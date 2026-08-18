@@ -134,9 +134,7 @@ def analyze_batch(texts_to_analyze):
         return {}
 
     genai.configure(api_key=API_KEY)
-    
-    # 支援標準穩定模型名稱
-    candidate_models = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"]
+    model = genai.GenerativeModel("gemini-1.5-flash")
 
     prompt = """
 你是一位美股交易分析師。請分析以下 Twitter 貼文：
@@ -151,27 +149,23 @@ def analyze_batch(texts_to_analyze):
 
     prompt += "\n\n請僅以純 JSON 格式回傳（key 為推文 ID 字串），不要輸出 markdown 語法外的文字。"
 
-    for m_name in candidate_models:
-        try:
-            model = genai.GenerativeModel(m_name)
-            response = model.generate_content(prompt)
-            raw_text = response.text.strip()
-            raw_text = re.sub(r"^```json\s*", "", raw_text)
-            raw_text = re.sub(r"^```\s*", "", raw_text)
-            raw_text = re.sub(r"```$", "", raw_text).strip()
-            result = json.loads(raw_text)
-            print(f"✨ 使用 {m_name} 成功解析 {len(result)} 則推文！")
-            return result
-        except Exception as e:
-            print(f"⚠️ 模型 {m_name} 調用失敗: {e}，嘗試下一個模型...")
-
-    return {}
+    try:
+        response = model.generate_content(prompt)
+        raw_text = response.text.strip()
+        raw_text = re.sub(r"^```json\s*", "", raw_text)
+        raw_text = re.sub(r"^```\s*", "", raw_text)
+        raw_text = re.sub(r"```$", "", raw_text).strip()
+        result = json.loads(raw_text)
+        print(f"✨ 使用 gemini-1.5-flash 成功解析 {len(result)} 則推文！")
+        return result
+    except Exception as e:
+        print(f"❌ Gemini API 呼叫失敗: {e}")
+        return {}
 
 def run_sentiment_pipeline(batch_limit=50):
     raw_data = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
 
-    # 由新到舊排序
     raw_data.sort(key=parse_sort_key, reverse=True)
 
     unprocessed = []
