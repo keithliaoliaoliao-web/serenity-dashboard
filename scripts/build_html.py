@@ -48,19 +48,22 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
         created_at = item.get("created_at") or ""
         
         time_str = created_at
+        month_key = ""
         try:
             if "T" in created_at:
                 dt = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
                 time_str = dt.strftime("%Y-%m-%d %H:%M")
+                month_key = dt.strftime("%Y-%m")
             elif len(created_at.split()) >= 6:
                 dt = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
                 time_str = dt.strftime("%Y-%m-%d %H:%M")
+                month_key = dt.strftime("%Y-%m")
         except Exception:
             time_str = created_at[:16]
+            month_key = created_at[:7] if len(created_at) >= 7 else "Unknown"
 
         tickers = extract_tickers(text)
         
-        # 優先採用 Gemini AI 情緒與摘要
         ai_data = sentiment_cache.get(tweet_id)
         if ai_data:
             sentiment = ai_data.get("sentiment", "Neutral")
@@ -82,6 +85,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
             "id": tweet_id,
             "text": text,
             "time": time_str,
+            "month": month_key,
             "tickers": tickers,
             "sentiment": sentiment,
             "summary": summary,
@@ -96,7 +100,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
 
 def generate_html(tweets, ticker_counts):
     total_tweets = len(tweets)
-    top_tickers = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:25]
+    top_tickers = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:30]
     bull_count = sum(1 for t in tweets if t["sentiment"] == "Bullish")
     bear_count = sum(1 for t in tweets if t["sentiment"] == "Bearish")
     
@@ -110,6 +114,7 @@ def generate_html(tweets, ticker_counts):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serenity (@aleabitoreddit) Stock Tracker</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     tailwind.config = {{
       darkMode: 'class',
@@ -130,11 +135,13 @@ def generate_html(tweets, ticker_counts):
   <style>
     body {{ background-color: #080b11; color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }}
     .ticker-pill:hover {{ transform: translateY(-1px); }}
+    .active-pill {{ border-color: #06b6d4 !important; background-color: rgba(6, 182, 212, 0.18) !important; }}
   </style>
 </head>
 <body class="min-h-screen p-3 md:p-8">
   <div class="max-w-6xl mx-auto space-y-6">
     
+    <!-- Top Header -->
     <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-cardBorder">
       <div>
         <div class="flex items-center gap-3">
@@ -145,13 +152,14 @@ def generate_html(tweets, ticker_counts):
             @aleabitoreddit
           </span>
         </div>
-        <p class="text-slate-400 text-sm mt-1">即時個股觀點、情緒分析與歷史推文儀表板</p>
+        <p class="text-slate-400 text-sm mt-1">即時個股觀點、多空時間線與歷史推文儀表板</p>
       </div>
       <div class="text-xs text-slate-400 bg-cardDark px-4 py-2 rounded-lg border border-cardBorder">
         最後更新：<span id="update-time" class="text-slate-200 font-medium">{datetime.now().strftime('%Y-%m-%d %H:%M')}</span>
       </div>
     </header>
 
+    <!-- Global Metrics Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="bg-cardDark border border-cardBorder p-4 rounded-xl">
         <div class="text-slate-400 text-xs font-medium">總追蹤推文</div>
@@ -171,11 +179,52 @@ def generate_html(tweets, ticker_counts):
       </div>
     </div>
 
+    <!-- Top Mentioned Tickers -->
     <div class="bg-cardDark border border-cardBorder p-4 rounded-xl">
-      <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">熱門提及標的 (點擊快速篩選)</div>
+      <div class="flex items-center justify-between mb-3">
+        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">熱門提及標的 (點擊展開個股深度分析)</div>
+        <button id="clear-filter-btn" class="text-xs text-slate-500 hover:text-cyan-400 hidden">清除篩選</button>
+      </div>
       <div id="top-tickers-container" class="flex flex-wrap gap-2"></div>
     </div>
 
+    <!-- Ticker Deep Dive Panel (Hidden by default, shown when a ticker is selected) -->
+    <div id="ticker-analytics-panel" class="hidden bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-5 md:p-6 space-y-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pb-4 border-b border-slate-800">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 id="analytics-ticker-title" class="text-2xl font-mono font-bold text-cyan-400">$TICKER</h2>
+            <span id="analytics-ticker-count" class="bg-slate-800 text-slate-300 text-xs px-2.5 py-1 rounded-full border border-slate-700 font-mono">0 則推文</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">歷史討論多空分佈與提及趨勢分析</p>
+        </div>
+        <div class="flex gap-4 text-xs font-medium">
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>看多: <span id="ticker-bull-pct" class="text-white font-bold">0%</span></div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>看空: <span id="ticker-bear-pct" class="text-white font-bold">0%</span></div>
+          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>中立: <span id="ticker-neutral-pct" class="text-white font-bold">0%</span></div>
+        </div>
+      </div>
+
+      <!-- Ratio Bar -->
+      <div class="space-y-1.5">
+        <div class="text-[11px] text-slate-400 font-medium">觀點情緒分佈比例</div>
+        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden flex">
+          <div id="bar-bull" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+          <div id="bar-bear" class="bg-rose-500 h-full transition-all duration-500" style="width: 0%"></div>
+          <div id="bar-neutral" class="bg-slate-600 h-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Timeline Chart -->
+      <div>
+        <div class="text-[11px] text-slate-400 font-medium mb-2">歷史月份提及趨勢圖</div>
+        <div class="h-48 w-full">
+          <canvas id="tickerTimelineChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search and Controls -->
     <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
       <div class="relative flex-1">
         <input type="text" id="search-input" placeholder="搜尋標的代號 (例如 NVDA) 或推文關鍵字..." 
@@ -196,12 +245,15 @@ def generate_html(tweets, ticker_counts):
       </div>
     </div>
 
+    <!-- Results Counter -->
     <div class="text-xs text-slate-400 px-1">
       符合條件推文：<span id="filtered-count" class="text-cyan-400 font-semibold">0</span> 則
     </div>
 
+    <!-- Tweet Feed List -->
     <div id="tweets-feed" class="space-y-4"></div>
 
+    <!-- Load More Button -->
     <div class="text-center pt-4 pb-12">
       <button id="load-more-btn" class="bg-cardDark hover:bg-slate-800 text-slate-300 border border-cardBorder px-6 py-2.5 rounded-lg text-sm font-medium transition duration-150">
         載入更多推文
@@ -218,24 +270,118 @@ def generate_html(tweets, ticker_counts):
     let currentPage = 1;
     const PAGE_SIZE = 25;
     let selectedTicker = null;
+    let chartInstance = null;
 
     const topContainer = document.getElementById('top-tickers-container');
+    const clearBtn = document.getElementById('clear-filter-btn');
+
     TOP_TICKERS.forEach(([ticker, count]) => {{
       const btn = document.createElement('button');
+      btn.id = `ticker-btn-${{ticker}}`;
       btn.className = "ticker-pill px-3 py-1 bg-slate-800/80 hover:bg-cyan-950/60 border border-slate-700/80 hover:border-cyan-500/50 rounded-lg text-xs font-mono text-cyan-300 transition";
       btn.innerHTML = `<span class="font-bold">$${{ticker}}</span> <span class="text-slate-400 text-[10px]">(${{count}})</span>`;
       btn.onclick = () => {{
         if (selectedTicker === ticker) {{
-          selectedTicker = null;
-          document.getElementById('search-input').value = '';
+          clearActiveTicker();
         }} else {{
-          selectedTicker = ticker;
-          document.getElementById('search-input').value = `$${{ticker}}`;
+          selectTicker(ticker);
         }}
-        applyFilters();
       }};
       topContainer.appendChild(btn);
     }});
+
+    clearBtn.onclick = clearActiveTicker;
+
+    function selectTicker(ticker) {{
+      selectedTicker = ticker;
+      document.querySelectorAll('.ticker-pill').forEach(el => el.classList.remove('active-pill'));
+      const activeEl = document.getElementById(`ticker-btn-${{ticker}}`);
+      if (activeEl) activeEl.classList.add('active-pill');
+      clearBtn.classList.remove('hidden');
+      document.getElementById('search-input').value = `$${{ticker}}`;
+      
+      renderTickerAnalytics(ticker);
+      applyFilters();
+    }}
+
+    function clearActiveTicker() {{
+      selectedTicker = null;
+      document.querySelectorAll('.ticker-pill').forEach(el => el.classList.remove('active-pill'));
+      clearBtn.classList.add('hidden');
+      document.getElementById('ticker-analytics-panel').classList.add('hidden');
+      document.getElementById('search-input').value = '';
+      applyFilters();
+    }}
+
+    function renderTickerAnalytics(ticker) {{
+      const tickerTweets = ALL_TWEETS.filter(t => t.tickers.includes(ticker));
+      const total = tickerTweets.length;
+      if (total === 0) return;
+
+      document.getElementById('ticker-analytics-panel').classList.remove('hidden');
+      document.getElementById('analytics-ticker-title').innerText = `$${{ticker}}`;
+      document.getElementById('analytics-ticker-count').innerText = `${{total}} 則推文`;
+
+      const bull = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
+      const bear = tickerTweets.filter(t => t.sentiment === 'Bearish').length;
+      const neutral = total - bull - bear;
+
+      const bullPct = Math.round((bull / total) * 100);
+      const bearPct = Math.round((bear / total) * 100);
+      const neutralPct = 100 - bullPct - bearPct;
+
+      document.getElementById('ticker-bull-pct').innerText = `${{bullPct}}% (${{bull}})`;
+      document.getElementById('ticker-bear-pct').innerText = `${{bearPct}}% (${{bear}})`;
+      document.getElementById('ticker-neutral-pct').innerText = `${{neutralPct}}% (${{neutral}})`;
+
+      document.getElementById('bar-bull').style.width = `${{bullPct}}%`;
+      document.getElementById('bar-bear').style.width = `${{bearPct}}%`;
+      document.getElementById('bar-neutral').style.width = `${{neutralPct}}%`;
+
+      // 彙整月度統計
+      const monthlyMap = {{}};
+      tickerTweets.forEach(t => {{
+        if (!t.month || t.month.length < 7) return;
+        if (!monthlyMap[t.month]) {{
+          monthlyMap[t.month] = {{ bull: 0, bear: 0, neutral: 0 }};
+        }}
+        if (t.sentiment === 'Bullish') monthlyMap[t.month].bull++;
+        else if (t.sentiment === 'Bearish') monthlyMap[t.month].bear++;
+        else monthlyMap[t.month].neutral++;
+      }});
+
+      const sortedMonths = Object.keys(monthlyMap).sort().slice(-12);
+      const labels = sortedMonths;
+      const bullData = sortedMonths.map(m => monthlyMap[m].bull);
+      const bearData = sortedMonths.map(m => monthlyMap[m].bear);
+      const neutralData = sortedMonths.map(m => monthlyMap[m].neutral);
+
+      const ctx = document.getElementById('tickerTimelineChart').getContext('2d');
+      if (chartInstance) chartInstance.destroy();
+
+      chartInstance = new Chart(ctx, {{
+        type: 'bar',
+        data: {{
+          labels: labels,
+          datasets: [
+            {{ label: '看多 (Bullish)', data: bullData, backgroundColor: '#10b981', stack: 'Stack 0' }},
+            {{ label: '看空 (Bearish)', data: bearData, backgroundColor: '#f43f5e', stack: 'Stack 0' }},
+            {{ label: '中立 (Neutral)', data: neutralData, backgroundColor: '#475569', stack: 'Stack 0' }}
+          ]
+        }},
+        options: {{
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {{
+            legend: {{ labels: {{ color: '#94a3b8', font: {{ size: 11 }} }} }}
+          }},
+          scales: {{
+            x: {{ stacked: true, ticks: {{ color: '#64748b' }}, grid: {{ display: false }} }},
+            y: {{ stacked: true, ticks: {{ color: '#64748b' }}, grid: {{ color: '#1e293b' }} }}
+          }}
+        }}
+      }});
+    }}
 
     function highlightText(text) {{
       return text
@@ -294,7 +440,7 @@ def generate_html(tweets, ticker_counts):
         const summaryHtml = item.summary ? `<div class="text-xs text-slate-400 bg-slate-900/80 border border-slate-800 p-2.5 rounded-lg"><span class="text-purple-300 font-semibold">觀點摘要：</span>${{item.summary}}</div>` : '';
 
         const tickerTags = item.tickers.map(t => 
-          `<span class="bg-cyan-950/50 text-cyan-300 text-xs px-2 py-0.5 rounded border border-cyan-800/50 font-mono font-medium">$${{t}}</span>`
+          `<button onclick="selectTicker('${{t}}')" class="bg-cyan-950/50 hover:bg-cyan-900/60 text-cyan-300 text-xs px-2 py-0.5 rounded border border-cyan-800/50 font-mono font-medium transition cursor-pointer">$${{t}}</button>`
         ).join(" ");
 
         card.innerHTML = `
@@ -326,7 +472,17 @@ def generate_html(tweets, ticker_counts):
       loadMoreBtn.style.display = slice.length >= filteredTweets.length ? 'none' : 'inline-block';
     }}
 
-    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('search-input').addEventListener('input', () => {{
+      const val = document.getElementById('search-input').value.trim().toUpperCase();
+      if (val.startsWith('$')) {{
+        const sym = val.replace('$', '');
+        if (TOP_TICKERS.some(t => t[0] === sym)) {{
+          renderTickerAnalytics(sym);
+        }}
+      }}
+      applyFilters();
+    }});
+
     document.getElementById('sentiment-filter').addEventListener('change', applyFilters);
     document.getElementById('sort-order').addEventListener('change', applyFilters);
     document.getElementById('load-more-btn').addEventListener('click', () => {{
