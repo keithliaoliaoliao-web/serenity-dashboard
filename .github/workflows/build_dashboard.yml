@@ -2,12 +2,13 @@ name: 產生並部署儀表板
 
 on:
   schedule:
+    # 每天台灣時間 08:00 與 20:00 自動執行
     - cron: '0 0,12 * * *'
   workflow_dispatch:
   push:
     paths:
-      - 'data/tweets.json'
       - 'scripts/**'
+      - '.github/workflows/build_dashboard.yml'
 
 permissions:
   contents: write
@@ -19,12 +20,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout 儲存庫
         uses: actions/checkout@v4
@@ -63,7 +60,7 @@ jobs:
         run: |
           python scripts/build_html.py
 
-      - name: 提交更新至 repo
+      - name: 提交更新至 repo (帶 skip ci 避免迴圈)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -71,7 +68,7 @@ jobs:
           git reset --soft origin/main
           git add data/sentiment_cache.json docs/index.html data/tweets.json
           if ! git diff --staged --quiet; then
-            git commit -m "chore: 更新 AI 情緒快取與儀表板 HTML"
+            git commit -m "chore: 更新 AI 快取與儀表板 [skip ci]"
             git push origin main
           fi
 
@@ -80,6 +77,13 @@ jobs:
         with:
           path: 'docs'
 
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: 直接部署至 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
