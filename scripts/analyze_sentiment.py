@@ -12,7 +12,10 @@ def load_json(filepath, default):
     if os.path.exists(filepath):
         try:
             with open(filepath, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                if isinstance(data, dict):
+                    data = data.get("tweets", data.get("data", list(data.values())))
+                return data
         except Exception:
             return default
     return default
@@ -29,36 +32,54 @@ def extract_tickers(text):
     blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP"}
     return [t for t in set(matches) if t not in blacklist]
 
+def extract_tweet_id(item):
+    for k in ["id", "id_str", "tweet_id", "tweetId", "rest_id"]:
+        if k in item and item[k]:
+            return str(item[k])
+    url = item.get("url") or item.get("permanentUrl") or ""
+    if url:
+        m = re.search(r"status/(\d+)", str(url))
+        if m: return m.group(1)
+    return ""
+
+def extract_tweet_text(item):
+    for k in ["text", "rawContent", "full_text", "content"]:
+        if k in item and item[k]:
+            return str(item[k])
+    legacy = item.get("legacy") or {}
+    if isinstance(legacy, dict) and "full_text" in legacy:
+        return str(legacy["full_text"])
+    return ""
+
 def analyze_batch(texts_to_analyze):
     if not API_KEY:
         print("⚠️ 未檢測到 GEMINI_API_KEY，略過 AI 分析")
         return {}
 
     genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    
+    # 依序嘗試可用模型
+    model_names = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+    model = None
+    for m_name in model_names:
+        try:
+            model = genai.GenerativeModel(m_name)
+            break
+        except Exception:
+            continue
 
     prompt = """
-你是一位精通美股交易與社群語境的資深分析師。請分析以下 Twitter 貼文：
-1. 判斷對標的 ($TICKER) 的交易情緒："Bullish" (看多/買進), "Bearish" (看空/警戒/獲利了結), 或 "Neutral" (客觀討論/迷因/問答)。
-2. 將推文完整翻譯為道地、通順的【繁體中文】(translation_zh)，保留美股專業術語（例如 Call/Put、突破、支撐位等）。
-3. 提供 15 字以內的【繁體中文核心觀點摘要】(summary)。
+你是一位資深美股分析師。請分析以下 Twitter 貼文：
+1. 判斷對標的 ($TICKER) 的交易情緒："Bullish" (看多/買進), "Bearish" (看空/獲利了結), 或 "Neutral" (中立/客觀分析)。
+2. 將推文完整翻譯為道地繁體中文 (translation_zh)。
+3. 提供 15 字以內的繁體中文核心觀點摘要 (summary)。
 
 待分析推文：
 """
     for item in texts_to_analyze:
         prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
 
-    prompt += """
-請以純 JSON 格式回傳，格式範例如下：
-{
-  "tweet_id": {
-    "sentiment": "Bullish",
-    "summary": "突破頸線看好後續動能",
-    "translation_zh": "這就是為什麼我買了 15 萬美元的 $UPWK..."
-  }
-}
-不要輸出任何 Markdown 區塊外的文字。
-"""
+    prompt += "\n\n請僅輸出標準 JSON 格式，不要包含任何 markdown 語法外的文字。"
 
     try:
         response = model.generate_content(prompt)
@@ -68,38 +89,32 @@ def analyze_batch(texts_to_analyze):
         raw_text = re.sub(r"```$", "", raw_text).strip()
         return json.loads(raw_text)
     except Exception as e:
-        print(f"Gemini API 呼叫失敗: {e}")
+        print(f"Gemini API 調用失敗: {e}")
         return {}
 
-def run_sentiment_pipeline(batch_limit=40):
+def run_sentiment_pipeline(batch_limit=50):
     raw_data = load_json(TWEETS_FILE, [])
-    if isinstance(raw_data, dict):
-        raw_data = raw_data.get("tweets", raw_data.get("data", list(raw_data.values())))
-
     sentiment_cache = load_json(CACHE_FILE, {})
 
     unprocessed = []
     for item in raw_data:
-        t_id = str(item.get("id") or item.get("id_str") or item.get("tweet_id") or "")
-        text = item.get("text") or item.get("rawContent") or item.get("full_text") or ""
+        t_id = extract_tweet_id(item)
+        text = extract_tweet_text(item)
         if not t_id or not text:
             continue
         
-        # 判斷是否缺少情緒或繁中翻譯
         cached = sentiment_cache.get(t_id)
         needs_analysis = not cached or "translation_zh" not in cached
         
         if extract_tickers(text) and needs_analysis:
             unprocessed.append({"id": t_id, "text": text})
 
-    print(f"待分析與翻譯之個股推文數: {len(unprocessed)}")
+    print(f"待分析推文數: {len(unprocessed)}")
     if not unprocessed:
-        print("所有個股推文均已完成 AI 分析與繁中翻譯。")
+        print("所有推文皆已快取。")
         return
 
     to_process = unprocessed[:batch_limit]
-    print(f"正在使用 Gemini 分析與翻譯最新 {len(to_process)} 則推文...")
-
     results = analyze_batch(to_process)
     for t_id, res in results.items():
         if isinstance(res, dict) and "sentiment" in res:
