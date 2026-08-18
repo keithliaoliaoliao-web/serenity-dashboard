@@ -129,50 +129,26 @@ def parse_sort_key(item):
 
     return s
 
-def get_dynamic_model():
-    """自動偵測此 API Key 可用的所有模型，並挑選最適模型"""
+def get_candidate_models():
+    """優先指定你 API Key 支援的最新版本模型清單"""
     if not API_KEY:
         print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
-        return None
+        return []
 
     genai.configure(api_key=API_KEY)
-
-    try:
-        models = list(genai.list_models())
-        supported = [m.name for m in models if 'generateContent' in m.supported_generation_methods]
-        print(f"📋 該 API Key 可用的模型清單: {supported}")
-    except Exception as e:
-        print(f"⚠️ 無法動態列出模型: {e}")
-        supported = []
-
-    preferred = [
-        "models/gemini-2.0-flash",
-        "models/gemini-1.5-flash",
-        "models/gemini-1.5-flash-latest",
-        "models/gemini-1.5-flash-8b",
-        "models/gemini-1.5-pro",
-        "models/gemini-1.0-pro"
+    
+    # 根據你的帳號權限優先排序可用模型
+    preferred_models = [
+        "gemini-3.6-flash",
+        "gemini-3.7-flash",
+        "gemini-flash-latest",
+        "gemini-2.5-flash-lite",
+        "gemini-flash-lite-latest",
+        "gemini-3-flash-preview"
     ]
+    return preferred_models
 
-    selected_model_name = None
-    for pref in preferred:
-        if pref in supported:
-            selected_model_name = pref
-            break
-
-    if not selected_model_name and supported:
-        flash_candidates = [m for m in supported if "flash" in m]
-        selected_model_name = flash_candidates[0] if flash_candidates else supported[0]
-
-    if not selected_model_name:
-        selected_model_name = "gemini-1.5-flash"
-
-    # 去除 models/ 前綴以符合 GenerativeModel 初始化格式
-    clean_name = selected_model_name.replace("models/", "")
-    print(f"🎯 自動選定使用模型: {clean_name}")
-    return genai.GenerativeModel(clean_name)
-
-def analyze_sub_batch(model, items):
+def analyze_sub_batch(items, candidate_models):
     prompt = """你是一位資深美股分析師。請分析以下 Twitter 貼文：
 1. 判斷對標的 ($TICKER) 的交易情緒："Bullish" (看多/買進), "Bearish" (看空/警戒), 或 "Neutral" (中立/客觀分析)。
 2. 將推文完整翻譯為繁體中文 (translation_zh)。
@@ -183,34 +159,40 @@ def analyze_sub_batch(model, items):
     for item in items:
         prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
 
-    prompt += "\n\n請以標準 JSON 物件回傳（以推文 ID 作為 Key），不要包含任何 markdown 區塊外的文字。"
+    prompt += "\n\n請以標準 JSON 物件格式輸出（以推文 ID 作為 Key），不要包含任何 markdown 區塊外的文字。"
 
-    try:
+    for m_name in candidate_models:
         try:
-            response = model.generate_content(
-                prompt,
-                generation_config={"response_mime_type": "application/json"}
-            )
-        except Exception:
-            response = model.generate_content(prompt)
+            model = genai.GenerativeModel(m_name)
+            try:
+                response = model.generate_content(
+                    prompt,
+                    generation_config={"response_mime_type": "application/json"}
+                )
+            except Exception:
+                response = model.generate_content(prompt)
 
-        raw_text = response.text.strip()
-        raw_text = re.sub(r"^```json\s*", "", raw_text)
-        raw_text = re.sub(r"^```\s*", "", raw_text)
-        raw_text = re.sub(r"```$", "", raw_text).strip()
-        return json.loads(raw_text)
-    except Exception as e:
-        print(f"❌ 本批次呼叫失敗: {e}")
-        return {}
+            raw_text = response.text.strip()
+            raw_text = re.sub(r"^```json\s*", "", raw_text)
+            raw_text = re.sub(r"^```\s*", "", raw_text)
+            raw_text = re.sub(r"```$", "", raw_text).strip()
+            result = json.loads(raw_text)
+            print(f"    ✨ 使用模型 [{m_name}] 成功解析 {len(result)} 則推文！")
+            return result
+        except Exception as e:
+            print(f"    ⚠️ 模型 [{m_name}] 調用失敗 ({e})，切換至下一個備用模型...")
+
+    return {}
 
 def run_sentiment_pipeline(total_target=30, chunk_size=10):
-    model = get_dynamic_model()
-    if not model:
+    candidate_models = get_candidate_models()
+    if not candidate_models:
         return
 
     raw_data = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
 
+    # 由新到舊排序
     raw_data.sort(key=parse_sort_key, reverse=True)
 
     unprocessed = []
@@ -243,7 +225,7 @@ def run_sentiment_pipeline(total_target=30, chunk_size=10):
     for i in range(0, len(to_process), chunk_size):
         chunk = to_process[i:i + chunk_size]
         print(f"  正在分析第 {i + 1} ~ {i + len(chunk)} 則...")
-        results = analyze_sub_batch(model, chunk)
+        results = analyze_sub_batch(chunk, candidate_models)
 
         for item in chunk:
             t_id = item["id"]
@@ -255,7 +237,7 @@ def run_sentiment_pipeline(total_target=30, chunk_size=10):
                     "translation_zh": res.get("translation_zh", "")
                 }
                 added_count += 1
-                print(f"    ✅ 已解析 [{t_id}]: {res.get('summary')}")
+                print(f"    ✅ 已儲存 [{t_id}]: {res.get('summary')}")
 
         time.sleep(1)
 
