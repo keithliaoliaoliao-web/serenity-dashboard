@@ -184,7 +184,7 @@ def analyze_sub_batch(items, candidate_models):
 
     return {}
 
-def run_sentiment_pipeline(total_target=30, chunk_size=10):
+def run_sentiment_pipeline(total_target=150, chunk_size=10):
     candidate_models = get_candidate_models()
     if not candidate_models:
         return
