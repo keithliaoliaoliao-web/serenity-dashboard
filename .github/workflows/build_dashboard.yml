@@ -2,7 +2,7 @@ name: 產生並部署儀表板
 
 on:
   schedule:
-    # 每天台灣時間 08:00 與 20:00 自動執行
+    # 每天台灣時間 08:00 與 20:00 自動排程執行
     - cron: '0 0,12 * * *'
   workflow_dispatch:
   push:
@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -60,7 +60,7 @@ jobs:
         run: |
           python scripts/build_html.py
 
-      - name: 提交更新至 repo (帶 skip ci 避免迴圈)
+      - name: 提交更新至 repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
