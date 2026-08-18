@@ -1,6 +1,9 @@
 name: 產生並部署儀表板
 
 on:
+  schedule:
+    # 每天 UTC 00:00 與 12:00 執行 (對應台灣時間 08:00 與 20:00)
+    - cron: '0 0,12 * * *'
   workflow_dispatch:
   push:
     paths:
@@ -17,6 +20,20 @@ jobs:
       - name: Checkout 儲存庫
         uses: actions/checkout@v4
 
+      - name: 同步 yan-labs 最新推文存檔
+        run: |
+          echo "🔄 檢查 yan-labs 最新資料..."
+          curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json" -o data/tweets_upstream.json || true
+          if [ -f data/tweets_upstream.json ]; then
+            # 確保檔案有效且非空才覆蓋
+            if [ -s data/tweets_upstream.json ]; then
+              mv data/tweets_upstream.json data/tweets.json
+              echo "✅ 資料更新成功"
+            else
+              rm data/tweets_upstream.json
+            fi
+          fi
+
       - name: 設定 Python 環境
         uses: actions/setup-python@v5
         with:
@@ -26,9 +43,9 @@ jobs:
         run: |
           python scripts/build_html.py
 
-      - name: 提交產出的 index.html
+      - name: 提交更新至 repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/index.html
-          git diff --staged --quiet || (git commit -m "chore: 自動更新儀表板 HTML" && git push)
+          git add data/tweets.json docs/index.html
+          git diff --staged --quiet || (git commit -m "chore: 定時同步資料並重編儀表板" && git push)
