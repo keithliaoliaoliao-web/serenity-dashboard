@@ -8,17 +8,33 @@ CACHE_FILE = "data/sentiment_cache.json"
 
 API_KEY = os.environ.get("GEMINI_API_KEY")
 
-def load_json(filepath, default):
-    if os.path.exists(filepath):
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                if isinstance(data, dict):
-                    data = data.get("tweets", data.get("data", list(data.values())))
+def load_tweets(filepath):
+    if not os.path.exists(filepath):
+        return []
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data.get("tweets", data.get("data", list(data.values())))
+            elif isinstance(data, list):
                 return data
-        except Exception:
-            return default
-    return default
+            return []
+    except Exception as e:
+        print(f"讀取推文失敗: {e}")
+        return []
+
+def load_cache(filepath):
+    if not os.path.exists(filepath):
+        return {}
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+            return {}
+    except Exception as e:
+        print(f"讀取快取失敗: {e}")
+        return {}
 
 def save_json(filepath, data):
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
@@ -29,7 +45,7 @@ def extract_tickers(text):
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Z]{1,5})\b", text.upper())
-    blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP"}
+    blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP", "DD", "EOD", "YOLO"}
     return [t for t in set(matches) if t not in blacklist]
 
 def extract_tweet_id(item):
@@ -58,7 +74,7 @@ def analyze_batch(texts_to_analyze):
 
     genai.configure(api_key=API_KEY)
     
-    # 依序嘗試可用模型
+    # 嘗試可用模型名稱
     model_names = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
     model = None
     for m_name in model_names:
@@ -79,7 +95,7 @@ def analyze_batch(texts_to_analyze):
     for item in texts_to_analyze:
         prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
 
-    prompt += "\n\n請僅輸出標準 JSON 格式，不要包含任何 markdown 語法外的文字。"
+    prompt += "\n\n請僅輸出標準 JSON 物件格式（key 為推文 ID 字串），不要包含任何 markdown 或其他文字。"
 
     try:
         response = model.generate_content(prompt)
@@ -92,9 +108,9 @@ def analyze_batch(texts_to_analyze):
         print(f"Gemini API 調用失敗: {e}")
         return {}
 
-def run_sentiment_pipeline(batch_limit=50):
-    raw_data = load_json(TWEETS_FILE, [])
-    sentiment_cache = load_json(CACHE_FILE, {})
+def run_sentiment_pipeline(batch_limit=40):
+    raw_data = load_tweets(TWEETS_FILE)
+    sentiment_cache = load_cache(CACHE_FILE)
 
     unprocessed = []
     for item in raw_data:
@@ -104,7 +120,7 @@ def run_sentiment_pipeline(batch_limit=50):
             continue
         
         cached = sentiment_cache.get(t_id)
-        needs_analysis = not cached or "translation_zh" not in cached
+        needs_analysis = not cached or not isinstance(cached, dict) or "translation_zh" not in cached
         
         if extract_tickers(text) and needs_analysis:
             unprocessed.append({"id": t_id, "text": text})
@@ -115,6 +131,7 @@ def run_sentiment_pipeline(batch_limit=50):
         return
 
     to_process = unprocessed[:batch_limit]
+    print(f"正在分析最新 {len(to_process)} 則推文...")
     results = analyze_batch(to_process)
     for t_id, res in results.items():
         if isinstance(res, dict) and "sentiment" in res:
