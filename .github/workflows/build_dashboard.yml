@@ -1,0 +1,34 @@
+name: 產生並部署儀表板
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/tweets.json'
+      - 'scripts/build_html.py'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout 儲存庫
+        uses: actions/checkout@v4
+
+      - name: 設定 Python 環境
+        uses: setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 執行編譯腳本產出 HTML
+        run: |
+          python scripts/build_html.py
+
+      - name: 提交產出的 index.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          git diff --staged --quiet || (git commit -m "chore: 自動更新儀表板 HTML" && git push)
