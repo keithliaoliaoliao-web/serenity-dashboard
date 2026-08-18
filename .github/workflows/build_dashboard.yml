@@ -9,11 +9,21 @@ on:
       - 'data/tweets.json'
       - 'scripts/**'
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout 儲存庫
@@ -64,3 +74,12 @@ jobs:
             git commit -m "chore: 更新 AI 情緒快取與儀表板 HTML"
             git push origin main
           fi
+
+      - name: 上傳 Pages 產出檔案
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'docs'
+
+      - name: 直接部署至 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
