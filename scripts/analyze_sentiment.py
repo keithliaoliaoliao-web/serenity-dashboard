@@ -129,8 +129,50 @@ def parse_sort_key(item):
 
     return s
 
+def get_dynamic_model():
+    """自動偵測此 API Key 可用的所有模型，並挑選最適模型"""
+    if not API_KEY:
+        print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
+        return None
+
+    genai.configure(api_key=API_KEY)
+
+    try:
+        models = list(genai.list_models())
+        supported = [m.name for m in models if 'generateContent' in m.supported_generation_methods]
+        print(f"📋 該 API Key 可用的模型清單: {supported}")
+    except Exception as e:
+        print(f"⚠️ 無法動態列出模型: {e}")
+        supported = []
+
+    preferred = [
+        "models/gemini-2.0-flash",
+        "models/gemini-1.5-flash",
+        "models/gemini-1.5-flash-latest",
+        "models/gemini-1.5-flash-8b",
+        "models/gemini-1.5-pro",
+        "models/gemini-1.0-pro"
+    ]
+
+    selected_model_name = None
+    for pref in preferred:
+        if pref in supported:
+            selected_model_name = pref
+            break
+
+    if not selected_model_name and supported:
+        flash_candidates = [m for m in supported if "flash" in m]
+        selected_model_name = flash_candidates[0] if flash_candidates else supported[0]
+
+    if not selected_model_name:
+        selected_model_name = "gemini-1.5-flash"
+
+    # 去除 models/ 前綴以符合 GenerativeModel 初始化格式
+    clean_name = selected_model_name.replace("models/", "")
+    print(f"🎯 自動選定使用模型: {clean_name}")
+    return genai.GenerativeModel(clean_name)
+
 def analyze_sub_batch(model, items):
-    """處理單批（10則）推文，使用原生 JSON 格式強制輸出"""
     prompt = """你是一位資深美股分析師。請分析以下 Twitter 貼文：
 1. 判斷對標的 ($TICKER) 的交易情緒："Bullish" (看多/買進), "Bearish" (看空/警戒), 或 "Neutral" (中立/客觀分析)。
 2. 將推文完整翻譯為繁體中文 (translation_zh)。
@@ -141,42 +183,34 @@ def analyze_sub_batch(model, items):
     for item in items:
         prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
 
-    prompt += "\n請以 JSON 物件輸出，以推文 ID 為 Key。"
+    prompt += "\n\n請以標準 JSON 物件回傳（以推文 ID 作為 Key），不要包含任何 markdown 區塊外的文字。"
 
     try:
-        response = model.generate_content(
-            prompt,
-            generation_config={"response_mime_type": "application/json"}
-        )
-        return json.loads(response.text.strip())
+        try:
+            response = model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
+        except Exception:
+            response = model.generate_content(prompt)
+
+        raw_text = response.text.strip()
+        raw_text = re.sub(r"^```json\s*", "", raw_text)
+        raw_text = re.sub(r"^```\s*", "", raw_text)
+        raw_text = re.sub(r"```$", "", raw_text).strip()
+        return json.loads(raw_text)
     except Exception as e:
         print(f"❌ 本批次呼叫失敗: {e}")
         return {}
 
 def run_sentiment_pipeline(total_target=30, chunk_size=10):
-    if not API_KEY:
-        print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
-        return
-
-    genai.configure(api_key=API_KEY)
-    
-    # 優先使用 gemini-1.5-flash
-    model = None
-    for m_name in ["gemini-1.5-flash", "gemini-2.0-flash"]:
-        try:
-            model = genai.GenerativeModel(m_name)
-            break
-        except Exception:
-            continue
-
+    model = get_dynamic_model()
     if not model:
-        print("❌ 無法初始化模型。")
         return
 
     raw_data = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
 
-    # 由新到舊排序，優先挑選最新發布推文
     raw_data.sort(key=parse_sort_key, reverse=True)
 
     unprocessed = []
@@ -185,7 +219,7 @@ def run_sentiment_pipeline(total_target=30, chunk_size=10):
         text = extract_tweet_text(item)
         if not t_id or not text:
             continue
-        
+
         cached = sentiment_cache.get(t_id)
         needs_analysis = (
             not cached or 
@@ -193,7 +227,7 @@ def run_sentiment_pipeline(total_target=30, chunk_size=10):
             not cached.get("summary") or 
             not cached.get("translation_zh")
         )
-        
+
         if extract_tickers(text) and needs_analysis:
             unprocessed.append({"id": t_id, "text": text})
 
@@ -203,17 +237,16 @@ def run_sentiment_pipeline(total_target=30, chunk_size=10):
         return
 
     to_process = unprocessed[:total_target]
-    print(f"🚀 本次排程將分批處理最新 {len(to_process)} 則推文（每批 {chunk_size} 則）...")
+    print(f"🚀 本次將分批處理最新 {len(to_process)} 則推文（每批 {chunk_size} 則）...")
 
     added_count = 0
     for i in range(0, len(to_process), chunk_size):
         chunk = to_process[i:i + chunk_size]
         print(f"  正在分析第 {i + 1} ~ {i + len(chunk)} 則...")
         results = analyze_sub_batch(model, chunk)
-        
+
         for item in chunk:
             t_id = item["id"]
-            # 支援精準 ID 匹配或字串轉型匹配
             res = results.get(t_id) or results.get(str(t_id))
             if res and isinstance(res, dict):
                 sentiment_cache[t_id] = {
@@ -223,8 +256,8 @@ def run_sentiment_pipeline(total_target=30, chunk_size=10):
                 }
                 added_count += 1
                 print(f"    ✅ 已解析 [{t_id}]: {res.get('summary')}")
-        
-        time.sleep(1)  # 避免觸發頻率限制
+
+        time.sleep(1)
 
     save_json(CACHE_FILE, sentiment_cache)
     print(f"🎉 本次成功更新 {added_count} 則推文快取！目前總快取量: {len(sentiment_cache)} 則。")
