@@ -4,47 +4,38 @@ import os
 from datetime import datetime
 
 TWEETS_FILE = "data/tweets.json"
+CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
-def load_tweets():
-    if not os.path.exists(TWEETS_FILE):
-        print(f"Error: {TWEETS_FILE} not found.")
-        return []
-    
-    with open(TWEETS_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    
-    if isinstance(data, dict):
-        # 兼容字典格式
-        data = data.get("tweets", data.get("data", list(data.values())))
-    
-    return data
+def load_json(filepath, default):
+    if os.path.exists(filepath):
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return default
+    return default
 
 def extract_tickers(text):
     if not text:
         return []
-    # 匹配 $TICKER 格式 (1-5 個大寫字母)
     matches = re.findall(r"(?<!\w)\$([A-Z]{1,5})\b", text.upper())
-    # 過濾常見非標的符號
     blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP"}
     return [t for t in set(matches) if t not in blacklist]
 
 def rule_based_sentiment(text):
-    """M2 階段基準情緒分析 (M5 會替換為 Gemini API 精準分析)"""
     t = text.lower()
-    bull_words = ["long", "call", "calls", "breakout", "accumulate", "higher", "ath", "bounce", "bottom", "support", "target", "rip", "gap up", "buying", "bullish", "moon"]
-    bear_words = ["short", "put", "puts", "breakdown", "dump", "lower", "crash", "resistance", "drop", "gap down", "selling", "bearish", "flush", "top"]
-    
+    bull_words = ["long", "call", "calls", "breakout", "accumulate", "higher", "ath", "bounce", "bottom", "support", "target", "rip", "buying", "bullish", "moon"]
+    bear_words = ["short", "put", "puts", "breakdown", "dump", "lower", "crash", "resistance", "drop", "selling", "bearish", "flush", "top"]
     bull_score = sum(1 for w in bull_words if re.search(r'\b' + re.escape(w) + r'\b', t))
     bear_score = sum(1 for w in bear_words if re.search(r'\b' + re.escape(w) + r'\b', t))
-    
     if bull_score > bear_score:
         return "Bullish"
     elif bear_score > bull_score:
         return "Bearish"
     return "Neutral"
 
-def clean_tweet_data(raw_tweets):
+def clean_tweet_data(raw_tweets, sentiment_cache):
     cleaned = []
     ticker_counts = {}
     
@@ -56,7 +47,6 @@ def clean_tweet_data(raw_tweets):
         tweet_id = str(item.get("id") or item.get("id_str") or item.get("tweet_id") or "")
         created_at = item.get("created_at") or ""
         
-        # 格式化時間
         time_str = created_at
         try:
             if "T" in created_at:
@@ -69,7 +59,17 @@ def clean_tweet_data(raw_tweets):
             time_str = created_at[:16]
 
         tickers = extract_tickers(text)
-        sentiment = rule_based_sentiment(text)
+        
+        # 優先採用 Gemini AI 情緒與摘要
+        ai_data = sentiment_cache.get(tweet_id)
+        if ai_data:
+            sentiment = ai_data.get("sentiment", "Neutral")
+            summary = ai_data.get("summary", "")
+            is_ai = True
+        else:
+            sentiment = rule_based_sentiment(text)
+            summary = ""
+            is_ai = False
         
         for ticker in tickers:
             ticker_counts[ticker] = ticker_counts.get(ticker, 0) + 1
@@ -84,12 +84,13 @@ def clean_tweet_data(raw_tweets):
             "time": time_str,
             "tickers": tickers,
             "sentiment": sentiment,
+            "summary": summary,
+            "is_ai": is_ai,
             "likes": int(likes),
             "retweets": int(retweets),
             "views": int(views) if str(views).isdigit() else 0
         })
     
-    # 根據時間排序 (最新在最前)
     cleaned.sort(key=lambda x: x["time"], reverse=True)
     return cleaned, ticker_counts
 
@@ -128,14 +129,12 @@ def generate_html(tweets, ticker_counts):
   </script>
   <style>
     body {{ background-color: #080b11; color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }}
-    .scrollbar-hide::-webkit-scrollbar {{ display: none; }}
     .ticker-pill:hover {{ transform: translateY(-1px); }}
   </style>
 </head>
 <body class="min-h-screen p-3 md:p-8">
   <div class="max-w-6xl mx-auto space-y-6">
     
-    <!-- Top Header -->
     <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-cardBorder">
       <div>
         <div class="flex items-center gap-3">
@@ -153,7 +152,6 @@ def generate_html(tweets, ticker_counts):
       </div>
     </header>
 
-    <!-- Metrics Cards Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="bg-cardDark border border-cardBorder p-4 rounded-xl">
         <div class="text-slate-400 text-xs font-medium">總追蹤推文</div>
@@ -173,13 +171,11 @@ def generate_html(tweets, ticker_counts):
       </div>
     </div>
 
-    <!-- Top Mentioned Tickers -->
     <div class="bg-cardDark border border-cardBorder p-4 rounded-xl">
       <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">熱門提及標的 (點擊快速篩選)</div>
       <div id="top-tickers-container" class="flex flex-wrap gap-2"></div>
     </div>
 
-    <!-- Search and Controls -->
     <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
       <div class="relative flex-1">
         <input type="text" id="search-input" placeholder="搜尋標的代號 (例如 NVDA) 或推文關鍵字..." 
@@ -200,15 +196,12 @@ def generate_html(tweets, ticker_counts):
       </div>
     </div>
 
-    <!-- Results Counter -->
     <div class="text-xs text-slate-400 px-1">
       符合條件推文：<span id="filtered-count" class="text-cyan-400 font-semibold">0</span> 則
     </div>
 
-    <!-- Tweet Feed List -->
     <div id="tweets-feed" class="space-y-4"></div>
 
-    <!-- Load More Button -->
     <div class="text-center pt-4 pb-12">
       <button id="load-more-btn" class="bg-cardDark hover:bg-slate-800 text-slate-300 border border-cardBorder px-6 py-2.5 rounded-lg text-sm font-medium transition duration-150">
         載入更多推文
@@ -226,7 +219,6 @@ def generate_html(tweets, ticker_counts):
     const PAGE_SIZE = 25;
     let selectedTicker = null;
 
-    // Render Top Ticker Pills
     const topContainer = document.getElementById('top-tickers-container');
     TOP_TICKERS.forEach(([ticker, count]) => {{
       const btn = document.createElement('button');
@@ -298,6 +290,9 @@ def generate_html(tweets, ticker_counts):
         if (item.sentiment === 'Bullish') badgeColor = "bg-emerald-950/60 text-emerald-400 border-emerald-800/60";
         if (item.sentiment === 'Bearish') badgeColor = "bg-rose-950/60 text-rose-400 border-rose-800/60";
 
+        const aiTag = item.is_ai ? '<span class="text-[10px] bg-purple-950/80 text-purple-300 border border-purple-800/60 px-1.5 py-0.5 rounded font-mono">✨ Gemini AI</span>' : '';
+        const summaryHtml = item.summary ? `<div class="text-xs text-slate-400 bg-slate-900/80 border border-slate-800 p-2.5 rounded-lg"><span class="text-purple-300 font-semibold">觀點摘要：</span>${{item.summary}}</div>` : '';
+
         const tickerTags = item.tickers.map(t => 
           `<span class="bg-cyan-950/50 text-cyan-300 text-xs px-2 py-0.5 rounded border border-cyan-800/50 font-mono font-medium">$${{t}}</span>`
         ).join(" ");
@@ -308,6 +303,7 @@ def generate_html(tweets, ticker_counts):
               <span class="text-xs px-2.5 py-0.5 rounded-full border font-semibold ${{badgeColor}}">
                 ${{item.sentiment}}
               </span>
+              ${{aiTag}}
               ${{tickerTags}}
             </div>
             <a href="https://x.com/aleabitoreddit/status/${{item.id}}" target="_blank" class="text-slate-500 hover:text-slate-300 text-xs flex items-center gap-1 transition">
@@ -315,6 +311,7 @@ def generate_html(tweets, ticker_counts):
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </a>
           </div>
+          ${{summaryHtml}}
           <div class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap">${{highlightText(item.text)}}</div>
           <div class="flex items-center gap-5 pt-2 text-xs text-slate-500 border-t border-cardBorder/60">
             <span class="flex items-center gap-1">❤️ ${{item.likes.toLocaleString()}}</span>
@@ -337,7 +334,6 @@ def generate_html(tweets, ticker_counts):
       renderFeed();
     }});
 
-    // 初始化渲染
     applyFilters();
   </script>
 </body>
@@ -346,9 +342,10 @@ def generate_html(tweets, ticker_counts):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_content)
-    print(f"✅ 儀表板成功產出至 {OUTPUT_HTML} (總推文: {total_tweets})")
+    print(f"✅ 儀表板成功產出至 {OUTPUT_HTML}")
 
 if __name__ == "__main__":
-    tweets_raw = load_tweets()
-    cleaned_tweets, counts = clean_tweet_data(tweets_raw)
+    tweets_raw = load_json(TWEETS_FILE, [])
+    sentiment_cache = load_json(CACHE_FILE, {})
+    cleaned_tweets, counts = clean_tweet_data(tweets_raw, sentiment_cache)
     generate_html(cleaned_tweets, counts)
