@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import time
 from datetime import datetime
 import google.generativeai as genai
 
@@ -63,11 +64,11 @@ def extract_tickers(text):
 def extract_tweet_id(item):
     for k in ["id", "id_str", "tweet_id", "tweetId", "rest_id", "conversation_id"]:
         if k in item and item[k]:
-            return str(item[k])
+            return str(item[k]).strip()
     url = item.get("url") or item.get("permanentUrl") or item.get("link") or ""
     if url:
         m = re.search(r"status/(\d+)", str(url))
-        if m: return m.group(1)
+        if m: return m.group(1).strip()
     return ""
 
 def extract_tweet_text(item):
@@ -128,44 +129,54 @@ def parse_sort_key(item):
 
     return s
 
-def analyze_batch(texts_to_analyze):
-    if not API_KEY:
-        print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
-        return {}
-
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-
-    prompt = """
-你是一位美股交易分析師。請分析以下 Twitter 貼文：
+def analyze_sub_batch(model, items):
+    """處理單批（10則）推文，使用原生 JSON 格式強制輸出"""
+    prompt = """你是一位資深美股分析師。請分析以下 Twitter 貼文：
 1. 判斷對標的 ($TICKER) 的交易情緒："Bullish" (看多/買進), "Bearish" (看空/警戒), 或 "Neutral" (中立/客觀分析)。
 2. 將推文完整翻譯為繁體中文 (translation_zh)。
 3. 提供 15 字以內的繁體中文核心觀點摘要 (summary)。
 
 待分析推文：
 """
-    for item in texts_to_analyze:
+    for item in items:
         prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
 
-    prompt += "\n\n請僅以純 JSON 格式回傳（key 為推文 ID 字串），不要輸出 markdown 語法外的文字。"
+    prompt += "\n請以 JSON 物件輸出，以推文 ID 為 Key。"
 
     try:
-        response = model.generate_content(prompt)
-        raw_text = response.text.strip()
-        raw_text = re.sub(r"^```json\s*", "", raw_text)
-        raw_text = re.sub(r"^```\s*", "", raw_text)
-        raw_text = re.sub(r"```$", "", raw_text).strip()
-        result = json.loads(raw_text)
-        print(f"✨ 使用 gemini-1.5-flash 成功解析 {len(result)} 則推文！")
-        return result
+        response = model.generate_content(
+            prompt,
+            generation_config={"response_mime_type": "application/json"}
+        )
+        return json.loads(response.text.strip())
     except Exception as e:
-        print(f"❌ Gemini API 呼叫失敗: {e}")
+        print(f"❌ 本批次呼叫失敗: {e}")
         return {}
 
-def run_sentiment_pipeline(batch_limit=50):
+def run_sentiment_pipeline(total_target=30, chunk_size=10):
+    if not API_KEY:
+        print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
+        return
+
+    genai.configure(api_key=API_KEY)
+    
+    # 優先使用 gemini-1.5-flash
+    model = None
+    for m_name in ["gemini-1.5-flash", "gemini-2.0-flash"]:
+        try:
+            model = genai.GenerativeModel(m_name)
+            break
+        except Exception:
+            continue
+
+    if not model:
+        print("❌ 無法初始化模型。")
+        return
+
     raw_data = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
 
+    # 由新到舊排序，優先挑選最新發布推文
     raw_data.sort(key=parse_sort_key, reverse=True)
 
     unprocessed = []
@@ -176,30 +187,47 @@ def run_sentiment_pipeline(batch_limit=50):
             continue
         
         cached = sentiment_cache.get(t_id)
-        needs_analysis = not cached or not isinstance(cached, dict) or "translation_zh" not in cached
+        needs_analysis = (
+            not cached or 
+            not isinstance(cached, dict) or 
+            not cached.get("summary") or 
+            not cached.get("translation_zh")
+        )
         
         if extract_tickers(text) and needs_analysis:
             unprocessed.append({"id": t_id, "text": text})
 
-    print(f"🔍 個股待分析總數: {len(unprocessed)} 則")
+    print(f"🔍 待分析個股推文總數: {len(unprocessed)} 則")
     if not unprocessed:
-        print("所有最新推文均已完成快取。")
+        print("所有最新推文均已在快取中。")
         return
 
-    to_process = unprocessed[:batch_limit]
-    print(f"🚀 開始使用 Gemini 分析最新 {len(to_process)} 則推文...")
+    to_process = unprocessed[:total_target]
+    print(f"🚀 本次排程將分批處理最新 {len(to_process)} 則推文（每批 {chunk_size} 則）...")
 
-    results = analyze_batch(to_process)
-    for t_id, res in results.items():
-        if isinstance(res, dict) and "sentiment" in res:
-            sentiment_cache[str(t_id)] = {
-                "sentiment": res.get("sentiment", "Neutral"),
-                "summary": res.get("summary", ""),
-                "translation_zh": res.get("translation_zh", "")
-            }
+    added_count = 0
+    for i in range(0, len(to_process), chunk_size):
+        chunk = to_process[i:i + chunk_size]
+        print(f"  正在分析第 {i + 1} ~ {i + len(chunk)} 則...")
+        results = analyze_sub_batch(model, chunk)
+        
+        for item in chunk:
+            t_id = item["id"]
+            # 支援精準 ID 匹配或字串轉型匹配
+            res = results.get(t_id) or results.get(str(t_id))
+            if res and isinstance(res, dict):
+                sentiment_cache[t_id] = {
+                    "sentiment": res.get("sentiment", "Neutral"),
+                    "summary": res.get("summary", ""),
+                    "translation_zh": res.get("translation_zh", "")
+                }
+                added_count += 1
+                print(f"    ✅ 已解析 [{t_id}]: {res.get('summary')}")
+        
+        time.sleep(1)  # 避免觸發頻率限制
 
     save_json(CACHE_FILE, sentiment_cache)
-    print(f"✅ 快取已儲存，累計已分析 {len(sentiment_cache)} 則推文。")
+    print(f"🎉 本次成功更新 {added_count} 則推文快取！目前總快取量: {len(sentiment_cache)} 則。")
 
 if __name__ == "__main__":
-    run_sentiment_pipeline(batch_limit=50)
+    run_sentiment_pipeline(total_target=30, chunk_size=10)
