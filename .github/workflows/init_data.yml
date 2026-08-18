@@ -1,0 +1,36 @@
+name: 初始化資料 (手動執行一次)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 下載 yan-labs 推文存檔
+        run: |
+          echo "📥 下載 tweets.json..."
+          curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json" \
+            -o data/tweets.json
+          echo "📥 下載 ticker_stats.txt..."
+          curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/ticker_stats.txt" \
+            -o data/ticker_stats.txt
+          echo "📥 下載 tweets.csv..."
+          curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.csv" \
+            -o data/tweets.csv
+          echo "✅ 下載完成"
+          ls -lh data/
+
+      - name: 提交資料到 repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --staged --quiet || git commit -m "feat: 匯入 yan-labs 推文存檔"
+          git push
