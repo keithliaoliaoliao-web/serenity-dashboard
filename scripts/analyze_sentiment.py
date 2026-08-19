@@ -139,13 +139,11 @@ def get_candidate_models():
     
     # 根據你的帳號權限優先排序可用模型
     preferred_models = [
-        "gemini-3.6-flash",
-        "gemini-3.7-flash",
-        "gemini-flash-latest",
-        "gemini-2.5-flash-lite",
-        "gemini-flash-lite-latest",
-        "gemini-3-flash-preview"
-    ]
+    "gemini-3.6-flash",        # 最新 Flash（2026-07）
+    "gemini-3.5-flash-lite",   # 輕量高速版
+    "gemini-2.5-flash-lite",   # 備用舊版
+    "gemini-2.5-flash",        # 備用穩定版
+]
     return preferred_models
 
 def analyze_sub_batch(items, candidate_models):
