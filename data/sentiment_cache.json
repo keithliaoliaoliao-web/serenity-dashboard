@@ -1048,5 +1048,155 @@
     "sentiment": "Neutral",
     "summary": "大摩發布CPO報告，盤點產業鏈關鍵玩家",
     "translation_zh": "摩根士丹利今天關於 CPO 的報告。主要參與者包括：\n\n- 雷達供應鏈的 $SIVE、$COHR、$LITE\n- 交換器平台的 Broadcom 與 Nvidia\n- 光學引擎與光子學的 Lightmatter、Ayar Labs、Marvell/Celestial、POET\n- 矽光子的 $TSM、$GFS、$TSEM"
+  },
+  "2076467953995071881": {
+    "sentiment": "Neutral",
+    "summary": "玻璃橋接潛力受關注，供應鏈面臨產能挑戰。",
+    "translation_zh": "半導體總結簡述：\n- 摩根士丹利指出 $GLW 的玻璃橋接有潛力，但在短期內很難取代 FAU（如 FOCI）。\n- $SPCX 星鏈第三代正擴產至 10 万台（前代的 10 倍），可能對 CCL 的交換器供應商造成產能瓶頸。\n- PCB"
+  },
+  "2076284746385240101": {
+    "sentiment": "Bearish",
+    "summary": "諷刺傳聞，暗示GPU計畫可能延遲。",
+    "translation_zh": "@softmaxedx 我在 $AMD 的朋友被石頭絆倒，不得不在家休息幾個小時。\n\n所以我們很可能會看到 AMD 的整個 GPU 專案出現重大延遲。"
+  },
+  "2076281362248769713": {
+    "sentiment": "Neutral",
+    "summary": "量產使感測器成本下降，成本結構分析複雜。",
+    "translation_zh": "@Traderissimo 所以這是最終售價的成本，而不是 BOM 成本。他們使用的是 134K 美元的 ASP，而不是量產後降至 20K 美元以下的成本。\n\n正如 $VPG 所示，單個感測器 750 美元的成本在量產時會降至 150 美元。\n\n因此很多計算都變了，我覺得這個成本結構沒有什麼實質幫助"
+  },
+  "2076266613675069628": {
+    "sentiment": "Neutral",
+    "summary": "批判市場放大技術細節來盲目看空科技巨頭。",
+    "translation_zh": "顯然現在有一個熱門趨勢，就是看空兆元市值公司。\n\n像是 $NVDA 或 $TSM。\n\n透過找出孤立的技術細節，然後誇大其詞，聲稱他們的整個專案都延遲了。\n\n-> 如果公司不回應，股價/情緒將會..."
+  },
+  "2076030743655109063": {
+    "sentiment": "Neutral",
+    "summary": "韓系美妝股表現驚人，漲幅超越輝達與英特爾。",
+    "translation_zh": "顯然，韓系美妝才是所有超額報酬（alpha）所在。\n\nAPR (278470.KS) 在過去兩年內上漲了 529%，遠遠跑贏 $NVDA 和 $INTC。\n\n我認識的每個女性都在討論他們的「Medicube」棒，然後買產品……把整家族的鮭魚都敷在臉上 https://t.co/bjIjMZTDgY"
+  },
+  "2075896028323254679": {
+    "sentiment": "Neutral",
+    "summary": "剖析企業創辦人透過合縱連橫建立兆元帝國。",
+    "translation_zh": "@SpongeQuant 如果沒有使出所有這些手段，他是不可能建立一家市值 1 兆美元的公司的。\n\n- 從馬斯克那裡獲得資金 -> 透過獨立惹怒 $TSLA\n- 從 $MSFT 那裡獲得資金 -> 透過引入其他超大規模雲端運算商資金來稀釋微軟，惹怒微軟\n- 從 $NVDA 那裡獲得資金 -> 建立他們的..."
+  },
+  "2075894311741440041": {
+    "sentiment": "Bullish",
+    "summary": "OpenAI 建立自有生態，展現顛覆巨頭潛力。",
+    "translation_zh": "反向觀點：如果山姆·阿特曼 / OpenAI 把像 $AAPL 這樣的七大巨頭都惹毛了，那說明他做對了一些事情。\n\n透過建立自己的生態系統，而不是被吸入別人的生態系統。\n\n$GOOGL、蘋果、微軟和其他公司已經很久沒有出現真正的顛覆者了。"
+  },
+  "2075670213169918070": {
+    "sentiment": "Bullish",
+    "summary": "$SIVE 採用架構中立技術推進 CPO 發展。",
+    "translation_zh": "@siflower 它是架構中立的。UHP 輸出可以透過單個 cw 雷射或多發射器 cw dfb 陣列實現，這正是 $SIVE 正在為 CPO 做的事情。\n\n因為後者的總和輸出是相當的。"
+  },
+  "2075645547978084371": {
+    "sentiment": "Neutral",
+    "summary": "針對網路優化傳聞，機構已做好模型預測。",
+    "translation_zh": "關於 $AMZN RNG 加上 OpenAI 的 MRC 和 VCSEL。\n\n這似乎是對 B. Riley 關於 $AAOI 賣出報告的間接回應，該報告涉及「扁平化網路並將收發器 TAM 削減 40-50%」的最佳化。\n\nRosenblatt 總結：他們已經對此進行了建模，儘管每個 XPU https://t.co/A41ceTqKwJ"
+  },
+  "2075634064518955297": {
+    "sentiment": "Bullish",
+    "summary": "光通訊板塊近期疲軟，機構認為空頭信心不足。",
+    "translation_zh": "Rosenblatt 談論近期從 $AAOI 到 $LITE 的光通訊板塊疲軟：\n\n「由於 CPO 延遲報告和中國產能恐慌，光通訊板塊的股票在過去 1-2 個月內交易表現不佳。」\n\n「我們認為放空者……其實並不是很堅信這個論點。」\n\n多重 https://t.co/C9QTiFOPlH"
+  },
+  "2075613590955106581": {
+    "sentiment": "Bullish",
+    "summary": "美國買盤湧入可能帶來結構性溢價影響。",
+    "translation_zh": "@yuntungshieh 嗯，不過美國買盤湧入或許會產生結構性影響？但我確信這情況就像 $TSM 一樣帶有溢價。"
+  },
+  "2075613235756294559": {
+    "sentiment": "Bullish",
+    "summary": "期待 $SIVE 美國上市以利大眾交易。",
+    "translation_zh": "@2147gp 是的，我非常期待 $SIVE 在美國上市。多數人無法在小型瑞典交易所買到。"
+  },
+  "2075611260771852590": {
+    "sentiment": "Bullish",
+    "summary": "SK Hynix 美股掛牌狂飆 16%。",
+    "translation_zh": "SK Hynix 現在以 $SKHYV 代號交易！目前暴漲了 16%。我很想知道韓國那邊的 SK Hynix 週一會作何反應。"
+  },
+  "2075557588159058076": {
+    "sentiment": "Bullish",
+    "summary": "三菱加入人形機器人競賽，點名相關供應鏈。",
+    "translation_zh": "三菱汽車加入機器人競賽，計劃在 2027 年前部署人形勞動力。與日本機器人公司 Highlanders 合作。\n- Agility $CCXI x 富士康、豐田\n- Apptronik x $JBL、賓士\n- Highlanders x 三菱\n- Figure × BMW\n- 波士頓動力 x 現代（子公司）"
+  },
+  "2075542529467154838": {
+    "sentiment": "Bullish",
+    "summary": "技術指標顯示 $AAOI 蓄勢待發準備大漲。",
+    "translation_zh": "@UNICONTSLA 在 $AAOI 的圖表上，我們能看到「沉睡國王」指標。你可以看到盤整型態中形成的王冠。但一旦國王從午睡中醒來……圖表基本面預期將有皇室敕令。"
+  },
+  "2075539824589860866": {
+    "sentiment": "Bullish",
+    "summary": "神準預測 $SIVE 執行長買進與股價反彈。",
+    "translation_zh": "「神話級金蛋巨龍K線」預測了今天 $SIVE 的反彈。如果你看我畫的金蛋孵化指標，你就會知道它預測了 Sivers 執行長在隔天於公開市場買進。你們覺得我是時候該賣技術分析課程了嗎？"
+  },
+  "2075306506585813108": {
+    "sentiment": "Neutral",
+    "summary": "比較 $TSLA 與 $CCXI 供應鏈與量產差異。",
+    "translation_zh": "@NullContex1s 依我之見，情況很微妙：\n- $TSLA 擁有最清晰的路徑來縮小美中在量產上的差距。但要做到這點，多數零組件似乎都採購自中國？\n- $CCXI 目前擁有年產 1 万台以上的 RoboFab，且 75% 以上的零組件採購自美國。所以"
+  },
+  "2075294412377358828": {
+    "sentiment": "Bullish",
+    "summary": "$SIVE 美國上市旨在募資、收購與彌合估值。",
+    "translation_zh": "@shaaaawty_7 $SIVE 在美國那斯達克上市主要是為了：\n- 募資（最重要的事情）以收購智慧財產權（IP）+ 擴大潛在市場總額（TAM），讓他們銷售的每個雷射更有價值。效仿 $LITE 的做法（例如收購 Cloud Light），而不僅僅是銷售雷射。\n- 也有助於彌合估值差距，因為我"
+  },
+  "2075289915697553697": {
+    "sentiment": "Bullish",
+    "summary": "$SIVE 執行長趁股價下跌之際大舉買進。",
+    "translation_zh": "今天有三筆新的 $SIVE 內部人買進。最值得注意的是：$SIVEF 執行長 Vikram 今天在公開市場買了價值 100 萬瑞典克朗的股票。在此之前，Sivers 股價因兩份誤導性的 CPO 延遲報告、Meta 運算頭條新聞以及另一位內部人"
+  },
+  "2075218841266016561": {
+    "sentiment": "Bullish",
+    "summary": "$SIVE 有望補漲跟上其他雷射類股腳步。",
+    "translation_zh": "@Goodly2016 我覺得演算法之神只是在 $LITE 和雷射類股復甦後，暫時漏掉了 $SIVE。"
+  },
+  "2075199849507762279": {
+    "sentiment": "Bullish",
+    "summary": "META內部備忘錄曝AI基礎設施擴張",
+    "translation_zh": "看到外洩的 $META 內部備忘錄真是難得。顯示 AI 持續快速擴張：- 與三星和 $SNDK 簽署記憶體 LTA - 與住友電氣簽署光纖 LTA - 預計今年部署 7GW 運算基礎設施，2027 年翻倍。高達 1450 億美元"
+  },
+  "2074979055410266452": {
+    "sentiment": "Bullish",
+    "summary": "xAI以低成本打造高階LLM",
+    "translation_zh": "哇，看起來 Elon 加 xAI 在 $SPCX 成功用 Grok 4.5 打造出 Anthropic Opus 級別的 LLM。而且成本效益高得多……有點在模仿中國廠商為了爭取定價與普及率的作法。（鑑於中國模型的成長，這是個理想的做法）"
+  },
+  "2074972411557249248": {
+    "sentiment": "Bullish",
+    "summary": "持續持有AXTI與多檔翻倍舊股",
+    "translation_zh": "@starlightrvrie 沒錯，我還在持有 $AXTI。還有很多像 $EWY 這樣漲了幾百％的舊論點。即使我不再那麼常提起它"
+  },
+  "2074965761345642660": {
+    "sentiment": "Bullish",
+    "summary": "META建百億數據中心破除砍資本傳言",
+    "translation_zh": "$META 將在加拿大建造一處 100 億美元的新資料中心，以擴大 AI 產能。媒體指稱「Meta Compute」是过度建设并削减資本支出的說法根本不攻自破。"
+  },
+  "2074961844184506526": {
+    "sentiment": "Bullish",
+    "summary": "看好SIVE光學轉型潛力與那斯達克上市",
+    "translation_zh": "@THEBONDINVESTO 我目前持有數百萬股，所以不太清楚這些指控是怎麼回事。因為我相信 $SIVE 是下一次光學轉型中最重要的雷射公司之一……並且透過 IP 收購具有巨大的 TAM 擴張潛力。即將在那斯達克上市"
+  },
+  "2074954930939625564": {
+    "sentiment": "Neutral",
+    "summary": "Agility估值具吸引力但SPAC表現不一",
+    "translation_zh": "@kapo52277 @neruda_de Agility 的估值在約 39 億美元預先融資，對我來說非常有吸引力。並不是所有的 SPAC 都以這種方式運作，正如 $BRUN 所見，這就是為什麼我個人不會等待的原因。"
+  },
+  "2074843710806978606": {
+    "sentiment": "Neutral",
+    "summary": "長期看好ASTS但需考量機會成本",
+    "translation_zh": "@lucas_SPACs 不知道，與瓶頸兄弟相比，Spacemob 過去一年的表現不是很好。我認為這主要是機會成本的問題，即使我長期看好 $ASTS。"
+  },
+  "2074842421620527157": {
+    "sentiment": "Bullish",
+    "summary": "關注SIVE夥伴關係與1.6T LRO認證進度",
+    "translation_zh": "@Emre07465060084 對於 $SIVE 的這種佈局，最好看一下他們的合作夥伴及其時間表。-$JBL 透過 JPM 爐邊談話確認他們在 1.6T LRO 上擁有相對顯著的護城河，並且將在未來 1-4 個月內完成認證（2 個月前）。"
+  },
+  "2074838397341065516": {
+    "sentiment": "Bullish",
+    "summary": "藍源高估值融資利好RKLB與ASTS等太空股",
+    "translation_zh": "據《紐約時報》報導，藍源（Blue Origin）據報正在以 1300 億美元的估值籌集 100 億美元。就相對估值錨定而言，這對 $RKLB、$ASTS 和其他太空公司來說似乎相當正面。如果 SpaceX 和藍源能夠設定這麼高的估值..."
+  },
+  "2074587024959709419": {
+    "sentiment": "Bullish",
+    "summary": "中國光達若遭禁將使OUST與AEVA受益",
+    "translation_zh": "@jey0316 基本上：> 中國主要的光達玩家可能會在西方被禁。> $OUST、$AEVA 等公司透過填補真空而受益 > 為 Aeva 等西方光達公司提供動力的光學公司也受益於營收增長。不知道這則新聞是否真有那麼重要..."
   }
 }
