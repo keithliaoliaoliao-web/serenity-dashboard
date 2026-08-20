@@ -4,7 +4,7 @@ import re
 import urllib.request
 from datetime import datetime
 
-# 目標帳號改為 Serenity 的 Twitter Handle
+# Serenity 目標推特帳號
 TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 
@@ -12,7 +12,7 @@ AUTH_TOKEN = os.environ.get("TWITTER_AUTH_TOKEN", "").strip()
 CT0 = os.environ.get("TWITTER_CT0", "").strip()
 
 def load_existing_tweets(filepath):
-    """讀取本地現有推文資料庫"""
+    """讀取本地現有的推文資料庫"""
     if not os.path.exists(filepath):
         return []
     try:
