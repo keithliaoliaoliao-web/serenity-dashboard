@@ -266,14 +266,7 @@ def fetch_stock_quotes(tickers):
 
     return quotes
 
-def generate_html(tweets, ticker_counts, stock_quotes):
-    os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
-    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
-    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:35]
-    top_tickers_json_str = json.dumps(ticker_counts_sorted, ensure_ascii=False)
-    stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
-
-    html_content = f"""<!DOCTYPE html>
+HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -281,28 +274,28 @@ def generate_html(tweets, ticker_counts, stock_quotes):
   <title>Serenity 美股推文情報與情緒儀表板</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {{
+    tailwind.config = {
       darkMode: 'class',
-      theme: {{
-        extend: {{
-          colors: {{
-            brand: {{
+      theme: {
+        extend: {
+          colors: {
+            brand: {
               50: '#f0fdfa',
               500: '#14b8a6',
               600: '#0d9488',
               900: '#134e4a',
-            }}
-          }}
-        }}
-      }}
-    }}
+            }
+          }
+        }
+      }
+    }
   </script>
   <style>
-    body {{ background-color: #0b0f17; }}
-    ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
-    ::-webkit-scrollbar-track {{ background: #0f172a; }}
-    ::-webkit-scrollbar-thumb {{ background: #334155; border-radius: 3px; }}
-    ::-webkit-scrollbar-thumb:hover {{ background: #475569; }}
+    body { background-color: #0b0f17; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
   </style>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
@@ -357,7 +350,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
       <div class="flex flex-wrap gap-1.5" id="top-tickers-bar"></div>
     </div>
 
-    <!-- 個股即時行情專區 (強化版 Stock Quote Card) -->
+    <!-- 個股即時行情專區 -->
     <div id="stock-quote-section" class="bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 border border-slate-700/80 rounded-xl p-5 shadow-lg relative overflow-hidden hidden space-y-4">
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
@@ -452,9 +445,9 @@ def generate_html(tweets, ticker_counts, stock_quotes):
   </main>
 
   <script>
-    const allTweets = {tweets_json_str};
-    const topTickers = {top_tickers_json_str};
-    const stockQuotes = {stock_quotes_json_str};
+    const allTweets = __TWEETS_DATA__;
+    const topTickers = __TOP_TICKERS__;
+    const stockQuotes = __STOCK_QUOTES__;
 
     let currentSentiment = 'ALL';
     let currentTicker = topTickers.length > 0 ? topTickers[0][0] : '';
@@ -462,67 +455,67 @@ def generate_html(tweets, ticker_counts, stock_quotes):
     let currentSort = 'date_desc';
     let displayLimit = 25;
 
-    let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{{}}');
+    let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
 
-    function formatNumber(num) {{
+    function formatNumber(num) {
       if (!num) return '-';
       if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B';
       if (num >= 1e6) return (num / 1e6).toFixed(2) + 'M';
       if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
       return num.toLocaleString();
-    }}
+    }
 
-    function highlightText(text) {{
+    function highlightText(text) {
       if (!text) return '';
       return text
-        .replace(/(\\$[A-Z]{{1,5}})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\'))" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
+        .replace(/(\\$[A-Z]{1,5})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\'))" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
         .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
-    }}
+    }
 
-    function renderStockQuote(ticker) {{
+    function renderStockQuote(ticker) {
       const section = document.getElementById('stock-quote-section');
-      if (!ticker || !stockQuotes[ticker]) {{
+      if (!ticker || !stockQuotes[ticker]) {
         section.classList.add('hidden');
         return;
-      }}
+      }
 
       const data = stockQuotes[ticker];
       section.classList.remove('hidden');
 
-      document.getElementById('quote-ticker-name').innerText = `$${{ticker}}`;
-      document.getElementById('quote-price').innerText = `$${{data.price.toFixed(2)}}`;
+      document.getElementById('quote-ticker-name').innerText = `$${ticker}`;
+      document.getElementById('quote-price').innerText = `$${data.price.toFixed(2)}`;
 
       const isPositive = data.change >= 0;
       const changeEl = document.getElementById('quote-change-container');
-      const changeVal = `${{isPositive ? '+' : ''}}${{data.change.toFixed(2)}}`;
-      const changePctVal = `(${{isPositive ? '+' : ''}}${{data.changePct.toFixed(2)}}%)`;
+      const changeVal = `${isPositive ? '+' : ''}${data.change.toFixed(2)}`;
+      const changePctVal = `(${isPositive ? '+' : ''}${data.changePct.toFixed(2)}%)`;
 
       document.getElementById('quote-change').innerText = changeVal;
       document.getElementById('quote-change-pct').innerText = changePctVal;
 
-      if (isPositive) {{
+      if (isPositive) {
         changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono text-emerald-400';
-      }} else {{
+      } else {
         changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono text-rose-400';
-      }}
+      }
 
-      // 外部連結
-      document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${{ticker}}/`;
-      document.getElementById('link-finviz').href = `https://finviz.com/quote.ashx?t=${{ticker}}`;
+      // 外部看盤連結
+      document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${ticker}/`;
+      document.getElementById('link-finviz').href = `https://finviz.com/quote.ashx?t=${ticker}`;
 
       document.getElementById('quote-volume').innerText = formatNumber(data.volume);
-      document.getElementById('quote-low52').innerText = data.low52 ? `$${{data.low52.toFixed(2)}}` : '-';
-      document.getElementById('quote-high52').innerText = data.high52 ? `$${{data.high52.toFixed(2)}}` : '-';
+      document.getElementById('quote-low52').innerText = data.low52 ? `$${data.low52.toFixed(2)}` : '-';
+      document.getElementById('quote-high52').innerText = data.high52 ? `$${data.high52.toFixed(2)}` : '-';
 
       // 52 週水位計算
-      if (data.low52 && data.high52 && data.high52 > data.low52) {{
+      if (data.low52 && data.high52 && data.high52 > data.low52) {
         const rangePct = Math.max(0, Math.min(100, Math.round(((data.price - data.low52) / (data.high52 - data.low52)) * 100)));
-        document.getElementById('quote-range-pct').innerText = `52 週區間水位 ${ rangePct }%`;
-        document.getElementById('quote-range-bar').style.width = `${ rangePct }%`;
+        document.getElementById('quote-range-pct').innerText = `52 週區間水位 ${rangePct}%`;
+        document.getElementById('quote-range-bar').style.width = `${rangePct}%`;
         document.getElementById('quote-52w-container').classList.remove('hidden');
-      }} else {{
+      } else {
         document.getElementById('quote-52w-container').classList.add('hidden');
-      }}
+      }
 
       // 該標的專屬情緒統計
       const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
@@ -531,76 +524,76 @@ def generate_html(tweets, ticker_counts, stock_quotes):
       const totalCount = tickerTweets.length;
 
       document.getElementById('quote-sentiment-badge').innerHTML = `
-        <span class="text-emerald-400 font-bold font-mono">${{bullishCount}} 多</span> /
-        <span class="text-rose-400 font-bold font-mono">${{bearishCount}} 空</span>
-        <span class="text-slate-500 font-normal">(${{totalCount}} 則討論)</span>
+        <span class="text-emerald-400 font-bold font-mono">${bullishCount} 多</span> /
+        <span class="text-rose-400 font-bold font-mono">${bearishCount} 空</span>
+        <span class="text-slate-500 font-normal">(${totalCount} 則討論)</span>
       `;
-    }}
+    }
 
-    function renderTopTickers() {{
+    function renderTopTickers() {
       const bar = document.getElementById('top-tickers-bar');
-      bar.innerHTML = topTickers.map(([t, count]) => {{
+      bar.innerHTML = topTickers.map(([t, count]) => {
         const quote = stockQuotes[t];
         let miniBadge = '';
-        if (quote) {{
+        if (quote) {
           const isPos = quote.changePct >= 0;
-          miniBadge = `<span class="text-[10px] ml-1 ${{isPos ? 'text-emerald-400' : 'text-rose-400'}}">${{isPos ? '+' : ''}}${{quote.changePct.toFixed(1)}}%</span>`;
-        }}
+          miniBadge = `<span class="text-[10px] ml-1 ${isPos ? 'text-emerald-400' : 'text-rose-400'}">${isPos ? '+' : ''}${quote.changePct.toFixed(1)}%</span>`;
+        }
         return `
-          <button onclick="filterByTicker('${{t}}')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition ${{currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}}">
-            \\$${{t}} ${{miniBadge}} <span class="text-[10px] opacity-70">(${{count}})</span>
+          <button onclick="filterByTicker('${t}')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition ${currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}">
+            \\$${t} ${miniBadge} <span class="text-[10px] opacity-70">(${count})</span>
           </button>
         `;
-      }}).join('');
-    }}
+      }).join('');
+    }
 
-    function filterByTicker(ticker) {{
+    function filterByTicker(ticker) {
       currentTicker = ticker;
       displayLimit = 25;
       document.getElementById('clear-ticker-btn').classList.toggle('hidden', !ticker);
       renderTopTickers();
       renderStockQuote(ticker);
       render();
-    }}
+    }
 
-    function setSentimentFilter(val) {{
+    function setSentimentFilter(val) {
       currentSentiment = val;
       displayLimit = 25;
-      document.querySelectorAll('.filter-btn').forEach(btn => {{
+      document.querySelectorAll('.filter-btn').forEach(btn => {
         const active = btn.dataset.val === val;
-        btn.className = `filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ${{
+        btn.className = `filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
           active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
-        }}`;
-      }});
+        }`;
+      });
       render();
-    }}
+    }
 
-    function changeSort(val) {{
+    function changeSort(val) {
       currentSort = val;
       displayLimit = 25;
       render();
-    }}
+    }
 
-    function loadMore() {{
+    function loadMore() {
       displayLimit += 25;
       render();
-    }}
+    }
 
-    async function translateByIndex(idx) {{
-      const transEl = document.getElementById(`trans-text-${{idx}}`);
-      const btnEl = document.getElementById(`trans-btn-${{idx}}`);
+    async function translateByIndex(idx) {
+      const transEl = document.getElementById(`trans-text-${idx}`);
+      const btnEl = document.getElementById(`trans-btn-${idx}`);
       const item = allTweets[idx];
       if (!transEl || !item) return;
 
       const rawText = item.text;
-      if (clientTranslations[rawText]) {{
+      if (clientTranslations[rawText]) {
         transEl.innerHTML = highlightText(clientTranslations[rawText]);
         transEl.classList.remove('hidden');
         if (btnEl) btnEl.remove();
         return;
-      }}
+      }
 
-      try {{
+      try {
         if (btnEl) btnEl.innerText = '翻譯中...';
         const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&dt=t&q=' + encodeURIComponent(rawText);
         const res = await fetch(url);
@@ -611,15 +604,15 @@ def generate_html(tweets, ticker_counts, stock_quotes):
         transEl.innerHTML = highlightText(translated);
         transEl.classList.remove('hidden');
         if (btnEl) btnEl.remove();
-      }} catch (err) {{
+      } catch (err) {
         console.error('翻譯失敗', err);
         if (btnEl) btnEl.innerText = '⚠️ 翻譯失敗，點擊重試';
-      }}
-    }}
+      }
+    }
 
-    function render() {{
+    function render() {
       const container = document.getElementById('tweets-list');
-      let filtered = allTweets.filter(t => {{
+      let filtered = allTweets.filter(t => {
         const matchSentiment = currentSentiment === 'ALL' || t.sentiment === currentSentiment;
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
@@ -627,117 +620,117 @@ def generate_html(tweets, ticker_counts, stock_quotes):
           t.summary.toLowerCase().includes(searchQuery) ||
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
         return matchSentiment && matchTicker && matchSearch;
-      }});
+      });
 
       // 執行排序
-      if (currentSort === 'likes_desc') {{
+      if (currentSort === 'likes_desc') {
         filtered.sort((a, b) => b.likes - a.likes);
-      }} else if (currentSort === 'views_desc') {{
+      } else if (currentSort === 'views_desc') {
         filtered.sort((a, b) => b.views - a.views);
-      }} else {{
+      } else {
         filtered.sort((a, b) => b.date.localeCompare(a.date));
-      }}
+      }
 
       const totalFiltered = filtered.length;
       const visibleItems = filtered.slice(0, displayLimit);
 
-      // 控制載入更多按鈕顯示狀態
+      // 控制載入更多按鈕
       const loadMoreContainer = document.getElementById('load-more-container');
       const loadMoreCount = document.getElementById('load-more-count');
-      if (visibleItems.length < totalFiltered) {{
+      if (visibleItems.length < totalFiltered) {
         loadMoreContainer.classList.remove('hidden');
-        loadMoreCount.innerText = `${{visibleItems.length}} / ${{totalFiltered}}`;
-      }} else {{
+        loadMoreCount.innerText = `${visibleItems.length} / ${totalFiltered}`;
+      } else {
         loadMoreContainer.classList.add('hidden');
-      }}
+      }
 
-      if (visibleItems.length === 0) {{
+      if (visibleItems.length === 0) {
         container.innerHTML = `
           <div class="text-center py-16 text-slate-500 bg-slate-900/30 rounded-xl border border-slate-800">
             沒有符合篩選條件的推文。
           </div>
         `;
         return;
-      }}
+      }
 
-      container.innerHTML = visibleItems.map(item => {{
+      container.innerHTML = visibleItems.map(item => {
         const globalIdx = allTweets.indexOf(item);
         const cachedClient = clientTranslations[item.text];
 
         let sentimentBadge = '';
-        if (item.sentiment === 'Bullish') {{
+        if (item.sentiment === 'Bullish') {
           sentimentBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">看多 Bullish</span>';
-        }} else if (item.sentiment === 'Bearish') {{
+        } else if (item.sentiment === 'Bearish') {
           sentimentBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">看空 Bearish</span>';
-        }} else {{
+        } else {
           sentimentBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">中立 Neutral</span>';
-        }}
+        }
 
         let contentHtml = '';
-        if (item.summary || item.translation_zh) {{
+        if (item.summary || item.translation_zh) {
           contentHtml = `
-            ${{item.summary ? `<div class="text-sm font-semibold text-teal-300 mb-1.5 flex items-start gap-1.5"><span class="text-teal-400 font-mono">⚡ 觀點：</span>${{item.summary}}</div>` : ''}}
-            ${{item.translation_zh ? `<div class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap">${{highlightText(item.translation_zh)}}</div>` : ''}}
+            ${item.summary ? `<div class="text-sm font-semibold text-teal-300 mb-1.5 flex items-start gap-1.5"><span class="text-teal-400 font-mono">⚡ 觀點：</span>${item.summary}</div>` : ''}
+            ${item.translation_zh ? `<div class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap">${highlightText(item.translation_zh)}</div>` : ''}
             <details class="mt-2 text-xs text-slate-500">
               <summary class="cursor-pointer hover:text-slate-400 select-none">查看原文</summary>
-              <div class="mt-1 text-slate-400 whitespace-pre-wrap border-l-2 border-slate-700 pl-2 py-1">${{highlightText(item.text)}}</div>
+              <div class="mt-1 text-slate-400 whitespace-pre-wrap border-l-2 border-slate-700 pl-2 py-1">${highlightText(item.text)}</div>
             </details>
           `;
-        }} else {{
+        } else {
           contentHtml = `
-            <div id="trans-text-${{globalIdx}}" class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap font-medium mb-1 ${{cachedClient ? '' : 'hidden'}}">${{cachedClient ? highlightText(cachedClient) : ''}}</div>
-            <div class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">${{highlightText(item.text)}}</div>
-            ${{cachedClient ? '' : `<button id="trans-btn-${{globalIdx}}" onclick="translateByIndex(${{globalIdx}})" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 mt-2 transition">🌐 翻譯為繁體中文</button>`}}
+            <div id="trans-text-${globalIdx}" class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap font-medium mb-1 ${cachedClient ? '' : 'hidden'}">${cachedClient ? highlightText(cachedClient) : ''}</div>
+            <div class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">${highlightText(item.text)}</div>
+            ${cachedClient ? '' : `<button id="trans-btn-${globalIdx}" onclick="translateByIndex(${globalIdx})" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 mt-2 transition">🌐 翻譯為繁體中文</button>`}
           `;
-        }}
+        }
 
         return `
           <article class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 sm:p-5 hover:border-slate-700/80 transition space-y-3">
             <div class="flex items-center justify-between flex-wrap gap-2">
               <div class="flex items-center gap-2">
-                ${{sentimentBadge}}
+                ${sentimentBadge}
                 <div class="flex flex-wrap gap-1">
-                  ${{item.tickers.map(tk => `<button onclick="filterByTicker('${{tk}}')" class="text-xs font-mono font-bold text-teal-400 bg-slate-800 hover:bg-slate-700 px-1.5 py-0.5 rounded border border-slate-700 transition">\\$${{tk}}</button>`).join('')}}
+                  ${item.tickers.map(tk => `<button onclick="filterByTicker('${tk}')" class="text-xs font-mono font-bold text-teal-400 bg-slate-800 hover:bg-slate-700 px-1.5 py-0.5 rounded border border-slate-700 transition">\\$${tk}</button>`).join('')}
                 </div>
               </div>
-              <div class="text-xs text-slate-500 font-mono">${{item.date}}</div>
+              <div class="text-xs text-slate-500 font-mono">${item.date}</div>
             </div>
 
-            <div class="py-1">${{contentHtml}}</div>
+            <div class="py-1">${contentHtml}</div>
 
             <div class="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2.5">
               <div class="flex items-center gap-4 font-mono">
-                <span>❤️ ${{item.likes.toLocaleString()}}</span>
-                <span>🔁 ${{item.retweets.toLocaleString()}}</span>
-                <span>👁️ ${{item.views.toLocaleString()}}</span>
+                <span>❤️ ${item.likes.toLocaleString()}</span>
+                <span>🔁 ${item.retweets.toLocaleString()}</span>
+                <span>👁️ ${item.views.toLocaleString()}</span>
               </div>
-              <a href="${{item.url}}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition flex items-center gap-1">
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition flex items-center gap-1">
                 開啟推文 ↗
               </a>
             </div>
           </article>
         `;
-      }}).join('');
-    }}
+      }).join('');
+    }
 
-    function initStats() {{
+    function initStats() {
       const total = allTweets.length;
       const bullish = allTweets.filter(t => t.sentiment === 'Bullish').length;
       const bearish = allTweets.filter(t => t.sentiment === 'Bearish').length;
       const uniqueTickers = new Set(allTweets.flatMap(t => t.tickers)).size;
 
       document.getElementById('stat-total').innerText = total.toLocaleString();
-      document.getElementById('stat-bullish').innerText = `${{bullish}} (${{total ? Math.round(bullish/total*100) : 0}}%)`;
-      document.getElementById('stat-bearish').innerText = `${{bearish}} (${{total ? Math.round(bearish/total*100) : 0}}%)`;
+      document.getElementById('stat-bullish').innerText = `${bullish} (${total ? Math.round(bullish/total*100) : 0}%)`;
+      document.getElementById('stat-bearish').innerText = `${bearish} (${total ? Math.round(bearish/total*100) : 0}%)`;
       document.getElementById('stat-tickers').innerText = uniqueTickers.toLocaleString();
-      document.getElementById('last-update-time').innerText = `建置時間：${{new Date().toLocaleString('zh-TW', {{ hour12: false }})}}`;
-    }}
+      document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
+    }
 
-    document.getElementById('search-input').addEventListener('input', (e) => {{
+    document.getElementById('search-input').addEventListener('input', (e) => {
       searchQuery = e.target.value.trim().toLowerCase();
       displayLimit = 25;
       render();
-    }});
+    });
 
     // 初始化載入
     initStats();
@@ -748,8 +741,21 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 </body>
 </html>
 """
+
+def generate_html(tweets, ticker_counts, stock_quotes):
+    os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
+    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
+    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:35]
+    top_tickers_json_str = json.dumps(ticker_counts_sorted, ensure_ascii=False)
+    stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
+
+    # 採用標準字串替換注入 JSON 資料，避免 f-string 符號干擾
+    html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
+                                 .replace("__TOP_TICKERS__", top_tickers_json_str) \
+                                 .replace("__STOCK_QUOTES__", stock_quotes_json_str)
+
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
-        f.write(html_content)
+        f.write(html_rendered)
     print(f"✅ 儀表板成功產出至 {OUTPUT_HTML}")
 
 if __name__ == "__main__":
@@ -757,7 +763,6 @@ if __name__ == "__main__":
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts = clean_tweet_data(tweets_raw, sentiment_cache)
     
-    # 擷取討論量前 35 名標的市場行情
     top_tickers_list = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:35]]
     stock_quotes = fetch_stock_quotes(top_tickers_list)
     
