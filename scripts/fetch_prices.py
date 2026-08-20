@@ -4,7 +4,7 @@ import re
 import urllib.request
 from datetime import datetime
 
-# Serenity 目標推特帳號
+# 目標帳號：Serenity (aleabitoreddit)
 TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 
@@ -93,7 +93,7 @@ def fetch_tweets_syndication(screen_name):
     return fetched_tweets
 
 def save_merged_tweets(filepath, new_tweets):
-    """將新推文與現有資料庫合併去重並儲存"""
+    """將新推文與現有資料庫合併去重，並儲存至 JSON"""
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     existing_tweets = load_existing_tweets(filepath)
 
