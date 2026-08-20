@@ -25,7 +25,7 @@ def load_tweets(filepath):
                 return list(data.values())
             return []
     except Exception as e:
-        print(f"讀取推文失敗: {e}")
+        print(f"⚠️ 讀取推文失敗: {e}")
         return []
 
 def load_cache(filepath):
@@ -46,7 +46,7 @@ def load_cache(filepath):
                 return cache_dict
             return {}
     except Exception as e:
-        print(f"讀取快取失敗: {e}")
+        print(f"⚠️ 讀取快取失敗: {e}")
         return {}
 
 def save_json(filepath, data):
@@ -68,7 +68,8 @@ def extract_tweet_id(item):
     url = item.get("url") or item.get("permanentUrl") or item.get("link") or ""
     if url:
         m = re.search(r"status/(\d+)", str(url))
-        if m: return m.group(1).strip()
+        if m:
+            return m.group(1).strip()
     return ""
 
 def extract_tweet_text(item):
@@ -130,21 +131,18 @@ def parse_sort_key(item):
     return s
 
 def get_candidate_models():
-    """優先指定你 API Key 支援的最新版本模型清單"""
+    """設定官方主流與相容的模型優先順序"""
     if not API_KEY:
         print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
         return []
 
     genai.configure(api_key=API_KEY)
     
-    # 根據你的帳號權限優先排序可用模型
     preferred_models = [
-        "gemini-3.6-flash",
-        "gemini-3.7-flash",
-        "gemini-flash-latest",
-        "gemini-2.5-flash-lite",
-        "gemini-flash-lite-latest",
-        "gemini-3-flash-preview"
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+        "gemini-1.5-pro",
+        "gemini-2.0-flash-lite-preview-02-05"
     ]
     return preferred_models
 
@@ -154,16 +152,25 @@ def analyze_sub_batch(items, candidate_models):
 2. 將推文完整翻譯為繁體中文 (translation_zh)。
 3. 提供 15 字以內的繁體中文核心觀點摘要 (summary)。
 
-待分析推文：
+輸出格式必須為嚴格的 JSON 物件，格式範例如下：
+{
+  "推文ID_1": {
+    "sentiment": "Bullish",
+    "summary": "看好本季營收爆發突破新高",
+    "translation_zh": "完整中文翻譯內容..."
+  }
+}
+
+待分析推文清單：
 """
     for item in items:
         prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
 
-    prompt += "\n\n請以標準 JSON 物件格式輸出（以推文 ID 作為 Key），不要包含任何 markdown 區塊外的文字。"
-
     for m_name in candidate_models:
         try:
             model = genai.GenerativeModel(m_name)
+            
+            # 優先嘗試 JSON 格式輸出限制
             try:
                 response = model.generate_content(
                     prompt,
@@ -173,18 +180,23 @@ def analyze_sub_batch(items, candidate_models):
                 response = model.generate_content(prompt)
 
             raw_text = response.text.strip()
-            raw_text = re.sub(r"^```json\s*", "", raw_text)
-            raw_text = re.sub(r"^```\s*", "", raw_text)
-            raw_text = re.sub(r"```$", "", raw_text).strip()
-            result = json.loads(raw_text)
-            print(f"    ✨ 使用模型 [{m_name}] 成功解析 {len(result)} 則推文！")
-            return result
+            
+            # 擷取標準 JSON 區塊，避免模型輸出前後包含多餘字元
+            json_match = re.search(r"\{[\s\S]*\}", raw_text)
+            if not json_match:
+                continue
+                
+            result = json.loads(json_match.group(0))
+            if isinstance(result, dict) and result:
+                print(f"    ✨ 使用模型 [{m_name}] 成功解析 {len(result)} 則推文！")
+                return result
         except Exception as e:
-            print(f"    ⚠️ 模型 [{m_name}] 調用失敗 ({e})，切換至下一個備用模型...")
+            print(f"    ⚠️ 模型 [{m_name}] 調用失敗 ({e})，切換至備用模型...")
+            time.sleep(1)
 
     return {}
 
-def run_sentiment_pipeline(total_target=150, chunk_size=10):
+def run_sentiment_pipeline(total_target=50, chunk_size=10):
     candidate_models = get_candidate_models()
     if not candidate_models:
         return
@@ -192,7 +204,7 @@ def run_sentiment_pipeline(total_target=150, chunk_size=10):
     raw_data = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
 
-    # 由新到舊排序
+    # 依推文時間由新至舊排序
     raw_data.sort(key=parse_sort_key, reverse=True)
 
     unprocessed = []
@@ -215,7 +227,7 @@ def run_sentiment_pipeline(total_target=150, chunk_size=10):
 
     print(f"🔍 待分析個股推文總數: {len(unprocessed)} 則")
     if not unprocessed:
-        print("所有最新推文均已在快取中。")
+        print("所有最新推文均已在快取中，無須分析。")
         return
 
     to_process = unprocessed[:total_target]
@@ -227,6 +239,7 @@ def run_sentiment_pipeline(total_target=150, chunk_size=10):
         print(f"  正在分析第 {i + 1} ~ {i + len(chunk)} 則...")
         results = analyze_sub_batch(chunk, candidate_models)
 
+        batch_updated = False
         for item in chunk:
             t_id = item["id"]
             res = results.get(t_id) or results.get(str(t_id))
@@ -237,12 +250,16 @@ def run_sentiment_pipeline(total_target=150, chunk_size=10):
                     "translation_zh": res.get("translation_zh", "")
                 }
                 added_count += 1
+                batch_updated = True
                 print(f"    ✅ 已儲存 [{t_id}]: {res.get('summary')}")
 
-        time.sleep(1)
+        # 每批次完成即時寫入快取，避免中途失敗遺失進度
+        if batch_updated:
+            save_json(CACHE_FILE, sentiment_cache)
 
-    save_json(CACHE_FILE, sentiment_cache)
-    print(f"🎉 本次成功更新 {added_count} 則推文快取！目前總快取量: {len(sentiment_cache)} 則。")
+        time.sleep(2)
+
+    print(f"🎉 分析作業完成！本次更新 {added_count} 則推文。目前總快取量: {len(sentiment_cache)} 則。")
 
 if __name__ == "__main__":
-    run_sentiment_pipeline(total_target=30, chunk_size=10)
+    run_sentiment_pipeline(total_target=50, chunk_size=10)
