@@ -47,7 +47,7 @@ jobs:
       - name: 安裝 Python 套件
         run: |
           python -m pip install --upgrade pip
-          pip install google-generativeai
+          pip install google-generativeai yfinance
 
       - name: 執行 Gemini 情緒深度分析
         env:
@@ -67,7 +67,7 @@ jobs:
           git add data/ docs/
           
           if ! git diff --staged --quiet; then
-            git commit -m "chore: 更新 AI 快取與儀表板 [skip ci]"
+            git commit -m "chore: 更新 AI 快取、股價行情與儀表板 [skip ci]"
             git pull --rebase origin main
             git push origin main
           else
