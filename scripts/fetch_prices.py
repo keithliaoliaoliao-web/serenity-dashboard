@@ -1,126 +1,135 @@
 import json
 import os
 import re
+import urllib.request
 from datetime import datetime
 
-# ── 設定 ──────────────────────────────────────────────────
+# 目標帳號改為 Serenity 的 Twitter Handle
+TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
-OUTPUT_FILE  = "data/prices.json"
-MAX_TICKERS  = 50  # 只抓出現頻率最高的前 50 個標的
 
-# 與 build_html.py 相同的黑名單
-BLACKLIST = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP", "DD", "EOD", "YOLO"}
+AUTH_TOKEN = os.environ.get("TWITTER_AUTH_TOKEN", "").strip()
+CT0 = os.environ.get("TWITTER_CT0", "").strip()
 
-# ── 工具函數 ──────────────────────────────────────────────
-def extract_tickers_from_text(text):
-    """從推文文字提取 ticker（與 build_html.py 邏輯相同）"""
-    if not text:
-        return []
-    matches = re.findall(r"(?<!\w)\$([A-Z]{1,5})\b", text.upper())
-    return [t for t in set(matches) if t not in BLACKLIST]
-
-def get_top_tickers(tweets_file):
-    """讀取 tweets.json，統計各 ticker 出現次數，回傳 top N"""
-    if not os.path.exists(tweets_file):
-        print(f"❌ 找不到 {tweets_file}")
+def load_existing_tweets(filepath):
+    """讀取本地現有推文資料庫"""
+    if not os.path.exists(filepath):
         return []
     try:
-        with open(tweets_file, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
+            return data if isinstance(data, list) else []
     except Exception as e:
-        print(f"❌ 讀取推文失敗: {e}")
+        print(f"⚠️ 讀取現有推文失敗: {e}", flush=True)
         return []
 
-    # 相容多種 JSON 結構
-    if isinstance(data, list):
-        tweets = data
-    elif isinstance(data, dict):
-        tweets = data.get("tweets", data.get("data", list(data.values())))
-    else:
-        return []
+def fetch_tweets_syndication(screen_name):
+    """透過 Twitter 官方 Syndication 串流抓取最新推文"""
+    url = f"https://syndication.twitter.com/srv/timeline-profile/screen-name/{screen_name}"
+    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://platform.twitter.com/"
+    }
 
-    ticker_counts = {}
-    for item in tweets:
-        text = ""
-        for k in ["text", "rawContent", "full_text", "content"]:
-            if k in item and item[k]:
-                text = str(item[k])
-                break
-        for ticker in extract_tickers_from_text(text):
-            ticker_counts[ticker] = ticker_counts.get(ticker, 0) + 1
+    if AUTH_TOKEN and CT0:
+        headers["Cookie"] = f"auth_token={AUTH_TOKEN}; ct0={CT0};"
+        headers["x-csrf-token"] = CT0
 
-    sorted_tickers = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)
-    top = [t for t, _ in sorted_tickers[:MAX_TICKERS]]
-    print(f"🔍 找到 {len(ticker_counts)} 個 ticker，抓取前 {len(top)} 個")
-    return top
+    fetched_tweets = []
+    print(f"📡 正在連線 Twitter 官方串流端點抓取 @{screen_name} 最新推文...", flush=True)
 
-def fetch_price_data(tickers):
-    """使用 yfinance 批次抓取各 ticker 股價快照"""
     try:
-        import yfinance as yf
-    except ImportError:
-        print("❌ yfinance 未安裝")
-        return {}
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=15) as response:
+            html = response.read().decode("utf-8")
 
-    prices = {}
-    print(f"📊 開始抓取 {len(tickers)} 個標的...")
+            match = re.search(r'<script id="__NEXT_DATA__" type="application/json">([^<]+)</script>', html)
+            if not match:
+                print("⚠️ 未能從頁面中解析出結構化 JSON 資料區塊。", flush=True)
+                return []
 
-    for ticker in tickers:
-        try:
-            info = yf.Ticker(ticker).fast_info
+            data = json.loads(match.group(1))
+            entries = data.get("props", {}).get("pageProps", {}).get("timeline", {}).get("entries", [])
 
-            price       = getattr(info, "last_price",     None)
-            prev_close  = getattr(info, "previous_close", None)
-            week52_high = getattr(info, "year_high",      None)
-            week52_low  = getattr(info, "year_low",       None)
-            volume      = getattr(info, "last_volume",    None)
+            for entry in entries:
+                tweet_raw = entry.get("content", {}).get("tweet")
+                if not tweet_raw:
+                    continue
 
-            # 無有效股價 → 略過（非美股 ticker 常見）
-            if price is None or price <= 0:
-                print(f"  ⚠️  {ticker}: 無有效股價，略過")
-                continue
+                tweet_id = str(tweet_raw.get("id_str") or tweet_raw.get("id", "")).strip()
+                text = tweet_raw.get("full_text") or tweet_raw.get("text", "")
+                created_at = tweet_raw.get("created_at", "")
+                fav_count = tweet_raw.get("favorite_count", 0)
+                rt_count = tweet_raw.get("retweet_count", 0)
+                views_data = tweet_raw.get("views", {})
+                views = views_data.get("count", 0) if isinstance(views_data, dict) else (tweet_raw.get("views", 0) or 0)
 
-            change     = round(float(price) - float(prev_close), 2) if prev_close else None
-            change_pct = round(change / float(prev_close) * 100, 2) if change and prev_close else None
+                iso_date = ""
+                try:
+                    dt = datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
+                    iso_date = dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+                except Exception:
+                    iso_date = str(created_at)
 
-            prices[ticker] = {
-                "price":       round(float(price), 2),
-                "prev_close":  round(float(prev_close), 2) if prev_close else None,
-                "change":      change,
-                "change_pct":  change_pct,
-                "week52_high": round(float(week52_high), 2) if week52_high else None,
-                "week52_low":  round(float(week52_low),  2) if week52_low  else None,
-                "volume":      int(volume) if volume else None,
-                "updated_at":  datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
-            }
-            sign = "+" if (change or 0) >= 0 else ""
-            print(f"  ✅ {ticker}: ${price:.2f}  {sign}{change_pct:.2f}%")
+                if tweet_id and text:
+                    fetched_tweets.append({
+                        "id": tweet_id,
+                        "text": text.strip(),
+                        "created_at": iso_date,
+                        "favorite_count": int(fav_count),
+                        "retweet_count": int(rt_count),
+                        "views": int(views) if str(views).isdigit() else 0,
+                        "url": f"https://twitter.com/{screen_name}/status/{tweet_id}"
+                    })
 
-        except Exception as e:
-            print(f"  ❌ {ticker}: {e}")
+            print(f"✨ 順利從官方串流解析出 {len(fetched_tweets)} 則最新推文！", flush=True)
+
+    except Exception as e:
+        print(f"⚠️ 串流連線發生異常: {e}", flush=True)
+
+    return fetched_tweets
+
+def save_merged_tweets(filepath, new_tweets):
+    """將新推文與現有資料庫合併去重並儲存"""
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    existing_tweets = load_existing_tweets(filepath)
+
+    tweets_map = {str(t.get("id", "")).strip(): t for t in existing_tweets if t.get("id")}
+
+    added_count = 0
+    updated_count = 0
+
+    for t in new_tweets:
+        t_id = str(t.get("id", "")).strip()
+        if not t_id:
             continue
 
-    return prices
+        if t_id not in tweets_map:
+            tweets_map[t_id] = t
+            added_count += 1
+        else:
+            tweets_map[t_id] = t
+            updated_count += 1
 
-# ── 主流程 ────────────────────────────────────────────────
-def main():
-    print("=== 股價資料抓取腳本 ===")
+    merged_list = list(tweets_map.values())
+    merged_list.sort(key=lambda x: str(x.get("created_at", "") or x.get("date", "")), reverse=True)
 
-    tickers = get_top_tickers(TWEETS_FILE)
-    if not tickers:
-        print("⚠️  沒有找到任何 ticker，輸出空檔案")
-        os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump({}, f)
-        return
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(merged_list, f, ensure_ascii=False, indent=2)
 
-    prices = fetch_price_data(tickers)
-
-    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(prices, f, ensure_ascii=False, indent=2)
-
-    print(f"\n✅ 股價資料輸出至 {OUTPUT_FILE}（共 {len(prices)} 個標的）")
+    print(
+        f"📊 [結算報告] 本次抓取: {len(new_tweets)} 則 | "
+        f"全新新增: {added_count} 則 | "
+        f"既有推文更新互動數據: {updated_count} 則 | "
+        f"目前推文資料庫總數: {len(merged_list)} 則",
+        flush=True
+    )
 
 if __name__ == "__main__":
-    main()
+    print(f"🚀 開始執行 @{TARGET_HANDLE} 推文擷取流程...", flush=True)
+    tweets = fetch_tweets_syndication(TARGET_HANDLE)
+    save_merged_tweets(TWEETS_FILE, tweets)
+    print("✅ 任務執行完成。", flush=True)
