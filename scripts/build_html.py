@@ -224,7 +224,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts
 
 def fetch_stock_quotes(tickers):
-    """批次獲取美股市場行情數據（股價、漲跌幅、52週高低點、成交量）"""
+    """獲取美股市場行情數據"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情數據...")
     quotes = {}
     
@@ -269,7 +269,7 @@ def fetch_stock_quotes(tickers):
 def generate_html(tweets, ticker_counts, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     tweets_json_str = json.dumps(tweets, ensure_ascii=False)
-    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:30]
+    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:35]
     top_tickers_json_str = json.dumps(ticker_counts_sorted, ensure_ascii=False)
     stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
 
@@ -357,13 +357,13 @@ def generate_html(tweets, ticker_counts, stock_quotes):
       <div class="flex flex-wrap gap-1.5" id="top-tickers-bar"></div>
     </div>
 
-    <!-- 個股即時行情專區 (Stock Quote Card) -->
-    <div id="stock-quote-section" class="bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 border border-slate-700/80 rounded-xl p-5 shadow-lg relative overflow-hidden hidden">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <!-- 個股即時行情專區 (強化版 Stock Quote Card) -->
+    <div id="stock-quote-section" class="bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 border border-slate-700/80 rounded-xl p-5 shadow-lg relative overflow-hidden hidden space-y-4">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
-        <!-- 左側：標的與價格、漲跌幅 -->
-        <div class="flex items-center gap-4">
-          <div class="px-3 py-2 bg-slate-800 rounded-lg border border-slate-700 font-mono font-bold text-xl text-teal-400" id="quote-ticker-name">
+        <!-- 左側：標的與價格、漲跌幅、外部看盤連結 -->
+        <div class="flex items-center gap-4 flex-wrap">
+          <div class="px-3 py-2 bg-slate-800 rounded-lg border border-slate-700 font-mono font-bold text-xl text-teal-400 shadow-inner" id="quote-ticker-name">
             $TICKER
           </div>
           <div>
@@ -377,34 +377,61 @@ def generate_html(tweets, ticker_counts, stock_quotes):
               <span class="text-xs font-normal text-slate-400">相對前一日收盤</span>
             </div>
           </div>
+          <div class="flex items-center gap-2 ml-0 sm:ml-4">
+            <a id="link-tradingview" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition flex items-center gap-1">
+              📈 TradingView
+            </a>
+            <a id="link-finviz" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition flex items-center gap-1">
+              📊 Finviz
+            </a>
+          </div>
         </div>
 
-        <!-- 右側：52 週高低點與成交量 -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 border-t md:border-t-0 md:border-l border-slate-800 pt-3 md:pt-0 md:pl-6">
+        <!-- 右側：成交量與該標的專屬情緒偏向 -->
+        <div class="flex items-center gap-6 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-6">
           <div>
             <div class="text-xs text-slate-400">最新成交量</div>
             <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-volume">-</div>
           </div>
           <div>
-            <div class="text-xs text-slate-400">52 週最低</div>
-            <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-low52">$0.00</div>
-          </div>
-          <div>
-            <div class="text-xs text-slate-400">52 週最高</div>
-            <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-high52">$0.00</div>
+            <div class="text-xs text-slate-400">社群 AI 情緒偏向</div>
+            <div class="text-xs font-medium mt-1 flex items-center gap-2" id="quote-sentiment-badge">
+              -
+            </div>
           </div>
         </div>
 
       </div>
+
+      <!-- 52 週高低水位區間可視化進度條 -->
+      <div id="quote-52w-container" class="border-t border-slate-800/80 pt-3">
+        <div class="flex justify-between text-xs text-slate-400 font-mono mb-1.5">
+          <span>52 週最低：<b class="text-slate-200" id="quote-low52">$0.00</b></span>
+          <span class="text-teal-400 font-semibold" id="quote-range-pct">52 週區間水位 0%</span>
+          <span>52 週最高：<b class="text-slate-200" id="quote-high52">$0.00</b></span>
+        </div>
+        <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden flex items-center">
+          <div id="quote-range-bar" class="bg-gradient-to-r from-teal-600 to-cyan-400 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 搜尋與篩選列 -->
-    <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
-      <div class="relative w-full sm:w-80">
+    <!-- 搜尋、排序與篩選列 -->
+    <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div class="flex items-center gap-2 flex-1 max-w-lg">
         <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的..." 
           class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
+        
+        <!-- 排序選單 -->
+        <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer">
+          <option value="date_desc">🕒 最新發布</option>
+          <option value="likes_desc">❤️ 最多按讚</option>
+          <option value="views_desc">👁️ 最多瀏覽</option>
+        </select>
       </div>
-      <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
         <button onclick="setSentimentFilter('ALL')" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-val="ALL">全部</button>
         <button onclick="setSentimentFilter('Bullish')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-emerald-400 hover:bg-slate-900 transition" data-val="Bullish">看多</button>
         <button onclick="setSentimentFilter('Bearish')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-rose-400 hover:bg-slate-900 transition" data-val="Bearish">看空</button>
@@ -414,6 +441,13 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     <!-- 推文卡片列表 -->
     <div class="space-y-4" id="tweets-list"></div>
+
+    <!-- 載入更多按鈕 -->
+    <div class="text-center pt-2 pb-8" id="load-more-container">
+      <button onclick="loadMore()" class="px-6 py-2.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-teal-500/50 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition shadow-sm">
+        載入更多推文 (<span id="load-more-count">0 / 0</span>)
+      </button>
+    </div>
 
   </main>
 
@@ -425,6 +459,8 @@ def generate_html(tweets, ticker_counts, stock_quotes):
     let currentSentiment = 'ALL';
     let currentTicker = topTickers.length > 0 ? topTickers[0][0] : '';
     let searchQuery = '';
+    let currentSort = 'date_desc';
+    let displayLimit = 25;
 
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{{}}');
 
@@ -470,9 +506,35 @@ def generate_html(tweets, ticker_counts, stock_quotes):
         changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono text-rose-400';
       }}
 
+      // 外部連結
+      document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${{ticker}}/`;
+      document.getElementById('link-finviz').href = `https://finviz.com/quote.ashx?t=${{ticker}}`;
+
       document.getElementById('quote-volume').innerText = formatNumber(data.volume);
       document.getElementById('quote-low52').innerText = data.low52 ? `$${{data.low52.toFixed(2)}}` : '-';
       document.getElementById('quote-high52').innerText = data.high52 ? `$${{data.high52.toFixed(2)}}` : '-';
+
+      // 52 週水位計算
+      if (data.low52 && data.high52 && data.high52 > data.low52) {{
+        const rangePct = Math.max(0, Math.min(100, Math.round(((data.price - data.low52) / (data.high52 - data.low52)) * 100)));
+        document.getElementById('quote-range-pct').innerText = `52 週區間水位 ${ rangePct }%`;
+        document.getElementById('quote-range-bar').style.width = `${ rangePct }%`;
+        document.getElementById('quote-52w-container').classList.remove('hidden');
+      }} else {{
+        document.getElementById('quote-52w-container').classList.add('hidden');
+      }}
+
+      // 該標的專屬情緒統計
+      const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
+      const bullishCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
+      const bearishCount = tickerTweets.filter(t => t.sentiment === 'Bearish').length;
+      const totalCount = tickerTweets.length;
+
+      document.getElementById('quote-sentiment-badge').innerHTML = `
+        <span class="text-emerald-400 font-bold font-mono">${{bullishCount}} 多</span> /
+        <span class="text-rose-400 font-bold font-mono">${{bearishCount}} 空</span>
+        <span class="text-slate-500 font-normal">(${{totalCount}} 則討論)</span>
+      `;
     }}
 
     function renderTopTickers() {{
@@ -494,6 +556,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     function filterByTicker(ticker) {{
       currentTicker = ticker;
+      displayLimit = 25;
       document.getElementById('clear-ticker-btn').classList.toggle('hidden', !ticker);
       renderTopTickers();
       renderStockQuote(ticker);
@@ -502,12 +565,24 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     function setSentimentFilter(val) {{
       currentSentiment = val;
+      displayLimit = 25;
       document.querySelectorAll('.filter-btn').forEach(btn => {{
         const active = btn.dataset.val === val;
         btn.className = `filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ${{
           active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
         }}`;
       }});
+      render();
+    }}
+
+    function changeSort(val) {{
+      currentSort = val;
+      displayLimit = 25;
+      render();
+    }}
+
+    function loadMore() {{
+      displayLimit += 25;
       render();
     }}
 
@@ -544,7 +619,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     function render() {{
       const container = document.getElementById('tweets-list');
-      const filtered = allTweets.filter(t => {{
+      let filtered = allTweets.filter(t => {{
         const matchSentiment = currentSentiment === 'ALL' || t.sentiment === currentSentiment;
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
@@ -554,7 +629,29 @@ def generate_html(tweets, ticker_counts, stock_quotes):
         return matchSentiment && matchTicker && matchSearch;
       }});
 
-      if (filtered.length === 0) {{
+      // 執行排序
+      if (currentSort === 'likes_desc') {{
+        filtered.sort((a, b) => b.likes - a.likes);
+      }} else if (currentSort === 'views_desc') {{
+        filtered.sort((a, b) => b.views - a.views);
+      }} else {{
+        filtered.sort((a, b) => b.date.localeCompare(a.date));
+      }}
+
+      const totalFiltered = filtered.length;
+      const visibleItems = filtered.slice(0, displayLimit);
+
+      // 控制載入更多按鈕顯示狀態
+      const loadMoreContainer = document.getElementById('load-more-container');
+      const loadMoreCount = document.getElementById('load-more-count');
+      if (visibleItems.length < totalFiltered) {{
+        loadMoreContainer.classList.remove('hidden');
+        loadMoreCount.innerText = `${{visibleItems.length}} / ${{totalFiltered}}`;
+      }} else {{
+        loadMoreContainer.classList.add('hidden');
+      }}
+
+      if (visibleItems.length === 0) {{
         container.innerHTML = `
           <div class="text-center py-16 text-slate-500 bg-slate-900/30 rounded-xl border border-slate-800">
             沒有符合篩選條件的推文。
@@ -563,7 +660,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
         return;
       }}
 
-      container.innerHTML = filtered.map(item => {{
+      container.innerHTML = visibleItems.map(item => {{
         const globalIdx = allTweets.indexOf(item);
         const cachedClient = clientTranslations[item.text];
 
@@ -609,7 +706,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
             <div class="py-1">${{contentHtml}}</div>
 
             <div class="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2.5">
-              <div class="flex items-center gap-4">
+              <div class="flex items-center gap-4 font-mono">
                 <span>❤️ ${{item.likes.toLocaleString()}}</span>
                 <span>🔁 ${{item.retweets.toLocaleString()}}</span>
                 <span>👁️ ${{item.views.toLocaleString()}}</span>
@@ -638,6 +735,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     document.getElementById('search-input').addEventListener('input', (e) => {{
       searchQuery = e.target.value.trim().toLowerCase();
+      displayLimit = 25;
       render();
     }});
 
@@ -659,8 +757,8 @@ if __name__ == "__main__":
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts = clean_tweet_data(tweets_raw, sentiment_cache)
     
-    # 取出現次數最高的前 30 個標的抓取即時行情
-    top_tickers_list = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:30]]
+    # 擷取討論量前 35 名標的市場行情
+    top_tickers_list = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:35]]
     stock_quotes = fetch_stock_quotes(top_tickers_list)
     
     generate_html(cleaned_tweets, counts, stock_quotes)
