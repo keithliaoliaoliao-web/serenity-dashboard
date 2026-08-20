@@ -1348,5 +1348,155 @@
     "sentiment": "Neutral",
     "summary": "分享2026機器人產業報告排名",
     "translation_zh": "看到了一份來自 SVRC Research 於 4 月發布的有趣報告，名為《2026 機器人現狀》。其中列出了：1. Figure AI 2. Agility Robotics $CCXI 3. Apptronik 4. $TSLA 5. Boston Dynamics 6. Physical Intelligence 7. 1X Technologies 8. $AMZN Robotics 9. ..."
+  },
+  "2073793206408667392": {
+    "sentiment": "Bullish",
+    "summary": "記憶體需求強勁與投資增加看多",
+    "translation_zh": "整理一些關於記憶體的最新動態：- 美光（$MU）領導在廣島投資 1.5 兆日圓（約 93 億美元）。由於資本支出在地化，這對 Disco、愛德萬測試（Advantest）、Resonac、Towa 為利多。- 摩根士丹利指出，NAND 供不應求的情況將持續至 2027 年，因此 $SNDK /"
+  },
+  "2073763512216899825": {
+    "sentiment": "Neutral",
+    "summary": "資料中心備用電池面臨供應瓶頸",
+    "translation_zh": "看來高功率圓柱電池／BBU（備用電池單元）電池出現短缺（即瓶頸）：- 三星 SDI 供應電池給順達（Simplo），順達將其組裝成 BBU 供 $META 至 $AMZN 使用。- 隨著資料中心需求增加，三星 SDI 的圓柱電池產量已..."
+  },
+  "2073704784398528599": {
+    "sentiment": "Bullish",
+    "summary": "AI需求推動澳洲資料中心建設",
+    "translation_zh": "外洩的 Anthropic 文件顯示，計劃從澳洲取得 1.4GW 的產能，金額約達 216 億美元。最近 $IREN、$SHAZ 和其他新型雲端業者一直在澳洲興建主權資料中心。看來很多事情在關聯性上開始變得更加合理了？（聲明：無..."
+  },
+  "2073537674905055568": {
+    "sentiment": "Bullish",
+    "summary": "電商巨頭將顯著受益於實體AI",
+    "translation_zh": "@fivepointscap 沒錯，$SE、$MELI、$JD、$AMZN 以及其他電商巨頭，是我能想到實體 AI 推動過程中最明顯的受益者，因為他們能立即透過機器人優化營運費用。像 $META 這類公司的受益程度則相對較不確定。"
+  },
+  "2073536758604771517": {
+    "sentiment": "Bullish",
+    "summary": "重倉SIVE並等待成交量放量",
+    "translation_zh": "@mkavethewave 不，情況如果沒有更高也是持平。市場已收盤，如果沒有新進展，我也沒有新內容可以補充。$SIVE 個人是我最大的持倉之一，我已經發布了關於他們與超大型雲端業者供應商關係的所有看法。所以我只是在等待成交量。"
+  },
+  "2073523410643366242": {
+    "sentiment": "Neutral",
+    "summary": "京東計畫以機器人取代配送人員",
+    "translation_zh": "日經新聞 - 電商巨頭京東（$JD）執行長警告「機器人將取代 70 萬名配送員工」。根據金融時報上個月的報導：該公司工作的 70 萬名配送人員將被機器人取代，突顯出快速自動化已成為中國的新威脅..."
+  },
+  "2073307016760791512": {
+    "sentiment": "Neutral",
+    "summary": "微軟水下與浮動資料中心之差異",
+    "translation_zh": "@frank_be 微軟（$MSFT）先前做的是水下資料中心。而這些則是海上水面浮動式資料中心。"
+  },
+  "2073305375957541013": {
+    "sentiment": "Neutral",
+    "summary": "探索海上浮動AI資料中心發展",
+    "translation_zh": "今天才知道原來有海上浮動資料中心和海洋運算？顯然它具備免費冷卻功能，且非常適合地理空間緊張的地方……未來哪天搭乘郵輪行經一整排 $NBIS 或三星的海上浮動 AI 資料中心一定很狂。如果這真的像軌道運算一樣普及起來的話？"
+  },
+  "2073079326862672205": {
+    "sentiment": "Bullish",
+    "summary": "機構發看空報告後抄底相關股票",
+    "translation_zh": "@256_rc -> 撰寫看空報告，特別點名 $HIMX 和 $LITE -> 在它們下跌 25-40% 後，接著將 $HIMX 和 $LITE 納入其主動型 ETF 中。真是神操作策略。"
+  },
+  "2072936659369517341": {
+    "sentiment": "Bullish",
+    "summary": "矽光子概念股暴跌後發行ETF",
+    "translation_zh": "SemiAnalysis 的作風：- 發布一篇嚴厲批評 CPO（共封裝光學）延遲與光學公司估值的文章，引發暴跌。而這隨後被 $NVDA、分析師團隊及各大光學公司反駁。- 在光學類股暴跌 40-60% 後，推出機構級矽光子 ETF。"
+  },
+  "2072928111495376922": {
+    "sentiment": "Bullish",
+    "summary": "批評誤導報導，看好市場修復",
+    "translation_zh": "@softmaxedx 我怪罪 Semianalysis 誤導性的 CPO 延遲報導導致整個光電市場崩盤，但這已被 $NVDA 駁斥。加上全球期刊近期對 $META 的誤導性報導……但我認為他們意識到所有東西都隨之崩盤，所以需要一篇宏觀看多的文章。"
+  },
+  "2072925550608523738": {
+    "sentiment": "Bullish",
+    "summary": "澄清不實訊息，重倉持股不變",
+    "translation_zh": "@ontrialperiod 當全球與美國市場因來自 $META 的不實資訊和斷章取義的引用而崩盤時，我大概會想澄清一下？話雖如此，$AAOI、$SIVE 和 $CCXI 在我的投資組合中佔了很大比重。"
+  },
+  "2072922974345445511": {
+    "sentiment": "Bullish",
+    "summary": "META算力加速，資本支出將新高",
+    "translation_zh": "SemiAnalysis 針對 $META「產能過剩」及 $NBIS 等市場反應表示：「我們相信 Meta 的資料中心和算力將會加速」。「2027年的資本支出將高得令人震驚」。近期全球崩盤，特別是光電領域，是基於誤導性敘事下的愚蠢反應……"
+  },
+  "2072913865458004014": {
+    "sentiment": "Bullish",
+    "summary": "機器人板塊火熱，推升概念股",
+    "translation_zh": "綠的諧波 (688017) 在今天達到 20% 漲停後創下歷史新高。看起來機器人領域的熱情顯而易見……很大程度上是由中美頂尖人形機器人公司如 $CCXI / Agility Robotics 以及宇樹科技（今日獲批科創板上市）所推動。"
+  },
+  "2072906728853881251": {
+    "sentiment": "Bullish",
+    "summary": "闢謠META退出AI競賽傳言",
+    "translation_zh": "最近有許多關於 $META 的誤導性資訊。最近主流期刊一直聲稱「過去四個月的 AI 代理開發並未像我們預期的那樣加速」，企圖營造 Meta 退出競賽或降低資本支出的敘事：正如 Wang 所澄清的："
+  },
+  "2072902886712094919": {
+    "sentiment": "Bullish",
+    "summary": "META新模型追平OpenAI",
+    "translation_zh": "$META：即將推出的 AI 模型「Watermelon」已追上 OpenAI 的 GPT 5.5。Wang 指出其算力使用量比上一代「Avocado」高出一個數量級。到底是誰說他們退出 AI 競賽了？"
+  },
+  "2072795186263187831": {
+    "sentiment": "Bullish",
+    "summary": "AXTI簽訂三年長期供貨大單",
+    "translation_zh": "$AXTI 與 $COHR 簽署為期 3 年的晶圓合約。「Coherent 將預付 2,228.85 萬美元給 AXTI 通美晶源，以換取承諾的供應產能。」"
+  },
+  "2072781715916169660": {
+    "sentiment": "Bullish",
+    "summary": "逢低看好MRVL長線潛力",
+    "translation_zh": "還有其他人腦海裡也被種下了這個煩人的念頭嗎？每當我看到 $MRVL 下跌，就會想起黃仁勳的評語：「下一個市值兆美元的公司」。"
+  },
+  "2072765527764971642": {
+    "sentiment": "Bullish",
+    "summary": "億萬富豪入股持股5.6%",
+    "translation_zh": "就在這一個小時內：BlueCrest 資產管理公司及其億萬富豪 Michael Platt 跨過門檻，披露持有 $CCXI 5.6% 的股權。我就知道 Agility Robotics 會大受歡迎……"
+  },
+  "2072760446617280650": {
+    "sentiment": "Neutral",
+    "summary": "媒體引發半導體板塊恐慌暴跌",
+    "translation_zh": "再次看到半導體市場因彭博社報導的刻意構詞而崩盤，真是有趣……瑞銀分析師對 $META 報導表示：「這不是新消息」。儘管如此：$AEHR 下跌 -18.3%、$AAOI 下跌 -17.13%、$SIVEF 下跌 -15.4%、$SNDK 下跌 -14.8%、$TER 下跌 -13.8%、$GLW 下跌 -11.4%、$MRVL 下跌 -11.2%。"
+  },
+  "2072752326147031494": {
+    "sentiment": "Bullish",
+    "summary": "看好 CCXI 具備前沿領域龍頭潛力。",
+    "translation_zh": "@SUOHA_AI 我記得當初第一次投資 $RKLB 是在 15 美元左右。我覺得能接觸到下游＋前沿領域的領頭羊真的很難得。所以這次我個人不會再錯過 $CCXI 的機會了。"
+  },
+  "2072745577310564861": {
+    "sentiment": "Bearish",
+    "summary": "批評 SPCX 與 CBRS 上市前估值過高。",
+    "translation_zh": "@hitraderjoe 近期的美股 IPO 模式非常愚蠢，就像 $SPCX / $CBRS 在上市前把估值推到荒謬的高度。更多美股上市應該效法宇樹科技（這可能會獲得更高的估值）以及像光子算力（Lightelligence）這樣的中國 IPO。這能讓散戶在相同的..."
+  },
+  "2072743412244287527": {
+    "sentiment": "Bullish",
+    "summary": "有大廠背書，看重基本面而非 SPAC。",
+    "translation_zh": "@supplepest 對 SPAC 有什麼創傷後應激障礙（PTSD）嗎？我只關心公司的基本面。$NVDA、軟銀、$AMZN 等大廠不會隨便支持垃圾公司。而且鴻海（Foxconn）也在資助 PIPE。這只是為了更快上市，特別是給美國投資人提供極其..."
+  },
+  "2072741541404406008": {
+    "sentiment": "Bullish",
+    "summary": "看好 CCXI 旗下 Agility 的商業化。",
+    "translation_zh": "依我個人看，就商業化而言，Agility Robotics 是目前美國第一的人形機器人業者。個人排名：1. 透過 $CCXI 的 Agility Robotics 2. $TSLA Optimus（兆美元級公司） 3. 2025 年估值 390 億美元的 Figure，現在可能更高。隨著特斯拉可能在一年內..."
+  },
+  "2072733748261720186": {
+    "sentiment": "Bearish",
+    "summary": "警戒 AXTI 大幅擴股股權稀釋損害散戶。",
+    "translation_zh": "@MosheFeins48329 在 $AXTI 從 13 美元漲到 140 美元的過程中，伴隨著大幅的股本擴張和股權稀釋。由於稀釋方案獲得通過，正如我之前提到的，如果對散戶投資人有過度稀釋，我就不太樂意討論這檔股票。但我確實認為..."
+  },
+  "2072732576952012829": {
+    "sentiment": "Bullish",
+    "summary": "多個量產項目帶來實質營收，看好發展。",
+    "translation_zh": "@CFc19971622 你是傻了嗎？ 1. $JBL 量產 1.6T LRO 是營收。2. 昂納（O-Net）量產 ELS 是營收。3. $GFS 使用 $SIVE 作為超大規模客戶的參考雷射也是營收。4. Ayar 加入 $NVDA 的 NVLink 做 CPO，並採用 $SIVE 進行量產也是營收。5. 其他可插拔..."
+  },
+  "2072730156297556328": {
+    "sentiment": "Bullish",
+    "summary": "SIVE 籌資擴產，基本面強勁看好量產。",
+    "translation_zh": "@Cped221267 根本沒人在乎技術分析圖表，那些只是人們編造出來試圖說服別人賣出的波浪線。$SIVE 剛緊急籌集了 7000 萬美元用於量產，很可能是為了取得晶圓廠產能分配。隨著 $JBL、$POET、$AEVA 等公司近期產能提速，接著是 $GFS..."
+  },
+  "2072728939324428655": {
+    "sentiment": "Neutral",
+    "summary": "矽光子板塊波動巨大，長期仍回歸基本面。",
+    "translation_zh": "@ram_blings 不客氣，我不確定大家是否還記得，$SIVE 曾因為 $GFS 的消息一天暴漲超過 70%。而 $AAOI 也常有隨機上漲 20-30% 的日子。當然它們也有可能出現相反走勢。矽光子領域波動非常大，但長期方向仍遵循基本面。"
+  },
+  "2072726120706007465": {
+    "sentiment": "Bullish",
+    "summary": "NVDA 主導矽光子轉型，產能滿載看好。",
+    "translation_zh": "矽光子有實際的營收數據支持，且是 $NVDA 主導的架構變革。量子計算幾乎沒有營收。$LITE 未來兩年的產能已完全售罄（根據 $POET 股東大會），訂單可能排到 2029 年。Lumentum 供不應求，甚至需要對外採購 CW 雷射..."
+  },
+  "2072638343486259415": {
+    "sentiment": "Bullish",
+    "summary": "美國資金青睞太空與 AI 等前沿溢價股。",
+    "translation_zh": "@sokarsokk 像綠的諧波（LeaderDrive）這樣的公司創下歷史新高了嗎？這當然取決於公司本身。美國的流動性運作方式有點不同，通常集中在航太、機器人、AI 等下游前沿產業。如果我們以航太領域的 $RKLB 為例，它就享有溢價..."
   }
 }
