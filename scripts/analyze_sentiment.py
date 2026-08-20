@@ -131,20 +131,54 @@ def parse_sort_key(item):
     return s
 
 def get_candidate_models():
-    """設定官方主流與相容的模型優先順序"""
+    """優先透過 API 動態取得可用模型，並依版本與效能最佳化排列"""
     if not API_KEY:
         print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
         return []
 
     genai.configure(api_key=API_KEY)
     
-    preferred_models = [
-        "gemini-2.0-flash",
-        "gemini-1.5-flash",
-        "gemini-1.5-pro",
-        "gemini-2.0-flash-lite-preview-02-05"
+    try:
+        available_models = []
+        for m in genai.list_models():
+            if "generateContent" in m.supported_generation_methods:
+                model_name = m.name.replace("models/", "")
+                available_models.append(model_name)
+        
+        # 優先順序偏好清單
+        preferred_priority = [
+            "gemini-3.6-flash",
+            "gemini-3.7-flash",
+            "gemini-flash-latest",
+            "gemini-2.5-flash",
+            "gemini-2.5-flash-lite",
+            "gemini-flash-lite-latest",
+            "gemini-3-flash-preview"
+        ]
+        
+        selected_models = [m for m in preferred_priority if m in available_models]
+        
+        # 加入其他支援的 flash / pro 模型做為備援
+        for m in available_models:
+            if m not in selected_models and ("flash" in m or "pro" in m):
+                selected_models.append(m)
+                
+        if selected_models:
+            print(f"📡 已成功動態偵測可用模型清單: {selected_models}")
+            return selected_models
+    except Exception as e:
+        print(f"⚠️ 動態查詢模型清單失敗 ({e})，使用最新官方模型備用清單。")
+
+    # 靜態備援清單
+    return [
+        "gemini-3.6-flash",
+        "gemini-3.7-flash",
+        "gemini-flash-latest",
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-flash-lite-latest",
+        "gemini-3-flash-preview"
     ]
-    return preferred_models
 
 def analyze_sub_batch(items, candidate_models):
     prompt = """你是一位資深美股分析師。請分析以下 Twitter 貼文：
@@ -152,7 +186,7 @@ def analyze_sub_batch(items, candidate_models):
 2. 將推文完整翻譯為繁體中文 (translation_zh)。
 3. 提供 15 字以內的繁體中文核心觀點摘要 (summary)。
 
-輸出格式必須為嚴格的 JSON 物件，格式範例如下：
+請嚴格輸出 JSON 格式物件（以推文 ID 作為 Key），範例如下：
 {
   "推文ID_1": {
     "sentiment": "Bullish",
@@ -170,7 +204,6 @@ def analyze_sub_batch(items, candidate_models):
         try:
             model = genai.GenerativeModel(m_name)
             
-            # 優先嘗試 JSON 格式輸出限制
             try:
                 response = model.generate_content(
                     prompt,
@@ -181,7 +214,6 @@ def analyze_sub_batch(items, candidate_models):
 
             raw_text = response.text.strip()
             
-            # 擷取標準 JSON 區塊，避免模型輸出前後包含多餘字元
             json_match = re.search(r"\{[\s\S]*\}", raw_text)
             if not json_match:
                 continue
@@ -191,7 +223,7 @@ def analyze_sub_batch(items, candidate_models):
                 print(f"    ✨ 使用模型 [{m_name}] 成功解析 {len(result)} 則推文！")
                 return result
         except Exception as e:
-            print(f"    ⚠️ 模型 [{m_name}] 調用失敗 ({e})，切換至備用模型...")
+            print(f"    ⚠️ 模型 [{m_name}] 調用失敗 ({e})，切換至下一個備用模型...")
             time.sleep(1)
 
     return {}
@@ -199,12 +231,12 @@ def analyze_sub_batch(items, candidate_models):
 def run_sentiment_pipeline(total_target=50, chunk_size=10):
     candidate_models = get_candidate_models()
     if not candidate_models:
+        print("❌ 無可用模型，終止分析流程。")
         return
 
     raw_data = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
 
-    # 依推文時間由新至舊排序
     raw_data.sort(key=parse_sort_key, reverse=True)
 
     unprocessed = []
@@ -253,7 +285,6 @@ def run_sentiment_pipeline(total_target=50, chunk_size=10):
                 batch_updated = True
                 print(f"    ✅ 已儲存 [{t_id}]: {res.get('summary')}")
 
-        # 每批次完成即時寫入快取，避免中途失敗遺失進度
         if batch_updated:
             save_json(CACHE_FILE, sentiment_cache)
 
