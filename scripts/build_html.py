@@ -51,7 +51,7 @@ def extract_tickers(text):
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Z]{1,5})\b", text.upper())
-    blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP", "DD", "EOD", "YOLO"}
+    blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP", "DD", "EOD", "YOLO", "NEW", "BUY", "SELL"}
     return sorted(list(set(t for t in matches if t not in blacklist)))
 
 def extract_tweet_id(item):
@@ -75,16 +75,19 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item):
+    """強大相容性日期解析器（支援自我修復）"""
     raw_date = None
-    for k in ["date", "created_at", "createdAt", "timestamp", "datetime", "time"]:
-        if k in item and item[k]:
-            raw_date = item[k]
+    for k in ["created_at", "date", "createdAt", "timestamp", "datetime", "time", "pubDate"]:
+        val = item.get(k)
+        if val and not str(val).startswith("1970"):
+            raw_date = val
             break
+            
     if not raw_date:
         legacy = item.get("legacy") if isinstance(item.get("legacy"), dict) else {}
         raw_date = legacy.get("created_at")
 
-    if not raw_date:
+    if not raw_date or str(raw_date).startswith("1970"):
         return "未知時間", "未知月份", ""
 
     if isinstance(raw_date, (int, float)):
@@ -106,7 +109,8 @@ def parse_date(item):
 
     try:
         if "T" in s or "+" in s:
-            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+            clean_s = s.replace("Z", "+00:00")
+            dt = datetime.fromisoformat(clean_s)
             return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
     except Exception:
         pass
@@ -121,12 +125,17 @@ def parse_date(item):
     m = re.search(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})", s)
     if m:
         y, mth, d = m.groups()
+        time_part = ""
+        tm = re.search(r"(\d{1,2}):(\d{1,2})", s)
+        if tm:
+            time_part = f" {int(tm.group(1)):02d}:{int(tm.group(2)):02d}"
         iso = f"{int(y):04d}-{int(mth):02d}-{int(d):02d}T00:00:00"
-        return f"{int(y):04d}-{int(mth):02d}-{int(d):02d}", f"{int(y):04d}-{int(mth):02d}", iso
+        return f"{int(y):04d}-{int(mth):02d}-{int(d):02d}{time_part}", f"{int(y):04d}-{int(mth):02d}", iso
 
     return s, "未知月份", ""
 
 def extract_metrics(item):
+    """解析互動指標（點讚、轉推、瀏覽量）"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -148,15 +157,15 @@ def extract_metrics(item):
         if not isinstance(c, dict):
             continue
         if likes == 0:
-            val = get_num(c, ["likeCount", "likes", "like_count", "favorite_count", "favorites", "favoriteCount", "favs"])
+            val = get_num(c, ["favorite_count", "likeCount", "likes", "like_count", "favorites", "favoriteCount", "favs"])
             if val is not None:
                 likes = val
         if retweets == 0:
-            val = get_num(c, ["retweetCount", "retweets", "retweet_count", "reposts", "repost_count"])
+            val = get_num(c, ["retweet_count", "retweetCount", "retweets", "reposts", "repost_count"])
             if val is not None:
                 retweets = val
         if views == 0:
-            val = get_num(c, ["viewCount", "views", "view_count", "impression_count", "impressions"])
+            val = get_num(c, ["view_count", "viewCount", "views", "impression_count", "impressions"])
             if val is not None:
                 views = val
 
@@ -200,14 +209,21 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
         is_analyzed = False
 
         if ai_data and isinstance(ai_data, dict):
-            sentiment = ai_data.get("sentiment", "Neutral")
-            summary = ai_data.get("summary", "")
-            translation_zh = ai_data.get("translation_zh", "")
+            raw_sent = ai_data.get("sentiment", "Neutral")
+            if any(w in raw_sent for w in ["Bull", "多"]):
+                sentiment = "Bullish"
+            elif any(w in raw_sent for w in ["Bear", "空"]):
+                sentiment = "Bearish"
+            else:
+                sentiment = "Neutral"
+
+            summary = ai_data.get("summary", "") or ai_data.get("summary_zh", "")
+            translation_zh = ai_data.get("translation_zh", "") or ai_data.get("chinese", "")
             is_analyzed = bool(summary or translation_zh)
 
         url = item.get("url") or item.get("permanentUrl") or item.get("link")
         if not url and tweet_id:
-            url = f"https://twitter.com/i/web/status/{tweet_id}"
+            url = f"https://twitter.com/aleabitoreddit/status/{tweet_id}"
 
         cleaned.append({
             "id": tweet_id,
@@ -230,7 +246,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
 
 def fetch_stock_quotes(tickers):
     """獲取美股市場行情數據"""
-    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情數據...")
+    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情數據...", flush=True)
     quotes = {}
     
     for symbol in tickers:
@@ -252,7 +268,7 @@ def fetch_stock_quotes(tickers):
                 low_52 = info.get("fiftyTwoWeekLow")
                 volume = info.get("regularMarketVolume") or info.get("volume")
 
-            if current_price is not None:
+            if current_price is not None and float(current_price) > 0:
                 change = (current_price - prev_close) if prev_close else 0.0
                 change_pct = ((change / prev_close) * 100) if prev_close else 0.0
 
@@ -265,9 +281,9 @@ def fetch_stock_quotes(tickers):
                     "low52": round(float(low_52), 2) if low_52 else None,
                     "volume": int(volume) if volume else 0
                 }
-                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%)")
+                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%)", flush=True)
         except Exception as e:
-            print(f"  ⚠️ 無法取得 ${symbol} 行情: {e}")
+            print(f"  ⚠️ 無法取得 ${symbol} 行情: {e}", flush=True)
 
     return quotes
 
@@ -983,7 +999,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    // AI 對話抽屜邏輯與意圖解析引擎
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -1022,7 +1037,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function processChatIntent(query) {
       const q = query.toUpperCase();
       
-      // 1. 意圖：日報 / 今日
       if (q.includes('日報') || q.includes('今日')) {
         setViewMode('daily');
         const viewTweets = getFilteredByView(allTweets);
@@ -1041,7 +1055,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
-      // 2. 意圖：偏多股票總覽
       if (q.includes('偏多') || q.includes('看多') || q.includes('BULLISH')) {
         const counts = {};
         allTweets.forEach(t => {
@@ -1068,7 +1081,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
-      // 3. 意圖：查詢特定標的或風險（如 "幫我看 SIVE" 或 "AXTI 風險"）
       const tickerMatch = q.match(/\\$?([A-Z]{1,5})/);
       const symbol = tickerMatch ? tickerMatch[1] : null;
 
@@ -1094,7 +1106,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           return;
         }
 
-        // 一般標的論點總覽
         let analysisHtml = `
           🎯 <b>\\$${symbol} 即時論點脈絡分析：</b><br>
           • <b>當前股價：</b>$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(2)}%)<br>
@@ -1109,7 +1120,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
-      // 4. 通用搜尋 fallback
       searchQuery = query.toLowerCase();
       document.getElementById('search-input').value = query;
       render();
@@ -1147,7 +1157,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ 儀表板成功產出至 {OUTPUT_HTML}")
+    print(f"✅ 儀表板成功產出至 {OUTPUT_HTML}", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
