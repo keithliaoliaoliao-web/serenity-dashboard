@@ -1,7 +1,7 @@
 import json
 import os
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 import yfinance as yf
 
 TWEETS_FILE = "data/tweets.json"
@@ -85,13 +85,14 @@ def parse_date(item):
         raw_date = legacy.get("created_at")
 
     if not raw_date:
-        return "未知時間", "未知月份"
+        return "未知時間", "未知月份", ""
 
+    # 解析為標準 YYYY-MM-DD HH:MM 與 ISO 格式（方便前端計算天數差）
     if isinstance(raw_date, (int, float)):
         try:
             val = float(raw_date)
             dt = datetime.fromtimestamp(val / 1000.0 if val > 1e11 else val)
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m")
+            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
         except Exception:
             pass
 
@@ -100,30 +101,31 @@ def parse_date(item):
         try:
             val = float(s)
             dt = datetime.fromtimestamp(val / 1000.0 if val > 1e11 else val)
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m")
+            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
         except Exception:
             pass
 
     try:
         if "T" in s or "+" in s:
             dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m")
+            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
     except Exception:
         pass
 
     try:
         if len(s.split()) >= 6:
             dt = datetime.strptime(s, "%a %b %d %H:%M:%S %z %Y")
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m")
+            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
     except Exception:
         pass
 
     m = re.search(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})", s)
     if m:
         y, mth, d = m.groups()
-        return f"{int(y):04d}-{int(mth):02d}-{int(d):02d}", f"{int(y):04d}-{int(mth):02d}"
+        iso = f"{int(y):04d}-{int(mth):02d}-{int(d):02d}T00:00:00"
+        return f"{int(y):04d}-{int(mth):02d}-{int(d):02d}", f"{int(y):04d}-{int(mth):02d}", iso
 
-    return s, "未知月份"
+    return s, "未知月份", ""
 
 def extract_metrics(item):
     likes, retweets, views = 0, 0, 0
@@ -185,7 +187,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
         if not text:
             continue
 
-        date_str, month_str = parse_date(item)
+        date_str, month_str, iso_date = parse_date(item)
         tickers = extract_tickers(text)
         likes, retweets, views = extract_metrics(item)
 
@@ -196,11 +198,13 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
         sentiment = "Neutral"
         summary = ""
         translation_zh = ""
+        is_analyzed = False
 
         if ai_data and isinstance(ai_data, dict):
             sentiment = ai_data.get("sentiment", "Neutral")
             summary = ai_data.get("summary", "")
             translation_zh = ai_data.get("translation_zh", "")
+            is_analyzed = bool(summary or translation_zh)
 
         url = item.get("url") or item.get("permanentUrl") or item.get("link")
         if not url and tweet_id:
@@ -211,6 +215,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
             "text": text,
             "date": date_str,
             "month": month_str,
+            "iso_date": iso_date,
             "tickers": tickers,
             "likes": likes,
             "retweets": retweets,
@@ -218,6 +223,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
             "sentiment": sentiment,
             "summary": summary,
             "translation_zh": translation_zh,
+            "is_analyzed": is_analyzed,
             "url": url or "#"
         })
 
@@ -312,7 +318,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             Serenity Dashboard
             <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">Live</span>
           </h1>
-          <p class="text-xs text-slate-400">美股社群情緒與 AI 深度摘要</p>
+          <p class="text-xs text-slate-400">美股社群情報、多空偏向與即時行情</p>
         </div>
       </div>
       <div class="text-xs text-slate-400 font-mono" id="last-update-time"></div>
@@ -323,21 +329,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <!-- 概覽數據統計指標 -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="stats-container">
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col">
-        <span class="text-xs font-medium text-slate-400">推文總數</span>
-        <span class="text-2xl font-bold text-white mt-1" id="stat-total">0</span>
+      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-medium text-slate-400">推文總量 / AI 涵蓋率</span>
+          <div class="text-2xl font-bold text-white mt-1" id="stat-total">0</div>
+        </div>
+        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">AI 分析：0 / 0 (0%)</div>
       </div>
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col">
-        <span class="text-xs font-medium text-emerald-400">看多觀點 (Bullish)</span>
-        <span class="text-2xl font-bold text-emerald-400 mt-1" id="stat-bullish">0</span>
+      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-medium text-emerald-400">看多觀點 (Bullish)</span>
+          <div class="text-2xl font-bold text-emerald-400 mt-1" id="stat-bullish">0</div>
+        </div>
+        <div class="mt-2 text-[11px] text-slate-400" id="stat-bullish-sub">多空佔比評估</div>
       </div>
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col">
-        <span class="text-xs font-medium text-rose-400">看空/警戒 (Bearish)</span>
-        <span class="text-2xl font-bold text-rose-400 mt-1" id="stat-bearish">0</span>
+      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-medium text-rose-400">看空/警戒 (Bearish)</span>
+          <div class="text-2xl font-bold text-rose-400 mt-1" id="stat-bearish">0</div>
+        </div>
+        <div class="mt-2 text-[11px] text-slate-400" id="stat-bearish-sub">風險警戒貼文</div>
       </div>
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col">
-        <span class="text-xs font-medium text-teal-400">追蹤標的數量</span>
-        <span class="text-2xl font-bold text-teal-400 mt-1" id="stat-tickers">0</span>
+      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-medium text-teal-400">追蹤標的數量</span>
+          <div class="text-2xl font-bold text-teal-400 mt-1" id="stat-tickers">0</div>
+        </div>
+        <div class="mt-2 text-[11px] text-slate-400">已過濾雜訊代號</div>
       </div>
     </div>
 
@@ -350,7 +368,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div class="flex flex-wrap gap-1.5" id="top-tickers-bar"></div>
     </div>
 
-    <!-- 個股即時行情專區 -->
+    <!-- 個股即時行情專區 (強化版 Stock Quote Card) -->
     <div id="stock-quote-section" class="bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 border border-slate-700/80 rounded-xl p-5 shadow-lg relative overflow-hidden hidden space-y-4">
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
@@ -371,26 +389,27 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             </div>
           </div>
           <div class="flex items-center gap-2 ml-0 sm:ml-4">
-            <a id="link-tradingview" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition flex items-center gap-1">
-              📈 TradingView
+            <button onclick="toggleTvChart()" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 transition flex items-center gap-1">
+              📊 <span id="tv-chart-btn-text">展開即時 K 線圖</span>
+            </button>
+            <a id="link-tradingview" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
+              TradingView ↗
             </a>
-            <a id="link-finviz" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition flex items-center gap-1">
-              📊 Finviz
+            <a id="link-finviz" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
+              Finviz ↗
             </a>
           </div>
         </div>
 
-        <!-- 右側：成交量與該標的專屬情緒偏向 -->
-        <div class="flex items-center gap-6 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-6">
+        <!-- 右側：成交量與量化情緒偏向指數 -->
+        <div class="grid grid-cols-2 gap-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-6 min-w-[260px]">
           <div>
             <div class="text-xs text-slate-400">最新成交量</div>
             <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-volume">-</div>
           </div>
           <div>
-            <div class="text-xs text-slate-400">社群 AI 情緒偏向</div>
-            <div class="text-xs font-medium mt-1 flex items-center gap-2" id="quote-sentiment-badge">
-              -
-            </div>
+            <div class="text-xs text-slate-400">多方情緒偏向度</div>
+            <div class="text-base font-semibold font-mono text-emerald-400 mt-0.5" id="quote-sentiment-index">-</div>
           </div>
         </div>
 
@@ -408,27 +427,47 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
-    </div>
-
-    <!-- 搜尋、排序與篩選列 -->
-    <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
-      <div class="flex items-center gap-2 flex-1 max-w-lg">
-        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的..." 
-          class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
-        
-        <!-- 排序選單 -->
-        <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer">
-          <option value="date_desc">🕒 最新發布</option>
-          <option value="likes_desc">❤️ 最多按讚</option>
-          <option value="views_desc">👁️ 最多瀏覽</option>
-        </select>
+      <!-- TradingView 即時線圖嵌入容器 (預設折疊) -->
+      <div id="tv-chart-wrapper" class="hidden border-t border-slate-800/80 pt-4">
+        <div class="w-full h-[380px] rounded-lg overflow-hidden border border-slate-800" id="tv-chart-container"></div>
       </div>
 
-      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
-        <button onclick="setSentimentFilter('ALL')" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-val="ALL">全部</button>
-        <button onclick="setSentimentFilter('Bullish')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-emerald-400 hover:bg-slate-900 transition" data-val="Bullish">看多</button>
-        <button onclick="setSentimentFilter('Bearish')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-rose-400 hover:bg-slate-900 transition" data-val="Bearish">看空</button>
-        <button onclick="setSentimentFilter('Neutral')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-blue-400 hover:bg-slate-900 transition" data-val="Neutral">中立</button>
+    </div>
+
+    <!-- 搜尋、時間區間、排序與情緒篩選列 -->
+    <div class="space-y-3 bg-slate-900/40 border border-slate-800/80 rounded-xl p-4">
+      <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+        
+        <!-- 搜尋列與排序 -->
+        <div class="flex items-center gap-2 flex-1 max-w-lg">
+          <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的..." 
+            class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
+          
+          <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
+            <option value="date_desc">🕒 最新發布</option>
+            <option value="likes_desc">❤️ 最多按讚</option>
+            <option value="views_desc">👁️ 最多瀏覽</option>
+          </select>
+        </div>
+
+        <!-- 時間範圍過濾 -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
+          <span class="text-xs text-slate-500 font-medium mr-1">時間：</span>
+          <button onclick="setTimeFilter('ALL')" class="time-filter-btn active px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-time="ALL">全部</button>
+          <button onclick="setTimeFilter('7d')" class="time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-white hover:bg-slate-900 transition" data-time="7d">近 7 天</button>
+          <button onclick="setTimeFilter('30d')" class="time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-white hover:bg-slate-900 transition" data-time="30d">近 30 天</button>
+          <button onclick="setTimeFilter('90d')" class="time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-white hover:bg-slate-900 transition" data-time="90d">近 90 天</button>
+        </div>
+
+      </div>
+
+      <!-- 情緒標籤過濾 -->
+      <div class="flex items-center gap-2 pt-2 border-t border-slate-800/60 overflow-x-auto">
+        <span class="text-xs text-slate-500 font-medium mr-1">觀點：</span>
+        <button onclick="setSentimentFilter('ALL')" class="filter-btn active px-3 py-1 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-val="ALL">全部</button>
+        <button onclick="setSentimentFilter('Bullish')" class="filter-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-emerald-400 hover:bg-slate-900 transition" data-val="Bullish">看多</button>
+        <button onclick="setSentimentFilter('Bearish')" class="filter-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-rose-400 hover:bg-slate-900 transition" data-val="Bearish">看空</button>
+        <button onclick="setSentimentFilter('Neutral')" class="filter-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-blue-400 hover:bg-slate-900 transition" data-val="Neutral">中立</button>
       </div>
     </div>
 
@@ -450,10 +489,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     const stockQuotes = __STOCK_QUOTES__;
 
     let currentSentiment = 'ALL';
+    let currentTimeWindow = 'ALL';
     let currentTicker = topTickers.length > 0 ? topTickers[0][0] : '';
     let searchQuery = '';
     let currentSort = 'date_desc';
     let displayLimit = 25;
+    let tvChartVisible = false;
 
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
 
@@ -470,6 +511,35 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       return text
         .replace(/(\\$[A-Z]{1,5})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\'))" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
         .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
+    }
+
+    function toggleTvChart() {
+      tvChartVisible = !tvChartVisible;
+      const wrapper = document.getElementById('tv-chart-wrapper');
+      const btnText = document.getElementById('tv-chart-btn-text');
+      if (tvChartVisible) {
+        wrapper.classList.remove('hidden');
+        btnText.innerText = '收合即時 K 線圖';
+        loadTradingViewWidget(currentTicker);
+      } else {
+        wrapper.classList.add('hidden');
+        btnText.innerText = '展開即時 K 線圖';
+      }
+    }
+
+    function loadTradingViewWidget(ticker) {
+      const container = document.getElementById('tv-chart-container');
+      if (!ticker || !container) return;
+      container.innerHTML = `
+        <iframe 
+          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${ticker}&interval=D&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Asia%2FTaipei&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=zh_TW" 
+          width="100%" 
+          height="100%" 
+          frameborder="0" 
+          allowtransparency="true" 
+          scrolling="no">
+        </iframe>
+      `;
     }
 
     function renderStockQuote(ticker) {
@@ -517,17 +587,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         document.getElementById('quote-52w-container').classList.add('hidden');
       }
 
-      // 該標的專屬情緒統計
+      // 多方情緒偏向度計算（Sentiment Index）
       const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
       const bullishCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
       const bearishCount = tickerTweets.filter(t => t.sentiment === 'Bearish').length;
-      const totalCount = tickerTweets.length;
+      const validSentimentCount = bullishCount + bearishCount;
 
-      document.getElementById('quote-sentiment-badge').innerHTML = `
-        <span class="text-emerald-400 font-bold font-mono">${bullishCount} 多</span> /
-        <span class="text-rose-400 font-bold font-mono">${bearishCount} 空</span>
-        <span class="text-slate-500 font-normal">(${totalCount} 則討論)</span>
-      `;
+      let sentimentScoreText = '中立 / 無顯著偏向';
+      if (validSentimentCount > 0) {
+        const score = Math.round((bullishCount / validSentimentCount) * 100);
+        sentimentScoreText = `${score}% 多方 (${bullishCount}多 / ${bearishCount}空)`;
+      }
+      document.getElementById('quote-sentiment-index').innerText = sentimentScoreText;
+
+      if (tvChartVisible) {
+        loadTradingViewWidget(ticker);
+      }
     }
 
     function renderTopTickers() {
@@ -561,7 +636,19 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       displayLimit = 25;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         const active = btn.dataset.val === val;
-        btn.className = `filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
+        btn.className = `filter-btn px-3 py-1 rounded-lg text-xs font-medium border transition ${
+          active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
+        }`;
+      });
+      render();
+    }
+
+    function setTimeFilter(val) {
+      currentTimeWindow = val;
+      displayLimit = 25;
+      document.querySelectorAll('.time-filter-btn').forEach(btn => {
+        const active = btn.dataset.time === val;
+        btn.className = `time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border transition ${
           active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
         }`;
       });
@@ -612,6 +699,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     function render() {
       const container = document.getElementById('tweets-list');
+      const now = new Date();
+
       let filtered = allTweets.filter(t => {
         const matchSentiment = currentSentiment === 'ALL' || t.sentiment === currentSentiment;
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
@@ -619,7 +708,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           t.text.toLowerCase().includes(searchQuery) || 
           t.summary.toLowerCase().includes(searchQuery) ||
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
-        return matchSentiment && matchTicker && matchSearch;
+
+        let matchTime = true;
+        if (currentTimeWindow !== 'ALL' && t.iso_date) {
+          const tweetDate = new Date(t.iso_date);
+          const diffDays = (now - tweetDate) / (1000 * 60 * 60 * 24);
+          if (currentTimeWindow === '7d') matchTime = diffDays <= 7;
+          else if (currentTimeWindow === '30d') matchTime = diffDays <= 30;
+          else if (currentTimeWindow === '90d') matchTime = diffDays <= 90;
+        }
+
+        return matchSentiment && matchTicker && matchSearch && matchTime;
       });
 
       // 執行排序
@@ -717,9 +816,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const total = allTweets.length;
       const bullish = allTweets.filter(t => t.sentiment === 'Bullish').length;
       const bearish = allTweets.filter(t => t.sentiment === 'Bearish').length;
+      const analyzedCount = allTweets.filter(t => t.is_analyzed).length;
       const uniqueTickers = new Set(allTweets.flatMap(t => t.tickers)).size;
+      const coveragePct = total ? Math.round((analyzedCount / total) * 100) : 0;
 
       document.getElementById('stat-total').innerText = total.toLocaleString();
+      document.getElementById('stat-ai-coverage').innerText = `AI 分析：${analyzedCount.toLocaleString()} / ${total.toLocaleString()} (${coveragePct}%)`;
       document.getElementById('stat-bullish').innerText = `${bullish} (${total ? Math.round(bullish/total*100) : 0}%)`;
       document.getElementById('stat-bearish').innerText = `${bearish} (${total ? Math.round(bearish/total*100) : 0}%)`;
       document.getElementById('stat-tickers').innerText = uniqueTickers.toLocaleString();
@@ -749,7 +851,6 @@ def generate_html(tweets, ticker_counts, stock_quotes):
     top_tickers_json_str = json.dumps(ticker_counts_sorted, ensure_ascii=False)
     stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
 
-    # 採用標準字串替換注入 JSON 資料，避免 f-string 符號干擾
     html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
                                  .replace("__TOP_TICKERS__", top_tickers_json_str) \
                                  .replace("__STOCK_QUOTES__", stock_quotes_json_str)
