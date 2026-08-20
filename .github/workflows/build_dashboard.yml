@@ -2,7 +2,7 @@ name: 產生並部署儀表板
 
 on:
   schedule:
-    # 每天台灣時間 08:00 與 20:00 自動排程執行
+    # 每天 UTC 00:05 與 12:05 執行（對應台灣時間 UTC+8 08:05 與 20:05）
     - cron: '5 0,12 * * *'
   workflow_dispatch:
   push:
@@ -22,27 +22,40 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: 建立必要資料夾結構
+        run: |
+          mkdir -p data docs
+
       - name: 同步 yan-labs 最新推文存檔
         run: |
           echo "🔄 檢查 yan-labs 最新資料..."
+          # 使用 -fL 下載，若失敗不中斷流程
           curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json" -o data/tweets_upstream.json || true
-          if [ -f data/tweets_upstream.json ]; then
-            if [ -s data/tweets_upstream.json ]; then
-              mv data/tweets_upstream.json data/tweets.json
-              echo "✅ 資料更新成功"
-            else
-              rm data/tweets_upstream.json
-            fi
+          
+          # 確認檔案存在且非空檔才進行覆蓋
+          if [ -s data/tweets_upstream.json ]; then
+            mv data/tweets_upstream.json data/tweets.json
+            echo "✅ 資料更新成功"
+          else
+            rm -f data/tweets_upstream.json
+            echo "ℹ️ 無新資料或下載失敗，維持既有資料"
           fi
 
       - name: 設定 Python 環境
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: '**/requirements.txt'
 
-      - name: 安裝 Gemini 套件
+      - name: 安裝 Python 套件
         run: |
-          pip install google-generativeai
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install google-generativeai
+          fi
 
       - name: 執行 Gemini 情緒深度分析
         env:
@@ -58,10 +71,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git reset --soft origin/main
-          git add data/sentiment_cache.json docs/index.html data/tweets.json
+          
+          # 將產生的目標資料夾加入暫存區
+          git add data/ docs/
+          
+          # 檢查是否有實際變更才進行 commit 與 push
           if ! git diff --staged --quiet; then
             git commit -m "chore: 更新 AI 快取與儀表板 [skip ci]"
+            git pull --rebase origin main
             git push origin main
+          else
+            echo "沒有檢測到任何資料或頁面變動，跳過提交。"
           fi
