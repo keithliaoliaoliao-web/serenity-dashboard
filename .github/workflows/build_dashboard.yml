@@ -29,10 +29,8 @@ jobs:
       - name: 同步 yan-labs 最新推文存檔
         run: |
           echo "🔄 檢查 yan-labs 最新資料..."
-          # 使用 -fL 下載，若失敗不中斷流程
           curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json" -o data/tweets_upstream.json || true
           
-          # 確認檔案存在且非空檔才進行覆蓋
           if [ -s data/tweets_upstream.json ]; then
             mv data/tweets_upstream.json data/tweets.json
             echo "✅ 資料更新成功"
@@ -45,17 +43,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
-          cache-dependency-path: '**/requirements.txt'
 
       - name: 安裝 Python 套件
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          else
-            pip install google-generativeai
-          fi
+          pip install google-generativeai
 
       - name: 執行 Gemini 情緒深度分析
         env:
@@ -72,10 +64,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # 將產生的目標資料夾加入暫存區
           git add data/ docs/
           
-          # 檢查是否有實際變更才進行 commit 與 push
           if ! git diff --staged --quiet; then
             git commit -m "chore: 更新 AI 快取與儀表板 [skip ci]"
             git pull --rebase origin main
