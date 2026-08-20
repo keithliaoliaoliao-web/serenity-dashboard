@@ -1,7 +1,7 @@
 import json
 import os
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 import yfinance as yf
 
 TWEETS_FILE = "data/tweets.json"
@@ -87,7 +87,6 @@ def parse_date(item):
     if not raw_date:
         return "未知時間", "未知月份", ""
 
-    # 解析為標準 YYYY-MM-DD HH:MM 與 ISO 格式（方便前端計算天數差）
     if isinstance(raw_date, (int, float)):
         try:
             val = float(raw_date)
@@ -277,7 +276,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serenity 美股推文情報與情緒儀表板</title>
+  <title>Serenity 美股推文情報與 AI 論點儀表板</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -306,8 +305,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
 
-  <!-- 頂部導航 -->
-  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur sticky top-0 z-50">
+  <!-- 頂部導航與主視圖切換 -->
+  <header class="border-b border-slate-800/80 bg-slate-900/70 backdrop-blur sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-teal-500 to-cyan-400 flex items-center justify-center font-bold text-slate-950 text-base shadow-lg shadow-teal-500/20">
@@ -315,23 +314,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
         <div>
           <h1 class="font-bold text-base sm:text-lg tracking-tight text-white flex items-center gap-2">
-            Serenity Dashboard
+            Serenity Tracker
             <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">Live</span>
           </h1>
-          <p class="text-xs text-slate-400">美股社群情報、多空偏向與即時行情</p>
+          <p class="text-xs text-slate-400 hidden sm:block">美股社群情報、AI 論點脈絡與即時行情</p>
         </div>
       </div>
-      <div class="text-xs text-slate-400 font-mono" id="last-update-time"></div>
+
+      <!-- 四大核心視圖切換器 (Daily / Weekly / Monthly / Quarterly) -->
+      <div class="flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800">
+        <button onclick="setViewMode('all')" class="view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition" data-view="all">全部</button>
+        <button onclick="setViewMode('daily')" class="view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition" data-view="daily">📅 每日</button>
+        <button onclick="setViewMode('weekly')" class="view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition" data-view="weekly">📆 每週 (7D)</button>
+        <button onclick="setViewMode('monthly')" class="view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition" data-view="monthly">📈 每月 (28D)</button>
+        <button onclick="setViewMode('quarterly')" class="view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition" data-view="quarterly">📊 季度 (90D)</button>
+      </div>
+
+      <div class="text-xs text-slate-400 font-mono hidden lg:block" id="last-update-time"></div>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-    <!-- 概覽數據統計指標 -->
+    <!-- 概覽數據統計指標 (隨視圖動態聚合) -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="stats-container">
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-medium text-slate-400">推文總量 / AI 涵蓋率</span>
+          <span class="text-xs font-medium text-slate-400" id="stat-title-period">當前視圖提及推文</span>
           <div class="text-2xl font-bold text-white mt-1" id="stat-total">0</div>
         </div>
         <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">AI 分析：0 / 0 (0%)</div>
@@ -341,7 +350,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           <span class="text-xs font-medium text-emerald-400">看多觀點 (Bullish)</span>
           <div class="text-2xl font-bold text-emerald-400 mt-1" id="stat-bullish">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-slate-400" id="stat-bullish-sub">多空佔比評估</div>
+        <div class="mt-2 text-[11px] text-slate-400" id="stat-bullish-sub">多方偏向佔比</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
@@ -352,27 +361,26 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-medium text-teal-400">追蹤標的數量</span>
+          <span class="text-xs font-medium text-teal-400">視圖關注標的數</span>
           <div class="text-2xl font-bold text-teal-400 mt-1" id="stat-tickers">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-slate-400">已過濾雜訊代號</div>
+        <div class="mt-2 text-[11px] text-slate-400">活躍討論股票</div>
       </div>
     </div>
 
-    <!-- 熱門標的快速過濾區 -->
+    <!-- 熱門標的快速過濾區 (隨視圖模式重新計算排行) -->
     <div class="bg-slate-900/40 border border-slate-800/80 rounded-xl p-4">
       <div class="flex items-center justify-between mb-3">
-        <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">熱門關注標的 ($TICKER)</h2>
+        <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">熱門關注標的 ($TICKER) - 點擊展開深度論點</h2>
         <button id="clear-ticker-btn" onclick="filterByTicker('')" class="text-xs text-teal-400 hover:underline hidden">清除標的篩選</button>
       </div>
       <div class="flex flex-wrap gap-1.5" id="top-tickers-bar"></div>
     </div>
 
-    <!-- 個股即時行情專區 (強化版 Stock Quote Card) -->
+    <!-- 個股即時行情專區 -->
     <div id="stock-quote-section" class="bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 border border-slate-700/80 rounded-xl p-5 shadow-lg relative overflow-hidden hidden space-y-4">
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
-        <!-- 左側：標的與價格、漲跌幅、外部看盤連結 -->
         <div class="flex items-center gap-4 flex-wrap">
           <div class="px-3 py-2 bg-slate-800 rounded-lg border border-slate-700 font-mono font-bold text-xl text-teal-400 shadow-inner" id="quote-ticker-name">
             $TICKER
@@ -389,19 +397,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             </div>
           </div>
           <div class="flex items-center gap-2 ml-0 sm:ml-4">
-            <button onclick="toggleTvChart()" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 transition flex items-center gap-1">
-              📊 <span id="tv-chart-btn-text">展開即時 K 線圖</span>
+            <button onclick="openDeepDiveModal(currentTicker)" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-teal-500 text-slate-950 hover:bg-teal-400 transition flex items-center gap-1 shadow-sm">
+              🧠 AI 論點脈絡詳情
             </button>
-            <a id="link-tradingview" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
+            <button onclick="toggleTvChart()" class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
+              📊 <span id="tv-chart-btn-text">K 線圖</span>
+            </button>
+            <a id="link-tradingview" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
               TradingView ↗
-            </a>
-            <a id="link-finviz" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
-              Finviz ↗
             </a>
           </div>
         </div>
 
-        <!-- 右側：成交量與量化情緒偏向指數 -->
         <div class="grid grid-cols-2 gap-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-6 min-w-[260px]">
           <div>
             <div class="text-xs text-slate-400">最新成交量</div>
@@ -415,7 +422,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       </div>
 
-      <!-- 52 週高低水位區間可視化進度條 -->
+      <!-- 52 週水位 -->
       <div id="quote-52w-container" class="border-t border-slate-800/80 pt-3">
         <div class="flex justify-between text-xs text-slate-400 font-mono mb-1.5">
           <span>52 週最低：<b class="text-slate-200" id="quote-low52">$0.00</b></span>
@@ -427,47 +434,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- TradingView 即時線圖嵌入容器 (預設折疊) -->
+      <!-- K 線圖容器 -->
       <div id="tv-chart-wrapper" class="hidden border-t border-slate-800/80 pt-4">
         <div class="w-full h-[380px] rounded-lg overflow-hidden border border-slate-800" id="tv-chart-container"></div>
       </div>
 
     </div>
 
-    <!-- 搜尋、時間區間、排序與情緒篩選列 -->
-    <div class="space-y-3 bg-slate-900/40 border border-slate-800/80 rounded-xl p-4">
-      <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+    <!-- 搜尋、排序與觀點篩選 -->
+    <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+      <div class="flex items-center gap-2 flex-1 max-w-lg">
+        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的..." 
+          class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
         
-        <!-- 搜尋列與排序 -->
-        <div class="flex items-center gap-2 flex-1 max-w-lg">
-          <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的..." 
-            class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
-          
-          <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
-            <option value="date_desc">🕒 最新發布</option>
-            <option value="likes_desc">❤️ 最多按讚</option>
-            <option value="views_desc">👁️ 最多瀏覽</option>
-          </select>
-        </div>
-
-        <!-- 時間範圍過濾 -->
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
-          <span class="text-xs text-slate-500 font-medium mr-1">時間：</span>
-          <button onclick="setTimeFilter('ALL')" class="time-filter-btn active px-2.5 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-time="ALL">全部</button>
-          <button onclick="setTimeFilter('7d')" class="time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-white hover:bg-slate-900 transition" data-time="7d">近 7 天</button>
-          <button onclick="setTimeFilter('30d')" class="time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-white hover:bg-slate-900 transition" data-time="30d">近 30 天</button>
-          <button onclick="setTimeFilter('90d')" class="time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-white hover:bg-slate-900 transition" data-time="90d">近 90 天</button>
-        </div>
-
+        <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
+          <option value="date_desc">🕒 最新發布</option>
+          <option value="likes_desc">❤️ 最多按讚</option>
+          <option value="views_desc">👁️ 最多瀏覽</option>
+        </select>
       </div>
 
-      <!-- 情緒標籤過濾 -->
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-800/60 overflow-x-auto">
-        <span class="text-xs text-slate-500 font-medium mr-1">觀點：</span>
-        <button onclick="setSentimentFilter('ALL')" class="filter-btn active px-3 py-1 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-val="ALL">全部</button>
-        <button onclick="setSentimentFilter('Bullish')" class="filter-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-emerald-400 hover:bg-slate-900 transition" data-val="Bullish">看多</button>
-        <button onclick="setSentimentFilter('Bearish')" class="filter-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-rose-400 hover:bg-slate-900 transition" data-val="Bearish">看空</button>
-        <button onclick="setSentimentFilter('Neutral')" class="filter-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-blue-400 hover:bg-slate-900 transition" data-val="Neutral">中立</button>
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
+        <button onclick="setSentimentFilter('ALL')" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-val="ALL">全部觀點</button>
+        <button onclick="setSentimentFilter('Bullish')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-emerald-400 hover:bg-slate-900 transition" data-val="Bullish">看多</button>
+        <button onclick="setSentimentFilter('Bearish')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-rose-400 hover:bg-slate-900 transition" data-val="Bearish">看空</button>
+        <button onclick="setSentimentFilter('Neutral')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-blue-400 hover:bg-slate-900 transition" data-val="Neutral">中立</button>
       </div>
     </div>
 
@@ -483,14 +474,66 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   </main>
 
+  <!-- 個股 AI 深度論點脈絡 Modal -->
+  <div id="deepdive-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="px-3 py-1 bg-teal-500/10 border border-teal-500/30 text-teal-400 font-mono font-bold text-lg rounded-lg" id="modal-ticker-title">$TICKER</span>
+          <h3 class="text-lg font-bold text-white">AI 個股投資論點脈絡與歷史</h3>
+        </div>
+        <button onclick="closeDeepDiveModal()" class="text-slate-400 hover:text-white text-xl p-1 font-bold">✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+          <div class="text-slate-400">首次提及時間</div>
+          <div class="text-sm font-bold text-white mt-1" id="modal-first-date">-</div>
+        </div>
+        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+          <div class="text-slate-400">總提及次數 / AI 分析</div>
+          <div class="text-sm font-bold text-teal-400 mt-1" id="modal-mention-count">-</div>
+        </div>
+        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+          <div class="text-slate-400">當前最新立場</div>
+          <div class="text-sm font-bold text-emerald-400 mt-1" id="modal-latest-stance">-</div>
+        </div>
+      </div>
+
+      <!-- 3 個關鍵代表性觀點 (Milestones) -->
+      <div>
+        <h4 class="text-sm font-bold text-slate-200 flex items-center gap-2 mb-3">
+          📌 3 個關鍵代表性觀點 (Key Milestones)
+        </h4>
+        <div class="space-y-2.5" id="modal-key-points"></div>
+      </div>
+
+      <!-- 立場歷史變化軸 -->
+      <div>
+        <h4 class="text-sm font-bold text-slate-200 flex items-center gap-2 mb-3">
+          ⏳ 立場變化與歷史軌跡
+        </h4>
+        <div class="space-y-2 max-h-48 overflow-y-auto pr-1" id="modal-timeline"></div>
+      </div>
+
+      <!-- 被提到的風險因子 -->
+      <div>
+        <h4 class="text-sm font-bold text-rose-400 flex items-center gap-2 mb-3">
+          ⚠️ 曾提及的風險與疑慮因素
+        </h4>
+        <div class="space-y-2" id="modal-risks"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const allTweets = __TWEETS_DATA__;
-    const topTickers = __TOP_TICKERS__;
+    const initialTopTickers = __TOP_TICKERS__;
     const stockQuotes = __STOCK_QUOTES__;
 
+    let currentViewMode = 'all';
     let currentSentiment = 'ALL';
-    let currentTimeWindow = 'ALL';
-    let currentTicker = topTickers.length > 0 ? topTickers[0][0] : '';
+    let currentTicker = initialTopTickers.length > 0 ? initialTopTickers[0][0] : '';
     let searchQuery = '';
     let currentSort = 'date_desc';
     let displayLimit = 25;
@@ -513,17 +556,97 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
     }
 
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        const active = btn.dataset.view === mode;
+        btn.className = `view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium transition ${
+          active ? 'bg-teal-500 text-slate-950 font-bold shadow-sm' : 'text-slate-400 hover:text-white'
+        }`;
+      });
+      displayLimit = 25;
+      updateAggregatedView();
+    }
+
+    function getFilteredByView(tweetsList) {
+      if (currentViewMode === 'all') return tweetsList;
+      const now = new Date();
+      return tweetsList.filter(t => {
+        if (!t.iso_date) return true;
+        const d = new Date(t.iso_date);
+        const diffDays = (now - d) / (1000 * 60 * 60 * 24);
+        if (currentViewMode === 'daily') return diffDays <= 1.5;
+        if (currentViewMode === 'weekly') return diffDays <= 7;
+        if (currentViewMode === 'monthly') return diffDays <= 28;
+        if (currentViewMode === 'quarterly') return diffDays <= 90;
+        return true;
+      });
+    }
+
+    function updateAggregatedView() {
+      const viewTweets = getFilteredByView(allTweets);
+      
+      // 計算當前視圖下的標的排行
+      const counts = {};
+      viewTweets.forEach(t => {
+        t.tickers.forEach(sym => {
+          counts[sym] = (counts[sym] || 0) + 1;
+        });
+      });
+      const topTickers = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 35);
+
+      // 更新頂部統計數據
+      const total = viewTweets.length;
+      const bullish = viewTweets.filter(t => t.sentiment === 'Bullish').length;
+      const bearish = viewTweets.filter(t => t.sentiment === 'Bearish').length;
+      const analyzed = viewTweets.filter(t => t.is_analyzed).length;
+      const uniqueTickers = Object.keys(counts).length;
+      const coveragePct = total ? Math.round((analyzed / total) * 100) : 0;
+
+      document.getElementById('stat-total').innerText = total.toLocaleString();
+      document.getElementById('stat-ai-coverage').innerText = `AI 分析：${analyzed.toLocaleString()} / ${total.toLocaleString()} (${coveragePct}%)`;
+      document.getElementById('stat-bullish').innerText = `${bullish} (${total ? Math.round(bullish/total*100) : 0}%)`;
+      document.getElementById('stat-bearish').innerText = `${bearish} (${total ? Math.round(bearish/total*100) : 0}%)`;
+      document.getElementById('stat-tickers').innerText = uniqueTickers.toLocaleString();
+
+      // 重新渲染熱門標的
+      renderTopTickers(topTickers);
+      if (currentTicker) renderStockQuote(currentTicker);
+      render();
+    }
+
+    function renderTopTickers(tickersList) {
+      const bar = document.getElementById('top-tickers-bar');
+      if (tickersList.length === 0) {
+        bar.innerHTML = '<span class="text-xs text-slate-500">該時間視圖內無推文資料</span>';
+        return;
+      }
+      bar.innerHTML = tickersList.map(([t, count]) => {
+        const quote = stockQuotes[t];
+        let miniBadge = '';
+        if (quote) {
+          const isPos = quote.changePct >= 0;
+          miniBadge = `<span class="text-[10px] ml-1 ${isPos ? 'text-emerald-400' : 'text-rose-400'}">${isPos ? '+' : ''}${quote.changePct.toFixed(1)}%</span>`;
+        }
+        return `
+          <button onclick="filterByTicker('${t}')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition ${currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}">
+            \\$${t} ${miniBadge} <span class="text-[10px] opacity-70">(${count})</span>
+          </button>
+        `;
+      }).join('');
+    }
+
     function toggleTvChart() {
       tvChartVisible = !tvChartVisible;
       const wrapper = document.getElementById('tv-chart-wrapper');
       const btnText = document.getElementById('tv-chart-btn-text');
       if (tvChartVisible) {
         wrapper.classList.remove('hidden');
-        btnText.innerText = '收合即時 K 線圖';
+        btnText.innerText = '收合 K 線';
         loadTradingViewWidget(currentTicker);
       } else {
         wrapper.classList.add('hidden');
-        btnText.innerText = '展開即時 K 線圖';
+        btnText.innerText = 'K 線圖';
       }
     }
 
@@ -569,15 +692,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono text-rose-400';
       }
 
-      // 外部看盤連結
       document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${ticker}/`;
-      document.getElementById('link-finviz').href = `https://finviz.com/quote.ashx?t=${ticker}`;
 
       document.getElementById('quote-volume').innerText = formatNumber(data.volume);
       document.getElementById('quote-low52').innerText = data.low52 ? `$${data.low52.toFixed(2)}` : '-';
       document.getElementById('quote-high52').innerText = data.high52 ? `$${data.high52.toFixed(2)}` : '-';
 
-      // 52 週水位計算
       if (data.low52 && data.high52 && data.high52 > data.low52) {
         const rangePct = Math.max(0, Math.min(100, Math.round(((data.price - data.low52) / (data.high52 - data.low52)) * 100)));
         document.getElementById('quote-range-pct').innerText = `52 週區間水位 ${rangePct}%`;
@@ -587,48 +707,100 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         document.getElementById('quote-52w-container').classList.add('hidden');
       }
 
-      // 多方情緒偏向度計算（Sentiment Index）
       const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
       const bullishCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
       const bearishCount = tickerTweets.filter(t => t.sentiment === 'Bearish').length;
-      const validSentimentCount = bullishCount + bearishCount;
+      const validCount = bullishCount + bearishCount;
 
       let sentimentScoreText = '中立 / 無顯著偏向';
-      if (validSentimentCount > 0) {
-        const score = Math.round((bullishCount / validSentimentCount) * 100);
+      if (validCount > 0) {
+        const score = Math.round((bullishCount / validCount) * 100);
         sentimentScoreText = `${score}% 多方 (${bullishCount}多 / ${bearishCount}空)`;
       }
       document.getElementById('quote-sentiment-index').innerText = sentimentScoreText;
 
-      if (tvChartVisible) {
-        loadTradingViewWidget(ticker);
-      }
+      if (tvChartVisible) loadTradingViewWidget(ticker);
     }
 
-    function renderTopTickers() {
-      const bar = document.getElementById('top-tickers-bar');
-      bar.innerHTML = topTickers.map(([t, count]) => {
-        const quote = stockQuotes[t];
-        let miniBadge = '';
-        if (quote) {
-          const isPos = quote.changePct >= 0;
-          miniBadge = `<span class="text-[10px] ml-1 ${isPos ? 'text-emerald-400' : 'text-rose-400'}">${isPos ? '+' : ''}${quote.changePct.toFixed(1)}%</span>`;
-        }
-        return `
-          <button onclick="filterByTicker('${t}')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition ${currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}">
-            \\$${t} ${miniBadge} <span class="text-[10px] opacity-70">(${count})</span>
-          </button>
-        `;
-      }).join('');
+    function openDeepDiveModal(ticker) {
+      if (!ticker) return;
+      const modal = document.getElementById('deepdive-modal');
+      const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
+      
+      document.getElementById('modal-ticker-title').innerText = `$${ticker}`;
+      
+      if (tickerTweets.length === 0) return;
+
+      // 首次與最新
+      const chronological = [...tickerTweets].sort((a, b) => a.date.localeCompare(b.date));
+      const firstMention = chronological[0];
+      const latestMention = chronological[chronological.length - 1];
+
+      document.getElementById('modal-first-date').innerText = firstMention.date;
+      document.getElementById('modal-mention-count').innerText = `${tickerTweets.length} 則 (${tickerTweets.filter(t=>t.is_analyzed).length} 則已分析)`;
+      document.getElementById('modal-latest-stance').innerText = latestMention.sentiment === 'Bullish' ? '看多 (Bullish)' : (latestMention.sentiment === 'Bearish' ? '看空 (Bearish)' : '中立 (Neutral)');
+
+      // 3 個關鍵代表性觀點 (依互動與 AI 摘要品質挑選)
+      const keyPoints = [...tickerTweets]
+        .filter(t => t.summary)
+        .sort((a, b) => (b.views + b.likes * 10) - (a.views + a.likes * 10))
+        .slice(0, 3);
+
+      const keyContainer = document.getElementById('modal-key-points');
+      if (keyPoints.length > 0) {
+        keyContainer.innerHTML = keyPoints.map((item, idx) => `
+          <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-teal-400 font-bold font-mono">里程碑 #${idx + 1} (${item.date})</span>
+              <a href="${item.url}" target="_blank" class="text-slate-400 hover:text-white text-xs">原始推文 ↗</a>
+            </div>
+            <div class="text-sm font-semibold text-slate-100">${item.summary}</div>
+            <div class="text-xs text-slate-300 leading-relaxed">${item.translation_zh || item.text}</div>
+          </div>
+        `).join('');
+      } else {
+        keyContainer.innerHTML = '<div class="text-xs text-slate-500">尚無足夠的 AI 重點摘要紀錄。</div>';
+      }
+
+      // 立場變化軸
+      const timelineContainer = document.getElementById('modal-timeline');
+      timelineContainer.innerHTML = chronological.map(item => `
+        <div class="flex items-center gap-3 text-xs border-l-2 border-slate-800 pl-3 py-1 font-mono">
+          <span class="text-slate-500">${item.date}</span>
+          <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${item.sentiment==='Bullish'?'bg-emerald-500/10 text-emerald-400':(item.sentiment==='Bearish'?'bg-rose-500/10 text-rose-400':'bg-blue-500/10 text-blue-400')}">${item.sentiment}</span>
+          <span class="text-slate-300 truncate max-w-md">${item.summary || item.text}</span>
+        </div>
+      `).join('');
+
+      // 風險疑慮貼文
+      const riskTweets = tickerTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('警戒') || t.summary.includes('跌'))));
+      const riskContainer = document.getElementById('modal-risks');
+      if (riskTweets.length > 0) {
+        riskContainer.innerHTML = riskTweets.slice(0, 3).map(item => `
+          <div class="bg-rose-950/20 border border-rose-900/40 p-3 rounded-xl text-xs space-y-1">
+            <div class="flex justify-between text-rose-400 font-mono font-semibold">
+              <span>${item.date}</span>
+              <a href="${item.url}" target="_blank" class="hover:underline">來源 ↗</a>
+            </div>
+            <div class="text-rose-200">${item.summary || item.translation_zh || item.text}</div>
+          </div>
+        `).join('');
+      } else {
+        riskContainer.innerHTML = '<div class="text-xs text-slate-500">歷史貼文中未出現重大看空或風險警語。</div>';
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeDeepDiveModal() {
+      document.getElementById('deepdive-modal').classList.add('hidden');
     }
 
     function filterByTicker(ticker) {
       currentTicker = ticker;
       displayLimit = 25;
       document.getElementById('clear-ticker-btn').classList.toggle('hidden', !ticker);
-      renderTopTickers();
-      renderStockQuote(ticker);
-      render();
+      updateAggregatedView();
     }
 
     function setSentimentFilter(val) {
@@ -636,19 +808,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       displayLimit = 25;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         const active = btn.dataset.val === val;
-        btn.className = `filter-btn px-3 py-1 rounded-lg text-xs font-medium border transition ${
-          active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
-        }`;
-      });
-      render();
-    }
-
-    function setTimeFilter(val) {
-      currentTimeWindow = val;
-      displayLimit = 25;
-      document.querySelectorAll('.time-filter-btn').forEach(btn => {
-        const active = btn.dataset.time === val;
-        btn.className = `time-filter-btn px-2.5 py-1.5 rounded-lg text-xs font-medium border transition ${
+        btn.className = `filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
           active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
         }`;
       });
@@ -699,29 +859,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     function render() {
       const container = document.getElementById('tweets-list');
-      const now = new Date();
+      const viewFiltered = getFilteredByView(allTweets);
 
-      let filtered = allTweets.filter(t => {
+      let filtered = viewFiltered.filter(t => {
         const matchSentiment = currentSentiment === 'ALL' || t.sentiment === currentSentiment;
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
           t.text.toLowerCase().includes(searchQuery) || 
           t.summary.toLowerCase().includes(searchQuery) ||
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
-
-        let matchTime = true;
-        if (currentTimeWindow !== 'ALL' && t.iso_date) {
-          const tweetDate = new Date(t.iso_date);
-          const diffDays = (now - tweetDate) / (1000 * 60 * 60 * 24);
-          if (currentTimeWindow === '7d') matchTime = diffDays <= 7;
-          else if (currentTimeWindow === '30d') matchTime = diffDays <= 30;
-          else if (currentTimeWindow === '90d') matchTime = diffDays <= 90;
-        }
-
-        return matchSentiment && matchTicker && matchSearch && matchTime;
+        return matchSentiment && matchTicker && matchSearch;
       });
 
-      // 執行排序
       if (currentSort === 'likes_desc') {
         filtered.sort((a, b) => b.likes - a.likes);
       } else if (currentSort === 'views_desc') {
@@ -733,7 +882,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const totalFiltered = filtered.length;
       const visibleItems = filtered.slice(0, displayLimit);
 
-      // 控制載入更多按鈕
       const loadMoreContainer = document.getElementById('load-more-container');
       const loadMoreCount = document.getElementById('load-more-count');
       if (visibleItems.length < totalFiltered) {
@@ -746,7 +894,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (visibleItems.length === 0) {
         container.innerHTML = `
           <div class="text-center py-16 text-slate-500 bg-slate-900/30 rounded-xl border border-slate-800">
-            沒有符合篩選條件的推文。
+            當前時間視圖或篩選條件下沒有推文。
           </div>
         `;
         return;
@@ -812,33 +960,21 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    function initStats() {
-      const total = allTweets.length;
-      const bullish = allTweets.filter(t => t.sentiment === 'Bullish').length;
-      const bearish = allTweets.filter(t => t.sentiment === 'Bearish').length;
-      const analyzedCount = allTweets.filter(t => t.is_analyzed).length;
-      const uniqueTickers = new Set(allTweets.flatMap(t => t.tickers)).size;
-      const coveragePct = total ? Math.round((analyzedCount / total) * 100) : 0;
-
-      document.getElementById('stat-total').innerText = total.toLocaleString();
-      document.getElementById('stat-ai-coverage').innerText = `AI 分析：${analyzedCount.toLocaleString()} / ${total.toLocaleString()} (${coveragePct}%)`;
-      document.getElementById('stat-bullish').innerText = `${bullish} (${total ? Math.round(bullish/total*100) : 0}%)`;
-      document.getElementById('stat-bearish').innerText = `${bearish} (${total ? Math.round(bearish/total*100) : 0}%)`;
-      document.getElementById('stat-tickers').innerText = uniqueTickers.toLocaleString();
-      document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
-    }
-
     document.getElementById('search-input').addEventListener('input', (e) => {
       searchQuery = e.target.value.trim().toLowerCase();
       displayLimit = 25;
       render();
     });
 
+    // 鍵盤 ESC 關閉 Modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDeepDiveModal();
+    });
+
+    document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
+
     // 初始化載入
-    initStats();
-    renderTopTickers();
-    renderStockQuote(currentTicker);
-    render();
+    setViewMode('all');
   </script>
 </body>
 </html>
