@@ -2,6 +2,7 @@ import json
 import os
 import re
 from datetime import datetime
+import yfinance as yf
 
 TWEETS_FILE = "data/tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
@@ -222,11 +223,55 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
 
     return cleaned, ticker_counts
 
-def generate_html(tweets, ticker_counts):
+def fetch_stock_quotes(tickers):
+    """批次獲取美股市場行情數據（股價、漲跌幅、52週高低點、成交量）"""
+    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情數據...")
+    quotes = {}
+    
+    for symbol in tickers:
+        try:
+            ticker_obj = yf.Ticker(symbol)
+            fast = getattr(ticker_obj, "fast_info", None)
+            
+            if fast:
+                current_price = getattr(fast, "last_price", None) or getattr(fast, "regular_market_price", None)
+                prev_close = getattr(fast, "previous_close", None)
+                high_52 = getattr(fast, "year_high", None)
+                low_52 = getattr(fast, "year_low", None)
+                volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None)
+            else:
+                info = ticker_obj.info or {}
+                current_price = info.get("currentPrice") or info.get("regularMarketPrice")
+                prev_close = info.get("regularMarketPreviousClose") or info.get("previousClose")
+                high_52 = info.get("fiftyTwoWeekHigh")
+                low_52 = info.get("fiftyTwoWeekLow")
+                volume = info.get("regularMarketVolume") or info.get("volume")
+
+            if current_price is not None:
+                change = (current_price - prev_close) if prev_close else 0.0
+                change_pct = ((change / prev_close) * 100) if prev_close else 0.0
+
+                quotes[symbol] = {
+                    "price": round(float(current_price), 2),
+                    "prevClose": round(float(prev_close), 2) if prev_close else round(float(current_price), 2),
+                    "change": round(float(change), 2),
+                    "changePct": round(float(change_pct), 2),
+                    "high52": round(float(high_52), 2) if high_52 else None,
+                    "low52": round(float(low_52), 2) if low_52 else None,
+                    "volume": int(volume) if volume else 0
+                }
+                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%)")
+        except Exception as e:
+            print(f"  ⚠️ 無法取得 ${symbol} 行情: {e}")
+
+    return quotes
+
+def generate_html(tweets, ticker_counts, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     tweets_json_str = json.dumps(tweets, ensure_ascii=False)
-    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:25]
+    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:30]
     top_tickers_json_str = json.dumps(ticker_counts_sorted, ensure_ascii=False)
+    stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
@@ -312,6 +357,47 @@ def generate_html(tweets, ticker_counts):
       <div class="flex flex-wrap gap-1.5" id="top-tickers-bar"></div>
     </div>
 
+    <!-- 個股即時行情專區 (Stock Quote Card) -->
+    <div id="stock-quote-section" class="bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/90 border border-slate-700/80 rounded-xl p-5 shadow-lg relative overflow-hidden hidden">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- 左側：標的與價格、漲跌幅 -->
+        <div class="flex items-center gap-4">
+          <div class="px-3 py-2 bg-slate-800 rounded-lg border border-slate-700 font-mono font-bold text-xl text-teal-400" id="quote-ticker-name">
+            $TICKER
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2">
+              <span class="text-3xl font-bold font-mono text-white" id="quote-price">$0.00</span>
+              <span class="text-xs text-slate-400">USD</span>
+            </div>
+            <div class="flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono" id="quote-change-container">
+              <span id="quote-change">$0.00</span>
+              <span id="quote-change-pct">(0.00%)</span>
+              <span class="text-xs font-normal text-slate-400">相對前一日收盤</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側：52 週高低點與成交量 -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 border-t md:border-t-0 md:border-l border-slate-800 pt-3 md:pt-0 md:pl-6">
+          <div>
+            <div class="text-xs text-slate-400">最新成交量</div>
+            <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-volume">-</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400">52 週最低</div>
+            <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-low52">$0.00</div>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400">52 週最高</div>
+            <div class="text-base font-semibold font-mono text-slate-200 mt-0.5" id="quote-high52">$0.00</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- 搜尋與篩選列 -->
     <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
       <div class="relative w-full sm:w-80">
@@ -334,32 +420,83 @@ def generate_html(tweets, ticker_counts):
   <script>
     const allTweets = {tweets_json_str};
     const topTickers = {top_tickers_json_str};
+    const stockQuotes = {stock_quotes_json_str};
+
     let currentSentiment = 'ALL';
-    let currentTicker = '';
+    let currentTicker = topTickers.length > 0 ? topTickers[0][0] : '';
     let searchQuery = '';
 
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{{}}');
 
+    function formatNumber(num) {{
+      if (!num) return '-';
+      if (num >= 1e9) return (num / 1e9).toFixed(2) + 'B';
+      if (num >= 1e6) return (num / 1e6).toFixed(2) + 'M';
+      if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+      return num.toLocaleString();
+    }}
+
     function highlightText(text) {{
       if (!text) return '';
       return text
-        .replace(/(\\$[A-Z]{{1,5}})/g, '<span class="font-bold text-teal-400 bg-teal-950/60 px-1 py-0.5 rounded border border-teal-500/30">$1</span>')
+        .replace(/(\\$[A-Z]{{1,5}})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\'))" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
         .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
+    }}
+
+    function renderStockQuote(ticker) {{
+      const section = document.getElementById('stock-quote-section');
+      if (!ticker || !stockQuotes[ticker]) {{
+        section.classList.add('hidden');
+        return;
+      }}
+
+      const data = stockQuotes[ticker];
+      section.classList.remove('hidden');
+
+      document.getElementById('quote-ticker-name').innerText = `$${{ticker}}`;
+      document.getElementById('quote-price').innerText = `$${{data.price.toFixed(2)}}`;
+
+      const isPositive = data.change >= 0;
+      const changeEl = document.getElementById('quote-change-container');
+      const changeVal = `${{isPositive ? '+' : ''}}${{data.change.toFixed(2)}}`;
+      const changePctVal = `(${{isPositive ? '+' : ''}}${{data.changePct.toFixed(2)}}%)`;
+
+      document.getElementById('quote-change').innerText = changeVal;
+      document.getElementById('quote-change-pct').innerText = changePctVal;
+
+      if (isPositive) {{
+        changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono text-emerald-400';
+      }} else {{
+        changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono text-rose-400';
+      }}
+
+      document.getElementById('quote-volume').innerText = formatNumber(data.volume);
+      document.getElementById('quote-low52').innerText = data.low52 ? `$${{data.low52.toFixed(2)}}` : '-';
+      document.getElementById('quote-high52').innerText = data.high52 ? `$${{data.high52.toFixed(2)}}` : '-';
     }}
 
     function renderTopTickers() {{
       const bar = document.getElementById('top-tickers-bar');
-      bar.innerHTML = topTickers.map(([t, count]) => `
-        <button onclick="filterByTicker('${{t}}')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition ${{currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}}">
-          \\$${{t}} <span class="text-[10px] opacity-70">(${{count}})</span>
-        </button>
-      `).join('');
+      bar.innerHTML = topTickers.map(([t, count]) => {{
+        const quote = stockQuotes[t];
+        let miniBadge = '';
+        if (quote) {{
+          const isPos = quote.changePct >= 0;
+          miniBadge = `<span class="text-[10px] ml-1 ${{isPos ? 'text-emerald-400' : 'text-rose-400'}}">${{isPos ? '+' : ''}}${{quote.changePct.toFixed(1)}}%</span>`;
+        }}
+        return `
+          <button onclick="filterByTicker('${{t}}')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition ${{currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}}">
+            \\$${{t}} ${{miniBadge}} <span class="text-[10px] opacity-70">(${{count}})</span>
+          </button>
+        `;
+      }}).join('');
     }}
 
     function filterByTicker(ticker) {{
       currentTicker = ticker;
       document.getElementById('clear-ticker-btn').classList.toggle('hidden', !ticker);
       renderTopTickers();
+      renderStockQuote(ticker);
       render();
     }}
 
@@ -463,7 +600,7 @@ def generate_html(tweets, ticker_counts):
               <div class="flex items-center gap-2">
                 ${{sentimentBadge}}
                 <div class="flex flex-wrap gap-1">
-                  ${{item.tickers.map(tk => `<span class="text-xs font-mono font-bold text-teal-400 bg-slate-800 px-1.5 py-0.5 rounded border border-slate-700">\\$${{tk}}</span>`).join('')}}
+                  ${{item.tickers.map(tk => `<button onclick="filterByTicker('${{tk}}')" class="text-xs font-mono font-bold text-teal-400 bg-slate-800 hover:bg-slate-700 px-1.5 py-0.5 rounded border border-slate-700 transition">\\$${{tk}}</button>`).join('')}}
                 </div>
               </div>
               <div class="text-xs text-slate-500 font-mono">${{item.date}}</div>
@@ -507,6 +644,7 @@ def generate_html(tweets, ticker_counts):
     // 初始化載入
     initStats();
     renderTopTickers();
+    renderStockQuote(currentTicker);
     render();
   </script>
 </body>
@@ -520,4 +658,9 @@ if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts = clean_tweet_data(tweets_raw, sentiment_cache)
-    generate_html(cleaned_tweets, counts)
+    
+    # 取出現次數最高的前 30 個標的抓取即時行情
+    top_tickers_list = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:30]]
+    stock_quotes = fetch_stock_quotes(top_tickers_list)
+    
+    generate_html(cleaned_tweets, counts, stock_quotes)
