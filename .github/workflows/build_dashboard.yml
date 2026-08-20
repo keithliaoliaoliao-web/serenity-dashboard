@@ -1,13 +1,20 @@
-name: 產生並部署儀表板
+name: 產生並部署 Serenity 儀表板
 
 on:
   schedule:
-    # 每天 UTC 00:05 與 12:05 執行（對應台灣時間 UTC+8 08:05 與 20:05）
-    - cron: '5 0,12 * * *'
+    # 每 2 小時自動排程執行一次（於偶數小時的第 5 分執行）
+    - cron: '5 */2 * * *'
   workflow_dispatch:
+    inputs:
+      target_count:
+        description: '本次手動執行欲分析的推文數量'
+        required: false
+        default: '50'
+        type: string
   push:
     paths:
       - 'scripts/**'
+      - 'data/tweets.json'
       - '.github/workflows/build_dashboard.yml'
 
 permissions:
@@ -26,32 +33,27 @@ jobs:
         run: |
           mkdir -p data docs
 
-      - name: 同步 yan-labs 最新推文存檔
-        run: |
-          echo "🔄 檢查 yan-labs 最新資料..."
-          curl -fL "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json" -o data/tweets_upstream.json || true
-          
-          if [ -s data/tweets_upstream.json ]; then
-            mv data/tweets_upstream.json data/tweets.json
-            echo "✅ 資料更新成功"
-          else
-            rm -f data/tweets_upstream.json
-            echo "ℹ️ 無新資料或下載失敗，維持既有資料"
-          fi
-
       - name: 設定 Python 環境
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: 安裝 Python 套件
+      - name: 安裝 Python 必要套件
         run: |
           python -m pip install --upgrade pip
           pip install google-generativeai yfinance
 
+      - name: 執行原生認證推文抓取
+        env:
+          TWITTER_AUTH_TOKEN: ${{ secrets.TWITTER_AUTH_TOKEN }}
+          TWITTER_CT0: ${{ secrets.TWITTER_CT0 }}
+        run: |
+          python scripts/fetch_tweets.py
+
       - name: 執行 Gemini 情緒深度分析
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TOTAL_TARGET: ${{ inputs.target_count || '50' }}
         run: |
           python scripts/analyze_sentiment.py
 
@@ -64,16 +66,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # 將產生的最新資料加入暫存區
           git add data/ docs/
           
-          # 檢查是否有實際變更
           if ! git diff --staged --quiet; then
-            git commit -m "chore: 自動更新 AI 快取與儀表板 [skip ci]"
-            
-            # 若遠端有並行推入的提交，使用 -X theirs 自動採用機器人產生的最新建置成果解決衝突
+            git commit -m "chore: 自動抓取最新推文、更新 AI 快取與儀表板 [skip ci]"
             git pull origin main --rebase -X theirs || git rebase --abort
-            
             git push origin main
           else
             echo "沒有檢測到任何資料或頁面變動，跳過提交。"
