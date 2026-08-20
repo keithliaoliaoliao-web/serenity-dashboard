@@ -324,6 +324,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
+      <!-- M3：股價快照卡，找不到資料時自動隱藏 -->
+      <div id="price-card" class="hidden bg-slate-800/50 border border-slate-700/50 rounded-xl p-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="col-span-2">
+            <div class="text-[11px] text-slate-400 font-medium mb-1.5">最新股價</div>
+            <div class="flex items-baseline gap-2.5 flex-wrap">
+              <span id="price-current" class="text-3xl font-bold font-mono text-white">--</span>
+              <span id="price-change-badge" class="text-sm font-semibold px-2.5 py-0.5 rounded-full border">--</span>
+            </div>
+            <div id="price-vs-close" class="text-xs text-slate-400 mt-1">vs 前收: --</div>
+          </div>
+          <div>
+            <div class="text-[11px] text-slate-400 font-medium mb-1.5">52 週區間</div>
+            <div id="price-52w" class="text-sm font-mono text-slate-200 leading-relaxed">--</div>
+          </div>
+          <div>
+            <div class="text-[11px] text-slate-400 font-medium mb-1.5">成交量</div>
+            <div id="price-volume" class="text-sm font-mono text-slate-200">--</div>
+          </div>
+        </div>
+        <div id="price-updated" class="text-[10px] text-slate-500 mt-2.5 text-right"></div>
+      </div>
+
       <div class="space-y-1.5">
         <div class="text-[11px] text-slate-400 font-medium">情緒多空比例</div>
         <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden flex">
@@ -378,6 +401,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <script>
     const ALL_TWEETS = __TWEETS_JSON__;
     const TOP_TICKERS = __TOP_TICKERS_JSON__;
+    const PRICES_DATA = __PRICES_JSON__;
     
     let filteredTweets = [...ALL_TWEETS];
     let currentPage = 1;
@@ -386,8 +410,39 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let chartInstance = null;
     const clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
 
-    const topContainer = document.getElementById('top-tickers-container');
-    const clearBtn = document.getElementById('clear-filter-btn');
+document.getElementById('ticker-analytics-panel').classList.remove('hidden');
+      document.getElementById('analytics-ticker-title').innerText = `$${ticker}`;
+      document.getElementById('analytics-ticker-count').innerText = `${total} 則推文`;
+
+      // M3：渲染股價快照卡
+      const priceCard = document.getElementById('price-card');
+      const pd = PRICES_DATA[ticker];
+      if (pd && pd.price != null) {
+        const isUp = (pd.change ?? 0) >= 0;
+        const sign = isUp ? '+' : '-';
+        const badgeCls = isUp
+          ? 'bg-emerald-950/70 text-emerald-400 border-emerald-700/50'
+          : 'bg-rose-950/70 text-rose-400 border-rose-700/50';
+        document.getElementById('price-current').innerText = `$${pd.price.toFixed(2)}`;
+        const badge = document.getElementById('price-change-badge');
+        badge.className = `text-sm font-semibold px-2.5 py-0.5 rounded-full border ${badgeCls}`;
+        badge.innerText = `${isUp ? '+' : ''}${pd.change_pct != null ? pd.change_pct.toFixed(2) : '--'}%`;
+        document.getElementById('price-vs-close').innerText =
+          `vs 前收 $${pd.prev_close != null ? pd.prev_close.toFixed(2) : '--'}　${sign}$${pd.change != null ? Math.abs(pd.change).toFixed(2) : '--'}`;
+        const h = pd.week52_high != null ? `$${pd.week52_high.toFixed(2)}` : '--';
+        const l = pd.week52_low  != null ? `$${pd.week52_low.toFixed(2)}`  : '--';
+        document.getElementById('price-52w').innerHTML =
+          `<span class="text-emerald-400">↑ ${h}</span><br><span class="text-rose-400">↓ ${l}</span>`;
+        const vol = pd.volume;
+        document.getElementById('price-volume').innerText = vol == null ? '--'
+          : vol >= 1e6 ? `${(vol/1e6).toFixed(1)}M`
+          : vol >= 1e3 ? `${(vol/1e3).toFixed(0)}K`
+          : String(vol);
+        document.getElementById('price-updated').innerText = `資料更新：${pd.updated_at ?? '--'}`;
+        priceCard.classList.remove('hidden');
+      } else {
+        priceCard.classList.add('hidden');
+      }
 
     TOP_TICKERS.forEach(([ticker, count]) => {
       const btn = document.createElement('button');
@@ -670,8 +725,22 @@ def generate_html(tweets, ticker_counts):
     bull_count = sum(1 for t in tweets if t["sentiment"] == "Bullish")
     bear_count = sum(1 for t in tweets if t["sentiment"] == "Bearish")
     
-    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
+tweets_json_str = json.dumps(tweets, ensure_ascii=False)
     top_tickers_json = json.dumps(top_tickers, ensure_ascii=False)
+
+    # M3：讀取股價快照（由 fetch_prices.py 產生，不存在時使用空字典）
+    prices_file = "data/prices.json"
+    if os.path.exists(prices_file):
+        try:
+            with open(prices_file, "r", encoding="utf-8") as pf:
+                prices_data = json.load(pf)
+        except Exception:
+            prices_data = {}
+    else:
+        prices_data = {}
+    prices_json_str = json.dumps(prices_data, ensure_ascii=False)
+
+    html = HTML_TEMPLATE
 
     html = HTML_TEMPLATE
     html = html.replace("__UPDATE_TIME__", datetime.now().strftime('%Y-%m-%d %H:%M'))
@@ -681,6 +750,7 @@ def generate_html(tweets, ticker_counts):
     html = html.replace("__BEAR_COUNT__", f"{bear_count:,}")
     html = html.replace("__TWEETS_JSON__", tweets_json_str)
     html = html.replace("__TOP_TICKERS_JSON__", top_tickers_json)
+    html = html.replace("__PRICES_JSON__", prices_json_str)
 
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
