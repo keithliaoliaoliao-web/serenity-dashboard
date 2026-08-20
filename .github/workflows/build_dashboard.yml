@@ -3,7 +3,7 @@ name: 產生並部署儀表板
 on:
   schedule:
     # 每天 UTC 00:05 與 12:05 執行（對應台灣時間 UTC+8 08:05 與 20:05）
-    - cron: '5 0,12 * * *'
+   - cron: '5 * * * *'
   workflow_dispatch:
   push:
     paths:
