@@ -3,7 +3,7 @@ name: 產生並部署儀表板
 on:
   schedule:
     # 每天 UTC 00:05 與 12:05 執行（對應台灣時間 UTC+8 08:05 與 20:05）
-   - cron: '5 * * * *'
+    - cron: '5 0,12 * * *'
   workflow_dispatch:
   push:
     paths:
@@ -64,11 +64,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          # 將產生的最新資料加入暫存區
           git add data/ docs/
           
+          # 檢查是否有實際變更
           if ! git diff --staged --quiet; then
-            git commit -m "chore: 更新 AI 快取、股價行情與儀表板 [skip ci]"
-            git pull --rebase origin main
+            git commit -m "chore: 自動更新 AI 快取與儀表板 [skip ci]"
+            
+            # 若遠端有並行推入的提交，使用 -X theirs 自動採用機器人產生的最新建置成果解決衝突
+            git pull origin main --rebase -X theirs || git rebase --abort
+            
             git push origin main
           else
             echo "沒有檢測到任何資料或頁面變動，跳過提交。"
