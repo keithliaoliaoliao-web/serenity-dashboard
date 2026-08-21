@@ -12,21 +12,22 @@ from datetime import datetime
 TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 
-# Yan Labs 遠端資料庫來源網址（可自訂或使用預設開源端點）
-YAN_LABS_URL = os.environ.get(
-    "YAN_LABS_URL", 
-    "https://raw.githubusercontent.com/yan-labs/serenity-tracker/main/data/tweets.json"
-)
+# Yan Labs 官方儲存庫候選 Raw 網址清單
+YAN_LABS_CANDIDATE_URLS = [
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/tweets.json",
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/master/data/tweets.json",
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/tweets.json",
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/master/tweets.json"
+]
 
 AUTH_TOKEN = os.environ.get("TWITTER_AUTH_TOKEN", "").strip()
 CT0 = os.environ.get("TWITTER_CT0", "").strip()
 
-# Twitter 官方公開 Bearer Token 與 Snowflake 起始紀元 (2010-11-04 01:42:54.657 UTC)
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
+# Twitter 官方 Snowflake 紀元起點 (2010-11-04 01:42:54.657 UTC)
 TWITTER_EPOCH = 1288834974657
 
 def log(message):
-    """即時強制輸出日誌至 GitHub Actions 控制台"""
+    """即時強制輸出日誌至控制台"""
     print(message, flush=True)
 
 def snowflake_to_iso(tweet_id_str):
@@ -67,58 +68,57 @@ def load_local_tweets(filepath):
         log(f"⚠️ 讀取本地推文失敗: {e}")
         return []
 
-def fetch_yan_labs_data(url):
-    """【軌道 1】從 Yan Labs 遠端庫抓取推文資料庫"""
-    if not url:
-        return []
-
-    log(f"🌐 [軌道 1] 正在連線 Yan Labs 遠端資料來源: {url[:55]}...")
+def fetch_yan_labs_data():
+    """【軌道 1】連線 yan-labs/serenity-aleabitoreddit 遠端資料庫"""
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
 
-    try:
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            if resp.status == 200:
-                raw_data = json.loads(resp.read().decode("utf-8"))
-                
-                # 相容多種結構
-                raw_list = []
-                if isinstance(raw_data, list):
-                    raw_list = raw_data
-                elif isinstance(raw_data, dict):
-                    for k in ["tweets", "data", "statuses"]:
-                        if isinstance(raw_data.get(k), list):
-                            raw_list = raw_data[k]
-                            break
-                    if not raw_list:
-                        raw_list = list(raw_data.values())
+    log(f"🌐 [軌道 1] 正在探測 Yan Labs 遠端資料來源 (yan-labs/serenity-aleabitoreddit)...")
 
-                cleaned = []
-                for item in raw_list:
-                    if not isinstance(item, dict):
-                        continue
-                    t_id = str(item.get("id") or item.get("id_str") or "").strip()
-                    text = item.get("text") or item.get("full_text") or item.get("content") or ""
+    for url in YAN_LABS_CANDIDATE_URLS:
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                if resp.status == 200:
+                    raw_data = json.loads(resp.read().decode("utf-8"))
                     
-                    if t_id.isdigit() and len(t_id) >= 10 and text:
-                        cleaned.append({
-                            "id": t_id,
-                            "text": text.strip(),
-                            "created_at": snowflake_to_iso(t_id) or item.get("created_at") or "1970-01-01T00:00:00Z",
-                            "favorite_count": int(item.get("favorite_count", 0) or item.get("likes", 0) or 0),
-                            "retweet_count": int(item.get("retweet_count", 0) or item.get("retweets", 0) or 0),
-                            "views": int(item.get("views", 0) or 0),
-                            "url": item.get("url") or f"https://twitter.com/{TARGET_HANDLE}/status/{t_id}",
-                            "source": "yan_labs"
-                        })
+                    raw_list = []
+                    if isinstance(raw_data, list):
+                        raw_list = raw_data
+                    elif isinstance(raw_data, dict):
+                        for k in ["tweets", "data", "statuses"]:
+                            if isinstance(raw_data.get(k), list):
+                                raw_list = raw_data[k]
+                                break
+                        if not raw_list:
+                            raw_list = list(raw_data.values())
 
-                log(f"  ✨ [軌道 1] 成功自 Yan Labs 同步 {len(cleaned)} 則推文資料！")
-                return cleaned
-    except Exception as e:
-        log(f"  ℹ️ Yan Labs 連線略過或異常 (此為正常備援機制): {e}")
+                    cleaned = []
+                    for item in raw_list:
+                        if not isinstance(item, dict):
+                            continue
+                        t_id = str(item.get("id") or item.get("id_str") or "").strip()
+                        text = item.get("text") or item.get("full_text") or item.get("content") or ""
+                        
+                        if t_id.isdigit() and len(t_id) >= 10 and text:
+                            cleaned.append({
+                                "id": t_id,
+                                "text": text.strip(),
+                                "created_at": snowflake_to_iso(t_id) or item.get("created_at") or "1970-01-01T00:00:00Z",
+                                "favorite_count": int(item.get("favorite_count", 0) or item.get("likes", 0) or 0),
+                                "retweet_count": int(item.get("retweet_count", 0) or item.get("retweets", 0) or 0),
+                                "views": int(item.get("views", 0) or 0),
+                                "url": item.get("url") or f"https://twitter.com/{TARGET_HANDLE}/status/{t_id}",
+                                "source": "yan_labs"
+                            })
 
+                    log(f"  ✨ [軌道 1] 成功連線並自 {url} 同步 {len(cleaned)} 則歷史推文！")
+                    return cleaned
+        except Exception:
+            continue
+
+    log("  ℹ️ Yan Labs 遠端資料庫未回應或為私有庫，順暢切換為本地獨立抓取模式。")
     return []
 
 def fetch_syndication_stream(screen_name):
@@ -256,11 +256,10 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
             tweets_map[t_id] = tw
             yan_added += 1
         else:
-            # 若 Yan Labs 內文較長則補齊
             if len(tw.get("text", "")) > len(tweets_map[t_id].get("text", "")):
                 tweets_map[t_id]["text"] = tw["text"]
 
-    # 3. 比對並融合本地即時抓取資料（即時抓取的數據權重最高）
+    # 3. 比對並融合本地即時抓取資料（即時抓取權重最高）
     for tw in live_stream_data:
         t_id = str(tw.get("id", "")).strip()
         if not t_id:
@@ -296,7 +295,7 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
         f"📊 [比對結算] 本地既有: {local_count} 則 | "
         f"Yan Labs 增補: {yan_added} 則 | "
         f"即時捕獲新增: {live_added} 則 | "
-        f"融合後資料庫總數: {len(merged_list)} 則"
+        f"🎉 融合後資料庫總數: {len(merged_list)} 則"
     )
 
     return merged_list
@@ -320,8 +319,8 @@ if __name__ == "__main__":
     # 1. 讀取本地既有推文庫
     local_tweets = load_local_tweets(TWEETS_FILE)
 
-    # 2. 獲取 Yan Labs 遠端資料庫
-    yan_tweets = fetch_yan_labs_data(YAN_LABS_URL)
+    # 2. 獲取 Yan Labs 遠端資料庫 (yan-labs/serenity-aleabitoreddit)
+    yan_tweets = fetch_yan_labs_data()
 
     # 3. 獲取 Twitter 官方即時最新推文
     user_id, live_tweets = fetch_syndication_stream(TARGET_HANDLE)
