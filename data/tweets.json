@@ -1,29 +1,49 @@
 [
   {
+    "id": "2090735668532224224",
+    "text": "Since people are having fun speculating on $SKHY CPO roadmap supply chains.\n\nI'm gonna do my own guess and say SK Hynix is evaluating Celestial/Ayar. Then doing heavy evaluation into microLEDs past first-gen deployments. \n\nBoth have been kinda working on it for awhile. \n\n- Ayar shown up in SK hynix's own website in the context of optical <-> memory links. \n- Marvell is actively working with SK Hynix in custom memory solutions (and guess who owns Celestial now). \n\nCelestial/Ayar are both also cited in SK Hynix's linked Nature Paper, which helps a bit with technical relevance: \n\n(121): Stojanovic, V. A UCIe optical I/O retimer chiplet for AI scale-up. In 2025 IEEE Hot Chips 37 Symposium (HCS) 1–22 (IEEE, 2025) \n\n- This is Ayar reference (Ayar’s teraphy optical I/O chiplet), Stojanovic is Ayar Lab's co-founder btw. \n\n(123): Winterbottom, P. Photonic interconnect for accelerated computing celestial AI photonic fabric module (cough cough Celestial)\n\nThere's more breadcrumbs out there, but wanted to keep this relatively short-form. \n\nFor more upstream beneficaries: \n\n-> I still think $SIVE is the cleanest read through since they're likely supplying to both Celestial/Ayar. \n\nThe interposer/packaging IP layer... People were speculating $POET, but Marvell probably vertically integrated players them out this year after the announcement. \n\nGiven they've had their own SiPH interposer tech/integration IP before Celestials acquisition (eg. presented a silicon-photonics interposer back in 2023)\n\n-> AMS Osram (which I don't own), seems like they're co-developing in this area given they randomly went out of their way this year to say HBM <-> optics was a TAM increase for them. \n\nTLDR: I see Ayar/Celestial as candidates for SK Hynix's CPO roadmap, then microLEDs being commercialized past gen-1 maybe 2029. (this is all speculation)\n\nJust to throw a bone to quantum dot bros, this got cited like 5 times.",
+    "created_at": "2026-08-21T09:40:02Z",
+    "favorite_count": 133,
+    "retweet_count": 9,
+    "views": 31098,
+    "url": "https://twitter.com/aleabitoreddit/status/2090735668532224224",
+    "source": "live_stream"
+  },
+  {
+    "id": "2090714894874050824",
+    "text": "There’s a lot of viral fabricated screenshots of me going around recently. \n\nSome are annoying jokes for engagement, like text-edited posts from me citing bible verses.\n\nBut some like “Innolight secures Nvidia NPO orders” or off platform promotional content are maliciously fabricated.\n\nUnfortunately I don’t have the power to prevent false images from circulating.\n\nSo please make sure to double check primary sources.",
+    "created_at": "2026-08-21T08:17:29Z",
+    "favorite_count": 258,
+    "retweet_count": 10,
+    "views": 111604,
+    "url": "https://twitter.com/aleabitoreddit/status/2090714894874050824",
+    "source": "live_stream"
+  },
+  {
     "id": "2090510568474231045",
     "text": "After seeing how the robotics and space sectors reacted to Unitree and $SPCX IPOs\n\nI’m not quite sure I want Anthropic to go public… https://t.co/hY6tM1r4Qb",
     "created_at": "2026-08-20T18:45:33Z",
-    "favorite_count": 887,
+    "favorite_count": 900,
     "retweet_count": 18,
-    "views": 198269,
+    "views": 208668,
     "url": "https://twitter.com/aleabitoreddit/status/2090510568474231045"
   },
   {
     "id": "2090490101260591481",
     "text": "Very positive. My opinion is that the optical sector underperformance recently from $AAOI to $SIVE has been absurd.\n\nThe demand visibility... is just way too stupidly high.\n\nAOI: “Even combined AOI, Coherent program altogether, is still very tough to meet the customer demand in the next 3 years” (2029)\n\nElazr GM: \"entire optical supply chain was facing major shortages.\" \"The shortage will continue to the next few years\"\n\nSivers CEO said the same thing about InP laser demand imbalances expected for the next 3-5 years.\n\nCan go on and on about $LITE, $MTSI and other comments.\n\nWe haven't even hit the inflection point with 1.6T, NPO, CPO scale out/up, and optics with memory (as seen with SK Hynix).\n\nYet the industry is already bottlenecked by EML/CW and all your other upstream components from PDs/TIA/DSPs, transceivers, and soon FAU + others when CPO scales… \n\nI'm personally extremely comfortable watching this all play out, but just a little confused that markets don't know how to math a year or two ahead.",
     "created_at": "2026-08-20T17:24:14Z",
-    "favorite_count": 1468,
-    "retweet_count": 102,
-    "views": 338517,
+    "favorite_count": 1492,
+    "retweet_count": 103,
+    "views": 358038,
     "url": "https://twitter.com/aleabitoreddit/status/2090490101260591481"
   },
   {
     "id": "2090380103268315584",
     "text": "@KhalidIshaq85 @EnamelEquity My domain knowledge isn’t really about biotech, so can’t really comment there. \n\nIt’s hard for me to build conviction around themes or company’s I don’t fully understand.\n\nAnd that really shows if there’s ever a correction or drop.",
     "created_at": "2026-08-20T10:07:08Z",
-    "favorite_count": 84,
+    "favorite_count": 85,
     "retweet_count": 0,
-    "views": 15988,
+    "views": 16371,
     "url": "https://twitter.com/aleabitoreddit/status/2090380103268315584",
     "source": "yan_labs"
   },
@@ -33,7 +53,7 @@
     "created_at": "2026-08-20T09:57:58Z",
     "favorite_count": 230,
     "retweet_count": 10,
-    "views": 38443,
+    "views": 39325,
     "url": "https://twitter.com/aleabitoreddit/status/2090377797441323097",
     "source": "yan_labs"
   },
@@ -41,9 +61,9 @@
     "id": "2090374603264929981",
     "text": "I'm glad the leverage bros moved from AI stocks back to Hyerliquid and biotech like $MRNA, so maybe we'll see a faster recovery. \n\nAside from that just some TLDR stuff:\n\n- $EWY up, primarily from SK Hynix buybacks (they're just too profitable), and Samsung Foundry roughly ~10-15% price hikes. \n\n- $SKHY unveils CPO roadmap?? Apparently they're doing something with photonic interposer that links to memory, so I gotta look a bit deeper into this\n\nProbably going to be more TAM expansion, more supply chain beneficiaries (eg. lasers, PICs, packaging) off this.\n\n- $YMTC pursuing IPO next quarter following CMXT's successful IPO. \n\nThe Chinese IPO market is just going brrr from Unitree to memory makers. \n\nUS needs to do something similar rather than IPOing companies at trillion dollar valuations already. \n\n- Tyntek limit up there's now order visibility through 2028, given photodiode demand imbalance for photonics. \n\nElazr GM did say the entire optical supply chain was facing major shortages... I'll probably look more at high-end PD bottlenecks next.\n\n- MS forecasts a 50% Q/Q price increase for DDR4 for Q3, and 10%+ increase for Q4 2026. (Nanya/2408, Windbond/2344, should be happy). \n\n- China reportedly delays clearance from germanium, quartz-based materials, and neodymium magnets To taiwan. \n\nSo I'll probably have some fun looking into supply chains disruptions there over cup noodles.\n\n- High-end PCB drill shortage (still ongoing), Kawei (5498) said AI DCs, servers and optical communications are driving demand for PCBs, HDI and package substrates, while tungsten prices are rising. \n\nThough the world's five largest drill manufacturers are aggressively expanding capacity, supply remains far below overall market demand\n\nJust stuff I found interesting recently, obviously $MRNA stuff is too.",
     "created_at": "2026-08-20T09:45:17Z",
-    "favorite_count": 1064,
-    "retweet_count": 39,
-    "views": 303033,
+    "favorite_count": 1074,
+    "retweet_count": 40,
+    "views": 309352,
     "url": "https://twitter.com/aleabitoreddit/status/2090374603264929981"
   },
   {
@@ -52,7 +72,7 @@
     "created_at": "2026-08-19T16:54:05Z",
     "favorite_count": 49,
     "retweet_count": 0,
-    "views": 25794,
+    "views": 26112,
     "url": "https://twitter.com/aleabitoreddit/status/2090120128805691484",
     "source": "yan_labs"
   },
@@ -60,18 +80,18 @@
     "id": "2090103899302826302",
     "text": "$MRVL gives $GOOGL options to buy $12.2B of the company. \n\n\"The Marvell-Google deal covers a broad range of technologies used ​with TPUs, including processors that run AI models, manage data storage ​and  move information ⁠across networks.\"\n\nWhich could translate into ~$120 billion ​in revenue through 2033. \n\nMarvell also has separate warrants with $AMZN after their Celestial acquisition (for purchases of photonic fabric).\n\nRemember the good times when Jensen said Marvell would be the next $1T+ company?  \n\nSeems Nvidia knew Marvell was \"networking\" its way into all the hyperscalers with warrants.",
     "created_at": "2026-08-19T15:49:36Z",
-    "favorite_count": 1179,
+    "favorite_count": 1180,
     "retweet_count": 93,
-    "views": 303033,
+    "views": 305715,
     "url": "https://twitter.com/aleabitoreddit/status/2090103899302826302"
   },
   {
     "id": "2089978707830280655",
     "text": "@Blazedsin Yeah, $SIVE is my favorite high-beta optical long. \n\nYou have a small company supplying lasers for: \n- Hyperscaler suppliers like $JBL with pluggables. \n- ELS + optical engines with $POET / O-Net. \n- Scale up with optical I/O with Ayar and others. \n- Photonic Foundries like $GFS across all architectures like NPO/pluggables/CPO. \n\nwith independent CW capacity coming online with Win Semi during a structural bottleneck... NASDAQ listing likely in the next few quarters. \n\nAnd the CEO actually knows what he's doing + aligned with shareholders (in terms of buying stock on the open market), with low dilution to get all of this done.   \n\nAnd they hinted at M&A, which is ideal for TAM expansion (look at what happened with Lumentum after Cloud Light H2 2023 M&A). \n\nThen you have $MTSI, $AAOI likely no meaningful participating in first-gen CPO deployments (smaller pool of players)... Industry CW shortages currently before volume ramp. Regulation tailwinds targeting Chinese competition. \n\nI'm not sure if it's just me but they have the ideal setup, main downside is that it's just listed on some small Swedish exchange and that harms valuations.",
     "created_at": "2026-08-19T07:32:08Z",
-    "favorite_count": 489,
-    "retweet_count": 58,
-    "views": 90820,
+    "favorite_count": 490,
+    "retweet_count": 57,
+    "views": 91327,
     "url": "https://twitter.com/aleabitoreddit/status/2089978707830280655",
     "source": "yan_labs"
   },
@@ -81,7 +101,7 @@
     "created_at": "2026-08-19T07:11:47Z",
     "favorite_count": 1323,
     "retweet_count": 93,
-    "views": 245989,
+    "views": 247228,
     "url": "https://twitter.com/aleabitoreddit/status/2089973586425766134"
   },
   {
@@ -90,7 +110,7 @@
     "created_at": "2026-08-19T02:51:57Z",
     "favorite_count": 1810,
     "retweet_count": 119,
-    "views": 549888,
+    "views": 551223,
     "url": "https://twitter.com/aleabitoreddit/status/2089908198694351064"
   },
   {
@@ -99,7 +119,7 @@
     "created_at": "2026-08-18T17:27:07Z",
     "favorite_count": 1535,
     "retweet_count": 104,
-    "views": 370913,
+    "views": 371660,
     "url": "https://twitter.com/aleabitoreddit/status/2089766053274661143"
   },
   {
@@ -137,7 +157,7 @@
     "created_at": "2026-08-18T16:47:03Z",
     "favorite_count": 47,
     "retweet_count": 0,
-    "views": 18483
+    "views": 18601
   },
   {
     "id": "2089753753625018830",
@@ -174,7 +194,7 @@
     "created_at": "2026-08-18T16:38:15Z",
     "favorite_count": 63,
     "retweet_count": 0,
-    "views": 19032
+    "views": 19140
   },
   {
     "id": "2089749225768915037",
@@ -211,7 +231,7 @@
     "created_at": "2026-08-18T16:20:15Z",
     "favorite_count": 73,
     "retweet_count": 1,
-    "views": 22871
+    "views": 23028
   },
   {
     "id": "2089748568852799580",
@@ -248,7 +268,7 @@
     "created_at": "2026-08-18T16:17:39Z",
     "favorite_count": 93,
     "retweet_count": 3,
-    "views": 22129
+    "views": 22258
   },
   {
     "id": "2089746797300432912",
@@ -256,7 +276,7 @@
     "created_at": "2026-08-18T16:10:36Z",
     "favorite_count": 985,
     "retweet_count": 42,
-    "views": 256410,
+    "views": 256998,
     "url": "https://twitter.com/aleabitoreddit/status/2089746797300432912"
   },
   {
@@ -294,7 +314,7 @@
     "created_at": "2026-08-18T14:15:30Z",
     "favorite_count": 241,
     "retweet_count": 6,
-    "views": 31854
+    "views": 32042
   },
   {
     "id": "2089714869876764762",
@@ -331,15 +351,15 @@
     "created_at": "2026-08-18T14:03:44Z",
     "favorite_count": 169,
     "retweet_count": 3,
-    "views": 32441
+    "views": 32502
   },
   {
     "id": "2089690098875130084",
     "text": "Looks like we're getting the Strait of America, a new US territory... https://t.co/HCQ139Ys4V",
     "created_at": "2026-08-18T12:25:18Z",
-    "favorite_count": 971,
+    "favorite_count": 972,
     "retweet_count": 35,
-    "views": 284106,
+    "views": 284732,
     "url": "https://twitter.com/aleabitoreddit/status/2089690098875130084"
   },
   {
@@ -377,7 +397,7 @@
     "created_at": "2026-08-18T07:04:18Z",
     "favorite_count": 61,
     "retweet_count": 1,
-    "views": 17663
+    "views": 17702
   },
   {
     "id": "2089551553992761810",
@@ -414,7 +434,7 @@
     "created_at": "2026-08-18T03:14:47Z",
     "favorite_count": 140,
     "retweet_count": 3,
-    "views": 24167
+    "views": 24221
   },
   {
     "id": "2089547564249219163",
@@ -422,7 +442,7 @@
     "created_at": "2026-08-18T02:58:55Z",
     "favorite_count": 762,
     "retweet_count": 57,
-    "views": 295280,
+    "views": 295768,
     "url": "https://twitter.com/aleabitoreddit/status/2089547564249219163"
   },
   {
@@ -431,7 +451,7 @@
     "created_at": "2026-08-17T18:42:13Z",
     "favorite_count": 3924,
     "retweet_count": 111,
-    "views": 487374,
+    "views": 487833,
     "url": "https://twitter.com/aleabitoreddit/status/2089422562019393654"
   },
   {
@@ -469,7 +489,7 @@
     "created_at": "2026-08-17T16:07:12Z",
     "favorite_count": 117,
     "retweet_count": 1,
-    "views": 25017
+    "views": 25076
   },
   {
     "id": "2089373679625142542",
@@ -506,7 +526,7 @@
     "created_at": "2026-08-17T15:27:58Z",
     "favorite_count": 103,
     "retweet_count": 4,
-    "views": 22818
+    "views": 22875
   },
   {
     "id": "2089372686858465731",
@@ -543,7 +563,7 @@
     "created_at": "2026-08-17T15:24:01Z",
     "favorite_count": 81,
     "retweet_count": 0,
-    "views": 21319
+    "views": 21355
   },
   {
     "id": "2089369432837722525",
@@ -580,7 +600,7 @@
     "created_at": "2026-08-17T15:11:06Z",
     "favorite_count": 86,
     "retweet_count": 1,
-    "views": 20974
+    "views": 21010
   },
   {
     "id": "2089355682286092748",
@@ -588,7 +608,7 @@
     "created_at": "2026-08-17T14:16:27Z",
     "favorite_count": 1412,
     "retweet_count": 83,
-    "views": 388422,
+    "views": 388861,
     "url": "https://twitter.com/aleabitoreddit/status/2089355682286092748"
   },
   {
@@ -626,15 +646,15 @@
     "created_at": "2026-08-17T10:01:25Z",
     "favorite_count": 94,
     "retweet_count": 0,
-    "views": 24599
+    "views": 24635
   },
   {
     "id": "2089264987328151637",
     "text": "Just some more demand imbalance visibility for $SNDK, $SKHY, $MU, Kioxia, and your NAND players. \n\nPhison CEO: \"2027 capacity constraints will be even more severe than in 2026.\"\n\n\"Upstream suppliers need up to 4 years from plant construction and equipment investment to actual production.\n\nWith demand growing explosively and supply expansion limited, the NAND shortage is likely to last for years.\"\n\nDon't quite think I agree with the people claiming it's all over for memory, esp. NAND bottlenecks in 2026...",
     "created_at": "2026-08-17T08:16:04Z",
     "favorite_count": 1671,
-    "retweet_count": 114,
-    "views": 372744,
+    "retweet_count": 113,
+    "views": 373185,
     "url": "https://twitter.com/aleabitoreddit/status/2089264987328151637"
   },
   {
@@ -672,7 +692,7 @@
     "created_at": "2026-08-17T04:02:03Z",
     "favorite_count": 79,
     "retweet_count": 1,
-    "views": 21164
+    "views": 21199
   },
   {
     "id": "2089189149563838878",
@@ -709,7 +729,7 @@
     "created_at": "2026-08-17T03:14:43Z",
     "favorite_count": 79,
     "retweet_count": 5,
-    "views": 26149
+    "views": 26183
   },
   {
     "id": "2089188332987097213",
@@ -746,7 +766,7 @@
     "created_at": "2026-08-17T03:11:28Z",
     "favorite_count": 67,
     "retweet_count": 2,
-    "views": 27656
+    "views": 27692
   },
   {
     "id": "2089183484556480536",
@@ -754,7 +774,7 @@
     "created_at": "2026-08-17T02:52:12Z",
     "favorite_count": 1084,
     "retweet_count": 55,
-    "views": 412485,
+    "views": 412829,
     "url": "https://twitter.com/aleabitoreddit/status/2089183484556480536"
   },
   {
@@ -792,7 +812,7 @@
     "created_at": "2026-08-17T01:57:29Z",
     "favorite_count": 154,
     "retweet_count": 1,
-    "views": 27499
+    "views": 27529
   },
   {
     "id": "2089165155741622679",
@@ -800,7 +820,7 @@
     "created_at": "2026-08-17T01:39:22Z",
     "favorite_count": 1500,
     "retweet_count": 119,
-    "views": 352637,
+    "views": 353037,
     "url": "https://twitter.com/aleabitoreddit/status/2089165155741622679"
   },
   {
@@ -838,7 +858,7 @@
     "created_at": "2026-08-17T00:45:31Z",
     "favorite_count": 138,
     "retweet_count": 3,
-    "views": 23886
+    "views": 23913
   },
   {
     "id": "2089148883838611460",
@@ -846,7 +866,7 @@
     "created_at": "2026-08-17T00:34:43Z",
     "favorite_count": 943,
     "retweet_count": 36,
-    "views": 834377,
+    "views": 834608,
     "url": "https://twitter.com/aleabitoreddit/status/2089148883838611460"
   },
   {
