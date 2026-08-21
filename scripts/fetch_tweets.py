@@ -12,26 +12,28 @@ from datetime import datetime
 TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 
-# Yan Labs 官方儲存庫候選 Raw 網址清單
+# Yan Labs 儲存庫候選路徑
 YAN_LABS_CANDIDATE_URLS = [
     "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/tweets.json",
     "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/master/data/tweets.json",
     "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/tweets.json",
-    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/master/tweets.json"
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/master/tweets.json",
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/gh-pages/data/tweets.json",
 ]
 
 AUTH_TOKEN = os.environ.get("TWITTER_AUTH_TOKEN", "").strip()
 CT0 = os.environ.get("TWITTER_CT0", "").strip()
+GH_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip() or os.environ.get("GH_PAT", "").strip()
 
-# Twitter 官方 Snowflake 紀元起點 (2010-11-04 01:42:54.657 UTC)
+# Twitter Snowflake 紀元常數
 TWITTER_EPOCH = 1288834974657
 
 def log(message):
-    """即時強制輸出日誌至控制台"""
+    """即時輸出日誌至控制台"""
     print(message, flush=True)
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法由推文 ID 反推精確 UTC 發布時間"""
+    """利用 Twitter Snowflake 演算法反推精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -69,17 +71,20 @@ def load_local_tweets(filepath):
         return []
 
 def fetch_yan_labs_data():
-    """【軌道 1】連線 yan-labs/serenity-aleabitoreddit 遠端資料庫"""
+    """【軌道 1】帶 Token 探測 Yan Labs 遠端資料庫"""
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Accept": "application/json"
     }
+    if GH_TOKEN:
+        headers["Authorization"] = f"token {GH_TOKEN}"
 
-    log(f"🌐 [軌道 1] 正在探測 Yan Labs 遠端資料來源 (yan-labs/serenity-aleabitoreddit)...")
+    log(f"🌐 [軌道 1] 正在連線探測 Yan Labs (yan-labs/serenity-aleabitoreddit)...")
 
     for url in YAN_LABS_CANDIDATE_URLS:
         try:
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=10) as resp:
+            with urllib.request.urlopen(req, timeout=8) as resp:
                 if resp.status == 200:
                     raw_data = json.loads(resp.read().decode("utf-8"))
                     
@@ -113,12 +118,14 @@ def fetch_yan_labs_data():
                                 "source": "yan_labs"
                             })
 
-                    log(f"  ✨ [軌道 1] 成功連線並自 {url} 同步 {len(cleaned)} 則歷史推文！")
+                    log(f"  ✨ [軌道 1] 成功連線並自 {url} 同步 {len(cleaned)} 則推文！")
                     return cleaned
-        except Exception:
-            continue
+        except urllib.error.HTTPError as he:
+            log(f"  ↳ 探測 {url.split('/')[-2]}/{url.split('/')[-1]} -> HTTP {he.code}")
+        except Exception as e:
+            log(f"  ↳ 探測異常: {e}")
 
-    log("  ℹ️ Yan Labs 遠端資料庫未回應或為私有庫，順暢切換為本地獨立抓取模式。")
+    log("  ℹ️ Yan Labs 候選路徑未取得資料，自動使用本地既有資料庫與官方即時串流。")
     return []
 
 def fetch_syndication_stream(screen_name):
@@ -183,20 +190,20 @@ def fetch_syndication_stream(screen_name):
                             "source": "live_stream"
                         })
 
-                log(f"  ✨ [軌道 2] 官方串流解析出 {len(fetched)} 則即時推文！")
+                log(f"  ✨ [軌道 2] 官方串流成功解析出 {len(fetched)} 則即時推文！")
     except Exception as e:
         log(f"  ⚠️ [軌道 2 異常]: {e}")
 
     return user_id, fetched
 
 def enrich_recent_metrics(tweets_list, target_count=40):
-    """【軌道 3】即時互動數據強制同步（更新最新 40 則推文的愛心、轉推與瀏覽量）"""
+    """【軌道 3】強制同步前 40 則推文的真實按讚數、轉推數與瀏覽量"""
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
     updated = 0
     check_limit = min(len(tweets_list), target_count)
-    log(f"🔄 [數據校準] 正在為最新 {check_limit} 則推文連線同步真實互動指標 (❤️ Likes / 🔁 RT / 👁️ Views)...")
+    log(f"🔄 [數據校準] 正在為最新 {check_limit} 則推文連線同步真實互動指標 (❤️ / 🔁 / 👁️)...")
 
     for tw in tweets_list[:check_limit]:
         t_id = str(tw.get("id", "")).strip()
@@ -215,12 +222,10 @@ def enrich_recent_metrics(tweets_list, target_count=40):
                         retweets = int(t_data.get("retweets", 0) or t_data.get("retweet_count", 0) or 0)
                         views = int(t_data.get("views", 0) or 0)
 
-                        # 強制覆蓋為最新真實指標
                         tw["favorite_count"] = likes
                         tw["retweet_count"] = retweets
                         tw["views"] = views
 
-                        # 補齊完整未被截斷的正文
                         if t_data.get("text") and len(t_data["text"]) > len(tw.get("text", "")):
                             tw["text"] = t_data["text"]
 
@@ -233,10 +238,9 @@ def enrich_recent_metrics(tweets_list, target_count=40):
     return tweets_list
 
 def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
-    """【融合比對核心】比對本地、Yan Labs 與即時抓取資料，智慧去重與欄位優化"""
+    """三軌資料合併去重與時間校準"""
     tweets_map = {}
 
-    # 1. 載入本地既有資料
     for tw in local_data:
         t_id = str(tw.get("id", "")).strip()
         if t_id:
@@ -246,12 +250,10 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
     yan_added = 0
     live_added = 0
 
-    # 2. 比對並融合 Yan Labs 資料
     for tw in yan_labs_data:
         t_id = str(tw.get("id", "")).strip()
         if not t_id:
             continue
-
         if t_id not in tweets_map:
             tweets_map[t_id] = tw
             yan_added += 1
@@ -259,12 +261,10 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
             if len(tw.get("text", "")) > len(tweets_map[t_id].get("text", "")):
                 tweets_map[t_id]["text"] = tw["text"]
 
-    # 3. 比對並融合本地即時抓取資料（即時抓取權重最高）
     for tw in live_stream_data:
         t_id = str(tw.get("id", "")).strip()
         if not t_id:
             continue
-
         if t_id not in tweets_map:
             tweets_map[t_id] = tw
             live_added += 1
@@ -282,13 +282,13 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
 
     merged_list = list(tweets_map.values())
 
-    # 4. 嚴格按 Snowflake UTC 時間由新到舊排序
+    # 嚴格按 Snowflake UTC 時間降序排序
     merged_list.sort(
         key=lambda x: str(x.get("created_at") or snowflake_to_iso(x.get("id")) or "1970-01-01T00:00:00Z"),
         reverse=True
     )
 
-    # 5. 針對最新前 40 則推文強制校準真實按讚、轉推與瀏覽量
+    # 校準前 40 則最新推文的互動數據
     merged_list = enrich_recent_metrics(merged_list, target_count=40)
 
     log(
@@ -301,7 +301,7 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
     return merged_list
 
 def save_tweets(filepath, tweets_list):
-    """安全儲存至 JSON 檔案"""
+    """儲存資料庫檔案"""
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(tweets_list, f, ensure_ascii=False, indent=2)
@@ -316,18 +316,10 @@ def save_tweets(filepath, tweets_list):
 if __name__ == "__main__":
     log(f"🚀 開始執行 @{TARGET_HANDLE} (Serenity) 多來源比對融合與即時同步流程...")
 
-    # 1. 讀取本地既有推文庫
     local_tweets = load_local_tweets(TWEETS_FILE)
-
-    # 2. 獲取 Yan Labs 遠端資料庫 (yan-labs/serenity-aleabitoreddit)
     yan_tweets = fetch_yan_labs_data()
-
-    # 3. 獲取 Twitter 官方即時最新推文
     user_id, live_tweets = fetch_syndication_stream(TARGET_HANDLE)
 
-    # 4. 執行多來源比對融合、去重、時間校準與真實互動數據同步
     final_merged = merge_and_compare_sources(local_tweets, yan_tweets, live_tweets)
-
-    # 5. 存入本地資料庫
     save_tweets(TWEETS_FILE, final_merged)
     log("✅ 任務全部完成。")
