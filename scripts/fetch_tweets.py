@@ -2,136 +2,130 @@ import json
 import os
 import re
 import time
+import urllib.parse
 import urllib.request
 from datetime import datetime
 
-# 目標推特帳號：Serenity (aleabitoreddit)
+# ==========================================
+# 參數設定區 (Serenity 專案)
+# ==========================================
 TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
+
+# Yan Labs 遠端資料庫來源網址（可自訂或使用預設開源端點）
+YAN_LABS_URL = os.environ.get(
+    "YAN_LABS_URL", 
+    "https://raw.githubusercontent.com/yan-labs/serenity-tracker/main/data/tweets.json"
+)
 
 AUTH_TOKEN = os.environ.get("TWITTER_AUTH_TOKEN", "").strip()
 CT0 = os.environ.get("TWITTER_CT0", "").strip()
 
+# Twitter 官方公開 Bearer Token 與 Snowflake 起始紀元 (2010-11-04 01:42:54.657 UTC)
+BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
+TWITTER_EPOCH = 1288834974657
+
 def log(message):
-    """即時輸出日誌至控制台"""
+    """即時強制輸出日誌至 GitHub Actions 控制台"""
     print(message, flush=True)
 
-def robust_parse_date(raw_date):
-    """強大相容性日期解析器：精準識別多種時間格式，解析失敗回傳 None"""
-    if not raw_date:
-        return None
-    
-    s = str(raw_date).strip()
-    if not s or s.lower() in ("none", "null", "1970-01-01t00:00:00z", "1970-01-01 00:00", "未知時間"):
-        return None
-
-    # 1. Twitter 官方格式: "Tue Aug 18 14:15:00 +0000 2026"
+def snowflake_to_iso(tweet_id_str):
+    """利用 Twitter Snowflake 演算法由推文 ID 反推精確 UTC 發布時間"""
     try:
-        dt = datetime.strptime(s, "%a %b %d %H:%M:%S %z %Y")
+        t_id = int(str(tweet_id_str).strip())
+        timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
+        dt = datetime.utcfromtimestamp(timestamp_ms / 1000.0)
         return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     except Exception:
-        pass
+        return None
 
-    # 2. 標準 ISO 格式: "2026-08-20T16:12:00Z" 或 "2026-08-20T16:12:00.000Z"
-    if re.match(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}', s):
-        return s[:19] + "Z"
-
-    # 3. 常見日期格式: "2026-08-18 14:15:00" 或 "2026-08-18 14:15" 或 "2026/08/18"
-    try:
-        clean = s.replace("/", "-")
-        if len(clean) >= 19:
-            dt = datetime.strptime(clean[:19], "%Y-%m-%d %H:%M:%S")
-            return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-        elif len(clean) == 16:
-            dt = datetime.strptime(clean, "%Y-%m-%d %H:%M")
-            return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-        elif len(clean) == 10:
-            dt = datetime.strptime(clean, "%Y-%m-%d")
-            return dt.strftime("%Y-%m-%dT00:00:00Z")
-    except Exception:
-        pass
-
-    # 4. RFC 2822 格式 (RSS): "Wed, 20 Aug 2026 16:12:00 GMT"
-    try:
-        clean_rfc = re.sub(r'^[A-Za-z]+,\s*', '', s)
-        dt = datetime.strptime(clean_rfc[:20].strip(), "%d %b %Y %H:%M:%S")
-        return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-    except Exception:
-        pass
-
-    # 5. Unix 時間戳 (數字)
-    if s.isdigit():
-        try:
-            ts = int(s)
-            dt = datetime.utcfromtimestamp(ts / 1000.0 if ts > 1e11 else ts)
-            return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-        except Exception:
-            pass
-
-    return None
-
-def recover_tweet_date(item):
-    """自我修復：從所有備援欄位中還原正確日期"""
-    # 依序檢索所有可能的日期欄位
-    candidates = [
-        item.get("created_at"),
-        item.get("date"),
-        item.get("datetime"),
-        item.get("timestamp"),
-        item.get("time"),
-        item.get("pubDate")
-    ]
-    legacy = item.get("legacy") if isinstance(item.get("legacy"), dict) else {}
-    candidates.append(legacy.get("created_at"))
-
-    for c in candidates:
-        parsed = robust_parse_date(c)
-        if parsed and not parsed.startswith("1970"):
-            return parsed
-
-    return "1970-01-01T00:00:00Z"
-
-def load_existing_tweets(filepath):
-    """讀取本地推文並自動修復先前被誤改為 1970 的舊推文日期"""
+def load_local_tweets(filepath):
+    """讀取本地既有推文資料庫"""
     if not os.path.exists(filepath):
-        log("ℹ️ 本地 tweets.json 尚不存在，將建立新資料庫。")
+        log("ℹ️ 本地 tweets.json 尚不存在，將建立新檔案。")
         return []
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
             if not isinstance(data, list):
                 return []
-            
-            repaired_count = 0
+
             cleaned = []
             for item in data:
                 if not isinstance(item, dict):
                     continue
                 t_id = str(item.get("id") or item.get("id_str") or "").strip()
-                if not t_id:
+                if not t_id.isdigit() or len(t_id) < 10:
                     continue
-                
-                original_date = item.get("created_at", "")
-                recovered_date = recover_tweet_date(item)
-                
-                if str(original_date).startswith("1970") and not recovered_date.startswith("1970"):
-                    repaired_count += 1
 
-                item["created_at"] = recovered_date
+                item["id"] = t_id
+                item["created_at"] = snowflake_to_iso(t_id) or item.get("created_at") or "1970-01-01T00:00:00Z"
                 cleaned.append(item)
 
-            if repaired_count > 0:
-                log(f"🛠️ [自我修復] 成功修復 {repaired_count} 則歷史推文的 1970 日期異常！")
             return cleaned
     except Exception as e:
-        log(f"⚠️ 讀取現有推文失敗: {e}")
+        log(f"⚠️ 讀取本地推文失敗: {e}")
         return []
 
-def fetch_tweets_syndication(screen_name):
-    """透過 Twitter 官方 Syndication 串流抓取真實推文與完整互動數據"""
+def fetch_yan_labs_data(url):
+    """【軌道 1】從 Yan Labs 遠端庫抓取推文資料庫"""
+    if not url:
+        return []
+
+    log(f"🌐 [軌道 1] 正在連線 Yan Labs 遠端資料來源: {url[:55]}...")
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            if resp.status == 200:
+                raw_data = json.loads(resp.read().decode("utf-8"))
+                
+                # 相容多種結構
+                raw_list = []
+                if isinstance(raw_data, list):
+                    raw_list = raw_data
+                elif isinstance(raw_data, dict):
+                    for k in ["tweets", "data", "statuses"]:
+                        if isinstance(raw_data.get(k), list):
+                            raw_list = raw_data[k]
+                            break
+                    if not raw_list:
+                        raw_list = list(raw_data.values())
+
+                cleaned = []
+                for item in raw_list:
+                    if not isinstance(item, dict):
+                        continue
+                    t_id = str(item.get("id") or item.get("id_str") or "").strip()
+                    text = item.get("text") or item.get("full_text") or item.get("content") or ""
+                    
+                    if t_id.isdigit() and len(t_id) >= 10 and text:
+                        cleaned.append({
+                            "id": t_id,
+                            "text": text.strip(),
+                            "created_at": snowflake_to_iso(t_id) or item.get("created_at") or "1970-01-01T00:00:00Z",
+                            "favorite_count": int(item.get("favorite_count", 0) or item.get("likes", 0) or 0),
+                            "retweet_count": int(item.get("retweet_count", 0) or item.get("retweets", 0) or 0),
+                            "views": int(item.get("views", 0) or 0),
+                            "url": item.get("url") or f"https://twitter.com/{TARGET_HANDLE}/status/{t_id}",
+                            "source": "yan_labs"
+                        })
+
+                log(f"  ✨ [軌道 1] 成功自 Yan Labs 同步 {len(cleaned)} 則推文資料！")
+                return cleaned
+    except Exception as e:
+        log(f"  ℹ️ Yan Labs 連線略過或異常 (此為正常備援機制): {e}")
+
+    return []
+
+def fetch_syndication_stream(screen_name):
+    """【軌道 2】Twitter 官方認證即時串流"""
     timestamp = int(time.time())
     url = f"https://syndication.twitter.com/srv/timeline-profile/screen-name/{screen_name}?t={timestamp}"
-    
+
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -145,11 +139,10 @@ def fetch_tweets_syndication(screen_name):
         headers["Cookie"] = f"auth_token={AUTH_TOKEN}; ct0={CT0};"
         headers["x-csrf-token"] = CT0
         log("🔑 官方認證憑證 (Cookies) 注入成功。")
-    else:
-        log("⚠️ 未偵測到完整 Cookies，將使用公開訪客模式連線。")
 
-    fetched_tweets = []
-    log(f"📡 正在連線 Twitter 官方串流端點抓取 @{screen_name} 最新發文...")
+    fetched = []
+    user_id = None
+    log(f"📡 [軌道 2] 正在連線 Twitter 官方串流抓取 @{screen_name} 本地最新即時發文...")
 
     try:
         req = urllib.request.Request(url, headers=headers)
@@ -157,99 +150,185 @@ def fetch_tweets_syndication(screen_name):
             html = response.read().decode("utf-8")
 
             match = re.search(r'<script id="__NEXT_DATA__" type="application/json">([^<]+)</script>', html)
-            if not match:
-                log("⚠️ 未能解析出 JSON 區塊。")
-                return []
+            if match:
+                data = json.loads(match.group(1))
+                entries = data.get("props", {}).get("pageProps", {}).get("timeline", {}).get("entries", [])
 
-            data = json.loads(match.group(1))
-            entries = data.get("props", {}).get("pageProps", {}).get("timeline", {}).get("entries", [])
+                for entry in entries:
+                    tw = entry.get("content", {}).get("tweet")
+                    if not tw:
+                        continue
 
-            for entry in entries:
-                tweet_raw = entry.get("content", {}).get("tweet")
-                if not tweet_raw:
-                    continue
+                    if not user_id and tw.get("user", {}).get("id_str"):
+                        user_id = str(tw["user"]["id_str"]).strip()
 
-                tweet_id = str(tweet_raw.get("id_str") or tweet_raw.get("id", "")).strip()
-                text = tweet_raw.get("full_text") or tweet_raw.get("text", "")
-                
-                # 解析官方發布時間
-                raw_time = tweet_raw.get("created_at", "")
-                created_at = robust_parse_date(raw_time) or datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+                    tweet_id = str(tw.get("id_str") or tw.get("id", "")).strip()
+                    text = tw.get("full_text") or tw.get("text", "")
+                    created_at = snowflake_to_iso(tweet_id) or datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
-                # 解析真實互動數據
-                fav_count = int(tweet_raw.get("favorite_count", 0) or 0)
-                rt_count = int(tweet_raw.get("retweet_count", 0) or 0)
-                views_data = tweet_raw.get("views", {})
-                views = int(views_data.get("count", 0)) if isinstance(views_data, dict) and str(views_data.get("count", "")).isdigit() else 0
+                    fav_count = int(tw.get("favorite_count", 0) or 0)
+                    rt_count = int(tw.get("retweet_count", 0) or 0)
+                    views_data = tw.get("views", {})
+                    views = int(views_data.get("count", 0)) if isinstance(views_data, dict) and str(views_data.get("count", "")).isdigit() else 0
 
-                if tweet_id and text:
-                    fetched_tweets.append({
-                        "id": tweet_id,
-                        "text": text.strip(),
-                        "created_at": created_at,
-                        "favorite_count": fav_count,
-                        "retweet_count": rt_count,
-                        "views": views,
-                        "url": f"https://twitter.com/{screen_name}/status/{tweet_id}"
-                    })
+                    if tweet_id and text:
+                        fetched.append({
+                            "id": tweet_id,
+                            "text": text.strip(),
+                            "created_at": created_at,
+                            "favorite_count": fav_count,
+                            "retweet_count": rt_count,
+                            "views": views,
+                            "url": f"https://twitter.com/{screen_name}/status/{tweet_id}",
+                            "source": "live_stream"
+                        })
 
-            log(f"✨ 順利從官方串流解析出 {len(fetched_tweets)} 則真實推文（含愛心/轉推數據）！")
-
+                log(f"  ✨ [軌道 2] 官方串流解析出 {len(fetched)} 則即時推文！")
     except Exception as e:
-        log(f"⚠️ 官方串流抓取異常: {e}")
+        log(f"  ⚠️ [軌道 2 異常]: {e}")
 
-    return fetched_tweets
+    return user_id, fetched
 
-def save_merged_tweets(filepath, new_tweets):
-    """將新推文與現有資料庫合併去重，並由新到舊嚴格排序"""
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    existing_tweets = load_existing_tweets(filepath)
+def enrich_recent_metrics(tweets_list, target_count=40):
+    """【軌道 3】即時互動數據強制同步（更新最新 40 則推文的愛心、轉推與瀏覽量）"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+    updated = 0
+    check_limit = min(len(tweets_list), target_count)
+    log(f"🔄 [數據校準] 正在為最新 {check_limit} 則推文連線同步真實互動指標 (❤️ Likes / 🔁 RT / 👁️ Views)...")
 
-    tweets_map = {str(t.get("id", "")).strip(): t for t in existing_tweets if t.get("id")}
+    for tw in tweets_list[:check_limit]:
+        t_id = str(tw.get("id", "")).strip()
+        if not t_id.isdigit() or len(t_id) < 10:
+            continue
 
-    added_count = 0
-    updated_count = 0
+        api_url = f"https://api.fxtwitter.com/status/{t_id}"
+        try:
+            req = urllib.request.Request(api_url, headers=headers)
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                if resp.status == 200:
+                    data = json.loads(resp.read().decode("utf-8"))
+                    t_data = data.get("tweet", {})
+                    if t_data:
+                        likes = int(t_data.get("likes", 0) or t_data.get("favorite_count", 0) or 0)
+                        retweets = int(t_data.get("retweets", 0) or t_data.get("retweet_count", 0) or 0)
+                        views = int(t_data.get("views", 0) or 0)
 
-    for t in new_tweets:
-        t_id = str(t.get("id", "")).strip()
+                        # 強制覆蓋為最新真實指標
+                        tw["favorite_count"] = likes
+                        tw["retweet_count"] = retweets
+                        tw["views"] = views
+
+                        # 補齊完整未被截斷的正文
+                        if t_data.get("text") and len(t_data["text"]) > len(tw.get("text", "")):
+                            tw["text"] = t_data["text"]
+
+                        updated += 1
+            time.sleep(0.1)
+        except Exception:
+            continue
+
+    log(f"✨ 成功校準 {updated} 則推文的真實互動指標！")
+    return tweets_list
+
+def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
+    """【融合比對核心】比對本地、Yan Labs 與即時抓取資料，智慧去重與欄位優化"""
+    tweets_map = {}
+
+    # 1. 載入本地既有資料
+    for tw in local_data:
+        t_id = str(tw.get("id", "")).strip()
+        if t_id:
+            tweets_map[t_id] = tw
+
+    local_count = len(tweets_map)
+    yan_added = 0
+    live_added = 0
+
+    # 2. 比對並融合 Yan Labs 資料
+    for tw in yan_labs_data:
+        t_id = str(tw.get("id", "")).strip()
         if not t_id:
             continue
 
         if t_id not in tweets_map:
-            tweets_map[t_id] = t
-            added_count += 1
-            log(f"  ➕ 新增真實推文 [{t_id}] ({t['created_at']}): {t['text'][:35]}...")
+            tweets_map[t_id] = tw
+            yan_added += 1
         else:
-            # 若既有推文數據不完整，或新抓取有更新的愛心數，則進行更新
-            old_item = tweets_map[t_id]
-            if t.get("favorite_count", 0) > 0 or t.get("views", 0) > 0 or str(old_item.get("created_at", "")).startswith("1970"):
-                tweets_map[t_id].update(t)
-                updated_count += 1
+            # 若 Yan Labs 內文較長則補齊
+            if len(tw.get("text", "")) > len(tweets_map[t_id].get("text", "")):
+                tweets_map[t_id]["text"] = tw["text"]
+
+    # 3. 比對並融合本地即時抓取資料（即時抓取的數據權重最高）
+    for tw in live_stream_data:
+        t_id = str(tw.get("id", "")).strip()
+        if not t_id:
+            continue
+
+        if t_id not in tweets_map:
+            tweets_map[t_id] = tw
+            live_added += 1
+            log(f"  ➕ [即時捕獲新貼文] [{t_id}] ({tw['created_at']}): {tw['text'][:35]}...")
+        else:
+            old = tweets_map[t_id]
+            if tw.get("favorite_count", 0) >= old.get("favorite_count", 0):
+                tweets_map[t_id]["favorite_count"] = tw["favorite_count"]
+            if tw.get("retweet_count", 0) >= old.get("retweet_count", 0):
+                tweets_map[t_id]["retweet_count"] = tw["retweet_count"]
+            if tw.get("views", 0) >= old.get("views", 0):
+                tweets_map[t_id]["views"] = tw["views"]
+            if len(tw.get("text", "")) > len(old.get("text", "")):
+                tweets_map[t_id]["text"] = tw["text"]
 
     merged_list = list(tweets_map.values())
 
-    # 嚴格按 ISO 8601 時間由新到舊排序（1970 沉底）
+    # 4. 嚴格按 Snowflake UTC 時間由新到舊排序
     merged_list.sort(
-        key=lambda x: str(x.get("created_at") or recover_tweet_date(x)), 
+        key=lambda x: str(x.get("created_at") or snowflake_to_iso(x.get("id")) or "1970-01-01T00:00:00Z"),
         reverse=True
     )
 
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(merged_list, f, ensure_ascii=False, indent=2)
+    # 5. 針對最新前 40 則推文強制校準真實按讚、轉推與瀏覽量
+    merged_list = enrich_recent_metrics(merged_list, target_count=40)
 
     log(
-        f"📊 [結算報告] 本次官方抓取: {len(new_tweets)} 則 | "
-        f"全新新增: {added_count} 則 | "
-        f"既有資料修復/更新: {updated_count} 則 | "
-        f"目前推文資料庫總數: {len(merged_list)} 則"
+        f"📊 [比對結算] 本地既有: {local_count} 則 | "
+        f"Yan Labs 增補: {yan_added} 則 | "
+        f"即時捕獲新增: {live_added} 則 | "
+        f"融合後資料庫總數: {len(merged_list)} 則"
     )
 
-    if merged_list:
-        latest = merged_list[0]
-        log(f"🔝 資料庫最新第一筆推文日期: {latest.get('created_at')} (ID: {latest.get('id')})")
+    return merged_list
+
+def save_tweets(filepath, tweets_list):
+    """安全儲存至 JSON 檔案"""
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(tweets_list, f, ensure_ascii=False, indent=2)
+
+    file_size_kb = os.path.getsize(filepath) / 1024.0
+    log(f"💾 資料庫已成功寫入 {filepath} (檔案大小: {file_size_kb:.1f} KB)")
+
+    if tweets_list:
+        latest = tweets_list[0]
+        log(f"🔝 最新第 1 筆推文: {latest.get('created_at')} (ID: {latest.get('id')}) | ❤️ {latest.get('favorite_count', 0)}  🔁 {latest.get('retweet_count', 0)}  👁️ {latest.get('views', 0)}")
 
 if __name__ == "__main__":
-    log(f"🚀 開始執行 @{TARGET_HANDLE} 官方認證推文擷取任務...")
-    tweets = fetch_tweets_syndication(TARGET_HANDLE)
-    save_merged_tweets(TWEETS_FILE, tweets)
+    log(f"🚀 開始執行 @{TARGET_HANDLE} (Serenity) 多來源比對融合與即時同步流程...")
+
+    # 1. 讀取本地既有推文庫
+    local_tweets = load_local_tweets(TWEETS_FILE)
+
+    # 2. 獲取 Yan Labs 遠端資料庫
+    yan_tweets = fetch_yan_labs_data(YAN_LABS_URL)
+
+    # 3. 獲取 Twitter 官方即時最新推文
+    user_id, live_tweets = fetch_syndication_stream(TARGET_HANDLE)
+
+    # 4. 執行多來源比對融合、去重、時間校準與真實互動數據同步
+    final_merged = merge_and_compare_sources(local_tweets, yan_tweets, live_tweets)
+
+    # 5. 存入本地資料庫
+    save_tweets(TWEETS_FILE, final_merged)
     log("✅ 任務全部完成。")
