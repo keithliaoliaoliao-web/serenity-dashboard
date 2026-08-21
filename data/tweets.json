@@ -1,11 +1,21 @@
 [
   {
+    "id": "2090816483861696517",
+    "text": "Uhh Citadel?\n\n> Say emergency rate hike. More crashes/liquidations follow\n\n> No rate hike\n\n> Reaches out to buy liquidated hedge fund portfolios\n\n> buys billions of Situational Awareness holdings.\n\n> Says AI bull case is intact\n\n>markets rally\n\n> Sells AI stocks into the buying pressure\n\nI’m just stating the timeline here…",
+    "created_at": "2026-08-21T15:01:09Z",
+    "favorite_count": 1460,
+    "retweet_count": 68,
+    "views": 174359,
+    "url": "https://twitter.com/aleabitoreddit/status/2090816483861696517",
+    "source": "live_stream"
+  },
+  {
     "id": "2090735668532224224",
     "text": "Since people are having fun speculating on $SKHY CPO roadmap supply chains.\n\nI'm gonna do my own guess and say SK Hynix is evaluating Celestial/Ayar. Then doing heavy evaluation into microLEDs past first-gen deployments. \n\nBoth have been kinda working on it for awhile. \n\n- Ayar shown up in SK hynix's own website in the context of optical <-> memory links. \n- Marvell is actively working with SK Hynix in custom memory solutions (and guess who owns Celestial now). \n\nCelestial/Ayar are both also cited in SK Hynix's linked Nature Paper, which helps a bit with technical relevance: \n\n(121): Stojanovic, V. A UCIe optical I/O retimer chiplet for AI scale-up. In 2025 IEEE Hot Chips 37 Symposium (HCS) 1–22 (IEEE, 2025) \n\n- This is Ayar reference (Ayar’s teraphy optical I/O chiplet), Stojanovic is Ayar Lab's co-founder btw. \n\n(123): Winterbottom, P. Photonic interconnect for accelerated computing celestial AI photonic fabric module (cough cough Celestial)\n\nThere's more breadcrumbs out there, but wanted to keep this relatively short-form. \n\nFor more upstream beneficaries: \n\n-> I still think $SIVE is the cleanest read through since they're likely supplying to both Celestial/Ayar. \n\nThe interposer/packaging IP layer... People were speculating $POET, but Marvell probably vertically integrated players them out this year after the announcement. \n\nGiven they've had their own SiPH interposer tech/integration IP before Celestials acquisition (eg. presented a silicon-photonics interposer back in 2023)\n\n-> AMS Osram (which I don't own), seems like they're co-developing in this area given they randomly went out of their way this year to say HBM <-> optics was a TAM increase for them. \n\nTLDR: I see Ayar/Celestial as candidates for SK Hynix's CPO roadmap, then microLEDs being commercialized past gen-1 maybe 2029. (this is all speculation)\n\nJust to throw a bone to quantum dot bros, this got cited like 5 times.",
     "created_at": "2026-08-21T09:40:02Z",
-    "favorite_count": 499,
-    "retweet_count": 39,
-    "views": 150503,
+    "favorite_count": 589,
+    "retweet_count": 45,
+    "views": 191977,
     "url": "https://twitter.com/aleabitoreddit/status/2090735668532224224",
     "source": "live_stream"
   },
@@ -13,9 +23,9 @@
     "id": "2090714894874050824",
     "text": "There’s a lot of viral fabricated screenshots of me going around recently. \n\nSome are annoying jokes for engagement, like text-edited posts from me citing bible verses.\n\nBut some like “Innolight secures Nvidia NPO orders” or off platform promotional content are maliciously fabricated.\n\nUnfortunately I don’t have the power to prevent false images from circulating.\n\nSo please make sure to double check primary sources.",
     "created_at": "2026-08-21T08:17:29Z",
-    "favorite_count": 431,
-    "retweet_count": 13,
-    "views": 232993,
+    "favorite_count": 518,
+    "retweet_count": 14,
+    "views": 299805,
     "url": "https://twitter.com/aleabitoreddit/status/2090714894874050824",
     "source": "live_stream"
   },
@@ -23,27 +33,27 @@
     "id": "2090510568474231045",
     "text": "After seeing how the robotics and space sectors reacted to Unitree and $SPCX IPOs\n\nI’m not quite sure I want Anthropic to go public… https://t.co/hY6tM1r4Qb",
     "created_at": "2026-08-20T18:45:33Z",
-    "favorite_count": 926,
+    "favorite_count": 958,
     "retweet_count": 19,
-    "views": 223486,
+    "views": 235599,
     "url": "https://twitter.com/aleabitoreddit/status/2090510568474231045"
   },
   {
     "id": "2090490101260591481",
     "text": "Very positive. My opinion is that the optical sector underperformance recently from $AAOI to $SIVE has been absurd.\n\nThe demand visibility... is just way too stupidly high.\n\nAOI: “Even combined AOI, Coherent program altogether, is still very tough to meet the customer demand in the next 3 years” (2029)\n\nElazr GM: \"entire optical supply chain was facing major shortages.\" \"The shortage will continue to the next few years\"\n\nSivers CEO said the same thing about InP laser demand imbalances expected for the next 3-5 years.\n\nCan go on and on about $LITE, $MTSI and other comments.\n\nWe haven't even hit the inflection point with 1.6T, NPO, CPO scale out/up, and optics with memory (as seen with SK Hynix).\n\nYet the industry is already bottlenecked by EML/CW and all your other upstream components from PDs/TIA/DSPs, transceivers, and soon FAU + others when CPO scales… \n\nI'm personally extremely comfortable watching this all play out, but just a little confused that markets don't know how to math a year or two ahead.",
     "created_at": "2026-08-20T17:24:14Z",
-    "favorite_count": 1561,
-    "retweet_count": 110,
-    "views": 388020,
+    "favorite_count": 1615,
+    "retweet_count": 112,
+    "views": 411370,
     "url": "https://twitter.com/aleabitoreddit/status/2090490101260591481"
   },
   {
     "id": "2090380103268315584",
     "text": "@KhalidIshaq85 @EnamelEquity My domain knowledge isn’t really about biotech, so can’t really comment there. \n\nIt’s hard for me to build conviction around themes or company’s I don’t fully understand.\n\nAnd that really shows if there’s ever a correction or drop.",
     "created_at": "2026-08-20T10:07:08Z",
-    "favorite_count": 85,
+    "favorite_count": 87,
     "retweet_count": 0,
-    "views": 17089,
+    "views": 17609,
     "url": "https://twitter.com/aleabitoreddit/status/2090380103268315584",
     "source": "yan_labs"
   },
@@ -51,9 +61,9 @@
     "id": "2090377797441323097",
     "text": "@EnamelEquity Nope, all my thematic baskets were picked earlier this year with memory like $EWY and CPO like $SIVE. \n\nOnly recent was kinda humanoids with $CCXI, but that's one-off. \n\nI'm just waiting for everything to play out, not a fan of jumping ship to ship.",
     "created_at": "2026-08-20T09:57:58Z",
-    "favorite_count": 233,
+    "favorite_count": 235,
     "retweet_count": 10,
-    "views": 41019,
+    "views": 42162,
     "url": "https://twitter.com/aleabitoreddit/status/2090377797441323097",
     "source": "yan_labs"
   },
@@ -61,18 +71,18 @@
     "id": "2090374603264929981",
     "text": "I'm glad the leverage bros moved from AI stocks back to Hyerliquid and biotech like $MRNA, so maybe we'll see a faster recovery. \n\nAside from that just some TLDR stuff:\n\n- $EWY up, primarily from SK Hynix buybacks (they're just too profitable), and Samsung Foundry roughly ~10-15% price hikes. \n\n- $SKHY unveils CPO roadmap?? Apparently they're doing something with photonic interposer that links to memory, so I gotta look a bit deeper into this\n\nProbably going to be more TAM expansion, more supply chain beneficiaries (eg. lasers, PICs, packaging) off this.\n\n- $YMTC pursuing IPO next quarter following CMXT's successful IPO. \n\nThe Chinese IPO market is just going brrr from Unitree to memory makers. \n\nUS needs to do something similar rather than IPOing companies at trillion dollar valuations already. \n\n- Tyntek limit up there's now order visibility through 2028, given photodiode demand imbalance for photonics. \n\nElazr GM did say the entire optical supply chain was facing major shortages... I'll probably look more at high-end PD bottlenecks next.\n\n- MS forecasts a 50% Q/Q price increase for DDR4 for Q3, and 10%+ increase for Q4 2026. (Nanya/2408, Windbond/2344, should be happy). \n\n- China reportedly delays clearance from germanium, quartz-based materials, and neodymium magnets To taiwan. \n\nSo I'll probably have some fun looking into supply chains disruptions there over cup noodles.\n\n- High-end PCB drill shortage (still ongoing), Kawei (5498) said AI DCs, servers and optical communications are driving demand for PCBs, HDI and package substrates, while tungsten prices are rising. \n\nThough the world's five largest drill manufacturers are aggressively expanding capacity, supply remains far below overall market demand\n\nJust stuff I found interesting recently, obviously $MRNA stuff is too.",
     "created_at": "2026-08-20T09:45:17Z",
-    "favorite_count": 1086,
-    "retweet_count": 42,
-    "views": 317775,
+    "favorite_count": 1094,
+    "retweet_count": 43,
+    "views": 324520,
     "url": "https://twitter.com/aleabitoreddit/status/2090374603264929981"
   },
   {
     "id": "2090120128805691484",
     "text": "@200pipss Is there something wrong with $GOOGL and $MRVL?",
     "created_at": "2026-08-19T16:54:05Z",
-    "favorite_count": 50,
+    "favorite_count": 51,
     "retweet_count": 0,
-    "views": 26759,
+    "views": 27549,
     "url": "https://twitter.com/aleabitoreddit/status/2090120128805691484",
     "source": "yan_labs"
   },
@@ -80,9 +90,9 @@
     "id": "2090103899302826302",
     "text": "$MRVL gives $GOOGL options to buy $12.2B of the company. \n\n\"The Marvell-Google deal covers a broad range of technologies used ​with TPUs, including processors that run AI models, manage data storage ​and  move information ⁠across networks.\"\n\nWhich could translate into ~$120 billion ​in revenue through 2033. \n\nMarvell also has separate warrants with $AMZN after their Celestial acquisition (for purchases of photonic fabric).\n\nRemember the good times when Jensen said Marvell would be the next $1T+ company?  \n\nSeems Nvidia knew Marvell was \"networking\" its way into all the hyperscalers with warrants.",
     "created_at": "2026-08-19T15:49:36Z",
-    "favorite_count": 1185,
-    "retweet_count": 93,
-    "views": 310319,
+    "favorite_count": 1189,
+    "retweet_count": 94,
+    "views": 314638,
     "url": "https://twitter.com/aleabitoreddit/status/2090103899302826302"
   },
   {
@@ -91,7 +101,7 @@
     "created_at": "2026-08-19T07:32:08Z",
     "favorite_count": 492,
     "retweet_count": 57,
-    "views": 92225,
+    "views": 92815,
     "url": "https://twitter.com/aleabitoreddit/status/2089978707830280655",
     "source": "yan_labs"
   },
@@ -99,18 +109,18 @@
     "id": "2089973586425766134",
     "text": "We got $LITE, $MTSI, $AAOI all pointing to extreme demand imbalances with lasers/TIA/DSP/etc from earnings... \n\nAnd now Elazr GM at their investor conference stated: \n\nOptical supply is still far behind the market demand, the expected AI optical supply chain are likely to continue for years.\n\n- \"the entire supply chain is out of stock\"\n\n- \"the supply is still far behind the market demand\"\n\n- \"the shortage will continue to the next few years\"\n\n\"Whether it is PCB, carrier board, laser chip, or even related packaging  capacity, as long as the AI supply chain link, almost all are in short supply.\" \n\nWhen demand visibility extends for years with the supply chain bottlenecked:\n\nIt's getting difficult not to see photonics echoing the memory supercycle entering 2027.",
     "created_at": "2026-08-19T07:11:47Z",
-    "favorite_count": 1324,
+    "favorite_count": 1323,
     "retweet_count": 93,
-    "views": 249437,
+    "views": 251312,
     "url": "https://twitter.com/aleabitoreddit/status/2089973586425766134"
   },
   {
     "id": "2089908198694351064",
     "text": "Unitree (688836) is now public.\n\nAnd is valued at ~$53.3B, after rising +492.18%\n\nWe finally have a major public company benchmark for humanoids.\n\nFor reference, Agility (backed by $NVDA, $AMZN) via $CCXI is expected to go public at $2.5B premoney valuation Q4. \n\n$TSLA is $1T+, but Optimus is wrapped inside a much larger company.\n\nBut I think Unitree showed that the demand for pure play humanoid players is much larger… than people expected in public markets.",
     "created_at": "2026-08-19T02:51:57Z",
-    "favorite_count": 1812,
+    "favorite_count": 1813,
     "retweet_count": 119,
-    "views": 553493,
+    "views": 555708,
     "url": "https://twitter.com/aleabitoreddit/status/2089908198694351064"
   },
   {
@@ -119,7 +129,7 @@
     "created_at": "2026-08-18T17:27:07Z",
     "favorite_count": 1537,
     "retweet_count": 104,
-    "views": 373023,
+    "views": 374316,
     "url": "https://twitter.com/aleabitoreddit/status/2089766053274661143"
   },
   {
@@ -155,9 +165,9 @@
     "createdAtISO": "2026-08-18T16:47:03+00:00",
     "createdAtLocal": "2026-08-19 00:47",
     "created_at": "2026-08-18T16:47:03Z",
-    "favorite_count": 47,
+    "favorite_count": 48,
     "retweet_count": 0,
-    "views": 18860
+    "views": 19080
   },
   {
     "id": "2089753753625018830",
@@ -192,9 +202,9 @@
     "createdAtISO": "2026-08-18T16:38:15+00:00",
     "createdAtLocal": "2026-08-19 00:38",
     "created_at": "2026-08-18T16:38:15Z",
-    "favorite_count": 65,
+    "favorite_count": 66,
     "retweet_count": 0,
-    "views": 19363
+    "views": 19487
   },
   {
     "id": "2089749225768915037",
@@ -229,9 +239,9 @@
     "createdAtISO": "2026-08-18T16:20:15+00:00",
     "createdAtLocal": "2026-08-19 00:20",
     "created_at": "2026-08-18T16:20:15Z",
-    "favorite_count": 73,
+    "favorite_count": 74,
     "retweet_count": 1,
-    "views": 23326
+    "views": 23542
   },
   {
     "id": "2089748568852799580",
@@ -266,9 +276,9 @@
     "createdAtISO": "2026-08-18T16:17:39+00:00",
     "createdAtLocal": "2026-08-19 00:17",
     "created_at": "2026-08-18T16:17:39Z",
-    "favorite_count": 93,
+    "favorite_count": 94,
     "retweet_count": 3,
-    "views": 22495
+    "views": 22620
   },
   {
     "id": "2089746797300432912",
@@ -276,7 +286,7 @@
     "created_at": "2026-08-18T16:10:36Z",
     "favorite_count": 986,
     "retweet_count": 42,
-    "views": 258134,
+    "views": 259244,
     "url": "https://twitter.com/aleabitoreddit/status/2089746797300432912"
   },
   {
@@ -312,9 +322,9 @@
     "createdAtISO": "2026-08-18T14:15:30+00:00",
     "createdAtLocal": "2026-08-18 22:15",
     "created_at": "2026-08-18T14:15:30Z",
-    "favorite_count": 240,
+    "favorite_count": 241,
     "retweet_count": 6,
-    "views": 32355
+    "views": 32653
   },
   {
     "id": "2089714869876764762",
@@ -349,17 +359,17 @@
     "createdAtISO": "2026-08-18T14:03:44+00:00",
     "createdAtLocal": "2026-08-18 22:03",
     "created_at": "2026-08-18T14:03:44Z",
-    "favorite_count": 169,
+    "favorite_count": 170,
     "retweet_count": 3,
-    "views": 32626
+    "views": 32748
   },
   {
     "id": "2089690098875130084",
     "text": "Looks like we're getting the Strait of America, a new US territory... https://t.co/HCQ139Ys4V",
     "created_at": "2026-08-18T12:25:18Z",
-    "favorite_count": 974,
+    "favorite_count": 975,
     "retweet_count": 35,
-    "views": 285842,
+    "views": 286969,
     "url": "https://twitter.com/aleabitoreddit/status/2089690098875130084"
   },
   {
@@ -395,9 +405,9 @@
     "createdAtISO": "2026-08-18T07:04:18+00:00",
     "createdAtLocal": "2026-08-18 15:04",
     "created_at": "2026-08-18T07:04:18Z",
-    "favorite_count": 61,
+    "favorite_count": 62,
     "retweet_count": 1,
-    "views": 17798
+    "views": 17889
   },
   {
     "id": "2089551553992761810",
@@ -432,26 +442,26 @@
     "createdAtISO": "2026-08-18T03:14:47+00:00",
     "createdAtLocal": "2026-08-18 11:14",
     "created_at": "2026-08-18T03:14:47Z",
-    "favorite_count": 140,
+    "favorite_count": 141,
     "retweet_count": 3,
-    "views": 24344
+    "views": 24454
   },
   {
     "id": "2089547564249219163",
     "text": "So just tracking the MLCC cycle:\n\nComponentNews classified server MLCCs as “severe” shortage stage, with ETNews reporting:\n\n- Samsung has reached ~40 week lead times for some high capacitance MLCCs per DigiKey’s shipment data.\n\nEarlier this year, broader reports were ~20 weeks, so the AI server MLCC bottleneck keeps growing.\n\n- Murata was ~24 weeks in June. \n\nJuly was ~30 weeks. And now some at ~36 weeks. \n\nThis was interesting: \n\n“The expansion of new production capacity is being postponed from Q4 2026 to 2027”\n\nDoesn’t say which expansion… maybe Murata? But if capacity expansion reportedly gets stalled, the bottleneck should tighten short term.\n\nLead times are a good way to track demand imbalances.",
     "created_at": "2026-08-18T02:58:55Z",
-    "favorite_count": 763,
+    "favorite_count": 764,
     "retweet_count": 57,
-    "views": 296683,
+    "views": 297612,
     "url": "https://twitter.com/aleabitoreddit/status/2089547564249219163"
   },
   {
     "id": "2089422562019393654",
     "text": "I've decided to name my next two pets Applied Optoelectronics and Sivers Semiconductors",
     "created_at": "2026-08-17T18:42:13Z",
-    "favorite_count": 3925,
+    "favorite_count": 3926,
     "retweet_count": 111,
-    "views": 488782,
+    "views": 489865,
     "url": "https://twitter.com/aleabitoreddit/status/2089422562019393654"
   },
   {
@@ -487,9 +497,9 @@
     "createdAtISO": "2026-08-17T16:07:12+00:00",
     "createdAtLocal": "2026-08-18 00:07",
     "created_at": "2026-08-17T16:07:12Z",
-    "favorite_count": 117,
+    "favorite_count": 118,
     "retweet_count": 1,
-    "views": 25213
+    "views": 25323
   },
   {
     "id": "2089373679625142542",
@@ -524,9 +534,9 @@
     "createdAtISO": "2026-08-17T15:27:58+00:00",
     "createdAtLocal": "2026-08-17 23:27",
     "created_at": "2026-08-17T15:27:58Z",
-    "favorite_count": 103,
+    "favorite_count": 104,
     "retweet_count": 4,
-    "views": 22998
+    "views": 23102
   },
   {
     "id": "2089372686858465731",
@@ -561,9 +571,9 @@
     "createdAtISO": "2026-08-17T15:24:01+00:00",
     "createdAtLocal": "2026-08-17 23:24",
     "created_at": "2026-08-17T15:24:01Z",
-    "favorite_count": 81,
+    "favorite_count": 82,
     "retweet_count": 0,
-    "views": 21431
+    "views": 21490
   },
   {
     "id": "2089369432837722525",
@@ -600,15 +610,15 @@
     "created_at": "2026-08-17T15:11:06Z",
     "favorite_count": 86,
     "retweet_count": 1,
-    "views": 21094
+    "views": 21178
   },
   {
     "id": "2089355682286092748",
     "text": "It's official, Unitree the 8000x+ retail oversubscribed humanoid company in China.\n\nIs expected to go public in 2 days! So the 19th. \n\nOpening is implied to be around ~$41.66B MC per derivatives, around +363.3% above its ~$9B IPO valuation. \n\nFun times for humanoids this week. https://t.co/yav4oRs2bO",
     "created_at": "2026-08-17T14:16:27Z",
-    "favorite_count": 1413,
+    "favorite_count": 1414,
     "retweet_count": 83,
-    "views": 389701,
+    "views": 390482,
     "url": "https://twitter.com/aleabitoreddit/status/2089355682286092748"
   },
   {
@@ -644,17 +654,17 @@
     "createdAtISO": "2026-08-17T10:01:25+00:00",
     "createdAtLocal": "2026-08-17 18:01",
     "created_at": "2026-08-17T10:01:25Z",
-    "favorite_count": 95,
+    "favorite_count": 96,
     "retweet_count": 0,
-    "views": 24727
+    "views": 24819
   },
   {
     "id": "2089264987328151637",
     "text": "Just some more demand imbalance visibility for $SNDK, $SKHY, $MU, Kioxia, and your NAND players. \n\nPhison CEO: \"2027 capacity constraints will be even more severe than in 2026.\"\n\n\"Upstream suppliers need up to 4 years from plant construction and equipment investment to actual production.\n\nWith demand growing explosively and supply expansion limited, the NAND shortage is likely to last for years.\"\n\nDon't quite think I agree with the people claiming it's all over for memory, esp. NAND bottlenecks in 2026...",
     "created_at": "2026-08-17T08:16:04Z",
-    "favorite_count": 1674,
+    "favorite_count": 1675,
     "retweet_count": 113,
-    "views": 373979,
+    "views": 374739,
     "url": "https://twitter.com/aleabitoreddit/status/2089264987328151637"
   },
   {
@@ -690,9 +700,9 @@
     "createdAtISO": "2026-08-17T04:02:03+00:00",
     "createdAtLocal": "2026-08-17 12:02",
     "created_at": "2026-08-17T04:02:03Z",
-    "favorite_count": 79,
+    "favorite_count": 80,
     "retweet_count": 1,
-    "views": 21278
+    "views": 21336
   },
   {
     "id": "2089189149563838878",
@@ -727,9 +737,9 @@
     "createdAtISO": "2026-08-17T03:14:43+00:00",
     "createdAtLocal": "2026-08-17 11:14",
     "created_at": "2026-08-17T03:14:43Z",
-    "favorite_count": 79,
+    "favorite_count": 80,
     "retweet_count": 5,
-    "views": 26284
+    "views": 26380
   },
   {
     "id": "2089188332987097213",
@@ -764,17 +774,17 @@
     "createdAtISO": "2026-08-17T03:11:28+00:00",
     "createdAtLocal": "2026-08-17 11:11",
     "created_at": "2026-08-17T03:11:28Z",
-    "favorite_count": 67,
+    "favorite_count": 68,
     "retweet_count": 2,
-    "views": 27760
+    "views": 27830
   },
   {
     "id": "2089183484556480536",
     "text": "I think we're seeing AI server MLCC demand cause an interesting effect... with tightening capacity for consumer/general-purpose MLCCs.\n\nIf you get Vietnam flashbacks like I do to $MU / Samsung / SK Hynix -> Legacy DRAM: \n\nMy thesis is we'll see the same thing here maybe late H2, early 2027 with consumer/broad MLCCs. \n\nFrom July 6th: \n\n\"the crowding-out effect from AI-oriented high-end MLCC production has begun spilling over into both the automotive and consumer markets.\" \n\nJuly 28th: \n\n\"AI Demand Pushes Japanese and Korean MLCC Suppliers to Record Monthly Shipments; Consumer-Grade Order Spillovers Continue to Surge\"\n\nAug 12: \n\nAs [MLCC] capacity shifts from consumer grades to AI-oriented products... (Trendforce)\n\nAug 12: \n\nChina's electronics market channel checks found 22µF and 47µF MLCCs (used more broadly) out of stock. Then found and said certain manufacturers had stopped taking orders. \n\n(for reference: Walsin said high-volume smartphone/PC products such as... 22µF, so it's broader MLCCs)\n\nObviously Samsung Electro-Mechanics/Murata are main beneficiaries of AI server MLCC ramp. \n\nBut companies with large market share of overall MLCCs like Taiyo Yuden (6976, disclosure: I have positions) with less AI server share, would be a major beneficiary of this. \n\nFun part is, we're only in H2 2026, so the next major bottleneck should be fun!",
     "created_at": "2026-08-17T02:52:12Z",
-    "favorite_count": 1085,
+    "favorite_count": 1086,
     "retweet_count": 55,
-    "views": 413575,
+    "views": 414272,
     "url": "https://twitter.com/aleabitoreddit/status/2089183484556480536"
   },
   {
@@ -810,17 +820,17 @@
     "createdAtISO": "2026-08-17T01:57:29+00:00",
     "createdAtLocal": "2026-08-17 09:57",
     "created_at": "2026-08-17T01:57:29Z",
-    "favorite_count": 154,
+    "favorite_count": 155,
     "retweet_count": 1,
-    "views": 27600
+    "views": 27695
   },
   {
     "id": "2089165155741622679",
     "text": "\"Severe InP Shortage Triggers Largest Price Hike Ever\" - $AXTI. \n\nSuppliers have bluntly stated that \"even if you have the money, you still may not be able to get the material\" (lol). \n\n- Industry sources revealed that InP substrate prices began rising in Q4 last year and was the fourth consecutive substrate price hike. \n\n- The latest Q4 hike is expected to be >10%,\n\n- Meanwhile, prices for epitaxial wafers made from those substrates have already been raised two times, and the market is moving toward a 3rd consecutive increase in Q4. (I also wrote a thesis on $IQE, which benefits here too). \n\nArticle states VPEC, Landmark, IET benefits (Taiwan centric reporting). \n\nI did predict this last year... The bottleneck is real, but I do have higher expectations for price hikes that comes next. \n\nGlad it's starting to play out.",
     "created_at": "2026-08-17T01:39:22Z",
-    "favorite_count": 1500,
+    "favorite_count": 1501,
     "retweet_count": 119,
-    "views": 353853,
+    "views": 354778,
     "url": "https://twitter.com/aleabitoreddit/status/2089165155741622679"
   },
   {
@@ -858,7 +868,7 @@
     "created_at": "2026-08-17T00:45:31Z",
     "favorite_count": 138,
     "retweet_count": 3,
-    "views": 23967
+    "views": 24002
   },
   {
     "id": "2089148883838611460",
