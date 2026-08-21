@@ -12,7 +12,7 @@ OUTPUT_HTML = "docs/index.html"
 TWITTER_EPOCH = 1288834974657
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法計算 UTC 時間"""
+    """利用 Twitter Snowflake 演算法計算精確發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -61,11 +61,16 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
+    """從推文內文中精確萃取美股代號（支援 1~6 字元）並過濾常用非股票詞彙"""
     if not text:
         return []
-    matches = re.findall(r"(?<!\w)\$([A-Z]{1,5})\b", text.upper())
-    blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP", "DD", "EOD", "YOLO", "NEW", "BUY", "SELL"}
-    return sorted(list(set(t for t in matches if t not in blacklist)))
+    matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
+    blacklist = {
+        "USD", "USDT", "BTC", "ETH", "CAD", "EUR", "ATH", "CEO", "CFO", "CTO",
+        "AI", "FOMC", "FED", "CPI", "PPI", "GDP", "DD", "EOD", "YOLO", "NEW",
+        "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV"
+    }
+    return sorted(list(set(t.upper() for t in matches if t.upper() not in blacklist and t.isalpha())))
 
 def extract_tweet_id(item):
     for k in ["id", "id_str", "tweet_id", "tweetId", "rest_id", "conversation_id"]:
@@ -88,7 +93,7 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
-    """精確解析日期時間"""
+    """精確解析推文日期"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -120,7 +125,7 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s
 
 def extract_metrics(item):
-    """解析互動指標"""
+    """解析互動指標（點讚、轉推、瀏覽量）"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -170,8 +175,9 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
 
     cleaned = []
     ticker_counts = {}
+    recent_tickers = []  # 記錄近期最新出現的標的順序
 
-    for item in raw_tweets:
+    for idx, item in enumerate(raw_tweets):
         if not isinstance(item, dict):
             continue
 
@@ -186,6 +192,8 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
 
         for t in tickers:
             ticker_counts[t] = ticker_counts.get(t, 0) + 1
+            if idx < 50 and t not in recent_tickers:
+                recent_tickers.append(t)  # 前 50 則最新推文提及的股票優先收錄
 
         ai_data = sentiment_cache.get(tweet_id) if tweet_id else None
         sentiment = "Neutral"
@@ -227,13 +235,13 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
             "url": url or "#"
         })
 
-    # 嚴格按發布時間降序排序（最新發布排在第 1 筆）
+    # 嚴格按時間降序排序
     cleaned.sort(key=lambda x: str(x.get("iso_date") or x.get("date") or ""), reverse=True)
-    return cleaned, ticker_counts
+    return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes(tickers):
     """獲取美股市場行情數據"""
-    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情數據...", flush=True)
+    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情數據 (含最新提及與熱門標的)...", flush=True)
     quotes = {}
     
     for symbol in tickers:
@@ -268,6 +276,7 @@ def fetch_stock_quotes(tickers):
                     "low52": round(float(low_52), 2) if low_52 else None,
                     "volume": int(volume) if volume else 0
                 }
+                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%)", flush=True)
         except Exception:
             continue
 
@@ -370,10 +379,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- 熱門標的快速過濾區 -->
+    <!-- 熱門與近期關注標的快速過濾區 (支援最新提及標的優先呈現) -->
     <div class="bg-slate-900/40 border border-slate-800/80 rounded-xl p-4">
       <div class="flex items-center justify-between mb-3">
-        <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">熱門關注標的 ($TICKER)</h2>
+        <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <span>🔥</span> 熱門與近期關注標的 ($TICKER)
+        </h2>
         <button id="clear-ticker-btn" onclick="filterByTicker('')" class="text-xs text-teal-400 hover:underline hidden">清除標的篩選</button>
       </div>
       <div class="flex flex-wrap gap-1.5" id="top-tickers-bar"></div>
@@ -446,7 +457,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <!-- 搜尋、排序與觀點篩選 -->
     <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
       <div class="flex items-center gap-2 flex-1 max-w-lg">
-        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的..." 
+        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的（例如: SPCX, NBIS）..." 
           class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
         
         <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
@@ -498,14 +509,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="mt-2 flex flex-wrap gap-1.5">
           <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">📅 日報</button>
           <button onclick="handleQuickAsk('目前有哪些偏多股票？')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🚀 偏多股票</button>
-          <button onclick="handleQuickAsk('幫我看 NBIS')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔍 幫我看 NBIS</button>
-          <button onclick="handleQuickAsk('AAOI 有哪些風險？')" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded border border-rose-500/30">⚠️ AAOI 風險</button>
+          <button onclick="handleQuickAsk('幫我看 SPCX')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔍 幫我看 SPCX</button>
+          <button onclick="handleQuickAsk('NBIS 有哪些風險？')" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded border border-rose-500/30">⚠️ NBIS 風險</button>
         </div>
       </div>
     </div>
 
     <form onsubmit="handleChatSubmit(event)" class="p-3 bg-slate-950 border-t border-slate-800 flex gap-2">
-      <input type="text" id="chat-input" placeholder="輸入問題（例如：幫我看 NBIS）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
+      <input type="text" id="chat-input" placeholder="輸入問題（例如：幫我看 SPCX）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
       <button type="submit" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition">發送</button>
     </form>
   </div>
@@ -566,7 +577,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
-    // 【核心修正】：預設為空字串，展示全部推文，不預先鎖定特定個股
     let currentTicker = '';
     let searchQuery = '';
     let currentSort = 'date_desc';
@@ -586,7 +596,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function highlightText(text) {
       if (!text) return '';
       return text
-        .replace(/(\\$[A-Z]{1,5})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\'))" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
+        .replace(/(\\$[A-Za-z]{1,6})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\').toUpperCase())" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
         .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
     }
 
@@ -621,12 +631,25 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const viewTweets = getFilteredByView(allTweets);
       
       const counts = {};
-      viewTweets.forEach(t => {
+      const recencyScores = {};
+
+      // 計算提及次數與最新出現權重（最新推文加權優先）
+      viewTweets.forEach((t, index) => {
         t.tickers.forEach(sym => {
           counts[sym] = (counts[sym] || 0) + 1;
+          if (!recencyScores[sym]) {
+            // 越新的推文權重越高
+            recencyScores[sym] = Math.max(1, 100 - index);
+          }
         });
       });
-      const topTickers = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 35);
+
+      // 混成排序：結合近期活躍度與歷史次數，確保如 $SPCX 等新標的優先入榜
+      const topTickers = Object.keys(counts).sort((a, b) => {
+        const scoreA = (recencyScores[a] || 0) * 2 + (counts[a] || 0);
+        const scoreB = (recencyScores[b] || 0) * 2 + (counts[b] || 0);
+        return scoreB - scoreA;
+      }).slice(0, 40).map(sym => [sym, counts[sym]]);
 
       const total = viewTweets.length;
       const bullish = viewTweets.filter(t => t.sentiment === 'Bullish').length;
@@ -827,7 +850,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }
 
     function filterByTicker(ticker) {
-      currentTicker = ticker;
+      currentTicker = ticker.toUpperCase();
       displayLimit = 25;
       document.getElementById('clear-ticker-btn').classList.toggle('hidden', !ticker);
       updateAggregatedView();
@@ -906,7 +929,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       } else if (currentSort === 'views_desc') {
         filtered.sort((a, b) => b.views - a.views);
       } else {
-        // 嚴格依照發布時間降序排序（最新發布排在最前方）
         filtered.sort((a, b) => (b.iso_date || b.date).localeCompare(a.iso_date || a.date));
       }
 
@@ -1060,11 +1082,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         });
 
         const bullishList = Object.entries(counts)
-          .filter(([sym, data]) => data.total >= 5 && (data.bullish / (data.bullish + data.bearish || 1)) >= 0.7)
+          .filter(([sym, data]) => data.total >= 3 && (data.bullish / (data.bullish + data.bearish || 1)) >= 0.6)
           .sort((a, b) => b[1].bullish - a[1].bullish)
           .slice(0, 6);
 
-        let resHtml = '🚀 <b>目前社群立場高度偏多的精選標的：</b><br>';
+        let resHtml = '🚀 <b>目前社群立場偏多的精選標的：</b><br>';
         bullishList.forEach(([sym, data]) => {
           const qData = stockQuotes[sym];
           const priceStr = qData ? `$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(1)}%)` : '';
@@ -1074,8 +1096,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
-      const tickerMatch = q.match(/\\$?([A-Z]{1,5})/);
-      const symbol = tickerMatch ? tickerMatch[1] : null;
+      const tickerMatch = q.match(/\\$?([A-Za-z]{1,6})/);
+      const symbol = tickerMatch ? tickerMatch[1].toUpperCase() : null;
 
       if (symbol && stockQuotes[symbol]) {
         filterByTicker(symbol);
@@ -1131,18 +1153,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
 
-    // 啟動儀表板預設視圖（預設顯示全部推文，最新排在最前）
     setViewMode('all');
   </script>
 </body>
 </html>
 """
 
-def generate_html(tweets, ticker_counts, stock_quotes):
+def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     tweets_json_str = json.dumps(tweets, ensure_ascii=False)
-    ticker_counts_sorted = sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True)[:35]
-    top_tickers_json_str = json.dumps(ticker_counts_sorted, ensure_ascii=False)
+    
+    # 混成排名：近期新提及的標的優先，其餘按頻率排序
+    ordered_tickers = []
+    for t in recent_tickers:
+        if t not in ordered_tickers:
+            ordered_tickers.append(t)
+            
+    for t, _ in sorted(ticker_counts.items(), key=lambda x: x[1], reverse=True):
+        if t not in ordered_tickers:
+            ordered_tickers.append(t)
+
+    top_tickers_sorted = [[t, ticker_counts.get(t, 0)] for t in ordered_tickers[:40]]
+    top_tickers_json_str = json.dumps(top_tickers_sorted, ensure_ascii=False)
     stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
 
     html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
@@ -1151,14 +1183,15 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML}", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (已包含最新標的如 SPCX)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
-    cleaned_tweets, counts = clean_tweet_data(tweets_raw, sentiment_cache)
+    cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
-    top_tickers_list = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:35]]
-    stock_quotes = fetch_stock_quotes(top_tickers_list)
+    # 合併近期提及標的與歷史熱門標的進行行情抓取
+    combined_target_list = list(dict.fromkeys(recent_tickers + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:35]]))[:45]
+    stock_quotes = fetch_stock_quotes(combined_target_list)
     
-    generate_html(cleaned_tweets, counts, stock_quotes)
+    generate_html(cleaned_tweets, counts, recent_tickers, stock_quotes)
