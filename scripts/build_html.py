@@ -4,9 +4,22 @@ import re
 from datetime import datetime
 import yfinance as yf
 
+TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
+
+TWITTER_EPOCH = 1288834974657
+
+def snowflake_to_iso(tweet_id_str):
+    """利用 Twitter Snowflake 演算法計算 UTC 時間"""
+    try:
+        t_id = int(str(tweet_id_str).strip())
+        timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
+        dt = datetime.utcfromtimestamp(timestamp_ms / 1000.0)
+        return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    except Exception:
+        return None, None, None
 
 def load_tweets(filepath):
     if not os.path.exists(filepath):
@@ -23,7 +36,7 @@ def load_tweets(filepath):
                 return list(data.values())
             return []
     except Exception as e:
-        print(f"⚠️ 讀取推文檔案失敗 ({filepath}): {e}")
+        print(f"⚠️ 讀取推文檔案失敗 ({filepath}): {e}", flush=True)
         return []
 
 def load_cache(filepath):
@@ -44,7 +57,7 @@ def load_cache(filepath):
                 return cache_dict
             return {}
     except Exception as e:
-        print(f"⚠️ 讀取快取檔案失敗 ({filepath}): {e}")
+        print(f"⚠️ 讀取快取檔案失敗 ({filepath}): {e}", flush=True)
         return {}
 
 def extract_tickers(text):
@@ -74,8 +87,13 @@ def extract_tweet_text(item):
         return str(legacy["full_text"])
     return ""
 
-def parse_date(item):
-    """強大相容性日期解析器（支援自我修復）"""
+def parse_date(item, tweet_id=""):
+    """精確解析日期時間"""
+    if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
+        d_str, m_str, iso_str = snowflake_to_iso(tweet_id)
+        if d_str:
+            return d_str, m_str, iso_str
+
     raw_date = None
     for k in ["created_at", "date", "createdAt", "timestamp", "datetime", "time", "pubDate"]:
         val = item.get(k)
@@ -90,52 +108,19 @@ def parse_date(item):
     if not raw_date or str(raw_date).startswith("1970"):
         return "未知時間", "未知月份", ""
 
-    if isinstance(raw_date, (int, float)):
-        try:
-            val = float(raw_date)
-            dt = datetime.fromtimestamp(val / 1000.0 if val > 1e11 else val)
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
-        except Exception:
-            pass
-
     s = str(raw_date).strip()
-    if s.isdigit():
-        try:
-            val = float(s)
-            dt = datetime.fromtimestamp(val / 1000.0 if val > 1e11 else val)
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
-        except Exception:
-            pass
-
     try:
-        if "T" in s or "+" in s:
+        if "T" in s:
             clean_s = s.replace("Z", "+00:00")
             dt = datetime.fromisoformat(clean_s)
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
+            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), s
     except Exception:
         pass
 
-    try:
-        if len(s.split()) >= 6:
-            dt = datetime.strptime(s, "%a %b %d %H:%M:%S %z %Y")
-            return dt.strftime("%Y-%m-%d %H:%M"), dt.strftime("%Y-%m"), dt.isoformat()
-    except Exception:
-        pass
-
-    m = re.search(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})", s)
-    if m:
-        y, mth, d = m.groups()
-        time_part = ""
-        tm = re.search(r"(\d{1,2}):(\d{1,2})", s)
-        if tm:
-            time_part = f" {int(tm.group(1)):02d}:{int(tm.group(2)):02d}"
-        iso = f"{int(y):04d}-{int(mth):02d}-{int(d):02d}T00:00:00"
-        return f"{int(y):04d}-{int(mth):02d}-{int(d):02d}{time_part}", f"{int(y):04d}-{int(mth):02d}", iso
-
-    return s, "未知月份", ""
+    return s, "未知月份", s
 
 def extract_metrics(item):
-    """解析互動指標（點讚、轉推、瀏覽量）"""
+    """解析互動指標"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -195,7 +180,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
         if not text:
             continue
 
-        date_str, month_str, iso_date = parse_date(item)
+        date_str, month_str, iso_date = parse_date(item, tweet_id=tweet_id)
         tickers = extract_tickers(text)
         likes, retweets, views = extract_metrics(item)
 
@@ -223,7 +208,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
 
         url = item.get("url") or item.get("permanentUrl") or item.get("link")
         if not url and tweet_id:
-            url = f"https://twitter.com/aleabitoreddit/status/{tweet_id}"
+            url = f"https://twitter.com/{TARGET_HANDLE}/status/{tweet_id}"
 
         cleaned.append({
             "id": tweet_id,
@@ -242,6 +227,8 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
             "url": url or "#"
         })
 
+    # 嚴格按發布時間降序排序（最新發布排在第 1 筆）
+    cleaned.sort(key=lambda x: str(x.get("iso_date") or x.get("date") or ""), reverse=True)
     return cleaned, ticker_counts
 
 def fetch_stock_quotes(tickers):
@@ -281,9 +268,8 @@ def fetch_stock_quotes(tickers):
                     "low52": round(float(low_52), 2) if low_52 else None,
                     "volume": int(volume) if volume else 0
                 }
-                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%)", flush=True)
-        except Exception as e:
-            print(f"  ⚠️ 無法取得 ${symbol} 行情: {e}", flush=True)
+        except Exception:
+            continue
 
     return quotes
 
@@ -512,14 +498,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="mt-2 flex flex-wrap gap-1.5">
           <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">📅 日報</button>
           <button onclick="handleQuickAsk('目前有哪些偏多股票？')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🚀 偏多股票</button>
-          <button onclick="handleQuickAsk('幫我看 SIVE')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔍 幫我看 SIVE</button>
-          <button onclick="handleQuickAsk('AXTI 有哪些風險？')" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded border border-rose-500/30">⚠️ AXTI 風險</button>
+          <button onclick="handleQuickAsk('幫我看 NBIS')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔍 幫我看 NBIS</button>
+          <button onclick="handleQuickAsk('AAOI 有哪些風險？')" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded border border-rose-500/30">⚠️ AAOI 風險</button>
         </div>
       </div>
     </div>
 
     <form onsubmit="handleChatSubmit(event)" class="p-3 bg-slate-950 border-t border-slate-800 flex gap-2">
-      <input type="text" id="chat-input" placeholder="輸入問題（例如：幫我看 NVDA）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
+      <input type="text" id="chat-input" placeholder="輸入問題（例如：幫我看 NBIS）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
       <button type="submit" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition">發送</button>
     </form>
   </div>
@@ -580,7 +566,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
-    let currentTicker = initialTopTickers.length > 0 ? initialTopTickers[0][0] : '';
+    // 【核心修正】：預設為空字串，展示全部推文，不預先鎖定特定個股
+    let currentTicker = '';
     let searchQuery = '';
     let currentSort = 'date_desc';
     let displayLimit = 25;
@@ -655,7 +642,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('stat-tickers').innerText = uniqueTickers.toLocaleString();
 
       renderTopTickers(topTickers);
-      if (currentTicker) renderStockQuote(currentTicker);
+      if (currentTicker) {
+        renderStockQuote(currentTicker);
+      } else {
+        document.getElementById('stock-quote-section').classList.add('hidden');
+      }
       render();
     }
 
@@ -774,7 +765,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('modal-ticker-title').innerText = `$${ticker}`;
       if (tickerTweets.length === 0) return;
 
-      const chronological = [...tickerTweets].sort((a, b) => a.date.localeCompare(b.date));
+      const chronological = [...tickerTweets].sort((a, b) => (a.iso_date || a.date).localeCompare(b.iso_date || b.date));
       const firstMention = chronological[0];
       const latestMention = chronological[chronological.length - 1];
 
@@ -915,7 +906,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       } else if (currentSort === 'views_desc') {
         filtered.sort((a, b) => b.views - a.views);
       } else {
-        filtered.sort((a, b) => b.date.localeCompare(a.date));
+        // 嚴格依照發布時間降序排序（最新發布排在最前方）
+        filtered.sort((a, b) => (b.iso_date || b.date).localeCompare(a.iso_date || a.date));
       }
 
       const totalFiltered = filtered.length;
@@ -999,6 +991,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
+    // AI 對話抽屜邏輯與意圖解析引擎
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -1087,7 +1080,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (symbol && stockQuotes[symbol]) {
         filterByTicker(symbol);
         const tickerTweets = allTweets.filter(t => t.tickers.includes(symbol));
-        const chronological = [...tickerTweets].sort((a, b) => a.date.localeCompare(b.date));
+        const chronological = [...tickerTweets].sort((a, b) => (a.iso_date || a.date).localeCompare(b.iso_date || b.date));
         const first = chronological[0];
         const latest = chronological[chronological.length - 1];
         const qData = stockQuotes[symbol];
@@ -1138,6 +1131,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
 
+    // 啟動儀表板預設視圖（預設顯示全部推文，最新排在最前）
     setViewMode('all');
   </script>
 </body>
@@ -1157,7 +1151,7 @@ def generate_html(tweets, ticker_counts, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ 儀表板成功產出至 {OUTPUT_HTML}", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML}", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
