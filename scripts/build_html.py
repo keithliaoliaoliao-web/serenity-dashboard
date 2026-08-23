@@ -5,16 +5,16 @@ from datetime import datetime
 import yfinance as yf
 
 # ==========================================
-# 專案參數設定區 (Serenity: aleabitoreddit / Burak: burak_finance)
+# 參數設定區 (Serenity 專屬)
 # ==========================================
-TARGET_HANDLE = os.environ.get("TARGET_HANDLE", "aleabitoreddit")
+TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
 TWITTER_EPOCH = 1288834974657
 
-# 產業鏈與板塊分類定義 (含生技與醫療製藥)
+# 產業鏈與板塊分類定義 (含生技醫療與美股科技族群)
 SECTOR_MAPPING = {
     "生技與醫療製藥": ["HIMS", "MRNA", "JNJ", "TEM", "LLY", "NVO", "ISRG", "CRSP", "VRTX", "AMGN"],
     "光通訊與雷射": ["AAOI", "LITE", "COHR", "POET", "CRDO", "CIEN", "FN"],
@@ -33,7 +33,7 @@ def get_sector_for_ticker(ticker):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法計算 UTC 發布時間"""
+    """利用 Twitter Snowflake 演算法計算精確發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -79,10 +79,10 @@ def load_cache(filepath):
             return {}
     except Exception as e:
         print(f"⚠️ 讀取快取檔案失敗 ({filepath}): {e}", flush=True)
-        return {}
+        return []
 
 def extract_tickers(text):
-    """萃取推文中的美股代號"""
+    """從推文內文中萃取美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -146,7 +146,7 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s
 
 def extract_metrics(item):
-    """解析按讚、轉推與瀏覽量"""
+    """解析互動指標（按讚、轉推、瀏覽量）"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -276,14 +276,12 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             low_52 = getattr(fast, "year_low", None) or info.get("fiftyTwoWeekLow")
             volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None) or info.get("volume")
 
-            # 基本面估值指標
             market_cap = getattr(fast, "market_cap", None) or info.get("marketCap")
             forward_pe = info.get("forwardPE")
             trailing_pe = info.get("trailingPE")
             price_to_sales = info.get("priceToSalesTrailing12Months")
             revenue_growth = info.get("revenueGrowth")
 
-            # 下次財報公布日
             earnings_date_str = None
             try:
                 cal = ticker_obj.calendar
@@ -323,7 +321,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serenity / Burak 美股專業情報與產業鏈雷達</title>
+  <title>Serenity 美股情報與 AI 對話助理</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -353,7 +351,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
 
-  <!-- 頂部導航 -->
+  <!-- 頂部導航 (Serenity 品牌設計) -->
   <header class="border-b border-slate-800/80 bg-slate-900/70 backdrop-blur sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -362,10 +360,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
         <div>
           <h1 class="font-bold text-base sm:text-lg tracking-tight text-white flex items-center gap-2">
-            Market Intelligence Radar
-            <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">Pro 6.0</span>
+            Serenity Tracker
+            <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">Live</span>
           </h1>
-          <p class="text-xs text-slate-400 hidden sm:block">產業鏈族群、基本面估值、情緒趨勢圖與 AI 脈絡</p>
+          <p class="text-xs text-slate-400 hidden sm:block">美股社群情報、AI 對話問答與個股論點脈絡</p>
         </div>
       </div>
 
@@ -416,7 +414,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- 模組 1：產業鏈/板塊分類導航列 (含生技專區與自選股切換) -->
+    <!-- 模組 1：產業鏈/板塊分類導航列 (含生技醫療與自選股切換) -->
     <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 flex flex-wrap items-center gap-1.5" id="sector-bar">
       <span class="text-xs font-bold text-slate-400 mr-2 flex items-center gap-1">🏢 產業板塊：</span>
       <button onclick="setSectorFilter('ALL')" class="sector-btn active px-3 py-1 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-sector="ALL">全部板塊</button>
@@ -486,7 +484,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 基本面估值指標卡 (模組 3) -->
+        <!-- 基本面估值指標卡 -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-6">
           <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/80">
             <div class="text-[11px] text-slate-400">市值 (Market Cap)</div>
@@ -512,7 +510,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <div id="quote-52w-container" class="border-t border-slate-800/80 pt-3">
         <div class="flex justify-between text-xs text-slate-400 font-mono mb-1.5">
           <span>52 週最低：<b class="text-slate-200" id="quote-low52">$0.00</b></span>
-          <span class="text-teal-400 font-semibold" id="quote-range-pct">52 週區間水位 0%</span>
+          <span class="text-teal-400 font-semibold" id="quote-range-pct">52 週區建水位 0%</span>
           <span>52 週最高：<b class="text-slate-200" id="quote-high52">$0.00</b></span>
         </div>
         <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden flex items-center">
@@ -520,7 +518,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- 模組 4：歷史多空情緒趨勢圖容器 (Chart.js) -->
+      <!-- 歷史多空情緒趨勢圖容器 (Chart.js) -->
       <div id="sentiment-chart-wrapper" class="hidden border-t border-slate-800/80 pt-4">
         <div class="text-xs font-semibold text-slate-400 mb-2 flex items-center gap-1.5">
           <span>📈</span> 近期 6 個月多空立場演變趨勢 (Sentiment Trend)
@@ -570,7 +568,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   </main>
 
-  <!-- 模組 6：雙標的橫向對比矩陣 Modal (Head-to-Head Comparison) -->
+  <!-- 雙標的橫向對比矩陣 Modal -->
   <div id="compare-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-4">
@@ -607,10 +605,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 浮動 AI 對話助理按鈕與對話面板 -->
+  <!-- 浮動 AI 對話助理按鈕與對話面板 (Serenity 設計) -->
   <div class="fixed bottom-6 right-6 z-50">
     <button id="ai-chat-btn" onclick="toggleChatDrawer()" class="bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 px-4 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 hover:scale-105 transition-all">
-      💬 <span class="text-sm">問問 AI 助理</span>
+      💬 <span class="text-sm">問問 Serenity AI</span>
     </button>
   </div>
 
@@ -618,14 +616,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="p-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
-        <span class="font-bold text-sm text-white">AI 智能問答助理</span>
+        <span class="font-bold text-sm text-white">Serenity AI 問答</span>
       </div>
       <button onclick="toggleChatDrawer()" class="text-slate-400 hover:text-white font-bold p-1">✕</button>
     </div>
 
     <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
       <div class="bg-slate-800/80 border border-slate-700/70 p-3 rounded-xl text-slate-200">
-        👋 你好！你可以直接點擊或詢問：
+        👋 你好！我是 Serenity AI 助理，你可以直接點擊或詢問：
         <div class="mt-2 flex flex-wrap gap-1.5">
           <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">📅 日報</button>
           <button onclick="handleQuickAsk('目前有哪些生技醫療股票？')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">💊 生技醫療股</button>
@@ -636,7 +634,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
 
     <form onsubmit="handleChatSubmit(event)" class="p-3 bg-slate-950 border-t border-slate-800 flex gap-2">
-      <input type="text" id="chat-input" placeholder="輸入問題（例如：生技股有哪些觀點？）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
+      <input type="text" id="chat-input" placeholder="輸入問題（例如：幫我看 HIMS 或 NBIS）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
       <button type="submit" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition">發送</button>
     </form>
   </div>
@@ -708,9 +706,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let sentimentChartVisible = false;
     let sentimentChartInstance = null;
 
-    // 自選股狀態管理 (localStorage 持久保存)
-    let watchlist = JSON.parse(localStorage.getItem('user_watchlist') || '[]');
-    let clientTranslations = JSON.parse(localStorage.getItem('tracker_trans_cache') || '{}');
+    let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
+    let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
 
     function formatNumber(num) {
       if (!num) return '-';
@@ -730,7 +727,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       } else {
         watchlist.push(ticker);
       }
-      localStorage.setItem('user_watchlist', JSON.stringify(watchlist));
+      localStorage.setItem('serenity_watchlist', JSON.stringify(watchlist));
       updateAggregatedView();
     }
 
@@ -810,7 +807,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         });
       });
 
-      // 排序：自選股優先 ＋ 近期熱度混成
       const topTickers = Object.keys(counts).sort((a, b) => {
         const aStar = isWatchlisted(a) ? 10000 : 0;
         const bStar = isWatchlisted(b) ? 10000 : 0;
@@ -1033,7 +1029,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (sentimentChartVisible) renderSentimentChart(ticker);
     }
 
-    // 模組 6：雙標的橫向對比矩陣邏輯
     function openCompareModal() {
       const modal = document.getElementById('compare-modal');
       const selectA = document.getElementById('compare-select-a');
@@ -1219,7 +1214,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const json = await res.json();
         const translated = json[0].map(row => row[0]).join('');
         clientTranslations[rawText] = translated;
-        localStorage.setItem('tracker_trans_cache', JSON.stringify(clientTranslations));
+        localStorage.setItem('serenity_trans_cache', JSON.stringify(clientTranslations));
         transEl.innerHTML = highlightText(translated);
         transEl.classList.remove('hidden');
         if (btnEl) btnEl.remove();
@@ -1346,7 +1341,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       msgDiv.className = isUser 
         ? 'bg-teal-500/20 text-teal-200 border border-teal-500/30 p-2.5 rounded-xl ml-6'
         : 'bg-slate-800/90 text-slate-200 border border-slate-700/80 p-3 rounded-xl mr-4 space-y-1.5';
-      msgDiv.innerHTML = isUser ? `<b>你：</b>${htmlContent}` : `<b>AI 助理：</b><br>${htmlContent}`;
+      msgDiv.innerHTML = isUser ? `<b>你：</b>${htmlContent}` : `<b>Serenity AI 助理：</b><br>${htmlContent}`;
       container.appendChild(msgDiv);
       container.scrollTop = container.scrollHeight;
     }
@@ -1516,14 +1511,13 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ 專業版情報雷達已產出至 {OUTPUT_HTML} (涵蓋生技板塊、估值卡、趨勢圖與對比矩陣)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (Serenity Tracker 標題與生技板塊已全部就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
-    # 匯整生技板塊、近期提及標的與歷史熱門清單
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     combined_target_list = list(dict.fromkeys(recent_tickers + all_sector_symbols + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:60]]))[:90]
     
