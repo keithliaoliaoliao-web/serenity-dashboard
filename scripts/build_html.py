@@ -687,26 +687,30 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 浮動 AI 對話助理按鈕與對話面板 -->
+  <!-- 浮動 AI 對話助理按鈕與對話面板 (支援自訂金鑰與 Gemini 直連) -->
   <div class="fixed bottom-6 right-6 z-50">
     <button id="ai-chat-btn" onclick="toggleChatDrawer()" class="bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 px-4 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 hover:scale-105 transition-all">
       💬 <span class="text-sm">問問 AI 助理</span>
     </button>
   </div>
 
-  <div id="ai-chat-drawer" class="fixed bottom-20 right-6 z-50 w-[92vw] sm:w-[420px] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden hidden flex-col h-[520px]">
+  <div id="ai-chat-drawer" class="fixed bottom-20 right-6 z-50 w-[92vw] sm:w-[440px] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden hidden flex-col h-[550px]">
     <div class="p-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
-        <span class="font-bold text-sm text-white">AI 智能問答助理</span>
+        <span class="font-bold text-sm text-white">Serenity 智能問答助理</span>
+        <span id="ai-llm-badge" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 font-mono">本機模式</span>
       </div>
-      <button onclick="toggleChatDrawer()" class="text-slate-400 hover:text-white font-bold p-1">✕</button>
+      <div class="flex items-center gap-2">
+        <button onclick="configureApiKey()" title="設定 Gemini API 金鑰" class="text-slate-400 hover:text-teal-400 transition p-1">⚙️</button>
+        <button onclick="toggleChatDrawer()" class="text-slate-400 hover:text-white font-bold p-1">✕</button>
+      </div>
     </div>
 
     <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
-      <div class="bg-slate-800/80 border border-slate-700/70 p-3 rounded-xl text-slate-200">
-        👋 你好！我是 Serenity AI 助理，你可以直接點擊或詢問：
-        <div class="mt-2 flex flex-wrap gap-1.5">
+      <div class="bg-slate-800/80 border border-slate-700/70 p-3 rounded-xl text-slate-200 space-y-2">
+        <div>👋 你好！我是 Serenity AI 助理。你可以詢問任意個股問題、點擊快捷查詢，或點擊右上角 ⚙️ 綁定 Gemini 金鑰以啟用完整自由問答。</div>
+        <div class="flex flex-wrap gap-1.5 pt-1">
           <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">📅 日報</button>
           <button onclick="handleQuickAsk('半導體設備')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔬 半導體設備</button>
           <button onclick="handleQuickAsk('低估值')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">💰 低估值標的</button>
@@ -718,11 +722,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     <form onsubmit="handleChatSubmit(event)" class="p-3 bg-slate-950 border-t border-slate-800 flex gap-2">
       <input type="text" id="chat-input" placeholder="輸入問題（例如：半導體設備有哪些觀點？）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
-      <button type="submit" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition">發送</button>
+      <button type="submit" id="chat-submit-btn" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition">發送</button>
     </form>
   </div>
 
-  <!-- 【升級】：個股 AI 深度論點脈絡 Modal (展示故事演變、3 大里程碑與重要性說明) -->
+  <!-- 個股 AI 深度論點脈絡 Modal -->
   <div id="deepdive-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-4">
@@ -733,7 +737,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <button onclick="closeDeepDiveModal()" class="text-slate-400 hover:text-white text-xl p-1 font-bold">✕</button>
       </div>
 
-      <!-- 指標總覽 -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
         <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
           <div class="text-slate-400">首次提及時間</div>
@@ -749,7 +752,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- AI 投資論點故事摘要 -->
       <div class="bg-gradient-to-r from-teal-950/30 via-slate-950/50 to-slate-950/30 p-4 rounded-xl border border-teal-500/30 space-y-1.5">
         <div class="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
           <span>🧠</span> AI 投資論點演進故事 (Thesis Story)
@@ -759,7 +761,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- 3 個關鍵里程碑與重要性說明 -->
       <div>
         <h4 class="text-sm font-bold text-slate-200 flex items-center gap-2 mb-3">
           📌 3 個關鍵代表性觀點 (Key Milestones & Significance)
@@ -767,7 +768,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="space-y-3" id="modal-key-points"></div>
       </div>
 
-      <!-- 立場歷史時間軸 -->
       <div>
         <h4 class="text-sm font-bold text-slate-200 flex items-center gap-2 mb-3">
           ⏳ 立場變化與歷史軌跡 (Timeline)
@@ -775,7 +775,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="space-y-2 max-h-48 overflow-y-auto pr-1" id="modal-timeline"></div>
       </div>
 
-      <!-- 風險警戒 -->
       <div>
         <h4 class="text-sm font-bold text-rose-400 flex items-center gap-2 mb-3">
           ⚠️ 曾提及的風險與疑慮因素 (Identified Risks)
@@ -810,6 +809,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let currentLang = localStorage.getItem('serenity_lang') || 'zh';
+    let clientApiKey = localStorage.getItem('serenity_gemini_key') || '';
 
     const i18n = {
       zh: {
@@ -1447,7 +1447,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       `).join('');
     }
 
-    // 【升級】：載入結構化 AI 投資故事、里程碑與重要性說明
     function openDeepDiveModal(ticker) {
       if (!ticker) return;
       const modal = document.getElementById('deepdive-modal');
@@ -1467,12 +1466,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const latestStance = thesis ? thesis.latest_stance : latestMention.sentiment;
       document.getElementById('modal-latest-stance').innerText = latestStance === 'Bullish' ? '看多 (Bullish)' : (latestStance === 'Bearish' ? '看空 (Bearish)' : '中立 (Neutral)');
 
-      // 渲染論點故事
       document.getElementById('modal-thesis-story').innerText = thesis && thesis.thesis_story 
         ? thesis.thesis_story 
         : `$${ticker} 於 ${firstMention.date} 首次被提及。歷史討論中看多佔比為 ${Math.round(tickerTweets.filter(t=>t.sentiment==='Bullish').length/tickerTweets.length*100)}%。最新觀點為：${latestMention.summary || latestMention.text.slice(0, 100)}`;
 
-      // 渲染 3 個關鍵里程碑與重要性說明
       const keyContainer = document.getElementById('modal-key-points');
       if (thesis && thesis.milestones && thesis.milestones.length > 0) {
         keyContainer.innerHTML = thesis.milestones.map((item, idx) => `
@@ -1501,7 +1498,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         `).join('');
       }
 
-      // 渲染歷史時間軸
       const timelineContainer = document.getElementById('modal-timeline');
       timelineContainer.innerHTML = chronological.map(item => `
         <div class="flex items-center gap-3 text-xs border-l-2 border-slate-800 pl-3 py-1 font-mono">
@@ -1511,7 +1507,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       `).join('');
 
-      // 渲染風險清單
       const riskContainer = document.getElementById('modal-risks');
       if (thesis && thesis.risks && thesis.risks.length > 0) {
         riskContainer.innerHTML = thesis.risks.map(item => `
@@ -1711,10 +1706,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
+    // AI 對話抽屜邏輯與 Gemini 直連問答
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
       drawer.classList.toggle('flex');
+      updateLlmBadge();
+    }
+
+    function configureApiKey() {
+      const key = prompt("請輸入您的 Google Gemini API Key (可於 Google AI Studio 免費取得)：", clientApiKey);
+      if (key !== null) {
+        clientApiKey = key.trim();
+        localStorage.setItem('serenity_gemini_key', clientApiKey);
+        updateLlmBadge();
+        appendChatMessage('ai', clientApiKey ? '✅ <b>Gemini API 金鑰已綁定！</b>現在您可以自由提問任何進階投資問題。' : 'ℹ️ 已切換回本機快速模式。');
+      }
+    }
+
+    function updateLlmBadge() {
+      const badge = document.getElementById('ai-llm-badge');
+      if (clientApiKey) {
+        badge.innerText = 'Gemini 雲端連線';
+        badge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-400 border border-teal-500/40 font-mono';
+      } else {
+        badge.innerText = '本機模式';
+        badge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 font-mono';
+      }
     }
 
     function appendChatMessage(sender, htmlContent) {
@@ -1734,7 +1752,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       handleChatSubmit();
     }
 
-    function handleChatSubmit(e) {
+    async function handleChatSubmit(e) {
       if (e) e.preventDefault();
       const input = document.getElementById('chat-input');
       const query = input.value.trim();
@@ -1743,7 +1761,54 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       appendChatMessage('user', query);
       input.value = '';
 
-      processChatIntent(query);
+      // 若有設定金鑰且非快捷固定指令，直接呼叫 Gemini
+      if (clientApiKey && !isBasicQuickCommand(query)) {
+        await askGeminiLive(query);
+      } else {
+        processChatIntent(query);
+      }
+    }
+
+    function isBasicQuickCommand(q) {
+      const upper = q.toUpperCase();
+      return upper === '日報' || upper === '今日' || upper === '半導體設備' || upper === '低估值';
+    }
+
+    async function askGeminiLive(userQuery) {
+      appendChatMessage('ai', '<span class="text-teal-400 font-mono animate-pulse">🤖 正在調用 Gemini 模型深度分析社群數據中...</span>');
+      const container = document.getElementById('chat-messages');
+      const loadingMsg = container.lastElementChild;
+
+      // 提取相關推文作為上下文
+      const relevantTweets = allTweets.slice(0, 30).map(t => `[${t.date}] ($${t.tickers.join(',')}) ${t.summary || t.text.slice(0, 80)}`).join('\n');
+      
+      const prompt = `
+你是一位精通美股社群投資論點的 AI 助理。請依據以下 Serenity (@aleabitoreddit) 的推文情報紀錄，回答使用者的問題。
+
+【社群即時情報摘要】：
+${relevantTweets}
+
+【使用者問題】：${userQuery}
+
+請用繁體中文回答，維持客觀、專業、簡潔且條理清晰的分析師語氣。
+`;
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${clientApiKey}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        const data = await res.json();
+        const replyText = data.candidates[0].content.parts[0].text;
+        
+        loadingMsg.innerHTML = `<b>Serenity AI (Gemini)：</b><br>${replyText.replace(/\\n/g, '<br>')}`;
+      } catch (err) {
+        console.error('Gemini 呼叫失敗', err);
+        loadingMsg.innerHTML = `<b>Serenity AI：</b><br>⚠️ 呼叫 Gemini 失敗（請檢查 API Key 是否有效），切換回本機分析模式。<br>`;
+        processChatIntent(userQuery);
+      }
+      container.scrollTop = container.scrollHeight;
     }
 
     function processChatIntent(query) {
@@ -1887,6 +1952,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     applyLanguage();
     setViewMode('all');
+    updateLlmBadge();
   </script>
 </body>
 </html>
@@ -1919,7 +1985,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes, thesis_da
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (結構化論點與里程碑深度解析已完成注入)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (雲端 LLM 直連與金鑰管理已全面就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
