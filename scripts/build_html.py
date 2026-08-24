@@ -314,8 +314,8 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """獲取美股市場行情與基本面數據，並使用雙層分類引擎確認產業板塊"""
-    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情與智慧產業板塊分類...", flush=True)
+    """獲取美股市場行情、基本面數據與歷史日 K 收盤價（用於首次提及疊圖）"""
+    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、歷史走勢與智慧產業分類...", flush=True)
     quotes = {}
     
     for symbol in tickers:
@@ -346,6 +346,17 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
             sector_name = resolve_sector(symbol, info)
 
+            # 擷取過去 1 年歷史日 K 線收盤數據（用於首次提及以來的走勢疊圖）
+            history_points = []
+            try:
+                hist = ticker_obj.history(period="1y", interval="1d")
+                if not hist.empty:
+                    for dt_idx, row in hist.iterrows():
+                        d_str = dt_idx.strftime("%Y-%m-%d")
+                        history_points.append({"d": d_str, "p": round(float(row["Close"]), 2)})
+            except Exception:
+                history_points = []
+
             if current_price is not None and float(current_price) > 0:
                 change = (current_price - prev_close) if prev_close else 0.0
                 change_pct = ((change / prev_close) * 100) if prev_close else 0.0
@@ -364,13 +375,14 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                     "priceToSales": round(float(price_to_sales), 2) if price_to_sales else None,
                     "revenueGrowth": round(float(revenue_growth) * 100, 1) if revenue_growth else None,
                     "earningsDate": earnings_date_str,
-                    "sector": sector_name
+                    "sector": sector_name,
+                    "history": history_points
                 }
-                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 板塊: {sector_name}", flush=True)
+                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_points)} 筆 | 板塊: {sector_name}", flush=True)
             else:
-                quotes[symbol] = {"sector": sector_name}
+                quotes[symbol] = {"sector": sector_name, "history": []}
         except Exception:
-            quotes[symbol] = {"sector": resolve_sector(symbol)}
+            quotes[symbol] = {"sector": resolve_sector(symbol), "history": []}
 
     return quotes
 
@@ -410,7 +422,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
 
-  <!-- 頂部導航 (Serenity 青綠色系品牌識別) -->
+  <!-- 頂部導航 (Serenity 青綠色系品牌識別 + i18n 多語切換) -->
   <header class="border-b border-slate-800/80 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -422,7 +434,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             Serenity Tracker
             <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">Live</span>
           </h1>
-          <p class="text-xs text-slate-400 hidden sm:block">美股社群情報、AI 對話問答與個股論點脈絡</p>
+          <p class="text-xs text-slate-400 hidden sm:block" id="app-subtitle">美股社群情報、AI 對話問答與個股論點脈絡</p>
         </div>
       </div>
 
@@ -435,7 +447,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <button onclick="setViewMode('quarterly')" class="view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition" data-view="quarterly">📊 季度 (90D)</button>
       </div>
 
-      <div class="text-xs text-slate-400 font-mono hidden lg:block" id="last-update-time"></div>
+      <!-- 多語系與建置時間 -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleLanguage()" id="lang-toggle-btn" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-mono text-teal-400 font-bold transition">
+          🌐 EN
+        </button>
+        <div class="text-xs text-slate-400 font-mono hidden lg:block" id="last-update-time"></div>
+      </div>
     </div>
   </header>
 
@@ -445,37 +463,37 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="stats-container">
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-medium text-slate-400">當前視圖提及推文</span>
+          <span class="text-xs font-medium text-slate-400" id="lbl-stat-total">當前視圖提及推文</span>
           <div class="text-2xl font-bold text-white mt-1" id="stat-total">0</div>
         </div>
         <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">AI 分析：0 / 0 (0%)</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-medium text-emerald-400">看多觀點 (Bullish)</span>
+          <span class="text-xs font-medium text-emerald-400" id="lbl-stat-bullish">看多觀點 (Bullish)</span>
           <div class="text-2xl font-bold text-emerald-400 mt-1" id="stat-bullish">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-slate-400">多方偏向佔比</div>
+        <div class="mt-2 text-[11px] text-slate-400" id="lbl-stat-bull-sub">多方偏向佔比</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-medium text-rose-400">看空/警戒 (Bearish)</span>
+          <span class="text-xs font-medium text-rose-400" id="lbl-stat-bearish">看空/警戒 (Bearish)</span>
           <div class="text-2xl font-bold text-rose-400 mt-1" id="stat-bearish">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-slate-400">風險警戒貼文</div>
+        <div class="mt-2 text-[11px] text-slate-400" id="lbl-stat-bear-sub">風險警戒貼文</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
-          <span class="text-xs font-medium text-teal-400">視圖關注標的數</span>
+          <span class="text-xs font-medium text-teal-400" id="lbl-stat-tickers">視圖關注標的數</span>
           <div class="text-2xl font-bold text-teal-400 mt-1" id="stat-tickers">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-slate-400">活躍討論股票</div>
+        <div class="mt-2 text-[11px] text-slate-400" id="lbl-stat-ticker-sub">活躍討論股票</div>
       </div>
     </div>
 
     <!-- 產業鏈/板塊分類導航列 -->
     <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 flex flex-wrap items-center gap-1.5" id="sector-bar">
-      <span class="text-xs font-bold text-slate-400 mr-2 flex items-center gap-1">🏢 產業板塊：</span>
+      <span class="text-xs font-bold text-slate-400 mr-2 flex items-center gap-1">🏢 <span id="lbl-sector-prefix">產業板塊：</span></span>
       <button onclick="setSectorFilter('ALL')" class="sector-btn active px-3 py-1 rounded-lg text-xs font-medium border border-slate-700 bg-slate-800 text-white transition" data-sector="ALL">全部板塊</button>
       <button onclick="setSectorFilter('WATCHLIST')" class="sector-btn px-3 py-1 rounded-lg text-xs font-medium border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 transition" data-sector="WATCHLIST">⭐ 我的自選股</button>
       <button onclick="setSectorFilter('生技與醫療製藥')" class="sector-btn px-3 py-1 rounded-lg text-xs font-medium border border-transparent text-slate-400 hover:text-emerald-400 hover:bg-slate-800 transition" data-sector="生技與醫療製藥">💊 生技與醫療製藥</button>
@@ -493,7 +511,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="bg-slate-900/40 border border-slate-800/80 rounded-xl p-4">
       <div class="flex items-center justify-between mb-3">
         <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <span>🔥</span> 標的快速篩選 ($TICKER)
+          <span>🔥</span> <span id="lbl-quick-filter">標的快速篩選 ($TICKER)</span>
         </h2>
         <div class="flex items-center gap-3">
           <button onclick="exportWatchlist()" class="text-xs text-slate-400 hover:text-teal-300">📤 匯出自選</button>
@@ -531,9 +549,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               <span class="text-xs font-normal text-slate-400">相對前一日收盤</span>
             </div>
           </div>
-          <div class="flex items-center gap-2 ml-0 sm:ml-4">
+          <div class="flex items-center gap-2 ml-0 sm:ml-4 flex-wrap">
             <button onclick="openDeepDiveModal(currentTicker)" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-teal-500 text-slate-950 hover:bg-teal-400 transition flex items-center gap-1 shadow-sm font-bold">
               🧠 AI 論點脈絡
+            </button>
+            <button onclick="togglePriceHistoryChart()" class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/40 text-teal-300 transition">
+              📉 <span id="price-history-btn-text">首次提及走勢疊圖</span>
             </button>
             <button onclick="toggleSentimentChart()" class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
               📈 <span id="sentiment-chart-btn-text">情緒趨勢</span>
@@ -578,6 +599,24 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
         <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden flex items-center">
           <div id="quote-range-bar" class="bg-gradient-to-r from-teal-600 to-cyan-400 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- 【新增】：首次提及走勢疊圖容器 (含推文點位標記與績效計算) -->
+      <div id="price-history-chart-wrapper" class="hidden border-t border-slate-800/80 pt-4 space-y-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-2">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-slate-200">📉 首次提及以來股價走勢與社群多空點位疊圖</span>
+            <span class="px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 font-mono text-[11px]" id="perf-first-mention">計算中...</span>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] font-mono">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>看多推文</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-400"></span>看空推文</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-400"></span>中立推文</span>
+          </div>
+        </div>
+        <div class="w-full h-[260px] bg-slate-950/80 p-3 rounded-lg border border-slate-800">
+          <canvas id="priceHistoryChartCanvas"></canvas>
         </div>
       </div>
 
@@ -774,10 +813,79 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     
     let tvChartVisible = false;
     let sentimentChartVisible = false;
+    let priceHistoryChartVisible = false;
+
     let sentimentChartInstance = null;
+    let priceHistoryChartInstance = null;
 
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
+    let currentLang = localStorage.getItem('serenity_lang') || 'zh';
+
+    const i18n = {
+      zh: {
+        subtitle: "美股社群情報、AI 對話問答與個股論點脈絡",
+        all: "全部",
+        daily: "📅 每日",
+        weekly: "📆 每週 (7D)",
+        monthly: "📈 每月 (28D)",
+        quarterly: "📊 季度 (90D)",
+        statTotal: "當前視圖提及推文",
+        statBullish: "看多觀點 (Bullish)",
+        statBearish: "看空/警戒 (Bearish)",
+        statTickers: "視圖關注標的數",
+        statBullSub: "多方偏向佔比",
+        statBearSub: "風險警戒貼文",
+        statTickerSub: "活躍討論股票",
+        sectorPrefix: "產業板塊：",
+        quickFilter: "標的快速篩選 ($TICKER)"
+      },
+      en: {
+        subtitle: "US Stock Intelligence, AI Thesis & Stance History",
+        all: "All",
+        daily: "📅 Daily",
+        weekly: "📆 Weekly (7D)",
+        monthly: "📈 Monthly (28D)",
+        quarterly: "📊 Quarterly (90D)",
+        statTotal: "Tracked Mentions",
+        statBullish: "Bullish Stance",
+        statBearish: "Bearish / Risk",
+        statTickers: "Active Tickers",
+        statBullSub: "Bullish Bias Ratio",
+        statBearSub: "Risk Alerts",
+        statTickerSub: "Active Discussion",
+        sectorPrefix: "Sectors: ",
+        quickFilter: "Quick Ticker Filter ($TICKER)"
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'zh' ? 'en' : 'zh';
+      localStorage.setItem('serenity_lang', currentLang);
+      applyLanguage();
+    }
+
+    function applyLanguage() {
+      const dict = i18n[currentLang];
+      document.getElementById('app-subtitle').innerText = dict.subtitle;
+      document.getElementById('lbl-stat-total').innerText = dict.statTotal;
+      document.getElementById('lbl-stat-bullish').innerText = dict.statBullish;
+      document.getElementById('lbl-stat-bearish').innerText = dict.statBearish;
+      document.getElementById('lbl-stat-tickers').innerText = dict.statTickers;
+      document.getElementById('lbl-stat-bull-sub').innerText = dict.statBullSub;
+      document.getElementById('lbl-stat-bear-sub').innerText = dict.statBearSub;
+      document.getElementById('lbl-stat-ticker-sub').innerText = dict.statTickerSub;
+      document.getElementById('lbl-sector-prefix').innerText = dict.sectorPrefix;
+      document.getElementById('lbl-quick-filter').innerText = dict.quickFilter;
+
+      document.querySelectorAll('[data-view="all"]').forEach(el => el.innerText = dict.all);
+      document.querySelectorAll('[data-view="daily"]').forEach(el => el.innerText = dict.daily);
+      document.querySelectorAll('[data-view="weekly"]').forEach(el => el.innerText = dict.weekly);
+      document.querySelectorAll('[data-view="monthly"]').forEach(el => el.innerText = dict.monthly);
+      document.querySelectorAll('[data-view="quarterly"]').forEach(el => el.innerText = dict.quarterly);
+
+      document.getElementById('lang-toggle-btn').innerText = currentLang === 'zh' ? '🌐 EN' : '🌐 繁中';
+    }
 
     function formatNumber(num) {
       if (!num) return '-';
@@ -977,6 +1085,139 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
+    // 【新增】：首次提及走勢疊圖切換與繪製邏輯
+    function togglePriceHistoryChart() {
+      priceHistoryChartVisible = !priceHistoryChartVisible;
+      const wrapper = document.getElementById('price-history-chart-wrapper');
+      const btnText = document.getElementById('price-history-btn-text');
+      if (priceHistoryChartVisible) {
+        wrapper.classList.remove('hidden');
+        btnText.innerText = '收合走勢疊圖';
+        renderPriceHistoryChart(currentTicker);
+      } else {
+        wrapper.classList.add('hidden');
+        btnText.innerText = '首次提及走勢疊圖';
+      }
+    }
+
+    function renderPriceHistoryChart(ticker) {
+      if (!ticker) return;
+      const data = stockQuotes[ticker] || {};
+      const history = data.history || [];
+      const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
+      
+      const perfEl = document.getElementById('perf-first-mention');
+      if (history.length === 0) {
+        perfEl.innerText = '無歷史日 K 資料';
+        return;
+      }
+
+      // 取得所有日期標籤
+      const labels = history.map(item => item.d);
+      const priceData = history.map(item => item.p);
+
+      // 建立推文點位對應
+      const tweetPointColors = [];
+      const tweetPointRadius = [];
+      const tweetPointHoverRadius = [];
+
+      // 首次提及計算
+      const chronologicalTweets = [...tickerTweets].sort((a, b) => (a.iso_date || a.date).localeCompare(b.iso_date || b.date));
+      const firstTweet = chronologicalTweets[0];
+      let firstMentionPrice = null;
+
+      if (firstTweet) {
+        const fDate = (firstTweet.iso_date || firstTweet.date).slice(0, 10);
+        const matchPoint = history.find(h => h.d >= fDate);
+        if (matchPoint) {
+          firstMentionPrice = matchPoint.p;
+        }
+      }
+
+      if (firstMentionPrice && data.price) {
+        const totalReturn = ((data.price - firstMentionPrice) / firstMentionPrice) * 100;
+        const isPos = totalReturn >= 0;
+        perfEl.innerHTML = `首次提及: <b>${firstTweet ? (firstTweet.iso_date||firstTweet.date).slice(0,10) : '-'}</b> ($${firstMentionPrice}) ➔ 目前: <b>$${data.price}</b> (<span class="${isPos ? 'text-emerald-400' : 'text-rose-400'}">${isPos ? '+' : ''}${totalReturn.toFixed(1)}%</span>)`;
+      } else {
+        perfEl.innerText = `首次提及: ${firstTweet ? (firstTweet.iso_date||firstTweet.date).slice(0,10) : '未知'}`;
+      }
+
+      // 標註每個 K 線日是否有推文提及
+      labels.forEach(dateStr => {
+        const found = tickerTweets.filter(t => (t.iso_date || t.date).startsWith(dateStr));
+        if (found.length > 0) {
+          const hasBull = found.some(t => t.sentiment === 'Bullish');
+          const hasBear = found.some(t => t.sentiment === 'Bearish');
+          if (hasBull && !hasBear) {
+            tweetPointColors.push('#10b981'); // 綠色
+          } else if (hasBear && !hasBull) {
+            tweetPointColors.push('#f43f5e'); // 紅色
+          } else {
+            tweetPointColors.push('#38bdf8'); // 藍色
+          }
+          tweetPointRadius.push(6);
+          tweetPointHoverRadius.push(9);
+        } else {
+          tweetPointColors.push('transparent');
+          tweetPointRadius.push(0);
+          tweetPointHoverRadius.push(0);
+        }
+      });
+
+      const ctx = document.getElementById('priceHistoryChartCanvas').getContext('2d');
+      if (priceHistoryChartInstance) priceHistoryChartInstance.destroy();
+
+      priceHistoryChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: `$${ticker} 收盤價 (USD)`,
+              data: priceData,
+              borderColor: '#14b8a6',
+              borderWidth: 2,
+              pointBackgroundColor: tweetPointColors,
+              pointBorderColor: tweetPointColors,
+              pointRadius: tweetPointRadius,
+              pointHoverRadius: tweetPointHoverRadius,
+              tension: 0.1,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
+            tooltip: {
+              callbacks: {
+                afterLabel: function(context) {
+                  const dateStr = context.label;
+                  const found = tickerTweets.filter(t => (t.iso_date || t.date).startsWith(dateStr));
+                  if (found.length > 0) {
+                    return found.map(t => `💬 [${t.sentiment}] ${t.summary || t.text.slice(0, 35)}...`);
+                  }
+                  return '';
+                }
+              }
+            }
+          },
+          scales: {
+            x: { 
+              ticks: { color: '#94a3b8', maxTicksLimit: 8 }, 
+              grid: { color: '#1e293b' } 
+            },
+            y: { 
+              ticks: { color: '#94a3b8' }, 
+              grid: { color: '#1e293b' } 
+            }
+          }
+        }
+      });
+    }
+
     function toggleSentimentChart() {
       sentimentChartVisible = !sentimentChartVisible;
       const wrapper = document.getElementById('sentiment-chart-wrapper');
@@ -1127,7 +1368,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       } else {
         document.getElementById('quote-price').innerText = '即時行情模式';
         currencyLabel.innerText = '';
-        changeEl.innerHTML = '<span class="text-xs font-normal text-teal-400 font-mono">可點擊「K 線圖」展開即時走勢</span>';
+        changeEl.innerHTML = '<span class="text-xs font-normal text-teal-400 font-mono">可點擊「首次提及走勢疊圖」展開歷史點位</span>';
         changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-medium';
         document.getElementById('val-mkt-cap').innerText = '-';
         document.getElementById('val-fwd-pe').innerText = '-';
@@ -1138,6 +1379,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${ticker}/`;
 
+      if (priceHistoryChartVisible) renderPriceHistoryChart(ticker);
       if (tvChartVisible) loadTradingViewWidget(ticker);
       if (sentimentChartVisible) renderSentimentChart(ticker);
     }
@@ -1637,6 +1879,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
 
+    applyLanguage();
     setViewMode('all');
   </script>
 </body>
@@ -1668,7 +1911,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (4 大優化模組已全面就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (首次提及走勢疊圖與多語系已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
