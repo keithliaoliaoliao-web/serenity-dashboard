@@ -10,12 +10,15 @@ import yfinance as yf
 # ==========================================
 TARGET_HANDLE = os.environ.get("TARGET_HANDLE", "aleabitoreddit")
 TWEETS_FILE = "data/tweets.json"
+ALT_TWEETS_FILE = "data/aleabitoreddit_tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 THESIS_FILE = "data/thesis_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
-# 遠端備援資料庫 (Yan Labs 6,400+ 則推文資料)
-YAN_LABS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
+DATA_SOURCES = [
+    "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json",
+    "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@main/data/aleabitoreddit_tweets.json"
+]
 
 TWITTER_EPOCH = 1288834974657
 
@@ -97,43 +100,37 @@ def snowflake_to_iso(tweet_id_str):
     except Exception:
         return None, None, None
 
-def load_tweets(filepath):
-    """具備自動遠端備援的推文載入器"""
-    tweets = []
-    # 1. 優先嘗試讀取本地檔案
-    if os.path.exists(filepath):
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    tweets = data
-                elif isinstance(data, dict):
-                    for key in ["tweets", "data", "statuses", "results"]:
-                        if key in data and isinstance(data[key], list):
-                            tweets = data[key]
-                            break
-                    if not tweets:
-                        tweets = list(data.values())
-        except Exception as e:
-            print(f"⚠️ 讀取本地推文失敗: {e}", flush=True)
+def load_tweets():
+    """自動多檔案檢查與遠端備援的推文載入器"""
+    for path in [TWEETS_FILE, ALT_TWEETS_FILE]:
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if isinstance(data, list) and len(data) > 0:
+                        return data
+                    elif isinstance(data, dict) and len(data) > 0:
+                        return list(data.values())
+            except Exception:
+                pass
 
-    # 2. 若本地無資料，自動從遠端備援拉取
-    if not tweets:
-        print(f"🌐 本地推文為空，正在從遠端備援資料庫拉取歷史推文...", flush=True)
+    print("🌐 本地推文為空，正在從備援資料庫即時拉取推文...", flush=True)
+    for url in DATA_SOURCES:
         try:
-            res = requests.get(YAN_LABS_URL, timeout=15)
+            res = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
             if res.status_code == 200:
-                remote_data = res.json()
-                tweets = remote_data if isinstance(remote_data, list) else list(remote_data.values())
-                # 自動回寫到本地保存
-                os.makedirs(os.path.dirname(filepath), exist_ok=True)
-                with open(filepath, "w", encoding="utf-8") as f:
-                    json.dump(tweets, f, ensure_ascii=False)
-                print(f"✅ 成功從遠端備援拉取 {len(tweets)} 則歷史推文並寫入 {filepath}", flush=True)
-        except Exception as e:
-            print(f"⚠️ 從遠端備援拉取推文失敗: {e}", flush=True)
+                data = res.json()
+                tweets = data if isinstance(data, list) else list(data.values())
+                if len(tweets) > 0:
+                    os.makedirs(os.path.dirname(TWEETS_FILE), exist_ok=True)
+                    with open(TWEETS_FILE, "w", encoding="utf-8") as f:
+                        json.dump(tweets, f, ensure_ascii=False)
+                    print(f"✅ 成功拉取 {len(tweets)} 則歷史推文並寫入 {TWEETS_FILE}", flush=True)
+                    return tweets
+        except Exception:
+            pass
 
-    return tweets
+    return []
 
 def load_json_dict(filepath):
     if not os.path.exists(filepath):
@@ -2017,15 +2014,15 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes, thesis_da
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (共注入 {len(tweets)} 則推文資料)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (共注入 {len(tweets)} 則有效推文資料)", flush=True)
 
 if __name__ == "__main__":
-    tweets_raw = load_tweets(TWEETS_FILE)
+    tweets_raw = load_tweets()
     sentiment_cache = load_json_dict(CACHE_FILE)
     thesis_data = load_json_dict(THESIS_FILE)
     cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
-    print(f"📦 成功載入推文：原始 {len(tweets_raw)} 則，清洗後有效推文 {len(cleaned_tweets)} 則", flush=True)
+    print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後推文 {len(cleaned_tweets)} 則 | 涵蓋標的 {len(counts)} 檔", flush=True)
 
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     combined_target_list = list(dict.fromkeys(recent_tickers + all_sector_symbols + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:60]]))[:110]
