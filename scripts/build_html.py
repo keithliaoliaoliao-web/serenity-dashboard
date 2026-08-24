@@ -22,7 +22,6 @@ DATA_SOURCES = [
 
 TWITTER_EPOCH = 1288834974657
 
-# 美股 9 大核心產業板塊對應字典
 SECTOR_MAPPING = {
     "生技與醫療製藥": [
         "HIMS", "MRNA", "JNJ", "TEM", "LLY", "NVO", "ISRG", "CRSP", "VRTX", "AMGN", 
@@ -101,7 +100,6 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None
 
 def load_tweets():
-    """自動多檔案檢查與遠端備援的推文載入器"""
     for path in [TWEETS_FILE, ALT_TWEETS_FILE]:
         if os.path.exists(path):
             try:
