@@ -2,11 +2,9 @@ name: Hourly Serenity Tracker Pipeline
 
 on:
   schedule:
-    # 每個整點執行一次 (UTC 0 分，相當於台灣時間每小時 0 分)
     - cron: '0 * * * *'
-  workflow_dispatch: # 支援在 GitHub 介面手動一鍵觸發
+  workflow_dispatch:
 
-# 賦予工作流程對儲存庫內容的讀寫權限
 permissions:
   contents: write
 
@@ -35,9 +33,10 @@ jobs:
         env:
           TARGET_HANDLE: "aleabitoreddit"
         run: |
-          python scripts/fetch_tweets.py || echo "⚠️ 抓取遇限流或防清空鎖啟動，使用既有資料繼續"
+          python scripts/fetch_tweets.py
 
       - name: 5. 提煉 AI 投資論點與關鍵里程碑 (generate_thesis.py)
+        continue-on-error: true
         run: |
           python scripts/generate_thesis.py
 
@@ -51,8 +50,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # 檢查是否有檔案變動
           git add data/ docs/
           if git diff --staged --quiet; then
             echo "✅ 沒有新的資料變更，跳過提交。"
