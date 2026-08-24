@@ -29,24 +29,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install yfinance requests
 
-      - name: 4. 執行推文擷取與同步 (fetch_tweets.py)
-        env:
-          TARGET_HANDLE: "aleabitoreddit"
-        run: |
-          python scripts/fetch_tweets.py
-
-      - name: 5. 提煉 AI 投資論點與關鍵里程碑 (generate_thesis.py)
-        continue-on-error: true
-        run: |
-          python scripts/generate_thesis.py
-
-      - name: 6. 產出儀表板 HTML (build_html.py)
-        env:
-          TARGET_HANDLE: "aleabitoreddit"
+      - name: 4. 產出儀表板 HTML (build_html.py)
         run: |
           python scripts/build_html.py
 
-      - name: 7. 自動提交並推送更新 (Git Commit & Push)
+      - name: 5. 自動提交並推送更新 (Git Commit & Push)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -54,6 +41,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "✅ 沒有新的資料變更，跳過提交。"
           else
-            git commit -m "🤖 自動排程更新: 推文資料與儀表板 ($(date +'%Y-%m-%d %H:%M:%S UTC'))"
+            git commit -m "🤖 自動排程更新: 產出儀表板 ($(date +'%Y-%m-%d %H:%M:%S UTC'))"
             git push origin main
           fi
