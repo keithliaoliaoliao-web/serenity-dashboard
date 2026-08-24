@@ -1,0 +1,45 @@
+name: Hourly Serenity Tracker Cron & Build
+
+on:
+  schedule:
+    # 每個整點執行一次 (UTC 0 分)
+    - cron: '0 * * * *'
+  workflow_dispatch: # 支援手動一鍵觸發
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 檢出專案程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 安裝相依套件
+        run: |
+          pip install --upgrade pip
+          pip install yfinance requests
+
+      - name: 執行推文擷取與同步
+        run: |
+          python scripts/fetch_tweets.py || echo "⚠️ 擷取遇限流，使用現有快取繼續建置"
+
+      - name: 產出靜態儀表板 HTML
+        run: |
+          python scripts/build_html.py
+
+      - name: 部署至 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          force_orphan: true
