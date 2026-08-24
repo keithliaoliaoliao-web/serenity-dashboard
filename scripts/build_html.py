@@ -2,6 +2,7 @@ import json
 import os
 import re
 from datetime import datetime
+import requests
 import yfinance as yf
 
 # ==========================================
@@ -12,6 +13,9 @@ TWEETS_FILE = "data/tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 THESIS_FILE = "data/thesis_cache.json"
 OUTPUT_HTML = "docs/index.html"
+
+# 遠端備援資料庫 (Yan Labs 6,400+ 則推文資料)
+YAN_LABS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
 
 TWITTER_EPOCH = 1288834974657
 
@@ -94,22 +98,42 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None
 
 def load_tweets(filepath):
-    if not os.path.exists(filepath):
-        return []
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            if isinstance(data, list):
-                return data
-            elif isinstance(data, dict):
-                for key in ["tweets", "data", "statuses", "results"]:
-                    if key in data and isinstance(data[key], list):
-                        return data[key]
-                return list(data.values())
-            return []
-    except Exception as e:
-        print(f"⚠️ 讀取推文失敗 ({filepath}): {e}", flush=True)
-        return []
+    """具備自動遠端備援的推文載入器"""
+    tweets = []
+    # 1. 優先嘗試讀取本地檔案
+    if os.path.exists(filepath):
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    tweets = data
+                elif isinstance(data, dict):
+                    for key in ["tweets", "data", "statuses", "results"]:
+                        if key in data and isinstance(data[key], list):
+                            tweets = data[key]
+                            break
+                    if not tweets:
+                        tweets = list(data.values())
+        except Exception as e:
+            print(f"⚠️ 讀取本地推文失敗: {e}", flush=True)
+
+    # 2. 若本地無資料，自動從遠端備援拉取
+    if not tweets:
+        print(f"🌐 本地推文為空，正在從遠端備援資料庫拉取歷史推文...", flush=True)
+        try:
+            res = requests.get(YAN_LABS_URL, timeout=15)
+            if res.status_code == 200:
+                remote_data = res.json()
+                tweets = remote_data if isinstance(remote_data, list) else list(remote_data.values())
+                # 自動回寫到本地保存
+                os.makedirs(os.path.dirname(filepath), exist_ok=True)
+                with open(filepath, "w", encoding="utf-8") as f:
+                    json.dump(tweets, f, ensure_ascii=False)
+                print(f"✅ 成功從遠端備援拉取 {len(tweets)} 則歷史推文並寫入 {filepath}", flush=True)
+        except Exception as e:
+            print(f"⚠️ 從遠端備援拉取推文失敗: {e}", flush=True)
+
+    return tweets
 
 def load_json_dict(filepath):
     if not os.path.exists(filepath):
@@ -290,7 +314,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、歷史走勢與智慧產業分類...", flush=True)
+    print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情與歷史日 K 數據...", flush=True)
     quotes = {}
     
     for symbol in tickers:
@@ -352,7 +376,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                     "sector": sector_name,
                     "history": history_points
                 }
-                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 板塊: {sector_name}", flush=True)
             else:
                 quotes[symbol] = {"sector": sector_name, "history": []}
         except Exception:
@@ -687,7 +710,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 浮動 AI 對話助理按鈕與對話面板 (支援自訂金鑰與 Gemini 直連) -->
+  <!-- 浮動 AI 對話助理按鈕與對話面板 -->
   <div class="fixed bottom-6 right-6 z-50">
     <button id="ai-chat-btn" onclick="toggleChatDrawer()" class="bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 px-4 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 hover:scale-105 transition-all">
       💬 <span class="text-sm">問問 AI 助理</span>
@@ -1247,7 +1270,19 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            legend: { labels: { color: '#94a3b8', font: { size: 11 } } }
+            legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
+            tooltip: {
+              callbacks: {
+                afterLabel: function(context) {
+                  const dateStr = context.label;
+                  const found = tickerTweets.filter(t => (t.iso_date || t.date).startsWith(dateStr));
+                  if (found.length > 0) {
+                    return found.map(t => `💬 [${t.sentiment}] ${t.summary || t.text.slice(0, 35)}...`);
+                  }
+                  return '';
+                }
+              }
+            }
           },
           scales: {
             x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
@@ -1706,7 +1741,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    // AI 對話抽屜邏輯與 Gemini 直連問答
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -1761,7 +1795,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       appendChatMessage('user', query);
       input.value = '';
 
-      // 若有設定金鑰且非快捷固定指令，直接呼叫 Gemini
       if (clientApiKey && !isBasicQuickCommand(query)) {
         await askGeminiLive(query);
       } else {
@@ -1779,7 +1812,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const container = document.getElementById('chat-messages');
       const loadingMsg = container.lastElementChild;
 
-      // 提取相關推文作為上下文
       const relevantTweets = allTweets.slice(0, 30).map(t => `[${t.date}] ($${t.tickers.join(',')}) ${t.summary || t.text.slice(0, 80)}`).join('\n');
       
       const prompt = `
@@ -1985,7 +2017,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes, thesis_da
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (雲端 LLM 直連與金鑰管理已全面就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (共注入 {len(tweets)} 則推文資料)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
@@ -1993,6 +2025,8 @@ if __name__ == "__main__":
     thesis_data = load_json_dict(THESIS_FILE)
     cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
+    print(f"📦 成功載入推文：原始 {len(tweets_raw)} 則，清洗後有效推文 {len(cleaned_tweets)} 則", flush=True)
+
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     combined_target_list = list(dict.fromkeys(recent_tickers + all_sector_symbols + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:60]]))[:110]
     
