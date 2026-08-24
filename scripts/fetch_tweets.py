@@ -21,7 +21,6 @@ def fetch_tweets():
     print(f"🔄 正在為 @{TARGET_HANDLE} 同步歷史推文資料庫...", flush=True)
 
     tweets = []
-    # 依序嘗試多個來源
     for url in DATA_SOURCES:
         try:
             print(f"  🌐 正在連接資料來源: {url[:60]}...", flush=True)
@@ -40,7 +39,6 @@ def fetch_tweets():
             print(f"  ⚠️ 連線來源失敗，嘗試下一個備用來源: {e}", flush=True)
             time.sleep(1)
 
-    # 防清空熔斷保護：若抓取為空且本地已有資料，保留本地資料
     if not tweets and os.path.exists(OUTPUT_FILE):
         try:
             with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
