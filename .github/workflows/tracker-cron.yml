@@ -1,45 +1,62 @@
-name: Hourly Serenity Tracker Cron & Build
+name: Hourly Serenity Tracker Pipeline
 
 on:
   schedule:
-    # 每個整點執行一次 (UTC 0 分)
+    # 每個整點執行一次 (UTC 0 分，相當於台灣時間每小時 0 分)
     - cron: '0 * * * *'
-  workflow_dispatch: # 支援手動一鍵觸發
+  workflow_dispatch: # 支援在 GitHub 介面手動一鍵觸發
 
+# 賦予工作流程對儲存庫內容的讀寫權限
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
-  build-and-deploy:
+  run-pipeline:
     runs-on: ubuntu-latest
-    steps:
-      - name: 檢出專案程式碼
-        uses: actions/checkout@v4
 
-      - name: 設定 Python 環境
+    steps:
+      - name: 1. 檢出專案程式碼
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 2. 設定 Python 3.11 環境
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: 安裝相依套件
+      - name: 3. 安裝必要依賴套件
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install yfinance requests
 
-      - name: 執行推文擷取與同步
+      - name: 4. 執行推文擷取與同步 (fetch_tweets.py)
+        env:
+          TARGET_HANDLE: "aleabitoreddit"
         run: |
-          python scripts/fetch_tweets.py || echo "⚠️ 擷取遇限流，使用現有快取繼續建置"
+          python scripts/fetch_tweets.py || echo "⚠️ 抓取遇限流或防清空鎖啟動，使用既有資料繼續"
 
-      - name: 產出靜態儀表板 HTML
+      - name: 5. 提煉 AI 投資論點與關鍵里程碑 (generate_thesis.py)
+        run: |
+          python scripts/generate_thesis.py
+
+      - name: 6. 產出儀表板 HTML (build_html.py)
+        env:
+          TARGET_HANDLE: "aleabitoreddit"
         run: |
           python scripts/build_html.py
 
-      - name: 部署至 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          force_orphan: true
+      - name: 7. 自動提交並推送更新 (Git Commit & Push)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 檢查是否有檔案變動
+          git add data/ docs/
+          if git diff --staged --quiet; then
+            echo "✅ 沒有新的資料變更，跳過提交。"
+          else
+            git commit -m "🤖 自動排程更新: 推文資料與儀表板 ($(date +'%Y-%m-%d %H:%M:%S UTC'))"
+            git push origin main
+          fi
