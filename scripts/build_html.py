@@ -419,7 +419,7 @@ def to_b64_json(obj):
     raw_str = json.dumps(obj, ensure_ascii=False)
     return base64.b64encode(raw_str.encode("utf-8")).decode("ascii")
 
-HTML_TEMPLATE = """<!DOCTYPE html>
+HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -885,7 +885,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 【Base64 安全資料容器】：內容僅為 ASCII 字元，100% 免疫任何特殊字元與語法中斷 -->
+  <!-- 【Base64 安全資料容器】：純 ASCII 字元，100% 免疫任何特殊字元與語法中斷 -->
   <script id="b64-tweets" type="text/plain">__TWEETS_B64__</script>
   <script id="b64-top-tickers" type="text/plain">__TOP_TICKERS_B64__</script>
   <script id="b64-stock-quotes" type="text/plain">__STOCK_QUOTES_B64__</script>
@@ -1213,8 +1213,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function highlightText(text) {
       if (!text) return '';
       return text
-        .replace(/(\\$[A-Za-z]{1,6})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\').toUpperCase())" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
-        .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
+        .replace(/(\$[A-Za-z]{1,6})\b/g, '<button onclick="filterByTicker(\'$1\'.replace(\'$\', \'\').toUpperCase())" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
+        .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
     }
 
     function setViewMode(mode) {
@@ -2024,7 +2024,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         if (result.ok && result.data.candidates && result.data.candidates[0] && result.data.candidates[0].content) {
           const aiResponseText = result.data.candidates[0].content.parts[0].text;
-          loadingMsg.innerHTML = `<b>Serenity AI (${result.modelUsed})：</b><br>${aiResponseText.replace(/\n/g, '<br>')}`;
+          const formattedReply = aiResponseText.split('\n').join('<br>');
+          loadingMsg.innerHTML = `<b>Serenity AI (${result.modelUsed})：</b><br>${formattedReply}`;
         } else {
           loadingMsg.innerHTML = `⚠️ Gemini API 回傳異常：<b>${result.error || '呼叫失敗'}</b><br><br>💡 <b>解決步驟：</b>請點擊右上角 <b>⚙️ 設定</b> 重新測試連線。`;
         }
