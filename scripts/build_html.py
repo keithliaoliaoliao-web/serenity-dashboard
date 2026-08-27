@@ -64,6 +64,7 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
+    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -91,6 +92,7 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
+    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -100,6 +102,7 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
+    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
     for path in [filepath, ALT_TWEETS_FILE]:
         if os.path.exists(path):
@@ -162,6 +165,7 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
+    """萃取推文中的美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -193,6 +197,7 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
+    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -224,6 +229,7 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
+    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -338,6 +344,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
+    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     quotes = {}
     
@@ -369,6 +376,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
             sector_name = resolve_sector(symbol, info)
 
+            # 擷取 1 年歷史日 K 資料
             history_data = []
             try:
                 hist = ticker_obj.history(period="1y", interval="1d")
@@ -412,7 +420,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
     return quotes
 
-# 乾淨且輕量的 HTML 模板（不包夾大筆推文資料，完全避免 SyntaxError）
+# 乾淨且輕量的 HTML 模板（完全不包夾推文大陣列，透過非同步 fetch('./data.json') 載入，100% 杜絕 SyntaxError）
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
 <head>
@@ -659,7 +667,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <!-- 搜尋、排序與觀點篩選 -->
     <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
       <div class="flex items-center gap-2 flex-1 max-w-lg">
-        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的（例如: HIMS, MRNA, NBIS, AMAT）..." 
+        <input type="text" id="search-input" placeholder="搜尋推文內容, 摘要或 $標的（例如: HIMS, MRNA, NBIS, AMAT）..." 
           class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
         
         <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
@@ -846,7 +854,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <!-- 投資故事脈絡 -->
       <div class="bg-teal-950/20 border border-teal-500/30 p-4 rounded-xl space-y-2">
         <h4 class="text-xs font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
-          <span>📖</span> 投資論點演演變故事 (Thesis Story)
+          <span>📖</span> 投資論點演變故事 (Thesis Story)
         </h4>
         <p class="text-xs text-slate-200 leading-relaxed" id="modal-thesis-story">
           正在分析論點脈絡...
@@ -879,11 +887,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
+  <!-- 非同步資料載入容器：透過 fetch('./data.json') 取得推文，100% 杜絕任何 HTML 注入與 SyntaxError -->
   <script>
-    const allTweets = __TWEETS_DATA__;
-    const initialTopTickers = __TOP_TICKERS__;
-    const stockQuotes = __STOCK_QUOTES__;
-    const sectorMapping = __SECTOR_MAPPING__;
+    let allTweets = [];
+    let initialTopTickers = [];
+    let stockQuotes = __STOCK_QUOTES__;
+    let sectorMapping = __SECTOR_MAPPING__;
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -899,6 +908,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let geminiApiKey = localStorage.getItem('serenity_gemini_api_key') || '';
+
+    // 啟動時非同步載入 data.json
+    async function initDashboard() {
+      try {
+        const res = await fetch('./data.json?v=' + Date.now());
+        if (res.ok) {
+          allTweets = await res.json();
+          document.getElementById('stat-ai-coverage').innerText = '資料載入完成 (' + allTweets.length + ' 則)';
+          updateAggregatedView();
+        } else {
+          document.getElementById('stat-ai-coverage').innerText = '⚠️ 無法載入 data.json';
+        }
+      } catch (err) {
+        console.error('載入資料失敗:', err);
+        document.getElementById('stat-ai-coverage').innerText = '⚠️ 載入失敗';
+      }
+    }
 
     function updateChatModeBadge() {
       const badge = document.getElementById('chat-mode-badge');
@@ -1651,7 +1677,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         ['社群提及總數', tweetsA.length + ' 則', tweetsB.length + ' 則', tweetsA.length > tweetsB.length, tweetsB.length > tweetsA.length],
         ['看多偏向度 (Bullish %)', pctA + '% (' + bullA + '多)', pctB + '% (' + bullB + '多)', pctA > pctB, pctB > pctA],
         ['市值 (Market Cap)', formatNumber(dataA.marketCap), formatNumber(dataB.marketCap), (dataA.marketCap||0) > (dataB.marketCap||0), (dataB.marketCap||0) > (dataA.marketCap||0)],
-        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? dataA.forwardPE + 'x' : '-', dataB.forwardPE ? dataB.forwardPE + 'x' : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataB.forwardPE : false],
+        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? dataA.forwardPE + 'x' : '-', dataB.forwardPE ? dataB.forwardPE + 'x' : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
         ['市銷率 (P/S)', dataA.priceToSales ? dataA.priceToSales + 'x' : '-', dataB.priceToSales ? dataB.priceToSales + 'x' : '-', (dataA.priceToSales && dataB.priceToSales) ? dataA.priceToSales < dataB.priceToSales : false, (dataA.priceToSales && dataB.priceToSales) ? dataB.priceToSales < dataB.priceToSales : false],
         ['營收年增率 (YoY)', dataA.revenueGrowth ? dataA.revenueGrowth + '%' : '-', dataB.revenueGrowth ? dataB.revenueGrowth + '%' : '-', (dataA.revenueGrowth || -999) > (dataB.revenueGrowth || -999), (dataB.revenueGrowth || -999) > (dataA.revenueGrowth || -999)],
         ['下次財報日', dataA.earningsDate || '-', dataB.earningsDate || '-', false, false]
@@ -1756,8 +1782,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               '<a href="' + item.url + '" target="_blank" class="hover:underline">來源 ↗</a>' +
             '</div>' +
             '<div class="text-rose-200">' + (item.summary || item.translation_zh || item.text) + '</div>' +
-          '</div>'
-        )).join('');
+          '</div>' +
+        '</div>'
+      )).join('');
       } else {
         riskContainer.innerHTML = '<div class="text-xs text-slate-500">歷史貼文中未出現重大看空或風險警語。</div>';
       }
@@ -1971,7 +1998,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const contextTweets = allTweets.slice(0, 25).map(t => '[' + t.date + '] $' + (t.tickers.join(',$') || '大盤') + ' (' + t.sentiment + '): ' + (t.summary || t.text)).join('\n');
         const contextTickers = Object.entries(stockQuotes).slice(0, 20).map(([k, v]) => '$' + k + ': $' + (v.price || '-') + ' (PE: ' + (v.forwardPE || '-') + ', 板塊: ' + (v.sector || '-') + ')').join('; ');
 
-        const systemPrompt = '你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\n\n【即時行情摘要】：\n' + contextTickers + \n\n【近期關鍵推文摘要】：\n' + contextTweets + '\n\n使用者問題：' + userQuery;
+        const systemPrompt = '你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\n\n【即時行情摘要】：\n' + contextTickers + '\n\n【近期關鍵推文摘要】：\n' + contextTweets + '\n\n使用者問題：' + userQuery;
 
         const result = await executeGeminiRequest(geminiApiKey, systemPrompt);
 
@@ -2101,7 +2128,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             '• <b>最新立場：</b>' + (latest ? latest.sentiment : '中立') + '<br>' +
             '• <b>最新觀點：</b>' + storySummary + '<br>' +
             '<div class="mt-2 flex gap-2">' +
-              '<button onclick="openDeepDiveModal(\'' + symbol + '\')" class="px-2 py-1 bg-teal-500 text-slate-950 font-bold rounded">開啟 AI 論點脈絡 ↗</button>' +
+              '<button onclick="openDeepDiveModal(\'' + symbol + \')" class="px-2 py-1 bg-teal-500 text-slate-950 font-bold rounded">開啟 AI 論點脈絡 ↗</button>' +
             '</div>'
           );
           appendChatMessage('ai', analysisHtml);
@@ -2132,7 +2159,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     document.getElementById('last-update-time').innerText = '建置時間：' + new Date().toLocaleString('zh-TW', { hour12: false });
 
     updateChatModeBadge();
-    setViewMode('all');
+    initDashboard();
   </script>
 </body>
 </html>
@@ -2141,8 +2168,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     
-    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
-    
+    # 同步輸出 docs/data.json 供前端非同步讀取
+    with open(OUTPUT_DATA_JSON, "w", encoding="utf-8") as f:
+        json.dump(tweets, f, ensure_ascii=False)
+    print(f"💾 獨立推文資料已成功輸出至 {OUTPUT_DATA_JSON} (共 {len(tweets)} 則)", flush=True)
+
     ordered_tickers = []
     for t in recent_tickers:
         if t not in ordered_tickers:
@@ -2157,14 +2187,13 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
     sector_mapping_json_str = json.dumps(SECTOR_MAPPING, ensure_ascii=False)
 
-    html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
-                                 .replace("__TOP_TICKERS__", top_tickers_json_str) \
+    html_rendered = HTML_TEMPLATE.replace("__TOP_TICKERS__", top_tickers_json_str) \
                                  .replace("__STOCK_QUOTES__", stock_quotes_json_str) \
                                  .replace("__SECTOR_MAPPING__", sector_mapping_json_str)
 
-    with open(OUTPUT_HTML, "w", encoding="str" if False else "utf-8") as f:
+    with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (共注入 {len(tweets)} 則推文資料)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (採用 fetch('./data.json') 架構)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
