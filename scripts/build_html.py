@@ -13,6 +13,7 @@ TWEETS_FILE = "data/tweets.json"
 ALT_TWEETS_FILE = "data/aleabitoreddit_tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
+OUTPUT_DATA_JSON = "docs/data.json"
 
 # 遠端推文備援資料來源 (收錄 6,400+ 則歷史推文)
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
@@ -63,7 +64,6 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
-    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -91,7 +91,6 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -101,7 +100,6 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
-    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
     for path in [filepath, ALT_TWEETS_FILE]:
         if os.path.exists(path):
@@ -164,7 +162,6 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
-    """萃取推文中的美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -196,7 +193,6 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
-    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -228,7 +224,6 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
-    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -351,15 +346,53 @@ def fetch_stock_quotes_and_fundamentals(tickers):
         try:
             ticker_obj = yf.Ticker(symbol)
             fast = getattr(ticker_obj, "fast_info", None)
-            info = ticker_obj.info or {}
             
-            current_price = getattr(fast, "last_price", None) or getattr(fast, "regular_market_price", None) or info.get("currentPrice") or info.get("regularMarketPrice")
-            prev_close = getattr(fast, "previous_close", None) or info.get("regularMarketPreviousClose") or info.get("previousClose")
-            high_52 = getattr(fast, "year_high", None) or info.get("fiftyTwoWeekHigh")
-            low_52 = getattr(fast, "year_low", None) or info.get("fiftyTwoWeekLow")
-            volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None) or info.get("volume")
+            current_price = getattr(fast, "last_price", None) or getattr(fast, "regular_market_price", None)
+            prev_close = getattr(fast, "previous_close", None)
+            high_52 = getattr(fast, "year_high", None)
+            low_52 = getattr(fast, "year_low", None)
+            volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None)
+            market_cap = getattr(fast, "market_cap", None)
 
-            market_cap = getattr(fast, "market_cap", None) or info.get("marketCap")
+            # 擷取 1 年歷史日 K 資料
+            history_data = []
+            try:
+                hist = ticker_obj.history(period="1y", interval="1d")
+                if not hist.empty:
+                    for ts, row in hist.iterrows():
+                        c_val = row.get("Close")
+                        if c_val is not None and not str(c_val).lower() == 'nan':
+                            history_data.append({
+                                "d": ts.strftime("%Y-%m-%d"),
+                                "c": round(float(c_val), 2)
+                            })
+                    # 關鍵備援：若 fast_info 未能及時取得即時價，直接以日 K 最後一筆收盤價自動回填
+                    if current_price is None or float(current_price) <= 0:
+                        current_price = history_data[-1]["c"]
+                    if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
+                        prev_close = history_data[-2]["c"]
+            except Exception as hist_err:
+                print(f"  ⚠️ 無法取得 ${symbol} 歷史日 K: {hist_err}")
+
+            info = {}
+            try:
+                info = ticker_obj.info or {}
+            except Exception:
+                pass
+
+            if not current_price and info:
+                current_price = info.get("currentPrice") or info.get("regularMarketPrice")
+            if not prev_close and info:
+                prev_close = info.get("regularMarketPreviousClose") or info.get("previousClose")
+            if not high_52 and info:
+                high_52 = info.get("fiftyTwoWeekHigh")
+            if not low_52 and info:
+                low_52 = info.get("fiftyTwoWeekLow")
+            if not volume and info:
+                volume = info.get("volume")
+            if not market_cap and info:
+                market_cap = info.get("marketCap")
+
             forward_pe = info.get("forwardPE")
             trailing_pe = info.get("trailingPE")
             price_to_sales = info.get("priceToSalesTrailing12Months")
@@ -374,21 +407,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                 pass
 
             sector_name = resolve_sector(symbol, info)
-
-            # 擷取 1 年歷史日 K 資料
-            history_data = []
-            try:
-                hist = ticker_obj.history(period="1y", interval="1d")
-                if not hist.empty:
-                    for ts, row in hist.iterrows():
-                        c_val = row.get("Close")
-                        if c_val is not None and not str(c_val).lower() == 'nan':
-                            history_data.append({
-                                "d": ts.strftime("%Y-%m-%d"),
-                                "c": round(float(c_val), 2)
-                            })
-            except Exception as hist_err:
-                print(f"  ⚠️ 無法取得 ${symbol} 歷史日 K: {hist_err}")
 
             if current_price is not None and float(current_price) > 0:
                 change = (current_price - prev_close) if prev_close else 0.0
@@ -424,7 +442,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serenity 美股情報儀表板 & AI 對話助理</title>
+  <title>Serenity 美股社群情報儀表板 & AI 對話助理</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -450,7 +468,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.12); }
+    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.15); }
   </style>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
@@ -493,7 +511,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           <span class="text-xs font-medium text-slate-400">當前視圖提及推文</span>
           <div class="text-2xl font-bold text-white mt-1" id="stat-total">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">AI 分析：0 / 0 (0%)</div>
+        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">資料載入中...</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
@@ -619,7 +637,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           </div>
           <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/80">
             <div class="text-[11px] text-slate-400">下次財報倒數 (Catalyst)</div>
-            <div class="text-sm font-bold font-mono text-orange-400 mt-0.5" id="val-earnings-date">-</div>
+            <div class="text-sm font-bold font-mono text-amber-400 mt-0.5" id="val-earnings-date">-</div>
           </div>
         </div>
 
@@ -885,11 +903,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
+  <!-- 前端資料初始化與業務邏輯腳本 -->
   <script>
-    const allTweets = __TWEETS_DATA__;
-    const initialTopTickers = __TOP_TICKERS__;
-    const stockQuotes = __STOCK_QUOTES__;
-    const sectorMapping = __SECTOR_MAPPING__;
+    let allTweets = [];
+    let initialTopTickers = [];
+    let stockQuotes = __STOCK_QUOTES__;
+    let sectorMapping = __SECTOR_MAPPING__;
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -905,6 +924,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let geminiApiKey = localStorage.getItem('serenity_gemini_api_key') || '';
+
+    // 透過 fetch 非同步載入獨立的 data.json 檔案
+    async function initDashboard() {
+      try {
+        const res = await fetch('./data.json?v=' + Date.now());
+        if (res.ok) {
+          allTweets = await res.json();
+          document.getElementById('stat-ai-coverage').innerText = '資料載入完成 (' + allTweets.length + ' 則)';
+          updateAggregatedView();
+        } else {
+          document.getElementById('stat-ai-coverage').innerText = '⚠️ 無法讀取 data.json';
+        }
+      } catch (err) {
+        console.error('載入資料失敗:', err);
+        document.getElementById('stat-ai-coverage').innerText = '⚠️ 載入失敗';
+      }
+    }
 
     function updateChatModeBadge() {
       const badge = document.getElementById('chat-mode-badge');
@@ -942,11 +978,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('apikey-modal').classList.add('hidden');
     }
 
-    // 計算模型版本權重分數（例如 gemini-3.6-flash -> 360 分, gemini-2.0 -> 200 分）
     function getModelScore(modelName) {
       let score = 0;
       const lower = modelName.toLowerCase();
-      
       const verMatch = lower.match(/gemini-(\\d+(?:\\.\\d+)?)/);
       if (verMatch) {
         score += parseFloat(verMatch[1]) * 100;
@@ -954,11 +988,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (lower.includes('flash')) score += 50;
       if (lower.includes('pro')) score += 30;
       if (lower.includes('preview')) score -= 5;
-      
       return score;
     }
 
-    // 動態向 Google 查詢最新可用模型並自動降冪排序
     async function fetchOnlineGeminiModels(cleanKey) {
       const listUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
       let models = [];
@@ -976,7 +1008,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       let rawList = await tryFetch(listUrl, { 'x-goog-api-key': cleanKey });
       if (!rawList) {
-        rawList = await tryFetch(`${listUrl}?key=${encodeURIComponent(cleanKey)}`, {});
+        rawList = await tryFetch(listUrl + '?key=' + encodeURIComponent(cleanKey), {});
       }
 
       if (rawList && rawList.length > 0) {
@@ -988,19 +1020,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         models.sort((a, b) => getModelScore(b) - getModelScore(a));
       }
 
-      // 預設高優先安全候選名單（以最新 3.6-flash 為第一順位）
       const defaultCandidates = [
-        'gemini-3.6-flash',
-        'gemini-3.0-flash',
+        'gemini-2.5-flash',
         'gemini-2.0-flash',
         'gemini-2.0-flash-exp',
+        'gemini-1.5-flash',
         'gemini-pro'
       ];
 
       return Array.from(new Set([...models, ...defaultCandidates]));
     }
 
-    // 核心請求執行器：支援自動智慧輪詢與雙通道容錯
     async function executeGeminiRequest(key, promptText) {
       const cleanKey = key.trim().replace(/["'\\s]/g, '');
       const candidateModels = await fetchOnlineGeminiModels(cleanKey);
@@ -1014,7 +1044,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       for (const model of candidateModels) {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
-        // 管道 1：標準 x-goog-api-key 標頭傳遞
         try {
           const res1 = await fetch(url, {
             method: 'POST',
@@ -1035,7 +1064,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           lastError = err.message;
         }
 
-        // 管道 2：純 URL 參數備援
         try {
           const res2 = await fetch(`${url}?key=${encodeURIComponent(cleanKey)}`, {
             method: 'POST',
@@ -1857,7 +1885,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
           t.text.toLowerCase().includes(searchQuery) || 
-          t.summary.toLowerCase().includes(searchQuery) || 
+          t.summary.toLowerCase().includes(searchQuery) ||
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
         return matchSentiment && matchTicker && matchSearch;
       });
@@ -1951,7 +1979,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    // 4. AI 智能對話助理 (動態模型適應與連線)
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -2188,15 +2215,21 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (架構已對齊 Burak 穩定版本)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (高頻標的優先與多空走勢疊圖已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
+    print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
+
+    # 關鍵修正：推文高頻提及標的排在最前順位，並將上限擴大至 250 檔，確保 META (255次)、ORCL (107次) 完整擷取
+    mentioned_tickers_sorted = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
-    combined_target_list = list(dict.fromkeys(recent_tickers + all_sector_symbols + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:60]]))[:110]
+    
+    combined_target_list = list(dict.fromkeys(mentioned_tickers_sorted + recent_tickers + all_sector_symbols))[:250]
+    print(f"🎯 本次預計抓取市場數據標的總數：{len(combined_target_list)} 檔 (高頻提及標的優先)", flush=True)
     
     stock_quotes = fetch_stock_quotes_and_fundamentals(combined_target_list)
     generate_html(cleaned_tweets, counts, recent_tickers, stock_quotes)
