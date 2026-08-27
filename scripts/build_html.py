@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import re
@@ -14,11 +15,13 @@ ALT_TWEETS_FILE = "data/aleabitoreddit_tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
+# 遠端推文備援資料來源 (收錄 6,400+ 則歷史推文)
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
 CDN_TWEETS_URL = "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@main/data/aleabitoreddit_tweets.json"
 
 TWITTER_EPOCH = 1288834974657
 
+# 美股 9 大核心產業板塊對應字典
 SECTOR_MAPPING = {
     "生技與醫療製藥": [
         "HIMS", "MRNA", "JNJ", "TEM", "LLY", "NVO", "ISRG", "CRSP", "VRTX", "AMGN", 
@@ -335,6 +338,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
+    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     quotes = {}
     
@@ -366,6 +370,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
             sector_name = resolve_sector(symbol, info)
 
+            # 擷取 1 年歷史日 K 資料
             history_data = []
             try:
                 hist = ticker_obj.history(period="1y", interval="1d")
@@ -409,10 +414,10 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
     return quotes
 
-def safe_json_dump(obj):
-    """安全 JSON 序列化，防止 </script> 破壞 HTML 結構"""
-    s = json.dumps(obj, ensure_ascii=False)
-    return s.replace("</script", "<\\/script").replace("<!--", "<\\!--")
+def to_b64_json(obj):
+    """將資料序列化為 JSON 後以 Base64 編碼，100% 杜絕特殊字元破壞 HTML 語法"""
+    raw_str = json.dumps(obj, ensure_ascii=False)
+    return base64.b64encode(raw_str.encode("utf-8")).decode("ascii")
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
@@ -880,18 +885,37 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 【核心修復】：採用標準 JSON Island 容器存放資料，100% 杜絕 SyntaxError 語法崩潰 -->
-  <script type="application/json" id="raw-tweets-data">__TWEETS_DATA__</script>
-  <script type="application/json" id="raw-top-tickers">__TOP_TICKERS__</script>
-  <script type="application/json" id="raw-stock-quotes">__STOCK_QUOTES__</script>
-  <script type="application/json" id="raw-sector-mapping">__SECTOR_MAPPING__</script>
+  <!-- 【Base64 安全資料容器】：內容僅為 ASCII 字元，100% 免疫任何特殊字元與語法中斷 -->
+  <script id="b64-tweets" type="text/plain">__TWEETS_B64__</script>
+  <script id="b64-top-tickers" type="text/plain">__TOP_TICKERS_B64__</script>
+  <script id="b64-stock-quotes" type="text/plain">__STOCK_QUOTES_B64__</script>
+  <script id="b64-sector-mapping" type="text/plain">__SECTOR_MAPPING_B64__</script>
 
   <script>
-    // 安全由 JSON 容器解析資料
-    const allTweets = JSON.parse(document.getElementById('raw-tweets-data').textContent || '[]');
-    const initialTopTickers = JSON.parse(document.getElementById('raw-top-tickers').textContent || '[]');
-    const stockQuotes = JSON.parse(document.getElementById('raw-stock-quotes').textContent || '{}');
-    const sectorMapping = JSON.parse(document.getElementById('raw-sector-mapping').textContent || '{}');
+    // 安全 Base64 解碼器
+    function parseB64Data(id, fallbackVal) {
+      try {
+        const el = document.getElementById(id);
+        if (!el) return fallbackVal;
+        const b64 = el.textContent.trim();
+        if (!b64) return fallbackVal;
+        const binary = atob(b64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        const jsonStr = new TextDecoder('utf-8').decode(bytes);
+        return JSON.parse(jsonStr);
+      } catch (err) {
+        console.error('Base64 解碼失敗 (' + id + '):', err);
+        return fallbackVal;
+      }
+    }
+
+    const allTweets = parseB64Data('b64-tweets', []);
+    const initialTopTickers = parseB64Data('b64-top-tickers', []);
+    const stockQuotes = parseB64Data('b64-stock-quotes', {});
+    const sectorMapping = parseB64Data('b64-sector-mapping', {});
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -1691,6 +1715,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const firstMention = chronological[0];
       const latestMention = chronological[chronological.length - 1];
 
+      const bullCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
+      const bullRatio = Math.round((bullCount / tickerTweets.length) * 100);
+
       document.getElementById('modal-first-date').innerText = firstMention.date;
       document.getElementById('modal-mention-count').innerText = `${tickerTweets.length} 則 (${tickerTweets.filter(t=>t.is_analyzed).length} 則已分析)`;
       document.getElementById('modal-latest-stance').innerText = latestMention.sentiment === 'Bullish' ? '🟢 看多 (Bullish)' : (latestMention.sentiment === 'Bearish' ? '🔴 看空 (Bearish)' : '🔵 中立 (Neutral)');
@@ -1698,13 +1725,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const retData = calculateReturnSinceFirstMention(ticker);
       document.getElementById('modal-first-roi').innerText = retData ? `${retData.returnPct > 0 ? '+' : ''}${retData.returnPct}%` : '-';
 
-      const bullCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
-      const bearCount = tickerTweets.filter(t => t.sentiment === 'Bearish').length;
       const storyEl = document.getElementById('modal-thesis-story');
-
       let thesisText = `Serenity 於 <b>${firstMention.date}</b> 首次在社群建立 <b>$${ticker}</b> 的追蹤檔案，當時論點主軸為「${firstMention.summary || firstMention.text.slice(0, 80)}」。`;
       if (chronological.length > 2) {
-        thesisText += ` 在過去的追蹤歷程中，共發布了 ${chronological.length} 則相關情報（其中 ${bullCount} 則偏多、${bearCount} 則警戒），論點伴隨多次基本面與技術面催化推進。`;
+        thesisText += ` 在過去的追蹤歷程中，共發布了 ${chronological.length} 則相關情報（多方佔比 ${bullRatio}%），論點伴隨多次基本面與技術面催化推進。`;
       }
       thesisText += ` 截至最新一次發布（<b>${latestMention.date}</b>），對該標的的定調為【<b>${latestMention.sentiment}</b>】，核心觀點為：「${latestMention.summary || latestMention.translation_zh || latestMention.text.slice(0, 90)}」。`;
       storyEl.innerHTML = thesisText;
@@ -2091,6 +2115,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (symbol) {
         filterByTicker(symbol);
         const tickerTweets = allTweets.filter(t => t.tickers.includes(symbol));
+
         if (tickerTweets.length > 0) {
           const chronological = [...tickerTweets].sort((a, b) => (a.iso_date || a.date).localeCompare(b.iso_date || b.date));
           const latest = chronological[chronological.length - 1];
@@ -2111,13 +2136,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             return;
           }
 
+          let storySummary = latest && latest.summary ? latest.summary : latest.text.slice(0, 60) + '...';
+
           let analysisHtml = `
             🎯 <b>\\$${symbol} 即時論點脈絡分析：</b><br>
             • <b>所屬板塊：</b>${qData.sector || '科技'}<br>
             • <b>當前股價：</b>${priceText}<br>
             • <b>提及次數：</b>共 ${tickerTweets.length} 則推文<br>
             • <b>最新立場：</b>${latest ? latest.sentiment : '中立'}<br>
-            • <b>最新觀點：</b>${latest && latest.summary ? latest.summary : (latest ? latest.text.slice(0, 60) + '...' : '尚無摘要')}<br>
+            • <b>最新觀點：</b>${storySummary}<br>
             <div class="mt-2 flex gap-2">
               <button onclick="openDeepDiveModal('${symbol}')" class="px-2 py-1 bg-teal-500 text-slate-950 font-bold rounded">開啟 AI 論點脈絡 ↗</button>
             </div>
@@ -2159,8 +2186,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     
-    # 採用安全轉譯，防止特殊字元中斷 JavaScript 解析
-    tweets_json_str = safe_json_dump(tweets)
+    # 透過 Base64 安全編碼封裝，徹底杜絕特殊字元破壞語法
+    tweets_b64 = to_b64_json(tweets)
     
     ordered_tickers = []
     for t in recent_tickers:
@@ -2172,24 +2199,26 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
             ordered_tickers.append(t)
 
     top_tickers_sorted = [[t, ticker_counts.get(t, 0)] for t in ordered_tickers[:60]]
-    top_tickers_json_str = safe_json_dump(top_tickers_sorted)
-    stock_quotes_json_str = safe_json_dump(stock_quotes)
-    sector_mapping_json_str = safe_json_dump(SECTOR_MAPPING)
+    top_tickers_b64 = to_b64_json(top_tickers_sorted)
+    stock_quotes_b64 = to_b64_json(stock_quotes)
+    sector_mapping_b64 = to_b64_json(SECTOR_MAPPING)
 
-    html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
-                                 .replace("__TOP_TICKERS__", top_tickers_json_str) \
-                                 .replace("__STOCK_QUOTES__", stock_quotes_json_str) \
-                                 .replace("__SECTOR_MAPPING__", sector_mapping_json_str)
+    html_rendered = HTML_TEMPLATE.replace("__TWEETS_B64__", tweets_b64) \
+                                 .replace("__TOP_TICKERS_B64__", top_tickers_b64) \
+                                 .replace("__STOCK_QUOTES_B64__", stock_quotes_b64) \
+                                 .replace("__SECTOR_MAPPING_B64__", sector_mapping_b64)
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (安全 JSON 封裝已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (Base64 安全封裝模式已啟動，共注入 {len(tweets)} 則推文)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
+    print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
+
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     combined_target_list = list(dict.fromkeys(recent_tickers + all_sector_symbols + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:60]]))[:110]
     
