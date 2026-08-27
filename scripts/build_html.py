@@ -12,8 +12,8 @@ TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
 ALT_TWEETS_FILE = "data/aleabitoreddit_tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
+QUOTES_CACHE_FILE = "data/stock_quotes_cache.json"
 OUTPUT_HTML = "docs/index.html"
-OUTPUT_DATA_JSON = "docs/data.json"
 
 # 遠端推文備援資料來源 (收錄 6,400+ 則歷史推文)
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
@@ -338,15 +338,46 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢"""
+    """採用 yf.download 批次平行下載 + 快取持久化備援機制，徹底解決 META 等標的限流空白問題"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
-    quotes = {}
     
+    # 載入持久化快取作為容錯備援
+    cached_quotes = load_cache(QUOTES_CACHE_FILE)
+    quotes = cached_quotes.copy() if isinstance(cached_quotes, dict) else {}
+    
+    # 1. 執行批次平行下載 1 年歷史日 K（只需 1 次請求即可取得全部日 K，不受限流影響）
+    batch_df = None
+    try:
+        batch_df = yf.download(tickers, period="1y", interval="1d", group_by="ticker", threads=True, progress=False)
+    except Exception as e:
+        print(f"  ⚠️ 批次日 K 下載異常: {e}", flush=True)
+
     for symbol in tickers:
+        history_data = []
+        
+        # 解析批次歷史日 K
+        if batch_df is not None and not batch_df.empty:
+            try:
+                sym_df = batch_df[symbol] if (len(tickers) > 1 and symbol in batch_df) else batch_df
+                if sym_df is not None and not sym_df.empty:
+                    for ts, row in sym_df.iterrows():
+                        c_val = row.get("Close")
+                        if c_val is not None and str(c_val).lower() != 'nan':
+                            history_data.append({
+                                "d": ts.strftime("%Y-%m-%d"),
+                                "c": round(float(c_val), 2)
+                            })
+            except Exception:
+                pass
+
+        # 2. 擷取個股最新行情與基本面
+        current_price, prev_close, high_52, low_52, volume, market_cap = None, None, None, None, None, None
+        forward_pe, trailing_pe, price_to_sales, revenue_growth, earnings_date_str = None, None, None, None, None
+        info = {}
+
         try:
             ticker_obj = yf.Ticker(symbol)
             fast = getattr(ticker_obj, "fast_info", None)
-            
             current_price = getattr(fast, "last_price", None) or getattr(fast, "regular_market_price", None)
             prev_close = getattr(fast, "previous_close", None)
             high_52 = getattr(fast, "year_high", None)
@@ -354,31 +385,25 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None)
             market_cap = getattr(fast, "market_cap", None)
 
-            # 擷取 1 年歷史日 K 資料
-            history_data = []
-            try:
-                hist = ticker_obj.history(period="1y", interval="1d")
-                if not hist.empty:
-                    for ts, row in hist.iterrows():
-                        c_val = row.get("Close")
-                        if c_val is not None and not str(c_val).lower() == 'nan':
-                            history_data.append({
-                                "d": ts.strftime("%Y-%m-%d"),
-                                "c": round(float(c_val), 2)
-                            })
-                    # 關鍵備援：若 fast_info 未能及時取得即時價，直接以日 K 最後一筆收盤價自動回填
-                    if current_price is None or float(current_price) <= 0:
-                        current_price = history_data[-1]["c"]
-                    if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
-                        prev_close = history_data[-2]["c"]
-            except Exception as hist_err:
-                print(f"  ⚠️ 無法取得 ${symbol} 歷史日 K: {hist_err}")
+            # 若歷史資料為空，嘗試單獨擷取 1 次
+            if not history_data:
+                try:
+                    hist = ticker_obj.history(period="1y", interval="1d")
+                    if not hist.empty:
+                        for ts, row in hist.iterrows():
+                            c_val = row.get("Close")
+                            if c_val is not None and str(c_val).lower() != 'nan':
+                                history_data.append({
+                                    "d": ts.strftime("%Y-%m-%d"),
+                                    "c": round(float(c_val), 2)
+                                })
+                except Exception:
+                    pass
 
-            info = {}
             try:
                 info = ticker_obj.info or {}
             except Exception:
-                pass
+                info = {}
 
             if not current_price and info:
                 current_price = info.get("currentPrice") or info.get("regularMarketPrice")
@@ -398,42 +423,58 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             price_to_sales = info.get("priceToSalesTrailing12Months")
             revenue_growth = info.get("revenueGrowth")
 
-            earnings_date_str = None
             try:
                 cal = ticker_obj.calendar
                 if isinstance(cal, dict) and "Earnings Date" in cal and len(cal["Earnings Date"]) > 0:
                     earnings_date_str = str(cal["Earnings Date"][0])[:10]
             except Exception:
                 pass
+        except Exception:
+            pass
 
-            sector_name = resolve_sector(symbol, info)
+        # 3. 關鍵回填機制：若現價為空但有日 K，以日 K 最後一筆收盤價自動補齊
+        if (current_price is None or float(current_price) <= 0) and history_data:
+            current_price = history_data[-1]["c"]
+        if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
+            prev_close = history_data[-2]["c"]
 
-            if current_price is not None and float(current_price) > 0:
-                change = (current_price - prev_close) if prev_close else 0.0
-                change_pct = ((change / prev_close) * 100) if prev_close else 0.0
+        sector_name = resolve_sector(symbol, info)
 
-                quotes[symbol] = {
-                    "price": round(float(current_price), 2),
-                    "prevClose": round(float(prev_close), 2) if prev_close else round(float(current_price), 2),
-                    "change": round(float(change), 2),
-                    "changePct": round(float(change_pct), 2),
-                    "high52": round(float(high_52), 2) if high_52 else None,
-                    "low52": round(float(low_52), 2) if low_52 else None,
-                    "volume": int(volume) if volume else 0,
-                    "marketCap": int(market_cap) if market_cap else None,
-                    "forwardPE": round(float(forward_pe), 2) if forward_pe else None,
-                    "trailingPE": round(float(trailing_pe), 2) if trailing_pe else None,
-                    "priceToSales": round(float(price_to_sales), 2) if price_to_sales else None,
-                    "revenueGrowth": round(float(revenue_growth) * 100, 1) if revenue_growth else None,
-                    "earningsDate": earnings_date_str,
-                    "sector": sector_name,
-                    "history": history_data
-                }
-                print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_data)} 筆", flush=True)
-            else:
-                quotes[symbol] = {"sector": sector_name, "history": history_data}
-        except Exception as e:
-            quotes[symbol] = {"sector": resolve_sector(symbol), "history": []}
+        if current_price is not None and float(current_price) > 0:
+            change = (current_price - prev_close) if prev_close else 0.0
+            change_pct = ((change / prev_close) * 100) if prev_close else 0.0
+
+            quotes[symbol] = {
+                "price": round(float(current_price), 2),
+                "prevClose": round(float(prev_close), 2) if prev_close else round(float(current_price), 2),
+                "change": round(float(change), 2),
+                "changePct": round(float(change_pct), 2),
+                "high52": round(float(high_52), 2) if high_52 else None,
+                "low52": round(float(low_52), 2) if low_52 else None,
+                "volume": int(volume) if volume else 0,
+                "marketCap": int(market_cap) if market_cap else None,
+                "forwardPE": round(float(forward_pe), 2) if forward_pe else None,
+                "trailingPE": round(float(trailing_pe), 2) if trailing_pe else None,
+                "priceToSales": round(float(price_to_sales), 2) if price_to_sales else None,
+                "revenueGrowth": round(float(revenue_growth) * 100, 1) if revenue_growth else None,
+                "earningsDate": earnings_date_str,
+                "sector": sector_name,
+                "history": history_data
+            }
+            print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_data)} 筆", flush=True)
+        elif symbol in quotes and quotes[symbol].get("history"):
+            # 保留先前的快取資料
+            print(f"  🔄 ${symbol}: 使用快取資料 (${quotes[symbol].get('price', '-')})", flush=True)
+        else:
+            quotes[symbol] = {"sector": sector_name, "history": history_data}
+
+    # 4. 寫入持久化快取
+    try:
+        os.makedirs(os.path.dirname(QUOTES_CACHE_FILE), exist_ok=True)
+        with open(QUOTES_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(quotes, f, ensure_ascii=False)
+    except Exception:
+        pass
 
     return quotes
 
@@ -442,7 +483,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serenity 美股社群情報儀表板 & AI 對話助理</title>
+  <title>Serenity 美股情報儀表板 & AI 對話助理</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -468,7 +509,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.15); }
+    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.12); }
   </style>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
@@ -511,7 +552,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           <span class="text-xs font-medium text-slate-400">當前視圖提及推文</span>
           <div class="text-2xl font-bold text-white mt-1" id="stat-total">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">資料載入中...</div>
+        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">AI 分析：0 / 0 (0%)</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
@@ -605,7 +646,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               <span class="text-xs font-normal text-slate-400">相對前一日收盤</span>
             </div>
           </div>
-          <div class="flex items-center gap-2 ml-0 sm:ml-4">
+          <div class="flex items-center gap-2 ml-0 sm:ml-4 flex-wrap">
             <button onclick="openDeepDiveModal(currentTicker)" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-teal-500 text-slate-950 hover:bg-teal-400 transition flex items-center gap-1 shadow-sm font-bold">
               🧠 AI 論點脈絡
             </button>
@@ -903,12 +944,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 前端資料初始化與業務邏輯腳本 -->
   <script>
-    let allTweets = [];
-    let initialTopTickers = [];
-    let stockQuotes = __STOCK_QUOTES__;
-    let sectorMapping = __SECTOR_MAPPING__;
+    const allTweets = __TWEETS_DATA__;
+    const initialTopTickers = __TOP_TICKERS__;
+    const stockQuotes = __STOCK_QUOTES__;
+    const sectorMapping = __SECTOR_MAPPING__;
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -924,23 +964,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let geminiApiKey = localStorage.getItem('serenity_gemini_api_key') || '';
-
-    // 透過 fetch 非同步載入獨立的 data.json 檔案
-    async function initDashboard() {
-      try {
-        const res = await fetch('./data.json?v=' + Date.now());
-        if (res.ok) {
-          allTweets = await res.json();
-          document.getElementById('stat-ai-coverage').innerText = '資料載入完成 (' + allTweets.length + ' 則)';
-          updateAggregatedView();
-        } else {
-          document.getElementById('stat-ai-coverage').innerText = '⚠️ 無法讀取 data.json';
-        }
-      } catch (err) {
-        console.error('載入資料失敗:', err);
-        document.getElementById('stat-ai-coverage').innerText = '⚠️ 載入失敗';
-      }
-    }
 
     function updateChatModeBadge() {
       const badge = document.getElementById('chat-mode-badge');
@@ -978,9 +1001,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('apikey-modal').classList.add('hidden');
     }
 
+    // 計算模型版本權重分數
     function getModelScore(modelName) {
       let score = 0;
       const lower = modelName.toLowerCase();
+      
       const verMatch = lower.match(/gemini-(\\d+(?:\\.\\d+)?)/);
       if (verMatch) {
         score += parseFloat(verMatch[1]) * 100;
@@ -988,9 +1013,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (lower.includes('flash')) score += 50;
       if (lower.includes('pro')) score += 30;
       if (lower.includes('preview')) score -= 5;
+      
       return score;
     }
 
+    // 動態向 Google 查詢最新可用模型並自動降冪排序
     async function fetchOnlineGeminiModels(cleanKey) {
       const listUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
       let models = [];
@@ -1008,7 +1035,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       let rawList = await tryFetch(listUrl, { 'x-goog-api-key': cleanKey });
       if (!rawList) {
-        rawList = await tryFetch(listUrl + '?key=' + encodeURIComponent(cleanKey), {});
+        rawList = await tryFetch(`${listUrl}?key=${encodeURIComponent(cleanKey)}`, {});
       }
 
       if (rawList && rawList.length > 0) {
@@ -1021,16 +1048,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
 
       const defaultCandidates = [
-        'gemini-2.5-flash',
+        'gemini-3.6-flash',
+        'gemini-3.0-flash',
         'gemini-2.0-flash',
         'gemini-2.0-flash-exp',
-        'gemini-1.5-flash',
         'gemini-pro'
       ];
 
       return Array.from(new Set([...models, ...defaultCandidates]));
     }
 
+    // 核心請求執行器：支援自動智慧輪詢與雙通道容錯
     async function executeGeminiRequest(key, promptText) {
       const cleanKey = key.trim().replace(/["'\\s]/g, '');
       const candidateModels = await fetchOnlineGeminiModels(cleanKey);
@@ -1885,7 +1913,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
           t.text.toLowerCase().includes(searchQuery) || 
-          t.summary.toLowerCase().includes(searchQuery) ||
+          t.summary.toLowerCase().includes(searchQuery) || 
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
         return matchSentiment && matchTicker && matchSearch;
       });
@@ -1979,6 +2007,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
+    // 4. AI 智能對話助理
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -2215,7 +2244,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (高頻標的優先與多空走勢疊圖已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (批次下載與快取持久化已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
@@ -2224,11 +2253,11 @@ if __name__ == "__main__":
     
     print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
 
-    # 關鍵修正：推文高頻提及標的排在最前順位，並將上限擴大至 250 檔，確保 META (255次)、ORCL (107次) 完整擷取
+    # 關鍵修正：推文高頻提及標的排在最前順位，確保 META (255次)、ORCL (107次) 絕對優先完整擷取
     mentioned_tickers_sorted = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     
-    combined_target_list = list(dict.fromkeys(mentioned_tickers_sorted + recent_tickers + all_sector_symbols))[:250]
+    combined_target_list = list(dict.fromkeys(mentioned_tickers_sorted + recent_tickers + all_sector_symbols))[:120]
     print(f"🎯 本次預計抓取市場數據標的總數：{len(combined_target_list)} 檔 (高頻提及標的優先)", flush=True)
     
     stock_quotes = fetch_stock_quotes_and_fundamentals(combined_target_list)
