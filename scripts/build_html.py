@@ -10,16 +10,15 @@ import yfinance as yf
 # ==========================================
 TARGET_HANDLE = "aleabitoreddit"
 TWEETS_FILE = "data/tweets.json"
+ALT_TWEETS_FILE = "data/aleabitoreddit_tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
-# 遠端推文備援資料來源 (收錄 6,400+ 則歷史推文)
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
 CDN_TWEETS_URL = "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@main/data/aleabitoreddit_tweets.json"
 
 TWITTER_EPOCH = 1288834974657
 
-# 美股 9 大核心產業板塊對應字典
 SECTOR_MAPPING = {
     "生技與醫療製藥": [
         "HIMS", "MRNA", "JNJ", "TEM", "LLY", "NVO", "ISRG", "CRSP", "VRTX", "AMGN", 
@@ -62,7 +61,6 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
-    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -90,7 +88,6 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -100,23 +97,26 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
-    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
-    if os.path.exists(filepath):
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                if isinstance(data, list) and len(data) > 0:
-                    tweets = data
-                elif isinstance(data, dict) and len(data) > 0:
-                    for key in ["tweets", "data", "statuses", "results"]:
-                        if key in data and isinstance(data[key], list) and len(data[key]) > 0:
-                            tweets = data[key]
+    for path in [filepath, ALT_TWEETS_FILE]:
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if isinstance(data, list) and len(data) > 0:
+                        tweets = data
+                        break
+                    elif isinstance(data, dict) and len(data) > 0:
+                        for key in ["tweets", "data", "statuses", "results"]:
+                            if key in data and isinstance(data[key], list) and len(data[key]) > 0:
+                                tweets = data[key]
+                                break
+                        if not tweets:
+                            tweets = list(data.values())
+                        if len(tweets) > 0:
                             break
-                    if not tweets:
-                        tweets = list(data.values())
-        except Exception as e:
-            print(f"⚠️ 讀取本地推文失敗 ({filepath}): {e}", flush=True)
+            except Exception as e:
+                print(f"⚠️ 讀取本地推文失敗 ({path}): {e}", flush=True)
 
     if not tweets:
         print("🌐 本地推文為空，正在從備援資料庫即時拉取推文...", flush=True)
@@ -159,7 +159,6 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
-    """萃取推文中的美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -191,7 +190,6 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
-    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -223,7 +221,6 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
-    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -338,7 +335,6 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     quotes = {}
     
@@ -370,7 +366,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
             sector_name = resolve_sector(symbol, info)
 
-            # 擷取 1 年歷史日 K 資料
             history_data = []
             try:
                 hist = ticker_obj.history(period="1y", interval="1d")
@@ -413,6 +408,11 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             quotes[symbol] = {"sector": resolve_sector(symbol), "history": []}
 
     return quotes
+
+def safe_json_dump(obj):
+    """安全 JSON 序列化，防止 </script> 破壞 HTML 結構"""
+    s = json.dumps(obj, ensure_ascii=False)
+    return s.replace("</script", "<\\/script").replace("<!--", "<\\!--")
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
@@ -772,7 +772,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </form>
   </div>
 
-  <!-- 專屬 Gemini API Key 設定彈窗 (永遠相容最新模型) -->
+  <!-- 專屬 Gemini API Key 設定彈窗 -->
   <div id="apikey-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-md p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -880,11 +880,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
+  <!-- 【核心修復】：採用標準 JSON Island 容器存放資料，100% 杜絕 SyntaxError 語法崩潰 -->
+  <script type="application/json" id="raw-tweets-data">__TWEETS_DATA__</script>
+  <script type="application/json" id="raw-top-tickers">__TOP_TICKERS__</script>
+  <script type="application/json" id="raw-stock-quotes">__STOCK_QUOTES__</script>
+  <script type="application/json" id="raw-sector-mapping">__SECTOR_MAPPING__</script>
+
   <script>
-    const allTweets = __TWEETS_DATA__;
-    const initialTopTickers = __TOP_TICKERS__;
-    const stockQuotes = __STOCK_QUOTES__;
-    const sectorMapping = __SECTOR_MAPPING__;
+    // 安全由 JSON 容器解析資料
+    const allTweets = JSON.parse(document.getElementById('raw-tweets-data').textContent || '[]');
+    const initialTopTickers = JSON.parse(document.getElementById('raw-top-tickers').textContent || '[]');
+    const stockQuotes = JSON.parse(document.getElementById('raw-stock-quotes').textContent || '{}');
+    const sectorMapping = JSON.parse(document.getElementById('raw-sector-mapping').textContent || '{}');
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -940,7 +947,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function getModelScore(modelName) {
       let score = 0;
       const lower = modelName.toLowerCase();
-      
       const verMatch = lower.match(/gemini-(\d+(?:\.\d+)?)/);
       if (verMatch) {
         score += parseFloat(verMatch[1]) * 100;
@@ -948,7 +954,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (lower.includes('flash')) score += 50;
       if (lower.includes('pro')) score += 30;
       if (lower.includes('preview')) score -= 5;
-      
       return score;
     }
 
@@ -2153,7 +2158,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
-    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
+    
+    # 採用安全轉譯，防止特殊字元中斷 JavaScript 解析
+    tweets_json_str = safe_json_dump(tweets)
     
     ordered_tickers = []
     for t in recent_tickers:
@@ -2165,9 +2172,9 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
             ordered_tickers.append(t)
 
     top_tickers_sorted = [[t, ticker_counts.get(t, 0)] for t in ordered_tickers[:60]]
-    top_tickers_json_str = json.dumps(top_tickers_sorted, ensure_ascii=False)
-    stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
-    sector_mapping_json_str = json.dumps(SECTOR_MAPPING, ensure_ascii=False)
+    top_tickers_json_str = safe_json_dump(top_tickers_sorted)
+    stock_quotes_json_str = safe_json_dump(stock_quotes)
+    sector_mapping_json_str = safe_json_dump(SECTOR_MAPPING)
 
     html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
                                  .replace("__TOP_TICKERS__", top_tickers_json_str) \
@@ -2176,7 +2183,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (動態最新模型偵測已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (安全 JSON 封裝已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
