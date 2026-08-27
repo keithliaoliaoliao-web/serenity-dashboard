@@ -1,4 +1,3 @@
-import base64
 import json
 import os
 import re
@@ -64,7 +63,6 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
-    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -92,7 +90,6 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -102,7 +99,6 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
-    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
     for path in [filepath, ALT_TWEETS_FILE]:
         if os.path.exists(path):
@@ -165,7 +161,6 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
-    """萃取推文中的美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -197,7 +192,6 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
-    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -229,7 +223,6 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
-    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -344,7 +337,6 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     quotes = {}
     
@@ -419,11 +411,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             quotes[symbol] = {"sector": resolve_sector(symbol), "history": []}
 
     return quotes
-
-def to_b64_json(obj):
-    """將資料序列化為 JSON 後以 Base64 編碼，100% 杜絕特殊字元破壞 HTML 語法"""
-    raw_str = json.dumps(obj, ensure_ascii=False)
-    return base64.b64encode(raw_str.encode("utf-8")).decode("ascii")
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
@@ -891,37 +878,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 【Base64 安全資料容器】：純 ASCII 字元，100% 免疫任何特殊字元與語法中斷 -->
-  <script id="b64-tweets" type="text/plain">__TWEETS_B64__</script>
-  <script id="b64-top-tickers" type="text/plain">__TOP_TICKERS_B64__</script>
-  <script id="b64-stock-quotes" type="text/plain">__STOCK_QUOTES_B64__</script>
-  <script id="b64-sector-mapping" type="text/plain">__SECTOR_MAPPING_B64__</script>
-
   <script>
-    // 安全 Base64 解碼器
-    function parseB64Data(id, fallbackVal) {
-      try {
-        const el = document.getElementById(id);
-        if (!el) return fallbackVal;
-        const b64 = el.textContent.trim();
-        if (!b64) return fallbackVal;
-        const binary = atob(b64);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) {
-          bytes[i] = binary.charCodeAt(i);
-        }
-        const jsonStr = new TextDecoder('utf-8').decode(bytes);
-        return JSON.parse(jsonStr);
-      } catch (err) {
-        console.error('Base64 解碼失敗 (' + id + '):', err);
-        return fallbackVal;
-      }
-    }
-
-    const allTweets = parseB64Data('b64-tweets', []);
-    const initialTopTickers = parseB64Data('b64-top-tickers', []);
-    const stockQuotes = parseB64Data('b64-stock-quotes', {});
-    const sectorMapping = parseB64Data('b64-sector-mapping', {});
+    const allTweets = __TWEETS_DATA__;
+    const initialTopTickers = __TOP_TICKERS__;
+    const stockQuotes = __STOCK_QUOTES__;
+    const sectorMapping = __SECTOR_MAPPING__;
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -1209,7 +1170,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       return sectorTickers.includes(sym) || quoteSector === currentSector;
     }
 
-    // 安全字串高亮，杜絕 RegExp 轉義衝突
     function highlightText(text) {
       if (!text) return '';
       return text
@@ -2102,7 +2062,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
-      // 【核心修復】：先以純字串去除 $ 符號，再以純英文正規表達式匹配，100% 杜絕 SyntaxError 崩潰
+      // 先以純字串去除 $ 符號，再以純英文正規表達式匹配，杜絕轉義錯誤
       const cleanQ = q.replace('$', '');
       const tickerMatch = cleanQ.match(/([A-Za-z]{1,6})/);
       const symbol = tickerMatch ? tickerMatch[1].toUpperCase() : null;
@@ -2181,8 +2141,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
     
-    # 透過 Base64 安全編碼封裝，徹底杜絕特殊字元破壞語法
-    tweets_b64 = to_b64_json(tweets)
+    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
     
     ordered_tickers = []
     for t in recent_tickers:
@@ -2194,18 +2153,18 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
             ordered_tickers.append(t)
 
     top_tickers_sorted = [[t, ticker_counts.get(t, 0)] for t in ordered_tickers[:60]]
-    top_tickers_b64 = to_b64_json(top_tickers_sorted)
-    stock_quotes_b64 = to_b64_json(stock_quotes)
-    sector_mapping_b64 = to_b64_json(SECTOR_MAPPING)
+    top_tickers_json_str = json.dumps(top_tickers_sorted, ensure_ascii=False)
+    stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
+    sector_mapping_json_str = json.dumps(SECTOR_MAPPING, ensure_ascii=False)
 
-    html_rendered = HTML_TEMPLATE.replace("__TWEETS_B64__", tweets_b64) \
-                                 .replace("__TOP_TICKERS_B64__", top_tickers_b64) \
-                                 .replace("__STOCK_QUOTES_B64__", stock_quotes_b64) \
-                                 .replace("__SECTOR_MAPPING_B64__", sector_mapping_b64)
+    html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
+                                 .replace("__TOP_TICKERS__", top_tickers_json_str) \
+                                 .replace("__STOCK_QUOTES__", stock_quotes_json_str) \
+                                 .replace("__SECTOR_MAPPING__", sector_mapping_json_str)
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (Base64 安全封裝模式已啟動，共注入 {len(tweets)} 則推文)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (共注入 {len(tweets)} 則推文資料)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
