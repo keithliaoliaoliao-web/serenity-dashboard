@@ -1989,7 +1989,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const contextTweets = allTweets.slice(0, 25).map(t => '[' + t.date + '] $' + (t.tickers.join(',$') || '大盤') + ' (' + t.sentiment + '): ' + (t.summary || t.text)).join('\n');
         const contextTickers = Object.entries(stockQuotes).slice(0, 20).map(([k, v]) => '$' + k + ': $' + (v.price || '-') + ' (PE: ' + (v.forwardPE || '-') + ', 板塊: ' + (v.sector || '-') + ')').join('; ');
 
-        const systemPrompt = '你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\n\n【即時行情摘要】：\n' + contextTickers + '\n\n【近期關鍵推文摘要】：\n' + contextTweets + '\n\n使用者問題：' + userQuery;
+        const systemPrompt = '你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\\n\\n【即時行情摘要】：\\n' + contextTickers + '\\n\\n【近期關鍵推文摘要】：\\n' + contextTweets + '\\n\\n使用者問題：' + userQuery;
 
         const result = await executeGeminiRequest(geminiApiKey, systemPrompt);
 
