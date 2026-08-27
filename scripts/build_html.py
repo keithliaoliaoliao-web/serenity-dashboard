@@ -13,7 +13,6 @@ TWEETS_FILE = "data/tweets.json"
 ALT_TWEETS_FILE = "data/aleabitoreddit_tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 OUTPUT_HTML = "docs/index.html"
-OUTPUT_DATA_JSON = "docs/data.json"
 
 # 遠端推文備援資料來源 (收錄 6,400+ 則歷史推文)
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
@@ -64,6 +63,7 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
+    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -91,6 +91,7 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
+    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -100,6 +101,7 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
+    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
     for path in [filepath, ALT_TWEETS_FILE]:
         if os.path.exists(path):
@@ -162,6 +164,7 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
+    """萃取推文中的美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -193,6 +196,7 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
+    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -224,6 +228,7 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
+    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -338,6 +343,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
+    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     quotes = {}
     
@@ -369,6 +375,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
             sector_name = resolve_sector(symbol, info)
 
+            # 擷取 1 年歷史日 K 資料
             history_data = []
             try:
                 hist = ticker_obj.history(period="1y", interval="1d")
@@ -407,18 +414,17 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                 print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_data)} 筆", flush=True)
             else:
                 quotes[symbol] = {"sector": sector_name, "history": history_data}
-        except Exception:
+        except Exception as e:
             quotes[symbol] = {"sector": resolve_sector(symbol), "history": []}
 
     return quotes
 
-# 乾淨且輕量的 HTML 模板（透過非同步 fetch('./data.json') 載入，100% 杜絕 SyntaxError）
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serenity 美股社群情報儀表板 & AI 對話助理</title>
+  <title>Serenity 美股情報儀表板 & AI 對話助理</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -444,7 +450,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.15); }
+    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.12); }
   </style>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
@@ -487,7 +493,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           <span class="text-xs font-medium text-slate-400">當前視圖提及推文</span>
           <div class="text-2xl font-bold text-white mt-1" id="stat-total">0</div>
         </div>
-        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">資料載入中...</div>
+        <div class="mt-2 text-[11px] text-teal-400 font-mono" id="stat-ai-coverage">AI 分析：0 / 0 (0%)</div>
       </div>
       <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
         <div>
@@ -581,7 +587,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               <span class="text-xs font-normal text-slate-400">相對前一日收盤</span>
             </div>
           </div>
-          <div class="flex items-center gap-2 ml-0 sm:ml-4 flex-wrap">
+          <div class="flex items-center gap-2 ml-0 sm:ml-4">
             <button onclick="openDeepDiveModal(currentTicker)" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-teal-500 text-slate-950 hover:bg-teal-400 transition flex items-center gap-1 shadow-sm font-bold">
               🧠 AI 論點脈絡
             </button>
@@ -613,7 +619,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           </div>
           <div class="bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/80">
             <div class="text-[11px] text-slate-400">下次財報倒數 (Catalyst)</div>
-            <div class="text-sm font-bold font-mono text-amber-400 mt-0.5" id="val-earnings-date">-</div>
+            <div class="text-sm font-bold font-mono text-orange-400 mt-0.5" id="val-earnings-date">-</div>
           </div>
         </div>
 
@@ -771,7 +777,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </form>
   </div>
 
-  <!-- 專屬 Gemini API Key 設定彈窗 -->
+  <!-- 專屬 Gemini API Key 設定彈窗 (永遠相容最新模型) -->
   <div id="apikey-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-md p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -879,12 +885,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- 前端資料初始化與業務邏輯腳本 -->
   <script>
-    let allTweets = [];
-    let initialTopTickers = [];
-    let stockQuotes = __STOCK_QUOTES__;
-    let sectorMapping = __SECTOR_MAPPING__;
+    const allTweets = __TWEETS_DATA__;
+    const initialTopTickers = __TOP_TICKERS__;
+    const stockQuotes = __STOCK_QUOTES__;
+    const sectorMapping = __SECTOR_MAPPING__;
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -900,23 +905,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let geminiApiKey = localStorage.getItem('serenity_gemini_api_key') || '';
-
-    // 透過 fetch 非同步載入獨立的 data.json 檔案
-    async function initDashboard() {
-      try {
-        const res = await fetch('./data.json?v=' + Date.now());
-        if (res.ok) {
-          allTweets = await res.json();
-          document.getElementById('stat-ai-coverage').innerText = '資料載入完成 (' + allTweets.length + ' 則)';
-          updateAggregatedView();
-        } else {
-          document.getElementById('stat-ai-coverage').innerText = '⚠️ 無法讀取 data.json';
-        }
-      } catch (err) {
-        console.error('載入資料失敗:', err);
-        document.getElementById('stat-ai-coverage').innerText = '⚠️ 載入失敗';
-      }
-    }
 
     function updateChatModeBadge() {
       const badge = document.getElementById('chat-mode-badge');
@@ -954,19 +942,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('apikey-modal').classList.add('hidden');
     }
 
+    // 計算模型版本權重分數（例如 gemini-3.6-flash -> 360 分, gemini-2.0 -> 200 分）
     function getModelScore(modelName) {
       let score = 0;
       const lower = modelName.toLowerCase();
-      const verMatch = lower.match(/gemini-(\d+(?:\.\d+)?)/);
+      
+      const verMatch = lower.match(/gemini-(\\d+(?:\\.\\d+)?)/);
       if (verMatch) {
         score += parseFloat(verMatch[1]) * 100;
       }
       if (lower.includes('flash')) score += 50;
       if (lower.includes('pro')) score += 30;
       if (lower.includes('preview')) score -= 5;
+      
       return score;
     }
 
+    // 動態向 Google 查詢最新可用模型並自動降冪排序
     async function fetchOnlineGeminiModels(cleanKey) {
       const listUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
       let models = [];
@@ -984,31 +976,33 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       let rawList = await tryFetch(listUrl, { 'x-goog-api-key': cleanKey });
       if (!rawList) {
-        rawList = await tryFetch(listUrl + '?key=' + encodeURIComponent(cleanKey), {});
+        rawList = await tryFetch(`${listUrl}?key=${encodeURIComponent(cleanKey)}`, {});
       }
 
       if (rawList && rawList.length > 0) {
         models = rawList
           .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
-          .map(m => m.name.replace(/^models\//, ''))
+          .map(m => m.name.replace(/^models\\//, ''))
           .filter(name => name.toLowerCase().includes('gemini') && !name.toLowerCase().includes('vision') && !name.toLowerCase().includes('embedding'));
 
         models.sort((a, b) => getModelScore(b) - getModelScore(a));
       }
 
+      // 預設高優先安全候選名單（以最新 3.6-flash 為第一順位）
       const defaultCandidates = [
-        'gemini-2.5-flash',
+        'gemini-3.6-flash',
+        'gemini-3.0-flash',
         'gemini-2.0-flash',
         'gemini-2.0-flash-exp',
-        'gemini-1.5-flash',
         'gemini-pro'
       ];
 
       return Array.from(new Set([...models, ...defaultCandidates]));
     }
 
+    // 核心請求執行器：支援自動智慧輪詢與雙通道容錯
     async function executeGeminiRequest(key, promptText) {
-      const cleanKey = key.trim().replace(/["'\s]/g, '');
+      const cleanKey = key.trim().replace(/["'\\s]/g, '');
       const candidateModels = await fetchOnlineGeminiModels(cleanKey);
       
       const bodyPayload = JSON.stringify({
@@ -1018,8 +1012,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       let lastError = '';
 
       for (const model of candidateModels) {
-        const url = 'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent';
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
+        // 管道 1：標準 x-goog-api-key 標頭傳遞
         try {
           const res1 = await fetch(url, {
             method: 'POST',
@@ -1034,14 +1029,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             return { ok: true, data: data1, modelUsed: model };
           }
           if (data1.error && data1.error.message) {
-            lastError = '[' + model + '] ' + data1.error.message;
+            lastError = `[${model}] ${data1.error.message}`;
           }
         } catch (err) {
           lastError = err.message;
         }
 
+        // 管道 2：純 URL 參數備援
         try {
-          const res2 = await fetch(url + '?key=' + encodeURIComponent(cleanKey), {
+          const res2 = await fetch(`${url}?key=${encodeURIComponent(cleanKey)}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: bodyPayload
@@ -1051,7 +1047,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             return { ok: true, data: data2, modelUsed: model };
           }
           if (data2.error && data2.error.message) {
-            lastError = '[' + model + '] ' + data2.error.message;
+            lastError = `[${model}] ${data2.error.message}`;
           }
         } catch (err) {
           lastError = err.message;
@@ -1063,7 +1059,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     async function testApiKeyConnection() {
       const input = document.getElementById('apikey-input');
-      const key = input.value.trim().replace(/["'\s]/g, '');
+      const key = input.value.trim().replace(/["'\\s]/g, '');
       const statusBox = document.getElementById('apikey-test-status');
       const testBtn = document.getElementById('apikey-test-btn');
 
@@ -1075,19 +1071,26 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
 
       testBtn.disabled = true;
-      testBtn.innerText = '尋找可用模型中...';
+      testBtn.innerText = '動態尋找可用模型中...';
       statusBox.className = 'text-xs font-mono p-3 rounded-xl border bg-slate-800 border-slate-700 text-teal-400';
-      statusBox.innerText = '⏳ 正在向 Google 伺服器檢索並驗證最新 Gemini 模型...';
+      statusBox.innerText = '⏳ 正在向 Google 伺服器動態檢索並驗證最新 Gemini 模型...';
       statusBox.classList.remove('hidden');
 
       const result = await executeGeminiRequest(key, 'Hi');
 
       if (result.ok) {
         statusBox.className = 'text-xs font-mono p-3 rounded-xl border bg-emerald-950/40 border-emerald-800 text-emerald-300';
-        statusBox.innerHTML = '✅ <b>連線驗證成功 (HTTP 200)！</b><br>已動態連線至最新可用模型：<b>' + result.modelUsed + '</b>。<br>請點擊右下角「💾 儲存並啟用」。';
+        statusBox.innerHTML = `✅ <b>連線驗證成功 (HTTP 200)！</b><br>已動態連線至最新可用模型：<b>${result.modelUsed}</b>。<br>請點擊右下角「💾 儲存並啟用」。`;
       } else {
         statusBox.className = 'text-xs font-mono p-3 rounded-xl border bg-rose-950/40 border-rose-800 text-rose-300 space-y-1.5';
-        statusBox.innerHTML = '<div class="font-bold text-rose-400">❌ 驗證失敗：' + result.error + '</div><div class="text-[11px] text-slate-300 leading-relaxed border-t border-rose-900/60 pt-1.5"><b>排查建議：</b><br>1. 點擊輸入框右側「👁️」確認金鑰完整。<br>2. 請確認是在 <a href="https://aistudio.google.dev/" target="_blank" class="text-teal-400 underline font-bold">Google AI Studio</a> 建立的 Key。</div>';
+        statusBox.innerHTML = `
+          <div class="font-bold text-rose-400">❌ 驗證失敗：${result.error}</div>
+          <div class="text-[11px] text-slate-300 leading-relaxed border-t border-rose-900/60 pt-1.5">
+            <b>排查建議：</b><br>
+            1. 點擊輸入框右側「👁️」確認金鑰完整。<br>
+            2. 請確認是在 <a href="https://aistudio.google.dev/" target="_blank" class="text-teal-400 underline font-bold">Google AI Studio</a> 建立的 Key。
+          </div>
+        `;
       }
 
       testBtn.disabled = false;
@@ -1096,7 +1099,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     function saveApiKeyModal() {
       const input = document.getElementById('apikey-input');
-      const key = input.value.trim().replace(/["'\s]/g, '');
+      const key = input.value.trim().replace(/["'\\s]/g, '');
       if (key) {
         geminiApiKey = key;
         localStorage.setItem('serenity_gemini_api_key', key);
@@ -1144,7 +1147,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     function clearWatchlist() {
       if (watchlist.length === 0) return alert('自選股清單目前已是空的！');
-      if (confirm('確定要清空全部 ' + watchlist.length + ' 檔自選股嗎？')) {
+      if (confirm(`確定要清空全部 ${watchlist.length} 檔自選股嗎？`)) {
         watchlist = [];
         localStorage.removeItem('serenity_watchlist');
         updateAggregatedView();
@@ -1171,7 +1174,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           watchlist = Array.from(new Set(parsed.map(s => String(s).trim().toUpperCase()))).filter(Boolean);
           localStorage.setItem('serenity_watchlist', JSON.stringify(watchlist));
           updateAggregatedView();
-          alert('✅ 成功匯入 ' + watchlist.length + ' 檔自選股！');
+          alert(`✅ 成功匯入 ${watchlist.length} 檔自選股！`);
         } else {
           alert('⚠️ 格式錯誤：請輸入 JSON 陣列格式。');
         }
@@ -1192,20 +1195,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function highlightText(text) {
       if (!text) return '';
       return text
-        .replace(/([$][A-Za-z]{1,6})/g, function(match) {
-          const sym = match.replace('$', '').toUpperCase();
-          return '<button onclick="filterByTicker(\'' + sym + '\')" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">' + match + '</button>';
-        })
-        .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
+        .replace(/(\\$[A-Za-z]{1,6})/g, '<button onclick="filterByTicker(\\'$1\\'.replace(\\'$\\', \\'\\').toUpperCase())" class="font-bold text-teal-400 bg-teal-950/60 hover:bg-teal-900/80 px-1 py-0.5 rounded border border-teal-500/30 transition inline-block">$1</button>')
+        .replace(/(https?:\\/\\/[^\\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline break-all">$1</a>');
     }
 
     function setViewMode(mode) {
       currentViewMode = mode;
       document.querySelectorAll('.view-btn').forEach(btn => {
         const active = btn.dataset.view === mode;
-        btn.className = 'view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium transition ' + (
+        btn.className = `view-btn px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium transition ${
           active ? 'bg-teal-500 text-slate-950 font-bold shadow-sm' : 'text-slate-400 hover:text-white'
-        );
+        }`;
       });
       displayLimit = 25;
       updateAggregatedView();
@@ -1215,9 +1215,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       currentSector = sector;
       document.querySelectorAll('.sector-btn').forEach(btn => {
         const active = btn.dataset.sector === sector;
-        btn.className = 'sector-btn px-3 py-1 rounded-lg text-xs font-medium border transition ' + (
+        btn.className = `sector-btn px-3 py-1 rounded-lg text-xs font-medium border transition ${
           active ? 'border-slate-700 bg-slate-800 text-white font-bold shadow-sm' : 'border-transparent text-slate-400 hover:bg-slate-800'
-        );
+        }`;
       });
       displayLimit = 25;
       updateAggregatedView();
@@ -1284,9 +1284,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const coveragePct = total ? Math.round((analyzed / total) * 100) : 0;
 
       document.getElementById('stat-total').innerText = total.toLocaleString();
-      document.getElementById('stat-ai-coverage').innerText = 'AI 分析：' + analyzed.toLocaleString() + ' / ' + total.toLocaleString() + ' (' + coveragePct + '%)';
-      document.getElementById('stat-bullish').innerText = bullish + ' (' + (total ? Math.round(bullish/total*100) : 0) + '%)';
-      document.getElementById('stat-bearish').innerText = bearish + ' (' + (total ? Math.round(bearish/total*100) : 0) + '%)';
+      document.getElementById('stat-ai-coverage').innerText = `AI 分析：${analyzed.toLocaleString()} / ${total.toLocaleString()} (${coveragePct}%)`;
+      document.getElementById('stat-bullish').innerText = `${bullish} (${total ? Math.round(bullish/total*100) : 0}%)`;
+      document.getElementById('stat-bearish').innerText = `${bearish} (${total ? Math.round(bearish/total*100) : 0}%)`;
       document.getElementById('stat-tickers').innerText = uniqueTickers.toLocaleString();
 
       renderTopTickers(topTickers);
@@ -1310,18 +1310,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         let miniBadge = '';
         if (quote && quote.changePct !== undefined && quote.changePct !== null) {
           const isPos = quote.changePct >= 0;
-          miniBadge = '<span class="text-[10px] ml-1 ' + (isPos ? 'text-emerald-400' : 'text-rose-400') + '">' + (isPos ? '+' : '') + quote.changePct.toFixed(1) + '%</span>';
+          miniBadge = `<span class="text-[10px] ml-1 ${isPos ? 'text-emerald-400' : 'text-rose-400'}">${isPos ? '+' : ''}${quote.changePct.toFixed(1)}%</span>`;
         }
-        return (
-          '<div class="inline-flex items-center rounded-md border transition ' + (currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold shadow-md' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50') + '">' +
-            '<button onclick="filterByTicker(\'' + t + '\')" class="px-2.5 py-1 text-xs font-mono font-medium">' +
-              '$' + t + ' ' + miniBadge + ' <span class="text-[10px] opacity-70">(' + count + ')</span>' +
-            '</button>' +
-            '<button onclick="toggleWatchlist(\'' + t + '\', event)" class="pr-2 pl-0.5 text-xs ' + (starred ? 'text-amber-400 font-bold' : 'text-slate-500 hover:text-amber-400') + '" title="' + (starred ? '取消自選' : '加入自選') + '">' +
-              (starred ? '★' : '☆') +
-            '</button>' +
-          '</div>'
-        );
+        return `
+          <div class="inline-flex items-center rounded-md border transition ${currentTicker === t ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold shadow-md' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:border-teal-500/50'}">
+            <button onclick="filterByTicker('${t}')" class="px-2.5 py-1 text-xs font-mono font-medium">
+              \\$${t} ${miniBadge} <span class="text-[10px] opacity-70">(${count})</span>
+            </button>
+            <button onclick="toggleWatchlist('${t}', event)" class="pr-2 pl-0.5 text-xs ${starred ? 'text-amber-400 font-bold' : 'text-slate-500 hover:text-amber-400'}" title="${starred ? '取消自選' : '加入自選'}">
+              ${starred ? '★' : '☆'}
+            </button>
+          </div>
+        `;
       }).join('');
     }
 
@@ -1407,7 +1407,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         data: {
           labels: labels,
           datasets: [{
-            label: '$' + ticker + ' 收盤價',
+            label: `$${ticker} 收盤價`,
             data: prices,
             borderColor: '#14b8a6',
             borderWidth: 2,
@@ -1441,12 +1441,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 label: function(context) {
                   const d = context.label;
                   const price = context.parsed.y;
-                  let lines = ['股價：$' + price];
+                  let lines = [`股價：$${price}`];
                   const tweetsOnDay = tweetMap[d];
                   if (tweetsOnDay && tweetsOnDay.length > 0) {
                     tweetsOnDay.forEach(t => {
                       const icon = t.sentiment === 'Bullish' ? '🟢 看多' : (t.sentiment === 'Bearish' ? '🔴 看空' : '🔵 中立');
-                      lines.push('【' + icon + '】' + (t.summary || t.text.slice(0, 45) + '...'));
+                      lines.push(`【${icon}】${t.summary || t.text.slice(0, 45) + '...'}`);
                     });
                   }
                   return lines;
@@ -1493,16 +1493,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function loadTradingViewWidget(ticker) {
       const container = document.getElementById('tv-chart-container');
       if (!ticker || !container) return;
-      container.innerHTML = (
-        '<iframe ' +
-          'src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=' + ticker + '&interval=D&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Asia%2FTaipei&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=zh_TW" ' +
-          'width="100%" ' +
-          'height="100%" ' +
-          'frameborder="0" ' +
-          'allowtransparency="true" ' +
-          'scrolling="no">' +
-        '</iframe>'
-      );
+      container.innerHTML = `
+        <iframe 
+          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${ticker}&interval=D&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Asia%2FTaipei&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=zh_TW" 
+          width="100%" 
+          height="100%" 
+          frameborder="0" 
+          allowtransparency="true" 
+          scrolling="no">
+        </iframe>
+      `;
     }
 
     function renderStockQuote(ticker) {
@@ -1515,7 +1515,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const data = stockQuotes[ticker] || null;
       section.classList.remove('hidden');
 
-      document.getElementById('quote-ticker-name').innerText = '$' + ticker;
+      document.getElementById('quote-ticker-name').innerText = `$${ticker}`;
       const starBtn = document.getElementById('quote-star-btn');
       starBtn.innerText = isWatchlisted(ticker) ? '★' : '☆';
       starBtn.className = isWatchlisted(ticker) ? 'text-xl text-amber-400 font-bold' : 'text-xl text-slate-500 hover:text-amber-400';
@@ -1528,43 +1528,43 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (retData) {
         returnBadge.classList.remove('hidden');
         const isPos = retData.returnPct >= 0;
-        returnBadge.innerText = '首次提及 (' + retData.firstDate + ') 以來 ' + (isPos ? '+' : '') + retData.returnPct + '%';
-        returnBadge.className = 'ml-2 text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ' + (isPos ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-rose-500/10 text-rose-400 border-rose-500/30');
+        returnBadge.innerText = `首次提及 (${retData.firstDate}) 以來 ${isPos ? '+' : ''}${retData.returnPct}%`;
+        returnBadge.className = `ml-2 text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${isPos ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-rose-500/10 text-rose-400 border-rose-500/30'}`;
       } else {
         returnBadge.classList.add('hidden');
       }
 
       if (data && data.price) {
-        document.getElementById('quote-price').innerText = '$' + data.price.toFixed(2);
+        document.getElementById('quote-price').innerText = `$${data.price.toFixed(2)}`;
         currencyLabel.innerText = 'USD';
         
         const isPositive = data.change >= 0;
-        const changeVal = (isPositive ? '+' : '') + data.change.toFixed(2);
-        const changePctVal = '(' + (isPositive ? '+' : '') + data.changePct.toFixed(2) + '%)';
+        const changeVal = `${isPositive ? '+' : ''}${data.change.toFixed(2)}`;
+        const changePctVal = `(${isPositive ? '+' : ''}${data.changePct.toFixed(2)}%)`;
 
-        changeEl.innerHTML = (
-          '<span id="quote-change">' + changeVal + '</span>' +
-          '<span id="quote-change-pct">' + changePctVal + '</span>' +
-          '<span class="text-xs font-normal text-slate-400">相對前收盤</span>'
-        );
-        changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono ' + (isPositive ? 'text-emerald-400' : 'text-rose-400');
+        changeEl.innerHTML = `
+          <span id="quote-change">${changeVal}</span>
+          <span id="quote-change-pct">${changePctVal}</span>
+          <span class="text-xs font-normal text-slate-400">相對前收盤</span>
+        `;
+        changeEl.className = `flex items-center gap-2 mt-0.5 text-sm font-semibold font-mono ${isPositive ? 'text-emerald-400' : 'text-rose-400'}`;
 
         document.getElementById('val-mkt-cap').innerText = formatNumber(data.marketCap);
-        document.getElementById('val-fwd-pe').innerText = data.forwardPE ? data.forwardPE + 'x' : (data.trailingPE ? data.trailingPE + 'x (TTM)' : '-');
+        document.getElementById('val-fwd-pe').innerText = data.forwardPE ? `${data.forwardPE}x` : (data.trailingPE ? `${data.trailingPE}x (TTM)` : '-');
         
-        const psText = data.priceToSales ? data.priceToSales + 'x' : '-';
-        const yoyText = data.revenueGrowth ? (data.revenueGrowth > 0 ? '+' : '') + data.revenueGrowth + '%' : '-';
-        document.getElementById('val-ps-yoy').innerText = psText + ' / ' + yoyText;
+        const psText = data.priceToSales ? `${data.priceToSales}x` : '-';
+        const yoyText = data.revenueGrowth ? `${data.revenueGrowth > 0 ? '+' : ''}${data.revenueGrowth}%` : '-';
+        document.getElementById('val-ps-yoy').innerText = `${psText} / ${yoyText}`;
 
         document.getElementById('val-earnings-date').innerText = data.earningsDate ? data.earningsDate : '即將公布';
 
-        document.getElementById('quote-low52').innerText = data.low52 ? '$' + data.low52.toFixed(2) : '-';
-        document.getElementById('quote-high52').innerText = data.high52 ? '$' + data.high52.toFixed(2) : '-';
+        document.getElementById('quote-low52').innerText = data.low52 ? `$${data.low52.toFixed(2)}` : '-';
+        document.getElementById('quote-high52').innerText = data.high52 ? `$${data.high52.toFixed(2)}` : '-';
 
         if (data.low52 && data.high52 && data.high52 > data.low52) {
           const rangePct = Math.max(0, Math.min(100, Math.round(((data.price - data.low52) / (data.high52 - data.low52)) * 100)));
-          document.getElementById('quote-range-pct').innerText = '52 週區間水位 ' + rangePct + '%';
-          document.getElementById('quote-range-bar').style.width = rangePct + '%';
+          document.getElementById('quote-range-pct').innerText = `52 週區間水位 ${rangePct}%`;
+          document.getElementById('quote-range-bar').style.width = `${rangePct}%`;
           document.getElementById('quote-52w-container').classList.remove('hidden');
         } else {
           document.getElementById('quote-52w-container').classList.add('hidden');
@@ -1581,7 +1581,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         document.getElementById('quote-52w-container').classList.add('hidden');
       }
 
-      document.getElementById('link-tradingview').href = 'https://www.tradingview.com/symbols/' + ticker + '/';
+      document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${ticker}/`;
 
       renderPriceOverlayChart(ticker);
       if (tvChartVisible) loadTradingViewWidget(ticker);
@@ -1593,7 +1593,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const selectB = document.getElementById('compare-select-b');
       
       const allTickers = Object.keys(stockQuotes).sort();
-      const optionsHtml = allTickers.map(t => '<option value="' + t + '">$' + t + ' (' + (stockQuotes[t].sector || '科技') + ')</option>').join('');
+      const optionsHtml = allTickers.map(t => `<option value="${t}">$${t} (${stockQuotes[t].sector || '科技'})</option>`).join('');
       
       selectA.innerHTML = optionsHtml;
       selectB.innerHTML = optionsHtml;
@@ -1626,8 +1626,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const symA = document.getElementById('compare-select-a').value;
       const symB = document.getElementById('compare-select-b').value;
       
-      document.getElementById('th-comp-a').innerText = '$' + symA;
-      document.getElementById('th-comp-b').innerText = '$' + symB;
+      document.getElementById('th-comp-a').innerText = `$${symA}`;
+      document.getElementById('th-comp-b').innerText = `$${symB}`;
 
       const dataA = stockQuotes[symA] || {};
       const dataB = stockQuotes[symB] || {};
@@ -1646,43 +1646,43 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       const makeBadge = (valStr, isBetter) => {
         if (isBetter) {
-          return '<span class="bg-teal-500/20 text-teal-300 font-bold px-2 py-0.5 rounded border border-teal-500/40">' + valStr + ' ⭐</span>';
+          return `<span class="bg-teal-500/20 text-teal-300 font-bold px-2 py-0.5 rounded border border-teal-500/40">${valStr} ⭐</span>`;
         }
         return valStr;
       };
 
       const rows = [
         ['所屬板塊', dataA.sector || '-', dataB.sector || '-', false, false],
-        ['即時股價', dataA.price ? '$' + dataA.price : '-', dataB.price ? '$' + dataB.price : '-', false, false],
+        ['即時股價', dataA.price ? `$${dataA.price}` : '-', dataB.price ? `$${dataB.price}` : '-', false, false],
         ['單日漲跌幅', 
-          dataA.changePct !== undefined && dataA.changePct !== null ? (dataA.changePct > 0 ? '+' : '') + dataA.changePct + '%' : '-', 
-          dataB.changePct !== undefined && dataB.changePct !== null ? (dataB.changePct > 0 ? '+' : '') + dataB.changePct + '%' : '-',
+          dataA.changePct !== undefined && dataA.changePct !== null ? `${dataA.changePct > 0 ? '+' : ''}${dataA.changePct}%` : '-', 
+          dataB.changePct !== undefined && dataB.changePct !== null ? `${dataB.changePct > 0 ? '+' : ''}${dataB.changePct}%` : '-',
           (dataA.changePct || -999) > (dataB.changePct || -999),
           (dataB.changePct || -999) > (dataA.changePct || -999)
         ],
         ['自首次提及報酬率 (ROI)', 
-          retA ? (retA.returnPct > 0 ? '+' : '') + retA.returnPct + '%' : '-', 
-          retB ? (retB.returnPct > 0 ? '+' : '') + retB.returnPct + '%' : '-', 
+          retA ? `${retA.returnPct > 0 ? '+' : ''}${retA.returnPct}%` : '-', 
+          retB ? `${retB.returnPct > 0 ? '+' : ''}${retB.returnPct}%` : '-', 
           (retA && retB) ? retA.returnPct > retB.returnPct : false,
           (retA && retB) ? retB.returnPct > retA.returnPct : false
         ],
-        ['社群提及總數', tweetsA.length + ' 則', tweetsB.length + ' 則', tweetsA.length > tweetsB.length, tweetsB.length > tweetsA.length],
-        ['看多偏向度 (Bullish %)', pctA + '% (' + bullA + '多)', pctB + '% (' + bullB + '多)', pctA > pctB, pctB > pctA],
+        ['社群提及總數', `${tweetsA.length} 則`, `${tweetsB.length} 則`, tweetsA.length > tweetsB.length, tweetsB.length > tweetsA.length],
+        ['看多偏向度 (Bullish %)', `${pctA}% (${bullA}多)`, `${pctB}% (${bullB}多)`, pctA > pctB, pctB > pctA],
         ['市值 (Market Cap)', formatNumber(dataA.marketCap), formatNumber(dataB.marketCap), (dataA.marketCap||0) > (dataB.marketCap||0), (dataB.marketCap||0) > (dataA.marketCap||0)],
-        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? dataA.forwardPE + 'x' : '-', dataB.forwardPE ? dataB.forwardPE + 'x' : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
-        ['市銷率 (P/S)', dataA.priceToSales ? dataA.priceToSales + 'x' : '-', dataB.priceToSales ? dataB.priceToSales + 'x' : '-', (dataA.priceToSales && dataB.priceToSales) ? dataA.priceToSales < dataB.priceToSales : false, (dataA.priceToSales && dataB.priceToSales) ? dataB.priceToSales < dataA.priceToSales : false],
-        ['營收年增率 (YoY)', dataA.revenueGrowth ? dataA.revenueGrowth + '%' : '-', dataB.revenueGrowth ? dataB.revenueGrowth + '%' : '-', (dataA.revenueGrowth || -999) > (dataB.revenueGrowth || -999), (dataB.revenueGrowth || -999) > (dataA.revenueGrowth || -999)],
+        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? `${dataA.forwardPE}x` : '-', dataB.forwardPE ? `${dataB.forwardPE}x` : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
+        ['市銷率 (P/S)', dataA.priceToSales ? `${dataA.priceToSales}x` : '-', dataB.priceToSales ? `${dataB.priceToSales}x` : '-', (dataA.priceToSales && dataB.priceToSales) ? dataA.priceToSales < dataB.priceToSales : false, (dataA.priceToSales && dataB.priceToSales) ? dataB.priceToSales < dataA.priceToSales : false],
+        ['營收年增率 (YoY)', dataA.revenueGrowth ? `${dataA.revenueGrowth}%` : '-', dataB.revenueGrowth ? `${dataB.revenueGrowth}%` : '-', (dataA.revenueGrowth || -999) > (dataB.revenueGrowth || -999), (dataB.revenueGrowth || -999) > (dataA.revenueGrowth || -999)],
         ['下次財報日', dataA.earningsDate || '-', dataB.earningsDate || '-', false, false]
       ];
 
       const tbody = document.getElementById('compare-table-body');
-      tbody.innerHTML = rows.map(([label, valA, valB, aBetter, bBetter]) => (
-        '<tr class="hover:bg-slate-800/40">' +
-          '<td class="py-2.5 px-3 text-slate-400 font-sans">' + label + '</td>' +
-          '<td class="py-2.5 px-3 text-slate-200 font-semibold">' + makeBadge(valA, aBetter) + '</td>' +
-          '<td class="py-2.5 px-3 text-slate-200 font-semibold">' + makeBadge(valB, bBetter) + '</td>' +
-        '</tr>'
-      )).join('');
+      tbody.innerHTML = rows.map(([label, valA, valB, aBetter, bBetter]) => `
+        <tr class="hover:bg-slate-800/40">
+          <td class="py-2.5 px-3 text-slate-400 font-sans">${label}</td>
+          <td class="py-2.5 px-3 text-slate-200 font-semibold">${makeBadge(valA, aBetter)}</td>
+          <td class="py-2.5 px-3 text-slate-200 font-semibold">${makeBadge(valB, bBetter)}</td>
+        </tr>
+      `).join('');
     }
 
     function openDeepDiveModal(ticker) {
@@ -1690,29 +1690,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const modal = document.getElementById('deepdive-modal');
       const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
       
-      document.getElementById('modal-ticker-title').innerText = '$' + ticker;
+      document.getElementById('modal-ticker-title').innerText = `$${ticker}`;
       if (tickerTweets.length === 0) return;
 
       const chronological = [...tickerTweets].sort((a, b) => (a.iso_date || a.date).localeCompare(b.iso_date || b.date));
       const firstMention = chronological[0];
       const latestMention = chronological[chronological.length - 1];
 
-      const bullCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
-      const bullRatio = Math.round((bullCount / tickerTweets.length) * 100);
-
       document.getElementById('modal-first-date').innerText = firstMention.date;
-      document.getElementById('modal-mention-count').innerText = tickerTweets.length + ' 則 (' + tickerTweets.filter(t=>t.is_analyzed).length + ' 則已分析)';
+      document.getElementById('modal-mention-count').innerText = `${tickerTweets.length} 則 (${tickerTweets.filter(t=>t.is_analyzed).length} 則已分析)`;
       document.getElementById('modal-latest-stance').innerText = latestMention.sentiment === 'Bullish' ? '🟢 看多 (Bullish)' : (latestMention.sentiment === 'Bearish' ? '🔴 看空 (Bearish)' : '🔵 中立 (Neutral)');
 
       const retData = calculateReturnSinceFirstMention(ticker);
-      document.getElementById('modal-first-roi').innerText = retData ? (retData.returnPct > 0 ? '+' : '') + retData.returnPct + '%' : '-';
+      document.getElementById('modal-first-roi').innerText = retData ? `${retData.returnPct > 0 ? '+' : ''}${retData.returnPct}%` : '-';
 
+      const bullCount = tickerTweets.filter(t => t.sentiment === 'Bullish').length;
+      const bearCount = tickerTweets.filter(t => t.sentiment === 'Bearish').length;
       const storyEl = document.getElementById('modal-thesis-story');
-      let thesisText = 'Serenity 於 <b>' + firstMention.date + '</b> 首次在社群建立 <b>$' + ticker + '</b> 的追蹤檔案，當時論點主軸為「' + (firstMention.summary || firstMention.text.slice(0, 80)) + '」。';
+
+      let thesisText = `Serenity 於 <b>${firstMention.date}</b> 首次在社群建立 <b>$${ticker}</b> 的追蹤檔案，當時論點主軸為「${firstMention.summary || firstMention.text.slice(0, 80)}」。`;
       if (chronological.length > 2) {
-        thesisText += ' 在過去的追蹤歷程中，共發布了 ' + chronological.length + ' 則相關情報（多方佔比 ' + bullRatio + '%），論點伴隨多次基本面與技術面催化推進。';
+        thesisText += ` 在過去的追蹤歷程中，共發布了 ${chronological.length} 則相關情報（其中 ${bullCount} 則偏多、${bearCount} 則警戒），論點伴隨多次基本面與技術面催化推進。`;
       }
-      thesisText += ' 截至最新一次發布（<b>' + latestMention.date + '</b>），對該標的的定調為【<b>' + latestMention.sentiment + '</b>】，核心觀點為：「' + (latestMention.summary || latestMention.translation_zh || latestMention.text.slice(0, 90)) + '」。';
+      thesisText += ` 截至最新一次發布（<b>${latestMention.date}</b>），對該標的的定調為【<b>${latestMention.sentiment}</b>】，核心觀點為：「${latestMention.summary || latestMention.translation_zh || latestMention.text.slice(0, 90)}」。`;
       storyEl.innerHTML = thesisText;
 
       const milestones = [];
@@ -1743,39 +1743,39 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
 
       const milestonesContainer = document.getElementById('modal-key-milestones');
-      milestonesContainer.innerHTML = milestones.map(m => (
-        '<div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">' +
-          '<div class="flex items-center justify-between text-xs">' +
-            '<span class="text-teal-400 font-bold font-mono">' + m.tag + ' (' + m.item.date + ')</span>' +
-            '<a href="' + m.item.url + '" target="_blank" class="text-slate-400 hover:text-white text-xs">原始推文 ↗</a>' +
-          '</div>' +
-          '<div class="text-sm font-semibold text-slate-100">' + (m.item.summary || '觀點記錄') + '</div>' +
-          '<div class="text-xs text-slate-300 leading-relaxed">' + (m.item.translation_zh || m.item.text) + '</div>' +
-          '<div class="text-[11px] text-teal-300/80 bg-teal-500/10 p-2 rounded-lg border border-teal-500/20">' + m.importance + '</div>' +
-        '</div>'
-      )).join('');
+      milestonesContainer.innerHTML = milestones.map(m => `
+        <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-teal-400 font-bold font-mono">${m.tag} (${m.item.date})</span>
+            <a href="${m.item.url}" target="_blank" class="text-slate-400 hover:text-white text-xs">原始推文 ↗</a>
+          </div>
+          <div class="text-sm font-semibold text-slate-100">${m.item.summary || '觀點記錄'}</div>
+          <div class="text-xs text-slate-300 leading-relaxed">${m.item.translation_zh || m.item.text}</div>
+          <div class="text-[11px] text-teal-300/80 bg-teal-500/10 p-2 rounded-lg border border-teal-500/20">${m.importance}</div>
+        </div>
+      `).join('');
 
       const timelineContainer = document.getElementById('modal-timeline');
-      timelineContainer.innerHTML = chronological.map(item => (
-        '<div class="flex items-center gap-3 text-xs border-l-2 border-slate-800 pl-3 py-1 font-mono">' +
-          '<span class="text-slate-500">' + item.date + '</span>' +
-          '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold ' + (item.sentiment==='Bullish'?'bg-emerald-500/10 text-emerald-400':(item.sentiment==='Bearish'?'bg-rose-500/10 text-rose-400':'bg-blue-500/10 text-blue-400')) + '">' + item.sentiment + '</span>' +
-          '<span class="text-slate-300 truncate max-w-md">' + (item.summary || item.text) + '</span>' +
-        '</div>'
-      )).join('');
+      timelineContainer.innerHTML = chronological.map(item => `
+        <div class="flex items-center gap-3 text-xs border-l-2 border-slate-800 pl-3 py-1 font-mono">
+          <span class="text-slate-500">${item.date}</span>
+          <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${item.sentiment==='Bullish'?'bg-emerald-500/10 text-emerald-400':(item.sentiment==='Bearish'?'bg-rose-500/10 text-rose-400':'bg-blue-500/10 text-blue-400')}">${item.sentiment}</span>
+          <span class="text-slate-300 truncate max-w-md">${item.summary || item.text}</span>
+        </div>
+      `).join('');
 
       const riskTweets = tickerTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('警戒') || t.summary.includes('跌'))));
       const riskContainer = document.getElementById('modal-risks');
       if (riskTweets.length > 0) {
-        riskContainer.innerHTML = riskTweets.slice(0, 3).map(item => (
-          '<div class="bg-rose-950/20 border border-rose-900/40 p-3 rounded-xl text-xs space-y-1">' +
-            '<div class="flex justify-between text-rose-400 font-mono font-semibold">' +
-              '<span>' + item.date + '</span>' +
-              '<a href="' + item.url + '" target="_blank" class="hover:underline">來源 ↗</a>' +
-            '</div>' +
-            '<div class="text-rose-200">' + (item.summary || item.translation_zh || item.text) + '</div>' +
-          '</div>'
-        )).join('');
+        riskContainer.innerHTML = riskTweets.slice(0, 3).map(item => `
+          <div class="bg-rose-950/20 border border-rose-900/40 p-3 rounded-xl text-xs space-y-1">
+            <div class="flex justify-between text-rose-400 font-mono font-semibold">
+              <span>${item.date}</span>
+              <a href="${item.url}" target="_blank" class="hover:underline">來源 ↗</a>
+            </div>
+            <div class="text-rose-200">${item.summary || item.translation_zh || item.text}</div>
+          </div>
+        `).join('');
       } else {
         riskContainer.innerHTML = '<div class="text-xs text-slate-500">歷史貼文中未出現重大看空或風險警語。</div>';
       }
@@ -1799,9 +1799,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       displayLimit = 25;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         const active = btn.dataset.val === val;
-        btn.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ' + (
+        btn.className = `filter-btn px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
           active ? 'border-slate-700 bg-slate-800 text-white' : 'border-transparent text-slate-400 hover:bg-slate-900'
-        );
+        }`;
       });
       render();
     }
@@ -1818,8 +1818,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }
 
     async function translateByIndex(idx) {
-      const transEl = document.getElementById('trans-text-' + idx);
-      const btnEl = document.getElementById('trans-btn-' + idx);
+      const transEl = document.getElementById(`trans-text-${idx}`);
+      const btnEl = document.getElementById(`trans-btn-${idx}`);
       const item = allTweets[idx];
       if (!transEl || !item) return;
 
@@ -1857,7 +1857,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
           t.text.toLowerCase().includes(searchQuery) || 
-          t.summary.toLowerCase().includes(searchQuery) ||
+          t.summary.toLowerCase().includes(searchQuery) || 
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
         return matchSentiment && matchTicker && matchSearch;
       });
@@ -1877,13 +1877,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const loadMoreCount = document.getElementById('load-more-count');
       if (visibleItems.length < totalFiltered) {
         loadMoreContainer.classList.remove('hidden');
-        loadMoreCount.innerText = visibleItems.length + ' / ' + totalFiltered;
+        loadMoreCount.innerText = `${visibleItems.length} / ${totalFiltered}`;
       } else {
         loadMoreContainer.classList.add('hidden');
       }
 
       if (visibleItems.length === 0) {
-        container.innerHTML = '<div class="text-center py-16 text-slate-500 bg-slate-900/30 rounded-xl border border-slate-800">當前時間視圖或篩選條件下沒有推文。</div>';
+        container.innerHTML = `
+          <div class="text-center py-16 text-slate-500 bg-slate-900/30 rounded-xl border border-slate-800">
+            當前時間視圖或篩選條件下沒有推文。
+          </div>
+        `;
         return;
       }
 
@@ -1902,44 +1906,52 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         let contentHtml = '';
         if (item.summary || item.translation_zh) {
-          contentHtml = (
-            (item.summary ? '<div class="text-sm font-semibold text-teal-300 mb-1.5 flex items-start gap-1.5"><span class="text-teal-400 font-mono">⚡ 觀點：</span>' + item.summary + '</div>' : '') +
-            (item.translation_zh ? '<div class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap">' + highlightText(item.translation_zh) + '</div>' : '') +
-            '<details class="mt-2 text-xs text-slate-500"><summary class="cursor-pointer hover:text-slate-400 select-none">查看原文</summary><div class="mt-1 text-slate-400 whitespace-pre-wrap border-l-2 border-slate-700 pl-2 py-1">' + highlightText(item.text) + '</div></details>'
-          );
+          contentHtml = `
+            ${item.summary ? `<div class="text-sm font-semibold text-teal-300 mb-1.5 flex items-start gap-1.5"><span class="text-teal-400 font-mono">⚡ 觀點：</span>${item.summary}</div>` : ''}
+            ${item.translation_zh ? `<div class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap">${highlightText(item.translation_zh)}</div>` : ''}
+            <details class="mt-2 text-xs text-slate-500">
+              <summary class="cursor-pointer hover:text-slate-400 select-none">查看原文</summary>
+              <div class="mt-1 text-slate-400 whitespace-pre-wrap border-l-2 border-slate-700 pl-2 py-1">${highlightText(item.text)}</div>
+            </details>
+          `;
         } else {
-          contentHtml = (
-            '<div id="trans-text-' + globalIdx + '" class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap font-medium mb-1 ' + (cachedClient ? '' : 'hidden') + '">' + (cachedClient ? highlightText(cachedClient) : '') + '</div>' +
-            '<div class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">' + highlightText(item.text) + '</div>' +
-            (cachedClient ? '' : '<button id="trans-btn-' + globalIdx + '" onclick="translateByIndex(' + globalIdx + ')" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 mt-2 transition">🌐 翻譯為繁體中文</button>')
-          );
+          contentHtml = `
+            <div id="trans-text-${globalIdx}" class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap font-medium mb-1 ${cachedClient ? '' : 'hidden'}">${cachedClient ? highlightText(cachedClient) : ''}</div>
+            <div class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">${highlightText(item.text)}</div>
+            ${cachedClient ? '' : `<button id="trans-btn-${globalIdx}" onclick="translateByIndex(${globalIdx})" class="text-xs text-teal-400 hover:text-teal-300 flex items-center gap-1 mt-2 transition">🌐 翻譯為繁體中文</button>`}
+          `;
         }
 
-        return (
-          '<article class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 sm:p-5 hover:border-slate-700/80 transition space-y-3">' +
-            '<div class="flex items-center justify-between flex-wrap gap-2">' +
-              '<div class="flex items-center gap-2">' +
-                sentimentBadge +
-                '<div class="flex flex-wrap gap-1">' +
-                  item.tickers.map(tk => '<button onclick="filterByTicker(\'' + tk + '\')" class="text-xs font-mono font-bold text-teal-400 bg-slate-800 hover:bg-slate-700 px-1.5 py-0.5 rounded border border-slate-700 transition">$' + tk + '</button>').join('') +
-                '</div>' +
-              '</div>' +
-              '<div class="text-xs text-slate-500 font-mono">' + item.date + '</div>' +
-            '</div>' +
-            '<div class="py-1">' + contentHtml + '</div>' +
-            '<div class="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2.5">' +
-              '<div class="flex items-center gap-4 font-mono">' +
-                '<span>❤️ ' + item.likes.toLocaleString() + '</span>' +
-                '<span>🔁 ' + item.retweets.toLocaleString() + '</span>' +
-                '<span>👁️ ' + item.views.toLocaleString() + '</span>' +
-              '</div>' +
-              '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition flex items-center gap-1">開啟推文 ↗</a>' +
-            '</div>' +
-          '</article>'
-        );
+        return `
+          <article class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 sm:p-5 hover:border-slate-700/80 transition space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                ${sentimentBadge}
+                <div class="flex flex-wrap gap-1">
+                  ${item.tickers.map(tk => `<button onclick="filterByTicker('${tk}')" class="text-xs font-mono font-bold text-teal-400 bg-slate-800 hover:bg-slate-700 px-1.5 py-0.5 rounded border border-slate-700 transition">\\$${tk}</button>`).join('')}
+                </div>
+              </div>
+              <div class="text-xs text-slate-500 font-mono">${item.date}</div>
+            </div>
+
+            <div class="py-1">${contentHtml}</div>
+
+            <div class="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-2.5">
+              <div class="flex items-center gap-4 font-mono">
+                <span>❤️ ${item.likes.toLocaleString()}</span>
+                <span>🔁 ${item.retweets.toLocaleString()}</span>
+                <span>👁️ ${item.views.toLocaleString()}</span>
+              </div>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition flex items-center gap-1">
+                開啟推文 ↗
+              </a>
+            </div>
+          </article>
+        `;
       }).join('');
     }
 
+    // 4. AI 智能對話助理 (動態模型適應與連線)
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -1953,7 +1965,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       msgDiv.className = isUser 
         ? 'bg-teal-500/20 text-teal-200 border border-teal-500/30 p-2.5 rounded-xl ml-6'
         : 'bg-slate-800/90 text-slate-200 border border-slate-700/80 p-3 rounded-xl mr-4 space-y-1.5';
-      msgDiv.innerHTML = isUser ? '<b>你：</b>' + htmlContent : '<b>Serenity AI 助理：</b><br>' + htmlContent;
+      msgDiv.innerHTML = isUser ? `<b>你：</b>${htmlContent}` : `<b>Serenity AI 助理：</b><br>${htmlContent}`;
       container.appendChild(msgDiv);
       container.scrollTop = container.scrollHeight;
       return msgDiv;
@@ -1986,23 +1998,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const loadingMsg = appendChatMessage('ai', '🌟 Gemini 正在深入分析社群情報與基本面...');
 
       try {
-        const contextTweets = allTweets.slice(0, 25).map(t => '[' + t.date + '] $' + (t.tickers.join(',$') || '大盤') + ' (' + t.sentiment + '): ' + (t.summary || t.text)).join('\n');
-        const contextTickers = Object.entries(stockQuotes).slice(0, 20).map(([k, v]) => '$' + k + ': $' + (v.price || '-') + ' (PE: ' + (v.forwardPE || '-') + ', 板塊: ' + (v.sector || '-') + ')').join('; ');
+        const contextTweets = allTweets.slice(0, 25).map(t => `[${t.date}] $${t.tickers.join(',$') || '大盤'} (${t.sentiment}): ${t.summary || t.text}`).join('\\n');
+        const contextTickers = Object.entries(stockQuotes).slice(0, 20).map(([k, v]) => `$${k}: $${v.price || '-'} (PE: ${v.forwardPE || '-'}, 板塊: ${v.sector})`).join('; ');
 
-        const systemPrompt = '你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\\n\\n【即時行情摘要】：\\n' + contextTickers + '\\n\\n【近期關鍵推文摘要】：\\n' + contextTweets + '\\n\\n使用者問題：' + userQuery;
+        const systemPrompt = `你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\\n\\n【即時行情摘要】：\\n${contextTickers}\\n\\n【近期關鍵推文摘要】：\\n${contextTweets}\\n\\n使用者問題：${userQuery}`;
 
         const result = await executeGeminiRequest(geminiApiKey, systemPrompt);
 
         if (result.ok && result.data.candidates && result.data.candidates[0] && result.data.candidates[0].content) {
           const aiResponseText = result.data.candidates[0].content.parts[0].text;
-          const formattedReply = aiResponseText.split('\n').join('<br>');
-          loadingMsg.innerHTML = '<b>Serenity AI (' + result.modelUsed + ')：</b><br>' + formattedReply;
+          loadingMsg.innerHTML = `<b>Serenity AI (${result.modelUsed})：</b><br>${aiResponseText.replace(/\\n/g, '<br>')}`;
         } else {
-          loadingMsg.innerHTML = '⚠️ Gemini API 回傳異常：<b>' + (result.error || '呼叫失敗') + '</b><br><br>💡 <b>解決步驟：</b>請點擊右上角 <b>⚙️ 設定</b> 重新測試連線。';
+          loadingMsg.innerHTML = `⚠️ Gemini API 回傳異常：<b>${result.error || '呼叫失敗'}</b><br><br>💡 <b>解決步驟：</b>請點擊右上角 <b>⚙️ 設定</b> 重新測試連線。`;
         }
       } catch (err) {
         console.error('Gemini API 請求失敗:', err);
-        loadingMsg.innerHTML = '⚠️ 連線至 Gemini API 失敗 (' + err.message + ')。';
+        loadingMsg.innerHTML = `⚠️ 連線至 Gemini API 失敗 (${err.message})。`;
       } finally {
         sendBtn.disabled = false;
       }
@@ -2020,12 +2031,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         viewTweets.forEach(t => t.tickers.forEach(sym => counts[sym] = (counts[sym] || 0) + 1));
         const topSymbols = Object.keys(counts).filter(isTickerInCurrentSector).slice(0, 5).join(', ');
 
-        appendChatMessage('ai', (
-          '📅 <b>已為你切換至「今日日報」視圖！</b><br>' +
-          '• 今日提及推文：<b>' + total + '</b> 則<br>' +
-          '• 看多佔比：<b>' + bullish + ' 則 (' + (total ? Math.round(bullish/total*100) : 0) + '%)</b><br>' +
-          '• 今日熱門標的：<b>' + (topSymbols || '無') + '</b>'
-        ));
+        appendChatMessage('ai', `
+          📅 <b>已為你切換至「今日日報」視圖！</b><br>
+          • 今日提及推文：<b>${total}</b> 則<br>
+          • 看多佔比：<b>${bullish} 則 (${total ? Math.round(bullish/total*100) : 0}%)</b><br>
+          • 今日熱門標的：<b>${topSymbols || '無'}</b>
+        `);
         return;
       }
 
@@ -2037,7 +2048,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         let resHtml = '💰 <b>前瞻本益比 (Forward P/E) 最具估值吸引力標的：</b><br>';
         valueTickers.forEach(([sym, data]) => {
-          resHtml += '• <button onclick="filterByTicker(\'' + sym + '\')" class="text-teal-400 font-bold font-mono">$' + sym + '</button>：Fwd P/E <b>' + data.forwardPE + 'x</b> (' + data.sector + ')<br>';
+          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button>：Fwd P/E <b>${data.forwardPE}x</b> (${data.sector})<br>`;
         });
         appendChatMessage('ai', resHtml);
         return;
@@ -2045,13 +2056,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       if (q.includes('生技') || q.includes('醫療') || q.includes('藥')) {
         setSectorFilter('生技與醫療製藥');
-        appendChatMessage('ai', '💊 <b>已為你篩選「生技與醫療製藥」板塊！</b><br>包含 $HIMS, $MRNA, $JNJ, $TEM 等相關討論推文。');
+        appendChatMessage('ai', '💊 <b>已為你篩選「生技與醫療製藥」板塊！</b><br>包含 \\$HIMS, \\$MRNA, \\$JNJ, \\$TEM 等相關討論推文。');
         return;
       }
 
       if (q.includes('設備') || q.includes('封測') || q.includes('AMAT') || q.includes('ASML')) {
         setSectorFilter('半導體設備與封測');
-        appendChatMessage('ai', '🔬 <b>已為你篩選「半導體設備與封測」板塊！</b><br>包含 $AMAT, $ASML, $AEHR, $AMKR, $LRCX 等標的。');
+        appendChatMessage('ai', '🔬 <b>已為你篩選「半導體設備與封測」板塊！</b><br>包含 \\$AMAT, \\$ASML, \\$AEHR, \\$AMKR, \\$LRCX 等標的。');
         return;
       }
 
@@ -2074,54 +2085,50 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         let resHtml = '🚀 <b>目前社群立場偏多的精選標的：</b><br>';
         bullishList.forEach(([sym, data]) => {
           const qData = stockQuotes[sym];
-          const priceStr = qData && qData.price ? '$' + qData.price.toFixed(2) + ' (' + (qData.changePct>=0?'+':'') + qData.changePct.toFixed(1) + '%)' : '';
-          resHtml += '• <button onclick="filterByTicker(\'' + sym + '\')" class="text-teal-400 font-bold font-mono">$' + sym + '</button> ' + priceStr + '：' + data.bullish + ' 則看多 (' + Math.round(data.bullish/data.total*100) + '%)<br>';
+          const priceStr = qData && qData.price ? `$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(1)}%)` : '';
+          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button> ${priceStr}：${data.bullish} 則看多 (${Math.round(data.bullish/data.total*100)}%)<br>`;
         });
         appendChatMessage('ai', resHtml);
         return;
       }
 
-      const cleanQ = q.replace('$', '');
-      const tickerMatch = cleanQ.match(/([A-Za-z]{1,6})/);
+      const tickerMatch = q.match(/\\$?([A-Za-z]{1,6})/);
       const symbol = tickerMatch ? tickerMatch[1].toUpperCase() : null;
 
       if (symbol) {
         filterByTicker(symbol);
         const tickerTweets = allTweets.filter(t => t.tickers.includes(symbol));
-
         if (tickerTweets.length > 0) {
           const chronological = [...tickerTweets].sort((a, b) => (a.iso_date || a.date).localeCompare(b.iso_date || b.date));
           const latest = chronological[chronological.length - 1];
           const qData = stockQuotes[symbol] || {};
-          const priceText = qData.price ? '$' + qData.price.toFixed(2) + ' (' + (qData.changePct>=0?'+':'') + qData.changePct.toFixed(2) + '%)' : '即時行情模式';
+          const priceText = qData.price ? `$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(2)}%)` : '即時行情模式';
 
           if (q.includes('風險') || q.includes('疑慮') || q.includes('看空')) {
             const riskTweets = tickerTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('跌'))));
             if (riskTweets.length > 0) {
-              let riskHtml = '⚠️ <b>關於 $' + symbol + ' 被提及的風險與疑慮：</b><br>';
+              let riskHtml = `⚠️ <b>關於 \\$${symbol} 被提及的風險與疑慮：</b><br>`;
               riskTweets.slice(0, 3).forEach(t => {
-                riskHtml += '• <b>[' + t.date + ']</b> ' + (t.summary || t.translation_zh || t.text) + ' (<a href="' + t.url + '" target="_blank" class="text-cyan-400 hover:underline">來源</a>)<br>';
+                riskHtml += `• <b>[${t.date}]</b> ${t.summary || t.translation_zh || t.text} (<a href="${t.url}" target="_blank" class="text-cyan-400 hover:underline">來源</a>)<br>`;
               });
               appendChatMessage('ai', riskHtml);
             } else {
-              appendChatMessage('ai', '✅ <b>$' + symbol + '</b> 在歷史推文中未出現顯著的看空或風險警語。');
+              appendChatMessage('ai', `✅ <b>\\$${symbol}</b> 在歷史推文中未出現顯著的看空或風險警語。`);
             }
             return;
           }
 
-          let storySummary = latest && latest.summary ? latest.summary : latest.text.slice(0, 60) + '...';
-
-          let analysisHtml = (
-            '🎯 <b>$' + symbol + ' 即時論點脈絡分析：</b><br>' +
-            '• <b>所屬板塊：</b>' + (qData.sector || '科技') + '<br>' +
-            '• <b>當前股價：</b>' + priceText + '<br>' +
-            '• <b>提及次數：</b>共 ' + tickerTweets.length + ' 則推文<br>' +
-            '• <b>最新立場：</b>' + (latest ? latest.sentiment : '中立') + '<br>' +
-            '• <b>最新觀點：</b>' + storySummary + '<br>' +
-            '<div class="mt-2 flex gap-2">' +
-              '<button onclick="openDeepDiveModal(\'' + symbol + '\')" class="px-2 py-1 bg-teal-500 text-slate-950 font-bold rounded">開啟 AI 論點脈絡 ↗</button>' +
-            '</div>'
-          );
+          let analysisHtml = `
+            🎯 <b>\\$${symbol} 即時論點脈絡分析：</b><br>
+            • <b>所屬板塊：</b>${qData.sector || '科技'}<br>
+            • <b>當前股價：</b>${priceText}<br>
+            • <b>提及次數：</b>共 ${tickerTweets.length} 則推文<br>
+            • <b>最新立場：</b>${latest ? latest.sentiment : '中立'}<br>
+            • <b>最新觀點：</b>${latest && latest.summary ? latest.summary : (latest ? latest.text.slice(0, 60) + '...' : '尚無摘要')}<br>
+            <div class="mt-2 flex gap-2">
+              <button onclick="openDeepDiveModal('${symbol}')" class="px-2 py-1 bg-teal-500 text-slate-950 font-bold rounded">開啟 AI 論點脈絡 ↗</button>
+            </div>
+          `;
           appendChatMessage('ai', analysisHtml);
           return;
         }
@@ -2130,7 +2137,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       searchQuery = query.toLowerCase();
       document.getElementById('search-input').value = query;
       render();
-      appendChatMessage('ai', '已為你篩選包含關鍵字「<b>' + query + '</b>」的推文內容。');
+      appendChatMessage('ai', `已為你篩選包含關鍵字「<b>${query}</b>」的推文內容。`);
     }
 
     document.getElementById('search-input').addEventListener('input', (e) => {
@@ -2147,10 +2154,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
     });
 
-    document.getElementById('last-update-time').innerText = '建置時間：' + new Date().toLocaleString('zh-TW', { hour12: false });
+    document.getElementById('last-update-time').innerText = `建置時間：${new Date().toLocaleString('zh-TW', { hour12: false })}`;
 
     updateChatModeBadge();
-    initDashboard();
+    setViewMode('all');
   </script>
 </body>
 </html>
@@ -2158,12 +2165,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     os.makedirs(os.path.dirname(OUTPUT_HTML), exist_ok=True)
+    tweets_json_str = json.dumps(tweets, ensure_ascii=False)
     
-    # 輸出獨立的 docs/data.json
-    with open(OUTPUT_DATA_JSON, "w", encoding="utf-8") as f:
-        json.dump(tweets, f, ensure_ascii=False)
-    print(f"💾 獨立推文資料已成功輸出至 {OUTPUT_DATA_JSON} (共 {len(tweets)} 則)", flush=True)
-
     ordered_tickers = []
     for t in recent_tickers:
         if t not in ordered_tickers:
@@ -2178,21 +2181,20 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
     sector_mapping_json_str = json.dumps(SECTOR_MAPPING, ensure_ascii=False)
 
-    html_rendered = HTML_TEMPLATE.replace("__TOP_TICKERS__", top_tickers_json_str) \
+    html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
+                                 .replace("__TOP_TICKERS__", top_tickers_json_str) \
                                  .replace("__STOCK_QUOTES__", stock_quotes_json_str) \
                                  .replace("__SECTOR_MAPPING__", sector_mapping_json_str)
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (採用 fetch('./data.json') 架構)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (架構已對齊 Burak 穩定版本)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
     sentiment_cache = load_cache(CACHE_FILE)
     cleaned_tweets, counts, recent_tickers = clean_tweet_data(tweets_raw, sentiment_cache)
     
-    print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
-
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     combined_target_list = list(dict.fromkeys(recent_tickers + all_sector_symbols + [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)[:60]]))[:110]
     
