@@ -341,11 +341,10 @@ def fetch_stock_quotes_and_fundamentals(tickers):
     """採用 yf.download 批次平行下載 + 快取持久化備援機制，徹底解決 META 等標的限流空白問題"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     
-    # 載入持久化快取作為容錯備援
     cached_quotes = load_cache(QUOTES_CACHE_FILE)
     quotes = cached_quotes.copy() if isinstance(cached_quotes, dict) else {}
     
-    # 1. 執行批次平行下載 1 年歷史日 K（只需 1 次請求即可取得全部日 K，不受限流影響）
+    # 批次下載 1 年歷史日 K 收盤價
     batch_df = None
     try:
         batch_df = yf.download(tickers, period="1y", interval="1d", group_by="ticker", threads=True, progress=False)
@@ -355,7 +354,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
     for symbol in tickers:
         history_data = []
         
-        # 解析批次歷史日 K
         if batch_df is not None and not batch_df.empty:
             try:
                 sym_df = batch_df[symbol] if (len(tickers) > 1 and symbol in batch_df) else batch_df
@@ -370,7 +368,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             except Exception:
                 pass
 
-        # 2. 擷取個股最新行情與基本面
         current_price, prev_close, high_52, low_52, volume, market_cap = None, None, None, None, None, None
         forward_pe, trailing_pe, price_to_sales, revenue_growth, earnings_date_str = None, None, None, None, None
         info = {}
@@ -385,7 +382,6 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None)
             market_cap = getattr(fast, "market_cap", None)
 
-            # 若歷史資料為空，嘗試單獨擷取 1 次
             if not history_data:
                 try:
                     hist = ticker_obj.history(period="1y", interval="1d")
@@ -432,7 +428,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
         except Exception:
             pass
 
-        # 3. 關鍵回填機制：若現價為空但有日 K，以日 K 最後一筆收盤價自動補齊
+        # 價格回填備援機制
         if (current_price is None or float(current_price) <= 0) and history_data:
             current_price = history_data[-1]["c"]
         if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
@@ -463,12 +459,10 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             }
             print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_data)} 筆", flush=True)
         elif symbol in quotes and quotes[symbol].get("history"):
-            # 保留先前的快取資料
             print(f"  🔄 ${symbol}: 使用快取資料 (${quotes[symbol].get('price', '-')})", flush=True)
         else:
             quotes[symbol] = {"sector": sector_name, "history": history_data}
 
-    # 4. 寫入持久化快取
     try:
         os.makedirs(os.path.dirname(QUOTES_CACHE_FILE), exist_ok=True)
         with open(QUOTES_CACHE_FILE, "w", encoding="utf-8") as f:
@@ -803,7 +797,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     </button>
   </div>
 
-  <div id="ai-chat-drawer" class="fixed bottom-20 right-4 sm:right-6 z-50 w-[94vw] sm:w-[440px] max-h-[85vh] h-[min(500px,calc(100vh-120px))] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden hidden flex-col">
+  <div id="ai-chat-drawer" class="fixed bottom-20 right-4 sm:right-6 z-50 w-[94vw] sm:w-[460px] max-h-[85vh] h-[min(540px,calc(100vh-120px))] bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden hidden flex-col">
     <!-- 頂部標題列 -->
     <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-2 shrink-0">
       <div class="flex items-center gap-2 min-w-0">
@@ -817,16 +811,40 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       </div>
     </div>
 
+    <!-- 對話訊息容器與雙排綜合快捷按鈕 (方案 B + 方案 D 混合模式) -->
     <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
-      <div class="bg-slate-800/80 border border-slate-700/70 p-3 rounded-xl text-slate-200">
-        👋 你好！我是 Serenity AI 助理。目前支援快速查詢與 Gemini 深度分析：
-        <div class="mt-2 flex flex-wrap gap-1.5">
-          <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">📅 今日日報</button>
-          <button onclick="handleQuickAsk('半導體設備')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔬 半導體設備</button>
-          <button onclick="handleQuickAsk('低估值')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">💰 低估值標的</button>
-          <button onclick="handleQuickAsk('幫我看 AMAT')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔍 幫我看 AMAT</button>
-          <button onclick="handleQuickAsk('幫我看 HIMS')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 px-2 py-0.5 rounded border border-teal-500/30">🔍 幫我看 HIMS</button>
+      <div class="bg-slate-800/80 border border-slate-700/70 p-3.5 rounded-xl text-slate-200 space-y-2.5">
+        <div class="font-medium text-slate-200">
+          👋 你好！我是 Serenity AI 助理。目前支援全方位量化掃描、個股深鑽與 Gemini 深度分析：
         </div>
+        
+        <!-- 第一排：市場全局與量化掃描 (方案 B) -->
+        <div class="space-y-1">
+          <div class="text-[10px] font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1">
+            <span>📊</span> 全局量化與策略掃描：
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 px-2.5 py-1 rounded-lg border border-teal-500/30 transition">📅 今日日報重點</button>
+            <button onclick="handleQuickAsk('多方偏向精選')" class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-lg border border-emerald-500/30 transition">🚀 多方偏向精選</button>
+            <button onclick="handleQuickAsk('近期風險警戒')" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 px-2.5 py-1 rounded-lg border border-rose-500/30 transition">⚠️ 近期風險警戒</button>
+            <button onclick="handleQuickAsk('低估值')" class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-lg border border-amber-500/30 transition">💰 低前瞻P/E估值</button>
+            <button onclick="handleQuickAsk('AI 算力板塊')" class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded-lg border border-cyan-500/30 transition">🧠 AI 算力板塊</button>
+          </div>
+        </div>
+
+        <!-- 第二排：核心高頻標的深鑽 (方案 D) -->
+        <div class="space-y-1 pt-1 border-t border-slate-700/60">
+          <div class="text-[10px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
+            <span>🎯</span> 核心標的即時論點深鑽：
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="handleQuickAsk('幫我看 NBIS')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $NBIS</button>
+            <button onclick="handleQuickAsk('幫我看 SIVE')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $SIVE</button>
+            <button onclick="handleQuickAsk('幫我看 NVDA')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $NVDA</button>
+            <button onclick="handleQuickAsk('幫我看 META')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $META</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1001,7 +1019,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       document.getElementById('apikey-modal').classList.add('hidden');
     }
 
-    // 計算模型版本權重分數
     function getModelScore(modelName) {
       let score = 0;
       const lower = modelName.toLowerCase();
@@ -1017,7 +1034,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       return score;
     }
 
-    // 動態向 Google 查詢最新可用模型並自動降冪排序
     async function fetchOnlineGeminiModels(cleanKey) {
       const listUrl = 'https://generativelanguage.googleapis.com/v1beta/models';
       let models = [];
@@ -1058,7 +1074,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       return Array.from(new Set([...models, ...defaultCandidates]));
     }
 
-    // 核心請求執行器：支援自動智慧輪詢與雙通道容錯
     async function executeGeminiRequest(key, promptText) {
       const cleanKey = key.trim().replace(/["'\\s]/g, '');
       const candidateModels = await fetchOnlineGeminiModels(cleanKey);
@@ -1913,7 +1928,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
           t.text.toLowerCase().includes(searchQuery) || 
-          t.summary.toLowerCase().includes(searchQuery) || 
+          t.summary.toLowerCase().includes(searchQuery) ||
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
         return matchSentiment && matchTicker && matchSearch;
       });
@@ -2007,7 +2022,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    // 4. AI 智能對話助理
+    // 4. AI 智能對話助理 (動態模型適應與連線)
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
@@ -2078,6 +2093,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function processLocalChatIntent(query) {
       const q = query.toUpperCase();
       
+      // 1. 日報意圖
       if (q.includes('日報') || q.includes('今日')) {
         setViewMode('daily');
         const viewTweets = getFilteredByView(allTweets);
@@ -2096,33 +2112,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
-      if (q.includes('低估值') || q.includes('本益比') || q.includes('便宜')) {
-        const valueTickers = Object.entries(stockQuotes)
-          .filter(([sym, data]) => data.forwardPE && data.forwardPE > 0)
-          .sort((a, b) => a[1].forwardPE - b[1].forwardPE)
-          .slice(0, 5);
-
-        let resHtml = '💰 <b>前瞻本益比 (Forward P/E) 最具估值吸引力標的：</b><br>';
-        valueTickers.forEach(([sym, data]) => {
-          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button>：Fwd P/E <b>${data.forwardPE}x</b> (${data.sector})<br>`;
-        });
-        appendChatMessage('ai', resHtml);
-        return;
-      }
-
-      if (q.includes('生技') || q.includes('醫療') || q.includes('藥')) {
-        setSectorFilter('生技與醫療製藥');
-        appendChatMessage('ai', '💊 <b>已為你篩選「生技與醫療製藥」板塊！</b><br>包含 \\$HIMS, \\$MRNA, \\$JNJ, \\$TEM 等相關討論推文。');
-        return;
-      }
-
-      if (q.includes('設備') || q.includes('封測') || q.includes('AMAT') || q.includes('ASML')) {
-        setSectorFilter('半導體設備與封測');
-        appendChatMessage('ai', '🔬 <b>已為你篩選「半導體設備與封測」板塊！</b><br>包含 \\$AMAT, \\$ASML, \\$AEHR, \\$AMKR, \\$LRCX 等標的。');
-        return;
-      }
-
-      if (q.includes('偏多') || q.includes('看多') || q.includes('BULLISH')) {
+      // 2. 多方偏向精選 (方案 B)
+      if (q.includes('偏多') || q.includes('看多') || q.includes('多方') || q.includes('BULLISH')) {
         const counts = {};
         allTweets.forEach(t => {
           t.tickers.forEach(sym => {
@@ -2138,7 +2129,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           .sort((a, b) => b[1].bullish - a[1].bullish)
           .slice(0, 6);
 
-        let resHtml = '🚀 <b>目前社群立場偏多的精選標的：</b><br>';
+        let resHtml = '🚀 <b>目前社群立場高度偏多的精選標的：</b><br>';
         bullishList.forEach(([sym, data]) => {
           const qData = stockQuotes[sym];
           const priceStr = qData && qData.price ? `$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(1)}%)` : '';
@@ -2148,6 +2139,45 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         return;
       }
 
+      // 3. 近期風險警戒清單 (方案 B - 全局掃描)
+      if ((q.includes('風險') || q.includes('警戒') || q.includes('疑慮') || q.includes('看空')) && !q.match(/\\$?([A-Za-z]{1,6})/)) {
+        const riskTweets = allTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('警戒') || t.summary.includes('跌')))).slice(0, 5);
+        if (riskTweets.length > 0) {
+          let resHtml = '⚠️ <b>近期社群提及的重點風險與警戒觀點：</b><br>';
+          riskTweets.forEach(t => {
+            const symTag = t.tickers.length > 0 ? t.tickers.map(s => `\\$${s}`).join(', ') : '大盤';
+            resHtml += `• <b>[${t.date}] (${symTag})</b> ${t.summary || t.translation_zh || t.text.slice(0, 60)}... (<a href="${t.url}" target="_blank" class="text-cyan-400 hover:underline">來源</a>)<br>`;
+          });
+          appendChatMessage('ai', resHtml);
+        } else {
+          appendChatMessage('ai', '✅ 近期推文中未偵測到顯著的系統性風險警語。');
+        }
+        return;
+      }
+
+      // 4. 低估值標的查詢 (方案 B)
+      if (q.includes('低估值') || q.includes('本益比') || q.includes('便宜') || q.includes('P/E')) {
+        const valueTickers = Object.entries(stockQuotes)
+          .filter(([sym, data]) => data.forwardPE && data.forwardPE > 0)
+          .sort((a, b) => a[1].forwardPE - b[1].forwardPE)
+          .slice(0, 6);
+
+        let resHtml = '💰 <b>前瞻本益比 (Forward P/E) 最具估值吸引力標的排名：</b><br>';
+        valueTickers.forEach(([sym, data]) => {
+          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button>：Fwd P/E <b>${data.forwardPE}x</b> (${data.sector})<br>`;
+        });
+        appendChatMessage('ai', resHtml);
+        return;
+      }
+
+      // 5. AI 算力板塊過濾 (方案 B)
+      if (q.includes('算力') || q.includes('晶片') || q.includes('高速互連') || q.includes('半導體')) {
+        setSectorFilter('AI 算力與高速互連');
+        appendChatMessage('ai', '🧠 <b>已為你篩選「AI 算力與高速互連」核心板塊！</b><br>包含 \\$NVDA, \\$AMD, \\$AVGO, \\$TSM, \\$MRVL, \\$ALAB 等焦點標的。');
+        return;
+      }
+
+      // 6. 個股深鑽匹配 (方案 D)
       const tickerMatch = q.match(/\\$?([A-Za-z]{1,6})/);
       const symbol = tickerMatch ? tickerMatch[1].toUpperCase() : null;
 
@@ -2244,7 +2274,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (批次下載與快取持久化已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (AI 對話雙排混合模式已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
@@ -2253,7 +2283,7 @@ if __name__ == "__main__":
     
     print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
 
-    # 關鍵修正：推文高頻提及標的排在最前順位，確保 META (255次)、ORCL (107次) 絕對優先完整擷取
+    # 推文高頻提及標的排在最前順位，確保 META、ORCL、NBIS、SIVE 等 100% 優先抓取
     mentioned_tickers_sorted = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     
