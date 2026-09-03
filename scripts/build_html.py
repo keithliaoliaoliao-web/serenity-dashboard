@@ -64,6 +64,7 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
+    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -91,6 +92,7 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
+    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -100,6 +102,7 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
+    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
     for path in [filepath, ALT_TWEETS_FILE]:
         if os.path.exists(path):
@@ -162,6 +165,7 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
+    """萃取推文中的美股代號"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -193,6 +197,7 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
+    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -224,6 +229,7 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
+    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -338,13 +344,12 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """採用 yf.download 批次平行下載 + 快取持久化備援機制，徹底解決 META 等標的限流空白問題"""
+    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢 (含快取備援與回填機制)"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     
     cached_quotes = load_cache(QUOTES_CACHE_FILE)
     quotes = cached_quotes.copy() if isinstance(cached_quotes, dict) else {}
     
-    # 批次下載 1 年歷史日 K 收盤價
     batch_df = None
     try:
         batch_df = yf.download(tickers, period="1y", interval="1d", group_by="ticker", threads=True, progress=False)
@@ -503,7 +508,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.12); }
+    .teal-glow { box-shadow: 0 0 25px rgba(20, 184, 166, 0.15); }
+    @keyframes tweetHighlight {
+      0% { box-shadow: 0 0 0 2px #14b8a6, 0 0 25px rgba(20, 184, 166, 0.4); background-color: rgba(19, 78, 74, 0.35); }
+      100% { box-shadow: none; background-color: rgba(15, 23, 42, 0.6); }
+    }
+    .highlight-tweet-anim {
+      animation: tweetHighlight 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
   </style>
 </head>
 <body class="text-slate-200 min-h-screen font-sans antialiased selection:bg-teal-500 selection:text-white">
@@ -640,12 +652,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
               <span class="text-xs font-normal text-slate-400">相對前一日收盤</span>
             </div>
           </div>
-          <div class="flex items-center gap-2 ml-0 sm:ml-4 flex-wrap">
+          <div class="flex items-center gap-2 ml-0 sm:ml-4">
             <button onclick="openDeepDiveModal(currentTicker)" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-teal-500 text-slate-950 hover:bg-teal-400 transition flex items-center gap-1 shadow-sm font-bold">
               🧠 AI 論點脈絡
             </button>
             <button onclick="togglePriceOverlayChart()" class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-teal-500/10 border border-teal-500/30 text-teal-300 hover:bg-teal-500/20 transition">
-              📉 <span id="price-chart-btn-text">1年走勢與多空點位</span>
+              📉 <span id="price-chart-btn-text">走勢與多空點位</span>
             </button>
             <button onclick="toggleTvChart()" class="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition">
               📊 <span id="tv-chart-btn-text">即時 K 線</span>
@@ -690,21 +702,32 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- 1. 首次提及以來股價走勢與社群多空點位疊圖 -->
+      <!-- 走勢疊圖容器 (含 1M/3M/6M/1Y 時間軸切換與推文卡片直達提示) -->
       <div id="price-overlay-chart-wrapper" class="border-t border-slate-800/80 pt-4">
-        <div class="text-xs font-semibold text-slate-400 mb-2 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span>📉 1 年歷史股價走勢與 Serenity 發文點位疊加</span>
-            <div class="flex items-center gap-2 text-[10px] font-mono ml-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-semibold text-slate-300">📉 歷史走勢與 Serenity 點位疊圖</span>
+            <div class="flex items-center gap-2 text-[10px] font-mono">
               <span class="inline-flex items-center gap-1 text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>看多</span>
               <span class="inline-flex items-center gap-1 text-rose-400"><span class="w-2 h-2 rounded-full bg-rose-500"></span>看空</span>
               <span class="inline-flex items-center gap-1 text-blue-400"><span class="w-2 h-2 rounded-full bg-blue-500"></span>中立</span>
             </div>
           </div>
-          <span class="text-[11px] text-teal-400 font-mono hidden sm:inline">懸停圓點查看推文摘要與觀點</span>
+
+          <!-- 時間軸週期切換按鈕群組 -->
+          <div class="flex items-center gap-1 bg-slate-950/80 p-0.5 rounded-lg border border-slate-800 self-start sm:self-auto">
+            <button onclick="setChartRange('1M')" class="chart-range-btn px-2.5 py-0.5 rounded-md text-[11px] font-mono text-slate-400 hover:text-white transition" data-range="1M">1M</button>
+            <button onclick="setChartRange('3M')" class="chart-range-btn px-2.5 py-0.5 rounded-md text-[11px] font-mono text-slate-400 hover:text-white transition" data-range="3M">3M</button>
+            <button onclick="setChartRange('6M')" class="chart-range-btn px-2.5 py-0.5 rounded-md text-[11px] font-mono text-slate-400 hover:text-white transition" data-range="6M">6M</button>
+            <button onclick="setChartRange('1Y')" class="chart-range-btn active px-2.5 py-0.5 rounded-md text-[11px] font-mono bg-teal-500 text-slate-950 font-bold shadow-sm transition" data-range="1Y">1Y</button>
+          </div>
         </div>
-        <div class="w-full h-[280px] bg-slate-950/70 p-3 rounded-xl border border-slate-800">
+
+        <div class="w-full h-[280px] bg-slate-950/70 p-3 rounded-xl border border-slate-800 relative">
           <canvas id="priceOverlayCanvas"></canvas>
+          <div class="absolute bottom-2 right-3 text-[10px] text-teal-400/80 font-mono pointer-events-none hidden sm:block">
+            💡 點擊圖上圓點可直接跳轉至推文並高亮顯示
+          </div>
         </div>
       </div>
 
@@ -806,55 +829,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <span id="chat-mode-badge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 truncate">⚡ 本機快速模式</span>
       </div>
       <div class="flex items-center gap-1.5 shrink-0">
+        <button onclick="clearChatHistory()" class="text-slate-400 hover:text-teal-400 p-1 text-xs rounded hover:bg-slate-800 transition" title="清空對話歷史 (開啟新話題)">🧹</button>
         <button onclick="openApiKeyModal()" class="text-slate-400 hover:text-teal-400 p-1 text-xs rounded hover:bg-slate-800 transition" title="設定 Gemini API Key">⚙️</button>
         <button onclick="toggleChatDrawer()" class="text-slate-400 hover:text-white font-bold p-1 text-xs rounded hover:bg-slate-800 transition">✕</button>
       </div>
     </div>
 
-    <!-- 對話訊息容器與雙排綜合快捷按鈕 (方案 B + 方案 D 混合模式) -->
+    <!-- 對話訊息視窗 -->
     <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
       <div class="bg-slate-800/80 border border-slate-700/70 p-3.5 rounded-xl text-slate-200 space-y-2.5">
-        <div class="font-medium text-slate-200">
-          👋 你好！我是 Serenity AI 助理。目前支援全方位量化掃描、個股深鑽與 Gemini 深度分析：
+        <div class="font-semibold text-slate-100 flex items-center gap-1.5">
+          <span>👋</span> 你好！我是 Serenity AI 助理，已支援【流式打字生成】與【多輪連續追問】：
         </div>
-        
-        <!-- 第一排：市場全局與量化掃描 (方案 B) -->
-        <div class="space-y-1">
-          <div class="text-[10px] font-bold text-teal-400 uppercase tracking-wider flex items-center gap-1">
-            <span>📊</span> 全局量化與策略掃描：
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            <button onclick="handleQuickAsk('日報')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 px-2.5 py-1 rounded-lg border border-teal-500/30 transition">📅 今日日報重點</button>
-            <button onclick="handleQuickAsk('多方偏向精選')" class="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-lg border border-emerald-500/30 transition">🚀 多方偏向精選</button>
-            <button onclick="handleQuickAsk('近期風險警戒')" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 px-2.5 py-1 rounded-lg border border-rose-500/30 transition">⚠️ 近期風險警戒</button>
-            <button onclick="handleQuickAsk('低估值')" class="bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-lg border border-amber-500/30 transition">💰 低前瞻P/E估值</button>
-            <button onclick="handleQuickAsk('AI 算力板塊')" class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded-lg border border-cyan-500/30 transition">🧠 AI 算力板塊</button>
-          </div>
-        </div>
-
-        <!-- 第二排：核心高頻標的深鑽 (方案 D) -->
-        <div class="space-y-1 pt-1 border-t border-slate-700/60">
-          <div class="text-[10px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
-            <span>🎯</span> 核心標的即時論點深鑽：
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            <button onclick="handleQuickAsk('幫我看 NBIS')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $NBIS</button>
-            <button onclick="handleQuickAsk('幫我看 SIVE')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $SIVE</button>
-            <button onclick="handleQuickAsk('幫我看 NVDA')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $NVDA</button>
-            <button onclick="handleQuickAsk('幫我看 META')" class="bg-slate-900 hover:bg-slate-700/80 text-teal-400 font-mono font-bold px-2 py-1 rounded-lg border border-slate-700 transition">🔍 幫我看 $META</button>
-          </div>
-        </div>
-
+        <!-- 雙排綜合快捷問答按鈕容器 (方案 B + 方案 D) -->
+        <div id="quick-ask-container" class="space-y-2 pt-1 border-t border-slate-700/60"></div>
       </div>
     </div>
 
+    <!-- 輸入列 -->
     <form onsubmit="handleChatSubmit(event)" class="p-2.5 bg-slate-950 border-t border-slate-800 flex gap-2 shrink-0">
-      <input type="text" id="chat-input" placeholder="輸入問題（可詢問觀點、估值或個股分析）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
-      <button type="submit" id="chat-send-btn" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition">發送</button>
+      <input type="text" id="chat-input" placeholder="輸入問題（支援連續追問，如：分析 $NVDA、那 $AMD 呢？）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
+      <button type="submit" id="chat-send-btn" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition flex items-center justify-center">發送</button>
     </form>
   </div>
 
-  <!-- 專屬 Gemini API Key 設定彈窗 (永遠相容最新模型) -->
+  <!-- 專屬 Gemini API Key 設定彈窗 -->
   <div id="apikey-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-md p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
@@ -978,20 +977,31 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     
     let tvChartVisible = false;
     let priceOverlayChartInstance = null;
+    let currentChartRange = '1Y'; // 走勢圖時間週期 (1M / 3M / 6M / 1Y)
 
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let geminiApiKey = localStorage.getItem('serenity_gemini_api_key') || '';
+    let chatContextHistory = []; // 多輪對話歷史
 
     function updateChatModeBadge() {
       const badge = document.getElementById('chat-mode-badge');
       if (geminiApiKey) {
-        badge.innerText = '🌟 Gemini 雲端連線';
+        badge.innerText = '🌟 Gemini 串流連線';
         badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/40 truncate';
       } else {
         badge.innerText = '⚡ 本機快速模式';
         badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 truncate';
       }
+    }
+
+    function clearChatHistory() {
+      chatContextHistory = [];
+      const container = document.getElementById('chat-messages');
+      const firstWelcome = container.firstElementChild;
+      container.innerHTML = '';
+      if (firstWelcome) container.appendChild(firstWelcome);
+      appendChatMessage('ai', '🧹 對話歷史已清除，已開啟全新討論主題！');
     }
 
     function toggleApiKeyVisibility() {
@@ -1022,7 +1032,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function getModelScore(modelName) {
       let score = 0;
       const lower = modelName.toLowerCase();
-      
       const verMatch = lower.match(/gemini-(\\d+(?:\\.\\d+)?)/);
       if (verMatch) {
         score += parseFloat(verMatch[1]) * 100;
@@ -1030,7 +1039,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (lower.includes('flash')) score += 50;
       if (lower.includes('pro')) score += 30;
       if (lower.includes('preview')) score -= 5;
-      
       return score;
     }
 
@@ -1074,21 +1082,88 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       return Array.from(new Set([...models, ...defaultCandidates]));
     }
 
-    async function executeGeminiRequest(key, promptText) {
-      const cleanKey = key.trim().replace(/["'\\s]/g, '');
-      const candidateModels = await fetchOnlineGeminiModels(cleanKey);
-      
-      const bodyPayload = JSON.stringify({
-        contents: [{ parts: [{ text: promptText }] }]
+    function formatMarkdown(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\\*\\*(.*?)\\*\\*/g, '<b>$1</b>')
+        .replace(/\\*(.*?)\\*/g, '<i>$1</i>')
+        .replace(/`([^`]+)`/g, '<code class="bg-slate-800 px-1 py-0.5 rounded text-teal-300 font-mono text-[11px]">$1</code>')
+        .replace(/^\\s*[-*•]\\s+(.*)$/gm, '• $1')
+        .replace(/\\n/g, '<br>');
+    }
+
+    function buildSmartContext(query) {
+      const qUpper = query.toUpperCase();
+      const mentionedTickers = Object.keys(stockQuotes).filter(sym => {
+        const regex = new RegExp(`\\\\b\\\\$?${sym}\\\\b`, 'i');
+        return regex.test(query);
       });
 
+      let selectedTweets = [];
+      let selectedQuotes = [];
+
+      if (mentionedTickers.length > 0) {
+        const tickerTweets = allTweets.filter(t => t.tickers.some(s => mentionedTickers.includes(s))).slice(0, 20);
+        selectedTweets.push(...tickerTweets);
+
+        mentionedTickers.forEach(sym => {
+          const q = stockQuotes[sym];
+          if (q) selectedQuotes.push(`$${sym}: 現價 $${q.price || '-'} (漲跌幅: ${q.changePct || 0}%, PE: ${q.forwardPE || '-'}, PS: ${q.priceToSales || '-'}, 板塊: ${q.sector || '科技'}, 財報: ${q.earningsDate || '未定'})`);
+        });
+      }
+
+      allTweets.slice(0, 25).forEach(t => {
+        if (!selectedTweets.some(item => item.id === t.id) && selectedTweets.length < 25) {
+          selectedTweets.push(t);
+        }
+      });
+
+      if (selectedQuotes.length < 15) {
+        Object.entries(stockQuotes).slice(0, 15).forEach(([k, v]) => {
+          const str = `$${k}: $${v.price || '-'} (PE: ${v.forwardPE || '-'}, 板塊: ${v.sector || '科技'})`;
+          if (!selectedQuotes.includes(str)) selectedQuotes.push(str);
+        });
+      }
+
+      const tweetsText = selectedTweets.map(t => `[${t.date}] $${t.tickers.join(',$') || '大盤'} (${t.sentiment}): ${t.summary || t.text}`).join('\\n');
+      const quotesText = selectedQuotes.join('; ');
+
+      return `【即時行情摘要】：\\n${quotesText}\\n\\n【相關焦點情報與推文摘要】：\\n${tweetsText}`;
+    }
+
+    async function executeGeminiStreamRequest(key, userText, onChunk) {
+      const cleanKey = key.trim().replace(/["'\\s]/g, '');
+      const candidateModels = await fetchOnlineGeminiModels(cleanKey);
+
+      const smartContext = buildSmartContext(userText);
+      const systemInstructionText = `你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\\n\\n${smartContext}`;
+
+      const contentsPayload = [];
+      if (chatContextHistory.length === 0) {
+        contentsPayload.push({
+          role: 'user',
+          parts: [{ text: `${systemInstructionText}\\n\\n使用者問題：${userText}` }]
+        });
+      } else {
+        const recentHistory = chatContextHistory.slice(-6);
+        recentHistory.forEach(item => contentsPayload.push(item));
+        contentsPayload.push({
+          role: 'user',
+          parts: [{ text: `(參考最新市場情報與推文)\\n${smartContext}\\n\\n使用者最新問題：${userText}` }]
+        });
+      }
+
+      const bodyPayload = JSON.stringify({ contents: contentsPayload });
       let lastError = '';
 
       for (const model of candidateModels) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+        const streamUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`;
 
         try {
-          const res1 = await fetch(url, {
+          const response = await fetch(streamUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1096,36 +1171,71 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             },
             body: bodyPayload
           });
-          const data1 = await res1.json();
-          if (res1.ok && data1.candidates) {
-            return { ok: true, data: data1, modelUsed: model };
+
+          if (response.ok && response.body) {
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let buffer = '';
+            let fullText = '';
+
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split('\\n');
+              buffer = lines.pop() || '';
+
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('data: ')) {
+                  const jsonStr = trimmed.slice(6);
+                  try {
+                    const parsed = JSON.parse(jsonStr);
+                    if (parsed.candidates && parsed.candidates[0] && parsed.candidates[0].content) {
+                      const chunkText = parsed.candidates[0].content.parts[0].text || '';
+                      fullText += chunkText;
+                      if (onChunk) onChunk(fullText, model);
+                    }
+                  } catch (jsonErr) {}
+                }
+              }
+            }
+
+            if (fullText) {
+              chatContextHistory.push({ role: 'user', parts: [{ text: userText }] });
+              chatContextHistory.push({ role: 'model', parts: [{ text: fullText }] });
+              return { ok: true, fullText: fullText, modelUsed: model };
+            }
           }
-          if (data1.error && data1.error.message) {
-            lastError = `[${model}] ${data1.error.message}`;
+
+          const errData = await response.json().catch(() => ({}));
+          if (errData.error && errData.error.message) {
+            lastError = `[${model}] ${errData.error.message}`;
           }
-        } catch (err) {
-          lastError = err.message;
+        } catch (fetchErr) {
+          lastError = fetchErr.message;
         }
 
         try {
-          const res2 = await fetch(`${url}?key=${encodeURIComponent(cleanKey)}`, {
+          const normalUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+          const normalRes = await fetch(normalUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'x-goog-api-key': cleanKey },
             body: bodyPayload
           });
-          const data2 = await res2.json();
-          if (res2.ok && data2.candidates) {
-            return { ok: true, data: data2, modelUsed: model };
+          const normalData = await normalRes.json();
+          if (normalRes.ok && normalData.candidates) {
+            const text = normalData.candidates[0].content.parts[0].text;
+            if (onChunk) onChunk(text, model);
+            chatContextHistory.push({ role: 'user', parts: [{ text: userText }] });
+            chatContextHistory.push({ role: 'model', parts: [{ text: text }] });
+            return { ok: true, fullText: text, modelUsed: model };
           }
-          if (data2.error && data2.error.message) {
-            lastError = `[${model}] ${data2.error.message}`;
-          }
-        } catch (err) {
-          lastError = err.message;
-        }
+        } catch (normalErr) {}
       }
 
-      return { ok: false, error: lastError || '所有候選模型連線皆失敗' };
+      return { ok: false, error: lastError || '連線逾時，請檢查金鑰或網路。' };
     }
 
     async function testApiKeyConnection() {
@@ -1142,16 +1252,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
 
       testBtn.disabled = true;
-      testBtn.innerText = '動態尋找可用模型中...';
+      testBtn.innerText = '串流連線測試中...';
       statusBox.className = 'text-xs font-mono p-3 rounded-xl border bg-slate-800 border-slate-700 text-teal-400';
-      statusBox.innerText = '⏳ 正在向 Google 伺服器動態檢索並驗證最新 Gemini 模型...';
+      statusBox.innerText = '⏳ 正在向 Google 伺服器進行 SSE 串流連線與最新模型匹配...';
       statusBox.classList.remove('hidden');
 
-      const result = await executeGeminiRequest(key, 'Hi');
+      const result = await executeGeminiStreamRequest(key, '測試連線，請回覆 OK。', null);
 
       if (result.ok) {
         statusBox.className = 'text-xs font-mono p-3 rounded-xl border bg-emerald-950/40 border-emerald-800 text-emerald-300';
-        statusBox.innerHTML = `✅ <b>連線驗證成功 (HTTP 200)！</b><br>已動態連線至最新可用模型：<b>${result.modelUsed}</b>。<br>請點擊右下角「💾 儲存並啟用」。`;
+        statusBox.innerHTML = `✅ <b>SSE 流式連線驗證成功 (HTTP 200)！</b><br>已成功匹配最新模型：<b>${result.modelUsed}</b>。<br>請點擊右下角「💾 儲存並啟用」。`;
       } else {
         statusBox.className = 'text-xs font-mono p-3 rounded-xl border bg-rose-950/40 border-rose-800 text-rose-300 space-y-1.5';
         statusBox.innerHTML = `
@@ -1210,6 +1320,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
       localStorage.setItem('serenity_watchlist', JSON.stringify(watchlist));
       updateAggregatedView();
+      renderQuickAskButtons();
     }
 
     function isWatchlisted(ticker) {
@@ -1222,6 +1333,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         watchlist = [];
         localStorage.removeItem('serenity_watchlist');
         updateAggregatedView();
+        renderQuickAskButtons();
       }
     }
 
@@ -1245,6 +1357,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           watchlist = Array.from(new Set(parsed.map(s => String(s).trim().toUpperCase()))).filter(Boolean);
           localStorage.setItem('serenity_watchlist', JSON.stringify(watchlist));
           updateAggregatedView();
+          renderQuickAskButtons();
           alert(`✅ 成功匯入 ${watchlist.length} 檔自選股！`);
         } else {
           alert('⚠️ 格式錯誤：請輸入 JSON 陣列格式。');
@@ -1280,6 +1393,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       });
       displayLimit = 25;
       updateAggregatedView();
+      renderQuickAskButtons();
     }
 
     function setSectorFilter(sector) {
@@ -1292,6 +1406,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       });
       displayLimit = 25;
       updateAggregatedView();
+      renderQuickAskButtons();
     }
 
     function getFilteredByView(tweetsList) {
@@ -1422,10 +1537,49 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       };
     }
 
+    // 點擊圓點直達推文並高亮動畫 (Click-to-Scroll & Highlight)
+    function scrollToTweet(tweetId) {
+      if (!tweetId) return;
+
+      let targetEl = document.getElementById(`tweet-card-${tweetId}`);
+      
+      if (!targetEl) {
+        const viewFiltered = getFilteredByView(allTweets);
+        const targetIndex = viewFiltered.findIndex(t => t.id === tweetId);
+        if (targetIndex >= 0) {
+          displayLimit = Math.max(displayLimit, targetIndex + 10);
+          render();
+          targetEl = document.getElementById(`tweet-card-${tweetId}`);
+        }
+      }
+
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetEl.classList.remove('highlight-tweet-anim');
+        void targetEl.offsetWidth;
+        targetEl.classList.add('highlight-tweet-anim');
+      }
+    }
+
+    // 走勢圖時間週期切換 (1M / 3M / 6M / 1Y)
+    function setChartRange(range) {
+      currentChartRange = range;
+      document.querySelectorAll('.chart-range-btn').forEach(btn => {
+        const active = btn.dataset.range === range;
+        btn.className = `chart-range-btn px-2.5 py-0.5 rounded-md text-[11px] font-mono transition ${
+          active ? 'bg-teal-500 text-slate-950 font-bold shadow-sm' : 'text-slate-400 hover:text-white'
+        }`;
+      });
+      if (currentTicker) {
+        renderPriceOverlayChart(currentTicker);
+      }
+    }
+
+    // 走勢疊圖繪製引擎 (支援週期裁切與圓點直達事件)
     function renderPriceOverlayChart(ticker) {
       if (!ticker) return;
       const quote = stockQuotes[ticker];
-      const history = (quote && quote.history) ? quote.history : [];
+      let history = (quote && quote.history) ? [...quote.history] : [];
       const tickerTweets = allTweets.filter(t => t.tickers.includes(ticker));
 
       const ctx = document.getElementById('priceOverlayCanvas').getContext('2d');
@@ -1434,6 +1588,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       if (!history.length) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         return;
+      }
+
+      if (currentChartRange === '1M') {
+        history = history.slice(-22);
+      } else if (currentChartRange === '3M') {
+        history = history.slice(-66);
+      } else if (currentChartRange === '6M') {
+        history = history.slice(-130);
       }
 
       const labels = history.map(h => h.d);
@@ -1465,7 +1627,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             pointColors.push('#38bdf8');
           }
           pointRadiuses.push(6);
-          pointHoverRadiuses.push(9);
+          pointHoverRadiuses.push(10);
         } else {
           pointColors.push('transparent');
           pointRadiuses.push(0);
@@ -1499,6 +1661,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             mode: 'index',
             intersect: false
           },
+          onHover: (event, chartElements) => {
+            if (event.native && event.native.target) {
+              const hasTweetPoint = chartElements[0] && pointRadiuses[chartElements[0].index] > 0;
+              event.native.target.style.cursor = hasTweetPoint ? 'pointer' : 'default';
+            }
+          },
+          onClick: (event, chartElements) => {
+            if (chartElements && chartElements.length > 0) {
+              const idx = chartElements[0].index;
+              const clickedDate = labels[idx];
+              const tweetsOnDate = tweetMap[clickedDate];
+              if (tweetsOnDate && tweetsOnDate.length > 0) {
+                scrollToTweet(tweetsOnDate[0].id);
+              }
+            }
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -1519,6 +1697,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                       const icon = t.sentiment === 'Bullish' ? '🟢 看多' : (t.sentiment === 'Bearish' ? '🔴 看空' : '🔵 中立');
                       lines.push(`【${icon}】${t.summary || t.text.slice(0, 45) + '...'}`);
                     });
+                    lines.push('👉 點擊此點直達推文卡片');
                   }
                   return lines;
                 }
@@ -1863,6 +2042,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       displayLimit = 25;
       document.getElementById('clear-ticker-btn').classList.toggle('hidden', !ticker);
       updateAggregatedView();
+      renderQuickAskButtons();
     }
 
     function setSentimentFilter(val) {
@@ -1928,7 +2108,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         const matchTicker = !currentTicker || t.tickers.includes(currentTicker);
         const matchSearch = !searchQuery || 
           t.text.toLowerCase().includes(searchQuery) || 
-          t.summary.toLowerCase().includes(searchQuery) ||
+          t.summary.toLowerCase().includes(searchQuery) || 
           t.tickers.some(tick => tick.toLowerCase().includes(searchQuery));
         return matchSentiment && matchTicker && matchSearch;
       });
@@ -1994,7 +2174,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
 
         return `
-          <article class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 sm:p-5 hover:border-slate-700/80 transition space-y-3">
+          <article id="tweet-card-${item.id}" class="bg-slate-900/60 border border-slate-800 rounded-xl p-4 sm:p-5 hover:border-slate-700/80 transition duration-300 space-y-3">
             <div class="flex items-center justify-between flex-wrap gap-2">
               <div class="flex items-center gap-2">
                 ${sentimentBadge}
@@ -2022,11 +2202,77 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    // 4. AI 智能對話助理 (動態模型適應與連線)
+    // 雙排動態快捷問答按鈕生成器 (結合方案 B 全局策略 + 方案 D 核心深鑽)
+    function renderQuickAskButtons() {
+      const container = document.getElementById('quick-ask-container');
+      if (!container) return;
+
+      // 第一排：市場全局與量化掃描 (方案 B)
+      const row1 = [
+        { label: '📅 今日日報重點', query: '今日日報' },
+        { label: '🚀 目前立場最偏多標的', query: '偏多標的' },
+        { label: '💰 前瞻 P/E 最低估值排名', query: '低估值' },
+        { label: '⚠️ 近期風險警戒清單', query: '風險警戒' },
+        { label: '🧠 AI 算力板塊多空總覽', query: 'AI 算力板塊' }
+      ];
+
+      // 第二排：個股與焦點深鑽 (方案 D)
+      const row2 = [];
+      if (currentTicker) {
+        row2.push({ label: `🎯 深度診斷 $${currentTicker}`, query: `深度分析 $${currentTicker}` });
+        row2.push({ label: `⚠️ $${currentTicker} 歷史風險警語`, query: `$${currentTicker} 風險` });
+      }
+
+      // 動態擷取當前視圖提及次數前 2 高的熱門標的
+      const viewTweets = getFilteredByView(allTweets);
+      const counts = {};
+      viewTweets.forEach(t => t.tickers.forEach(s => counts[s] = (counts[s] || 0) + 1));
+      const topTickers = Object.keys(counts).filter(s => s !== currentTicker).slice(0, 2);
+
+      topTickers.forEach((sym, idx) => {
+        row2.push({ label: `🔥 熱門 #${idx + 1} $${sym}`, query: `幫我看 $${sym}` });
+      });
+
+      if (watchlist.length > 0) {
+        row2.push({ label: '⭐ 診斷我的自選股組合', query: '診斷自選股' });
+      }
+
+      container.innerHTML = `
+        <div class="space-y-1.5">
+          <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1">
+            <span>🌐</span> 市場量化策略：
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            ${row1.map(item => `
+              <button onclick="handleQuickAsk('${item.query}')" class="bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 px-2.5 py-1 rounded-lg border border-teal-500/30 text-[11px] font-medium transition shadow-sm">
+                ${item.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="space-y-1.5 pt-1.5 border-t border-slate-800/80">
+          <div class="text-[10px] uppercase font-bold text-amber-400 tracking-wider flex items-center gap-1">
+            <span>🔍</span> 個股與焦點深鑽：
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            ${row2.map(item => `
+              <button onclick="handleQuickAsk('${item.query}')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-2.5 py-1 rounded-lg border border-slate-700 hover:border-teal-500/50 text-[11px] font-mono transition shadow-sm">
+                ${item.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
     function toggleChatDrawer() {
       const drawer = document.getElementById('ai-chat-drawer');
       drawer.classList.toggle('hidden');
       drawer.classList.toggle('flex');
+      if (drawer.classList.contains('flex')) {
+        renderQuickAskButtons();
+      }
     }
 
     function appendChatMessage(sender, htmlContent) {
@@ -2034,8 +2280,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const isUser = sender === 'user';
       const msgDiv = document.createElement('div');
       msgDiv.className = isUser 
-        ? 'bg-teal-500/20 text-teal-200 border border-teal-500/30 p-2.5 rounded-xl ml-6'
-        : 'bg-slate-800/90 text-slate-200 border border-slate-700/80 p-3 rounded-xl mr-4 space-y-1.5';
+        ? 'bg-teal-500/20 text-teal-200 border border-teal-500/30 p-2.5 rounded-xl ml-6 font-medium'
+        : 'bg-slate-800/90 text-slate-200 border border-slate-700/80 p-3.5 rounded-xl mr-4 space-y-1.5 shadow-sm';
       msgDiv.innerHTML = isUser ? `<b>你：</b>${htmlContent}` : `<b>Serenity AI 助理：</b><br>${htmlContent}`;
       container.appendChild(msgDiv);
       container.scrollTop = container.scrollHeight;
@@ -2066,38 +2312,37 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     async function queryGeminiAPI(userQuery) {
       const sendBtn = document.getElementById('chat-send-btn');
       sendBtn.disabled = true;
-      const loadingMsg = appendChatMessage('ai', '🌟 Gemini 正在深入分析社群情報與基本面...');
+      sendBtn.innerText = '生成中...';
+
+      const botMsgDiv = appendChatMessage('ai', '<span class="animate-pulse text-teal-400">🌟 正在連接最新模型，解析市場情報與歷史脈絡...</span>');
+      const messagesContainer = document.getElementById('chat-messages');
 
       try {
-        const contextTweets = allTweets.slice(0, 25).map(t => `[${t.date}] $${t.tickers.join(',$') || '大盤'} (${t.sentiment}): ${t.summary || t.text}`).join('\\n');
-        const contextTickers = Object.entries(stockQuotes).slice(0, 20).map(([k, v]) => `$${k}: $${v.price || '-'} (PE: ${v.forwardPE || '-'}, 板塊: ${v.sector})`).join('; ');
+        const result = await executeGeminiStreamRequest(geminiApiKey, userQuery, (currentStreamText, modelUsed) => {
+          botMsgDiv.innerHTML = `<b>Serenity AI (${modelUsed})：</b><br>${formatMarkdown(currentStreamText)}`;
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        });
 
-        const systemPrompt = `你是一位專業的美股社群量化情報分析專家，請基於以下【Serenity (@aleabitoreddit)】社群情報與美股數據回答問題。請使用繁體中文、語氣精準客觀、以數據與推文論點為依據：\\n\\n【即時行情摘要】：\\n${contextTickers}\\n\\n【近期關鍵推文摘要】：\\n${contextTweets}\\n\\n使用者問題：${userQuery}`;
-
-        const result = await executeGeminiRequest(geminiApiKey, systemPrompt);
-
-        if (result.ok && result.data.candidates && result.data.candidates[0] && result.data.candidates[0].content) {
-          const aiResponseText = result.data.candidates[0].content.parts[0].text;
-          loadingMsg.innerHTML = `<b>Serenity AI (${result.modelUsed})：</b><br>${aiResponseText.replace(/\\n/g, '<br>')}`;
-        } else {
-          loadingMsg.innerHTML = `⚠️ Gemini API 回傳異常：<b>${result.error || '呼叫失敗'}</b><br><br>💡 <b>解決步驟：</b>請點擊右上角 <b>⚙️ 設定</b> 重新測試連線。`;
+        if (!result.ok) {
+          botMsgDiv.innerHTML = `⚠️ Gemini API 串流回傳異常：<b>${result.error || '連線中斷'}</b><br><br>💡 <b>解決步驟：</b>可點擊右上角 <b>⚙️ 設定</b> 重新測試連線，或點擊 <b>🧹</b> 開啟新話題。`;
         }
       } catch (err) {
-        console.error('Gemini API 請求失敗:', err);
-        loadingMsg.innerHTML = `⚠️ 連線至 Gemini API 失敗 (${err.message})。`;
+        console.error('串流處理失敗:', err);
+        botMsgDiv.innerHTML = `⚠️ 連線至 Gemini API 失敗 (${err.message})。`;
       } finally {
         sendBtn.disabled = false;
+        sendBtn.innerText = '發送';
       }
     }
 
     function processLocalChatIntent(query) {
       const q = query.toUpperCase();
       
-      // 1. 日報意圖
       if (q.includes('日報') || q.includes('今日')) {
         setViewMode('daily');
         const viewTweets = getFilteredByView(allTweets);
         const bullish = viewTweets.filter(t => t.sentiment === 'Bullish').length;
+        const bearish = viewTweets.filter(t => t.sentiment === 'Bearish').length;
         const total = viewTweets.length;
         const counts = {};
         viewTweets.forEach(t => t.tickers.forEach(sym => counts[sym] = (counts[sym] || 0) + 1));
@@ -2106,14 +2351,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         appendChatMessage('ai', `
           📅 <b>已為你切換至「今日日報」視圖！</b><br>
           • 今日提及推文：<b>${total}</b> 則<br>
-          • 看多佔比：<b>${bullish} 則 (${total ? Math.round(bullish/total*100) : 0}%)</b><br>
+          • 多空分佈：<b>${bullish} 多 / ${bearish} 空</b> (看多佔比 ${total ? Math.round(bullish/total*100) : 0}%)<br>
           • 今日熱門標的：<b>${topSymbols || '無'}</b>
         `);
         return;
       }
 
-      // 2. 多方偏向精選 (方案 B)
-      if (q.includes('偏多') || q.includes('看多') || q.includes('多方') || q.includes('BULLISH')) {
+      if (q.includes('偏多') || q.includes('看多') || q.includes('BULLISH')) {
         const counts = {};
         allTweets.forEach(t => {
           t.tickers.forEach(sym => {
@@ -2129,55 +2373,74 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           .sort((a, b) => b[1].bullish - a[1].bullish)
           .slice(0, 6);
 
-        let resHtml = '🚀 <b>目前社群立場高度偏多的精選標的：</b><br>';
+        let resHtml = '🚀 <b>目前社群立場最偏多的精選標的：</b><br>';
         bullishList.forEach(([sym, data]) => {
           const qData = stockQuotes[sym];
           const priceStr = qData && qData.price ? `$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(1)}%)` : '';
-          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button> ${priceStr}：${data.bullish} 則看多 (${Math.round(data.bullish/data.total*100)}%)<br>`;
+          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button> ${priceStr}：<b>${data.bullish} 則看多</b> (多方佔比 ${Math.round(data.bullish/data.total*100)}%)<br>`;
         });
         appendChatMessage('ai', resHtml);
         return;
       }
 
-      // 3. 近期風險警戒清單 (方案 B - 全局掃描)
-      if ((q.includes('風險') || q.includes('警戒') || q.includes('疑慮') || q.includes('看空')) && !q.match(/\\$?([A-Za-z]{1,6})/)) {
-        const riskTweets = allTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('警戒') || t.summary.includes('跌')))).slice(0, 5);
-        if (riskTweets.length > 0) {
-          let resHtml = '⚠️ <b>近期社群提及的重點風險與警戒觀點：</b><br>';
-          riskTweets.forEach(t => {
-            const symTag = t.tickers.length > 0 ? t.tickers.map(s => `\\$${s}`).join(', ') : '大盤';
-            resHtml += `• <b>[${t.date}] (${symTag})</b> ${t.summary || t.translation_zh || t.text.slice(0, 60)}... (<a href="${t.url}" target="_blank" class="text-cyan-400 hover:underline">來源</a>)<br>`;
-          });
-          appendChatMessage('ai', resHtml);
-        } else {
-          appendChatMessage('ai', '✅ 近期推文中未偵測到顯著的系統性風險警語。');
-        }
-        return;
-      }
-
-      // 4. 低估值標的查詢 (方案 B)
       if (q.includes('低估值') || q.includes('本益比') || q.includes('便宜') || q.includes('P/E')) {
         const valueTickers = Object.entries(stockQuotes)
           .filter(([sym, data]) => data.forwardPE && data.forwardPE > 0)
           .sort((a, b) => a[1].forwardPE - b[1].forwardPE)
           .slice(0, 6);
 
-        let resHtml = '💰 <b>前瞻本益比 (Forward P/E) 最具估值吸引力標的排名：</b><br>';
+        let resHtml = '💰 <b>前瞻本益比 (Forward P/E) 最具估值吸引力標的：</b><br>';
         valueTickers.forEach(([sym, data]) => {
-          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button>：Fwd P/E <b>${data.forwardPE}x</b> (${data.sector})<br>`;
+          resHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button>：Fwd P/E <b>${data.forwardPE}x</b> ｜ ${data.sector} ｜ 現價 $${data.price || '-'}<br>`;
         });
         appendChatMessage('ai', resHtml);
         return;
       }
 
-      // 5. AI 算力板塊過濾 (方案 B)
-      if (q.includes('算力') || q.includes('晶片') || q.includes('高速互連') || q.includes('半導體')) {
-        setSectorFilter('AI 算力與高速互連');
-        appendChatMessage('ai', '🧠 <b>已為你篩選「AI 算力與高速互連」核心板塊！</b><br>包含 \\$NVDA, \\$AMD, \\$AVGO, \\$TSM, \\$MRVL, \\$ALAB 等焦點標的。');
+      if (q.includes('風險') || q.includes('警戒') || q.includes('看空清單')) {
+        const riskTweets = allTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('警戒') || t.summary.includes('跌')))).slice(0, 5);
+        if (riskTweets.length > 0) {
+          let riskHtml = '⚠️ <b>近期被提及的重大風險警戒清單：</b><br>';
+          riskTweets.forEach(t => {
+            const symStr = t.tickers.length ? `$${t.tickers.join(',$')}` : '大盤';
+            riskHtml += `• <b>[${t.date}] <button onclick="filterByTicker('${t.tickers[0] || ''}')" class="text-rose-400 font-bold">${symStr}</button></b>：${t.summary || t.translation_zh || t.text.slice(0, 60)} (<a href="${t.url}" target="_blank" class="text-cyan-400 hover:underline">來源</a>)<br>`;
+          });
+          appendChatMessage('ai', riskHtml);
+        } else {
+          appendChatMessage('ai', '✅ 近期推文中未出現顯著的大盤或個股風險警語。');
+        }
         return;
       }
 
-      // 6. 個股深鑽匹配 (方案 D)
+      if (q.includes('AI') || q.includes('算力') || q.includes('晶片')) {
+        setSectorFilter('AI 算力與高速互連');
+        const aiSymbols = SECTOR_MAPPING['AI 算力與高速互連'] || [];
+        const related = allTweets.filter(t => t.tickers.some(s => aiSymbols.includes(s)));
+        const bull = related.filter(t => t.sentiment === 'Bullish').length;
+        appendChatMessage('ai', `
+          🧠 <b>已為你篩選「AI 算力與高速互連」板塊！</b><br>
+          • 相關推文：<b>${related.length}</b> 則 (看多 <b>${bull}</b> 則)<br>
+          • 核心覆蓋標的：<b>$NVDA, $AMD, $AVGO, $MRVL, $ALAB, $TSM</b> 等。
+        `);
+        return;
+      }
+
+      if (q.includes('自選') || q.includes('WATCHLIST')) {
+        if (watchlist.length === 0) {
+          appendChatMessage('ai', '⭐ 你的自選股清單目前是空的，請先在行情卡或上方標的列點擊「★」加入自選股！');
+          return;
+        }
+        let wlHtml = `⭐ <b>我的自選股組合即時診斷 (${watchlist.length} 檔)：</b><br>`;
+        watchlist.forEach(sym => {
+          const qData = stockQuotes[sym] || {};
+          const tList = allTweets.filter(t => t.tickers.includes(sym));
+          const latest = tList[0];
+          wlHtml += `• <button onclick="filterByTicker('${sym}')" class="text-teal-400 font-bold font-mono">\\$${sym}</button>：現價 $${qData.price || '-'} (${qData.changePct>=0?'+':''}${qData.changePct || 0}%) ｜ 最新立場：<b>${latest ? latest.sentiment : '未提及'}</b><br>`;
+        });
+        appendChatMessage('ai', wlHtml);
+        return;
+      }
+
       const tickerMatch = q.match(/\\$?([A-Za-z]{1,6})/);
       const symbol = tickerMatch ? tickerMatch[1].toUpperCase() : null;
 
@@ -2189,20 +2452,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
           const latest = chronological[chronological.length - 1];
           const qData = stockQuotes[symbol] || {};
           const priceText = qData.price ? `$${qData.price.toFixed(2)} (${qData.changePct>=0?'+':''}${qData.changePct.toFixed(2)}%)` : '即時行情模式';
-
-          if (q.includes('風險') || q.includes('疑慮') || q.includes('看空')) {
-            const riskTweets = tickerTweets.filter(t => t.sentiment === 'Bearish' || (t.summary && (t.summary.includes('風險') || t.summary.includes('跌'))));
-            if (riskTweets.length > 0) {
-              let riskHtml = `⚠️ <b>關於 \\$${symbol} 被提及的風險與疑慮：</b><br>`;
-              riskTweets.slice(0, 3).forEach(t => {
-                riskHtml += `• <b>[${t.date}]</b> ${t.summary || t.translation_zh || t.text} (<a href="${t.url}" target="_blank" class="text-cyan-400 hover:underline">來源</a>)<br>`;
-              });
-              appendChatMessage('ai', riskHtml);
-            } else {
-              appendChatMessage('ai', `✅ <b>\\$${symbol}</b> 在歷史推文中未出現顯著的看空或風險警語。`);
-            }
-            return;
-          }
 
           let analysisHtml = `
             🎯 <b>\\$${symbol} 即時論點脈絡分析：</b><br>
@@ -2244,6 +2493,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
     updateChatModeBadge();
     setViewMode('all');
+    renderQuickAskButtons();
   </script>
 </body>
 </html>
@@ -2274,7 +2524,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (AI 對話雙排混合模式已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (雙向走勢互動與流式問答升級已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
@@ -2283,11 +2533,10 @@ if __name__ == "__main__":
     
     print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
 
-    # 推文高頻提及標的排在最前順位，確保 META、ORCL、NBIS、SIVE 等 100% 優先抓取
     mentioned_tickers_sorted = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
     
-    combined_target_list = list(dict.fromkeys(mentioned_tickers_sorted + recent_tickers + all_sector_symbols))[:120]
+    combined_target_list = list(dict.fromkeys(mentioned_tickers_sorted + recent_tickers + all_sector_symbols))[:160]
     print(f"🎯 本次預計抓取市場數據標的總數：{len(combined_target_list)} 檔 (高頻提及標的優先)", flush=True)
     
     stock_quotes = fetch_stock_quotes_and_fundamentals(combined_target_list)
