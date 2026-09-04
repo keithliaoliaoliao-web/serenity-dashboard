@@ -1,296 +1,255 @@
 import json
 import os
 import re
+import sys
 import time
 from datetime import datetime
-import google.generativeai as genai
+import requests
 
+# ==========================================
+# 參數設定區 (Serenity Tracker)
+# ==========================================
 TWEETS_FILE = "data/tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 
-API_KEY = os.environ.get("GEMINI_API_KEY")
+# 每次排程執行的最大分析則數 (可透過環境變數 TOTAL_TARGET 覆蓋)
+TOTAL_TARGET = int(os.environ.get("TOTAL_TARGET", 50))
 
-def load_tweets(filepath):
-    if not os.path.exists(filepath):
-        return []
+# 是否分析未提及單一 $股票的大盤/總經推文 (開啟即可讓分析量突破 71% 往 100% 推進)
+ANALYZE_MACRO_TWEETS = True
+
+# Twitter Snowflake 紀元起點 (2010-11-04 01:42:54.657 UTC)
+TWITTER_EPOCH = 1288834974657
+
+# Gemini API 金鑰
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+
+def log(msg):
+    """即時強制輸出日誌"""
+    print(msg, flush=True)
+
+def get_tweet_timestamp(tweet):
+    """利用 Snowflake 演算法或發布時間取得時間戳，確保由新到舊排序"""
+    t_id = str(tweet.get("id") or tweet.get("id_str") or "0").strip()
+    if t_id.isdigit() and len(t_id) >= 10:
+        return (int(t_id) >> 22) + TWITTER_EPOCH
+    
+    # 備援：解析 created_at 字串
+    created_at = tweet.get("created_at") or tweet.get("createdAt") or tweet.get("date") or ""
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            if isinstance(data, list):
-                return data
-            elif isinstance(data, dict):
-                for key in ["tweets", "data", "statuses", "results"]:
-                    if key in data and isinstance(data[key], list):
-                        return data[key]
-                return list(data.values())
-            return []
-    except Exception as e:
-        print(f"⚠️ 讀取推文失敗: {e}")
-        return []
-
-def load_cache(filepath):
-    if not os.path.exists(filepath):
-        return {}
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            if isinstance(data, dict):
-                return data
-            elif isinstance(data, list):
-                cache_dict = {}
-                for item in data:
-                    if isinstance(item, dict):
-                        t_id = str(item.get("id") or item.get("tweet_id") or "")
-                        if t_id:
-                            cache_dict[t_id] = item
-                return cache_dict
-            return {}
-    except Exception as e:
-        print(f"⚠️ 讀取快取失敗: {e}")
-        return {}
-
-def save_json(filepath, data):
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        dt = datetime.fromisoformat(str(created_at).replace("Z", "+00:00"))
+        return int(dt.timestamp() * 1000)
+    except Exception:
+        return 0
 
 def extract_tickers(text):
+    """萃取推文中的美股代號"""
     if not text:
         return []
-    matches = re.findall(r"(?<!\w)\$([A-Z]{1,5})\b", text.upper())
-    blacklist = {"USD", "CAD", "EUR", "ATH", "CEO", "AI", "FOMC", "FED", "CPI", "GDP", "DD", "EOD", "YOLO"}
-    return [t for t in set(matches) if t not in blacklist]
+    matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
+    blacklist = {
+        "USD", "USDT", "BTC", "ETH", "CAD", "EUR", "ATH", "CEO", "CFO", "CTO",
+        "AI", "FOMC", "FED", "CPI", "PPI", "GDP", "DD", "EOD", "YOLO", "NEW",
+        "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV"
+    }
+    return sorted(list(set(t.upper() for t in matches if t.upper() not in blacklist and t.isalpha())))
 
-def extract_tweet_id(item):
-    for k in ["id", "id_str", "tweet_id", "tweetId", "rest_id", "conversation_id"]:
-        if k in item and item[k]:
-            return str(item[k]).strip()
-    url = item.get("url") or item.get("permanentUrl") or item.get("link") or ""
-    if url:
-        m = re.search(r"status/(\d+)", str(url))
-        if m:
-            return m.group(1).strip()
-    return ""
-
-def extract_tweet_text(item):
-    for k in ["text", "rawContent", "full_text", "content", "tweet", "body"]:
-        if k in item and item[k]:
-            return str(item[k])
-    legacy = item.get("legacy") if isinstance(item.get("legacy"), dict) else {}
-    if "full_text" in legacy:
-        return str(legacy["full_text"])
-    return ""
-
-def parse_sort_key(item):
-    raw_date = None
-    for k in ["date", "created_at", "createdAt", "timestamp", "datetime", "time"]:
-        if k in item and item[k]:
-            raw_date = item[k]
-            break
-    if not raw_date:
-        legacy = item.get("legacy") if isinstance(item.get("legacy"), dict) else {}
-        raw_date = legacy.get("created_at")
-
-    if not raw_date:
-        return ""
-
-    if isinstance(raw_date, (int, float)):
-        try:
-            dt = datetime.fromtimestamp(raw_date / 1000.0 if raw_date > 1e11 else raw_date)
-            return dt.strftime("%Y-%m-%d %H:%M:%S")
-        except Exception:
-            pass
-
-    s = str(raw_date).strip()
-    if s.isdigit():
-        try:
-            dt = datetime.fromtimestamp(float(s) / 1000.0 if float(s) > 1e11 else float(s))
-            return dt.strftime("%Y-%m-%d %H:%M:%S")
-        except Exception:
-            pass
-
-    try:
-        if "T" in s or "+" in s:
-            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
-            return dt.strftime("%Y-%m-%d %H:%M:%S")
-    except Exception:
-        pass
-
-    try:
-        if len(s.split()) >= 6:
-            dt = datetime.strptime(s, "%a %b %d %H:%M:%S %z %Y")
-            return dt.strftime("%Y-%m-%d %H:%M:%S")
-    except Exception:
-        pass
-
-    m = re.search(r"(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})", s)
-    if m:
-        y, mth, d = m.groups()
-        return f"{int(y):04d}-{int(mth):02d}-{int(d):02d}"
-
-    return s
-
-def get_candidate_models():
-    """優先透過 API 動態取得可用模型，並依版本與效能最佳化排列"""
-    if not API_KEY:
-        print("❌ 錯誤：未檢測到 GEMINI_API_KEY 環境變數。")
-        return []
-
-    genai.configure(api_key=API_KEY)
-    
-    try:
-        available_models = []
-        for m in genai.list_models():
-            if "generateContent" in m.supported_generation_methods:
-                model_name = m.name.replace("models/", "")
-                available_models.append(model_name)
+def load_data():
+    """載入推文庫與既有情緒快取"""
+    if not os.path.exists(TWEETS_FILE):
+        log(f"⚠️ 找不到推文檔案: {TWEETS_FILE}")
+        return [], {}
         
-        # 優先順序偏好清單
-        preferred_priority = [
-            "gemini-3.6-flash",
-            "gemini-3.7-flash",
-            "gemini-flash-latest",
-            "gemini-2.5-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-flash-lite-latest",
-            "gemini-3-flash-preview"
-        ]
-        
-        selected_models = [m for m in preferred_priority if m in available_models]
-        
-        # 加入其他支援的 flash / pro 模型做為備援
-        for m in available_models:
-            if m not in selected_models and ("flash" in m or "pro" in m):
-                selected_models.append(m)
-                
-        if selected_models:
-            print(f"📡 已成功動態偵測可用模型清單: {selected_models}")
-            return selected_models
-    except Exception as e:
-        print(f"⚠️ 動態查詢模型清單失敗 ({e})，使用最新官方模型備用清單。")
+    with open(TWEETS_FILE, "r", encoding="utf-8") as f:
+        tweets = json.load(f)
+        if isinstance(tweets, dict):
+            for k in ["tweets", "data", "statuses", "results"]:
+                if k in tweets and isinstance(tweets[k], list):
+                    tweets = tweets[k]
+                    break
+            if isinstance(tweets, dict):
+                tweets = list(tweets.values())
 
-    # 靜態備援清單
-    return [
-        "gemini-3.6-flash",
-        "gemini-3.7-flash",
-        "gemini-flash-latest",
-        "gemini-2.5-flash",
-        "gemini-2.5-flash-lite",
-        "gemini-flash-lite-latest",
-        "gemini-3-flash-preview"
-    ]
-
-def analyze_sub_batch(items, candidate_models):
-    prompt = """你是一位資深美股分析師。請分析以下 Twitter 貼文：
-1. 判斷對標的 ($TICKER) 的交易情緒："Bullish" (看多/買進), "Bearish" (看空/警戒), 或 "Neutral" (中立/客觀分析)。
-2. 將推文完整翻譯為繁體中文 (translation_zh)。
-3. 提供 15 字以內的繁體中文核心觀點摘要 (summary)。
-
-請嚴格輸出 JSON 格式物件（以推文 ID 作為 Key），範例如下：
-{
-  "推文ID_1": {
-    "sentiment": "Bullish",
-    "summary": "看好本季營收爆發突破新高",
-    "translation_zh": "完整中文翻譯內容..."
-  }
-}
-
-待分析推文清單：
-"""
-    for item in items:
-        prompt += f"\nID: {item['id']}\nText: {item['text']}\n---"
-
-    for m_name in candidate_models:
+    cache = {}
+    if os.path.exists(CACHE_FILE):
         try:
-            model = genai.GenerativeModel(m_name)
-            
-            try:
-                response = model.generate_content(
-                    prompt,
-                    generation_config={"response_mime_type": "application/json"}
-                )
-            except Exception:
-                response = model.generate_content(prompt)
-
-            raw_text = response.text.strip()
-            
-            json_match = re.search(r"\{[\s\S]*\}", raw_text)
-            if not json_match:
-                continue
-                
-            result = json.loads(json_match.group(0))
-            if isinstance(result, dict) and result:
-                print(f"    ✨ 使用模型 [{m_name}] 成功解析 {len(result)} 則推文！")
-                return result
+            with open(CACHE_FILE, "r", encoding="utf-8") as f:
+                raw_cache = json.load(f)
+                if isinstance(raw_cache, dict):
+                    cache = raw_cache
+                elif isinstance(raw_cache, list):
+                    for item in raw_cache:
+                        if isinstance(item, dict):
+                            t_id = str(item.get("id") or item.get("tweet_id") or "")
+                            if t_id:
+                                cache[t_id] = item
         except Exception as e:
-            print(f"    ⚠️ 模型 [{m_name}] 調用失敗 ({e})，切換至下一個備用模型...")
-            time.sleep(1)
+            log(f"⚠️ 讀取快取檔案異常: {e}")
+            cache = {}
 
-    return {}
+    return tweets, cache
 
-def run_sentiment_pipeline(total_target=50, chunk_size=10):
-    candidate_models = get_candidate_models()
-    if not candidate_models:
-        print("❌ 無可用模型，終止分析流程。")
-        return
+def save_cache(cache):
+    """安全儲存快取檔案"""
+    os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2)
 
-    raw_data = load_tweets(TWEETS_FILE)
-    sentiment_cache = load_cache(CACHE_FILE)
+def call_gemini_api(api_key, prompt_text):
+    """採用原生 REST API 調用 Gemini，具備多模型自動降級備援"""
+    candidate_models = [
+        "gemini-2.5-flash",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+        "gemini-pro"
+    ]
+    
+    clean_key = api_key.strip().replace('"', '').replace("'", "")
+    payload = {
+        "contents": [{"parts": [{"text": prompt_text}]}],
+        "generationConfig": {
+            "temperature": 0.2,
+            "responseMimeType": "application/json"
+        }
+    }
 
-    raw_data.sort(key=parse_sort_key, reverse=True)
+    for model in candidate_models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={clean_key}"
+        try:
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=20)
+            if res.status_code == 200:
+                data = res.json()
+                if "candidates" in data and data["candidates"]:
+                    raw_text = data["candidates"][0]["content"]["parts"][0]["text"]
+                    return True, raw_text, model
+            elif res.status_code == 429:
+                log(f"  ⚠️ 模型 {model} 遭遇頻率限制 (429)，等待重試...")
+                time.sleep(2)
+        except Exception:
+            pass
 
-    unprocessed = []
-    for item in raw_data:
-        t_id = extract_tweet_id(item)
-        text = extract_tweet_text(item)
-        if not t_id or not text:
+    return False, "", ""
+
+def parse_ai_response(response_text):
+    """安全解析 AI 回傳的 JSON 結構"""
+    try:
+        clean = response_text.strip()
+        if clean.startswith("```json"):
+            clean = clean[7:]
+        if clean.endswith("```"):
+            clean = clean[:-3]
+        clean = clean.strip()
+        data = json.loads(clean)
+        
+        sentiment = data.get("sentiment", "Neutral")
+        if "多" in sentiment or "Bull" in sentiment:
+            sentiment = "Bullish"
+        elif "空" in sentiment or "Bear" in sentiment:
+            sentiment = "Bearish"
+        else:
+            sentiment = "Neutral"
+
+        return {
+            "sentiment": sentiment,
+            "summary": data.get("summary", "").strip(),
+            "translation_zh": data.get("translation_zh", "").strip()
+        }
+    except Exception:
+        return {
+            "sentiment": "Neutral",
+            "summary": "觀點記錄",
+            "translation_zh": ""
+        }
+
+def main():
+    log("🚀 開始執行 Serenity 貼文 AI 情感分析與觀點提煉...")
+
+    if not GEMINI_API_KEY:
+        log("❌ 錯誤：未偵測到 GEMINI_API_KEY 環境變數，請在 GitHub Secrets 中配置。")
+        sys.exit(1)
+
+    tweets, cache = load_data()
+    total_tweets_count = len(tweets)
+    log(f"📊 總推文數: {total_tweets_count} 則 | 目前已分析快取數: {len(cache)} 則")
+
+    # 1. 篩選尚未分析的推文
+    pending_tweets = []
+    for t in tweets:
+        t_id = str(t.get("id") or t.get("id_str") or t.get("tweet_id") or "").strip()
+        if not t_id or t_id in cache:
+            continue
+        
+        text = t.get("text") or t.get("full_text") or ""
+        if not text:
             continue
 
-        cached = sentiment_cache.get(t_id)
-        needs_analysis = (
-            not cached or 
-            not isinstance(cached, dict) or 
-            not cached.get("summary") or 
-            not cached.get("translation_zh")
-        )
+        tickers = extract_tickers(text)
+        # 若未含個股標的，且未開啟大盤總經分析開關，則略過
+        if not tickers and not ANALYZE_MACRO_TWEETS:
+            continue
 
-        if extract_tickers(text) and needs_analysis:
-            unprocessed.append({"id": t_id, "text": text})
+        pending_tweets.append(t)
 
-    print(f"🔍 待分析個股推文總數: {len(unprocessed)} 則")
-    if not unprocessed:
-        print("所有最新推文均已在快取中，無須分析。")
+    # 2. 【核心升級】：嚴格按發布時間「由新到舊」降冪排序，確保新推文絕對優先分析
+    pending_tweets.sort(key=get_tweet_timestamp, reverse=True)
+
+    log(f"🔍 待分析推文總數: {len(pending_tweets)} 則 (已依時間排序，新推文優先)")
+
+    if not pending_tweets:
+        log("✅ 所有符合條件的最新推文均已在快取中，無須重複分析。")
         return
 
-    to_process = unprocessed[:total_target]
-    print(f"🚀 本次將分批處理最新 {len(to_process)} 則推文（每批 {chunk_size} 則）...")
+    # 3. 擷取本次處理批次 (新推文在前)
+    process_batch = pending_tweets[:TOTAL_TARGET]
+    log(f"⚡ 本次預計分析批次: {len(process_batch)} 則推文 (上限: {TOTAL_TARGET})...")
 
-    added_count = 0
-    for i in range(0, len(to_process), chunk_size):
-        chunk = to_process[i:i + chunk_size]
-        print(f"  正在分析第 {i + 1} ~ {i + len(chunk)} 則...")
-        results = analyze_sub_batch(chunk, candidate_models)
+    success_count = 0
+    for idx, t in enumerate(process_batch, 1):
+        t_id = str(t.get("id") or t.get("id_str") or t.get("tweet_id") or "").strip()
+        text = t.get("text") or t.get("full_text") or ""
+        tickers = extract_tickers(text)
+        ticker_label = ", ".join([f"${s}" for s in tickers]) if tickers else "美股大盤/總經"
 
-        batch_updated = False
-        for item in chunk:
-            t_id = item["id"]
-            res = results.get(t_id) or results.get(str(t_id))
-            if res and isinstance(res, dict):
-                sentiment_cache[t_id] = {
-                    "sentiment": res.get("sentiment", "Neutral"),
-                    "summary": res.get("summary", ""),
-                    "translation_zh": res.get("translation_zh", "")
-                }
-                added_count += 1
-                batch_updated = True
-                print(f"    ✅ 已儲存 [{t_id}]: {res.get('summary')}")
+        prompt = f"""
+你是一位專業的美股社群量化分析師。請分析以下推文內容，針對其投資觀點產出 JSON 格式：
+推文內容：
+\"\"\"{text}\"\"\"
 
-        if batch_updated:
-            save_json(CACHE_FILE, sentiment_cache)
+請回傳標準 JSON 格式（不要包含額外對話）：
+{{
+  "sentiment": "Bullish 或 Bearish 或 Neutral",
+  "summary": "以繁體中文撰寫 25 字以內的精煉觀點重點摘要（明確提及看多、看空、觀望或特定數據）",
+  "translation_zh": "流暢且符合台灣財經用語的完整繁體中文翻譯"
+}}
+"""
+        ok, res_text, model_used = call_gemini_api(GEMINI_API_KEY, prompt)
+        if ok and res_text:
+            parsed = parse_ai_response(res_text)
+            cache[t_id] = {
+                "id": t_id,
+                "tweet_id": t_id,
+                "sentiment": parsed["sentiment"],
+                "summary": parsed["summary"],
+                "translation_zh": parsed["translation_zh"],
+                "analyzed_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+            }
+            success_count += 1
+            log(f"  [{idx}/{len(process_batch)}] ✅ ID: {t_id} ({ticker_label}) ➔ 【{parsed['sentiment']}】 {parsed['summary']}")
+            
+            # 每成功分析 5 筆立即存檔一次，確保中途逾時不丟失資料
+            if success_count % 5 == 0:
+                save_cache(cache)
+        else:
+            log(f"  [{idx}/{len(process_batch)}] ⚠️ ID: {t_id} 分析失敗或跳過")
 
-        time.sleep(2)
+        # 適度間隔，遵守 API 速率限制
+        time.sleep(1.2)
 
-    print(f"🎉 分析作業完成！本次更新 {added_count} 則推文。目前總快取量: {len(sentiment_cache)} 則。")
+    # 4. 寫入最終快取資料庫
+    save_cache(cache)
+    coverage_pct = round((len(cache) / total_tweets_count) * 100, 1) if total_tweets_count else 0
+    log(f"🎉 本次分析作業完成！成功分析: {success_count} 則")
+    log(f"📈 目前最新 AI 分析總進度: {len(cache)} / {total_tweets_count} ({coverage_pct}%)")
 
 if __name__ == "__main__":
-    run_sentiment_pipeline(total_target=50, chunk_size=10)
+    main()
