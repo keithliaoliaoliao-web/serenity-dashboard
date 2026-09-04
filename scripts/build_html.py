@@ -21,6 +21,13 @@ CDN_TWEETS_URL = "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@m
 
 TWITTER_EPOCH = 1288834974657
 
+# 推文常見錯別字自動校正字典 (解決 APPL vs AAPL 問題)
+TICKER_ALIASES = {
+    "APPL": "AAPL",   # Apple 蘋果常見手誤修正
+    "QLCM": "QCOM",   # Qualcomm 高通手誤修正
+    "WLAC": "KLAC",   # KLAC 科磊常見手誤
+}
+
 # 美股 9 大核心產業板塊對應字典
 SECTOR_MAPPING = {
     "生技與醫療製藥": [
@@ -165,16 +172,27 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
-    """萃取推文中的美股代號"""
+    """萃取推文中的美股代號，並自動校正錯別字（如 APPL -> AAPL）"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
     blacklist = {
-        "USD", "USDT", "BTC", "ETH", "CAD", "EUR", "ATH", "CEO", "CFO", "CTO",
+        "USD", "USDT", "BTC", "ETH", "SOL", "CAD", "EUR", "ATH", "CEO", "CFO", "CTO",
         "AI", "FOMC", "FED", "CPI", "PPI", "GDP", "DD", "EOD", "YOLO", "NEW",
         "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV"
     }
-    return sorted(list(set(t.upper() for t in matches if t.upper() not in blacklist and t.isalpha())))
+    
+    cleaned_tickers = []
+    for m in matches:
+        sym = m.upper().strip()
+        # 智慧校正筆誤
+        if sym in TICKER_ALIASES:
+            sym = TICKER_ALIASES[sym]
+            
+        if sym not in blacklist and sym.isalpha():
+            cleaned_tickers.append(sym)
+            
+    return sorted(list(set(cleaned_tickers)))
 
 def extract_tweet_id(item):
     for k in ["id", "id_str", "tweet_id", "tweetId", "rest_id", "conversation_id"]:
@@ -344,12 +362,13 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """獲取美股市場即時行情、基本面估值以及過去 1 年的日 K 收盤歷史走勢 (含快取備援與回填機制)"""
+    """採用 yf.download 批次平行下載 + 快取持久化備援機制 (具備防禦性容錯)"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     
     cached_quotes = load_cache(QUOTES_CACHE_FILE)
     quotes = cached_quotes.copy() if isinstance(cached_quotes, dict) else {}
     
+    # 批次下載 1 年歷史日 K 收盤價
     batch_df = None
     try:
         batch_df = yf.download(tickers, period="1y", interval="1d", group_by="ticker", threads=True, progress=False)
@@ -977,12 +996,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     
     let tvChartVisible = false;
     let priceOverlayChartInstance = null;
-    let currentChartRange = '1Y'; // 走勢圖時間週期 (1M / 3M / 6M / 1Y)
+    let currentChartRange = '1Y';
 
     let watchlist = JSON.parse(localStorage.getItem('serenity_watchlist') || '[]');
     let clientTranslations = JSON.parse(localStorage.getItem('serenity_trans_cache') || '{}');
     let geminiApiKey = localStorage.getItem('serenity_gemini_api_key') || '';
-    let chatContextHistory = []; // 多輪對話歷史
+    let chatContextHistory = [];
 
     function updateChatModeBadge() {
       const badge = document.getElementById('chat-mode-badge');
@@ -2202,12 +2221,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }).join('');
     }
 
-    // 雙排動態快捷問答按鈕生成器 (結合方案 B 全局策略 + 方案 D 核心深鑽)
     function renderQuickAskButtons() {
       const container = document.getElementById('quick-ask-container');
       if (!container) return;
 
-      // 第一排：市場全局與量化掃描 (方案 B)
       const row1 = [
         { label: '📅 今日日報重點', query: '今日日報' },
         { label: '🚀 目前立場最偏多標的', query: '偏多標的' },
@@ -2216,14 +2233,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         { label: '🧠 AI 算力板塊多空總覽', query: 'AI 算力板塊' }
       ];
 
-      // 第二排：個股與焦點深鑽 (方案 D)
       const row2 = [];
       if (currentTicker) {
         row2.push({ label: `🎯 深度診斷 $${currentTicker}`, query: `深度分析 $${currentTicker}` });
         row2.push({ label: `⚠️ $${currentTicker} 歷史風險警語`, query: `$${currentTicker} 風險` });
       }
 
-      // 動態擷取當前視圖提及次數前 2 高的熱門標的
       const viewTweets = getFilteredByView(allTweets);
       const counts = {};
       viewTweets.forEach(t => t.tickers.forEach(s => counts[s] = (counts[s] || 0) + 1));
@@ -2524,7 +2539,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (雙向走勢互動與流式問答升級已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (代碼智慧校正與容錯機制已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
