@@ -15,17 +15,35 @@ CACHE_FILE = "data/sentiment_cache.json"
 QUOTES_CACHE_FILE = "data/stock_quotes_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
-# 遠端推文備援資料來源 (收錄 6,400+ 則歷史推文)
+# 遠端推文備援資料來源 (收錄歷史推文)
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
 CDN_TWEETS_URL = "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@main/data/aleabitoreddit_tweets.json"
 
 TWITTER_EPOCH = 1288834974657
 
-# 推文常見錯別字自動校正字典 (解決 APPL vs AAPL 問題)
+# 推文錯別字校正字典
 TICKER_ALIASES = {
-    "APPL": "AAPL",   # Apple 蘋果常見手誤修正
-    "QLCM": "QCOM",   # Qualcomm 高通手誤修正
-    "WLAC": "KLAC",   # KLAC 科磊常見手誤
+    "APPL": "AAPL",
+    "QLCM": "QCOM",
+    "WLAC": "KLAC",
+}
+
+# 國際非美股標的轉譯字典 (向 Yahoo Finance 請求時代入特定交易所後綴)
+TICKER_FETCH_MAP = {
+    "SIVE": "SIVE.ST",    # 瑞典斯德哥爾摩
+    "SOI": "SOI.PA",      # 法國泛歐交易所
+    "AIXA": "AIXA.DE",    # 德國法蘭克福
+    "IQE": "IQE.L",       # 英國倫敦
+    "XFAB": "XFAB.PA",    # 法國泛歐交易所
+}
+
+# TradingView 專屬交易所對應字典 (確保前端 K 線能精準顯示海外掛牌標的)
+TRADINGVIEW_MAP = {
+    "SIVE": "OMXSTO:SIVE",
+    "SOI": "EURONEXT:SOI",
+    "AIXA": "XETR:AIXA",
+    "IQE": "LSE:IQE",
+    "XFAB": "EURONEXT:XFAB",
 }
 
 # 美股 9 大核心產業板塊對應字典
@@ -71,7 +89,6 @@ SECTOR_MAPPING = {
 }
 
 def resolve_sector(ticker, yf_info=None):
-    """【雙層分類器】：結合靜態字典與 Yahoo Finance 英文產業語意自動轉譯"""
     sym = ticker.upper().strip()
     for sector_name, symbols in SECTOR_MAPPING.items():
         if sym in symbols:
@@ -99,7 +116,6 @@ def resolve_sector(ticker, yf_info=None):
     return "其他科技 / 綜合"
 
 def snowflake_to_iso(tweet_id_str):
-    """利用 Twitter Snowflake 演算法計算精確 UTC 發布時間"""
     try:
         t_id = int(str(tweet_id_str).strip())
         timestamp_ms = (t_id >> 22) + TWITTER_EPOCH
@@ -109,7 +125,6 @@ def snowflake_to_iso(tweet_id_str):
         return None, None, None, None
 
 def load_tweets(filepath):
-    """載入推文資料，若本地為空則自動由遠端抓取"""
     tweets = []
     for path in [filepath, ALT_TWEETS_FILE]:
         if os.path.exists(path):
@@ -172,7 +187,6 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
-    """萃取推文中的美股代號，並自動校正錯別字（如 APPL -> AAPL）"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -181,17 +195,13 @@ def extract_tickers(text):
         "AI", "FOMC", "FED", "CPI", "PPI", "GDP", "DD", "EOD", "YOLO", "NEW",
         "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV"
     }
-    
     cleaned_tickers = []
     for m in matches:
         sym = m.upper().strip()
-        # 智慧校正筆誤
         if sym in TICKER_ALIASES:
             sym = TICKER_ALIASES[sym]
-            
         if sym not in blacklist and sym.isalpha():
             cleaned_tickers.append(sym)
-            
     return sorted(list(set(cleaned_tickers)))
 
 def extract_tweet_id(item):
@@ -215,7 +225,6 @@ def extract_tweet_text(item):
     return ""
 
 def parse_date(item, tweet_id=""):
-    """解析推文發布時間"""
     if tweet_id and tweet_id.isdigit() and len(tweet_id) >= 10:
         d_str, m_str, day_str, iso_str = snowflake_to_iso(tweet_id)
         if d_str:
@@ -247,7 +256,6 @@ def parse_date(item, tweet_id=""):
     return s, "未知月份", s[:10], s
 
 def extract_metrics(item):
-    """解析按讚、轉推與瀏覽量"""
     likes, retweets, views = 0, 0, 0
     containers = [item]
     for sub in ["public_metrics", "metrics", "stats", "legacy"]:
@@ -362,25 +370,30 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """採用 yf.download 批次平行下載 + 快取持久化備援機制 (具備防禦性容錯)"""
+    """取得行情與日 K，含國際標的轉譯、指數 ETF 404 防禦與獨立重試"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     
     cached_quotes = load_cache(QUOTES_CACHE_FILE)
     quotes = cached_quotes.copy() if isinstance(cached_quotes, dict) else {}
     
-    # 批次下載 1 年歷史日 K 收盤價
+    # 建立下載符號對應表 (如 SIVE -> SIVE.ST)
+    fetch_sym_map = {sym: TICKER_FETCH_MAP.get(sym, sym) for sym in tickers}
+    download_symbols = list(set(fetch_sym_map.values()))
+
     batch_df = None
     try:
-        batch_df = yf.download(tickers, period="1y", interval="1d", group_by="ticker", threads=True, progress=False)
+        batch_df = yf.download(download_symbols, period="1y", interval="1d", group_by="ticker", threads=True, progress=False)
     except Exception as e:
         print(f"  ⚠️ 批次日 K 下載異常: {e}", flush=True)
 
     for symbol in tickers:
+        fetch_symbol = fetch_sym_map.get(symbol, symbol)
         history_data = []
         
+        # 1. 嘗試由批次下載解析日 K
         if batch_df is not None and not batch_df.empty:
             try:
-                sym_df = batch_df[symbol] if (len(tickers) > 1 and symbol in batch_df) else batch_df
+                sym_df = batch_df[fetch_symbol] if (len(download_symbols) > 1 and fetch_symbol in batch_df) else batch_df
                 if sym_df is not None and not sym_df.empty:
                     for ts, row in sym_df.iterrows():
                         c_val = row.get("Close")
@@ -394,10 +407,11 @@ def fetch_stock_quotes_and_fundamentals(tickers):
 
         current_price, prev_close, high_52, low_52, volume, market_cap = None, None, None, None, None, None
         forward_pe, trailing_pe, price_to_sales, revenue_growth, earnings_date_str = None, None, None, None, None
+        currency = "USD"
         info = {}
 
         try:
-            ticker_obj = yf.Ticker(symbol)
+            ticker_obj = yf.Ticker(fetch_symbol)
             fast = getattr(ticker_obj, "fast_info", None)
             current_price = getattr(fast, "last_price", None) or getattr(fast, "regular_market_price", None)
             prev_close = getattr(fast, "previous_close", None)
@@ -405,7 +419,9 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             low_52 = getattr(fast, "year_low", None)
             volume = getattr(fast, "last_volume", None) or getattr(fast, "regular_market_volume", None)
             market_cap = getattr(fast, "market_cap", None)
+            currency = getattr(fast, "currency", "USD") or "USD"
 
+            # 2. 獨立重試：若批次未取到日 K，執行單檔重試
             if not history_data:
                 try:
                     hist = ticker_obj.history(period="1y", interval="1d")
@@ -437,22 +453,29 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                 volume = info.get("volume")
             if not market_cap and info:
                 market_cap = info.get("marketCap")
+            if currency == "USD" and info.get("currency"):
+                currency = info.get("currency")
 
             forward_pe = info.get("forwardPE")
             trailing_pe = info.get("trailingPE")
             price_to_sales = info.get("priceToSalesTrailing12Months")
             revenue_growth = info.get("revenueGrowth")
 
-            try:
-                cal = ticker_obj.calendar
-                if isinstance(cal, dict) and "Earnings Date" in cal and len(cal["Earnings Date"]) > 0:
-                    earnings_date_str = str(cal["Earnings Date"][0])[:10]
-            except Exception:
-                pass
+            # 3. 指數型 ETF 財報 404 防禦
+            is_etf = symbol in SECTOR_MAPPING.get("指數與主題科技 ETF", []) or symbol in ["SPY", "QQQ", "ARKK", "SMH", "SOXX", "XBI", "IWM", "ARKW", "ARKG", "IBIT"]
+            if is_etf:
+                earnings_date_str = "指數 ETF (無財報)"
+            else:
+                try:
+                    cal = ticker_obj.calendar
+                    if isinstance(cal, dict) and "Earnings Date" in cal and len(cal["Earnings Date"]) > 0:
+                        earnings_date_str = str(cal["Earnings Date"][0])[:10]
+                except Exception:
+                    pass
         except Exception:
             pass
 
-        # 價格回填備援機制
+        # 4. 價格回填備援機制
         if (current_price is None or float(current_price) <= 0) and history_data:
             current_price = history_data[-1]["c"]
         if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
@@ -479,13 +502,14 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                 "revenueGrowth": round(float(revenue_growth) * 100, 1) if revenue_growth else None,
                 "earningsDate": earnings_date_str,
                 "sector": sector_name,
+                "currency": currency,
                 "history": history_data
             }
-            print(f"  ✅ ${symbol}: ${current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_data)} 筆", flush=True)
+            print(f"  ✅ ${symbol}: {currency} {current_price:.2f} ({change_pct:+.2f}%) | 歷史點位: {len(history_data)} 筆", flush=True)
         elif symbol in quotes and quotes[symbol].get("history"):
-            print(f"  🔄 ${symbol}: 使用快取資料 (${quotes[symbol].get('price', '-')})", flush=True)
+            print(f"  🔄 ${symbol}: 使用快取資料 ({quotes[symbol].get('price', '-')})", flush=True)
         else:
-            quotes[symbol] = {"sector": sector_name, "history": history_data}
+            quotes[symbol] = {"sector": sector_name, "currency": currency, "history": history_data}
 
     try:
         os.makedirs(os.path.dirname(QUOTES_CACHE_FILE), exist_ok=True)
@@ -760,7 +784,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <!-- 搜尋、排序與觀點篩選 -->
     <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
       <div class="flex items-center gap-2 flex-1 max-w-lg">
-        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的（例如: HIMS, MRNA, NBIS, AMAT）..." 
+        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的（例如: HIMS, MRNA, NBIS, SIVE）..." 
           class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
         
         <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
@@ -860,7 +884,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="font-semibold text-slate-100 flex items-center gap-1.5">
           <span>👋</span> 你好！我是 Serenity AI 助理，已支援【流式打字生成】與【多輪連續追問】：
         </div>
-        <!-- 雙排綜合快捷問答按鈕容器 (方案 B + 方案 D) -->
         <div id="quick-ask-container" class="space-y-2 pt-1 border-t border-slate-700/60"></div>
       </div>
     </div>
@@ -985,6 +1008,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     const initialTopTickers = __TOP_TICKERS__;
     const stockQuotes = __STOCK_QUOTES__;
     const sectorMapping = __SECTOR_MAPPING__;
+    const tradingviewMap = __TRADINGVIEW_MAP__;
 
     let currentViewMode = 'all';
     let currentSentiment = 'ALL';
@@ -1091,10 +1115,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
 
       const defaultCandidates = [
+        'gemini-3.8-flash',
         'gemini-3.6-flash',
-        'gemini-3.0-flash',
+        'gemini-2.5-flash',
         'gemini-2.0-flash',
-        'gemini-2.0-flash-exp',
         'gemini-pro'
       ];
 
@@ -1594,7 +1618,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
     }
 
-    // 走勢疊圖繪製引擎 (支援週期裁切與圓點直達事件)
+    // 走勢疊圖繪製引擎 (支援週期裁切、防黑屏提示與圓點直達事件)
     function renderPriceOverlayChart(ticker) {
       if (!ticker) return;
       const quote = stockQuotes[ticker];
@@ -1604,8 +1628,15 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const ctx = document.getElementById('priceOverlayCanvas').getContext('2d');
       if (priceOverlayChartInstance) priceOverlayChartInstance.destroy();
 
+      // 防黑屏保護：若無日 K 歷史，於畫布中央顯示引導文字
       if (!history.length) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.save();
+        ctx.font = "13px sans-serif";
+        ctx.fillStyle = "#64748b";
+        ctx.textAlign = "center";
+        ctx.fillText("此標的暫無美股歷史日 K 資料 (可能為非美股、無報價或代碼變更)", ctx.canvas.width / 2, ctx.canvas.height / 2);
+        ctx.restore();
         return;
       }
 
@@ -1762,9 +1793,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     function loadTradingViewWidget(ticker) {
       const container = document.getElementById('tv-chart-container');
       if (!ticker || !container) return;
+      const tvSymbol = tradingviewMap[ticker] || ticker;
       container.innerHTML = `
         <iframe 
-          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${ticker}&interval=D&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Asia%2FTaipei&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=zh_TW" 
+          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${tvSymbol}&interval=D&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Asia%2FTaipei&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=zh_TW" 
           width="100%" 
           height="100%" 
           frameborder="0" 
@@ -1805,7 +1837,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
       if (data && data.price) {
         document.getElementById('quote-price').innerText = `$${data.price.toFixed(2)}`;
-        currencyLabel.innerText = 'USD';
+        currencyLabel.innerText = data.currency || 'USD';
         
         const isPositive = data.change >= 0;
         const changeVal = `${isPositive ? '+' : ''}${data.change.toFixed(2)}`;
@@ -1840,7 +1872,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }
       } else {
         document.getElementById('quote-price').innerText = '即時行情模式';
-        currencyLabel.innerText = '';
+        currencyLabel.innerText = data ? (data.currency || '') : '';
         changeEl.innerHTML = '<span class="text-xs font-normal text-teal-400 font-mono">可點擊「即時 K 線」展開走勢</span>';
         changeEl.className = 'flex items-center gap-2 mt-0.5 text-sm font-medium';
         document.getElementById('val-mkt-cap').innerText = '-';
@@ -1850,7 +1882,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         document.getElementById('quote-52w-container').classList.add('hidden');
       }
 
-      document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${ticker}/`;
+      document.getElementById('link-tradingview').href = `https://www.tradingview.com/symbols/${tradingviewMap[ticker] || ticker}/`;
 
       renderPriceOverlayChart(ticker);
       if (tvChartVisible) loadTradingViewWidget(ticker);
@@ -1938,7 +1970,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         ['社群提及總數', `${tweetsA.length} 則`, `${tweetsB.length} 則`, tweetsA.length > tweetsB.length, tweetsB.length > tweetsA.length],
         ['看多偏向度 (Bullish %)', `${pctA}% (${bullA}多)`, `${pctB}% (${bullB}多)`, pctA > pctB, pctB > pctA],
         ['市值 (Market Cap)', formatNumber(dataA.marketCap), formatNumber(dataB.marketCap), (dataA.marketCap||0) > (dataB.marketCap||0), (dataB.marketCap||0) > (dataA.marketCap||0)],
-        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? `${dataA.forwardPE}x` : '-', dataB.forwardPE ? `${dataB.forwardPE}x` : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
+        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? `${dataA.forwardPE}x` : '-', dataB.forwardPE ? `${dataA.forwardPE}x` : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
         ['市銷率 (P/S)', dataA.priceToSales ? `${dataA.priceToSales}x` : '-', dataB.priceToSales ? `${dataB.priceToSales}x` : '-', (dataA.priceToSales && dataB.priceToSales) ? dataA.priceToSales < dataB.priceToSales : false, (dataA.priceToSales && dataB.priceToSales) ? dataB.priceToSales < dataA.priceToSales : false],
         ['營收年增率 (YoY)', dataA.revenueGrowth ? `${dataA.revenueGrowth}%` : '-', dataB.revenueGrowth ? `${dataB.revenueGrowth}%` : '-', (dataA.revenueGrowth || -999) > (dataB.revenueGrowth || -999), (dataB.revenueGrowth || -999) > (dataA.revenueGrowth || -999)],
         ['下次財報日', dataA.earningsDate || '-', dataB.earningsDate || '-', false, false]
@@ -2531,15 +2563,17 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
     top_tickers_json_str = json.dumps(top_tickers_sorted, ensure_ascii=False)
     stock_quotes_json_str = json.dumps(stock_quotes, ensure_ascii=False)
     sector_mapping_json_str = json.dumps(SECTOR_MAPPING, ensure_ascii=False)
+    tradingview_map_json_str = json.dumps(TRADINGVIEW_MAP, ensure_ascii=False)
 
     html_rendered = HTML_TEMPLATE.replace("__TWEETS_DATA__", tweets_json_str) \
                                  .replace("__TOP_TICKERS__", top_tickers_json_str) \
                                  .replace("__STOCK_QUOTES__", stock_quotes_json_str) \
-                                 .replace("__SECTOR_MAPPING__", sector_mapping_json_str)
+                                 .replace("__SECTOR_MAPPING__", sector_mapping_json_str) \
+                                 .replace("__TRADINGVIEW_MAP__", tradingview_map_json_str)
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (代碼智慧校正與容錯機制已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (國際標的轉譯與防黑屏保護已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
