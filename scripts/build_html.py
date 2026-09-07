@@ -15,35 +15,43 @@ CACHE_FILE = "data/sentiment_cache.json"
 QUOTES_CACHE_FILE = "data/stock_quotes_cache.json"
 OUTPUT_HTML = "docs/index.html"
 
-# 遠端推文備援資料來源 (收錄歷史推文)
+# 遠端推文備援資料來源
 REMOTE_TWEETS_URL = "https://raw.githubusercontent.com/yan-labs/serenity-aleabitoreddit/main/data/aleabitoreddit_tweets.json"
 CDN_TWEETS_URL = "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@main/data/aleabitoreddit_tweets.json"
 
 TWITTER_EPOCH = 1288834974657
 
-# 推文錯別字校正字典
+# 推文錯別字自動校正字典 (修復 APPL -> AAPL 等手誤)
 TICKER_ALIASES = {
-    "APPL": "AAPL",
-    "QLCM": "QCOM",
-    "WLAC": "KLAC",
+    "APPL": "AAPL",   # Apple 蘋果
+    "QLCM": "QCOM",   # Qualcomm 高通
+    "WLAC": "KLAC",   # KLA 科磊
 }
 
-# 國際非美股標的轉譯字典 (向 Yahoo Finance 請求時代入特定交易所後綴)
+# 國際非美股標的轉譯字典 (向 Yahoo Finance 請求時代入特定市場後綴)
 TICKER_FETCH_MAP = {
     "SIVE": "SIVE.ST",    # 瑞典斯德哥爾摩
     "SOI": "SOI.PA",      # 法國泛歐交易所
     "AIXA": "AIXA.DE",    # 德國法蘭克福
     "IQE": "IQE.L",       # 英國倫敦
     "XFAB": "XFAB.PA",    # 法國泛歐交易所
+    "LPK": "LPK.DE",      # 德國 LPKF Laser & Electronics
+    "ALRIB": "ALRIB.PA",  # 法國 Euronext Growth
+    "DOWA": "5714.T",     # 日本同和控股
+    "BITF": "BITF",       # 預設美股，失敗自動嘗試 BITF.TO
 }
 
-# TradingView 專屬交易所對應字典 (確保前端 K 線能精準顯示海外掛牌標的)
+# TradingView 專屬交易所對應字典 (確保前端 K 線能精確載入海外交易所)
 TRADINGVIEW_MAP = {
     "SIVE": "OMXSTO:SIVE",
     "SOI": "EURONEXT:SOI",
     "AIXA": "XETR:AIXA",
     "IQE": "LSE:IQE",
     "XFAB": "EURONEXT:XFAB",
+    "LPK": "XETR:LPK",
+    "ALRIB": "EURONEXT:ALRIB",
+    "DOWA": "TSE:5714",
+    "BITF": "NASDAQ:BITF",
 }
 
 # 美股 9 大核心產業板塊對應字典
@@ -187,13 +195,16 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
+    """萃取美股代號，支援自動校正筆誤並排除總經與加密貨幣縮寫"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
     blacklist = {
         "USD", "USDT", "BTC", "ETH", "SOL", "CAD", "EUR", "ATH", "CEO", "CFO", "CTO",
         "AI", "FOMC", "FED", "CPI", "PPI", "GDP", "DD", "EOD", "YOLO", "NEW",
-        "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV"
+        "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV",
+        # 排除總經數據指標與無效縮寫
+        "RPI", "VNP"
     }
     cleaned_tickers = []
     for m in matches:
@@ -370,7 +381,7 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """取得行情與日 K，含國際標的轉譯、指數 ETF 404 防禦與獨立重試"""
+    """取得行情與日 K，含國際代碼轉譯、雙重掛牌回退與 ETF 404 防禦"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     
     cached_quotes = load_cache(QUOTES_CACHE_FILE)
@@ -390,7 +401,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
         fetch_symbol = fetch_sym_map.get(symbol, symbol)
         history_data = []
         
-        # 1. 嘗試由批次下載解析日 K
+        # 1. 由批次下載中解析日 K 走勢
         if batch_df is not None and not batch_df.empty:
             try:
                 sym_df = batch_df[fetch_symbol] if (len(download_symbols) > 1 and fetch_symbol in batch_df) else batch_df
@@ -436,6 +447,25 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                 except Exception:
                     pass
 
+            # 3. 針對雙重掛牌標的 (BITF 遇 404 自動回退至 BITF.TO)
+            if symbol == "BITF" and (current_price is None or float(current_price) <= 0):
+                try:
+                    alt_obj = yf.Ticker("BITF.TO")
+                    alt_fast = getattr(alt_obj, "fast_info", None)
+                    current_price = getattr(alt_fast, "last_price", None)
+                    if current_price:
+                        prev_close = getattr(alt_fast, "previous_close", None)
+                        currency = getattr(alt_fast, "currency", "CAD") or "CAD"
+                        if not history_data:
+                            alt_hist = alt_obj.history(period="1y", interval="1d")
+                            if not alt_hist.empty:
+                                for ts, row in alt_hist.iterrows():
+                                    c_val = row.get("Close")
+                                    if c_val is not None and str(c_val).lower() != 'nan':
+                                        history_data.append({"d": ts.strftime("%Y-%m-%d"), "c": round(float(c_val), 2)})
+                except Exception:
+                    pass
+
             try:
                 info = ticker_obj.info or {}
             except Exception:
@@ -461,7 +491,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             price_to_sales = info.get("priceToSalesTrailing12Months")
             revenue_growth = info.get("revenueGrowth")
 
-            # 3. 指數型 ETF 財報 404 防禦
+            # 4. 指數型 ETF 財報 404 防禦
             is_etf = symbol in SECTOR_MAPPING.get("指數與主題科技 ETF", []) or symbol in ["SPY", "QQQ", "ARKK", "SMH", "SOXX", "XBI", "IWM", "ARKW", "ARKG", "IBIT"]
             if is_etf:
                 earnings_date_str = "指數 ETF (無財報)"
@@ -475,7 +505,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
         except Exception:
             pass
 
-        # 4. 價格回填備援機制
+        # 5. 收盤價自動回填
         if (current_price is None or float(current_price) <= 0) and history_data:
             current_price = history_data[-1]["c"]
         if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
@@ -884,6 +914,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="font-semibold text-slate-100 flex items-center gap-1.5">
           <span>👋</span> 你好！我是 Serenity AI 助理，已支援【流式打字生成】與【多輪連續追問】：
         </div>
+        <!-- 雙排綜合快捷問答按鈕容器 (方案 B + 方案 D) -->
         <div id="quick-ask-container" class="space-y-2 pt-1 border-t border-slate-700/60"></div>
       </div>
     </div>
@@ -1580,7 +1611,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       };
     }
 
-    // 點擊圓點直達推文並高亮動畫 (Click-to-Scroll & Highlight)
+    // 點擊圓點直達推文並高亮動畫
     function scrollToTweet(tweetId) {
       if (!tweetId) return;
 
@@ -1618,7 +1649,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       }
     }
 
-    // 走勢疊圖繪製引擎 (支援週期裁切、防黑屏提示與圓點直達事件)
+    // 走勢疊圖繪製引擎 (含時間週期裁切、防黑屏保護與圓點點擊事件)
     function renderPriceOverlayChart(ticker) {
       if (!ticker) return;
       const quote = stockQuotes[ticker];
@@ -1628,7 +1659,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       const ctx = document.getElementById('priceOverlayCanvas').getContext('2d');
       if (priceOverlayChartInstance) priceOverlayChartInstance.destroy();
 
-      // 防黑屏保護：若無日 K 歷史，於畫布中央顯示引導文字
+      // 防黑屏保護：若無日 K 歷史，於畫布中央顯示提示文字
       if (!history.length) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.save();
@@ -1970,7 +2001,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         ['社群提及總數', `${tweetsA.length} 則`, `${tweetsB.length} 則`, tweetsA.length > tweetsB.length, tweetsB.length > tweetsA.length],
         ['看多偏向度 (Bullish %)', `${pctA}% (${bullA}多)`, `${pctB}% (${bullB}多)`, pctA > pctB, pctB > pctA],
         ['市值 (Market Cap)', formatNumber(dataA.marketCap), formatNumber(dataB.marketCap), (dataA.marketCap||0) > (dataB.marketCap||0), (dataB.marketCap||0) > (dataA.marketCap||0)],
-        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? `${dataA.forwardPE}x` : '-', dataB.forwardPE ? `${dataA.forwardPE}x` : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
+        ['前瞻本益比 (Lower is Better)', dataA.forwardPE ? `${dataA.forwardPE}x` : '-', dataB.forwardPE ? `${dataB.forwardPE}x` : '-', (dataA.forwardPE && dataB.forwardPE) ? dataA.forwardPE < dataB.forwardPE : false, (dataA.forwardPE && dataB.forwardPE) ? dataB.forwardPE < dataA.forwardPE : false],
         ['市銷率 (P/S)', dataA.priceToSales ? `${dataA.priceToSales}x` : '-', dataB.priceToSales ? `${dataB.priceToSales}x` : '-', (dataA.priceToSales && dataB.priceToSales) ? dataA.priceToSales < dataB.priceToSales : false, (dataA.priceToSales && dataB.priceToSales) ? dataB.priceToSales < dataA.priceToSales : false],
         ['營收年增率 (YoY)', dataA.revenueGrowth ? `${dataA.revenueGrowth}%` : '-', dataB.revenueGrowth ? `${dataB.revenueGrowth}%` : '-', (dataA.revenueGrowth || -999) > (dataB.revenueGrowth || -999), (dataB.revenueGrowth || -999) > (dataA.revenueGrowth || -999)],
         ['下次財報日', dataA.earningsDate || '-', dataB.earningsDate || '-', false, false]
