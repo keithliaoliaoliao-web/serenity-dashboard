@@ -21,27 +21,27 @@ CDN_TWEETS_URL = "https://cdn.jsdelivr.net/gh/yan-labs/serenity-aleabitoreddit@m
 
 TWITTER_EPOCH = 1288834974657
 
-# 推文錯別字自動校正字典 (修復 APPL -> AAPL 等手誤)
+# 推文錯別字自動校正字典
 TICKER_ALIASES = {
-    "APPL": "AAPL",   # Apple 蘋果
-    "QLCM": "QCOM",   # Qualcomm 高通
-    "WLAC": "KLAC",   # KLA 科磊
+    "APPL": "AAPL",
+    "QLCM": "QCOM",
+    "WLAC": "KLAC",
 }
 
-# 國際非美股標的轉譯字典 (向 Yahoo Finance 請求時代入特定市場後綴)
+# 國際非美股標的轉譯字典
 TICKER_FETCH_MAP = {
-    "SIVE": "SIVE.ST",    # 瑞典斯德哥爾摩
-    "SOI": "SOI.PA",      # 法國泛歐交易所
-    "AIXA": "AIXA.DE",    # 德國法蘭克福
-    "IQE": "IQE.L",       # 英國倫敦
-    "XFAB": "XFAB.PA",    # 法國泛歐交易所
-    "LPK": "LPK.DE",      # 德國 LPKF Laser & Electronics
-    "ALRIB": "ALRIB.PA",  # 法國 Euronext Growth
-    "DOWA": "5714.T",     # 日本同和控股
-    "BITF": "BITF",       # 預設美股，失敗自動嘗試 BITF.TO
+    "SIVE": "SIVE.ST",
+    "SOI": "SOI.PA",
+    "AIXA": "AIXA.DE",
+    "IQE": "IQE.L",
+    "XFAB": "XFAB.PA",
+    "LPK": "LPK.DE",
+    "ALRIB": "ALRIB.PA",
+    "DOWA": "5714.T",
+    "BITF": "BITF",
 }
 
-# TradingView 專屬交易所對應字典 (確保前端 K 線能精確載入海外交易所)
+# TradingView 專屬交易所對應字典
 TRADINGVIEW_MAP = {
     "SIVE": "OMXSTO:SIVE",
     "SOI": "EURONEXT:SOI",
@@ -54,7 +54,7 @@ TRADINGVIEW_MAP = {
     "BITF": "NASDAQ:BITF",
 }
 
-# 美股 9 大核心產業板塊對應字典
+# 美股 9 大核心產業板塊對應字典 (確保 RCAT 獲保障收錄)
 SECTOR_MAPPING = {
     "生技與醫療製藥": [
         "HIMS", "MRNA", "JNJ", "TEM", "LLY", "NVO", "ISRG", "CRSP", "VRTX", "AMGN", 
@@ -195,7 +195,6 @@ def load_cache(filepath):
         return {}
 
 def extract_tickers(text):
-    """萃取美股代號，支援自動校正筆誤並排除總經與加密貨幣縮寫"""
     if not text:
         return []
     matches = re.findall(r"(?<!\w)\$([A-Za-z]{1,6})\b", text)
@@ -203,7 +202,6 @@ def extract_tickers(text):
         "USD", "USDT", "BTC", "ETH", "SOL", "CAD", "EUR", "ATH", "CEO", "CFO", "CTO",
         "AI", "FOMC", "FED", "CPI", "PPI", "GDP", "DD", "EOD", "YOLO", "NEW",
         "BUY", "SELL", "HOLD", "CALL", "PUT", "AND", "THE", "TECH", "EV",
-        # 排除總經數據指標與無效縮寫
         "RPI", "VNP"
     }
     cleaned_tickers = []
@@ -381,13 +379,12 @@ def clean_tweet_data(raw_tweets, sentiment_cache):
     return cleaned, ticker_counts, recent_tickers
 
 def fetch_stock_quotes_and_fundamentals(tickers):
-    """取得行情與日 K，含國際代碼轉譯、雙重掛牌回退與 ETF 404 防禦"""
+    """取得行情與日 K，含 RCAT 全面收錄、國際代碼轉譯、雙重掛牌回退與 ETF 404 防禦"""
     print(f"📈 正在擷取 {len(tickers)} 個關注標的的市場行情、估值與 1 年日 K 歷史數據...", flush=True)
     
     cached_quotes = load_cache(QUOTES_CACHE_FILE)
     quotes = cached_quotes.copy() if isinstance(cached_quotes, dict) else {}
     
-    # 建立下載符號對應表 (如 SIVE -> SIVE.ST)
     fetch_sym_map = {sym: TICKER_FETCH_MAP.get(sym, sym) for sym in tickers}
     download_symbols = list(set(fetch_sym_map.values()))
 
@@ -447,7 +444,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
                 except Exception:
                     pass
 
-            # 3. 針對雙重掛牌標的 (BITF 遇 404 自動回退至 BITF.TO)
+            # 3. 雙重掛牌回退 (如 BITF)
             if symbol == "BITF" and (current_price is None or float(current_price) <= 0):
                 try:
                     alt_obj = yf.Ticker("BITF.TO")
@@ -491,7 +488,7 @@ def fetch_stock_quotes_and_fundamentals(tickers):
             price_to_sales = info.get("priceToSalesTrailing12Months")
             revenue_growth = info.get("revenueGrowth")
 
-            # 4. 指數型 ETF 財報 404 防禦
+            # 4. 指數型 ETF 財報防禦
             is_etf = symbol in SECTOR_MAPPING.get("指數與主題科技 ETF", []) or symbol in ["SPY", "QQQ", "ARKK", "SMH", "SOXX", "XBI", "IWM", "ARKW", "ARKG", "IBIT"]
             if is_etf:
                 earnings_date_str = "指數 ETF (無財報)"
@@ -505,11 +502,16 @@ def fetch_stock_quotes_and_fundamentals(tickers):
         except Exception:
             pass
 
-        # 5. 收盤價自動回填
-        if (current_price is None or float(current_price) <= 0) and history_data:
-            current_price = history_data[-1]["c"]
-        if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
-            prev_close = history_data[-2]["c"]
+        # 5. 日 K 自動回填行情（確保即使 API 延遲，現價與 52 週水位仍 100% 呈現）
+        if history_data:
+            if current_price is None or float(current_price) <= 0:
+                current_price = history_data[-1]["c"]
+            if (prev_close is None or float(prev_close) <= 0) and len(history_data) >= 2:
+                prev_close = history_data[-2]["c"]
+            if high_52 is None:
+                high_52 = max(h["c"] for h in history_data)
+            if low_52 is None:
+                low_52 = min(h["c"] for h in history_data)
 
         sector_name = resolve_sector(symbol, info)
 
@@ -814,7 +816,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <!-- 搜尋、排序與觀點篩選 -->
     <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
       <div class="flex items-center gap-2 flex-1 max-w-lg">
-        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的（例如: HIMS, MRNA, NBIS, SIVE）..." 
+        <input type="text" id="search-input" placeholder="搜尋推文內容、摘要或 $標的（例如: HIMS, MRNA, NBIS, RCAT, SIVE）..." 
           class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition" />
         
         <select id="sort-select" onchange="changeSort(this.value)" class="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-teal-500 transition cursor-pointer shrink-0">
@@ -914,14 +916,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="font-semibold text-slate-100 flex items-center gap-1.5">
           <span>👋</span> 你好！我是 Serenity AI 助理，已支援【流式打字生成】與【多輪連續追問】：
         </div>
-        <!-- 雙排綜合快捷問答按鈕容器 (方案 B + 方案 D) -->
         <div id="quick-ask-container" class="space-y-2 pt-1 border-t border-slate-700/60"></div>
       </div>
     </div>
 
     <!-- 輸入列 -->
     <form onsubmit="handleChatSubmit(event)" class="p-2.5 bg-slate-950 border-t border-slate-800 flex gap-2 shrink-0">
-      <input type="text" id="chat-input" placeholder="輸入問題（支援連續追問，如：分析 $NVDA、那 $AMD 呢？）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
+      <input type="text" id="chat-input" placeholder="輸入問題（支援連續追問，如：分析 $RCAT、那 $RKLB 呢？）..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-teal-500" />
       <button type="submit" id="chat-send-btn" class="px-4 py-2 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs transition flex items-center justify-center">發送</button>
     </form>
   </div>
@@ -1423,7 +1424,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     }
 
     function importWatchlist() {
-      const input = prompt('請貼上自選股 JSON 陣列 (例如: ["HIMS", "AMAT", "NVDA"])：');
+      const input = prompt('請貼上自選股 JSON 陣列 (例如: ["HIMS", "RCAT", "NVDA"])：');
       if (!input) return;
       try {
         const parsed = JSON.parse(input.trim());
@@ -2604,7 +2605,7 @@ def generate_html(tweets, ticker_counts, recent_tickers, stock_quotes):
 
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html_rendered)
-    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (國際標的轉譯與防黑屏保護已就緒)", flush=True)
+    print(f"✅ Serenity 儀表板成功產出至 {OUTPUT_HTML} (RCAT 全面保障與日 K 容錯回填已就緒)", flush=True)
 
 if __name__ == "__main__":
     tweets_raw = load_tweets(TWEETS_FILE)
@@ -2613,11 +2614,12 @@ if __name__ == "__main__":
     
     print(f"📦 資料載入摘要：原始推文 {len(tweets_raw)} 則 | 整理後有效推文 {len(cleaned_tweets)} 則", flush=True)
 
-    mentioned_tickers_sorted = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
+    # 關鍵修正：將板塊成分股 (含 RCAT) 列入保證名單，並將總上限放寬至 350 檔，確保 RCAT 100% 收錄
     all_sector_symbols = [s for sub in SECTOR_MAPPING.values() for s in sub]
+    mentioned_tickers_sorted = [t[0] for t in sorted(counts.items(), key=lambda x: x[1], reverse=True)]
     
-    combined_target_list = list(dict.fromkeys(mentioned_tickers_sorted + recent_tickers + all_sector_symbols))[:160]
-    print(f"🎯 本次預計抓取市場數據標的總數：{len(combined_target_list)} 檔 (高頻提及標的優先)", flush=True)
+    combined_target_list = list(dict.fromkeys(all_sector_symbols + recent_tickers + mentioned_tickers_sorted))[:350]
+    print(f"🎯 本次預計抓取市場數據標的總數：{len(combined_target_list)} 檔 (板塊名單與高頻提及全面收錄)", flush=True)
     
     stock_quotes = fetch_stock_quotes_and_fundamentals(combined_target_list)
     generate_html(cleaned_tweets, counts, recent_tickers, stock_quotes)
