@@ -39140,5 +39140,29 @@
     "summary": "看好英特爾調漲PC CPU價格與記憶體族群營收暴增，有利市場表現。",
     "translation_zh": "根據Digitimes報導，英特爾顯然將於10月調漲PC CPU價格10%，我認為市場可能會對此給予正面回應。此外，傳統記憶體交易也因8月營收而大發利市：晶豪科（ESMT）營收年增約605%、月增16.4%，在毛利率同步上升的情況下，這點相當令人感興趣。",
     "analyzed_at": "2026-09-08T08:14:09Z"
+  },
+  "2097327653116363127": {
+    "id": "2097327653116363127",
+    "tweet_id": "2097327653116363127",
+    "sentiment": "Bullish",
+    "summary": "NBIS與PLTR達成合作並成首選夥伴，具備顯著利多潛力。",
+    "translation_zh": "Nebius ($NBIS)強勢回歸，宣佈與Palantir ($PLTR)建立新合作關係。Palantir更指定Nebius為其首選的主權AI基礎設施夥伴。考慮到Palantir與美國政府及企業的既有關係，此舉的潛在影響深遠。",
+    "analyzed_at": "2026-09-08T14:14:37Z"
+  },
+  "2097321349555306512": {
+    "id": "2097321349555306512",
+    "tweet_id": "2097321349555306512",
+    "sentiment": "Bullish",
+    "summary": "亞馬遜與高通簽署認股協議並佈局多家半導體廠，看好其擴大晶片領域投資。",
+    "translation_zh": "$AMZN 與 $QCOM 簽署新協議，讓亞馬遜透過認購權證獲得購買價值約 40 億美元高通股權的權利。照這個速度下去……亞馬遜會比 $NVDA 更像是一檔半導體 ETF 嗎？鑑於他們現有對 AlChip、$MRVL、$ALAB、$AAOI 及其他公司的股權／認股權證。這當然是有關聯的 https://t.co/76pMtQScn8",
+    "analyzed_at": "2026-09-08T14:14:56Z"
+  },
+  "2097309699645546763": {
+    "id": "2097309699645546763",
+    "tweet_id": "2097309699645546763",
+    "sentiment": "Bullish",
+    "summary": "看好HOOD收購Crypto.com少數股權及業務擴張，具備金融業整合優勢。",
+    "translation_zh": "哇，$HOOD 取得了 Crypto.com 的少數股權。感覺金融業的未來正慢慢向 Stripe/Robinhood 靠攏。特別是在 Robinhood Chain、預測市場以及信用卡/銀行業務成功擴張之後。",
+    "analyzed_at": "2026-09-08T14:15:15Z"
   }
 }
