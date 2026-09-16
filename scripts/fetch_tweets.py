@@ -33,6 +33,17 @@ def log(message):
     """即時強制輸出日誌至控制台"""
     print(message, flush=True)
 
+def safe_int(val):
+    """安全地將任意型別轉換為整數，若為 None 或無效字串則回傳 0"""
+    if val is None:
+        return 0
+    if isinstance(val, (int, float)):
+        return int(val)
+    val_str = str(val).strip()
+    if val_str.isdigit():
+        return int(val_str)
+    return 0
+
 def snowflake_to_iso(tweet_id_str):
     """利用 Twitter Snowflake 演算法計算精確 UTC ISO 時間"""
     try:
@@ -102,9 +113,9 @@ def fetch_yan_labs_data():
                         "id_str": t_id,
                         "text": text,
                         "created_at": created_at,
-                        "favorite_count": tw.get("favorite_count") or tw.get("likes") or 0,
-                        "retweet_count": tw.get("retweet_count") or tw.get("retweets") or 0,
-                        "views": tw.get("views") if not isinstance(tw.get("views"), dict) else tw.get("views", {}).get("count", 0),
+                        "favorite_count": safe_int(tw.get("favorite_count") or tw.get("likes")),
+                        "retweet_count": safe_int(tw.get("retweet_count") or tw.get("retweets")),
+                        "views": safe_int(tw.get("views") if not isinstance(tw.get("views"), dict) else tw.get("views", {}).get("count")),
                         "url": tw.get("url") or f"https://twitter.com/{TARGET_HANDLE}/status/{t_id}",
                         "source": "yan_labs"
                     })
@@ -167,15 +178,15 @@ def fetch_syndication_stream(screen_name):
                         "id_str": t_id,
                         "text": text,
                         "created_at": created_at,
-                        "favorite_count": tw_data.get("favorite_count", 0),
-                        "retweet_count": tw_data.get("retweet_count", 0),
-                        "views": tw_data.get("views", {}).get("count", 0) if isinstance(tw_data.get("views"), dict) else 0,
+                        "favorite_count": safe_int(tw_data.get("favorite_count")),
+                        "retweet_count": safe_int(tw_data.get("retweet_count")),
+                        "views": safe_int(tw_data.get("views", {}).get("count") if isinstance(tw_data.get("views"), dict) else tw_data.get("views")),
                         "url": f"https://twitter.com/{screen_name}/status/{t_id}",
                         "source": "live_stream"
                     })
                 log(f"  ✨ [軌道 2] 官方串流解析出 {len(fetched)} 則即時推文！")
         elif res.status_code == 429:
-            log("  ⚠️ [軌道 2] 官方伺服器觸發 429 限流 (若需持續自動抓取，可在 GitHub Secrets 設定 TWITTER_AUTH_TOKEN 與 TWITTER_CT0)。")
+            log("  ⚠️ [軌道 2] 官方伺服器觸發 429 限流。")
         else:
             log(f"  ⚠️ [軌道 2] 回應狀態碼: {res.status_code}")
     except Exception as e:
@@ -184,7 +195,7 @@ def fetch_syndication_stream(screen_name):
     return fetched
 
 def enrich_recent_metrics(tweets_list, target_count=30):
-    """【軌道 3】針對最新推文校準按讚、轉推與瀏覽量 (具備格式防護)"""
+    """【軌道 3】針對最新推文校準按讚、轉推與瀏覽量"""
     check_limit = min(len(tweets_list), target_count)
     log(f"🔄 [數據校準] 正在為最新 {check_limit} 則推文連線同步互動指標...")
 
@@ -198,18 +209,19 @@ def enrich_recent_metrics(tweets_list, target_count=30):
             if res.status_code == 200 and res.text.strip().startswith("{"):
                 detail = res.json()
                 if "favorite_count" in detail:
-                    tw["favorite_count"] = max(tw.get("favorite_count", 0), detail["favorite_count"])
+                    tw["favorite_count"] = max(safe_int(tw.get("favorite_count")), safe_int(detail["favorite_count"]))
                 if "retweet_count" in detail:
-                    tw["retweet_count"] = max(tw.get("retweet_count", 0), detail["retweet_count"])
-                if "views" in detail and isinstance(detail["views"], dict):
-                    tw["views"] = max(tw.get("views", 0), int(detail["views"].get("count", 0)))
+                    tw["retweet_count"] = max(safe_int(tw.get("retweet_count")), safe_int(detail["retweet_count"]))
+                if "views" in detail:
+                    v_val = detail["views"].get("count", 0) if isinstance(detail["views"], dict) else detail["views"]
+                    tw["views"] = max(safe_int(tw.get("views")), safe_int(v_val))
         except Exception:
             pass
 
     return tweets_list
 
 def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
-    """【智慧去重融合核心】整合本地庫、上游庫與即時抓取資料"""
+    """【智慧去重融合核心】整合本地庫、上游庫與即時抓取資料 (具備安全型別防護)"""
     tweets_map = {}
 
     # 1. 載入本地既有資料
@@ -233,7 +245,7 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
             if len(tw.get("text", "")) > len(tweets_map[t_id].get("text", "")):
                 tweets_map[t_id]["text"] = tw["text"]
 
-    # 3. 比對並融合即時抓取資料 (即時資料優先更新指標)
+    # 3. 比對並融合即時抓取資料 (即時資料優先更新指標，並使用 safe_int 防止 TypeError)
     for tw in live_stream_data:
         t_id = str(tw.get("id", "")).strip()
         if not t_id:
@@ -243,9 +255,18 @@ def merge_and_compare_sources(local_data, yan_labs_data, live_stream_data):
             live_added += 1
         else:
             tweets_map[t_id]["text"] = tw["text"]
-            tweets_map[t_id]["favorite_count"] = max(tweets_map[t_id].get("favorite_count", 0), tw.get("favorite_count", 0))
-            tweets_map[t_id]["retweet_count"] = max(tweets_map[t_id].get("retweet_count", 0), tw.get("retweet_count", 0))
-            tweets_map[t_id]["views"] = max(tweets_map[t_id].get("views", 0), tw.get("views", 0))
+            tweets_map[t_id]["favorite_count"] = max(
+                safe_int(tweets_map[t_id].get("favorite_count")), 
+                safe_int(tw.get("favorite_count"))
+            )
+            tweets_map[t_id]["retweet_count"] = max(
+                safe_int(tweets_map[t_id].get("retweet_count")), 
+                safe_int(tw.get("retweet_count"))
+            )
+            tweets_map[t_id]["views"] = max(
+                safe_int(tweets_map[t_id].get("views")), 
+                safe_int(tw.get("views"))
+            )
 
     # 補齊可能缺失的時間欄位
     for t_id, tw in tweets_map.items():
