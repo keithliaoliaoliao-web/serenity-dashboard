@@ -1,77 +1,90 @@
-name: 產生並部署 Serenity 儀表板
+name: Serenity 每小時更新
 
 on:
   schedule:
-    # 每 2 小時自動排程執行一次（於偶數小時的第 5 分執行）
-    - cron: '5 */2 * * *'
+    # 每小時第 7 分執行（避開整點的 GitHub 排程壅塞）
+    - cron: '7 * * * *'
   workflow_dispatch:
     inputs:
       target_count:
-        description: '本次手動執行欲分析的推文數量'
+        description: '本次最多分析幾則推文（預設 50）'
         required: false
         default: '50'
+        type: string
+      thesis_count:
+        description: '本次最多重新整理幾檔個股論點（預設 15）'
+        required: false
+        default: '15'
         type: string
   push:
     paths:
       - 'scripts/**'
-      - 'data/tweets.json'
       - '.github/workflows/build_dashboard.yml'
 
 permissions:
   contents: write
 
+# 同一時間只允許一個更新在跑，避免兩個流程同時寫回 GitHub 而互相打架
+concurrency:
+  group: serenity-pipeline
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
-      - name: Checkout 儲存庫
+      - name: 取得程式碼
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 建立必要資料夾結構
-        run: |
-          mkdir -p data docs
-
-      - name: 設定 Python 環境
+      - name: 設定 Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: 安裝 Python 必要套件
+      - name: 安裝套件
         run: |
           python -m pip install --upgrade pip
-          pip install google-generativeai yfinance
+          pip install requests yfinance
 
-      - name: 執行原生認證推文抓取
+      - name: 1. 抓取推文
+        continue-on-error: true
         env:
           TWITTER_AUTH_TOKEN: ${{ secrets.TWITTER_AUTH_TOKEN }}
           TWITTER_CT0: ${{ secrets.TWITTER_CT0 }}
-        run: |
-          python scripts/fetch_tweets.py
+        run: python scripts/fetch_tweets.py
 
-      - name: 執行 Gemini 情緒深度分析
+      - name: 2. Gemini 推文情緒分析
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TOTAL_TARGET: ${{ inputs.target_count || '50' }}
-        run: |
-          python scripts/analyze_sentiment.py
+        run: python scripts/analyze_sentiment.py
 
-      - name: 執行編譯腳本產出 HTML
-        run: |
-          python scripts/build_html.py
+      - name: 3. Gemini 個股論點整理
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          THESIS_MAX_PER_RUN: ${{ inputs.thesis_count || '15' }}
+        run: python scripts/generate_thesis.py
 
-      - name: 提交更新至 repo
+      - name: 4. 產出儀表板
+        run: python scripts/build_html.py
+
+      - name: 5. 提交更新
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
           git add data/ docs/
-          
-          if ! git diff --staged --quiet; then
-            git commit -m "chore: 自動抓取最新推文、更新 AI 快取與儀表板 [skip ci]"
-            git pull origin main --rebase -X theirs || git rebase --abort
-            git push origin main
+          if git diff --staged --quiet; then
+            echo "沒有任何變動，跳過提交。"
           else
-            echo "沒有檢測到任何資料或頁面變動，跳過提交。"
+            git commit -m "chore: 自動更新推文、AI 分析、論點與儀表板 [skip ci]"
+            for i in 1 2 3; do
+              git pull origin main --rebase -X theirs && git push origin main && break
+              echo "推送失敗，5 秒後重試 ($i/3)"
+              sleep 5
+            done
           fi
