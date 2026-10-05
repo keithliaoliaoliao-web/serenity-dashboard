@@ -23540,9 +23540,18 @@
     "translation_zh": "美國國防部宣佈提供 1.74 億美元資助以確保鎵供應鏈安全。受益者包括：\n\n- $AA（美鋁公司），用於其精煉廠的鎵生產。\n\n- 雙日（2768），作為日本合資事業的包銷夥伴。\n\n很高興看到美國對關鍵礦物供應鏈的投資。"
   },
   "2094831983306440746": {
+    "id": "2094831983306440746",
+    "tweet_id": "2094831983306440746",
     "sentiment": "Bearish",
-    "summary": "股市暴跌印證九月魔咒迷思",
-    "translation_zh": "在看到從 $AXTI 到 $IREN 的所有股票都被暴跌暴打之後……我開始相信「九月是一年中表現最差的月份」這個迷思了。"
+    "stances": {
+      "AXTI": "Bearish",
+      "IREN": "Bearish"
+    },
+    "summary": "作者認為AXTI與IREN股價暴跌，印證九月是股市最差月份的迷思。",
+    "translation_zh": "在看到從 AXTI 到 IREN 的所有股票都被血洗之後……我開始相信「九月是一年中表現最糟糕的月份」這個迷思了。",
+    "risk": "暗示九月季節性效應導致市場走弱與股價下跌的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:17Z"
   },
   "2094828832977305981": {
     "sentiment": "Neutral",
@@ -23555,9 +23564,18 @@
     "translation_zh": "@GGFitim1 絕對不是！但對我來說，這就像那家鞋業公司 $BIRD 轉型成為新型雲端服務公司一樣有趣。"
   },
   "2094786201605808566": {
-    "sentiment": "Neutral",
-    "summary": "GoPro跨界光通訊引發大漲",
-    "translation_zh": "什麼…… $GPRO 在計劃與光子學公司「Starman Optical」合併後大漲了 79.17%，旨在為 AI 資料中心製造美國本土的 800G/1.6T 光收發器。GoPro 居然想與 $AAOI 競爭，這完全不在我的意料之中。"
+    "id": "2094786201605808566",
+    "tweet_id": "2094786201605808566",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Neutral",
+      "GPRO": "Bullish"
+    },
+    "summary": "GPRO因併購傳聞飆漲79%並跨足AI光收發器，對其持看多立場。",
+    "translation_zh": "什麼... GPRO在計劃與光子學公司「Starman Optical」合併以打造用於AI資料中心的美國800G/1.6T光收發器後，股價大漲了79.17%。GoPro試圖與AAOI競爭絕對不在我的預料之中。",
+    "risk": "跨足AI光收發器市場面臨AAOI等強敵競爭，具備不確定性。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:19Z"
   },
   "2094754861695070712": {
     "sentiment": "Bullish",
@@ -23570,24 +23588,61 @@
     "translation_zh": "@halldj00 @wannabepanacea 兩者兼有，主要是圍繞在溝通問題。在營運方面看起來很理想，他們擁有 Jabil、GlobalFoundries、Ayar，以及約 6 個可插拔合作項目，並在嚴重瓶頸期擁有 2 家代工廠產能。$JBL 的時間線符合我的預期。但管理層的溝通重點卻放在安撫在地投資人的近期無線/營收與財務數據上，而非 CPO 及其他領域的重大未來經濟機會。此外，溝通極其糟糕且含糊其辭，特別是與兩個月前相比，關於那斯達克上市的說法。這是我非常不滿意的唯一實質性延誤，因為儘管獲得了 57 瑞典克朗的機構融資，這仍是一次執行失敗。而且財務長添加的法律字眼無端引入了不確定性，明明在那之前並無太多疑慮。市場毫不猶豫地因為那愚蠢的對沖字眼讓 Sivers 重挫了 28%。"
   },
   "2095565402223038651": {
+    "id": "2095565402223038651",
+    "tweet_id": "2095565402223038651",
     "sentiment": "Bullish",
-    "summary": "戴爾家族捐款，嘉惠 Robinhood",
-    "translation_zh": "DELL 創辦人真是個傳奇。戴爾家族透過川普帳戶承諾向 2,500 萬名兒童捐贈 62.5 億美元（每人 250 美元），並以 $HOOD（今日上漲 14.83%+）作為初始唯一的券商。雖然有點偏離主題，但與金額相比，讓大眾提早參與投資非常有意義。"
+    "stances": {
+      "DELL": "Bullish",
+      "HOOD": "Bullish"
+    },
+    "summary": "Dell創辦人家族大舉捐款並指定Hood為獨家券商，推動大眾投資具深遠意義。",
+    "translation_zh": "戴爾創辦人是個傳奇。戴爾家族透過川普帳戶承諾向2500萬名兒童捐贈62.5億美元（每人250美元），並以今天上漲14.83%以上的HOOD作為最初的唯一經紀商。雖然有點離題，但與金額相比，讓大眾及早投資非常有意義。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:51Z"
   },
   "2095546138510459218": {
+    "id": "2095546138510459218",
+    "tweet_id": "2095546138510459218",
     "sentiment": "Bullish",
-    "summary": "Sivers 產能擴張驚人，利多看好",
-    "translation_zh": "當看到 $SIVE 揭露超過 1 億顆 CW DFB 雷射的驚人產能時，這是正確的反應。補充背景資訊，Trendforce 七月數據指出全球 CW/EML 年產能約為 6.084 億顆（年化每月約 5,070 萬顆）。隨著 $AVGO、$LITE 與住友化學佔據了..."
+    "stances": {
+      "AVGO": "Bullish",
+      "LITE": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "分析指出SIVE、AVGO與LITE的產能與市佔，整體偏多看待。",
+    "translation_zh": "當看到$SIVE大於一億美金的CW DFB超凡產能揭露時，這才是正確的反應。提供一些背景資訊，Trendforce七月數據指出全球CW/EML產能大約是每年60.84億（年化約每月5070萬單位）。由$AVGO、$LITE以及住友（Sumitomo）組成https://t.co/tx3kjhYoO1",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:54Z"
   },
   "2095490725412733092": {
+    "id": "2095490725412733092",
+    "tweet_id": "2095490725412733092",
     "sentiment": "Bullish",
-    "summary": "輝達巨額收購 Hugging Face 生態系",
-    "translation_zh": "$NVDA 以 12,930,300,000 美元收購 Hugging Face。黃仁勳說明原因為：超過 1,800 萬名開發者使用 Hugging Face、擁有超過 300 萬個模型、50 萬個資料集、100 萬個應用程式、超過 20 萬家公司使用該平台，以及支援開源權重模型。這讓我想起了 $MSFT 收購 Github？"
+    "stances": {
+      "MSFT": "Neutral",
+      "NVDA": "Bullish"
+    },
+    "summary": "NVDA收購Hugging Face，開發者生態龐大，立場看多。",
+    "translation_zh": "$NVDA 以 12,930,300,000 美元收購 hugging face。黃仁勳表示原因如下：擁有 1800 萬以上開發者使用 Hugging Face、300 萬以上模型、50 萬以上資料集與 100 萬以上應用程式、20 萬以上公司使用該平台、支援開放權重模型。這幾乎讓我想起 $MSFT 收購 Github？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:00Z"
   },
   "2095460499769155944": {
+    "id": "2095460499769155944",
+    "tweet_id": "2095460499769155944",
     "sentiment": "Bullish",
-    "summary": "IQE 簽署採購協議，量子點商業化",
-    "translation_zh": "信不信由你，$IQE 實際上是量子點晶圓代工的領導者。今天 IQE 宣布與 Quintessent（量子點領域的頂尖業者）簽署採購協議。「隨著量子點雷射進入客戶送樣階段。」你的量子點夥伴如 $ALMU、QD Laser (6613) 等可能終於要開始..."
+    "stances": {
+      "ALMU": "Bullish",
+      "IQE": "Bullish"
+    },
+    "summary": "IQE與Quintessent合作，帶動IQE與ALMU等量子點相關標的看多。",
+    "translation_zh": "信不信由你，IQE實際上是量子點代工的領導者。今天IQE宣佈與量子點領域的頂尖玩家Quintessent簽署採購協議。「隨著量子點雷射進入客戶送樣階段。」你們的量子點好兄弟像是ALMU、QD Laser (6613)以及其他公司可能終於要開始了 https://t.co/67DFkr7Kei",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:05Z"
   },
   "2095453263613341938": {
     "sentiment": "Bullish",
@@ -23615,9 +23670,26 @@
     "translation_zh": "$MRVL 高級副總裁兼光學工程首席技術官 Radha Nagarajan 在台灣國際半導體展 (Semicon Taiwan) 上表示：1. 列舉歐洲/日本作為矽光子 (SiPH) 模組雷射供應來源的範例。極為有趣的是，Marvell 副總裁在舉例矽光子模組雷射供應源時，腦海中想到了歐洲。"
   },
   "2095087925822190023": {
+    "id": "2095087925822190023",
+    "tweet_id": "2095087925822190023",
     "sentiment": "Neutral",
-    "summary": "Leopold 基金最新 13F 持股揭露",
-    "translation_zh": "看看 Leopold's Situational Awareness 基金截至 6 月 30 日的第二季 13F 最新持股：1. $SNDK - 56.74 億美元 2. $MU - 55.74 億美元 3. $BE - 18.99 億美元 4. $TSM - 12.65 億美元 5. $NBIS - 12.32 億美元 6. $CRWV - 7.445 億美元 7. $CORZ - 6.656 億美元 8. $STM - 5.843 億美元（新進）9. $APLD - 4.690 億美元 10. $RIOT -"
+    "stances": {
+      "APLD": "Neutral",
+      "BE": "Neutral",
+      "CORZ": "Neutral",
+      "CRWV": "Neutral",
+      "MU": "Neutral",
+      "NBIS": "Neutral",
+      "RIOT": "Neutral",
+      "SNDK": "Neutral",
+      "STM": "Neutral",
+      "TSM": "Neutral"
+    },
+    "summary": "揭露最新13F持倉，盤點多檔股票部位。",
+    "translation_zh": "剛檢視了利奧波德形勢感知Q2 13F截至6月30日的最新持倉：1. SNDK - 56.74億美元 2. MU - 55.74億美元 3. BE - 18.99億美元 4. TSM - 12.65億美元 5. NBIS - 12.32億美元 6. CRWV - 7.445億美元 7. CORZ - 6.656億美元 8. STM - 5.843億美元（新倉） 9. APLD - 4.690億美元 10. RIOT - https://t.co/z39L255LAu",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:10Z"
   },
   "2095064848031678648": {
     "sentiment": "Bearish",
@@ -23625,9 +23697,18 @@
     "translation_zh": "我不想在這裡扮演股東積極主義者的角色：但我希望最近的股價暴跌能給 $SIVE 一個警訊，讓他們明白到底哪些投資人群體與業務焦點才是真正重要的（不是瑞典，也不是無線業務）。同時，他們也應該解僱任何向當地媒體批評妥協的董事會成員或高管：還有"
   },
   "2095012962360828314": {
+    "id": "2095012962360828314",
+    "tweet_id": "2095012962360828314",
     "sentiment": "Bullish",
-    "summary": "台股供應鏈迅速反彈表現優異",
-    "translation_zh": "非常有趣的是，注意到台灣市場的表現遠遠優於美國/歐盟等世界其他地區。上詮（$NVDA / $TSM 的 FAU 供應商）股價從 400 漲到 900 又跌回 400 再升至 800，自 7 月以來的復甦速度快得驚人。不確定是否像鈺創或其公司的獲利好到離譜，從而不必在意總體經濟？ https://t.co/WHzwj9n6e8"
+    "stances": {
+      "NVDA": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "台灣股市與供應鏈強勢回溫，NVDA與TSM展現極佳抗壓與復甦力道。",
+    "translation_zh": "很有趣的是，台灣的表現遠遠超過美國/歐洲等世界其他地區。Foci（$NVDA / $TSM FAU供應商）從 400->900->400->800，並且從 7 月開始瘋狂快速復甦。不確定像 Etron 或其他公司的財報是否只是荒謬到不在乎總體經濟？",
+    "risk": "不確定企業財報是否完全無視總體經濟風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:15Z"
   },
   "2095590610967421206": {
     "id": "2095590610967421206",
@@ -25233,9 +25314,15 @@
     "id": "2095823005595439615",
     "tweet_id": "2095823005595439615",
     "sentiment": "Neutral",
-    "summary": "分析美中地緣政治下，歐洲與日本半導體設備及材料的壟斷優勢。",
-    "translation_zh": "關於美中緊張局勢，我的看法如下：歐洲擁有如 ASML（EUV）、SOI（光子學 SOI）、Zeiss SMT（ASML EUV 供應商）及 Trumpf（ASML EUV 雷射供應商）等壟斷企業；日本則在 TOK、JSR、信越化學及富士軟片等 EUV 相關領域擁有近乎或完全的壟斷地位。",
-    "analyzed_at": "2026-09-04T12:16:33Z"
+    "stances": {
+      "ASML": "Neutral",
+      "SOI": "Neutral"
+    },
+    "summary": "分析美中緊張局勢下歐洲與日本的半導體獨佔企業。",
+    "translation_zh": "所以...這是我對美中緊張局勢的看法：你擁有歐洲的獨佔企業像是：- $ASML (EUV) - $SOI (Photonics-SOI) - Zeiss SMT (ASML EUV供應商)，Trumpf (ASML EUV雷射供應商)。日本也有許多近乎或完全獨佔的企業像是：- TOK, JSR, ShinEstu, Fujifilm 用於EUV。",
+    "risk": "美中地緣政治緊張局勢可能對歐洲與日本的半導體供應鏈造成不確定性風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:49Z"
   },
   "2063876472419533110": {
     "id": "2063876472419533110",
@@ -25624,10 +25711,17 @@
   "2095851749127188691": {
     "id": "2095851749127188691",
     "tweet_id": "2095851749127188691",
-    "sentiment": "Bullish",
-    "summary": "韓國散戶看好 HOOD 代幣化潛力，立場偏多。",
-    "translation_zh": "根據我的通路調查，韓國散戶顯然站在 HOOD 這邊，而非 AMC 執行長。韓國消息來源認為，三星與 SK 海力士 40 倍槓桿的前景，足以成為贏得代幣化論戰的有力論據。",
-    "analyzed_at": "2026-09-04T14:11:41Z"
+    "sentiment": "Neutral",
+    "stances": {
+      "AMC": "Bearish",
+      "HOOD": "Bullish",
+      "SKHY": "Bullish"
+    },
+    "summary": "韓國散戶支持HOOD與SKHY，勝過AMC執行長。",
+    "translation_zh": "根據我的通路調查，韓國散戶似乎堅定地站在HOOD這邊，勝過AMC執行長。韓國消息來源認為，40倍槓桿的三星與SKHY的前景，足以在代幣化辯論中勝出。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:47Z"
   },
   "2062437909874307391": {
     "id": "2062437909874307391",
@@ -26025,9 +26119,17 @@
     "id": "2095882424932766163",
     "tweet_id": "2095882424932766163",
     "sentiment": "Bullish",
-    "summary": "看好 NVDA 與 AVGO 的 AI 營收高成長及技術突破，對科技巨頭持樂觀立場。",
-    "translation_zh": "讓我理清一下... 你們看：NVDA 有 70% 受限於供應的營收成長預測（否則會是 100% 以上）；AVGO 的 AI 營收在未來兩年將以每年 100% 以上的速度從約 500 億成長至 2300 億美元；OpenAI Astra 橫掃 AGI 基準測試並開始自我訓練；還有 MSFT 與 GOOGL。",
-    "analyzed_at": "2026-09-04T16:12:49Z"
+    "stances": {
+      "AVGO": "Bullish",
+      "GOOGL": "Neutral",
+      "MSFT": "Neutral",
+      "NVDA": "Bullish"
+    },
+    "summary": "看好NVDA與AVGO強勁營收成長，微軟與谷歌僅提及。",
+    "translation_zh": "讓我理清一下，各位…你們現在看到的是：$NVDA 有 70% 受限於供應的營收成長預測（本來會是 100%+）；$AVGO 的 AI 營收在未來兩年內年增率達 100%+，從約 500 億美元成長至 2300 億美元；OpenAI Astra 橫掃 AGI 基準測試並開始自我訓練。還有 $MSFT / $GOOGL。",
+    "risk": "NVDA面臨供應鏈限制，導致營收成長受限於70%。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-05T21:59:59Z"
   },
   "2060728400625774932": {
     "id": "2060728400625774932",
@@ -28440,10 +28542,16 @@
   "2095853926218412211": {
     "id": "2095853926218412211",
     "tweet_id": "2095853926218412211",
-    "sentiment": "Neutral",
-    "summary": "支持HOOD，主張美國需明確代幣化股權法規",
-    "translation_zh": "@rektusd101 在這件事上我其實支持 $HOOD，但也在一個特定觀點上認同 $AMC 執行長：美國需要對代幣化股權制定更明確的監管法規，這類產品才能在美境內常態化提供。提供給需要相關背景脈絡的人參考：https://t.co/aRmgiTcyW4",
-    "analyzed_at": "2026-09-05T04:12:01Z"
+    "sentiment": "Bullish",
+    "stances": {
+      "AMC": "Neutral",
+      "HOOD": "Bullish"
+    },
+    "summary": "作者看好HOOD，並認同AMC執行長關於代幣化股票監管的看法。",
+    "translation_zh": "@rektusd101 我其實在這裡支持 $HOOD，但同意 $AMC 執行長的一個狹隘觀點：美國需要對代幣化股票有更明確的監管，以便它們能在美國境內定期提供。只是給那些缺少背景資訊的人：https://t.co/aRmgiTcyW4",
+    "risk": "美國缺乏對代幣化股票的明確監管法規。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:45Z"
   },
   "2095826150304145683": {
     "id": "2095826150304145683",
@@ -28480,26 +28588,45 @@
   "2095495334722179152": {
     "id": "2095495334722179152",
     "tweet_id": "2095495334722179152",
-    "sentiment": "Bullish",
-    "summary": "NVDA 透過收購 Hugging Face 強化防禦與 AI 佈局。",
-    "translation_zh": "@Shiboo9019 這在某種程度上是一項防禦性收購。據報導，在 Salesforce (CRM) 及其他公司接觸 Hugging Face 尋求收購後，NVIDIA (NVDA) 便啟動了談判。",
-    "analyzed_at": "2026-09-05T04:12:47Z"
+    "sentiment": "Neutral",
+    "stances": {
+      "CRM": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "NVDA與CRM因Hugging Face傳出收購意向而展開談話，屬防禦性併購。",
+    "translation_zh": "@Shiboo9019 這部分是防禦性收購。據報導，在 $CRM 與其他公司接觸 Hugging Face 尋求收購後，才開始了 $NVDA 的談判。",
+    "risk": "面臨來自競爭對手（如CRM等公司）爭奪收購目標的市場競爭風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:56Z"
   },
   "2095492110023901553": {
     "id": "2095492110023901553",
     "tweet_id": "2095492110023901553",
     "sentiment": "Neutral",
-    "summary": "微軟與輝達吉祥物喜好不同，推文未實質提及多空立場。",
-    "translation_zh": "＠nosallynoparty 這是因為 $MSFT 喜歡貓，而 $NVDA 喜歡笑臉。沒有人會想要一隻鯨魚當吉祥物。",
-    "analyzed_at": "2026-09-05T04:12:52Z"
+    "stances": {
+      "MSFT": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "推文提及MSFT與NVDA吉祥物喜好，立場中立。",
+    "translation_zh": "@nosallynoparty 這是因為 $MSFT 喜歡貓，而 $NVDA 喜歡笑臉。沒有人會想要鯨魚當吉祥物。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:00:58Z"
   },
   "2095471629954626013": {
     "id": "2095471629954626013",
     "tweet_id": "2095471629954626013",
-    "sentiment": "Bullish",
-    "summary": "作者看好 IQE 潛力，並強調其在產業重大事件前的研究觀點。",
-    "translation_zh": "@KhalidIshaq85 是嗎？我在今年第一季、於 $MTSI、$TSEM 及其他產業重大事件發生前，就已撰寫了關於 $IQE 的投資論點。",
-    "analyzed_at": "2026-09-05T04:13:02Z"
+    "sentiment": "Neutral",
+    "stances": {
+      "IQE": "Neutral",
+      "MTSI": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "作者提及 IQE、MTSI 與 TSEM，內容僅為討論研究 thesis，立場中立。",
+    "translation_zh": "＠KhalidIshaq85 是嗎？我在今年第一季、也就是 $MTSI、$TSEM 及其他重大事件發生之前，就已經把針對 $IQE 的論文寫好了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:03Z"
   },
   "2095458041445670973": {
     "id": "2095458041445670973",
@@ -28529,9 +28656,16 @@
     "id": "2095282495730446504",
     "tweet_id": "2095282495730446504",
     "sentiment": "Neutral",
-    "summary": "市場對非高成長股財報反應冷淡，正審視 CRDO 表現。",
-    "translation_zh": "@wannabepanacea 如果你沒有產能限制，且像 $NVDA 或 $AVGO 那樣每年成長 70-100%，顯然財報公布後就會被拋售。我稍後會研究 $CRDO 的財報，需要追蹤的公司實在太多了。",
-    "analyzed_at": "2026-09-05T04:13:40Z"
+    "stances": {
+      "AVGO": "Neutral",
+      "CRDO": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "探討NVDA與AVGO等高成長企業財報後被拋售的現象。",
+    "translation_zh": "@wannabepanacea 如果你的產能不受限制且每年增長 70-100%（像 $NVDA 或 $AVGO），顯然你在財報發布後會被拋售。我待會兒會看一下 $CRDO 的財報，有相當多的公司需要追蹤。",
+    "risk": "財報表現優異但仍面臨被市場拋售的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:07Z"
   },
   "2095154687007948876": {
     "id": "2095154687007948876",
@@ -28561,9 +28695,15 @@
     "id": "2095070350107386178",
     "tweet_id": "2095070350107386178",
     "sentiment": "Bullish",
-    "summary": "看好 $SIVE 在 CPO 領域的潛在爆發力與市場低估。",
-    "translation_zh": "「沒錯，CPO 出貨量甚至還沒開始……大家都忘了 $SIVE 是主要的 CPO 雷射供應商，因為管理層太過專注於無線、5G、FWA 和衛星通訊。像 $JBL 這類可插拔模組本應是 2028 年 CPO 放量的過渡方案，卻不知為何成了市場關注的焦點。」",
-    "analyzed_at": "2026-09-05T04:14:19Z"
+    "stances": {
+      "JBL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好 SIVE 作為 CPO 供應商的潛力，而 JBL 則被視為過渡橋樑。",
+    "translation_zh": "@dockery58 是的，CPO 的出貨量甚至還沒開始……大家都忘了 $SIVE 曾是主要的 CPO 雷達/雷射供應商，因為管理層把太多精力放在無線/5g/fwa/satcom 上。像 $JBL 這樣的可插拔模組本該是 2028 年 CPO 量產的過渡，不知怎地卻成了主導焦點。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T22:01:12Z"
   },
   "2045320542232957403": {
     "id": "2045320542232957403",
@@ -29225,9 +29365,16 @@
     "id": "2096149203278037407",
     "tweet_id": "2096149203278037407",
     "sentiment": "Bullish",
-    "summary": "看好美光等記憶體供需失衡加劇，結構性瓶頸支撐多頭。",
-    "translation_zh": "既然 $MU 到 $SNDK 都迎來了顯著反彈。正好藉此提醒大家，記憶體的供應瓶頸依然沒有改變！CW 雷射、載板等其他領域亦是如此。儘管短期市場情緒（取決於股價或總體經濟）經常波動，但我認為許多供需失衡的情況只會變得更為嚴重。",
-    "analyzed_at": "2026-09-05T08:12:15Z"
+    "stances": {
+      "MU": "Bullish",
+      "SNDK": "Bullish",
+      "SPCX": "Bullish"
+    },
+    "summary": "看好MU、SNDK與SPCX，記憶體供不應求且基本面強勁。",
+    "translation_zh": "既然 $MU 到 $SNDK 已經大幅回升。這很好地提醒了我們，記憶體瓶頸並未改變！CW 雷射、基板等也是如此。但短期情緒（取決於價格/總體經濟）通常會改變。我認為許多需求失衡的情況會比人們預期的更嚴重：- 今天日經新聞報導指出，有日本經銷商表示記憶體需求缺口已達 40-60%（比供給高出 67-150%）。預計到年底一般價格將上漲 50%。- $SPCX 未被納入 1.3 兆美元的超大型雲端業者資本支出數據中（我認為富國銀行等估計約為 2630 億美元的 AI 資本支出），因此總資本支出數據可能會令人驚喜。- $SNDK 預計到 2030 年將繼續保持 80% 的毛利率…（歡迎加入標普 100 指數）- 此外，像三星這樣的公司，現在讓你對 2031 年有了長期的能見度。記憶體確實非常波動…我的一些部位已經上漲了 270% 以上，所以我發現在波動時期持有會稍微容易一些。但無論如何，營運基本面並不總是與短期價格走勢一致。同樣的概念也可以應用於其他板塊。",
+    "risk": "記憶體市場非常波動，且短期價格走勢可能與營運基本面脫鉤。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-05T21:59:23Z"
   },
   "2096122640465645937": {
     "id": "2096122640465645937",
@@ -35625,9 +35772,17 @@
     "id": "2096605093986787380",
     "tweet_id": "2096605093986787380",
     "sentiment": "Bullish",
-    "summary": "AI模型預測KYTX等生技股具5至10倍潛力，看好其臨床與藥物數據。",
-    "translation_zh": "我讓 OpenAI Astra Ultra + Anthropic Fable 5.1 Max 幫我組合一個在一年內能有 5 到 10 倍回報的投資組合。燒了很多額度，結果出爐了：OpenAI 推薦：- $KYTX（自體免疫 CAR-T 結果）- $PRQR（人類 RNA 編輯數據集）- $VSTM（KRAS 抗癌藥物）- $CNTB（氣喘）",
-    "analyzed_at": "2026-09-06T16:12:28Z"
+    "stances": {
+      "CNTB": "Bullish",
+      "KYTX": "Bullish",
+      "PRQR": "Bullish",
+      "VSTM": "Bullish"
+    },
+    "summary": "AI推薦CNTB、KYTX、PRQR與VSTM為高回報看多組合。",
+    "translation_zh": "我讓 OpenAI Astra Ultra + Anthropic Fable 5.1 Max 幫我構建一個一年內能獲得 5 到 10 倍回報的投資組合。花了不少點數，結果如下：OpenAI 推薦：- $KYTX（自體免疫 CAR-T 療效結果）- $PRQR（人類 RNA 編輯數據集）- $VSTM（KRAS 癌症藥物）- $CNTB（氣喘",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-05T21:59:05Z"
   },
   "2007976857120190723": {
     "id": "2007976857120190723",
@@ -39952,9 +40107,17 @@
     "id": "2105709782854435274",
     "tweet_id": "2105709782854435274",
     "sentiment": "Neutral",
-    "summary": "摩根士丹利指FCC新規或針對3.2T中國製光收發器，800G與1.6T暫不受影響。",
-    "translation_zh": "「美國聯邦通信委員會（FCC）關於光收發器的潛在新規更有可能針對 3.2T 規格」——$LITE、$AAOI、$COHR、$SIVE。\n\n摩根士丹利與華盛頓官員會面指出：\n\n- 限制措施可能從中國製造的 3.2T 模組開始（800G/1.6T 則不受影響）\n\n- 潛在的限制將",
-    "analyzed_at": "2026-10-01T22:25:30Z"
+    "stances": {
+      "AAOI": "Neutral",
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "大摩指FCC限制或始於3.2T光模組，相關個股持中立態度",
+    "translation_zh": "「聯邦通信委員會（FCC）對光收發器的潛在新規更可能針對 3.2T 產品」— $LITE、$AAOI、$COHR、$SIVE。摩根士丹利與華盛頓官員會面：限制措施可能從中國製造的 3.2T 模組開始（800G/1.6T 將不受影響），潛在的限制將...",
+    "risk": "潛在的 FCC 新規可能會限制中國製造的 3.2T 光通訊模組。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-05T21:58:51Z"
   },
   "2105943565918703696": {
     "id": "2105943565918703696",
@@ -39963,5 +40126,19 @@
     "summary": "$LITE 執行長看好 CPO 需求，預計 2027 年供不應求缺口達 70%。",
     "translation_zh": "$LITE 執行長表示：「隨著 2027 年 CPO 與 NPO 的問世，我們預計屆時將嚴重供不應求……缺口高達 70%。字面上來說就是 70%，我們只能供應 30% 的需求。這情況令我們措手不及，預計要到 2029-2030 年才能達到某種程度的供需平衡。」",
     "analyzed_at": "2026-10-02T12:01:10Z"
+  },
+  "2107143846027268373": {
+    "id": "2107143846027268373",
+    "tweet_id": "2107143846027268373",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Bearish"
+    },
+    "summary": "AAOI擴產規模龐大，看好其表現優於LITE。",
+    "translation_zh": "$AAOI 終於……結束了……完成了他們 6 億美元的 ATM 現增計畫，平均價格約落在 105.36 美元。我確實認為只要他們不再提交這些 ATM 計畫，AOI 的表現會優於 $LITE。這單純是因為他們龐大的擴產規模，每月光收發模組營收達 4.71 億美元，加上每月 40 萬顆 ELSFP。",
+    "risk": "若公司持續提交 ATM 市價增資計畫，可能會對股價表現產生負面影響。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-05T21:58:19Z"
   }
 }
