@@ -39425,25 +39425,60 @@
     "id": "2100530507549425704",
     "tweet_id": "2100530507549425704",
     "sentiment": "Bullish",
-    "summary": "看好傳統記憶體後市，因下半年SLC NAND等產品價格預期暴漲。",
-    "translation_zh": "以防你想知道為什麼我對傳統記憶體這麼看好……它們的漲幅似乎比今天 $NBIS 報導的 GPU 租賃價格上漲 +17-21% 或太陽誘電類型的 MLCC 漲幅還要極端。下半年價格漲幅預期：- SLC NAND：下半年較上半年上漲 +120-170% - 高容量 NOR",
-    "analyzed_at": "2026-09-17T14:44:54Z"
+    "stances": {
+      "NBIS": "Neutral",
+      "PSMC": "Neutral"
+    },
+    "summary": "記憶體價格飆漲，預期相關無廠半導體公司Q3財報亮眼。",
+    "translation_zh": "如果你好奇我為何如此看好傳統記憶體...它們的漲幅看起來比NBIS今天報告的GPU租金上漲17-21%或太陽誘電型MLCC漲價還要極端。下半年價格漲幅預測：SLC NAND漲120-170%、高容量NOR漲90-110%、DDR3/DDR4漲50%、DDR2漲35-40%、LPDDR漲20%以上，DDR1與舊款LPDDR及PSRAM也在上漲。綜合來看，這些漲幅疊加了上半年的漲勢，預計2026年累計漲幅將達406-575%。這對混合淨利的影響大於上游晶圓成本上漲（如PSMC的DRAM晶圓漲45%），因此我預期許多傳統記憶體無廠半導體公司的Q3財報將表現強勁。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-10-05T05:39:29Z"
   },
   "2100735673561174047": {
     "id": "2100735673561174047",
     "tweet_id": "2100735673561174047",
     "sentiment": "Bullish",
-    "summary": "記憶體短缺加劇且價格飆升，對MU等相關晶片股抱持樂觀看法。",
-    "translation_zh": "本週發現有趣事物的重點摘要：\n\n- $INTC 執行長表示部分記憶體價格已上漲 5-7 倍，並警告短缺情況將在 2027 年惡化。\n\n$SNDK / $MU / 三星的兄弟們聽到這個一定很高興……（攝於聖塔克拉拉的 2026 AI 基礎設施峰會）\n\n- $GFS + $MRVL 簽署延長合作協議",
-    "analyzed_at": "2026-09-18T03:35:23Z"
+    "stances": {
+      "AAOI": "Neutral",
+      "AMD": "Bullish",
+      "AMZN": "Bullish",
+      "ARM": "Bullish",
+      "CIEN": "Bullish",
+      "CRWV": "Bullish",
+      "GFS": "Bullish",
+      "GNRC": "Bullish",
+      "INTC": "Bullish",
+      "IREN": "Bullish",
+      "MRVL": "Bullish",
+      "MU": "Bullish",
+      "NBIS": "Bullish",
+      "NVDA": "Bullish",
+      "QCOM": "Neutral",
+      "SIVE": "Neutral",
+      "SNDK": "Bullish",
+      "TSEM": "Neutral"
+    },
+    "summary": "AI基礎設施需求強勁，記憶體與供應鏈瓶頸推升相關個股看漲。",
+    "translation_zh": "本週重點摘要：INTC預警記憶體短缺將惡化；GFS與MRVL擴大合作；CIEN營收成長強勁；NBIS調漲雲端價格利好CRWV與IREN；AMZN與GNRC簽署大額合約；ARM對供應鏈信心充足。整體而言，AI基礎設施供應鏈持續受惠於需求大於供給的結構性利多。",
+    "risk": "記憶體與ABF載板面臨嚴重供應短缺，且部分AI相關估值存在泡沫疑慮。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-10-05T05:39:26Z"
   },
   "2100938001077674262": {
     "id": "2100938001077674262",
     "tweet_id": "2100938001077674262",
     "sentiment": "Bullish",
-    "summary": "記憶體超級週期強勁，看好MU與NVDA因資本支出與HBM需求上升。",
-    "translation_zh": "所以關於光學與光子學……像 $MU / $SKHY 這樣的記憶體正處於當前的超級週期中。\n\n-> 例如，RBC 通路調查預測 2027 年 HBM 平均售價 (ASP) 將大幅上漲 80-100%。\n-> 根據 $NVDA 財報，超大規模雲端業者 (Hyperscaler) 的資本支出在 2027 年將會增加。此外，根據 Trendforce 的數據，其中 68% 的超大規模資本支出將流向 https://t.co/m80ABt5dJC",
-    "analyzed_at": "2026-09-18T14:09:14Z"
+    "stances": {
+      "MU": "Bullish",
+      "NVDA": "Bullish",
+      "SKHY": "Bullish"
+    },
+    "summary": "HBM需求強勁，MU、SKHY與NVDA前景看好，處於超級週期。",
+    "translation_zh": "關於光學與光子學...像 $MU / $SKHY 這類記憶體正處於超級週期。例如，RBC 的通路調查預測 2027 年 HBM 平均售價將上漲 80-100%。根據 $NVDA 的財報，超大規模雲端業者的資本支出將在 2027 年增加，且根據 Trendforce 的數據，其中 68% 的資本支出將投入 AI 基礎設施。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-10-05T05:39:23Z"
   },
   "2101145461797335254": {
     "id": "2101145461797335254",
@@ -39457,9 +39492,16 @@
     "id": "2101402656845808007",
     "tweet_id": "2101402656845808007",
     "sentiment": "Bullish",
-    "summary": "建議AVGO鎖定光纖供應以壓制競爭對手，看好其擴大優勢。",
-    "translation_zh": "有個想法想拋給 $AVGO：如果你們在未來幾年鎖定 $SIVE 的雷射供應（因為你們需要「更多的雷射產能」），你們可能會無意間對主要的 ASIC 競爭對手造成瓶頸，像是第一代的 $MRVL (Celestial)、世芯、聯發科、創意 (Ayar CPO)。",
-    "analyzed_at": "2026-09-19T20:09:50Z"
+    "stances": {
+      "AVGO": "Bullish",
+      "MRVL": "Bearish",
+      "SIVE": "Bullish"
+    },
+    "summary": "建議AVGO鎖定SIVE雷射供應以壓制MRVL等ASIC競品，看好AVGO與SIVE。",
+    "translation_zh": "有個想法提供給 $AVGO：如果你們鎖定了 $SIVE 未來幾年的雷射供應，因為你們需要「更多的雷射產能」。你們可能會無意間在主要的 ASIC 競爭對手之間造成瓶頸：像是 $MRVL (Celestial)、艾智科 (AlChip)、聯發科、GUC (Ayar CPO) 的第一代產品。",
+    "risk": "可能造成主要 ASIC 競品供應鏈瓶頸",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:39:03Z"
   },
   "2101467035972894984": {
     "id": "2101467035972894984",
@@ -39473,9 +39515,16 @@
     "id": "2101730902615486643",
     "tweet_id": "2101730902615486643",
     "sentiment": "Neutral",
-    "summary": "提及光通訊個股與宏觀會談，作者主要感慨社群互動差異。",
-    "translation_zh": "當大家今天都在關注貝森特與何立峰的會談，或是 ECOC 光纖通訊展上的 $LITE / $MRVL / $SIVE 時……我只是很好奇，為什麼我發中文能有 2,000 多則留言，但用英文分享卻只有 50 則。感覺真難受，推友們。",
-    "analyzed_at": "2026-09-20T20:26:48Z"
+    "stances": {
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "作者提及LITE等光通訊股，但內容聚焦於推文語言互動率差異，無實質多空立場。",
+    "translation_zh": "當大家今天都在關注貝森特與何立峰的會談，或是 ECOC 光學會議上的 $LITE / $MRVL / $SIVE 時... 我只是很好奇為什麼我用中文發文時，追蹤者可以留下 2000 多則評論... 但如果我分享英文內容：我只有 50 則評論。感覺真糟啊。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:39:00Z"
   },
   "2101818303216013812": {
     "id": "2101818303216013812",
@@ -39497,17 +39546,36 @@
     "id": "2101906175046635887",
     "tweet_id": "2101906175046635887",
     "sentiment": "Bullish",
-    "summary": "持續做多記憶體族群，看好EWY長線風險報酬比。",
-    "translation_zh": "SK海力士（$SKHY）和三星這兩大巨頭今天表現亮眼。\n\n我依然做多記憶體族群（例如：$EWY / $DRAM），因為若產能協議能延長3至5年……且分析師模型預估2027年可達2.8至3.3倍。長期來看風險報酬比相當吸引人。\n\n不過我認為傳統記憶體也是個非常有趣的交易機會。",
-    "analyzed_at": "2026-09-21T09:42:14Z"
+    "stances": {
+      "DRAM": "Bullish",
+      "EWY": "Bullish",
+      "SKHY": "Bullish"
+    },
+    "summary": "分析師看好記憶體長線風險報酬，對 SKHY、EWY 與 DRAM 抱持多方立場。",
+    "translation_zh": "主要雙雄 SKHY 和三星今天過得很有趣。我依然做多記憶體（例如 $EWY / $DRAM ），因為如果產能協議延長 3-5 年……而你的分析師預估 2027 年預估本益比/倍數為 2.8-3.3 倍。隨著時間推移，風險報酬比很具吸引力。但我認為傳統記憶體是非常有趣的交易 https://t.co/SG50lI3Lv2",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:58Z"
   },
   "2102062423499047004": {
     "id": "2102062423499047004",
     "tweet_id": "2102062423499047004",
     "sentiment": "Bullish",
-    "summary": "看好CPU、光通訊與記憶體類股強勢大漲，市場情緒偏向多頭。",
-    "translation_zh": "我今天生病過得不太開心，但瓶頸股們倒是過得很爽：$AMD +9.13% | $INTC +14.16% | $ARM +14.33%，CPU印鈔中；$SIVE +10.32% | $AAOI +3.39% | AMS OSRAM +24.61%，雷射印鈔中；$EWY +4.08% | $DRAM +2.83% | $MU +2.23%，記憶體印鈔中。",
-    "analyzed_at": "2026-09-21T16:16:33Z"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMD": "Bullish",
+      "ARM": "Bullish",
+      "DRAM": "Bullish",
+      "EWY": "Bullish",
+      "INTC": "Bullish",
+      "MU": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "多檔半導體與記憶體相關標的大漲，整體氣氛看多。",
+    "translation_zh": "我今天生病過得不太好，但瓶頸概念股表現很好：AMD +9.13% | INTC +14.16% | ARM +14.33%，CPU飆漲；SIVE +10.32% | AAOI +3.39% | AMS OSRAM +24.61%，雷射飆漲；EWY +4.08% | DRAM +2.83% | MU +2.23%，記憶體飆漲。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:56Z"
   },
   "2102114073836228810": {
     "id": "2102114073836228810",
@@ -39521,33 +39589,59 @@
     "id": "2102256045938852015",
     "tweet_id": "2102256045938852015",
     "sentiment": "Bullish",
-    "summary": "看好加密貨幣強勁反彈，帶動 $HOOD、$COIN 及高 Beta AI 股走勢。",
-    "translation_zh": "哇，比特幣和乙太幣出現了極其強勁的反彈。看來 $HOOD、$COIN 和加密貨幣板塊要回歸了？鏈上股票交易加上監管豁免，可能為該產業注入了強大動力。除此之外，加密貨幣通常是高 Beta AI 股的重要領先指標。",
-    "analyzed_at": "2026-09-22T07:25:07Z"
+    "stances": {
+      "COIN": "Bullish",
+      "HOOD": "Bullish"
+    },
+    "summary": "比特幣與以太坊強彈，推動 COIN 與 HOOD 看多情緒。",
+    "translation_zh": "哇，比特幣和以太坊出現了相當極端的反彈。看起來 $HOOD / $COIN / 加密貨幣又回來了？鏈上股票交易加監管豁免可能為該板塊注入了大量動力。除此之外……加密貨幣通常是高貝塔 AI 的極佳指標。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:51Z"
   },
   "2102247915251224980": {
     "id": "2102247915251224980",
     "tweet_id": "2102247915251224980",
     "sentiment": "Bullish",
-    "summary": "META新功能Muse表現強勁，帶動AMD、INTC、ARM等硬體供應鏈需求看漲。",
-    "translation_zh": "好了，$META 的 Muse 正在發揮強大威力。我聽到了背景中所有 $AMD、$INTC 和 $ARM CPU 的運轉聲。還有瀏覽器/虛擬機所需的記憶體加上零組件（網卡、固態硬碟、DRAM）。當我要求它執行一堆長時間的任務時……Intel 執行長最近也這樣說過 https://t.co/GiyoF9sI5v",
-    "analyzed_at": "2026-09-22T07:25:12Z"
+    "stances": {
+      "AMD": "Bullish",
+      "ARM": "Bullish",
+      "INTC": "Bullish",
+      "META": "Bullish"
+    },
+    "summary": "META Muse運作熱絡，帶動AMD、INTC與ARM等硬體需求看漲。",
+    "translation_zh": "好吧，$META的Muse正在運作。我可以聽到背景中所有的$AMD、$INTC和$ARM CPU在運轉。還有瀏覽器/虛擬機所需的記憶體加組件（NIC、SSD、DRAM）。當我要求它執行一堆長期任務時……英特爾執行長最近也這樣說過。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:53Z"
   },
   "2102427727987179692": {
     "id": "2102427727987179692",
     "tweet_id": "2102427727987179692",
     "sentiment": "Bullish",
-    "summary": "看好 $SNDK 與 $LITE 受惠川普政策，具備超級智慧概念潛力。",
-    "translation_zh": "我想我得開始稱 $SNDK 或 $LITE 為「超級智慧」概念股了。謝啦，川普。",
-    "analyzed_at": "2026-09-22T17:59:38Z"
+    "stances": {
+      "LITE": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "推文將SNDK與LITE稱為超級智慧股，抱持看多立場。",
+    "translation_zh": "我想我得開始叫 $SNDK 或 $LITE 超級智慧股了。感謝川普。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:47Z"
   },
   "2102391630515110126": {
     "id": "2102391630515110126",
     "tweet_id": "2102391630515110126",
     "sentiment": "Neutral",
-    "summary": "觀察到傳統價值投資進入休眠，提及 $UPWK、$PYPL 等低本益比標的。",
-    "translation_zh": "我覺得傳統的「價值投資」已經進入了休眠期。以前是尋找本益比 10 到 12 倍的公司，像是 $UPWK、$PYPL、達美樂或百事可樂；甚至是低於帳面價值的廉價日本公司。然後只需享受緩慢的增長，以及來自公司實施庫藏股或配息帶來的增值。",
-    "analyzed_at": "2026-09-22T18:00:13Z"
+    "stances": {
+      "PYPL": "Neutral",
+      "UPWK": "Neutral"
+    },
+    "summary": "傳統價值投資沉寂，UPWK與PYPL曾具備低本益比優勢。",
+    "translation_zh": "我覺得傳統的「價值投資」陷入了冬眠。以前是尋找本益比 10 到 12 倍的公司，像是 UPWK 或 PYPL、達美樂、百事可樂，甚至是低於帳面價值的便宜日本公司。然後只需享受緩慢成長，並透過他們的資本配置獲得回購與股息的增值。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:49Z"
   },
   "2102565495342010529": {
     "id": "2102565495342010529",
@@ -39561,49 +39655,89 @@
     "id": "2102790422007550083",
     "tweet_id": "2102790422007550083",
     "sentiment": "Bullish",
-    "summary": "看好並進場佈局美光與三星的韓國微型半導體供應鏈。",
-    "translation_zh": "我最近確實進場佈局了許多韓國微型公司……這些公司積極向美光 ($MU)、SK 海力士 ($SKHY)、三星以及 $SMTC 等美國公司供應記憶體、測試設備與機器等。在市值 3,000 萬至 2.5 億美元的區間內，能發現許多有趣的光學元件與 CPU 公司。",
-    "analyzed_at": "2026-09-23T16:17:08Z"
+    "stances": {
+      "MU": "Bullish",
+      "SKHY": "Bullish",
+      "SMTC": "Neutral"
+    },
+    "summary": "分析師看好並進場投資供應美光等記憶體與設備的韓國小型供應鏈。",
+    "translation_zh": "我最近實際上已在許多微型韓國公司建立了部位……它們積極向 $MU、$SKHY、三星以及其他如 $SMTC 加美國公司供應記憶體、測試、機械等。你在 3,000 萬至 2.5 億美元市值範圍內找到的光學元件、CPU 真是相當有趣。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:42Z"
   },
   "2102763548715753927": {
     "id": "2102763548715753927",
     "tweet_id": "2102763548715753927",
     "sentiment": "Bullish",
-    "summary": "輝達CPO需求激增且ASP看漲，利多LITE與SIVE。",
-    "translation_zh": "關於 Lumentum ($LITE) 與穩懋代工的 Sivers ($SIVE) 最新消息：Lumentum 在 ECOC 2026 與 Stifel 的會議中表示，NVIDIA Spectrum-6 CPO UHP 的需求顯著增加；此外，NPO 規模大於 CPO，且多波長外部雷射提升了平均售價 (ASP)，而 Sivers 正提供多波長解決方案。",
-    "analyzed_at": "2026-09-23T16:17:33Z"
+    "stances": {
+      "LITE": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "LITE與SIVE因NVDA需求大增而受惠，整體看多。",
+    "translation_zh": "來自 LITE 與穩懋（$SIVE）代工廠的最新更新：Lumentum 在 ECOC 2026 與 Stifel 的會議中表示：- NVDA Spectrum-6 CPO UHP 需求大幅增加。- NPO 規模大於 CPO，多波長外置雷射推升 ASP（Sivers 提供多波長技術）。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:44Z"
   },
   "2103161145934963178": {
     "id": "2103161145934963178",
     "tweet_id": "2103161145934963178",
     "sentiment": "Bullish",
-    "summary": "美伊討論重開荷姆茲海峽達協議，有助平抑油價，利多SPY與QQQ。",
-    "translation_zh": "如果你對剛才 $SPY / $QQQ 的隨機K線感到好奇：就在剛剛，路透社報導「美國與伊朗討論分階段協議以重開荷姆茲海峽並結束美國封鎖」—「期中選舉前達成協議可能對川普有利，因為重開荷姆茲海峽可以緩解波斯灣緊張局勢、控制油價並...",
-    "analyzed_at": "2026-09-24T18:16:22Z"
+    "stances": {
+      "QQQ": "Bullish",
+      "SPY": "Bullish"
+    },
+    "summary": "美伊討論荷姆茲協議，SPY與QQQ偏多看待",
+    "translation_zh": "如果你對稍早$SPY / $QQQ的突發K線感到好奇：就在剛剛，「美國與伊朗討論分階段協議以重開荷姆茲海峽並解除美國封鎖」—路透社 —「期中選舉前達成協議可能對川普有利，因為重開荷姆茲能緩和波斯灣緊張局勢、控制油價並...",
+    "risk": "地緣政治局勢與協議變數可能引發市場波動。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:35Z"
   },
   "2103151990146801812": {
     "id": "2103151990146801812",
     "tweet_id": "2103151990146801812",
     "sentiment": "Bearish",
-    "summary": "AAOI 管理層頻繁使用 ATM 增發股票籌資，遭分析師抨擊為濫用垃圾結構，看空其後市。",
-    "translation_zh": "$AAOI 在 4 月完成了 5 億美元的 ATM（市價增資），6 月完成 6 億美元，接著在 8 月又提交了另一個 6 億美元的申請。如果管理層想要濫用這種垃圾般的重複 ATM 結構，這不是我能控制的。他們本可以像 $AXTI 那樣採用 LTA 預付款來資助廠房建設，或者採取...",
-    "analyzed_at": "2026-09-24T18:16:27Z"
+    "stances": {
+      "AAOI": "Bearish",
+      "AXTI": "Bullish"
+    },
+    "summary": "作者對頻繁發行ATM稀釋股權的AAOI看空，並看好採用預付款融資的AXTI。",
+    "translation_zh": "AAOI在4月完成了5億美元ATM，6月完成6億美元ATM，然後在8月又提交了6億美元。如果管理層想要濫用這種垃圾的重複ATM結構，這超出我的控制。我寧願追隨AXTI，例如採用LTA預付款並利用它來資助建設。",
+    "risk": "公司透過不斷發行ATM來融資，存在嚴重的股權稀釋風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:37Z"
   },
   "2103139052363133062": {
     "id": "2103139052363133062",
     "tweet_id": "2103139052363133062",
     "sentiment": "Bullish",
-    "summary": "看好 Nebius（$NBIS）相對強勢表現，資金集中配置獲利。",
-    "translation_zh": "哇，$NBIS 的相對表現真是驚人。早在 2025 年，我寫了關於從 $IREN 到 $CRWV 的 Neocloud 論點。但幾個月後我做出決定，將所有資金集中到 Nebius... 儘管當時 FinX 上充滿酸言酸語。看到 Nebius 在整個板塊下跌時還能逆勢大漲 6%，真的非常有趣。",
-    "analyzed_at": "2026-09-24T18:16:37Z"
+    "stances": {
+      "CRWV": "Neutral",
+      "IREN": "Neutral",
+      "NBIS": "Bullish"
+    },
+    "summary": "作者看好並集中投資Nebius，股價逆勢上漲表現亮眼。",
+    "translation_zh": "哇，$NBIS的相對優異表現真是驚人。早在2025年，我就寫了關於從$IREN到$CRWV的Neocloud論點。但我幾個月後做出決定，將所有資金集中到Nebius……儘管當時FinX充滿酸民。看到Nebius在板塊下跌時仍上漲6%非常有趣。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:40Z"
   },
   "2103232350348001701": {
     "id": "2103232350348001701",
     "tweet_id": "2103232350348001701",
     "sentiment": "Bullish",
-    "summary": "AKAM簽署巨額AI算力合約，資本支出暴增，看好AMD與MU等供應鏈受惠。",
-    "translation_zh": "AKAM 與 Anthropic 簽署為期 7 年、金額達 116 億美元的加速 CPU 工作負載運算協議。\n\n$AMD 到 $MU 聽到這個應該會很高興……\n\nAkamai 預估約需 55 億美元資本支出來履行這項 116 億美元的承諾。其中包含 2026 年超過 17 億美元的資本支出，專門用於預先採購供應鏈。",
-    "analyzed_at": "2026-09-24T23:03:41Z"
+    "stances": {
+      "AKAM": "Bullish",
+      "AMD": "Bullish",
+      "MU": "Bullish"
+    },
+    "summary": "AKAM簽訂巨額合約，帶動AKAM、AMD與MU看多情緒。",
+    "translation_zh": "AKAM與Anthropic簽署為期7年、總值116億美元的運算交易以滿足加速CPU工作負載的需求。AMD到MU聽到這個消息應該會很高興... Akamai預計約需55億美元的資本支出來履行這116億美元的承諾，其中包括2026年額外增加17億美元的資本支出，專門用於預先採購供應鏈。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:33Z"
   },
   "2103350532777943281": {
     "id": "2103350532777943281",
@@ -39633,17 +39767,32 @@
     "id": "2105151002760679706",
     "tweet_id": "2105151002760679706",
     "sentiment": "Bullish",
-    "summary": "看好亞馬遜透過私募與認股權證建立強大半導體投資組合，潛力超越輝達。",
-    "translation_zh": "兄弟，$AMZN 的半導體 ETF 投資組合最後可能會比 $NVDA 擁有的還要吸引人……今天亞馬遜對 PCB 製造商金像電（2368）進行了 4,980 萬美元的私募。所以現在亞馬遜擁有以下公司的股權／認股權證：- $AAOI - 世芯 - $MRVL (Celestial) - https://t.co/up26ZCPhli",
-    "analyzed_at": "2026-09-30T08:07:53Z"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Bullish",
+      "MRVL": "Bullish",
+      "NVDA": "Neutral"
+    },
+    "summary": "Amazon半導體投資組合潛力超越輝達，看好AMZN與相關供應鏈。",
+    "translation_zh": "兄弟，$AMZN 的半導體 ETF 投資組合可能最終會比 $NVDA 所擁有的還要更具吸引力……今天亞馬遜對 PCB 製造商金像電（2368）進行了 4980 萬美元的私募。所以現在亞馬遜在以下公司擁有所有權/認購權證：- $AAOI - Alchip - $MRVL (Celestial) - https://t.co/up26ZCPhli",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:30Z"
   },
   "2105397070681248021": {
     "id": "2105397070681248021",
     "tweet_id": "2105397070681248021",
     "sentiment": "Neutral",
-    "summary": "Google新模型效能遭質疑，暗示表現被刻意調降，立場中立。",
-    "translation_zh": "Google Gemini 4 Argon 效能評測已釋出。對抗 GPT-6 Astra 與 Anthropic Fable 5.1 / Opus 5.5。喉嚨還是咳個不停，所以稍後再評論 $MU / $JBL 的財報。我一直認為 Google 的內部模型非常優秀，但根據傳聞，它們似乎被大幅削弱了 https://t.co/zCBn8RzlDe",
-    "analyzed_at": "2026-09-30T21:57:31Z"
+    "stances": {
+      "GOOGL": "Neutral",
+      "JBL": "Neutral",
+      "MU": "Neutral"
+    },
+    "summary": "提及 GOOGL 模型的表現，並將稍後評論 MU 與 JBL 的財報，立場中立。",
+    "translation_zh": "已發布 $GOOGL Gemini 4 Argon 基準測試，對抗 GPT-6 Astra 以及 Anthropic Fable 5.1 / Opus 5.5。我仍在不停咳嗽，所以稍後再評論 $MU / $JBL 的財報。我一直認為 Google 的內部模型很出色，但據傳它們似乎被大幅削弱了 https://t.co/zCBn8RzlDe",
+    "risk": "推文提及 Google 內部模型表現出色但似乎被大幅削弱的競爭疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-05T05:38:28Z"
   },
   "2105709782854435274": {
     "id": "2105709782854435274",
