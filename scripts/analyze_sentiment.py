@@ -16,6 +16,8 @@ from gemini_client import GeminiClient
 TWEETS_FILE = "data/tweets.json"
 CACHE_FILE = "data/sentiment_cache.json"
 TOTAL_TARGET = int(os.environ.get("TOTAL_TARGET") or 50)
+# 舊推文（提到 2 檔以上股票）重做的每次上限，設 0 可完全跳過
+LEGACY_MAX_PER_RUN = int(os.environ.get("LEGACY_MAX_PER_RUN") or 20)
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 ANALYZE_MACRO_TWEETS = True       # 沒有 $代號 的大盤／總經推文也分析
 
@@ -102,8 +104,8 @@ def main():
 
     new_items.sort(key=newest_first, reverse=True)
     legacy_items.sort(key=newest_first, reverse=True)
-    pending = new_items + legacy_items
-    log(f"🔍 待分析：新推文 {len(new_items)} 則 + 需重做的舊推文 {len(legacy_items)} 則（本次上限 {TOTAL_TARGET}）")
+    pending = new_items + legacy_items[:LEGACY_MAX_PER_RUN]
+    log(f"🔍 待分析：新推文 {len(new_items)} 則 + 需重做的舊推文 {len(legacy_items)} 則（本次上限 {TOTAL_TARGET}，舊推文每次最多重做 {LEGACY_MAX_PER_RUN}）")
     if not pending:
         log("✅ 沒有需要分析的推文")
         return
