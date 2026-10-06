@@ -1,8 +1,18 @@
 {
   "2089383553222287767": {
+    "id": "2089383553222287767",
+    "tweet_id": "2089383553222287767",
     "sentiment": "Bullish",
-    "summary": "透過CCXI佈局人形機器人領域",
-    "translation_zh": "@tRbW6qAUT717891 我無法購買 A 股，所以我堅持投資美股市場。透過 $CCXI（由 $NVDA、$AMZN、軟銀支持）的 Agility 是我個人在人形機器人領域的投資組合。但我為所有幸運拿到宇樹科技（Unitree）股票的人感到高興。"
+    "stances": {
+      "AMZN": "Bullish",
+      "CCXI": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "透過CCXI、NVDA與AMZN佈局人形機器人概念。",
+    "translation_zh": "我無法買A股，所以留在美股市場。透過具備軟銀背景的CCXI（以及NVDA、AMZN）來參與人形機器人領域是我的個人部位。不過我也為所有抽中宇樹科技股票的人感到開心。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:38Z"
   },
   "2089373679625142542": {
     "sentiment": "Neutral",
@@ -15,9 +25,19 @@
     "translation_zh": "@Berlinergy 嗯，我個人主要是增加了 MLCC（積層陶瓷電容）的持股，而不是 NAND 的部位。因為 MLCC 的價格/緊縮情況類似於 NAND 調漲週期的早期階段……如果你的被動元件廠商想跟隨 $SNDK 的步伐。我只是說這顯示出相似性，但我不敢確定是否會出現那麼極端的情況。需要再觀察一兩個季度。"
   },
   "2089264987328151637": {
+    "id": "2089264987328151637",
+    "tweet_id": "2089264987328151637",
     "sentiment": "Bullish",
-    "summary": "NAND短缺或持續數年，看好記憶體",
-    "translation_zh": "這只是為 $SNDK、$SKHY、$MU、鎧俠（Kioxia）以及其他 NAND 廠商提供更多需求不平衡的能見度。群聯（Phison）執行長表示：「2027 年的產能限制將比 2026 年更加嚴重。」「上游供應商從建廠和設備投資到實際量產需要長達 4 年的時間。在需求爆發性增長且產能擴張有限的情況下，NAND 短缺可能持續數年。」我不太同意那些聲稱記憶體產業已經結束的人，特別是針對 2026 年的 NAND 瓶頸……"
+    "stances": {
+      "MU": "Bullish",
+      "SKHY": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "NAND需求爆發且供應吃緊，MU、SKHY與SNDK前景看多",
+    "translation_zh": "看到更多關於SNDK、SKHY、MU、Kioxia及其他NAND廠的需求失衡能見度。群聯執行長表示：「2027年的產能瓶頸將比2026年更為嚴重。」「上游供應商從廠房建設與設備投資到實際量產需要長達4年的時間。隨著需求爆發式增長且供應擴張受限，NAND短缺情況可能會持續多年。」我不太同意那些認為記憶體已經結束的人，特別是2026年的NAND瓶頸...",
+    "risk": "上游供應商擴產緩慢，建廠與設備投資需要長達4年，導致NAND短缺將持續多年。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:41Z"
   },
   "2089201061659886032": {
     "sentiment": "Neutral",
@@ -25,9 +45,18 @@
     "translation_zh": "@PumpCapitalLLC 這相當於一個英雄聯盟白銀 2 的玩家在告訴菁英玩家鬼步點燃努努輔助很強一樣。順便說一下，$EWY 主要由 SK 海力士 + 三星等記憶體股組成。你獲得的 MLCC 曝險微乎其微。"
   },
   "2089189149563838878": {
+    "id": "2089189149563838878",
+    "tweet_id": "2089189149563838878",
     "sentiment": "Bullish",
-    "summary": "美股上市的VSH與KN值得留意關注",
-    "translation_zh": "@wannabepanacea 是的，正如另一條留言所說，$VSH 和 $KN 是值得關注的兩家公司。雖然它們的市佔率比亞洲同行小得多，但……它們是在美國上市的。"
+    "stances": {
+      "KN": "Bullish",
+      "VSH": "Bullish"
+    },
+    "summary": "推文看好VSH與KN，因其在美國上市具優勢。",
+    "translation_zh": "正如另一則評論所說，$VSH 和 $KN 是值得關注的兩檔股票。它們的市佔率比亞洲同業少很多，但...它們是在美國上市的。",
+    "risk": "市佔率較亞洲同業少很多。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:43Z"
   },
   "2089183484556480536": {
     "sentiment": "Bullish",
@@ -40,9 +69,18 @@
     "translation_zh": "@rektusd101 去年每個人都在嘲笑我，說 $AXTI 是家詐騙公司。所以當我的分析驗證（成功兌現）時，我想它吸引了更多的關注。"
   },
   "2089165155741622679": {
+    "id": "2089165155741622679",
+    "tweet_id": "2089165155741622679",
     "sentiment": "Bullish",
-    "summary": "磷化銦大缺貨，看好AXTI漲價紅利",
-    "translation_zh": "「嚴重的磷化銦（InP）短缺引發史上最大漲價潮」—— $AXTI。供應商坦承表示「即使你有錢，也未必能拿到材料」（笑）。- 行業消息人士透露，InP 襯底價格自去年第四季開始上漲，這是連續第四次襯底調漲。- 最新第四季的漲幅預計將大於 10%。- 同時，利用這些襯底製成的磊晶晶圓價格已經上漲了兩次，市場正朝向第四季連續第三次上漲邁進。（我也寫過關於 $IQE 的投資論點，它在這裡也能受益）。文章指出全新（VPEC）、聯亞（Landmark）、英特磊（IET）均有獲益（台灣觀點的報導）。我去年確實預測過這一點……瓶頸是真實存在的，但我對接下來的漲價有更高的期望。很高興這項論點開始實現。"
+    "stances": {
+      "AXTI": "Bullish",
+      "IQE": "Bullish"
+    },
+    "summary": "磷化銲缺貨引發史上最大漲價潮，AXTI與IQE皆看多受惠。",
+    "translation_zh": "「嚴重的磷化銲短缺引發了有史以來最大幅度的價格飆升」——$AXTI。供應商直言不諱地表示：「就算你有錢，也可能買不到材料」（笑）。- 產業消息人士透露，磷化銲基板價格自去年第四季開始上漲，這是連續第四次調漲基板價格。- 最新的第四季漲幅預計將超過10%。- 同時，由這些基板製成的磊晶圓價格已經調漲了兩次，市場正朝著第四季的第三次連續漲價邁進。（我也寫過關於$IQE的論點，它也在這裡受益）。文章指出VPEC、Landmark、IET受益（以台灣為中心的報導）。我去年確實預測了這點……瓶頸是真實存在的，但我對接下來的漲價有更高的期望。很高興情況開始實現了。",
+    "risk": "材料嚴重短缺，即使有錢也可能買不到原料，供應鏈瓶頸真實存在。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:46Z"
   },
   "2089057857652338993": {
     "sentiment": "Bullish",
@@ -55,14 +93,42 @@
     "translation_zh": "@ram_blings 如果我提到 $SIVE，大家會說我提太多次了；如果我不提 $SIVE，大家又問為什麼沒提到。我怎麼做都不對。"
   },
   "2088950546879111534": {
+    "id": "2088950546879111534",
+    "tweet_id": "2088950546879111534",
     "sentiment": "Bullish",
-    "summary": "看好 CPO 趨勢並做多 $SIVE",
-    "translation_zh": "@KhalidIshaq85 至於黃仁勳 / 輝達直接投資的公司：\n\n- 人形機器人的 $CCXI (Agility)。\n- 光電領域的 $MRVL (Celestial)、$LITE、$COHR...\n\n出於我自己的思考過程，我傾向於做更複雜的投資：\n\n-> 我知道下一個主題是 CPO\n-> 輝達鎖定了所有 CW 激光產能。\n-> 也許 $AAOI、$MTSI、$AVGO、$SIVE、$SMTC 是剩餘的西方 CW 玩家。\n-> $SIVE 可能是 Beta 值最高的標的。所以這是我個人做多的選擇。\n\n大約也可以對其他主題做類似的操作。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AVGO": "Neutral",
+      "CCXI": "Neutral",
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "MTSI": "Neutral",
+      "SIVE": "Bullish",
+      "SMTC": "Neutral"
+    },
+    "summary": "分析輝達投資與CPO潛力股，看多高貝他值標的SIVE。",
+    "translation_zh": "@KhalidIshaq85 關於 Jensen / Nvidia 直接投資的標的：- 用於光學的 $MRVL (Celestial)、$LITE、$COHR...- 用於人形機器人的 $CCXI (Agility)。我傾向進行更複雜的投資，對我自己的思考過程而言：-> 我知道 CPO 主題即將到來 -> 輝達確保了所有 CW 雷射產能。-> 或許 $AAOI、$MTSI、$AVGO、$SIVE、$SMTC 是僅存的西方 CW 玩家。-> $SIVE 可能具備最高貝他值曝險。所以這是我個人的做多選擇。對其他主題大概也可以做類似的佈局。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:49Z"
   },
   "2088947694886920409": {
+    "id": "2088947694886920409",
+    "tweet_id": "2088947694886920409",
     "sentiment": "Bullish",
-    "summary": "堅定看好黃仁勳指引的 AI 發展趨勢",
-    "translation_zh": "我覺得 AI 投資比大家預期的更簡單。\n\n因為 $NVDA + 黃仁勳字面意義上告訴了每個人接下來會發生什麼。\n\n但不知為何，幾乎每一次，市場都會無視它，直到它真正發生？\n\n2025 年的輝達：買下 EML 和雷射產能。\n\n市場忽視它：「光電是個泡沫，就像量子一樣！某某公司是個管理層有問題的騙局」\n\n1 年後：$LITE +678%、$AAOI +475.12%、$COHR +260.7%、$AXTI +3,843.9%。\n\n_\n\n2026 年的輝達：\n\n透過長期合約買下 CW/EML 產能。轉向 800V。對 CPO 轉型極其明確。聲明物理 AI 是下一個主題。\n\n現在的市場：「CW 玩家是迷因股！800V、CPO 不會很快到來，人形機器人無法獲利！」\n\n好吧... 我們看看 2027 年會發生什麼。\n\n我想我會把錢投給黃仁勳/輝達，將其作為領先指標。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "看好Nvidia領向，強烈看多NVDA及光通訊相關概念股。",
+    "translation_zh": "我覺得AI投資比大家想像的還要簡單。因為輝達加上黃仁勳簡直是在明示所有人接下來會發生什麼。但不知為何，幾乎每一次，市場總是在事情真正發生前選擇忽視？以2025年的輝達為例：大舉買下EML與雷射產能。市場卻不屑一顧說：「光學元件是泡沫，就像量子一樣！某某公司是管理層有問題的騙局」。一年後：LITE暴漲678%、AAOI上漲475.12%、COHR上漲260.7%、AXTI飆升3,843.9%。2026年的輝達：透過長期協議買斷CW/EML產能。轉向800V。對CPO的轉變極其明確。並將「實體AI」宣告為下一個主題。現在的市場：「CW玩家是迷因股！800V與CPO短期內不會來，人形機器人根本不賺錢！」好吧……我們等2027年看著辦。我想我會把賭注壓在黃仁勳與輝達身上，將其視為領先指標。",
+    "risk": "市場常質疑光學元件是泡沫、CPO與800V不會實現、人形機器人不賺錢及供應商管理問題。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:52Z"
   },
   "2088914739867115965": {
     "sentiment": "Bullish",
@@ -70,9 +136,27 @@
     "translation_zh": "@_stockResearch 我也非常喜歡 $CCXI。我在消息公布前後買入了該公司約 0.25%-0.75% 的流通股。\n\n我認為宇樹科技（Unitree）上市和其他中國公司 IPO 應該會為其帶來推升，因為相對於預期的開盤價，Agility 一直相對落後..."
   },
   "2088850910529323315": {
+    "id": "2088850910529323315",
+    "tweet_id": "2088850910529323315",
     "sentiment": "Bullish",
-    "summary": "看好 AI 供應鏈強勁需求與成長前景",
-    "translation_zh": "以下是我覺得有趣的內容摘要：\n\n- $SNDK 投資者日預計到 2030 年調增後毛利率達 80%，營業利益率約 75%，調增後自由現金流利潤率約 50%。長期合約已佔 2028 年產能的 2/3。合約最低收入達 930 億美元（目前市值約 2390 億美元）... 當你的收入/目標預計將延續到 4 年後的 2030 年時，很難被視為週期股。\n\n- $CRWV 簽署了截至 2029 年使用 6 年前 $NVDA A100 GPU 的合約。對於像 Nebius/Iren 這樣的 Neocloud 來說是利多，因為這是反駁 Burry 折舊做空理論的論據。\n\n- 據瑞銀估計，傳統 DRAM（如美光）毛利率到 2027 年將達到前所未有的 95%，超越 HBM 的毛利率。如果預測正確，南亞科/華邦電等傳統 DRAM 玩家表現將極佳。\n\n- 據報導，Anthropic 年成長率超過 14 倍，第 2 季環比收入成長約 2.4 倍至 >115 億美元，預估 2028 年收入將成長至 1900-2000 億美元。前端實驗室保持驚人高速成長，如果沒有反而令人擔憂。\n\n- 據報導 $NVDA 正洽談向 SB Energy（軟銀子公司）投資 30 億美元，與阿波羅、黑石、布魯克菲爾德、高盛等共同推動逾 5000 億美元的算力融資。$NVDA Feynman 據傳將在 2028 下半年轉向台積電 A16 + SoIC + 定制 HBM + CPO。每天都有更多輝達新聞。\n\n- $MSFT Maia 300 討論台積電 2027 年產能超過 30 萬顆，並擴產至 100 萬顆以上。最早於 9 月亮相。這消息可能讓 $MRVL 更開心。對於眼前情況：\n- 現階段微軟 ASIC 放量可能利多世芯（GUC）。\n- 對於亞馬遜陣營，像世芯（Alchip，我有持股）這類公司可能正隨著 $AMZN 2026 下半年的 ASIC 項目放量...\n因此關注雲端業者 ASIC 放量時程及其受益者可能是個好主意。\n\n- 台積電先進封裝副總裁表示「未來幾年產業可能不僅面臨記憶體短缺，還面臨 ABF 載板供應緊張」... 強調記憶體和 ABF 載板瓶頸將持續幾年。連上游 ABF 載板設備商也獲益，例如使用真空壓膜設備的永泰精密表示訂單激增、滿載運作且漲價 20%+。\n\n- $AMAT 預計 2026 年先進封裝收入成長 >70%（先前為 >50%），並表示客戶討論已延伸至 2030 年。\n\n- Google 在 OCP APAC 表示傳統 48V 電力已達極限。$NVDA 詳細介紹了 2026 下半年的 800VDC MGX 相容機架（時程利多台達電/光寶）。\n\n- 除 $SNDK 外，南亞科長期合約涵蓋 50% 產能。長鑫存儲上個月簽署多年 DRAM 協議，整個記憶體產業似乎都在遵循三大巨頭的劇本。\n\n- 探針卡仍是瓶頸，精測(6223)/旺矽表示探針卡產能持續滿載，供不應求。本週早些時候已報導了 $AAOI、$SIVE 和 $LITE 的 CW 雷射瓶頸。\n\n- 日電波表示部分 MLCC/元件交貨期已達 36 週。三星電機、太陽誘電、村田製作所等玩家聽到這消息應該會很高興。\n\n摘要：AI 供應鏈正在瘋狂運作。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMAT": "Bullish",
+      "AMZN": "Bullish",
+      "CRWV": "Bullish",
+      "LITE": "Bullish",
+      "MRVL": "Bullish",
+      "MSFT": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish",
+      "SNDK": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "AI供應鏈動能強勁，記憶體、ABF載板與晶片大廠展望看多",
+    "translation_zh": "以下是我發現有趣的一些重點摘要：SNDK在投資人日預計至2030年調整後毛利率達80%、營益率約75%、自由現金流利潤率約50%。長期協議已佔2028年產能三分之二，最低合約營收達930億美元。CRWV簽署至2029年的6年期舊款輝達A100 GPU合約，對 Neocloud 來說是利多。美光等傳統DRAM毛利率預計到2027年將達到空前的95%。Anthropic據報實現14倍以上年增長。輝達據報正洽談向SB Energy投資30億美元。微軟Maia 300討論2027年TSM產能超過30萬顆。台積電先進封裝副總表示未來幾年將面臨記憶體與ABF載板供應緊俏。AMAT預期2026年先進封裝營收成長超過70%。整體而言：AI供應鏈持續暢旺。",
+    "risk": "推文未提及具體總體經濟風險、競爭威脅或需求放緩，主要點出記憶體、ABF載板與探針卡等產能瓶頸。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:56Z"
   },
   "2088610457104109828": {
     "sentiment": "Bullish",
@@ -80,14 +164,43 @@
     "translation_zh": "@LcubedInvest @logeonli16 當 $AAOI 銷售 ELSFP 和 1.6T 光收發器時，其綜合毛利率會提升。"
   },
   "2088575798664110367": {
+    "id": "2088575798664110367",
+    "tweet_id": "2088575798664110367",
     "sentiment": "Bullish",
-    "summary": "樂觀預計 $AAOI 營收具大幅追趕潛力",
-    "translation_zh": "@logeonli16 這完全取決於你。但如果 AOI 充分執行產能預測，我預計 $AAOI 在 2028 年上半年初營收有機會接近甚至有 20% 機會超越 $LITE。當你看到 120 億與約 800 億美元的估值差異時（大部分原因在於 Lumentum 更好的毛利率），這相當有趣。"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Neutral"
+    },
+    "summary": "看好AAOI在2028年營收追趕LITE，具備成長潛力。",
+    "translation_zh": "@logeonli16 這完全由你決定。但如果AAOI能完全落實產能預測，我預期它在2028年上半年初的營收將會接近，或甚至有20%的機率超越LITE。當你看到120億美元對比約800億美元的市值時，這其實相當有趣（其中很大一部分是因為Lumentum擁有更好的利潤率）。",
+    "risk": "Lumentum享有較佳的利潤率，且AAOI能否實現營收超越取決於其產能預測是否能完全落實。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:37:13Z"
   },
   "2088514723969159216": {
+    "id": "2088514723969159216",
+    "tweet_id": "2088514723969159216",
     "sentiment": "Bullish",
-    "summary": "拿持股亮眼回報證明投資策略成功",
-    "translation_zh": "@Jimbo_Jones_Jr 你可以看看我今年早些時候或去年建立部位的這些標的今年迄今（YTD）的表現：\n\n- $SIVE、$IQE、$AXTI、$ARM、$MRVL、$INTC、$SOI、solana:NBiSF3UaVUFtRzHwAfxyHsBCAZWGEKnMpewAE4oh7BG、$AAOI、$LITE、$EWY、$TSEM、$AEHR、$RPI、$MU\n\n看完後再告訴我你是否依然堅持那個想法。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AEHR": "Bullish",
+      "ARM": "Bullish",
+      "AXTI": "Bullish",
+      "EWY": "Bullish",
+      "INTC": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish",
+      "MRVL": "Bullish",
+      "MU": "Bullish",
+      "SIVE": "Bullish",
+      "SOI": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "作者看多SIVE等多年初建倉標的表現。",
+    "translation_zh": "你可以查看我今年初或去年建立倉位的 $SIVE、$IQE、$AXTI、$ARM、$MRVL、$INTC、$SOI、solana:NBiSF3UaVUFtRzHwAfxyHsBCAZWGEKnMpewAE4oh7BG、$AAOI、$LITE、$EWY、$TSEM、$AEHR、$RPI、$MU 的年初至今報酬率。然後再讓我知道你是否仍持那種看法。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:37:16Z"
   },
   "2088509060060741932": {
     "sentiment": "Bullish",
@@ -100,9 +213,19 @@
     "translation_zh": "@halldj00 一些有趣數據：\n\n- 大約 69.2% 是未實現獲利。約 2% 為未實現期權，98% 是純股票。\n- 從高點回撤約 77.8%，低點時並無斷頭清算風險，但反彈速度慢得多\n- $EWY 多頭在頂峰時上漲約 450%，佔了我早期已實現獲利的很大一部分，但我仍持有相當數量的部位。"
   },
   "2088457278928412812": {
-    "sentiment": "Bullish",
-    "summary": "美促蘋禁用中晶片利多美光",
-    "translation_zh": "美國政府敦促蘋果 ($AAPL) 不要購買中國記憶體晶片。美光 ($MU)、SK 海力士 ($SKHY) 和三星聽到這個消息一定很高興... 相當滑稽的是，長鑫存儲/長江存儲也在漲價，所以這並不完全是「充斥市場的廉價中國記憶體」。在 AI 爆發之前，蘋果曾經對供應商擁有極高的議價槓桿。"
+    "id": "2088457278928412812",
+    "tweet_id": "2088457278928412812",
+    "sentiment": "Neutral",
+    "stances": {
+      "AAPL": "Bearish",
+      "MU": "Bullish",
+      "SKHY": "Bullish"
+    },
+    "summary": "美政府促蘋果停購中國記憶體，美光與海力士利多，蘋果受壓。",
+    "translation_zh": "美國政府敦促$AAPL不要購買中國記憶體晶片。$MU、$SKHY和三星聽到這個消息很高興...有趣的是，CXMT/YMTC也在漲價，所以這不完全是「充斥市場的廉價中國記憶體」。在AI熱潮爆發之前，蘋果曾經擁有極端的供應商議價能力。",
+    "risk": "美國政府干預供應鏈採購，可能對蘋果晶片採購成本與供應穩定性造成潛在風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:37:18Z"
   },
   "2088264541675352316": {
     "sentiment": "Neutral",
@@ -110,9 +233,18 @@
     "translation_zh": "@XIAOTU_Li 我的意思是，關於 Reddit ($RDDT) 的貼文大概是兩週前的了，我討論過很多股票 https://t.co/HwEuKKOiS1"
   },
   "2088254454839820631": {
+    "id": "2088254454839820631",
+    "tweet_id": "2088254454839820631",
     "sentiment": "Bullish",
-    "summary": "長約加持記憶體長牛週期",
-    "translation_zh": "@sellihca_espn 謝謝關心，我的記憶體持股相當重。只是好奇問一下，你認為美光 ($MU) 簽訂了超過 16 份長期合約，以及 $SNDK 到 2030 財年預計達 80% 的毛利率預測，這還只是週期性商品嗎？（他們的長期合約已經涵蓋了 2028 年的大部分產能）。要我說的話，這週期相當長..."
+    "stances": {
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "作者看好 MU 與 SNDK，認為其長約與毛利率顯示非傳統週期股。",
+    "translation_zh": "@sellihca_espn 我的記憶體持股相當沉重，感謝你的詢問。我只是好奇，你認為與 $MU 簽訂 16 項以上的長期協議，以及 $SNDK 預測直到 2030 會計年度都維持 80% 的毛利率，這樣算是週期性大宗商品嗎？（他們的長約已經涵蓋 2028 年的大部分產出）。如果你問我，這會是一個相當長的週期……",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:37:20Z"
   },
   "2088226398708338889": {
     "sentiment": "Bullish",
@@ -600,14 +732,33 @@
     "translation_zh": "Citadel 真的剛剛清算了 Situational Awareness 嗎……\n\n然後隔天就把整個市場拉起來了？\n\n$NBIS +26.25%\n$IREN +25.96%\n$SHAZ +22.82%\n$SNDK + 23.98%\n$BE +23.67%\n$SKHY +16.98%\n$INTC +12.16%\n\n以及其他許多標的。這絕對是我見過最瘋狂的清算之一 https://t.co/CeHGSjnIsm"
   },
   "2089766053274661143": {
+    "id": "2089766053274661143",
+    "tweet_id": "2089766053274661143",
     "sentiment": "Bullish",
-    "summary": "AAOI需求與毛利率極佳，看多。",
-    "translation_zh": "我在 Rosenblatt 峰會上關於 $AAOI 的重點筆記：\n\n- 美國生產的 800g/1.6T 預計可獲得溢價（對 ASP/毛利率非常有利）。\n\n- 手頭有多個長期協議（LTA），但不願簽署以免產能被其他客戶鎖死（咳咳 $NVDA）。\n\n- 至少到明年下半年及更久的產能已售罄。（需求能見度高，類似 $LITE）\n\n- 已擁有 300-400 mW 雷射器。\n\n- 預計一旦 CPO 到來，毛利率將超過 40%+（這可能是重新估值最實質的因素）。\n\n我看不出有任何人怎麼可能看空這家公司……"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "AAOI美國生產溢價與高需求，作者極度看多。",
+    "translation_zh": "我在Rosenblatt峰會上對AAOI的簡要筆記：預期美國生產800g/1.6T可獲得溢價（對ASP/毛利率非常正面）。有多項長期協議在談，但不想簽署以免產能被其他客戶卡死（咳咳，NVDA）。至少在明年下半年及以後都已售罄（像LITE一樣具有高需求能見度）。已經擁有300-400 mW雷射。一旦CPO推出，預期毛利率將超過40%+（這可能是重估值的最關鍵因素）。我看不出任何人怎麼會看空這家公司...",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:24Z"
   },
   "2089753753625018830": {
+    "id": "2089753753625018830",
+    "tweet_id": "2089753753625018830",
     "sentiment": "Bullish",
-    "summary": "變壓器瓶頸帶動訂單，長期看好。",
-    "translation_zh": "@I_Am_Bloateds 我這兩家公司都還有持股？我持有的標的不該影響你自己的決定。\n\n變壓器瓶頸目前正在拖慢美國 AI 的建設進度，乾式與液體變壓器（更為極端）的交貨期都非常長。$HPS.A 的積壓訂單年增 +96.9%，考慮到他們的市占率……我覺得他們前景穩固。\n\n我很確定我在 170 美元左右分享過這個想法，它曾翻倍，但現在回檔到 240 美元，不過每個人的平均成本不同。\n\n這家比利時公司主要是 2028 上半年作為 CPO/光子學量產拉貨的受益者。他們與 IMEC 合作、為終端用戶 $NVDA 進行的 MTP 相關工作正處於評估階段，應該會非常有意思。\n\n他們用於 MEMS/光子學的晶片法案設施也將於 2028 下半年上線，而 800V 的轉型應該會在明年為任何與碳化矽（SiC）相關的業務帶來實質營收成長。\n\n我目前虧損 -31%，因為我的平均成本高得多。但它們正接近重置帳面價值遠高於市值的水準。"
+    "stances": {
+      "HPS": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "作者看好 HPS 與 NVDA，儘管短期回檔仍具長期潛力。",
+    "translation_zh": "@I_Am_Bloateds 我在這兩家公司都還有持倉？我持有的部位不應影響你自己的決定。變壓器瓶頸目前正在拖慢美國的AI基礎建設，且乾式與液冷式（情況更極端）的交貨期都非常長。$HPS.A 的積壓訂單年增率達 +96.9%，考量其市佔率...我認為它們不會倒閉。我很確定我曾在大約 170 的時候分享過這個點子，它翻倍了，現在修正回 240，但我猜每個人的人均成本不同。這家比利時公司主要是 2028 年上半年 CPO/光子學量產的受惠者。他們與 IMEC 針對 MTP 的合作，讓 $NVDA 作為最終用戶在評估階段會非常有趣。他們用於 MEMS/光子學的 CHIP 法案廠房也將於 2028 年下半年啟用，800V 的轉型應該會為明年任何碳化矽（SiC）相鄰的業務帶來實質的營收成長。我的虧損是 -31%，因為我的平均成本高很多。但它們正接近重置帳面價值遠高於市值的水平。",
+    "risk": "變壓器瓶頸導致美國AI建設停滯，且硬體交貨期非常長。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:27Z"
   },
   "2089749225768915037": {
     "sentiment": "Neutral",
@@ -615,19 +766,55 @@
     "translation_zh": "@kevs_World02 Harmonic、諧波傳動（LeaderDrive）和舍弗勒（Schaeffler）似乎無所不在。\n\n有一些像 $VPG 這樣更小眾的零件供應商，可能用於 Optimus 或 Figure。但我覺得規模差異巨大，因為舍弗勒聲稱他們正在與約 45 家人形機器人業者合作。\n\n不過，Agibot/宇樹科技（Unitree）的中國供應商可能會最先實現營收，我近期可以對該領域做更多研究。"
   },
   "2089748568852799580": {
+    "id": "2089748568852799580",
+    "tweet_id": "2089748568852799580",
     "sentiment": "Neutral",
-    "summary": "分析CCXI倉儲自動化商業策略。",
-    "translation_zh": "@HowlStWoofer $CCXI 以商業化為首要目標，因為他們已進入 $AMZN 和 $MELI 的倉庫協助人力自動化。\n\n我不認為 Agility 的機器人需要做後空翻才能進行配送或包裝。亞馬遜倉庫工人也是如此。\n\n這是兩種不同的應用場景，我認為波士頓動力（Boston Dynamics）在突破機器人極限方面是最近似的同業。\n\n$TSLA 的目標也是通用型機器人，但我認為他們目前還做不到。\n\n無論如何，看看美國能否趕上並超越中國將會非常有趣。"
+    "stances": {
+      "AMZN": "Neutral",
+      "CCXI": "Bullish",
+      "MELI": "Neutral",
+      "TSLA": "Bearish"
+    },
+    "summary": "CCXI聚焦商業化看好，TSLA通用機器人發展存疑。",
+    "translation_zh": "CCXI正以商業化為首要目標，因為他們的機器人正進駐AMZN與MELI的倉庫進行人形自動化。我不認為Agility的機器人需要會後空翻才能送貨或包裝，亞馬遜倉庫工人也是如此。這是兩種不同的使用情境，我認為Boston Dynamics在突破機器人極限方面是最接近的同業。TSLA也將目標指向通用目的，但我認為他們目前還做不到。無論如何，看美國能否迎頭趕上並超越中國將會非常有趣。",
+    "risk": "特斯拉在實現通用機器人目標上可能無法成功。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:29Z"
   },
   "2089717828916289860": {
+    "id": "2089717828916289860",
+    "tweet_id": "2089717828916289860",
     "sentiment": "Bullish",
-    "summary": "雷射需求能見度極高，看好AAOI。",
-    "translation_zh": "@abbysuyuyan $AAOI 實際上是我希望跌回 80 美元以便加碼買進的股票。\n\n到 2027 年，雷射相關股的需求能見度相當驚人……\n\n對於像 $NBIS 這樣的新型雲端服務商或像 $SNDK 這樣的記憶體廠商也是如此。"
+    "stances": {
+      "AAOI": "Bullish",
+      "NBIS": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "作者看好AAOI、NBIS與SNDK，因需求能見度極高。",
+    "translation_zh": "@abbysuyuyan $AAOI 實際上是我希望跌回 80 美元以便買入更多的一支股票。雷射相關企業直到 2027 年的需求能見度都相當瘋狂……如 $NBIS 這類新雲端企業或 $SNDK 這類記憶體企業也是如此。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:31Z"
   },
   "2089714869876764762": {
+    "id": "2089714869876764762",
+    "tweet_id": "2089714869876764762",
     "sentiment": "Neutral",
-    "summary": "分析AI光學股修復輪動與復甦節奏。",
-    "translation_zh": "@pkcapital_ 從 $AVGO 到 $TSM 來看，AI 半導體主題呈現下跌。高 Beta 值的個股似乎遭受最沉重的打擊。\n\n從我觀察光學股的趨勢來看，$LITE / $COHR 復甦最快，接著是較大型但仍高 Beta 的個股如 $AAOI / $AXTI（復甦到一半）。\n\n然後像 $SIVE / $POET 這類型的股票花的時間最長。但我確實看到當市場風險偏好上升或財報促成重新估值時，會有更強勁的復甦。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AVGO": "Bearish",
+      "AXTI": "Neutral",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "POET": "Neutral",
+      "SIVE": "Neutral",
+      "TSM": "Bearish"
+    },
+    "summary": "AI半導體拉回，LITE與COHR光通訊股復甦最快。",
+    "translation_zh": "@pkcapital_ 從 $AVGO 到 $TSM 來看，AI 半導體主題正在下跌。高貝塔值標的似乎受創最重。從我看到的類股趨勢，光通訊股 $LITE / $COHR 復甦最快，再來是大型的高貝塔值標的如 $AAOI / $AXTI（復甦過半）。接著是像 $SIVE / $POET 這類標的花費時間最長。但在市場更為風險偏好（risk-on）或財報促使重新評價時，我確實看到更急促的復甦。",
+    "risk": "高貝塔值標的受創最重，AI半導體整體拉回且復甦速度分化。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:34Z"
   },
   "2089609315061764473": {
     "sentiment": "Neutral",
@@ -635,9 +822,18 @@
     "translation_zh": "@RancicYaro4064 日本企業試圖符合產業價格，但不會刻意進行像單季暴漲 70% 那樣激進的調漲……\n\n我認為產業中只需要像 $SNDK 這樣的公司來帶頭，也許三星在這方面可以更激進一些。"
   },
   "2089551553992761810": {
-    "sentiment": "Bullish",
-    "summary": "零組件瓶頸持續，回歸基本面看好。",
-    "translation_zh": "@darkseidzz 我不太確定要怎麼跟人們解釋這點……但即使 $SNDK、村田（Murata）或 $AXTI 股價下跌，NAND/MLCC/磷化銦（InP）的瓶頸也不會消失。\n\n很多人只看財報發布時的股價波動來判斷好壞。\n\n或許關注實際的財報或正在發生的實情會更好……"
+    "id": "2089551553992761810",
+    "tweet_id": "2089551553992761810",
+    "sentiment": "Neutral",
+    "stances": {
+      "AXTI": "Neutral",
+      "SNDK": "Neutral"
+    },
+    "summary": "作者認為AXTI與SNDK股價下跌不代表產業瓶頸消失，應看財報。",
+    "translation_zh": "@darkseidzz 我不知道該怎麼告訴大家……但如果 $SNDK、村田（Murata）或 $AXTI 的價格下跌，NAND/MLCC/InP 的瓶頸並不會消失。這群人只會看財報發布時的價格波動來判斷好壞。或許看實際的財報或實際發生的情況會更好……",
+    "risk": "需注意NAND、MLCC及InP等零組件供應鏈仍存在瓶頸問題。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:36Z"
   },
   "2082740477795745942": {
     "sentiment": "Bullish",
@@ -3271,14 +3467,35 @@
     "analyzed_at": "2026-10-06T16:43:59Z"
   },
   "2089973586425766134": {
+    "id": "2089973586425766134",
+    "tweet_id": "2089973586425766134",
     "sentiment": "Bullish",
-    "summary": "AI光學元件供不應求極度看好",
-    "translation_zh": "我們看到 $LITE、$MTSI、$AAOI 在財報中都指出雷射/TIA/DSP等領域存在極度的供需失衡……\n\n而現在 Elazr 總經理在投資者會議上表示：\n\n光學供應仍遠落後於市場需求，預期的 AI 光學供應鏈很可能會……"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Bullish",
+      "MTSI": "Bullish"
+    },
+    "summary": "AI光學與光子學需求極度失衡，供應鏈大缺貨， LITE、MTSI與AAOI全面看多。",
+    "translation_zh": "我們從財報中發現 $LITE、$MTSI、$AAOI 的雷達/TIA/DSP等需求出現極端失衡的訊號... 現在 Elazr 總經理在投資人會議上表示：光學供應仍然遠遠落後於市場需求，預期 AI 光學供應鏈很可能會持續多年。「整個供應鏈都缺貨」、「供應仍然遠遠落後市場需求」、「短缺將持續到未來幾年」。無論是 PCB、載板、雷射晶片，甚至是相關封裝產能，只要是 AI 供應鏈環節，幾乎全部都供不應求。當需求能見度延伸數年且供應鏈瓶頸卡死：很難不看出光學元件在邁向 2027 年時正呼應著記憶體超級循環。",
+    "risk": "供應鏈全面嚴重瓶頸與缺貨可能限制出貨成長。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:19Z"
   },
   "2089908198694351064": {
+    "id": "2089908198694351064",
+    "tweet_id": "2089908198694351064",
     "sentiment": "Bullish",
-    "summary": "人形機器人指標上市掀高估值",
-    "translation_zh": "宇樹科技（688836）現已上市。\n\n在飆升 +492.18% 後，估值達到約 533 億美元。\n\n我們終於有了人形機器人領域的重大上市公司基準。\n\n作為參考，由 $NVDA 與 $AMZN 支持的 Agility 預計在第四季度通過 $CCXI 上市，投前估值為 25 億美元。\n\n$TSLA 則在 1 萬億美元以上……"
+    "stances": {
+      "AMZN": "Neutral",
+      "CCXI": "Bullish",
+      "NVDA": "Neutral",
+      "TSLA": "Bullish"
+    },
+    "summary": "宇樹上市大漲顯示人形機器人純概念股需求遠超預期，看好板塊前景。",
+    "translation_zh": "宇樹（688836）現已上市，飆升+492.18%後市值約533億美元。我們終於有了人形機器人的主要公眾公司基準。作為參考，由NVDA與AMZN支持的Agility透過CCXI預計將於第四季以25億美元估值上市。TSLA市值超過1兆美元，但Optimus包在一家更大的公司裡。但我認為宇樹表明，公開市場對純人形機器人玩家的需求遠比人們預期的要大得多……",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-06T21:36:21Z"
   },
   "2056558267896311996": {
     "sentiment": "Bullish",
