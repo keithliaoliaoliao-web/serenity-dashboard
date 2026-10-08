@@ -2809,14 +2809,33 @@
     "analyzed_at": "2026-10-08T16:24:59Z"
   },
   "2074587024959709419": {
+    "id": "2074587024959709419",
+    "tweet_id": "2074587024959709419",
     "sentiment": "Bullish",
-    "summary": "中國光達若遭禁將使OUST與AEVA受益",
-    "translation_zh": "@jey0316 基本上：> 中國主要的光達玩家可能會在西方被禁。> $OUST、$AEVA 等公司透過填補真空而受益 > 為 Aeva 等西方光達公司提供動力的光學公司也受益於營收增長。不知道這則新聞是否真有那麼重要..."
+    "stances": {
+      "AEVA": "Bullish",
+      "OUST": "Bullish"
+    },
+    "summary": "中國光達遭禁利多，看好OUST與AEVA填補市場。",
+    "translation_zh": "簡單來說：中國主要光達廠商可能在西方遭禁。$OUST、$AEVA等公司將因填補市場真空而受益，為Aeva等西方光達廠提供支援的光學業者也將因營收增加而受益。不過不確定考量到某些因素後這新聞是否真的重要",
+    "risk": "推文最後質疑該禁令新聞是否真的具備實質影響力。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-10-08T22:00:31Z"
   },
   "2074581698604593367": {
+    "id": "2074581698604593367",
+    "tweet_id": "2074581698604593367",
     "sentiment": "Bullish",
-    "summary": "中企受審查利多西方光達股",
-    "translation_zh": "中國光達製造商禾賽科技因與 $NVDA 的擴大合作及光達傳感器而面臨美國國家審查。對於 $OUST、$AEVA 和西方光達廠商來說，如果競爭對手被監管排除，這通常是利多。因為曾有警告指出：傳感器可能會... https://t.co/9ZmvOqIHrv"
+    "stances": {
+      "AEVA": "Bullish",
+      "NVDA": "Neutral",
+      "OUST": "Bullish"
+    },
+    "summary": "美對中企審查利多$OUST與$AEVA等西方光達股",
+    "translation_zh": "中國光達製造商禾賽科技因與 $NVDA 的擴大合作及光達感測器面臨美國國家審查。對於 $OUST、$AEVA 及西方光達同業而言，若競爭對手因監管被排除，這通常是利多。因為有警告指出：感測器可能...",
+    "risk": "中國光達感測器面臨美國國家安全審查與監管排除風險。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-08T22:00:49Z"
   },
   "2074568161299771394": {
     "sentiment": "Bullish",
@@ -2824,14 +2843,33 @@
     "translation_zh": "彭博社和 $META 在因 Meta 算力框架引發市場下跌後進行損害控管：發言人表示：「Meta 對更多算力依然渴望。它仍按計劃推進昂貴的新數據中心，最近並簽署了重大算力協議 https://t.co/gJ0Uie0Dr5」"
   },
   "2074552062382338069": {
+    "id": "2074552062382338069",
+    "tweet_id": "2074552062382338069",
     "sentiment": "Bullish",
-    "summary": "看好馬斯克帶領機器人與特斯拉",
-    "translation_zh": "@stockshop199020 簡直就是伊隆。- 他加上 $SPCX 基本上是美國在太空領域保持領先的唯一原因。- $TSLA 領導了美國電動車商業化。他有時在時間線上不準，但方向正確，所以相當確定他能讓美國機器人再度領先。我個人持有 $CCXI"
+    "stances": {
+      "CCXI": "Bullish",
+      "SPCX": "Bullish",
+      "TSLA": "Bullish"
+    },
+    "summary": "看好馬斯克帶領TSLA與SPCX，並透露持有CCXI。",
+    "translation_zh": "@stockshop199020 真的就只有馬斯克。- 他和 $SPCX 基本上是美國在太空領域保持領先的唯一原因。- $TSLA 引領了美國電動車的商業化。他有時候在時間時程上不太準確，但方向是正確的，所以很確定他能讓美國的機器人產業再次成為第一。我個人持有 $CCXI。",
+    "risk": "提到馬斯克有時對時間時程的預估不夠準確。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-08T22:01:11Z"
   },
   "2074548850996707412": {
+    "id": "2074548850996707412",
+    "tweet_id": "2074548850996707412",
     "sentiment": "Neutral",
-    "summary": "中國人形機器人領先急需追趕",
-    "translation_zh": "美國怎麼落後這麼多？新華社：中國今年人形機器人產量預計將突破10萬台以上。連摩根士丹利原本預測2026年也才1.4萬台...真的需要伊隆的 $TSLA、$CCXI (Agility)、Apptronik 和 Figure 趕上來。也需要更多美國政府補貼 https://t.co/y38EIhiUaB"
+    "stances": {
+      "CCXI": "Neutral",
+      "TSLA": "Neutral"
+    },
+    "summary": "提及TSLA與CCXI，認為美國人形機器人進度落後中國需急起直追。",
+    "translation_zh": "美國怎麼落後這麼多？新華社報導：中國今年人形機器人產量預計將達到10萬台以上。摩根士丹利原本預測2026年才14,000台...真的需要馬斯克的TSLA、CCXI（Agility）、Apptronik和Figure趕上進度，並且需要更多美國政府補貼。",
+    "risk": "美國在人形機器人生產進度上落後於中國的競爭風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:28Z"
   },
   "2074540168674160931": {
     "sentiment": "Neutral",
@@ -2844,19 +2882,54 @@
     "translation_zh": "@EUlmsten 哇，$SIVEF 圖表上出現了神話般的金蛋龍 K 線。大行情要來了... https://t.co/V4CL41m5ax"
   },
   "2074507578877599867": {
-    "sentiment": "Bullish",
-    "summary": "拋售源於彭博與報導誤導市場",
-    "translation_zh": "@AlzayakMoh60610 我個人認為是的。感覺市場是在那篇誤導性的彭博社 $META 算力文章，以及幾篇 SemiAnalysis 對 $NVDA 供應鏈的看空文章發表後開始拋售的。因為演算法加上頭條對「Meta 算力過剩」的解讀是削減資本支出並退出..."
+    "id": "2074507578877599867",
+    "tweet_id": "2074507578877599867",
+    "sentiment": "Bearish",
+    "stances": {
+      "META": "Bearish",
+      "NVDA": "Bearish"
+    },
+    "summary": "市場受META與NVDA負面報導影響而拋售，雙雙看空。",
+    "translation_zh": "我個人也這麼覺得。感覺市場在彭博社那篇誤導性的META算力文章以及SemiAnalysis關於NVDA供應鏈的幾篇看空文章之後就開始拋售。因為演算法加上對「Meta過剩算力」標題的解讀是削減資本支出加上退出。",
+    "risk": "誤導性報導與供應鏈看空文章引發市場拋售，算法誤解算力過剩導致削減資本支出。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:31Z"
   },
   "2074504394608193799": {
+    "id": "2074504394608193799",
+    "tweet_id": "2074504394608193799",
     "sentiment": "Bullish",
-    "summary": "看好SIVE長期價值與轉板上市",
-    "translation_zh": "@FaceHonor $SIVE 大概是我現在最喜歡的股票，不擔心短期下跌。- 它是 $GFS、$JBL、Ayar、$POET 及許多其他超大規模供應商的雷射供應商。- 預計未來幾個季度內在納斯達克上市。- 隨後有透過併購擴大總可尋址市場 (TAM) 的目標。"
+    "stances": {
+      "GFS": "Neutral",
+      "JBL": "Neutral",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者極度看好 $SIVE，不受短期跌勢影響，看好其技術與上市及併購計畫。",
+    "translation_zh": "@FaceHonor $SIVE 可能是我目前最喜歡的股票，不擔心短期下跌。\n\n- 你擁有 $GFS、$JBL、Ayar、$POET 以及許多其他超大規模運算供應商的雷射供應商。\n- 計劃在未來幾個季度內於那斯達克上市。\n- 隨後是為了擴大潛在市場規模（TAM）的併購目標。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:33Z"
   },
   "2074494514061017508": {
-    "sentiment": "Neutral",
-    "summary": "板塊普跌源於無差別市場拋售",
-    "translation_zh": "只是順便提一下：如果 $NBIS、$MRVL、$INTC、$SNDK、$AMD、$SIVE、$MU、$LITE 等所有股票同時暴跌...截至今天目前都下跌了 -4% 到 -10%+ 以上。這大概跟個股基本面無關，而是無差別的市場拋售..."
+    "id": "2074494514061017508",
+    "tweet_id": "2074494514061017508",
+    "sentiment": "Bearish",
+    "stances": {
+      "AMD": "Bearish",
+      "INTC": "Bearish",
+      "LITE": "Bearish",
+      "MRVL": "Bearish",
+      "MU": "Bearish",
+      "NBIS": "Bearish",
+      "SIVE": "Bearish",
+      "SNDK": "Bearish"
+    },
+    "summary": "多檔半導體與科技股無差別大跌，非基本面問題。",
+    "translation_zh": "只是提出來：如果 NBIS、MRVL、INTC、SNDK、AMD、SIVE、MU、LITE 等股票今天全部一起崩盤，目前為止都下跌 4% 到 10% 以上......這可能與個別基本面無關。這是無差別的拋售。",
+    "risk": "市場出現無差別拋售潮，多檔股票大跌4%至10%以上。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:35Z"
   },
   "2074466925263061100": {
     "sentiment": "Bearish",
@@ -2864,14 +2937,32 @@
     "translation_zh": "瑞蒙詹姆斯 (Raymond James) 首度將 $SPCX 評級為「強烈買進」。給予 800 美元目標價，估值 SpaceX 約 10 兆美元。無語。機構寫給散戶看的報告簡直成了笑話。 https://t.co/B0uRojaNJZ"
   },
   "2074416685843612031": {
-    "sentiment": "Bullish",
-    "summary": "財報極佳卻遭拋售，看好長期",
-    "translation_zh": "以市值 1.24 兆美元的估值來看三星：\n> 市場：我們不認為你能繼續調漲記憶體價格\n> 結果：調漲 DRAM 價格 20%\n> 發布財報：超越 NVDA 和 AAPL 成全球最賺錢公司，營業利潤年增 1803%\n\n市場：拋售三星 -7%"
+    "id": "2074416685843612031",
+    "tweet_id": "2074416685843612031",
+    "sentiment": "Bearish",
+    "stances": {
+      "AAPL": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "三星獲利暴增卻遭市場拋售，整體情緒看空。",
+    "translation_zh": "以1.24兆美元市值的三星為例：市場認為無法持續調漲記憶體價格，隨後DRAM調漲20%，公布財報成為全球最賺錢公司，超越NVDA與AAPL，營業利益年增1803%。結果：市場將三星賣壓殺低7%。",
+    "risk": "市場擔憂記憶體價格無法持續調漲，即使財報亮眼仍遭賣壓拋售。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:37Z"
   },
   "2074405723816304743": {
+    "id": "2074405723816304743",
+    "tweet_id": "2074405723816304743",
     "sentiment": "Bullish",
-    "summary": "拋售極不合理，機構終將做多",
-    "translation_zh": "這是我迄今見過最愚蠢的主題性拋售，源於：\n- 不是新新聞的 META 算力消息\n- 被 NVDA 駁斥的反光學共封裝（CPO）延遲報告 1\n- 被 NVDA 駁斥的反 CPO 延遲報告 2\n\n高信心，機構最終會做多他們正在（拋售的）同批股票。"
+    "stances": {
+      "META": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "META與NVDA遭無端拋售，機構最終將重新做多。",
+    "translation_zh": "我見過最愚蠢的主題性拋售之一：- META算力新聞並非新鮮事 - CPO延遲報告1已被NVDA反駁 - CPO延遲報告2已被NVDA反駁。信心十足，機構最終會對同一批標的做多。",
+    "risk": "市場對算力及CPO延遲的擔憂引發賣壓。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:41Z"
   },
   "2074243322475171872": {
     "sentiment": "Neutral",
@@ -2904,9 +2995,18 @@
     "translation_zh": "@rioferdy838 @ak_dfranco 是的，$NBIS 早期的回撤非常瘋狂。當時空頭到處發帖看空 Nebius 和新雲端模式。現在那些空頭似乎都消失了，哈哈。"
   },
   "2074152813958152688": {
+    "id": "2074152813958152688",
+    "tweet_id": "2074152813958152688",
     "sentiment": "Bullish",
-    "summary": "機構洗盤吸籌，長期看好前景",
-    "translation_zh": "@blkslymn 我在 $SIVE 和 $AAOI 也有很大持股比例。因為機構發布光學延遲的看空文章而承受回撤感覺很糟糕。結果同一家公司竟在底部將其納入自己的 ETF 中。非投資建議，但儘管如此，我對這兩家公司未來的表現特別有信心。"
+    "stances": {
+      "AAOI": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者重倉SIVE與AAOI，儘管遭遇機構延遲利空仍極具信心。",
+    "translation_zh": "@blkslymn我也在$SIVE和$AAOI有很高的持股集中度。承受機構光子學延遲看空貼文帶來的回撤感覺很糟。但同一家機構卻在底部將其納入他們的ETF中。非投資建議，儘管如此我對這兩檔未來特別有信心",
+    "risk": "機構的延遲與看空言論導致股價回撤的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:43Z"
   },
   "2074143469015281953": {
     "sentiment": "Bullish",
@@ -2929,9 +3029,18 @@
     "translation_zh": "@VixOver20 他們正在發布愚蠢且聳人聽聞的報告。利用新架構就過度推論說整個總潛在市場（TAM）會下降 40-50%。這就像如果我說 OpenAI 優化了記憶體壓縮，所以 $MU 的 TAM 會下降 80% 一樣誇張。"
   },
   "2074063175293809150": {
+    "id": "2074063175293809150",
+    "tweet_id": "2074063175293809150",
     "sentiment": "Bullish",
-    "summary": "XFAB獲調升至買進看好成長",
-    "translation_zh": "Kelper 將 $XFAB 調升至「買進」，理由包括： - 主要客戶 Melexis 的需求「週復一週、日復一日地增強」。 - AI 為 XFAB 提供由 SiC、GaN 和光子學帶來的結構性成長支柱，抵消了汽車產業的週期性。 - 稀缺的西方特種晶圓代工廠，如 $SILEX。"
+    "stances": {
+      "SILEX": "Bullish",
+      "XFAB": "Bullish"
+    },
+    "summary": "Kelper將XFAB調升至買進，看好AI與稀缺晶圓廠優勢。",
+    "translation_zh": "Kelper將XFAB調升至「買進」評級，理由包括：Melexis需求逐日逐週增強（其主要客戶）；AI為XFAB帶來結構性成長引擎，透過SiC、GaN和光子學抵消汽車週期性；以及像SILEX這類稀缺的西方特殊晶圓廠。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:45Z"
   },
   "2074057730692898839": {
     "sentiment": "Bullish",
@@ -2939,49 +3048,137 @@
     "translation_zh": "@softmaxedx 我只是在重申基本面和細微的細節。但我無法控制其他人怎麼做或市場最終如何反應。沒有人能 100% 正確，總是可能犯錯。但我很有信心自己在 $SIVE 的方向上是正確的。這就是為什麼我有押注資金在上面。"
   },
   "2074046947434860971": {
+    "id": "2074046947434860971",
+    "tweet_id": "2074046947434860971",
     "sentiment": "Bullish",
-    "summary": "看好SIVE潛力可成下個LITE",
-    "translation_zh": "我個人認為 $SIVE 有可能成為下一個 $LITE。僅在過去幾個月裡，我們就看到了：1. 與 O-Net 合作推動 ELS 進入量產 2. $JBL 1.6T LRO 量產訊號，為使用 Sivers 的可插拔模組帶來「相對巨大的護城河」 3. $GFS SCALE 參考架構"
+    "stances": {
+      "GFS": "Neutral",
+      "JBL": "Neutral",
+      "LITE": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好SIVE有潛力成為下一個LITE，展現強烈看多立場。",
+    "translation_zh": "我個人認為 $SIVE 可以成為下一個 $LITE。在過去幾個月裡，我們已經看到：1. 與 O-Net 的合作推動 ELS 進入量產；2. $JBL 發出 1.6T LRO 量產信號，其可插拔設備採用 Sivers 具有「相對顯著的護城河」；3. $GFS SCALE 參考設計。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:49Z"
   },
   "2074019505932845352": {
+    "id": "2074019505932845352",
+    "tweet_id": "2074019505932845352",
     "sentiment": "Neutral",
-    "summary": "質疑市場報告客觀性信輝達聲明",
-    "translation_zh": "@j1nv3st 只能說我不認為市場再把他們視為客觀了。市場有一種過度誇大技術細節的傾向。就像幾個月前聲稱 $MU 在 $NVDA 的 HBM4 中完全沒有份額一樣。我個人只聽取 $NVDA 的直接聲明與..."
+    "stances": {
+      "MU": "Bearish",
+      "NVDA": "Bullish"
+    },
+    "summary": "市場過度解讀MU與NVDA合作，作者傾向直接聆聽NVDA說法。",
+    "translation_zh": "@j1nv3st 只能說我認為市場不再視他們為客觀的了。過去傾向於針對細微技術細節發表過度誇大的說法。就像幾個月前美光（MU）在輝達（NVDA）沒有 HBM4 市佔率一樣。我個人只是在聽輝達（NVDA）的直接聲明，並且",
+    "risk": "市場出現對技術細節過度誇大且不客觀的誇大言論與誤解。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:51Z"
   },
   "2074007618046345249": {
+    "id": "2074007618046345249",
+    "tweet_id": "2074007618046345249",
     "sentiment": "Bullish",
-    "summary": "AXTI與IQE受惠產品大漲價",
-    "translation_zh": "野村的報告指出 $AXTI 和 $IQE 是領先業者。關於平均售價（ASP）更新： - 2吋 InP 襯底漲價 42-76% - 3吋 InP 襯底漲價 78% - 2吋 EML 磊晶片漲價 50-75% - 3吋 CW 磊晶片漲價 ~40%+ - 中國國內價格較低..."
+    "stances": {
+      "AXTI": "Bullish",
+      "IQE": "Bullish"
+    },
+    "summary": "野村報告指AXTI與IQE為產業領頭羊，且產品價格大幅調漲，看好兩檔標的。",
+    "translation_zh": "野村的報告引用 $AXTI 和 $IQE 為主要領導廠商。接著關於平均售價（ASP）更新：2吋 InP 基板價格調漲 42-76%；3吋 InP 基板價格調漲 78%；2吋 EML 磊晶片價格調漲 50-75%；3吋 CW 磊晶片價格調漲約 40%以上；中國國內價格較低。",
+    "risk": "中國國內價格較低可能帶來區域競爭或價格壓力的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:53Z"
   },
   "2073873043672420517": {
+    "id": "2073873043672420517",
+    "tweet_id": "2073873043672420517",
     "sentiment": "Bullish",
-    "summary": "亞馬遜為實體AI轉型明確贏家",
-    "translation_zh": "@heyfinlo 沒錯，$AMZN 看起來是實體 AI 轉型中的明確贏家。我認為 Amazon 生態系統... 相較於 Google/Meta 生態系統，可能會是機器人參與者的催化劑。我有點看到這與 $GOOGL TPU 對像 $LITE 這樣供應商的效應有相似之處..."
+    "stances": {
+      "AMZN": "Bullish",
+      "GOOGL": "Neutral",
+      "LITE": "Bullish"
+    },
+    "summary": "看好AMZN為實體AI贏家，並推升LITE等供應鏈。",
+    "translation_zh": "沒錯，$AMZN 看起來明顯是實體AI轉變的贏家。我認為相較於Google/Meta生態系，亞馬遜生態系可能會成為機器人玩家的催化劑。我有點看出這類似 $GOOGL TPU效應對 $LITE 等供應商的影響。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:01:58Z"
   },
   "2073867745243127973": {
+    "id": "2073867745243127973",
+    "tweet_id": "2073867745243127973",
     "sentiment": "Neutral",
-    "summary": "分享2026機器人產業報告排名",
-    "translation_zh": "看到了一份來自 SVRC Research 於 4 月發布的有趣報告，名為《2026 機器人現狀》。其中列出了：1. Figure AI 2. Agility Robotics $CCXI 3. Apptronik 4. $TSLA 5. Boston Dynamics 6. Physical Intelligence 7. 1X Technologies 8. $AMZN Robotics 9. ..."
+    "stances": {
+      "AMZN": "Neutral",
+      "CCXI": "Neutral",
+      "TSLA": "Neutral"
+    },
+    "summary": "提及AMZN、CCXI與TSLA等機器人相關企業，立場中立。",
+    "translation_zh": "看到一份SVRC Research於四月發布名為「2026年機器人現狀」的有趣報告，其中列出了：1. Figure AI 2. Agility Robotics $CCXI 3. Apptronik 4. $TSLA 5. 波士頓動力 6. Physical Intelligence 7. 1X Technologies 8. $AMZN Robotics 9. https://t.co/AmCFokQYxl",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:02:00Z"
   },
   "2073793206408667392": {
+    "id": "2073793206408667392",
+    "tweet_id": "2073793206408667392",
     "sentiment": "Bullish",
-    "summary": "記憶體需求強勁與投資增加看多",
-    "translation_zh": "整理一些關於記憶體的最新動態：- 美光（$MU）領導在廣島投資 1.5 兆日圓（約 93 億美元）。由於資本支出在地化，這對 Disco、愛德萬測試（Advantest）、Resonac、Towa 為利多。- 摩根士丹利指出，NAND 供不應求的情況將持續至 2027 年，因此 $SNDK /"
+    "stances": {
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "記憶體晶片需求強勁，MU與SNDK皆呈看多立場。",
+    "translation_zh": "記憶體市場整合更新：美光（$MU）主導廣島1.5兆日圓（約93億美元）新投資，因資本支出在地化，對Disco、Advantest、Resonac、Towa為利多解讀。摩根士丹利指出，NAND快閃記憶體短缺將持續至2027年，利好$SNDK。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:02:03Z"
   },
   "2073763512216899825": {
-    "sentiment": "Neutral",
-    "summary": "資料中心備用電池面臨供應瓶頸",
-    "translation_zh": "看來高功率圓柱電池／BBU（備用電池單元）電池出現短缺（即瓶頸）：- 三星 SDI 供應電池給順達（Simplo），順達將其組裝成 BBU 供 $META 至 $AMZN 使用。- 隨著資料中心需求增加，三星 SDI 的圓柱電池產量已..."
+    "id": "2073763512216899825",
+    "tweet_id": "2073763512216899825",
+    "sentiment": "Bearish",
+    "stances": {
+      "AMZN": "Bearish",
+      "META": "Bearish"
+    },
+    "summary": "AMZN與META面臨BBU電池短缺瓶頸，利空供應鏈。",
+    "translation_zh": "看起來高功率圓柱形電池／BBU電池出現短缺（亦即瓶頸）：三星SDI向順達供應電池，順達將其組裝成BBU供應給META與AMZN。隨著資料中心需求增加，三星SDI圓柱形電池的產能已經...",
+    "risk": "資料中心需求大增導致BBU電池與圓柱形電池出現嚴重短缺瓶頸。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:02:05Z"
   },
   "2073704784398528599": {
+    "id": "2073704784398528599",
+    "tweet_id": "2073704784398528599",
     "sentiment": "Bullish",
-    "summary": "AI需求推動澳洲資料中心建設",
-    "translation_zh": "外洩的 Anthropic 文件顯示，計劃從澳洲取得 1.4GW 的產能，金額約達 216 億美元。最近 $IREN、$SHAZ 和其他新型雲端業者一直在澳洲興建主權資料中心。看來很多事情在關聯性上開始變得更加合理了？（聲明：無..."
+    "stances": {
+      "IREN": "Bullish",
+      "SHAZ": "Bullish"
+    },
+    "summary": "Anthropic 計劃在澳洲建置產能，帶動 $IREN 與 $SHAZ 看多情緒。",
+    "translation_zh": "外洩的 Anthropic 文件顯示計畫從澳洲取得 1.4GW 的容量，金額約達 216 億美元。最近 $IREN、$SHAZ 和其他新雲端廠商一直在澳洲建立主權資料中心。猜想很多事情在連結性上開始變得更有意義了？（揭露：無",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:02:07Z"
   },
   "2073537674905055568": {
+    "id": "2073537674905055568",
+    "tweet_id": "2073537674905055568",
     "sentiment": "Bullish",
-    "summary": "電商巨頭將顯著受益於實體AI",
-    "translation_zh": "@fivepointscap 沒錯，$SE、$MELI、$JD、$AMZN 以及其他電商巨頭，是我能想到實體 AI 推動過程中最明顯的受益者，因為他們能立即透過機器人優化營運費用。像 $META 這類公司的受益程度則相對較不確定。"
+    "stances": {
+      "AMZN": "Bullish",
+      "JD": "Bullish",
+      "MELI": "Bullish",
+      "META": "Neutral",
+      "SE": "Bullish"
+    },
+    "summary": "電商巨頭透過機器人優化營運，SE、MELI、JD與AMZN看多。",
+    "translation_zh": "沒錯，SE、MELI、JD、AMZN及其他電商巨頭是我能想到的實體AI推進下最明顯的受惠者，因為他們可以利用機器人立即優化營運支出。像META這類名字則相對較不明確。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-08T22:02:09Z"
   },
   "2073536758604771517": {
     "sentiment": "Bullish",
@@ -42440,5 +42637,19 @@
     "risk": "若公司持續提交 ATM 市價增資計畫，可能會對股價表現產生負面影響。",
     "model": "gemini-3.7-flash",
     "analyzed_at": "2026-10-05T21:58:19Z"
+  },
+  "2108272287908860377": {
+    "id": "2108272287908860377",
+    "tweet_id": "2108272287908860377",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "MU": "Bullish"
+    },
+    "summary": "AI雜音不改AAOI與MU短缺利多，持續看好。",
+    "translation_zh": "有人能解釋一下，媒體大肆報導 OpenAI 約 500 億美元的 ARR（相較於與 Anthropic 錯誤會計比較得出的約 700 億美元），怎麼可能就此終結 $AAOI 長達 3 到 5 年的雷射短缺，或是 $MU 的記憶體短缺？提示：根本不可能。",
+    "risk": "",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-08T21:59:31Z"
   }
 }
