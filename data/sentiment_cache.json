@@ -3201,9 +3201,18 @@
     "translation_zh": "今天才知道原來有海上浮動資料中心和海洋運算？顯然它具備免費冷卻功能，且非常適合地理空間緊張的地方……未來哪天搭乘郵輪行經一整排 $NBIS 或三星的海上浮動 AI 資料中心一定很狂。如果這真的像軌道運算一樣普及起來的話？"
   },
   "2073079326862672205": {
-    "sentiment": "Bullish",
-    "summary": "機構發看空報告後抄底相關股票",
-    "translation_zh": "@256_rc -> 撰寫看空報告，特別點名 $HIMX 和 $LITE -> 在它們下跌 25-40% 後，接著將 $HIMX 和 $LITE 納入其主動型 ETF 中。真是神操作策略。"
+    "id": "2073079326862672205",
+    "tweet_id": "2073079326862672205",
+    "sentiment": "Neutral",
+    "stances": {
+      "HIMX": "Neutral",
+      "LITE": "Neutral"
+    },
+    "summary": "諷刺機構發空頭報告打壓 HIMX 與 LITE 後低檔抄底。",
+    "translation_zh": "@256_rc -> 先寫看空報告特別點名 $HIMX 和 $LITE，-> 等它們重挫 25% 到 40% 後，再將這兩檔股票加進自己的主動型 ETF。神操作策略。",
+    "risk": "",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-09T08:52:28Z"
   },
   "2072936659369517341": {
     "sentiment": "Bullish",
@@ -3620,39 +3629,103 @@
     "translation_zh": "我想知道人形機器人是否會引發機器人美容的新瓶頸或新產業。像是皮膚產能瓶頸，或是 Aespa K-POP 風格的機器人改造服務。因此，如果 $TSLA Optimus 生產數千萬台人形機器人：誰來讓它們看起來都很吸引人？"
   },
   "2071961279380791729": {
+    "id": "2071961279380791729",
+    "tweet_id": "2071961279380791729",
     "sentiment": "Neutral",
-    "summary": "OpenAI包下產能導致供不應求",
-    "translation_zh": "機器學習的 $RDDT 版塊出現了一個相當有趣的抱怨貼文。關於 $CBRS + OpenAI：- 需要每秒 1,000 到 2,000 個 token，因此嘗試使用 Cerebras。- 聲稱 OpenAI 包下了所有產能，導致非超大規模客戶的等候名單變得無限長。- 表示..."
+    "stances": {
+      "CBRS": "Neutral",
+      "RDDT": "Neutral"
+    },
+    "summary": "轉述社群抱怨 OpenAI 包下 Cerebras 產能，持中立看法。",
+    "translation_zh": "Reddit 的機器學習子版出現了一個蠻好笑的傳聞抱怨。關於 Cerebras 與 OpenAI：用戶需要每秒 1,000 至 2,000 個 token 因此嘗試使用 Cerebras，並聲稱 OpenAI 預訂了所有產能，導致其他非超大規模雲端業者的人面臨無限期等待。",
+    "risk": "OpenAI包下全部產能，導致其他非超大規模客戶面臨無限期排隊等待。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-09T08:52:38Z"
   },
   "2071903552608362500": {
-    "sentiment": "Bullish",
-    "summary": "地緣競爭推升美AI巨頭資本支出",
-    "translation_zh": "很難想像美國 AI 超大規模企業如 $GOOGL 到 $META 的資本支出會大幅下降。特別是當中國像 360 這樣的機構聲稱：他們現在擁有可以駭入西方公司和政府的「AI 網路核武器」。（周鴻禕聲稱 Mythos 就像是 AI 時代的網路...）"
+    "id": "2071903552608362500",
+    "tweet_id": "2071903552608362500",
+    "sentiment": "Neutral",
+    "stances": {
+      "GOOGL": "Neutral",
+      "META": "Neutral"
+    },
+    "summary": "考量資安威脅，GOOGL與META資本支出難大幅下滑。",
+    "translation_zh": "很難想像從 Alphabet 到 Meta 等美國 AI 超大型雲端業者的資本支出會大幅下滑，特別是當中國實體如 360 聲稱他們已擁有能駭入西方企業與政府的「AI 網路核武」之際。（周鴻禕宣稱 Mythos 就像是 AI 時代的網路...",
+    "risk": "中國企業聲稱具備能入侵西方企業與政府的 AI 網路攻擊武器威脅。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-09T08:52:51Z"
   },
   "2071545016007467486": {
+    "id": "2071545016007467486",
+    "tweet_id": "2071545016007467486",
     "sentiment": "Bullish",
-    "summary": "樂天攜手ASTS組合資建衛星網",
-    "translation_zh": "據 Digitimes/日經報導，日本樂天 (Rakuten) 將與 $ASTS 成立合資企業，為日本建置低軌 (LEO) 衛星網路。「此舉被廣泛視為應對 $SPCX Starlink 在日本日益增長影響力的戰略回應」"
+    "stances": {
+      "ASTS": "Bullish",
+      "SPCX": "Neutral"
+    },
+    "summary": "樂天與ASTS合資建衛星網路，看多ASTS發展。",
+    "translation_zh": "根據電子時報與日經新聞報導，日本樂天將與 $ASTS 成立合資公司，為日本打造低軌衛星網路。此舉被廣泛視為對 $SPCX Starlink 在日本日益擴大之影響力的戰略回應。",
+    "risk": "面臨 SpaceX Starlink 在日本市場日益強大的競爭威脅。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:53:46Z"
   },
   "2071532870859149617": {
+    "id": "2071532870859149617",
+    "tweet_id": "2071532870859149617",
     "sentiment": "Bullish",
-    "summary": "通用攜手輝達驗證機器人自動化",
-    "translation_zh": "$GM 裁員 1,000 名員工並以 50 台機器人取代（6 月 22 日報導）。報導還顯示 GM 正與 $NVDA 洽談工廠機器人的合作交易。這是對機器人產業的驗證，因為這可能證明了替代員工帶來的營運費用利潤率與效率提升..."
+    "stances": {
+      "GM": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "GM裁員改用機器人並攜手NVDA，看好雙方效率提升。",
+    "translation_zh": "$GM 裁員 1,000 人並以 50 台機器人取代（6 月 22 日報導）。報導亦指出 GM 正與 $NVDA 洽談工廠機器人合作。這代表了機器人產業獲得驗證，因為這可能顯著提升營運利潤率與員工效率。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:53:52Z"
   },
   "2071488272245944399": {
+    "id": "2071488272245944399",
+    "tweet_id": "2071488272245944399",
     "sentiment": "Bullish",
-    "summary": "激光器嚴重短缺將延續至2029",
-    "translation_zh": "關於 $POET 股東大會及光學市場解讀的一些筆記：-「前三大激光器供應商控制了 68% 的市場，而且未來兩年的產能已完全售罄」$LITE 執行長曾表示供不應求會持續到 2028 年，因此 POET 暗示激光器短缺將延續至 2029 年。-"
+    "stances": {
+      "LITE": "Bullish",
+      "POET": "Bullish"
+    },
+    "summary": "雷射供不應求，看好LITE與POET前景。",
+    "translation_zh": "關於 $POET 股東常會的一些筆記以及對光通訊市場的解讀：「前三大雷射供應商控制了 68% 的市場，且未來兩年的產能已完全售罄」。$LITE 執行長曾表示供不應求將持續到 2028 年，因此 POET 間接證實了雷射短缺將一路持續到 2029 年。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:00Z"
   },
   "2071465314794233905": {
+    "id": "2071465314794233905",
+    "tweet_id": "2071465314794233905",
     "sentiment": "Bullish",
-    "summary": "讚嘆火箭AI機器人迎歷史黃金期",
-    "translation_zh": "老實說，2020 到 2030 這十年可能是人類歷史上最偉大的十年。- $RKLB 和 $SPCX 正在擴大大型可重複使用火箭的規模，以實現軌道運算。- 與 Anthropic 和 OpenAI 一起處於通用超人工智慧 (ASI) 和遞迴學習的關口。- 會後空翻的 Boston Dynamics 和宇樹科技 (Unitree)。"
+    "stances": {
+      "RKLB": "Bullish",
+      "SPCX": "Bullish"
+    },
+    "summary": "看好RKLB與SPCX推動可回收火箭規模化發展。",
+    "translation_zh": "老實說，2020至2030這十年可能是人類歷史上最偉大的黃金十年。- 透過 $RKLB 與 $SPCX 擴大軌道運算用大型可回收火箭的規模。- 憑藉 Anthropic 和 OpenAI 處於人工超智慧（ASI）與遞迴學習的臨界點。- 波士頓動力與宇樹科技機器人展現後空翻技術。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:05Z"
   },
   "2071135874100990438": {
+    "id": "2071135874100990438",
+    "tweet_id": "2071135874100990438",
     "sentiment": "Neutral",
-    "summary": "算力受限促使Meta尋求外部合作",
-    "translation_zh": "看來我們終於知道為什麼 $META 在三月時與像 $NBIS 這樣的 Neoclouds 簽署了巨額合約... 以及為什麼 Gemini 效能大幅受限。據報導 $GOOGL 由於算力限制，在 2026 年 3 月限制了 Meta 的產能。Google 執行長在上次財報會議中表示算力..."
+    "stances": {
+      "GOOGL": "Bearish",
+      "META": "Neutral",
+      "NBIS": "Bullish"
+    },
+    "summary": "Meta因Google算力限制轉向NBIS，看好NBIS看空Google。",
+    "translation_zh": "看來我們終於知道為什麼 Meta 在三月與像 NBIS 這樣的 Neoclouds 簽署了巨額協議... 以及為什麼 Gemini 被嚴重削弱了。據報導，由於算力限制，Google 在 2026 年三月限制了 Meta 的容量。Google 執行長在上次財報會議中提到了算力問題。",
+    "risk": "Google面臨算力瓶頸限制Meta容量，且Gemini性能遭削弱。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:13Z"
   },
   "2070796064698044849": {
     "sentiment": "Bearish",
@@ -3660,9 +3733,18 @@
     "translation_zh": "@buy_the_day 兄弟，看看左邊的 $RR。然後看看右邊部署在軍事戰鬥中的人形機器人。我覺得右邊那個才是市場想要曝險的標的 https://t.co/EY2wHjfQmH"
   },
   "2070793664599863682": {
-    "sentiment": "Bullish",
-    "summary": "人形機器人帶動長期潛力",
-    "translation_zh": "@eldan_0123 $SIVE 有相當大的機會透過 $AEVA 和 LG Innotek 參與波士頓動力的人形機器人計畫。鑑於領先的人形機器人公司迄今僅生產了約 1 萬台，我不認為這在短期內會對營收有重大貢獻。但如果 2028 年後達到數百萬台，那就是…"
+    "id": "2070793664599863682",
+    "tweet_id": "2070793664599863682",
+    "sentiment": "Neutral",
+    "stances": {
+      "AEVA": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "SIVE與AEVA具長期潛力但短期營收有限持中立",
+    "translation_zh": "@eldan_0123 $SIVE 有相當大的機會透過 $AEVA 和 LG Innotek 進入波士頓動力的人型機器人計畫。我認為這在短期內對營收不會有太大實質貢獻，因為目前領先的人型機器人公司產量僅約 1 萬台。但如果 2028 年後達到數百萬台，那將會...",
+    "risk": "短期內對營收貢獻不顯著，因領先的人型機器人公司目前產量僅約1萬台。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:21Z"
   },
   "2070758710599954450": {
     "sentiment": "Neutral",
@@ -3680,9 +3762,18 @@
     "translation_zh": "@beauty_oe 當新聞公布時，我會試著思考誰能立即受益。在 $SPCX 收購 Mesh 後，考量到其與早期初創公司合作的紀錄，我覺得 $SIVE 似乎會受益。恭喜粉絲突破 2 萬人！"
   },
   "2070691462354993543": {
+    "id": "2070691462354993543",
+    "tweet_id": "2070691462354993543",
     "sentiment": "Bullish",
-    "summary": "併購案有利SIVE供應鏈",
-    "translation_zh": "$SPCX / 埃隆·馬斯克收購了光網路初創公司 Mesh。該公司正在開發 1.6T OSFP（可插拔）。他們似乎擁有光引擎/封裝方面的技術，但可能從商業公司採購 CW DFB 雷射器。$SIVE 是對初創公司相對友善的公司之一 https://t.co/A1H7Bd6ZU4"
+    "stances": {
+      "SIVE": "Bullish",
+      "SPCX": "Neutral"
+    },
+    "summary": "馬斯克收購Mesh，SIVE有望受惠雷射需求看多。",
+    "translation_zh": "馬斯克收購了光學網路新創公司 Mesh，該公司正致力於研發 1.6T OSFP（可插拔）技術。他們似乎擁有光學引擎/封裝方面的技術，但可能向其他商業公司採購 CW DFB 雷射。$SIVE 是其中對新創公司較友善的選擇之一。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:42Z"
   },
   "2070444675337503166": {
     "sentiment": "Bullish",
@@ -3695,34 +3786,97 @@
     "translation_zh": "埃隆·馬斯克隨口發出了警訊。關於 $MU / SK 海力士 / 三星記憶體相對於供應的巨大需求與價格上漲。他對記憶體瓶頸的可視度可能比其他人更高… https://t.co/iszX0YJHuS"
   },
   "2070354308965728519": {
+    "id": "2070354308965728519",
+    "tweet_id": "2070354308965728519",
     "sentiment": "Bearish",
-    "summary": "全球市場修正，高Beta股重挫",
-    "translation_zh": "目前全球市場正在經歷修正，不知道何時會停止。韓國綜合指數下跌 -8.18%（SK 海力士/三星），日經指數下跌 -4.8%，台灣加權指數下跌 -3.82%。正如你所看到的 $SOI 或 $RKLB 下跌了 30-40%。從個人經驗來看，高 Beta 股票受到的打擊要大得多，但是 https://t.co/ekYz44MqJI"
+    "stances": {
+      "RKLB": "Bearish",
+      "SOI": "Bearish"
+    },
+    "summary": "全球修正潮使高貝塔股SOI與RKLB重挫，後市看空。",
+    "translation_zh": "目前正處於全球股市修正，不知道何時會停止。韓國綜合指數下跌 -8.18%（SK海力士/三星）、日經指數下跌 -4.8%、台股加權指數下跌 -3.82%。正如你所見，$SOI 或 $RKLB 下跌了 30-40%。根據個人經驗，高貝塔值的股票會受到更嚴重的打擊，但是...",
+    "risk": "全球股市修正且未知何時停止，高貝塔值股票面臨更劇烈的下跌衝擊。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:50Z"
   },
   "2070304723262210194": {
+    "id": "2070304723262210194",
+    "tweet_id": "2070304723262210194",
     "sentiment": "Bullish",
-    "summary": "功率半導體漲價，題材看多",
-    "translation_zh": "看起來功率半導體已經開始漲價了。在 800V 直流電轉型完全到來之前，這對從 $AOSL 到 $POWI 的美國功率半導體交易題材來說是利多。中國的揚傑科技宣布了今年的第二次漲價，全面調升了其全線產品的價格 https://t.co/UrseTyBMFp"
+    "stances": {
+      "AOSL": "Bullish",
+      "POWI": "Bullish"
+    },
+    "summary": "功率半導體漲價，看好AOSL與POWI美股交易。",
+    "translation_zh": "功率半導體似乎已經開始調漲價格。在 800V 直流電轉型趨勢完全到來之前，這從主題上來看對從 AOSL 到 POWI 的美國功率半導體交易是個利多。中國的揚杰科技宣布了今年第二次漲價，全面調高其所有產品價格。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:54:55Z"
   },
   "2070189253573890167": {
+    "id": "2070189253573890167",
+    "tweet_id": "2070189253573890167",
     "sentiment": "Bearish",
-    "summary": "投資組合慘跌，連美光也救不了",
-    "translation_zh": "不了，我要去填溫蒂漢堡（$WEN）的求職申請表，然後在垃圾桶後面搭帳篷了。今天連美光（$MU）和閃迪（$SNDK）荒謬的優秀表現都救不了我的投資組合。不過還是為日本加油，希望瑞典以 0-2 被慘敗，來代表這 20% 的跌幅。"
+    "stances": {
+      "MU": "Neutral",
+      "SNDK": "Neutral",
+      "WEN": "Neutral"
+    },
+    "summary": "作者因投資慘賠自嘲，MU與SNDK強勢表現仍難救其部位。",
+    "translation_zh": "算了，我要去填 $WEN 的履歷表，並在垃圾子車後面紮營了。即使 $MU 和 $SNDK 今天驚人的表現也救不了我的投資組合。不過還是為日本加油，希望瑞典被 2-0 完虐，以代表這 20% 的跌幅。",
+    "risk": "推文指出其投資組合面臨嚴重虧損，暗示整體部位有單日下跌20%的極高風險。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:55:05Z"
   },
   "2070179074048409662": {
+    "id": "2070179074048409662",
+    "tweet_id": "2070179074048409662",
     "sentiment": "Bullish",
-    "summary": "股價下跌反而更看好SIVE潛力",
-    "translation_zh": "噢，我想你誤會了……隨著價格下跌，我實際上比以往任何時候都更加看好。在市值約 19 億美元時，$SIVE 擁有：\n\n- $GFS 參考雷射\n- 用於 Ayar 及 $NVDA NVLink 生態系統中其他廠商擴展 CPO 的雷射\n- 用於 $POET 和其他廠商擴展 CPO 的技術\n- 用於 $JBL 和其他廠商 1.6T+ 的應用"
+    "stances": {
+      "GFS": "Neutral",
+      "JBL": "Neutral",
+      "NVDA": "Neutral",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "股價下跌使作者更看好SIVE，因其具備多項技術優勢。",
+    "translation_zh": "喔我想你誤會了... 實際上隨著價格下跌，我比以往任何時候都還要看好。在市值約 19 億美元的 $SIVE，你擁有：- $GFS 參考雷射 - 用於 $NVDA NVLink 生態系統中 Ayar 及其他公司以進行 CPO 共同封裝光學元件規模擴展的雷射 - 用於 $POET 及其他公司以進行 CPO 擴展的雷射 - 用於 $JBL 及其他公司以實現 1.6T+ 的雷射",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:55:11Z"
   },
   "2070157835137434015": {
+    "id": "2070157835137434015",
+    "tweet_id": "2070157835137434015",
     "sentiment": "Bearish",
-    "summary": "除記憶體外多數科技與熱門股重挫",
-    "translation_zh": "感覺到目前為止唯一沒有崩盤的……只有像美光（$MU）這樣的記憶體、大盤指數，或是像英特爾這樣的大型半導體股。\n\n- 從 $AXTI 到 $SIVE 的光電板塊下跌了 40%。\n\n- $ASTS 和 $RKLB 等太空概念股近一個月下跌 40%。\n\n- 像 $PLTR 這樣的熱門 AI 概念股今年以來下跌約 35%。\n\n- 像 $CRM 這樣的軟體股下跌 https://t.co/aqC7wEgAKB"
+    "stances": {
+      "ASTS": "Bearish",
+      "AXTI": "Bearish",
+      "CRM": "Bearish",
+      "MU": "Neutral",
+      "PLTR": "Bearish",
+      "RKLB": "Bearish",
+      "SIVE": "Bearish"
+    },
+    "summary": "多數科技與太空板塊崩跌，僅MU等記憶體股尚未補跌。",
+    "translation_zh": "感覺目前唯一還沒崩盤的……只有像 $MU 這樣的記憶體、指數，或是像 Intel 這樣的大型半導體股。- 從 $AXTI 到 $SIVE 的光子學板塊下跌了 40%。- 來自 $ASTS 和 $RKLB 的太空板塊在一個月內下跌了 40%。- 像 $PLTR 這樣熱門的 AI 概念股今年以來下跌了約 35%。- 像 $CRM 這樣的軟體股下跌...",
+    "risk": "光子學、太空、AI及軟體板塊面臨35%至40%的崩盤跌勢。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:55:20Z"
   },
   "2070020727441621026": {
+    "id": "2070020727441621026",
+    "tweet_id": "2070020727441621026",
     "sentiment": "Neutral",
-    "summary": "迷因股大漲，歎自身AI持股太差",
-    "translation_zh": "$WEN 的迷因股交易員登上從日本到美國的全球媒體！這家漢堡速食連鎖店現在上漲了約 50%，相當令人印象深刻。不過觀望並看到自己的 AI 記憶體/光學投資組合表現比像 $RDDT 這樣的迷因股還差，感覺真不好。有人建倉了嗎？ https://t.co/hM0RhWh21c"
+    "stances": {
+      "RDDT": "Neutral",
+      "WEN": "Neutral"
+    },
+    "summary": "旁觀WEN與RDDT迷因股暴漲，感嘆表現超越自身持股",
+    "translation_zh": "$WEN 的迷因交易者登上了從日本到美國的全球媒體！這家漢堡速食連鎖店目前上漲了約 50%，相當令人印象深刻。不過，空手旁觀並看著我的 AI 記憶體/光通訊投資組合表現不如 $RDDT 迷因股，感覺真不好受。有人建倉了嗎？",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:55:42Z"
   },
   "2069990311296975133": {
     "sentiment": "Bullish",
@@ -3730,9 +3884,19 @@
     "translation_zh": "今天非常有意思的表態：$MU 執行長預測人形機器人將推動長達數十年的記憶體需求週期。「他說，人形機器人需要的記憶體大約是當今 L2+ 自動駕駛汽車的十倍。」「而這股需求浪潮預計將在……之前開始 https://t.co/bVnvG1Ihit"
   },
   "2069967746377662587": {
+    "id": "2069967746377662587",
+    "tweet_id": "2069967746377662587",
     "sentiment": "Bearish",
-    "summary": "分散虧損，CPO概念股受創嚴重",
-    "translation_zh": "我想是的。但與此同時，我把我目前的策略稱為：分散虧損。包括 $AXTI、$SOI、$AAOI 和許多其他股票。最近經歷了巨大的回撤，CPO 的曝險受創最嚴重（如聯亞、華星光等）以及相關概念股，感覺很糟。這對個人來說可能是個教訓，我的持倉太多了 https://t.co/Ob2No0rLa6"
+    "stances": {
+      "AAOI": "Bearish",
+      "AXTI": "Bearish",
+      "SOI": "Bearish"
+    },
+    "summary": "持有AXTI、SOI及AAOI等股面臨巨大回撤，整體看空。",
+    "translation_zh": "我想也是。但與此同時，我把我的策略稱為：分散式虧損。伴隨著 $AXTI、$SOI、$AAOI 以及許多其他股票。最近經歷了巨大的回撤，共同封裝光學（CPO）的曝險部位受創最深（如 Foci、Msscorp 等）及相關個股，感覺很糟。這對我個人可能是一個教訓，我持有太多了...",
+    "risk": "共同封裝光學（CPO）相關曝險過高，導致近期面臨嚴重的資金回撤。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:55:49Z"
   },
   "2069938631817699588": {
     "sentiment": "Bearish",
@@ -3745,19 +3909,49 @@
     "translation_zh": "看 $MU 的財報總是令人驚嘆：\n\n營收：414.6 億美元，預期 358 億美元。\n每股盈餘（EPS）：25.11 美元，預期 20.78 美元。\n\n預測：\n\n營收：490 億至 510 億美元，預期 432.4 億美元。\nEPS：30.00 至 32.00 美元，預期 25.31 美元。\n\n「美光週三表示已簽署 16 份長期協議」\n\n「當完成時，https://t.co/SlscP4IoI8"
   },
   "2069780882018459851": {
+    "id": "2069780882018459851",
+    "tweet_id": "2069780882018459851",
     "sentiment": "Bullish",
-    "summary": "裴洛西買進英特爾與優步看漲期權",
-    "translation_zh": "裴洛西剛披露：\n\n- 100 萬至 500 萬美元的 $INTC 2027 年 3 月看漲期權\n- 200 份 $UBER 2027 年 3 月 19 日到期、履約價 50 美元的看漲期權合約\n\n這是上個月 5 月 29 日進行的。（她的丈夫是執行此操作的活躍交易員）。僅供喜歡追蹤的人參考 https://t.co/HDtn0T7QYL"
+    "stances": {
+      "INTC": "Bullish",
+      "UBER": "Bullish"
+    },
+    "summary": "裴洛西申報買入英特爾與優步長期看漲期權，偏向看多。",
+    "translation_zh": "裴洛西剛披露：\n- 100 萬至 500 萬美元的英特爾（$INTC）2027 年 3 月看漲期權\n- 200 口優步（$UBER）2027 年 3 月 19 日到期、履約價 50 美元的看漲期權合約\n\n這是上個月 5 月 29 日進行的交易。（實際執行交易的是她的丈夫）。僅供喜歡此類資訊的人參考。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:55:53Z"
   },
   "2069775271562289299": {
+    "id": "2069775271562289299",
+    "tweet_id": "2069775271562289299",
     "sentiment": "Bullish",
-    "summary": "傳POET與SIVE供貨前三大巨頭",
-    "translation_zh": "來自 Poet OSINT 社群的有趣新資訊發現：看起來 $POET / $SIVE 很可能會為前三大超大規模雲端業者（亞馬遜、微軟或 Google 之一）提供動力。這是根據 Lumilens 執行長 Ankur Singla 在 LinkedIn 上的更新，他表示他們的客戶是前三大之一 https://t.co/Rs0D8HE1T9"
+    "stances": {
+      "POET": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "POET與SIVE有望為前三大巨頭供電，看多。",
+    "translation_zh": "來自 Poet 開源情報社群的有趣新發現：$POET / $SIVE 似乎很有可能將為前三大超大規模雲端業者（亞馬遜、微軟或 Google 之一）提供動力。這是基於 Lumilens 執行長 Ankur Singla 的 LinkedIn 更新，他指出其客戶為前三大業者之一。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:56:02Z"
   },
   "2069675057300082728": {
+    "id": "2069675057300082728",
+    "tweet_id": "2069675057300082728",
     "sentiment": "Bullish",
-    "summary": "看好 OpenLight 及其生態圈合作夥伴",
-    "translation_zh": "每當我關注 OpenLight（未上市）時，它似乎都變得越來越大。如果你對他們在愛德萬測試（Advantest）之外的上市生態系統感興趣：用於擴展 PIC 的 $JBL（$SIVE 的合作夥伴）；用於 DSP 的 $MRVL 和 $MXL；作為晶圓代工廠的 $TSEM；$300394.SZ / 天孚通信（OSAT/次模組）。"
+    "stances": {
+      "JBL": "Neutral",
+      "MRVL": "Neutral",
+      "MXL": "Neutral",
+      "SIVE": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "看好OpenLight成長，JBL等生態系合作夥伴受矚目。",
+    "translation_zh": "OpenLight（未上市）似乎每次我看它時都變得越來越大。如果你對他們在 Advantest 之外的公開生態系統感到好奇：$JBL（$SIVE 的合作夥伴）用於擴展 PIC，$MRVL 和 $MXL 用於 DSP，$TSEM 用於晶圓代工。$300394.SZ / 天孚通信（OSAT/次系統）。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T08:56:10Z"
   },
   "2069655980456149142": {
     "sentiment": "Bullish",
@@ -42845,5 +43039,18 @@
     "risk": "",
     "model": "gemini-3.7-flash",
     "analyzed_at": "2026-10-08T21:59:31Z"
+  },
+  "2108412203514925165": {
+    "id": "2108412203514925165",
+    "tweet_id": "2108412203514925165",
+    "sentiment": "Bullish",
+    "stances": {
+      "LITE": "Bullish"
+    },
+    "summary": "LITE產能幾乎售罄至2029年，強烈看多。",
+    "translation_zh": "哇……$LITE 執行長今天在彭博表示：Lumentum「產能基本上已近乎售罄至 2029 年」。從我們的角度來看，「完全賣光，看不到盡頭」。來自超大規模業者的需求能見度甚至延續到了 2030 年、2031 年。",
+    "risk": "",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-09T08:52:08Z"
   }
 }
