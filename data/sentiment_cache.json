@@ -3211,19 +3211,48 @@
     "translation_zh": "SemiAnalysis 的作風：- 發布一篇嚴厲批評 CPO（共封裝光學）延遲與光學公司估值的文章，引發暴跌。而這隨後被 $NVDA、分析師團隊及各大光學公司反駁。- 在光學類股暴跌 40-60% 後，推出機構級矽光子 ETF。"
   },
   "2072928111495376922": {
-    "sentiment": "Bullish",
-    "summary": "批評誤導報導，看好市場修復",
-    "translation_zh": "@softmaxedx 我怪罪 Semianalysis 誤導性的 CPO 延遲報導導致整個光電市場崩盤，但這已被 $NVDA 駁斥。加上全球期刊近期對 $META 的誤導性報導……但我認為他們意識到所有東西都隨之崩盤，所以需要一篇宏觀看多的文章。"
+    "id": "2072928111495376922",
+    "tweet_id": "2072928111495376922",
+    "sentiment": "Neutral",
+    "stances": {
+      "META": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "指責機構誤導性報導害輝達與Meta概念股暴跌",
+    "translation_zh": "我怪罪 Semianalysis 關於 CPO 延遲的誤導性報導擊垮了整個矽光子市場，而輝達已對此予以反駁。同時還有全球期刊對 Meta 最近的誤導性報導……但我認為他們意識到所有板塊都隨之崩盤，因此需要發一篇總體經濟的看多文章。",
+    "risk": "媒體發布誤導性的CPO延遲報導，導致光電市場與相關個股面臨暴跌風險。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-09T02:02:24Z"
   },
   "2072925550608523738": {
-    "sentiment": "Bullish",
-    "summary": "澄清不實訊息，重倉持股不變",
-    "translation_zh": "@ontrialperiod 當全球與美國市場因來自 $META 的不實資訊和斷章取義的引用而崩盤時，我大概會想澄清一下？話雖如此，$AAOI、$SIVE 和 $CCXI 在我的投資組合中佔了很大比重。"
+    "id": "2072925550608523738",
+    "tweet_id": "2072925550608523738",
+    "sentiment": "Neutral",
+    "stances": {
+      "AAOI": "Neutral",
+      "CCXI": "Neutral",
+      "META": "Bearish",
+      "SIVE": "Neutral"
+    },
+    "summary": "META引發市場崩跌，AAOI等三檔佔投資組合多數。",
+    "translation_zh": "當全球與美國市場因$META的錯誤資訊與斷章取義的引言而崩盤時，我大概想釐清這點？話雖如此，$AAOI、$SIVE與$CCXI確實佔了我投資組合的極大集中度。",
+    "risk": "全球與美國市場可能因錯假資訊與斷章取義的言論而崩盤。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:41Z"
   },
   "2072922974345445511": {
+    "id": "2072922974345445511",
+    "tweet_id": "2072922974345445511",
     "sentiment": "Bullish",
-    "summary": "META算力加速，資本支出將新高",
-    "translation_zh": "SemiAnalysis 針對 $META「產能過剩」及 $NBIS 等市場反應表示：「我們相信 Meta 的資料中心和算力將會加速」。「2027年的資本支出將高得令人震驚」。近期全球崩盤，特別是光電領域，是基於誤導性敘事下的愚蠢反應……"
+    "stances": {
+      "META": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "分析認為META資本支出將加速，光學元件股暴跌屬市場誤判，看好META與NBIS。",
+    "translation_zh": "SemiAnalysis 關於 $META 「過剩產能」與市場對 $NBIS 及其他公司的反應：「我們相信 Meta 的資料中心與運算將加速發展。」「2027 年的資本支出將高得令人震撼。」近期全球崩盤，特別是光學產業，是愚蠢的……擺脫誤導性論述。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:43Z"
   },
   "2072913865458004014": {
     "sentiment": "Bullish",
@@ -3241,9 +3270,18 @@
     "translation_zh": "$META：即將推出的 AI 模型「Watermelon」已追上 OpenAI 的 GPT 5.5。Wang 指出其算力使用量比上一代「Avocado」高出一個數量級。到底是誰說他們退出 AI 競賽了？"
   },
   "2072795186263187831": {
+    "id": "2072795186263187831",
+    "tweet_id": "2072795186263187831",
     "sentiment": "Bullish",
-    "summary": "AXTI簽訂三年長期供貨大單",
-    "translation_zh": "$AXTI 與 $COHR 簽署為期 3 年的晶圓合約。「Coherent 將預付 2,228.85 萬美元給 AXTI 通美晶源，以換取承諾的供應產能。」"
+    "stances": {
+      "AXTI": "Bullish",
+      "COHR": "Neutral"
+    },
+    "summary": "AXTI與COHR簽訂三年晶圓協議並獲得預付款，對AXTI偏向多方。",
+    "translation_zh": "AXTI與COHR簽署為期3年的晶圓協議。「Coherent將向AXT-Tongmei支付2,228萬8,500美元的預付款，以換取有保障的供應產能。」",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:45Z"
   },
   "2072781715916169660": {
     "sentiment": "Bullish",
@@ -3256,29 +3294,80 @@
     "translation_zh": "就在這一個小時內：BlueCrest 資產管理公司及其億萬富豪 Michael Platt 跨過門檻，披露持有 $CCXI 5.6% 的股權。我就知道 Agility Robotics 會大受歡迎……"
   },
   "2072760446617280650": {
-    "sentiment": "Neutral",
-    "summary": "媒體引發半導體板塊恐慌暴跌",
-    "translation_zh": "再次看到半導體市場因彭博社報導的刻意構詞而崩盤，真是有趣……瑞銀分析師對 $META 報導表示：「這不是新消息」。儘管如此：$AEHR 下跌 -18.3%、$AAOI 下跌 -17.13%、$SIVEF 下跌 -15.4%、$SNDK 下跌 -14.8%、$TER 下跌 -13.8%、$GLW 下跌 -11.4%、$MRVL 下跌 -11.2%。"
+    "id": "2072760446617280650",
+    "tweet_id": "2072760446617280650",
+    "sentiment": "Bearish",
+    "stances": {
+      "AAOI": "Bearish",
+      "AEHR": "Bearish",
+      "GLW": "Bearish",
+      "META": "Neutral",
+      "MRVL": "Bearish",
+      "SIVEF": "Bearish",
+      "SNDK": "Bearish",
+      "TER": "Bearish"
+    },
+    "summary": "彭博報導引發半導體市場崩跌，多檔概念股重挫。",
+    "translation_zh": "看到彭博社的報導再次框架導致半導體市場崩盤，總是有趣的時刻…瑞銀分析師對 $META 報告表示：「這不是新鮮事」。無論如何：$AEHR 下跌 18.3%、$AAOI 下跌 17.13%、$SIVEF 下跌 15.4%、$SNDK 下跌 14.8%、$TER 下跌 13.8%、$GLW 下跌 11.4%、$MRVL 下跌 11.2%",
+    "risk": "彭博報導引發市場恐慌，導致半導體類股全面大幅重挫。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:48Z"
   },
   "2072752326147031494": {
+    "id": "2072752326147031494",
+    "tweet_id": "2072752326147031494",
     "sentiment": "Bullish",
-    "summary": "看好 CCXI 具備前沿領域龍頭潛力。",
-    "translation_zh": "@SUOHA_AI 我記得當初第一次投資 $RKLB 是在 15 美元左右。我覺得能接觸到下游＋前沿領域的領頭羊真的很難得。所以這次我個人不會再錯過 $CCXI 的機會了。"
+    "stances": {
+      "CCXI": "Bullish",
+      "RKLB": "Bullish"
+    },
+    "summary": "作者看好CCXI與RKLB，認為RKLB具產業領導地位，不會再錯失CCXI的投資機會。",
+    "translation_zh": "我記得第一次投資 $RKLB 大約是在 15 美元左右。我只是覺得很難得有機會接觸到下游加前沿產業的領導者。所以我個人這次不會再錯過 $CCXI 的機會。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:50Z"
   },
   "2072745577310564861": {
+    "id": "2072745577310564861",
+    "tweet_id": "2072745577310564861",
     "sentiment": "Bearish",
-    "summary": "批評 SPCX 與 CBRS 上市前估值過高。",
-    "translation_zh": "@hitraderjoe 近期的美股 IPO 模式非常愚蠢，就像 $SPCX / $CBRS 在上市前把估值推到荒謬的高度。更多美股上市應該效法宇樹科技（這可能會獲得更高的估值）以及像光子算力（Lightelligence）這樣的中國 IPO。這能讓散戶在相同的..."
+    "stances": {
+      "CBRS": "Bearish",
+      "SPCX": "Bearish"
+    },
+    "summary": "SPCX與CBRS等美股IPO在上市前將估值拉高至荒謬水準，立場看空。",
+    "translation_zh": "近期美國IPO模型非常愚蠢，例如SPCX/CBRS在上市前將估值推高到荒謬的數字。更多美國掛牌公司應該效仿宇樹（可能享有更高估值）加上像Lightelligence中國IPO，這樣能讓散戶以相同方式參與。",
+    "risk": "近期美國IPO上市前將估值拉高至荒謬的過高水準。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:53Z"
   },
   "2072743412244287527": {
+    "id": "2072743412244287527",
+    "tweet_id": "2072743412244287527",
     "sentiment": "Bullish",
-    "summary": "有大廠背書，看重基本面而非 SPAC。",
-    "translation_zh": "@supplepest 對 SPAC 有什麼創傷後應激障礙（PTSD）嗎？我只關心公司的基本面。$NVDA、軟銀、$AMZN 等大廠不會隨便支持垃圾公司。而且鴻海（Foxconn）也在資助 PIPE。這只是為了更快上市，特別是給美國投資人提供極其..."
+    "stances": {
+      "AMZN": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "作者看好NVDA與AMZN等大廠背書，認為SPAC只是快速上市管道。",
+    "translation_zh": "@supplepest 這是對SPAC有什麼創傷症候群嗎？我只關心公司基本面。$NVDA、軟銀、$AMZN和其他公司不會隨便支持爛公司。而且富士康正在為PIPE提供資金。這只是為了更快上市，特別是為美國投資者提供極佳的替代方案",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:55Z"
   },
   "2072741541404406008": {
+    "id": "2072741541404406008",
+    "tweet_id": "2072741541404406008",
     "sentiment": "Bullish",
-    "summary": "看好 CCXI 旗下 Agility 的商業化。",
-    "translation_zh": "依我個人看，就商業化而言，Agility Robotics 是目前美國第一的人形機器人業者。個人排名：1. 透過 $CCXI 的 Agility Robotics 2. $TSLA Optimus（兆美元級公司） 3. 2025 年估值 390 億美元的 Figure，現在可能更高。隨著特斯拉可能在一年內..."
+    "stances": {
+      "CCXI": "Bullish",
+      "TSLA": "Bullish"
+    },
+    "summary": "作者看好CCXI與TSLA在人形機器人商業化的領先地位。",
+    "translation_zh": "依我來看，Agility Robotics絕對是目前美國商業化排名第一的人形機器人玩家。個人排名：1. 透過$CCXI的Agility Robotics 2. $TSLA Optimus（市值1兆美元以上公司） 3. Figure在2025年估值為390亿美元，現在可能更高。特斯拉可能在一年內取得領先。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:57Z"
   },
   "2072733748261720186": {
     "sentiment": "Bearish",
@@ -3286,24 +3375,67 @@
     "translation_zh": "@MosheFeins48329 在 $AXTI 從 13 美元漲到 140 美元的過程中，伴隨著大幅的股本擴張和股權稀釋。由於稀釋方案獲得通過，正如我之前提到的，如果對散戶投資人有過度稀釋，我就不太樂意討論這檔股票。但我確實認為..."
   },
   "2072732576952012829": {
+    "id": "2072732576952012829",
+    "tweet_id": "2072732576952012829",
     "sentiment": "Bullish",
-    "summary": "多個量產項目帶來實質營收，看好發展。",
-    "translation_zh": "@CFc19971622 你是傻了嗎？ 1. $JBL 量產 1.6T LRO 是營收。2. 昂納（O-Net）量產 ELS 是營收。3. $GFS 使用 $SIVE 作為超大規模客戶的參考雷射也是營收。4. Ayar 加入 $NVDA 的 NVLink 做 CPO，並採用 $SIVE 進行量產也是營收。5. 其他可插拔..."
+    "stances": {
+      "GFS": "Bullish",
+      "JBL": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "推文看多JBL、GFS、NVDA與SIVE，強調其量產及合作皆能帶來營收。",
+    "translation_zh": "你是笨蛋嗎？ 1. $JBL 大規模生產 1.6T LRO 就是營收。2. O-Net 大規模生產 ELS 就是營收。3. $GFS 使用 $SIVE 作為超大規模資料中心的參考雷射就是營收。4. Ayar 加入 $NVDA NVLink 進行 CPO 並使用 $SIVE 進行大規模生產就是營收。5. 其他可插拔式",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:02:59Z"
   },
   "2072730156297556328": {
+    "id": "2072730156297556328",
+    "tweet_id": "2072730156297556328",
     "sentiment": "Bullish",
-    "summary": "SIVE 籌資擴產，基本面強勁看好量產。",
-    "translation_zh": "@Cped221267 根本沒人在乎技術分析圖表，那些只是人們編造出來試圖說服別人賣出的波浪線。$SIVE 剛緊急籌集了 7000 萬美元用於量產，很可能是為了取得晶圓廠產能分配。隨著 $JBL、$POET、$AEVA 等公司近期產能提速，接著是 $GFS..."
+    "stances": {
+      "AEVA": "Bullish",
+      "GFS": "Bullish",
+      "JBL": "Bullish",
+      "POET": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE等五檔標的近期皆有增資或產量放大題材，整體看多。",
+    "translation_zh": "@Cped221267 沒人需要在乎技術分析圖表，那只是別人瞎畫來勸人賣出的曲線。$SIVE 剛為量產緊急籌集了 7000 萬美元，很可能是為了晶圓廠的產能分配。隨著 $JBL、$POET、$AEVA 和其他公司近期產量增加。還有 $GFS，",
+    "risk": "$SIVE 為量產進行了 7000 萬美元的緊急融資，可能存在股權稀釋或其他流動性壓力風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:02Z"
   },
   "2072728939324428655": {
+    "id": "2072728939324428655",
+    "tweet_id": "2072728939324428655",
     "sentiment": "Neutral",
-    "summary": "矽光子板塊波動巨大，長期仍回歸基本面。",
-    "translation_zh": "@ram_blings 不客氣，我不確定大家是否還記得，$SIVE 曾因為 $GFS 的消息一天暴漲超過 70%。而 $AAOI 也常有隨機上漲 20-30% 的日子。當然它們也有可能出現相反走勢。矽光子領域波動非常大，但長期方向仍遵循基本面。"
+    "stances": {
+      "AAOI": "Neutral",
+      "GFS": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "光子學板块波動大，SIVE與AAOI走勢難測。",
+    "translation_zh": "沒關係，我不確定大家是否還記得，但 SIVE 曾因 GFS 的消息在一天內飆漲 70%。而 AAOI 也有過隨機漲幅 20-30% 的日子。它們也可能出現相反的走勢。光子學領域非常波動，但從長遠來看，方向上仍遵循基本面。",
+    "risk": "光子學板塊非常波動，標的可能出現劇烈反向暴跌。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:04Z"
   },
   "2072726120706007465": {
+    "id": "2072726120706007465",
+    "tweet_id": "2072726120706007465",
     "sentiment": "Bullish",
-    "summary": "NVDA 主導矽光子轉型，產能滿載看好。",
-    "translation_zh": "矽光子有實際的營收數據支持，且是 $NVDA 主導的架構變革。量子計算幾乎沒有營收。$LITE 未來兩年的產能已完全售罄（根據 $POET 股東大會），訂單可能排到 2029 年。Lumentum 供不應求，甚至需要對外採購 CW 雷射..."
+    "stances": {
+      "LITE": "Bullish",
+      "NVDA": "Bullish",
+      "POET": "Bullish"
+    },
+    "summary": "光學技術有實際營收支撐且獲NVDA支援，LITE產能滿載至未來數年，全面看多。",
+    "translation_zh": "光子學有實際營收數字支撐，且這是由NVDA所倡導的架構轉變。量子運算幾乎沒有什麼營收。LITE未來兩年的產能已經完全售罄（根據POET股東會），可能一直持續到2029年。Lumentum的產能吃緊到必須外購連續波雷射。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:06Z"
   },
   "2072638343486259415": {
     "sentiment": "Bullish",
@@ -3311,9 +3443,18 @@
     "translation_zh": "@sokarsokk 像綠的諧波（LeaderDrive）這樣的公司創下歷史新高了嗎？這當然取決於公司本身。美國的流動性運作方式有點不同，通常集中在航太、機器人、AI 等下游前沿產業。如果我們以航太領域的 $RKLB 為例，它就享有溢價..."
   },
   "2072636916173066624": {
+    "id": "2072636916173066624",
+    "tweet_id": "2072636916173066624",
     "sentiment": "Bullish",
-    "summary": "看好CCXI與人形機器人發展潛力",
-    "translation_zh": "@blkslymn 我個人看多 $CCXI，且最大的持倉在 Agility Robotics（非投資建議）。它目前估值約為 49 億美元。\n\nFigure 去年的上一輪估值為 390 億美元，而那還是在今年人形機器人/機器人技術興趣大增之前。\n\n然後 $TSLA 萬億以上估值很大一部分也是來自機器人…"
+    "stances": {
+      "CCXI": "Bullish",
+      "TSLA": "Bullish"
+    },
+    "summary": "作者看好 CCXI 與 TSLA，並重倉機器人領域。",
+    "translation_zh": "@blkslymn 我個人做多 CCXI，且 Agility Robotics 的持倉集中度最高（非財務建議）。其目前估值約 49 億美元。Figure 去年的上一輪融資為 390 億美元，這還是在今年人形機器人／機器人學關注度提升之前。接著很大一部分是特斯拉（TSLA），市值突破 1 兆美元。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:12Z"
   },
   "2072616481846898782": {
     "sentiment": "Neutral",
@@ -3336,9 +3477,20 @@
     "translation_zh": "@mkfilko 例如摩根士丹利也預期 $META 的聲明將帶來 AI 資本支出的上修…\n\n因此所有 AI 概念股的拋售似乎有些過頭了。https://t.co/UTyz9a7KrM"
   },
   "2072575509880512555": {
-    "sentiment": "Neutral",
-    "summary": "科技股拋售劇烈，小型股相對抗跌",
-    "translation_zh": "@DogUrineCapital 看到 $MRVL 跌 -11%、$AMAT 跌 -11% 到 $NBIS 跌 -18%，這真的很令人反胃。\n\n好的一面是，許多高 Beta 值/小型股如 $AAOI 已經提前消化下跌。\n\n所以它們表現得相對較好。https://t.co/OEyJ4YiQQr"
+    "id": "2072575509880512555",
+    "tweet_id": "2072575509880512555",
+    "sentiment": "Bearish",
+    "stances": {
+      "AAOI": "Bullish",
+      "AMAT": "Bearish",
+      "MRVL": "Bearish",
+      "NBIS": "Bearish"
+    },
+    "summary": "MRVL、AMAT與NBIS大跌看空，AAOI表現較佳。",
+    "translation_zh": "看到 $MRVL 下跌 11%、$AMAT 下跌 11% 到 $NBIS 下跌 18%，這真是相當讓人反感。往好處看，像 $AAOI 這樣許多高貝塔/較小型的標的前期就已領跌，所以這些表現得比較好。",
+    "risk": "多檔標的出現雙位數大跌，顯示市場賣壓沈重與高貝塔股的回檔風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:14Z"
   },
   "2072574465763111166": {
     "sentiment": "Bullish",
@@ -3356,9 +3508,18 @@
     "translation_zh": "分享 Agility Robotics ($CCXI) 簡報中的這 3 張投影片。\n\n獻給那些看衰美國機器人計畫的人：\n\n1. 「75% 零件」來自美國本土\n\n2. 目測圖表，量產的物料清單（BOM）成本似乎小於 3 萬美元。大家之前只盯著約 14.5 萬美元的成本。\n\n3. https://t.co/zs2msucOk6"
   },
   "2072314906729455876": {
+    "id": "2072314906729455876",
+    "tweet_id": "2072314906729455876",
     "sentiment": "Bullish",
-    "summary": "澄清META砍支出傳言，算力極吃緊",
-    "translation_zh": "關於 $META 因為「過度建設」而「削減資本支出」的傳聞有很多不實資訊。\n\n這前提是「如果」他們有過剩產能。\n\n而現在看起來恰恰相反：\n\n像 $GOOGL 這樣的超大規模雲端業者算力極度吃緊，以至於不得不削減對 Meta 的算力分配"
+    "stances": {
+      "GOOGL": "Bullish",
+      "META": "Bullish"
+    },
+    "summary": "大型雲端商運算資源吃緊，對META與GOOGL抱持看多立場。",
+    "translation_zh": "關於$META「削減資本支出」是因為「過度建設」的謠言很多。這只有在他們有過剩產能的「假設」下成立。但目前看起來正好相反：像$GOOGL這樣的大型雲端商面臨嚴重的算力受限，甚至不得不削減對Meta的資源分配。",
+    "risk": "大型雲端服務商面臨運算資源嚴重受限，可能影響產能分配與業務成長。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:17Z"
   },
   "2072307910223532245": {
     "sentiment": "Neutral",
@@ -3376,14 +3537,37 @@
     "translation_zh": "根據彭博社報導，Meta ($META) 終於要建立雲端業務來銷售過剩的 AI 算力。我一直認為 Meta 最終應該與 GCP、Azure 和 AWS 競爭以增加收入來源。Meta 盤前上漲 6.65%。"
   },
   "2072275805330362648": {
-    "sentiment": "Bullish",
-    "summary": "看好人形機器人獲巨頭支持發展",
-    "translation_zh": "突發奇想，美國領先的人形機器人玩家運作模式，讓我想起目前的 LLM 動態：Agility ($CCXI) 感覺有點像機器人領域的 Anthropic。有 $AMZN 和 $NVDA 的大力支持，並與 $GOOGL Deepmind 深度結合（類似 TPU），而且它是從企業端開始切入的。"
+    "id": "2072275805330362648",
+    "tweet_id": "2072275805330362648",
+    "sentiment": "Neutral",
+    "stances": {
+      "AMZN": "Neutral",
+      "CCXI": "Neutral",
+      "GOOGL": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "作者認為Agility機器人發展類似Anthropic的LLM。",
+    "translation_zh": "隨興的想法，美國領先的人型機器人玩家讓我想起目前的LLM動態：Agility（$CCXI）感覺有點像是機器人領域的Anthropic。有$AMZN和$NVDA的大力支持，並融入了$GOOGL Deepmind（如TPU），且它從企業端切入。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:19Z"
   },
   "2072262479179284686": {
+    "id": "2072262479179284686",
+    "tweet_id": "2072262479179284686",
     "sentiment": "Bullish",
-    "summary": "機器人上市與能源合約帶動板塊",
-    "translation_zh": "@AleksandarGenov 可能 Agility Robotics 透過 $CCXI 上市及其周圍的媒體報導是個催化劑。在宣布前，$OUST、$AEVA 等股票表現平平。至於像 $FCEL、$BE 這類能源股，由於簽訂了擴大的新合約，基本面相當扎實。"
+    "stances": {
+      "AEVA": "Neutral",
+      "BE": "Bullish",
+      "CCXI": "Bullish",
+      "FCEL": "Bullish",
+      "OUST": "Neutral"
+    },
+    "summary": "CCXI帶動機器人話題，能源股FCEL與BE則擁合約利多。",
+    "translation_zh": "AleksandarGenov：大概是Agility Robotics透過$CCXI上市及相關媒體炒作成為催化劑。感覺在宣布之前，$OUST、$AEVA和其他標的表現平平。至於像$FCEL、$BE這樣的能源股，由於有新的擴大合約，看起來相當具基本面支撐。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:21Z"
   },
   "2072225122057142691": {
     "sentiment": "Bullish",
@@ -3401,9 +3585,19 @@
     "translation_zh": "@SidkMena 不確定，可能只是板塊拋售。訊芯最近確認與台積電 ($TSM) 的 COUPE 直接合作夥伴關係，隨後卻下跌了 15-20%。我不認為除了 SemiAnalysis 一再看空輝達生態圈之外，還有什麼實質性的變化。"
   },
   "2072178393878290789": {
-    "sentiment": "Neutral",
-    "summary": "彙整 AI 與半導體供應鏈最新動態",
-    "translation_zh": "整理一些我最近看到的有趣新聞：\n1. 摩根士丹利：將中國人形機器人 2026 年出貨量預測從今年早些時候的 1.4 萬台和 2.8 萬台上調至 5 萬台。\n2. 摩根士丹利：探針卡和測試插座可能會漲價（貴金屬漲價 + 測試針產能嚴重短缺）。\n3. 電容漲價：國巨的 MLCC、鋁電解、鉭電容、高分子鋁電容、薄膜電容和超級電容漲價。\n4. $META Vistara 架構：使用舊版 DDR4 記憶體並搭配 CXL 作為記憶體擴充。\n5. OpenAI 取得推理優化突破，將成本降低一半並減少 GPU 需求。\n6. 三星與美國大科技客戶簽署 LTA 後，MLCC 正在簽署長期供應協議（LTA）。\n7. 電網電力瓶頸促使 Brookfield 對 $BE 燃料電池的融資增加 5 倍（達到 250 億美元）。\n8. 台灣晶片封測供應鏈包括日月光 ($ASX)、京元電、超豐、順德等主要業者。（Digitimes）\n- 台灣 OSAT 業者正在調漲價格\n- 記憶體與半導體封測產能皆已成為供應鏈瓶頸"
+    "id": "2072178393878290789",
+    "tweet_id": "2072178393878290789",
+    "sentiment": "Bullish",
+    "stances": {
+      "ASX": "Bullish",
+      "BE": "Bullish",
+      "META": "Neutral"
+    },
+    "summary": "半導體封測需求強勁推升ASX，BE受惠電網瓶頸，整體產業看多。",
+    "translation_zh": "分享近期觀察到的有趣新聞：1. 摩根士丹利上調中國人形機器人出貨預測。2. 探針卡與測試插座因貴金屬漲價及產能短缺面臨漲價。3. 國巨調漲各類電容價格。4. META Vistara架構採用DDR4搭配CXL擴充記憶體。5. OpenAI實現推論優化，降低成本與GPU需求。6. 三星與美系科技巨頭簽署長約，帶動MLCC長約簽署。7. 電網瓶頸使Brookfield對BE燃料電池的融資增加5倍至250億美元。8. 台灣封測供應鏈包括ASX等大廠，目前封測業者正調漲價格，且記憶體與封測產能皆成為供應鏈瓶頸。",
+    "risk": "半導體供應鏈面臨產能瓶頸，且測試介面與原物料價格上漲可能增加營運成本。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-10-09T02:03:40Z"
   },
   "2072152226169331776": {
     "sentiment": "Bullish",
