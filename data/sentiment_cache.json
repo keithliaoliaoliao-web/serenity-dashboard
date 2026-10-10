@@ -4721,14 +4721,32 @@
     "analyzed_at": "2026-10-09T20:52:35Z"
   },
   "2062180757850968491": {
+    "id": "2062180757850968491",
+    "tweet_id": "2062180757850968491",
     "sentiment": "Bullish",
-    "summary": "歐洲強化供應鏈關鍵地位，看好SOI與SIVE",
-    "translation_zh": "@BilalElmou89932 歐洲在 AI 競賽中沒有機會與美國競爭。\n\n但他們能做的是加強其利基壟斷/關鍵瓶頸，以及主權供應鏈的韌性。\n\n不過我認為他們開始意識到像 $SOI 和 $SIVE 這樣的關鍵玩家對歐洲有多麼重要。"
+    "stances": {
+      "SIVE": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "看多SOI與SIVE，因其為歐洲關鍵利基卡位廠商。",
+    "translation_zh": "歐洲在 AI 競賽中毫無與美國競爭的機會。但他們能做的是強化自身利基市場的壟斷/卡位優勢，以及主權供應鏈的韌性。不過我認為他們正開始意識到像 $SOI 和 $SIVE 這樣的業者對歐洲有多關鍵。",
+    "risk": "歐洲在 AI 競賽中完全無法與美國競爭。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-10-10T00:42:41Z"
   },
   "2062169440444444887": {
-    "sentiment": "Bullish",
-    "summary": "歐盟晶片法案2研究助推供應鏈分析與個股點名",
-    "translation_zh": "老實說，晶片法案2的供應鏈研究真的很棒。如果你去看歐盟政府的影響分析報告，這一切都幫你整理好了。他們提到了像是TOWA（在模具和密封系統佔61%），然後拆解了像是 $ONTO、 $BESI 等控制權結構。"
+    "id": "2062169440444444887",
+    "tweet_id": "2062169440444444887",
+    "sentiment": "Neutral",
+    "stances": {
+      "BESI": "Neutral",
+      "ONTO": "Neutral"
+    },
+    "summary": "提及歐盟晶片法案分析中點名BESI與ONTO，立場中立。",
+    "translation_zh": "老實說，《歐洲晶片法案 2》的供應鏈研究真的很神。因為如果你去讀歐盟官方的影響評估報告，政府基本上都幫你做好了。他們點名了像 TOWA 這樣「在成型與封裝系統占有 61%」的公司，然後分析了像 $ONTO、$BESI 等公司的控制力。",
+    "risk": "",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-10-10T00:43:06Z"
   },
   "2062155740660588710": {
     "sentiment": "Bullish",
@@ -4741,9 +4759,18 @@
     "translation_zh": "@KayEffGeee $XFAB 突然上漲了 7%，我想知道那裡是否有被提及。我現在要去看會議記錄了。"
   },
   "2062139870613745890": {
-    "sentiment": "Bullish",
-    "summary": "$XFAB 基本面強勁且具備歐美晶片法案支持",
-    "translation_zh": "納斯達克上市與歐盟上市的區別：\n\n$POET：24億美元市值\n-> 包裝 Sivers 雷射\n-> 有一筆 5000 萬美元的認股權證預生產合約\n\n> $XFAB：17億美元市值\n-> 獲得歐盟晶片法案、美國晶片法案 PMT 支持的 SiC/GaN/MEMS/矽光子代工廠\n-> 低於重置股價淨值比 (P/B)"
+    "id": "2062139870613745890",
+    "tweet_id": "2062139870613745890",
+    "sentiment": "Neutral",
+    "stances": {
+      "POET": "Bearish",
+      "XFAB": "Bullish"
+    },
+    "summary": "看空 POET 估值過高，看好 XFAB 具價值低估優勢。",
+    "translation_zh": "那斯達克與歐洲上市公司的差異：$POET 市值 24 億美元，僅封裝 Sivers 雷射且只有一筆 5,000 萬美元換取認股權證的試產合約；$XFAB 市值 17 億美元，為獲美歐晶片法案支持的第三代半導體、微機電及矽光子代工廠，股價淨值比低於重置成本。",
+    "risk": "POET 市值高達 24 億美元卻僅有少額試產合約，存在估值過高與股權稀釋疑慮。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T00:43:57Z"
   },
   "2062123017002774840": {
     "sentiment": "Bullish",
@@ -4751,39 +4778,109 @@
     "translation_zh": "@EestiRadar很高興 $NBIS 結果很好，財報大好後的回檔相當殘酷。"
   },
   "2062122602672636043": {
+    "id": "2062122602672636043",
+    "tweet_id": "2062122602672636043",
     "sentiment": "Bullish",
-    "summary": "看好 $NVDA 入股 $MRVL 與 ASIC 成長潛力",
-    "translation_zh": "@WEB3_furture 很棒的文章！我其實沒想到 $NVDA 今年會合作並參股 $MRVL。但我本來就預期 Marvell 憑藉其即將到來的 ASIC/連接營收機會，會是一個引人注目的想法。"
+    "stances": {
+      "MRVL": "Bullish",
+      "NVDA": "Neutral"
+    },
+    "summary": "看好MRVL的ASIC與連結商機及NVDA入股合作。",
+    "translation_zh": "@WEB3_furture 好文！我原本真沒料到 $NVDA 今年會與 $MRVL 合作並入股。但無論如何，光憑他們即將到來的 ASIC 與連接解決方案營收商機，我就認為邁威爾是個極具吸引力的投資標的。",
+    "risk": "",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T00:44:24Z"
   },
   "2062119438552572283": {
-    "sentiment": "Bullish",
-    "summary": "$NBIS 財務結構健全且子公司資產估值吸引人",
-    "translation_zh": "@BKCY314 融資結構大不相同，$CRWV 正被債務利息吞噬。$IREN 的股權因過度的 ATM（市價增發）而缺乏升值空間。$NBIS 剛剛好，並且擁有來自 Avride 子公司及其對 Clickhouse 所有權的加總價值。"
+    "id": "2062119438552572283",
+    "tweet_id": "2062119438552572283",
+    "sentiment": "Neutral",
+    "stances": {
+      "CRWV": "Bearish",
+      "IREN": "Bearish",
+      "NBIS": "Bullish"
+    },
+    "summary": "看好NBIS業務價值，看空受債務與稀釋拖累的CRWV及IREN。",
+    "translation_zh": "@BKCY314 融資結構大不相同，$CRWV 正被債務利息生吞活剝。$IREN 則因過度的現價發行（ATM）增資導致股權幾乎沒有升值空間。$NBIS 恰到好處，且享有旗下子公司 Avride 與 Clickhouse 持股的分部加總價值。",
+    "risk": "CRWV面臨龐大債務利息負擔，IREN面臨過度現價發行增資稀釋股權風險。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T00:45:00Z"
   },
   "2062116398210703462": {
+    "id": "2062116398210703462",
+    "tweet_id": "2062116398210703462",
     "sentiment": "Bullish",
-    "summary": "Neocloud 領域首選 $NBIS 表現亮眼驗證論點",
-    "translation_zh": "很高興看到我最有信心的 Neocloud 首選 $NBIS 表現禁得起時間考驗。我去年寫了一篇關於 Neocloud 板塊將成為主流主題的論文，然後挑選了王者。-> Nebius 是從 $IREN 到 $CRWV 整個板塊中的第一名。$84 -> $260。論點已被市場驗證。"
+    "stances": {
+      "CRWV": "Neutral",
+      "IREN": "Neutral",
+      "NBIS": "Bullish"
+    },
+    "summary": "作者看好$NBIS為新雲端龍頭，投資邏輯獲市場驗證。",
+    "translation_zh": "很高興看到我在 $NBIS 最有信心的新雲端選擇表現優異。我去年寫了一篇論文，預測新雲端領域將成為大趨勢，隨後選出了王者：從 $IREN 到 $CRWV，Nebius 是整個領域的第 1 名。股價從 84 美元升至 260 美元，投資邏輯獲得市場驗證。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-10-10T00:45:31Z"
   },
   "2062086341291356317": {
+    "id": "2062086341291356317",
+    "tweet_id": "2062086341291356317",
     "sentiment": "Bullish",
-    "summary": "預期 $SIVE 將在更多利好消息下擊潰放空者",
-    "translation_zh": "@Jayden11129225 可能有活躍的空頭正在加碼 $SIVE。我預期隨著時間過去他們會被打趴。特別是當有更多公告發布時。再有一個類似 Innolight 的驚喜 $JBL 類型公告會很有趣。因為 Sivers 正在與..."
+    "stances": {
+      "JBL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好SIVE將軋空，期待類似JBL的合作公告。",
+    "translation_zh": "@Jayden11129225 目前有活躍的空頭可能正在加倍放空 $SIVE。我預計隨著時間推移他們會慘賠。特別是如果有更多公告發布的話。如果能再有一個像 $JBL 那樣與旭創（Innolight）之類的公司合作的驚喜公告，那將會非常有趣。因為 Sivers 正在與其共同開發/認證",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T00:45:58Z"
   },
   "2062084925445284078": {
+    "id": "2062084925445284078",
+    "tweet_id": "2062084925445284078",
     "sentiment": "Bullish",
-    "summary": "$SIVE 有望成為 NVLink  CPO 生態系的關鍵供應商",
-    "translation_zh": "@siflower 那是直接針對 $NVDA。我指的是 ASIC/中介商 NVLink CPO 生態系夥伴。$SIVE 看起來像是每個人的供應商。"
+    "stances": {
+      "NVDA": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好 SIVE 成為 NVLink 生態系中所有廠商的供應商",
+    "translation_zh": "@siflower 那是直接針對 $NVDA。我指的是 ASIC/商用 NVLink CPO 生態系統的合作夥伴。而 $SIVE 看起來像是所有人的供應商。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T00:46:20Z"
   },
   "2062083680093258006": {
-    "sentiment": "Bullish",
-    "summary": "供應鏈確認NVDA與AMD投資Ayar與SIVE",
-    "translation_zh": "@Uri62223094 這是供應鏈的確認，我知道 $NVDA 是 Ayar 的投資者，所以我猜想他們想要像是 NVlink 生態系這樣的策略合作。\n\n$AMD 也投資了 Ayar，所以 $AMD 選擇 $GFS 來做 CPO，透過 Ayar 把 $SIVE 的 1+1 給湊在一起了。\n\n聯發科與 $INTC"
+    "id": "2062083680093258006",
+    "tweet_id": "2062083680093258006",
+    "sentiment": "Neutral",
+    "stances": {
+      "AMD": "Neutral",
+      "GFS": "Neutral",
+      "INTC": "Neutral",
+      "NVDA": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "分析NVDA與AMD等晶片廠在Ayar的供應鏈合作關係",
+    "translation_zh": "這是供應鏈的確認。我之前就知道 $NVDA 是 Ayar 的投資者，所以我假設他們想要進行像 NVlink 生態系統這樣的戰略合作。$AMD 也投資了 Ayar，因此 $AMD 與 $GFS 在共同封裝光學（CPO）上的合作，也透過 Ayar 把 $SIVE 聯繫在了一起。聯發科和 $INTC。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T00:46:30Z"
   },
   "2062082082265076045": {
+    "id": "2062082082265076045",
+    "tweet_id": "2062082082265076045",
     "sentiment": "Bullish",
-    "summary": "預期SIVE將成NVDA生態系主要供應商",
-    "translation_zh": "@OGCapital25 @Chi_w_wong Celestial 和 Lightmatter 嘗試多元供應來源是可以預期的。\n\n但或許第一代產品，我猜 $SIVE 會在 $NVDA CPO NVlink 生態系中扮演許多獨家供應／主要供應商的角色。\n\nNvidia 有他們自己與 $LITE 和 $COHR 的合作計畫。"
+    "stances": {
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE在NVDA生態系佔優勢，看好SIVE與NVDA。",
+    "translation_zh": "@OGCapital25 @Chi_w_wong 預期 Celestial 和 Lightmatter 會嘗試多重供應來源。但對於第一代，我猜測許多將由 $SIVE 獨家或主要供應 $NVDA CPO NVlink 生態系。輝達則擁有他們自己的 $LITE 和 $COHR 計畫。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:46:48Z"
   },
   "2062081644631372075": {
     "sentiment": "Bullish",
@@ -4791,9 +4888,20 @@
     "translation_zh": "@MindQuest42 如果 $SIVE 今天以 60-80 億美元的估值交易，我也不會感到意外。\n\n話雖如此，它目前仍在瑞典交易所交易，但納斯達克上市應該能縮小估值差距。"
   },
   "2062080378882658330": {
+    "id": "2062080378882658330",
+    "tweet_id": "2062080378882658330",
     "sentiment": "Bullish",
-    "summary": "SIVE為多個光學大廠核心雷射供應商",
-    "translation_zh": "@Chi_w_wong $NVDA CPO 生態系 = $MRVL、Lightmatter、Ayar（今天加入）\n\n$SIVE 100% 確認成為 Ayar 的雷射供應商。\n\n$SIVE 高度確定成為 Marvell Celestial、Lightmatter 的雷射供應商。\n\nNvidia、Marvell、Lightmatter、Ayar 都使用 $GFS，而 Sivers 是參考雷射供應商。\n\nSivers ="
+    "stances": {
+      "GFS": "Bullish",
+      "MRVL": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE獲多方大廠採用為雷射供應商，帶動相關半導體生態系看多。",
+    "translation_zh": "@Chi_w_wong 輝達CPO生態系統包含美滿電子、Lightmatter與今日加入的Ayar。Sivers是Ayar 100%確認的雷射供應商，也是美滿電子Celestial與Lightmatter的高信心雷射供應商。輝達、美滿電子、Lightmatter與Ayar皆使用格芯，而Sivers為其參考雷射。Sivers =",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:46:51Z"
   },
   "2062079425475473595": {
     "sentiment": "Bullish",
@@ -4816,19 +4924,48 @@
     "translation_zh": "@ConfusedNDazzed 對 $SIVE 來說，今天其實有比歐盟晶片法案政策框架宣布還要更大的消息。"
   },
   "2062047308825681943": {
-    "sentiment": "Bullish",
-    "summary": "SIVE與XFAB高度契合歐盟政策激勵",
-    "translation_zh": "@aphexinvests 所以 $SOI 和 $NOK 已經更具規模。\n\n我深入研究後發現，這些提案圍繞在 3.0 至 5.0 億美元的資金和營收激勵，旨在協助量產前期的業者跨入 HVM（高產量製造）。\n\n$SIVE / $XFAB 與政策激勵的契合度更高，但這也不足為奇"
+    "id": "2062047308825681943",
+    "tweet_id": "2062047308825681943",
+    "sentiment": "Neutral",
+    "stances": {
+      "NOK": "Neutral",
+      "SIVE": "Bullish",
+      "SOI": "Neutral",
+      "XFAB": "Bullish"
+    },
+    "summary": "分析各標的政策補助適應性，NOK與SOI較成熟，SIVE與XFAB更契合。",
+    "translation_zh": "@aphexinvests 所以 $SOI 和 $NOK 已經更為成熟。我深入研究了一下，這些提案主要集中在 3，000 萬到 5 億美元的資金和營收激勵，旨在協助量產前期的業者過渡到高產量製造（HVM）。$SIVE / $XFAB 更契合政策激勵，但我也不會感到意外。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:46:53Z"
   },
   "2062045895500419101": {
+    "id": "2062045895500419101",
+    "tweet_id": "2062045895500419101",
     "sentiment": "Bullish",
-    "summary": "歐盟晶片法案2.0將優先支持光學產業",
-    "translation_zh": "歐洲於今天 6 月 3 日發布其技術主權方案。\n\n這包括預計將優先發展光學的晶片法案 2.0。\n\n$XFAB 和 $SIVE 都被納入指導歐盟立法的產業政策藍圖中。\n\n這提出了主權支持 https://t.co/WWBlo5o1tL"
+    "stances": {
+      "SIVE": "Bullish",
+      "XFAB": "Bullish"
+    },
+    "summary": "歐盟科技主權法案與晶片法案2.0將優先發展光子學，XFAB與SIVE獲政策藍圖點名背書看多。",
+    "translation_zh": "歐洲正於今日6月3日發布其科技主權包裹方案。這包括預期將優先發展光子學的晶片法案2.0。$XFAB與$SIVE雙雙被納入指導歐盟立法的產業政策藍圖中。這提出了主權擔保 https://t.co/WWBlo5o1tL",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:46:55Z"
   },
   "2061976525575270583": {
+    "id": "2061976525575270583",
+    "tweet_id": "2061976525575270583",
     "sentiment": "Bullish",
-    "summary": "$SIVE 成為輝達生態系雷射供應商",
-    "translation_zh": "@beauty_oe 我知道！$SIVE 成為 $NVDA nvlink 融合生態系統的雷射供應商，這真的是一則大消息。Marvell 幾個月前才加入，看看他們之後的市值變化。我今天稍後會詳細報導！"
+    "stances": {
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE為NVDA雷射供應商，潛力看好。",
+    "translation_zh": "我知道！$SIVE 成為 $NVDA nvlink 融合生態系統的雷射供應商，這真是個大新聞。Marvell 幾個月前加入後，看看他們的市值發生了什麼變化。我今天稍後會詳細介紹！",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:46:57Z"
   },
   "2061960469884346736": {
     "sentiment": "Neutral",
@@ -4841,9 +4978,18 @@
     "translation_zh": "@DeauDeuxsau 預計 2027 年上半年會有 $LPK 的玻璃核心基板量產訂單，除了等待這件事發生外，目前沒有什麼新消息。"
   },
   "2061958857132585076": {
+    "id": "2061958857132585076",
+    "tweet_id": "2061958857132585076",
     "sentiment": "Bullish",
-    "summary": "$AEHR 市值達 35 億，等待量產訂單",
-    "translation_zh": "$AEHR 的好日子，目前市值約 35 億美元。最近沒有提太多是因為沒有太多新消息。只是在等待像 $LPK 等這類玩家的量產訂單。"
+    "stances": {
+      "AEHR": "Bullish",
+      "LPK": "Neutral"
+    },
+    "summary": "作者看好 AEHR 的表現，並正等待 LPK 等同業的放量訂單。",
+    "translation_zh": "與 $AEHR 度過美好時光，其市值目前約為 35 億美元。由於沒有太多新消息，所以比較少提及。只是在等待像 $LPK 等這類同業的放量訂單。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:46:59Z"
   },
   "2061916930039291914": {
     "sentiment": "Bullish",
@@ -4851,24 +4997,62 @@
     "translation_zh": "$TSM COUPE 供應商想法：另一個是我有持股的精材 (3374)。這是 $TSM 的測試子公司，目前股價 255，市值約 21 億美元。最大的疑問是他們是否與 COUPE 有關……否則我不會建立頭寸。但最近的一些報導確認了台積電的垂直整合計畫：「台積電正在建立矽光子帝國，積極追求共同封裝光學 (CPO) 機會，引用未具名供應鏈消息來源稱其子公司精材和精材科技……預計台積電將於 5 月 14 日（星期四）在台灣新竹的技術研討會上談論其 SiPho 計畫，包括其 COUPE 平台。」所以如果他們「積極追求機會」，這對我來說就成定局了。反正有 $TSM 持股風險已降低。來自 COUPE 的上漲空間？個人覺得這是一個有趣的點子。"
   },
   "2061914361120362678": {
+    "id": "2061914361120362678",
+    "tweet_id": "2061914361120362678",
     "sentiment": "Bullish",
-    "summary": "看好黃仁勳言論激勵 $MRVL 飆升",
-    "translation_zh": "好吧，在看了他在 $NBIS 上的作為後，我應該更信任黃仁勳對 $MRVL 的看法。他這次實際上給了 Marvell 一個 1 兆美元的目標價。Marvell 僅憑一句話就上漲了 35%……"
+    "stances": {
+      "MRVL": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "黃仁勳談話激勵Marvell與NBIS大漲，看多其後市。",
+    "translation_zh": "好吧，早該在看到他對 $NBIS 的操作後就更相信黃仁勳對 $MRVL 的看法。他這次實際上給了 Marvell 一兆美元的目標價。Marvell 因為一句話就大漲了 35%…",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:47:01Z"
   },
   "2061815015892791408": {
+    "id": "2061815015892791408",
+    "tweet_id": "2061815015892791408",
     "sentiment": "Bullish",
-    "summary": "$SIVE 有望複製 $LITE 光學成長波段",
-    "translation_zh": "$LITE 憑藉 EML 和可插拔收發器，在 2 年內乘著第一波光學浪潮從 30 億美元飆升至 750 億美元。我的論點是 $SIVE 也能透過 CPO/可插拔設備和連續波雷射 (CW)，從 30 億美元做到這一點。Sivers + GFS SiPH 參考雷射消息，以及今天 54% 的漲幅，只是其中的第一步。"
+    "stances": {
+      "LITE": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好 LITE 成功經驗，認為 SIVE 具備極大成長潛力。",
+    "translation_zh": "$LITE 在兩年內憑藉 EML 與可插拔光學元件，搭上第一波光學浪潮，從 3 十億美元成長至 75 十億美元。我的論點是 $SIVE 也能憑藉 CPO/可插拔元件與 CW，從 3 十億美元做到同樣的事。Sivers 與 GFS 的矽光子參考雷射新聞，加上今天 54% 的漲幅，只是其中的一步。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:47:04Z"
   },
   "2061806782226604188": {
+    "id": "2061806782226604188",
+    "tweet_id": "2061806782226604188",
     "sentiment": "Bullish",
-    "summary": "$SOI 獲利豐厚，看好 $XFAB 估值",
-    "translation_zh": "@StocksAREnuts 是的，我在 $SOI 上賺了大約 250%，我很驚訝市場居然錯過了那個……對於 $XFAB 的估值我也相當驚訝，因為他們似乎正在領導歐洲的光學供應鏈發展……"
+    "stances": {
+      "SOI": "Bullish",
+      "XFAB": "Bullish"
+    },
+    "summary": "作者看好SOI並對XFAB的低估值感到驚訝。",
+    "translation_zh": "沒錯，我買SOI賺了大約250%，我很驚訝市場居然漏掉這檔...同時我也對XFAB的估值感到相當驚訝，因為他們似乎正在引領歐洲的光子學供應鏈發展...",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:47:06Z"
   },
   "2061799291681956348": {
+    "id": "2061799291681956348",
+    "tweet_id": "2061799291681956348",
     "sentiment": "Bullish",
-    "summary": "$XFAB 潛力大，獲大廠驗證與補助",
-    "translation_zh": "老實說，$XFAB 暗中讓我想起早期的 $TSEM。市值僅低於 20 億美元。你基本上找不到一家公司，其商業化前的矽光子晶圓廠（photonixFAB）正受到 $NVDA 和 $NOK 的積極驗證……同時還獲得 CHIPS 法案/政府補助來補貼資本支出。在領導……"
+    "stances": {
+      "NOK": "Bullish",
+      "NVDA": "Bullish",
+      "TSEM": "Bullish",
+      "XFAB": "Bullish"
+    },
+    "summary": "XFAB獲NVDA與NOK驗證且有補助，看好其潛力。",
+    "translation_zh": "老實說，$XFAB 低調地讓我想起早期的 $TSEM。市值才不到 20 億美元。你基本上很難找到一家公司，能擁有 $NVDA 和 $NOK 積極驗證其商業化前的矽光子晶圓代工廠（photonixFAB）……同時還能獲得 CHIPS 法案／政府補助來補貼資本支出。同時還主導了……",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:47:08Z"
   },
   "2061718299139100931": {
     "sentiment": "Bullish",
@@ -4876,9 +5060,20 @@
     "translation_zh": "你有在聽嗎？路透社：Sivers 與 GFS 全新策略合作。$SIVE 現已宣布其雷射將整合到基於 Globalfoundries 矽光子平台的參考設計中。適用於可插拔光學收發器、CPO 和 SiPH。這具有根本性的意義"
   },
   "2061704502076747781": {
+    "id": "2061704502076747781",
+    "tweet_id": "2061704502076747781",
     "sentiment": "Bullish",
-    "summary": "光子學雷射成為產業標準",
-    "translation_zh": "這是一家公司歷史上最重要的事件。今天與一家光子學廠商共同發布。使他們成為 CPO、可插拔模組和矽光子學（SiPH）的實質標準雷射廠商。適用於像 $NVDA、$AVGO、$AMD 到使用該代工廠的 $MRVL 等公司。有人知道名字嗎？"
+    "stances": {
+      "AMD": "Bullish",
+      "AVGO": "Bullish",
+      "MRVL": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "晶圓廠推出矽光子標準雷射，帶動NVDA等四大廠全面看多。",
+    "translation_zh": "一家公司歷史上最具影響力的重大事件。今天與光子技術業者合作發布。使其成為CPO、可插拔模組和矽光子(SiPH)的功能性標準雷射。適用於使用該晶圓廠的NVDA、AVGO、$AMD到$MRVL等公司。有人知道名字嗎？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T00:47:10Z"
   },
   "2061695297315876875": {
     "sentiment": "Bullish",
