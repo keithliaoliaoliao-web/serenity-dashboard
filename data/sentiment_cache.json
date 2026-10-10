@@ -5479,14 +5479,32 @@
     "translation_zh": "在台灣 Computex 展上，對於尋找新的 CPO 曝光公司來說，這總是一個尋找靈感的好機會：\n\n例如：3362 先進光電市值約 4.77 億美元，大立光 (3008) 市值約 146 億美元。\n\nPMLA（微透鏡陣列）與 FAU。這讓我想起了 $HIMX / 統新 (Foci)。\n\n不過，處於送樣/展示階段與擁有活躍客戶之間是有差異的，因此除了這個之外還需要做更多研究。\n\n這只是一個好的研究開端過程。"
   },
   "2061233888454988260": {
+    "id": "2061233888454988260",
+    "tweet_id": "2061233888454988260",
     "sentiment": "Bullish",
-    "summary": "ARM股價飆升，輝達也將推新品",
-    "translation_zh": "真不敢相信當我建立部位時，$ARM 的股價直接從 134 美元飆到 354 美元。當時這些酷炫的 AI CPU 帶來約 150 億美元的年營收，聽起來似乎有點瘋狂。在 Computex 上，$NVDA 似乎也要發表基於 ARM 的新型處理器了。Counterpoint 的數據顯示..."
+    "stances": {
+      "ARM": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "ARM與NVDA受惠AI處理器需求，表現強勢看多。",
+    "translation_zh": "真不敢相信當我建立部位時，$ARM直接從134美元飆升至354美元。當時這些酷炫名稱的AI CPU帶來的約150億美元年營收似乎有點瘋狂。在台北國際電腦展上，看起來$NVDA也將發表基於ARM的新處理器。對立觀點顯示...",
+    "risk": "年營收150億美元在當時顯得有些瘋狂，暗示估值可能過高。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:48Z"
   },
   "2061093085568966664": {
+    "id": "2061093085568966664",
+    "tweet_id": "2061093085568966664",
     "sentiment": "Neutral",
-    "summary": "徵求短期內具備10倍潛力標的",
-    "translation_zh": "好了各位，距離上次已經有一陣子了。從 $VPG 到 $ASPI 有超多檔股票大漲。所以來群策群力一份新清單：你認為哪一檔是你最有信心能在短時間內翻 10 倍的標的？原因是什麼？"
+    "stances": {
+      "ASPI": "Neutral",
+      "VPG": "Neutral"
+    },
+    "summary": "推文提及VPG與ASPI並尋找潛在十倍股。",
+    "translation_zh": "各位好，距離上一篇已經有一陣子了。從VPG到ASPI有大量股票表現亮眼。因此向大家徵集新名單：你最高信念且認為能在短時間內翻十倍的標的是什麼？原因為何？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:50Z"
   },
   "2061030685566235030": {
     "sentiment": "Neutral",
@@ -5494,9 +5512,19 @@
     "translation_zh": "$LPK 的情況還是一樣，只是在等待成交量放大開始啟動。"
   },
   "2060896847695384736": {
+    "id": "2060896847695384736",
+    "tweet_id": "2060896847695384736",
     "sentiment": "Bullish",
-    "summary": "看好供應鏈咽喉投資理論成真",
-    "translation_zh": "我在想，我的咽喉投資理論……關於從 $AXTI 到 $SOI 再到 $SIVE，未來會不會被寫進歷史書裡？無論如何，我認為這裡的每個人都是創造歷史的一部分。鑑於路透社、機構到各國都平靜地對應供應鏈賽局理論。"
+    "stances": {
+      "AXTI": "Bullish",
+      "SIVE": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "作者看好 AXTI、SIVE 與 SOI 的供應鏈投資策略。",
+    "translation_zh": "我很好奇我關於「瓶頸投資理論」的觀點——從 $AXTI 到 $SOI 再到 $SIVE——是否會被寫入未來的歷史書中？無論如何，我認為這裡的每個人都在創造歷史。鑑於路透社、機構到各國都以從容的態度在對應供應鏈賽局理論。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:52Z"
   },
   "2060867103562084835": {
     "sentiment": "Bullish",
@@ -43564,9 +43592,15 @@
     "id": "2101818303216013812",
     "tweet_id": "2101818303216013812",
     "sentiment": "Bearish",
-    "summary": "看空RDDT，認為AI自主互動將重創社群媒體生態。",
-    "translation_zh": "網路是不是快完蛋了？隨著 AI 發展，$RDDT 與 X 等社群媒體正面臨更高風險。現在能透過像 Jev 這類新型決策模型，以趨近於零的成本進行自主電腦操作（行為也更像真人且更具適應力），接著大型語言模型的輸出又將影響……",
-    "analyzed_at": "2026-09-20T23:54:18Z"
+    "stances": {
+      "RDDT": "Bearish",
+      "SIVE": "Bearish"
+    },
+    "summary": "AI機器人氾濫與惡意操縱輿論，對RDDT與SIVE等公司造成看空風險。",
+    "translation_zh": "網際網路快要完蛋了嗎？隨著AI發展，RDDT與X等社群媒體面臨更高風險。你可以擁有像Jev這樣成本接近$0且能自主進行電腦互動的新決策模型（行動變得更像人類／具適應性）。接著是LLMs輸出影響行為或主導對話。因此在大規模下，惡意人士可以產出五千萬個機器人在網路上遊蕩，透過LLM提示詞說服人們並製造輿論。主要的瓶頸會是手機號碼、IP、帳號年資，或許還有用於算力的硬體加裝置識別碼（這些依然極其便宜）......而不是LLM的成本。我已經耳聞放空機構利用AI機器人散播關於像SIVE這類公司的負面錯誤資訊。或者機器人在評論區行銷某帳號為最值得追蹤的帳號。正如X揭露200多個操縱資料中心輿論辯論的機器人所見。但這種規模很快就會呈指數級惡化。想起來真令人恐懼。",
+    "risk": "AI機器人與LLM被濫用來大規模製造負面假訊息、操縱輿論，對社群平台與被放空公司構成嚴重風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:46Z"
   },
   "2101797616812269694": {
     "id": "2101797616812269694",
@@ -43784,18 +43818,34 @@
   "2103490181525631382": {
     "id": "2103490181525631382",
     "tweet_id": "2103490181525631382",
-    "sentiment": "Bearish",
-    "summary": "認為債券殖利率無法抗通膨，看空固定收益資產。",
-    "translation_zh": "大家真的別再想著 10 年或 30 年期 5% 的殖利率了。連我的賽百味三明治通膨率都高達每年 12%。12 年前只要 5 美元，今天含稅後竟然要 20 美元。這才是跟上通膨的最佳方式。",
-    "analyzed_at": "2026-09-25T15:02:49Z"
+    "sentiment": "Bullish",
+    "stances": {
+      "SPY": "Bullish",
+      "SUBWAY": "Neutral"
+    },
+    "summary": "認為SPY等股票能對抗通膨，看好其表現。",
+    "translation_zh": "人們真的需要停止去想10年或30年期5%的殖利率。甚至我SUBWAY三明治的通膨每年也上漲了約12%。今天稅後大約是20美元，而12年前大約是5美元……。跟上重要事物（例如三明治）通膨的最佳方式是像SPY這樣的股票。",
+    "risk": "潛在的高通膨風險，生活成本大幅上升。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:43Z"
   },
   "2104698369591706069": {
     "id": "2104698369591706069",
     "tweet_id": "2104698369591706069",
-    "sentiment": "Neutral",
-    "summary": "作者身體不適暫時休息，關注AMD收購World Labs及實體AI發展，持中立立場。",
-    "translation_zh": "每個人都在問「Serenity在哪裡」或是「誰是Serenity」。但沒有人問……「Serenity好嗎」？我有看到關於 $AMD 以 82 億美元收購 World Labs 的消息……但現在感覺很不舒服，所以要休息一下。我記得我說過實體 AI 加上世界模型",
-    "analyzed_at": "2026-09-29T01:32:20Z"
+    "sentiment": "Bullish",
+    "stances": {
+      "AAPL": "Neutral",
+      "AMD": "Neutral",
+      "LITE": "Bullish",
+      "MRVL": "Neutral",
+      "NVDA": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "Nvidia壟斷雷射產能且大買庫藏股，看好NVDA與LITE。",
+    "translation_zh": "大家都在問「Serenity在哪裡」或是「誰是Serenity」，但都沒有人問「Serenity過得好嗎」？我有讀到關於AMD以82億美元併購World Labs的訊息，但現在感覺身體不太舒服，所以要休息一下。我記得很久以前就說過實體AI加上世界模型會帶來重大轉變，所以當時我也許應該投資私人公司...除此之外...其他有趣的新聞：來自ECOC的一些管道檢查顯示，據巴克萊銀行指出，輝達顯然確保了Lumentum（LITE）格林斯博羅UHP雷射產能的50%？並且可能還有合約讓他們確保剩餘的產能。那是價值50億美元的雷射（年產能），所以看到輝達透過這樣做來卡住整個產業的脖子實在是太滑稽了。但這只是為其他獨立雷射供應商賦予了更多戰略價值，並為Lumentum帶來了更高的能見度。這有點像是關於分配的賽局理論，因為如果你確保了所有的HBM、雷射和其他資源，它會在無意中讓競爭對手更難擴大他們的計畫。然後是你那規模龐大的150億美元輝達授權買回（看看蘋果做買回時的情況..）。他們印鈔印太多了。同樣有趣的是，三星電機今天正在擴大他們的FC-BGA基板產能...但客戶才是出資的人。我也記得美威（MRVL）在SEC文件中提到大型主體基板是他們計畫的核心瓶頸之一（伴隨著台積電的獨家供應依賴）。所以他們最近也跟AT&S等相關公司簽訂了其他擴產協議。關於OpenAI因安全考量延遲10月發布Astra-6.1的事剛剛發生。輝達剛好也發表了AI安全平台。我不認為這有什麼實質上的看空意義，這只是代表模型變得太優秀了。",
+    "risk": "OpenAI因安全考量延遲Astra-6.1發布，且基板與獨家供應依賴構成產業瓶頸。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:25Z"
   },
   "2105151002760679706": {
     "id": "2105151002760679706",
@@ -43892,5 +43942,579 @@
     "risk": "",
     "model": "gemini-3.7-flash",
     "analyzed_at": "2026-10-09T08:52:08Z"
+  },
+  "2108896030326682074": {
+    "id": "2108896030326682074",
+    "tweet_id": "2108896030326682074",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "RDDT": "Neutral"
+    },
+    "summary": "看好 AAOI 雷射護城河與長期潛力，RDDT 僅為提及。",
+    "translation_zh": "看起來有人在 $RDDT 的 WSB 板上記述了價值 100 萬美元的 $AAOI 部位。看那些留言讓我很想笑，當我名字出現時更有趣。如果人們以為雷射沒有護城河且 AOI 賺不到錢，那可能還太早了（等著看 2027 年 Q2 吧）。",
+    "risk": "市場存在對 AAOI 雷射技術缺乏護城河及公司無法盈利的疑慮。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-10-10T13:35:37Z"
+  },
+  "2108416144428421459": {
+    "id": "2108416144428421459",
+    "tweet_id": "2108416144428421459",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "AMD": "Neutral",
+      "LITE": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "光學元件短缺，看好LITE、SIVE與AAOI擴產。",
+    "translation_zh": "市場常忽視二階影響，直到直接聲明出現才注意到。如果 LITE 產能已被完全訂滿（主要是因為 NVDA 鎖定大部分產能，例如卡位 Greensboro 產能而擠壓到其他人），那麼像 AMD 或超大型雲端業者等其他公司要從哪裡採購供應？SIVE 自身即將上線的產能就占了全球現有雷射產能的六分之一左右（根據 Trendforce，全球為 6.08 億顆 EML/CW 雷射，而 SIVE 達 1 億顆以上的 CW DFB 雷射），這還不包括他們目標以 2:1 比例合作的代工廠夥伴。AAOI 明年也將上線大量產能，足以生產 40 萬個 ELSFP 外加每月 4.71 億美元的收發器。再結合 Lightcounting 等其他供應鏈聲明「過去通常使用 2 到 3 家供應商，現在則是 5 到 7 家」。因此，只要你的產品確實有效且能量產，在光學元件短缺成為巨大瓶頸的當下，很難想像其他具備產能的公司會無法打入供應鏈。",
+    "risk": "產品需確實有效且具備規模化量產能力，才能順利通過供應鏈認證。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:36:01Z"
+  },
+  "2108277973598232851": {
+    "id": "2108277973598232851",
+    "tweet_id": "2108277973598232851",
+    "sentiment": "Bullish",
+    "stances": {
+      "AMZN": "Bullish",
+      "GOOGL": "Bullish",
+      "MSFT": "Bullish"
+    },
+    "summary": "看好亞馬遜、谷歌與微軟，AI投資回報極具吸引力。",
+    "translation_zh": "@ps_georg 超大規模雲端業者是最終資助 AI 建設的人。正如亞馬遜與谷歌的財報發言所示，投資報酬率極具吸引力。甚至微軟也表示在建設期間自由現金流將保持正數。在 OpenAI 最近融資約 1680 億美元之前，我原本更擔心交易對手風險。",
+    "risk": "提及原先擔心的交易對手風險，但已被 OpenAI 最近的巨額融資所緩解。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:36:10Z"
+  },
+  "2108275499772649882": {
+    "id": "2108275499772649882",
+    "tweet_id": "2108275499772649882",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "SNAP": "Bullish"
+    },
+    "summary": "看好 AAOI 與 SNAP，認為估值低估且具長期需求。",
+    "translation_zh": "真正的泡沫在私有風投公司，如 Instinct…只有 10 萬用戶估值卻達 100 億美元，而擁有近 10 億月活的 $SNAP 市值還更低。但供應鏈股票絕非泡沫，像 $AAOI 等標的相對未來成長性被嚴重低估，且超大型雲端業者需求能見度長達多年…",
+    "risk": "提到風投私有公司僅有 10 萬用戶估值即達百億美元，存在估值過高與泡沫風險。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:36:20Z"
+  },
+  "2108111907819499646": {
+    "id": "2108111907819499646",
+    "tweet_id": "2108111907819499646",
+    "sentiment": "Bullish",
+    "stances": {
+      "CCXI": "Bullish",
+      "OKLO": "Neutral"
+    },
+    "summary": "看好 CCXI 上市前景，期望複製 OKLO 熱潮。",
+    "translation_zh": "@UjenA93UTP63896 $CCXI 看起來將在 2026 年第四季上市。我希望若引發足夠熱潮，它表現能像 $OKLO。前幾天看了投資人簡報，正等待近期公開上市（我個人前幾天加碼了一些）。我是人形機器人熱愛者，對物理 AI 轉移非常有信心。在申報階段我不太在意價格走勢，樂趣通常在更換代號後開始。我們拭目以待。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:36:29Z"
+  },
+  "2107534129780920682": {
+    "id": "2107534129780920682",
+    "tweet_id": "2107534129780920682",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "推主無法辨識簡報照片是否為AI生成，立場中立。",
+    "translation_zh": "我已經分不清這是一場真實的簡報，還是照片根本是AI生成的了。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:36:43Z"
+  },
+  "2107199278561333744": {
+    "id": "2107199278561333744",
+    "tweet_id": "2107199278561333744",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish"
+    },
+    "summary": "ATM壓制消除，看好AAOI重回正常走勢。",
+    "translation_zh": "@Blinklebloop 我想我們現在要回到正常軌道了，之前只是按市價增資（ATM）壓制了 $AAOI 好長一段時間。",
+    "risk": "推文提及之前按市價增資（ATM）曾長期對股價造成壓制。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:36:57Z"
+  },
+  "2105714014307397969": {
+    "id": "2105714014307397969",
+    "tweet_id": "2105714014307397969",
+    "sentiment": "Bullish",
+    "stances": {
+      "CCXI": "Bullish"
+    },
+    "summary": "期待 CCXI 本季上市公告，看法看多。",
+    "translation_zh": "@meidaoge Agility Robotics 尚未上市，我只是在等待 $CCXI 本季度的上市公告。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:37:04Z"
+  },
+  "2105711409271292255": {
+    "id": "2105711409271292255",
+    "tweet_id": "2105711409271292255",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "推文討論2024年揭露資料之排除法，立場中立。",
+    "translation_zh": "透過2024年發布的揭露資訊進行排除法。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:37:08Z"
+  },
+  "2105425820529635503": {
+    "id": "2105425820529635503",
+    "tweet_id": "2105425820529635503",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "推文為個人社交內容，無關股市標的，維持中立。",
+    "translation_zh": "我非常高興聽到這個消息，也為你的家人過得很好感到開心！很希望能有機會參觀多倫多。我偶爾會去那裡參加音樂節。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:37:14Z"
+  },
+  "2105421038922481986": {
+    "id": "2105421038922481986",
+    "tweet_id": "2105421038922481986",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "無涉及具體標的，推文為個人感言，整體立場中立。",
+    "translation_zh": "@beauty_oe 我現在感冒有點嚴重，但沒有勉強自己、有好好休息。能得到大家這麼多的支持，真的非常開心。謝謝你們！",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T13:37:34Z"
+  },
+  "2105377657043206492": {
+    "id": "2105377657043206492",
+    "tweet_id": "2105377657043206492",
+    "sentiment": "Bullish",
+    "stances": {
+      "JBL": "Bullish"
+    },
+    "summary": "分析師認為JBL財報表現極佳，市場反應不一反而是買進良機。",
+    "translation_zh": "@DavidJang0620 我其實覺得 $JBL 的財報非常棒。但通常如果你不同意市場的反應，那就代表這是一個買進機會。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:42Z"
+  },
+  "2105155546940891140": {
+    "id": "2105155546940891140",
+    "tweet_id": "2105155546940891140",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "作者未提及具體標的，僅對美國政府大型語言模型感到有趣。",
+    "translation_zh": "@jamesplash666 我感覺狀況比昨天還糟。不過我對新的美國政府 LLM（大型語言模型）玩得很開心 https://t.co/QjbldKrgIk",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:44Z"
+  },
+  "2104709202891735244": {
+    "id": "2104709202891735244",
+    "tweet_id": "2104709202891735244",
+    "sentiment": "Neutral",
+    "stances": {
+      "SPCX": "Neutral"
+    },
+    "summary": "作者提及SPCX執行長但無法確認真偽，立場中立。",
+    "translation_zh": "@Itachidata 我最近過得不太好，一直頭痛有點難受。不過最近確實做了一些有趣的通路調查。昨天在廁所旁邊遇到的一個傢伙自稱是 $SPCX Cursor 的執行長。我不擅長認臉，所以不知道他是不是在說謊。另外還跟一位產業高管討論了波束成形技術，這顯然比我之前想像的還要重要。",
+    "risk": "作者無法確認自稱執行長者的真實身分，且對該公司業務僅止於聽聞，存在消息不確定性風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:47Z"
+  },
+  "2103353556724293650": {
+    "id": "2103353556724293650",
+    "tweet_id": "2103353556724293650",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "作者感嘆舊金山人口僅82萬卻不及自身百萬粉絲數。",
+    "translation_zh": "@shanhai188 我剛剛看了一下舊金山的人口，感覺已經是個很大的城市了，結果整個城市也才82萬人...然後再看看我自己的粉絲數，居然有100萬。說實話，這個數字真的讓我在情緒上有點承受不過來。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:48Z"
+  },
+  "2103352098557690351": {
+    "id": "2103352098557690351",
+    "tweet_id": "2103352098557690351",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "大盤總經貼文，無明確標的與立場。",
+    "translation_zh": "@JHBECCALEE 替我向他們問好！",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:50Z"
+  },
+  "2103237386054570314": {
+    "id": "2103237386054570314",
+    "tweet_id": "2103237386054570314",
+    "sentiment": "Neutral",
+    "stances": {
+      "AKAM": "Neutral"
+    },
+    "summary": "AKAM雖有7年大單，但上游供應鏈才是主要受惠者，立場中立。",
+    "translation_zh": "@KhalidIshaq85 好好想一下：$AKAM 贏得了一筆超過7年的大單。但為了真正執行這筆交易：他們必須購買大量的CPU和記憶體……所以這些上游組件供應鏈可能比頭條新聞中的公司受益更大。不過無法提供買進某物的建議",
+    "risk": "執行訂單需大量採購CPU與記憶體，上游供應鏈可能拿走大部分利益。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:52Z"
+  },
+  "2103233602721132744": {
+    "id": "2103233602721132744",
+    "tweet_id": "2103233602721132744",
+    "sentiment": "Bullish",
+    "stances": {
+      "AKAM": "Bearish",
+      "AMD": "Bullish",
+      "ARM": "Bullish",
+      "INTC": "Bullish",
+      "JBL": "Bullish",
+      "MU": "Bullish"
+    },
+    "summary": "看好CPU與記憶體供應鏈如AMD、ARM、INTC及MU。",
+    "translation_zh": "不看好AKAM。但如果你看重需求，CPU與記憶體排第一。所以就主題來看是ARM、INTC、AMD（AMD對此公司的貝他值可能較高）。接著三星、MU、SK海力士是明顯的記憶體受惠者。組件採購透過JBL進行，若他們也做網通，可能對其自身供應鏈有利。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:55Z"
+  },
+  "2103156967053394241": {
+    "id": "2103156967053394241",
+    "tweet_id": "2103156967053394241",
+    "sentiment": "Neutral",
+    "stances": {
+      "AAOI": "Bullish",
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "作者看好AAOI在2027年起跟進自籌資金擴產。",
+    "translation_zh": "我看LITE/COHR確實有輝達提供20億美元資金來建立產能。但Lumentum似乎主要靠營運現金流自主融資。所以我預期AAOI在2027年上半年開始產能拉升時也會比照辦理。2026年正是資本支出建置的高峰期。我先前的批評在於這段期間的能見度與融資方式。",
+    "risk": "2026年資本支出建置期的高能見度與融資方式存在疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:37:57Z"
+  },
+  "2103155274274209796": {
+    "id": "2103155274274209796",
+    "tweet_id": "2103155274274209796",
+    "sentiment": "Bearish",
+    "stances": {},
+    "summary": "融資缺乏透明度與無限發行ATM的潛在股權稀釋風險使人擔憂。",
+    "translation_zh": "@piyush1337 這真的很讓人沮喪，因為...如果八月份的 6.08 億美元 ATM 完成後，他們在十月份又申請另一個 6.08 億美元的 ATM 該怎麼辦？我很高興能支持他們建設的融資，但對於 ATM 循環的結束或他們實際需要多少資金完全沒有透明度。如果他們只是說「我們需要 35 億美元」，並結合長期協議、私募和 ATM 來完成這件事，就不會有這麼多困惑了。我在營運上超級興奮，但他們融資的方式非常令人擔憂。",
+    "risk": "融資缺乏透明度、ATM循環無止盡及潛在的股權稀釋風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:00Z"
+  },
+  "2103144796110061704": {
+    "id": "2103144796110061704",
+    "tweet_id": "2103144796110061704",
+    "sentiment": "Bullish",
+    "stances": {
+      "CRWV": "Neutral",
+      "IREN": "Bullish",
+      "NBIS": "Neutral"
+    },
+    "summary": "IREN透過併購補足軟體護城河，整體前景看多",
+    "translation_zh": "fichgarciapinto，在IREN完成高達6億美元的市價發行（ATM）後，我對其股價表現會有好得多的看法（我想他們大約完成了41.5%）。我認為Mirantis的收購在完成整合後，將具體改變市場對其在叢集效能上相對於CRWV、NBIS、Lambda、Tensorwave及其他同業排名的看法。我一直認為軟體端實際上是一道護城河（這呼應了CoreWeave執行長的說法），而這正是IREN以前所缺乏的。但透過併購來彌補這項差距，可能是他們所做過最看多的舉動。",
+    "risk": "需留意6億美元市價發行（ATM）造成的股權稀釋壓力與併購整合風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:02Z"
+  },
+  "2103142451020267583": {
+    "id": "2103142451020267583",
+    "tweet_id": "2103142451020267583",
+    "sentiment": "Bullish",
+    "stances": {
+      "CCXI": "Bullish"
+    },
+    "summary": "持看多立場，認為掛牌上市事件尚未發生，目前的波動沒有意義。",
+    "translation_zh": "我仍然持有CCXI，他們甚至還沒有舉行上市活動，所以在那之前的所有波動對我來說都沒有什麼意義。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:04Z"
+  },
+  "2103142262729556021": {
+    "id": "2103142262729556021",
+    "tweet_id": "2103142262729556021",
+    "sentiment": "Bullish",
+    "stances": {
+      "IREN": "Bullish"
+    },
+    "summary": "作者表示好時光已到，且已與IREN和解，立場看多。",
+    "translation_zh": "@qwertyuipasd11 @FransBakker9812 美好時光，不過我已經和 $IREN 和解了 https://t.co/zdJmHgXLfx",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:06Z"
+  },
+  "2103140426404495375": {
+    "id": "2103140426404495375",
+    "tweet_id": "2103140426404495375",
+    "sentiment": "Bearish",
+    "stances": {},
+    "summary": "作者表示在此處削減了所有持倉部位。",
+    "translation_zh": "@kkkkk61216936 我在這裡砍倉了",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:08Z"
+  },
+  "2102839769374011497": {
+    "id": "2102839769374011497",
+    "tweet_id": "2102839769374011497",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "大盤討論，無特定標的。",
+    "translation_zh": "@troyluhman @elonmusk @ellev3n11 所有最厲害的工程師都用動漫大頭貼，這挺合理。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:10Z"
+  },
+  "2102793298561970218": {
+    "id": "2102793298561970218",
+    "tweet_id": "2102793298561970218",
+    "sentiment": "Neutral",
+    "stances": {
+      "AAOI": "Neutral",
+      "ARM": "Neutral",
+      "AXTI": "Neutral",
+      "CCXI": "Neutral",
+      "ESMT": "Neutral",
+      "INTC": "Neutral",
+      "MU": "Neutral",
+      "NBIS": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "目前主要處於追蹤先前投資論點的模式，觀察各標的表現。",
+    "translation_zh": "現在主要進入論點追蹤模式，因為我在上半年已經佈局了大部分的想法，從 INTC、ARM 到 MU，或是 SIVE 到 AAOI、AXTI 或 NBIS。近期只有兩個，一個是做傳統記憶體交易的 ESMT，另一個是做人形機器人的 CCXI，除此之外就是看它們隨時間是否獲得驗證。像是大尺寸基板、CXL 或 MLCC 的新發現，我之前都已經發布過了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:12Z"
+  },
+  "2102792299432530153": {
+    "id": "2102792299432530153",
+    "tweet_id": "2102792299432530153",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "作者未提及特定標的，僅分享研究過程與關注主題。",
+    "translation_zh": "@Jess252530 他們太小了，所以我不想公開談論這個特定的股票組合。不過，我確實會分享我的研究過程和關注的主題。所以我確定其他人也能找到類似的想法。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:14Z"
+  },
+  "2102771652027441611": {
+    "id": "2102771652027441611",
+    "tweet_id": "2102771652027441611",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "大盤總經討論，提及三星電機相關連結，立場中立。",
+    "translation_zh": "沒錯，看起來像是三星電機 https://t.co/h03NIqKDMk",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:31Z"
+  },
+  "2102766392336580670": {
+    "id": "2102766392336580670",
+    "tweet_id": "2102766392336580670",
+    "sentiment": "Neutral",
+    "stances": {
+      "LPK": "Neutral"
+    },
+    "summary": "網友提及 $LPK 新聞並將進一步了解，持中立觀望態度。",
+    "translation_zh": "@s0Xu8sC2tpvpPba 是的，剛看到關於 $LPK 的新聞！我會深入研究看看能不能查出是誰 https://t.co/nCet0CotMD",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:48Z"
+  },
+  "2102569588433334309": {
+    "id": "2102569588433334309",
+    "tweet_id": "2102569588433334309",
+    "sentiment": "Bullish",
+    "stances": {
+      "AVGO": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "AVGO、NVDA與SIVE皆面臨強勁需求與供給受限，半導體供應鏈前景看多。",
+    "translation_zh": "@ardninja 記憶體長約（LTA）延續至 2031 年。$AVGO 預期未來 2 年將面臨年增 100% 的供給受限成長。$NVDA 預期明年將面臨 70% 的供給受限成長（暗示隨後的需求依然強勁）。$SIVE 執行長表示，至少在未來 3 至 5 年內，雷射器將出現巨大的供需失衡。我認為半導體供應鏈的成長需要逐年重新評估，但至少在未來一年半內，我看到了空前的成長。",
+    "risk": "半導體供應鏈成長仍需逐年重新評估，應注意未來供需變化。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:50Z"
+  },
+  "2102568555598512362": {
+    "id": "2102568555598512362",
+    "tweet_id": "2102568555598512362",
+    "sentiment": "Bearish",
+    "stances": {},
+    "summary": "認為兩兆美元估值過高，看好其他平價AI實驗室。",
+    "translation_zh": "不對，兩兆美元的估值很難合理化。我寧願以一點二兆美元投資OpenAI。你們所有像DeepSeek、Minimax或智譜這樣的中國AI實驗室，估值都合理得多。",
+    "risk": "大型AI公司估值過高，難以合理化其龐大市值。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:52Z"
+  },
+  "2102436761914011909": {
+    "id": "2102436761914011909",
+    "tweet_id": "2102436761914011909",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "作者回覆感謝推文，未提及具體標的與投資觀點。",
+    "translation_zh": "@Gubloinvestor 非常感謝你 https://t.co/Yn2Lvqrxtw",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:54Z"
+  },
+  "2102429770973860263": {
+    "id": "2102429770973860263",
+    "tweet_id": "2102429770973860263",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "大盤觀點：推文幽默討論AI與SI的代稱，無明確投資立場。",
+    "translation_zh": "@BCorr_AI 要把事情稱作 SI 而不是 AI 應該會很難。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:57Z"
+  },
+  "2102070202779492802": {
+    "id": "2102070202779492802",
+    "tweet_id": "2102070202779492802",
+    "sentiment": "Bullish",
+    "stances": {
+      "CRWV": "Bearish",
+      "NBIS": "Bullish"
+    },
+    "summary": "推文看好NBIS融資永續性與調漲價格，看空CRWV。",
+    "translation_zh": "@mengxiong715781 荒謬的報告。$NBIS 的融資方式比 $CRWV 和其他新雲端公司永續得多。也有人聲稱 GPU 價格下跌，但 Nebius 將費率調高了約 17-21%（甲骨文也調高了 4 年以上設備的定價）。加總分部估值也是許多分析遺漏的，Clickhouse 很可能會為 Nebius 帶來巨大價值。還有 Avride（與 Uber 合作）以及他們的其它公司。",
+    "risk": "報告曾聲稱GPU價格下跌，需留意設備定價與市場需求變化。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:38:59Z"
+  },
+  "2102069188173222258": {
+    "id": "2102069188173222258",
+    "tweet_id": "2102069188173222258",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "AMS Osram未來可能成為瓶頸，MicroLED將在2028年大放異彩。",
+    "translation_zh": "@Frenchie_ AMS Osram目前不是瓶頸，但未來可能是。MicroLED將在2028年迎來高光時刻。",
+    "risk": "AMS Osram未來可能成為供應鏈的瓶頸。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:01Z"
+  },
+  "2102068786493026492": {
+    "id": "2102068786493026492",
+    "tweet_id": "2102068786493026492",
+    "sentiment": "Bullish",
+    "stances": {
+      "AXTI": "Bullish"
+    },
+    "summary": "AXTI上漲12.4%，因磷化銦具戰略價值且具定價權，看好後續估值重估。",
+    "translation_zh": "@TradingTh3Trend 很高興 $AXTI 今天也上漲了 +12.4%。它現在可能在習近平與川普的會談中被當作棋子使用。因為磷化銦基板將成為美國建置 AI 光學元件的瓶頸。但如果他們對定價有更多掌控權……我確實認為有很大的估值重估空間。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:03Z"
+  },
+  "2102067535915123156": {
+    "id": "2102067535915123156",
+    "tweet_id": "2102067535915123156",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "AMD": "Bullish",
+      "ARM": "Bullish",
+      "ESMT": "Bullish",
+      "INTC": "Bullish",
+      "NBIS": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好SIVE、AAOI、記憶體與CPU等標的之長期成長。",
+    "translation_zh": "@wannabepanacea $SIVE 和 $AAOI，若以2027年為時間框架是可以的，這就是細微差別所在。Sivers擁有1億顆CW DFB雷射產能加2家外部代工廠（總計可能達3億顆），且我所有的供應鏈對應都指向大型超大規模雲端供應商。AAOI在2028年時間框架下擁有4.71億美元收發器營收加40萬顆ELS單元，超大規模客戶與需求正吃掉他們的所有產能，只是有6億美元的ATM現增帶來了近期的潛在賣壓。$NBIS已經重新評價，但2026年第四季前景非常樂觀（尤其是價格調漲）。像 $ESMT 這樣的傳統記憶體（加上一些尚未點名的）以及三星等常規記憶體名稱，我認為近期將強勁跑贏大盤。顯然，最近如 $INTC $AMD $ARM 等CPU名稱也是如此。",
+    "risk": "AAOI有6億美元的ATM增資發行計畫，可能在近期帶來股價壓力與籌碼過剩的疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:06Z"
+  },
+  "2102065409482727842": {
+    "id": "2102065409482727842",
+    "tweet_id": "2102065409482727842",
+    "sentiment": "Bullish",
+    "stances": {
+      "SOI": "Bullish"
+    },
+    "summary": "SOI具矽光子技術壟斷優勢，若定價能力提升有望重回歷史高點。",
+    "translation_zh": "@gurkyboy $SOI 是矽光子完全壟斷的完美範例。（許多人流傳瑞銀或信越等 95% 的數據，Soitec 基本上會授權），但實際上... 幾乎是 100%，因為它用於製造所有 SOI 晶圓，只是人們在市場上不喜歡用壟斷這個詞。這取決於他們將簽署的所有長期協議（LTA）以及定價。如果他們濫用其地位來確保更高的定價，我會很感激。我們將看看他們的協議規模是否值得再次達到歷史新高。",
+    "risk": "需視長期協議的規模與定價策略而定，能否重回歷史高點仍具不確定性。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:09Z"
+  },
+  "2101909316957872324": {
+    "id": "2101909316957872324",
+    "tweet_id": "2101909316957872324",
+    "sentiment": "Bullish",
+    "stances": {
+      "ESMT": "Bullish"
+    },
+    "summary": "ESMT淨利與營收成長強勁，作者認為股價應更高而看多。",
+    "translation_zh": "@DanilSer33 我個人認為 $ESMT 應該要高得多，因為 7 月的淨利非常誇張（大約 1.11 億美元，小於 2 倍的年化 7 月 RR）。從 7 月到 8 月，營收成長約 16.5% 也是相當驚人的。而且我確實追蹤了他們的產品，對升息高度敏感（下半年高度預期）。市場並不總是有效率的，也許在 Q3 財報之後只需要一個提醒。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:11Z"
+  },
+  "2101821887877959762": {
+    "id": "2101821887877959762",
+    "tweet_id": "2101821887877959762",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "推文內容無特定標的與投資立場。",
+    "translation_zh": "你字面上的意思真的就是我所說的那個人工智慧。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:13Z"
+  },
+  "2101821769443422492": {
+    "id": "2101821769443422492",
+    "tweet_id": "2101821769443422492",
+    "sentiment": "Bullish",
+    "stances": {
+      "RDDT": "Bullish"
+    },
+    "summary": "RDDT因AI機器人增加帳號與營收，預期財報將優於預期而看多。",
+    "translation_zh": "@Pau1R0b $RDDT 可能會從表現得像人類的 AI 機器人中獲得更多帳號與營收，所以我猜測財報會優於預期。不過，用 AI 改變大眾輿論對民主與長期平台健康來說真的很糟糕。",
+    "risk": "利用AI改變大眾輿論可能危害民主及平台長期健康。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:15Z"
+  },
+  "2101820530139759017": {
+    "id": "2101820530139759017",
+    "tweet_id": "2101820530139759017",
+    "sentiment": "Bearish",
+    "stances": {
+      "RDDT": "Bearish"
+    },
+    "summary": "RDDT缺乏人類驗證機制，容易遭到平台操縱。",
+    "translation_zh": "@cchronobreakk 我的意思是Sam Altman在他的World專案中就一直在研究虹膜掃描，所以他可能預見了這一點。但現在所有帳號可能都需要全面進行人工驗證。$RDDT不需要太多驗證，所以像這樣的平台會最先遭到操縱。",
+    "risk": "平台缺乏人類驗證機制，容易遭到操縱。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:18Z"
+  },
+  "2101737329270665523": {
+    "id": "2101737329270665523",
+    "tweet_id": "2101737329270665523",
+    "sentiment": "Neutral",
+    "stances": {
+      "INTC": "Neutral",
+      "NBIS": "Neutral",
+      "RDDT": "Neutral"
+    },
+    "summary": "推主提及RDDT成長歷程，並計畫在INTC或NBIS圖表上畫畫。",
+    "translation_zh": "@Temptemo95 感謝一路以來的追蹤！從 $RDDT 到 X 上擁有 100 萬粉絲的整個成長過程就像洗三溫暖一樣。我想我得再次開始在 $INTC 或 $NBIS 的走勢圖上畫動漫和英雄聯盟的角色了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:20Z"
+  },
+  "2101733418300260655": {
+    "id": "2101733418300260655",
+    "tweet_id": "2101733418300260655",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "作者表示會閱讀多數留言但減少回覆以維持資訊品質，整體持中立態度。",
+    "translation_zh": "@Trader827063 我讀了大約95%的評論！我只是盡量少回覆，因為我不想讓一堆短回覆（人們學不到新東西）充斥新聞動態。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T13:39:22Z"
   }
 }
