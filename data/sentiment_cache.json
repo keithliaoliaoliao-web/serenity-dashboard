@@ -5076,19 +5076,50 @@
     "analyzed_at": "2026-10-10T00:47:10Z"
   },
   "2061695297315876875": {
+    "id": "2061695297315876875",
+    "tweet_id": "2061695297315876875",
     "sentiment": "Bullish",
-    "summary": "GFS矽光子合作利多SIVE",
-    "translation_zh": "@wangxindian @StormDirac 我不確定人們是否已經意識到這則關於 $GFS 的新聞的重要性。這可能比 $SIVE + $JBL 在基本面上更具突破性。因為 $AVGO、$MRVL、$NVDA 或任何使用 GFS 矽光子技術的人，預設都會在參考設計中嵌入 $SIVE。"
+    "stances": {
+      "AVGO": "Neutral",
+      "GFS": "Bullish",
+      "JBL": "Neutral",
+      "MRVL": "Neutral",
+      "NVDA": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "GFS矽光子進展具突破性，看好GFS與SIVE前景。",
+    "translation_zh": "我不確定大家是否已經意識到 GFS 這則消息的重大影響。這在基本面上可能比 SIVE 加上 JBL 更具突破性。因為 AVGO、MRVL、NVDA 或任何採用 GFS 矽光子技術的廠商，都會將 SIVE 預設嵌入在參考設計中。",
+    "risk": "",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-10-10T06:56:52Z"
   },
   "2061691323242148281": {
+    "id": "2061691323242148281",
+    "tweet_id": "2061691323242148281",
     "sentiment": "Bullish",
-    "summary": "SIVE與GFS合作屬重大利多",
-    "translation_zh": "@StormDirac 「Sivers Semiconductors 的雷射陣列將被整合到基於 GF 矽光子平台構建的參考設計中。」哇，這對 $SIVE 和 $GFS 來說是結構性的重磅新聞。"
+    "stances": {
+      "GFS": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "Sivers攜手格芯矽光子平台，看多SIVE與GFS。",
+    "translation_zh": "@StormDirac 「Sivers Semiconductors 的雷射陣列將整合至基於格芯（GF）矽光子平台打造的參考設計中。」哇，這對 $SIVE 與 $GFS 來說是結構性的重大利多。",
+    "risk": "",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-10-10T06:56:57Z"
   },
   "2061671824388403368": {
-    "sentiment": "Bullish",
-    "summary": "黃仁勳看好Marvell達兆美元",
-    "translation_zh": "$NVDA 黃仁勳：「各位，$MRVL 是下一家兆美元公司。」Marvell 目前市值為 1,910 億美元。我有持股 Marvell……但我們對黃仁勳預測的 5 倍成長有多大信心？ https://t.co/II4DTZ5Z9D"
+    "id": "2061671824388403368",
+    "tweet_id": "2061671824388403368",
+    "sentiment": "Neutral",
+    "stances": {
+      "MRVL": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "作者持股MRVL，但對黃仁勳看好5倍漲幅持懷疑態度。",
+    "translation_zh": "輝達黃仁勳表示：「各位先生女士，邁威爾將是下一家市值破兆美元的公司。」Marvell 目前市值為 1,910 億美元。我持有 Marvell 部位……但我們對黃仁勳這番 5 倍潛力的言論能有多少信心？",
+    "risk": "質疑 Marvell 能否達到黃仁勳預測的 5 倍成長與 1 兆美元市值。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T06:57:09Z"
   },
   "2061624122560692587": {
     "sentiment": "Neutral",
@@ -5096,14 +5127,40 @@
     "translation_zh": "提醒一下，我最近發現了一個擁有數十個帳號的機器人農場，過去幾天被用來散布關於 $SIVE 的假消息。這場非法活動在地理上可能來自亞洲。因為這些帳號被用來為相同的亞洲項目（如 Alchemy）進行行銷 https://t.co/xjRyZWJwV9"
   },
   "2061597746449248759": {
+    "id": "2061597746449248759",
+    "tweet_id": "2061597746449248759",
     "sentiment": "Bullish",
-    "summary": "Google擴充託管以部署TPU",
-    "translation_zh": "@JonahK44 $NBIS 合作對象是 $META 和 $MSFT。$GOOGL 已經與 $CIFR 到 $WULF 達成了許多 Fluidstack 交易以獲取更多託管服務。我的猜測是為了接入更多他們的 TPU。"
+    "stances": {
+      "CIFR": "Bullish",
+      "GOOGL": "Bullish",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "NBIS": "Neutral",
+      "WULF": "Bullish"
+    },
+    "summary": "GOOGL擴大TPU託管需求，看好CIFR與WULF。",
+    "translation_zh": "@JonahK44 $NBIS 背後是 $META 和 $MSFT。$GOOGL 已經透過 Fluidstack 與 $CIFR 及 $WULF 達成大量交易以取得更多機房託管空間，我猜是為了接入更多他們的 TPU。",
+    "risk": "",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T06:57:20Z"
   },
   "2061596599588114444": {
+    "id": "2061596599588114444",
+    "tweet_id": "2061596599588114444",
     "sentiment": "Bullish",
-    "summary": "AI資本支出狂潮利多上游供應鏈",
-    "translation_zh": "我從沒想過會看到 $GOOGL 需要籌集 800 億美元用於 AI 資本支出的這一天……然後華倫·巴菲特的 $BRK.A 正在資助超大型雲端業者的 AI 建設。- 400 億美元 ATM、300 億美元普通股/債券發行、波克夏 100 億美元。從 $LITE 到 $AVGO 到聯發科到 $TSM 到 $MU 的上游生態系統應該會蓬勃發展。 https://t.co/CxvctNZyMC"
+    "stances": {
+      "AVGO": "Bullish",
+      "BRK": "Neutral",
+      "GOOGL": "Neutral",
+      "LITE": "Bullish",
+      "MU": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "Google擴大AI資本支出，看好台積電等上游供應鏈爆發。",
+    "translation_zh": "我從沒想過會看到 Google 需要籌集 800 億美元用於 AI 資本支出的一天……而華倫·巴菲特的波克夏正在資助這場超大規模雲端業者的 AI 建設：包括 400 億美元的現價發行（ATM）、300 億美元公開發行以及波克夏出資 100 億美元。從 LITE、博通、聯發科到台積電和美光等上游生態系應該會數錢數到手軟。",
+    "risk": "Google需透過ATM增發與公開發行籌資800億美元，可能帶來潛在稀釋風險。",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T06:57:32Z"
   },
   "2061545299055882675": {
     "sentiment": "Bullish",
@@ -5111,9 +5168,20 @@
     "translation_zh": "馬克宏宣布 $NBIS 將投資 80 億歐元在法國建置 AI 雲端基礎設施。這是我最喜歡的評論：「那水資源怎麼辦？」 https://t.co/nlTb37BgE3"
   },
   "2061538735595069534": {
+    "id": "2061538735595069534",
+    "tweet_id": "2061538735595069534",
     "sentiment": "Bullish",
-    "summary": "SIVE為矽光子關鍵雷射供應商",
-    "translation_zh": "-> 智慧財產權（IP）收購 -> 只等待 CPO（共封裝光學）爆發。$SIVE 是光子學的雷射關鍵樞紐，並獲得公開驗證：- $GFS（簡報中指出是 CPO 領域與 $LITE 並列的 2 家公開雷射供應商之一）- $JBL（與 Sivers 合作構建的可插拔模組具有「相對顯著的護城河」）-"
+    "stances": {
+      "GFS": "Neutral",
+      "JBL": "Neutral",
+      "LITE": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好SIVE居光子雷射要角，坐擁護城河待CPO起飛",
+    "translation_zh": "-> IP收購 -> 只待共同封裝光學（CPO）爆發。$SIVE是矽光子雷射技術的關鍵樞紐，並獲得公開驗證：- $GFS（依簡報為CPO領域唯二公開雷射供應商之一，另一家為$LITE）- $JBL（與Sivers合作的可插拔模組具備「相對強大的護城河」）",
+    "risk": "",
+    "model": "gemini-3.7-flash",
+    "analyzed_at": "2026-10-10T06:57:53Z"
   },
   "2061499877763482108": {
     "sentiment": "Bullish",
@@ -5126,9 +5194,18 @@
     "translation_zh": "@Zeynfnr1 $SIVE 實際上是瑞典公司，你難道不知道國家嗎？"
   },
   "2061498698098708676": {
+    "id": "2061498698098708676",
+    "tweet_id": "2061498698098708676",
     "sentiment": "Bullish",
-    "summary": "看好光學股$AAOI大漲，潛力巨大",
-    "translation_zh": "我說過 $AAOI 是我最看好的美國光學長線標的... 今天大漲 +20.1%。如果你想找下一個 $SNDK，就是它了。我認為 2027 年上下半年交替之際，很可能是光學產業的巨大轉折點。我們在 2026 年下半年剛開始時進場稍微早了一點，當每個人都在 https://t.co/0JuWJFrz32"
+    "stances": {
+      "AAOI": "Bullish",
+      "SNDK": "Neutral"
+    },
+    "summary": "看好AAOI為美股光學長線首選，具大幅成長潛力。",
+    "translation_zh": "我確實說過 $AAOI 是我最愛的美國光學多頭標的... 今天大漲了 +20.1%。如果你在尋找下一個 $SNDK，你現在看到的這檔就是了。我認為 2027 年上半年進入下半年，很可能是光子學業者巨大的轉折點。我們在進入 2026 年下半年時只是稍微早了一點，當大家都在...",
+    "risk": "目前進場時間點可能稍微偏早。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-10-10T06:58:19Z"
   },
   "2061487711903740353": {
     "sentiment": "Bullish",
@@ -5146,9 +5223,19 @@
     "translation_zh": "$ARM 實在太誇張了。短短 2 個半月內從 134 美元直奔 413 美元。本來該做選擇權的，報酬率會是幾千個百分比，而不是只有 3 倍。https://t.co/tF335Qp656"
   },
   "2061480648561541175": {
-    "sentiment": "Bullish",
-    "summary": "看好$NBIS為最佳新雲端運算標的",
-    "translation_zh": "@Anon1pvi 我不是 $CRWV 的粉絲，債務利息太高了。至於 $IREN，無限的 ATMs 結構性地限制了上漲空間。$NBIS 則是新雲端領域中的完美平衡贏家。"
+    "id": "2061480648561541175",
+    "tweet_id": "2061480648561541175",
+    "sentiment": "Neutral",
+    "stances": {
+      "CRWV": "Bearish",
+      "IREN": "Bearish",
+      "NBIS": "Bullish"
+    },
+    "summary": "看空CRWV與IREN，看好NBIS為最佳新興雲端業者。",
+    "translation_zh": "@Anon1pvi 我不喜歡 $CRWV，債務利息太高。至於 $IREN，持續增資（ATM）從結構上限制了上漲空間。$NBIS 則是新興雲端領域中最為理想的業者。",
+    "risk": "CRWV債務利息過高；IREN無限ATM增資結構性限制股價上漲空間。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-10-10T06:58:51Z"
   },
   "2061479663181189201": {
     "sentiment": "Bullish",
@@ -5161,24 +5248,64 @@
     "translation_zh": "幾個月後...我的 $EWY 長期選擇權現在已經上漲了 485%。受益於隱含波動率擴張與方向性記憶體多頭。不幸的是，我看到很多人在伊朗局勢動盪期間，因為網路上到處都是末日言論而賣出。不過，從三星 SK 押注記憶體板塊的長期回報 https://t.co/WC7GD5RWka"
   },
   "2061467692469834105": {
+    "id": "2061467692469834105",
+    "tweet_id": "2061467692469834105",
     "sentiment": "Bullish",
-    "summary": "做空超級週期光學股下場慘烈",
-    "translation_zh": "@StormDirac 沒錯，混淆不同的架構和客戶時間表是非常不誠實的。並試圖利用關於 $SIVE 的假消息來獲利。但對 Citron 和 $AAOI 來說，在超級週期中做空光學公司結果並不好。"
+    "stances": {
+      "AAOI": "Bullish",
+      "SIVE": "Bearish"
+    },
+    "summary": "作者看多AAOI並警告放空光通訊有風險，同時指出SIVE伴隨虛假資訊。",
+    "translation_zh": "＠StormDirac 沒錯，混淆不同架構與客戶時間表極其不誠實，還企圖利用$SIVE的虛假資訊獲利。但對Citron與$AAOI來說，在超級週期中放空光學公司結果並不太好。",
+    "risk": "在超級週期中放空光學公司結果不佳，且SIVE相關資訊可能為假。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:08Z"
   },
   "2061466217911853429": {
+    "id": "2061466217911853429",
+    "tweet_id": "2061466217911853429",
     "sentiment": "Bullish",
-    "summary": "歐洲股$IQE大漲，長抱4個月翻倍",
-    "translation_zh": "特別感謝今天唯一收紅的歐洲股票：$IQE。從 4 個月前我以 12-13 美元買進長抱至今，已漲至 54 美元。可惜 $LPK、$SOI、$XFAB 和 $ALRIB 等其他股票波動很大。https://t.co/FysZyHk5OK"
+    "stances": {
+      "ALRIB": "Neutral",
+      "IQE": "Bullish",
+      "LPK": "Neutral",
+      "SOI": "Neutral",
+      "XFAB": "Neutral"
+    },
+    "summary": "IQE大漲看多，其餘標的波動大。",
+    "translation_zh": "特別感謝今天唯一收紅的歐洲股票：$IQE。在四個月前於12-13美元進場做多後，現已漲至54美元。不幸的是，$LPK、$SOI、$XFAB和$ALRIB等其他股票的波動性很大。",
+    "risk": "其他標的存有大量波動性風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:11Z"
   },
   "2061456212303221196": {
+    "id": "2061456212303221196",
+    "tweet_id": "2061456212303221196",
     "sentiment": "Bullish",
-    "summary": "SIVE作為雷射供應商將直接受惠",
-    "translation_zh": "有一個新的 $SIVE 空頭根本不知道自己在講什麼。\n\n1. $MRVL Celestial 可能直接向 $SIVE 採購雷射作為雷射供應商，而不是透過 $POET。\n\n因為自 2023 年以來，他們就被認定是潛在的直接客戶。\n\n打個比方，就像 O-Net / https://t.co/XDrPS6OVNG"
+    "stances": {
+      "MRVL": "Bullish",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者反駁SIVE空頭，看好MRVL與SIVE具直接業務合作。",
+    "translation_zh": "出現了一位對SIVE一無所知的新的SIVE空頭。1. MRVL Celestial可能是直接向雷射供應商SIVE購買雷射，而不是透過POET。因為自2023年以來，他們已被確認為可能的直接客戶。一個比喻就像O-Net / https://t.co/XDrPS6OVNG一樣。",
+    "risk": "遭不明空頭狙擊，可能引發市場對公司供應鏈關係與業務模式的短期疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:13Z"
   },
   "2061442981102764171": {
+    "id": "2061442981102764171",
+    "tweet_id": "2061442981102764171",
     "sentiment": "Bullish",
-    "summary": "FLNC潛在利多推動股價強勢大漲",
-    "translation_zh": "$NVDA、Siemens 和 $FLNC 共同開發 Vera Rubin N72 的參考電源架構。\n\n此時正值 FLNC 即將迎來兩筆潛在的超大規模資料中心（Hyperscaler）交易。\n\n如果你在納悶為什麼它漲了 36%，原因就在這裡。 https://t.co/8f4gAhJeTE"
+    "stances": {
+      "FLNC": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "NVDA與FLNC合作開發新架構且有潛在交易，雙雙看多。",
+    "translation_zh": "輝達（NVDA）、西門子與儲能大廠流體能源（FLNC）共同為 Vera Rubin N72 開發參考電源架構。此時正值 FLNC 有兩筆可能的超大規模數據中心交易即將到來。以防你好奇它為何大漲 36%。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:15Z"
   },
   "2061437102504681793": {
     "sentiment": "Bearish",
@@ -5191,9 +5318,19 @@
     "translation_zh": "@luckybibiw1p我覺得 $NBIS 擁有「主角光環之術」的力量"
   },
   "2061425895307608561": {
+    "id": "2061425895307608561",
+    "tweet_id": "2061425895307608561",
     "sentiment": "Bullish",
-    "summary": "NBIS表現強勁朝千億市值邁進",
-    "translation_zh": "$NBIS 擁有動漫的主角光環！\n\n很高興聽到 Weebius 的表現超越了市場和 Neocloud 籃子（$IREN / $CIFR）。\n\n去年微軟財報發布後，我在Q4財報後做出預測，Nebius 的市值將達到 1000 億美元。\n\n我們目前市值為 600 億美元，快要接近了！ https://t.co/e96TirkJT8"
+    "stances": {
+      "CIFR": "Neutral",
+      "IREN": "Neutral",
+      "NBIS": "Bullish"
+    },
+    "summary": "作者看多 NBIS，認為其表現超越大盤與同業。",
+    "translation_zh": "NBIS 擁有動漫主角光環！很高興聽到 Weebius 的表現超越大盤和 Neocloud 投資組合（IREN / CIFR）。去年微軟財報發布後，我在 Q4 財報後預測 Nebius 的市值將達到 1000 億美元。我們目前的市值為 600 億美元，快要接近目標了！",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:17Z"
   },
   "2061401720643887163": {
     "sentiment": "Neutral",
@@ -5201,14 +5338,36 @@
     "translation_zh": "@TheWizardofYYZ @ethics3606 沒什麼。只是一個經營避險基金的帥哥賣出 $LITE 持倉後，市場情緒轉變了而已。"
   },
   "2061398340605210698": {
+    "id": "2061398340605210698",
+    "tweet_id": "2061398340605210698",
     "sentiment": "Bullish",
-    "summary": "看好AAOI與SIVE強勁的營收成長",
-    "translation_zh": "@ethics3606 不，不幸的是，不像大眾輿論所想的那樣，我去年做多 $LITE 並不會把它推向 700 億美元的市值。\n\n它們都是由極端的遠期營收成長驅動的，$AAOI 從 2027 年下半年開始每月營收達 4.71 億美元。\n\n而 $SIVE 的總遠期營收管道在單季內成長了 77%，從..."
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好LITE、AAOI與SIVE的前景，認為受強勁營收成長驅動。",
+    "translation_zh": "@ethics3606 不，不幸的是，我去年做多 $LITE 並不會像大眾輿論所想的那樣，把它推高到 700 億美元的市值。牠們全都是由極端的未來營收成長所驅動，$AAOI 從 2027 年下半年開始每月營收達 4.71 億美元。而 $SIVE 的總未來營收管線在單季內成長了 77%，從",
+    "risk": "極端前瞻營收成長驅動，隱含估值過高及能否實現預期的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:19Z"
   },
   "2061395355695226960": {
+    "id": "2061395355695226960",
+    "tweet_id": "2061395355695226960",
     "sentiment": "Neutral",
-    "summary": "光學股受LITE連動引發演算法拋售",
-    "translation_zh": "這主要是目前光子學市場中的「跟隨領頭羊」演算法拋售。\n\n從 $AAOI 到 $SIVE，大多數雷射/光學相關公司似乎都與 $LITE 的表現綁定在一起……\n\n儘管各自的基本面正在改善。例如（AOI 與 $AMD / $NVDA 的討論）。\n\n演算法不會 https://t.co/gBm50DRqFj"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMD": "Neutral",
+      "LITE": "Neutral",
+      "NVDA": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "光學股受演算法拖累殺盤，但AAOI基本面改善看多。",
+    "translation_zh": "目前光學市場主要只是「跟隨領頭羊」的演算法賣壓。從 $AAOI 到 $SIVE 等多數雷射與光學相關公司，似乎都與 $LITE 的表現綁定……儘管各自的基本面正在改善（例如：AOI 與 $AMD / $NVDA 的討論）。演算法不管這些。",
+    "risk": "演算法引發的類股連動賣壓導致基本面佳的公司被錯殺。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:22Z"
   },
   "2061387901737537659": {
     "sentiment": "Bullish",
@@ -5216,9 +5375,19 @@
     "translation_zh": "@JohanAn37323972 $SIVE 沒有我照樣會過得很好。\n\n唯一的差別是，現在持股比例可能已經有 90% 是機構所有，而不是美國散戶。"
   },
   "2061387119634141492": {
-    "sentiment": "Bullish",
-    "summary": "SIVE未來有望獲得更多大廠合作",
-    "translation_zh": "@WuKongWAGMI 我能想到的主要可插拔設備玩家中，沒有垂直整合雷射的並不多，像是 $LITE 和 $COHR。\n\n所以 Innolight 是有可能的。\n\n$SIVE 暗示有多個玩家（用了複數），所以可能還有更多。"
+    "id": "2061387119634141492",
+    "tweet_id": "2061387119634141492",
+    "sentiment": "Neutral",
+    "stances": {
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "分析LITE、COHR與SIVE的可插拔光學設備玩家與市場潛在合作可能。",
+    "translation_zh": "＠WuKongWAGMI 我能想到的主要可插拔光學玩家中，只有少數幾家不像 $LITE 和 $COHR 那樣垂直整合雷射。所以 Innolight 是有可能的。$SIVE 暗示了多個玩家（因為用了複數），所以可能還有其他幾家。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:24Z"
   },
   "2061384495576789401": {
     "sentiment": "Bullish",
@@ -5231,9 +5400,18 @@
     "translation_zh": "@159Adir52550 這場文化之爭只是正常的波動，可以笑著去接受，因為這正是瑞典失去控制的方式。\n\n我其實曾試著向瑞典散戶說明 $SIVE 有多特別，但對大多數人來說，當地文化可能已經根深蒂固了「拔苗助長」的心態（見樹不見林／嫉妒優秀者的心態）。"
   },
   "2061366747652051064": {
+    "id": "2061366747652051064",
+    "tweet_id": "2061366747652051064",
     "sentiment": "Bullish",
-    "summary": "看好$SIVE業務成長，股價難再跌回低點",
-    "translation_zh": "@Path21Mil 如果跌到那個價位，我可能會考慮發起一檔基金來直接買下 $SIVE，哈哈。\n\n考慮到 $JBL 可插拔產品的放量以及更多光收發器客戶正在進行中，我覺得它不可能再回到那個價位了。\n\n同時也不確定他們是在為誰做分析，瑞典人並不..."
+    "stances": {
+      "JBL": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "分析師看好SIVE與JBL，認為JBL插拔式產能爬坡及光收縮器客戶增加具備利多。",
+    "translation_zh": "@Path21Mil 我可能會考慮創辦一檔基金，如果 $SIVE 跌到那個水位，我就直接買下它哈哈。鑑於 $JBL 的插拔式產能爬坡以及更多光收盤器客戶正在進行中，我認為不可能再次跌到那個水位。另外也不確定他們是在為誰分析，瑞典人不會...",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:26Z"
   },
   "2061353640812515790": {
     "sentiment": "Bearish",
@@ -5241,9 +5419,19 @@
     "translation_zh": "@MatteoDeDycker 從我所看到的來看，2025年將迎來週期性低迷。$XFAB 已經被拖累，因為根據個人估算，它已經接近股價淨值比（P/B）價值，且低於資產重置成本的實際價值。\n\n對於 Melexis 來說，這也是一種猜測，我們正處於傳統汽車週期拖累的底部附近，有點像 https://t.co/qDjspQB3yd"
   },
   "2061348882685243497": {
+    "id": "2061348882685243497",
+    "tweet_id": "2061348882685243497",
     "sentiment": "Bullish",
-    "summary": "看好$NVDA推動之功率半導體與供應鏈轉向",
-    "translation_zh": "關於 $XFAB 的一些隨想與思緒：\n\n1. 800vdc $NVDA 的推動尋找 GaN/SiC 玩家 / 功率半導體。\n\n2. $NVTS 與其他受惠於 $NVDA 推動的無廠／輕晶圓廠（fabless/fab-lite）可能採用晶圓代工模式。\n\n3. 比起亞洲，更重視西方供應鏈。"
+    "stances": {
+      "NVDA": "Bullish",
+      "NVTS": "Bullish",
+      "XFAB": "Neutral"
+    },
+    "summary": "看好NVDA推動GaN/SiC及NVTS等受惠股",
+    "translation_zh": "針對$XFAB的行動淋浴隨想與思路：1. 800vdc $NVDA的推動尋找GaN/SiC玩家／功率半導體。2. $NVTS與其他$NVDA推動下的無廠／輕晶圓廠受益者可能會使用晶圓代工模式。3. 更關心西方供應鏈而非亞洲。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:28Z"
   },
   "2061265938612465817": {
     "sentiment": "Neutral",
@@ -5256,14 +5444,34 @@
     "translation_zh": "@jpm7019 如果 $AAOI 在 2027 年下半年進入時 ARR 達到 57 億美元，而現在是 120 億美元，它將不會獲得太高的溢價。\n\n它是由底層基本面支撐的。\n\n不過，在這種情況下，太空或量子領域的大多數溢價可能會消失，因為它們沒有相同的營收數據。"
   },
   "2061254438791286784": {
+    "id": "2061254438791286784",
+    "tweet_id": "2061254438791286784",
     "sentiment": "Neutral",
-    "summary": "高成長股如$AAOI和$SNDK需自行計算前瞻本益比",
-    "translation_zh": "@michaelsikand 是的，我同意，總體而言，如果你的股票不叫 $MSFT 或大型軟體公司。\n\n你需要為像 $AAOI 或 $SNDK這樣的超高成長股計算自己的遠期本益比（fwd P/E）。"
+    "stances": {
+      "AAOI": "Neutral",
+      "MSFT": "Neutral",
+      "SNDK": "Neutral"
+    },
+    "summary": "微軟與大型軟體股外，高成長股如AAOI與SNDK需自行計算前瞻市盈率。",
+    "translation_zh": "@michaelsikand 是的，我同意，大致上如果你的股票不叫 $MSFT 或大型軟體股。對於像 $AAOI 或 $SNDK 這樣的高成長股，你需要計算自己的預估本益比 (fwd P/E ratios)。",
+    "risk": "高成長股如AAOI與SNDK未提供現成預估本益比，需自行計算可能隱含估值與投資風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:30Z"
   },
   "2061252644195504239": {
+    "id": "2061252644195504239",
+    "tweet_id": "2061252644195504239",
     "sentiment": "Bullish",
-    "summary": "$AAOI為美股首選光子學標的，財報後強烈看多",
-    "translation_zh": "$AAOI 實際上是我目前在美國市場中最喜歡的光子學投資標的。\n\n我去年以 28 美元的低水位建立長倉，當時我猜測他們正在通過 $AMZN 和 $MSFT 的認證。\n\n在財報發布後、當他們宣布 1.6T 及其他出貨訂單時，我抱持高度確信（約在 70 美元左右）。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Bullish",
+      "MSFT": "Bullish"
+    },
+    "summary": "作者高度看好AAOI，並提及與AMZN和MSFT的訂單合作。",
+    "translation_zh": "AAOI實際上是我目前在美國市場最喜歡的光學元件標的。我去年在28美元時以小倉位做多，當時我猜測他們正在通過AMZN和MSFT的認證。在財報發布後股價約70美元時我展現高確信度加碼，當時他們宣布了1.6T及其他出貨訂單。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-10T06:59:33Z"
   },
   "2061239244379803958": {
     "sentiment": "Neutral",
