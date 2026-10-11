@@ -11435,5 +11435,359 @@
     "analyzed_count": 2,
     "generated_at": "2026-10-11T08:47:27Z",
     "model": "gemini-3.7-flash"
+  },
+  "TPU": {
+    "ticker": "TPU",
+    "ai": true,
+    "thesis_story": "Serenity對TPU供應鏈的投資論點建立於對AI上游材料與光電組件的深度研究。在2025年12月，他提出全面覆蓋AI供應鏈的佈局，其中特別看好$LITE，認為其雖服務各大超大型雲端業者，但槓桿更偏向TPU體系；同時亦關注底部襯底廠商$AXTI與晶片巨頭$MRVL等。到了2026年3月，他進一步延伸至CPO與矽光子領域，點名$SIVE作為上游雷射光源供應商，極可能成為Google TPU集群及其他超大型雲端業者（如Trainium、Maia）的未來光源來源，並提出光學互連的推測性映射關係。整體立場持續看多，聚焦於光通訊與光源零組件在TPU供應鏈中的關鍵價值。",
+    "milestones": [
+      {
+        "tweet_id": "2005532674975539513",
+        "title": "佈局TPU供應鏈",
+        "significance": "指出LITE相比其他業者更具TPU槓桿，並建立對AI供應鏈底層材料與晶片的覆蓋。"
+      },
+      {
+        "tweet_id": "2034087274800091401",
+        "title": "看好SIVE光源",
+        "significance": "點名SIVE為CPO與矽光子雷射供應商，可能成為Google TPU集群未來的光源。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2034087274800091401",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:37:54Z",
+    "model": "gemini-3.6-flash"
+  },
+  "TMC": {
+    "ticker": "TMC",
+    "ai": true,
+    "thesis_story": "根據推特用戶 Serenity 對 TMC 的追蹤與記錄，其投資論點主要在 2026 年 4 月初開始成形。在 2026 年 4 月 3 日的貼文中，Serenity 將 TMC 列入追隨者喜愛的飆升成長 ETF 組合之中，當時標示價格為 $4.59，展現出高度關注與看多的企圖心。隨後在 2026 年 4 月 11 日的每週表現更新中，雖然該檔 ETF 整體表現亮眼，但 TMC 未出現在前段班的漲幅清單中。整體而言，Serenity 的投資論點核心是將 TMC 納入追隨者精選的潛力飆升組合中持續觀察，目前立場維持追蹤其在 ETF 中的績效表現。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "納入飆升成長ETF",
+        "significance": "在 2026 年 4 月將 TMC 以 $4.59 納入追隨者喜愛的飆升成長 ETF 清單，確立了對該股的看多立場。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "追蹤 ETF 首週表現",
+        "significance": "在 2026 年 4 月中旬公布 ETF 第一週績效，持續追蹤包含 TMC 在內的組合表現，檢視潛力標的動能。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:28Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "TLN": {
+    "ticker": "TLN",
+    "ai": true,
+    "thesis_story": "Serenity 對 TLN 的投資論點主要建立在美國 AI 發展與電力需求的宏觀趨勢上。在 2026 年 2 月初，OpenAI 針對 Deepseek 蒸餾發送備忘錄，強調美國 AI 優勢取決於大規模發電與供電能力，這讓 Serenity 將 TLN 定位為第一級能源供應商（Tier-1 Energy Providers）之一，享有政策與產業的重大順風。隨後在 2026 年 2 月下旬，他進一步分析了電力與電網板塊的投資策略，指出雖然透過 $XLU 等 ETF 進行選擇權配置能追求極端波動下的最大報酬，但個別標的如 TLN、VST 或 CEG 等公司即便股價翻倍，其報酬型態與風險也與全面佈局產業的 ETF 不同，顯示其持續關注 TLN 在美國電力與電網整體受惠浪潮中的角色，但對不同工具的風險報酬有明確的區隔評估。",
+    "milestones": [
+      {
+        "tweet_id": "2023061769313542601",
+        "title": "定位為第一級能源供應商",
+        "significance": "在 2026 年 2 月初因應 OpenAI 備忘錄，將 TLN 納入美國 AI 電力需求的受惠第一級能源供應商名單。"
+      },
+      {
+        "tweet_id": "2025222163251540079",
+        "title": "比較個股與板塊ETF報酬",
+        "significance": "於 2026 年 2 月下旬分析 TLN 等個股與低波動電網 ETF 的報酬差異，評估不同投資工具的風險與潛在回報。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2025222163251540079",
+        "point": "個別贏家如 TLN 的報酬型態可能與透過 ETF 佈局整體電網板塊有所不同。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2025222163251540079",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:32Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "TECK": {
+    "ticker": "TECK",
+    "ai": true,
+    "thesis_story": "投資人 Serenity 對 TECK 的投資論點主要建立在關鍵金屬與中國出口控制的供應鏈佈局上。在 2026 年 1 月的貼文中，Serenity 指出 TECK 同時涉及銦與鍺這兩種受到中國出口控制的關鍵礦物與材料，使其成為市場上值得關注的隱性潛在標的。隨後在 2026 年 3 月的貼文中，其論點進一步延伸至機器人等先進科技供應鏈的佈局思維。整體而言，Serenity 的立場維持看多，核心邏輯在於 TECK 掌握了受中國出口管制、具備戰略防禦與高科技應用價值的關鍵金屬資源，在供應鏈安全中扮演重要角色。",
+    "milestones": [
+      {
+        "tweet_id": "2015805598265479518",
+        "title": "點名TECK掌握關鍵金屬",
+        "significance": "在 2026 年 1 月指出 TECK 涉及銦與鍺等中國出口控制的關鍵礦物，確立了其在戰略金屬供應鏈中的重要地位。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2035984148159164870",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:36Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "SPIR": {
+    "ticker": "SPIR",
+    "ai": true,
+    "thesis_story": "投資人 Serenity 對 SPIR 的關注主要建立在國防合約與產業超級週期兩個維度上。在 2026 年 3 月中旬，美國戰爭部授予 Anduril 高達 200 億美元的累計總合約，這項利多消息波及供應鏈與整合夥伴，使 SPIR 被視為潛在受惠者之一。隨後在 2026 年 3 月下旬，市場迎來「太空衛星超級週期」，由 PL 觸發，並帶動 BKSY、SATL 與 SPIR 等相關標的跟進。此週期屬於太空應用相關的市場關注焦點。結合國防訂單與產業趨勢，Serenity 目前對 SPIR 保持多頭立場。",
+    "milestones": [
+      {
+        "tweet_id": "2032640028502012293",
+        "title": "獲國防合約波及",
+        "significance": "2026 年 3 月中旬指出 Anduril 獲得 200 億美元合約，將為供應鏈夥伴 SPIR 帶來正面效益。"
+      },
+      {
+        "tweet_id": "2036329557444403424",
+        "title": "太空衛星超級週期",
+        "significance": "2026 年 3 月下旬指出太空衛星超級週期由 PL 觸發，SPIR 等標的隨之跟進，展現太空應用題材。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2036329557444403424",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:40Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "SNPS": {
+    "ticker": "SNPS",
+    "ai": true,
+    "thesis_story": "根據 Serenity 對 SNPS 的貼文記錄，其投資論點主要圍繞在光學共封裝（CPO）與光子學生態系統的產業價值鏈中。在 2026 年 3 月的首次提及中，Serenity 關注了 CPO 價值鏈的整體分工與相關企業。隨後在 2026 年 4 月，Serenity 進一步點名 SNPS 被列入 Global Foundries 的光子學與 CPO 生態系統名單中，市值規模達 840 億美元，並探討了對該生態系統進行等權重做多的可能性。整體而言，其立場偏向看好 SNPS 在光子學與 CPO 生態鏈中的戰略地位。",
+    "milestones": [
+      {
+        "tweet_id": "2038777289115345200",
+        "title": "關注 CPO 價值鏈",
+        "significance": "於 2026 年 3 月整理了 CPO 價值鏈與相關供應商，為後續追蹤奠定基礎。"
+      },
+      {
+        "tweet_id": "2046302180001673341",
+        "title": "列入光子學生態系",
+        "significance": "在 2026 年 4 月指出 SNPS 名列 Global Foundries 光子學與 CPO 生態系，展現看好態度。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2046302180001673341",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:43Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "SMHN": {
+    "ticker": "SMHN",
+    "ai": true,
+    "thesis_story": "根據 Serenity 的貼文紀錄，其對 SMHN 的投資論點主要圍繞在矽光子與 CPO（共封裝光學）產業鏈的發展。在 2026 年 3 月 17 日的貼文中，Serenity 將 SMHN 歸類為矽光子瓶頸與供應鏈的相關標的之一，展現出長期看好的立場。隨後在 2026 年 3 月 20 日，Serenity 進一步公布了矽光子與 CPO ETF 的 YTD 年初至今報酬率追蹤，其中顯示 SMHN 獲得了 45.94% 的漲幅。整體而言，Serenity 的論點從最初的產業鏈佈局定位，延伸至實際的市場表現追蹤，目前持續維持看多立場。",
+    "milestones": [
+      {
+        "tweet_id": "2033885603423785170",
+        "title": "矽光子產業鏈佈局",
+        "significance": "在 2026 年 3 月 17 日將 SMHN 列入 CPO 與矽光子瓶頸供應鏈清單中，奠定了看多基礎。"
+      },
+      {
+        "tweet_id": "2034916899021365725",
+        "title": "ETF 表現追蹤",
+        "significance": "在 2026 年 3 月 20 日公布自製矽光子 ETF 的 YTD 報酬率，顯示 SMHN 取得 45.94% 的漲幅。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2034916899021365725",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:47Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "SEA": {
+    "ticker": "SEA",
+    "ai": true,
+    "thesis_story": "根據 Serenity 在 2025 年 10 月至 29 日期間的貼文，其對 SEA 的投資論點主要建立在總體經濟分析與機構資金流向的觀察上。在 2025 年 10 月 15 日的貼文中，Serenity 將 SEA 列入個人強烈買進與看多的股票清單中，顯示其對該標的抱持積極的投資態度。隨後在 2025 年 10 月 29 日的巨集分析中，進一步探討了機構資金流向、季節性因素與持倉佈局等總體經濟面向，指出 10 月至 11 月期間對沖基金為了鎖定稅務損失和再平衡會進行調整。整體而言，Serenity 持續看好 SEA，並將其置於總體經濟資金輪動與機構佈局的觀察架構之中。",
+    "milestones": [
+      {
+        "tweet_id": "1978365814941384882",
+        "title": "首次列入買進清單",
+        "significance": "在 2025 年 10 月將 SEA 正式納入個人強烈買進與看多的投資組合中，奠定了後續持續追蹤與看好的基礎。"
+      },
+      {
+        "tweet_id": "1983399179759300943",
+        "title": "總經與資金流向分析",
+        "significance": "在 2025 年 10 月底從總體經濟角度切入，分析機構資金流向與季節性調整對持倉的影響，強化對總體佈局的觀察。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "1983399179759300943",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:51Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "SBGSY": {
+    "ticker": "SBGSY",
+    "ai": true,
+    "thesis_story": "在 2026 年 2 月 7 日，Serenity 將 SBGSY 納入半導體供應鏈瓶頸摘要的電網（Grid）關鍵供應商範疇中，確立了其在 AI 基礎設施與電力傳輸主題中的投資地位。隨後在 2026 年 2 月 12 日，他追蹤了「瓶頸 ETF」供應鏈地圖的表現，顯示 SBGSY 隨同整體籃子錄得正向報酬（+9.27%）。從這兩篇貼文的脈絡來看，用戶維持看多的立場，並持續關注其在 AI 供電與電網瓶頸相關產業鏈中的實際股價表現與動能。",
+    "milestones": [
+      {
+        "tweet_id": "2020088575203721520",
+        "title": "納入電網供應鏈瓶頸",
+        "significance": "在 2026 年 2 月的半導體瓶頸總結中，將 SBGSY 歸類於電網（Grid）關鍵環節，奠定其投資論點基礎。"
+      },
+      {
+        "tweet_id": "2021783355076026581",
+        "title": "瓶頸 ETF 表現追蹤",
+        "significance": "於 2026 年 2 月中旬展示供應鏈等權重組合績效，指出 SBGSY 獲得 9.27% 的週漲幅，驗證概念潛力。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2021783355076026581",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:55Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "SANM": {
+    "ticker": "SANM",
+    "ai": true,
+    "thesis_story": "投資人 Serenity 對 SANM 的看法主要基於 AI 與高速光通訊基礎設施的供應鏈瓶頸受惠者。在 2026 年 3 月，他點名 SANM 作為光收發器 PCB 瓶頸的美國贏家之一，凸顯其在關鍵零組件供應上的重要地位。隨後在 2026 年 5 月，AMD 宣布投資台灣生態系並與多家 ODM 夥伴合作，SANM 再次被點名為直接受益者。整體而言，其論點從光收發器 PCB 瓶頸切入，並延伸至受惠於巨頭擴產的 ODM 供應鏈卡位，展現出持續看多（Bullish）的立場。",
+    "milestones": [
+      {
+        "tweet_id": "2037085574813942094",
+        "title": "光收發器PCB瓶頸受益者",
+        "significance": "在 2026 年 3 月指出 SANM 是克服光收發器 PCB 瓶頸的美國贏家，確立了其在光通訊供應鏈中的關鍵地位。"
+      },
+      {
+        "tweet_id": "2057388984310132855",
+        "title": "AMD生態系直接受惠",
+        "significance": "在 2026 年 5 月指出 SANM 作為 AMD 擴大基礎設施的 ODM 合作夥伴，深化了其作為直接受益者的多頭論點。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2057388984310132855",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:38:58Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "S": {
+    "ticker": "S",
+    "ai": true,
+    "thesis_story": "用戶 Serenity 對 S 的投資論點仍在初步形成階段。在 2025 年 11 月時，其主要關注點在於美股雲端與 AI 基礎設施板塊的債務負擔與利息成本風險，點出高利率債務對同業獲利與自由現金流的侵蝕。隨後在 2026 年 2 月，其立場轉為看多，並在探討 OpenClaw 交易受益者時，指出如 Minimax 與 RPI 等受惠標的漲幅顯著，認為大型科技股因體量過大難以產生實質影響，並在此背景下表達需要進一步研究 S。整體而言，其論點正從對整體neocloud板塊的總體審慎評估，過渡到尋找具備實質成長潛力的特定受惠標的。",
+    "milestones": [
+      {
+        "tweet_id": "1991212880424063060",
+        "title": "關注板塊債務風險",
+        "significance": "2025 年 11 月點出雲端板塊的高負債與利息成本對利潤的壓抑，建立其對AI基礎設施與neocloud板塊的謹慎審查標準。"
+      },
+      {
+        "tweet_id": "2023923131459723342",
+        "title": "轉向看多並關注 S",
+        "significance": "2026 年 2 月在評估 OpenClaw 交易的實質受益者時轉為看多，並點名需要深入研究 S 是否具備潛在投資價值。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "1991212880424063060",
+        "point": "企業承擔高利率垃圾債將嚴重侵蝕利潤率與自由現金流。"
+      },
+      {
+        "tweet_id": "1991212880424063060",
+        "point": "龐大的訂單積壓與產能建設成本，大幅增加了長期財務風險。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2023923131459723342",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:39:03Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "RUM": {
+    "ticker": "RUM",
+    "ai": true,
+    "thesis_story": "在 2025 年 9 月，Serenity 開始對 RUM 產生投資興趣。2025 年 9 月 15 日，他指出雖然交易相關事件令人感傷，但 RUM 可能在下次拉回時成為一個好的投機買點，主因是保守派互動增加與白宮串流將帶動財報表現優於預期，加上股價年初至今已下跌 42% 顯得更具吸引力。隨後在 2025 年 9 月 16 日，他將 RUM 納入 9 月份的前 15 大催化劑驅動股票清單中，延續其對該檔股票的看多立場。",
+    "milestones": [
+      {
+        "tweet_id": "1967414161597755466",
+        "title": "首次關注 RUM 投機機會",
+        "significance": "2025 年 9 月 15 日提出 RUM 因保守派engagement與白宮串流可能使財報超預期，且股價跌幅深具吸引力。"
+      },
+      {
+        "tweet_id": "1968051910663118861",
+        "title": "列入 9 月催化劑股票",
+        "significance": "2025 年 9 月 16 日將 RUM 放入 9 月前 15 大催化劑驅動股票清單，延續看多立場。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "1968051910663118861",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:39:06Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "RKT": {
+    "ticker": "RKT",
+    "ai": true,
+    "thesis_story": "在 2025 年 7 月，Serenity 觀察到 meme 股狂潮並注意到 RKT。起初他通常不參與這類投機狂熱，但基於對放空機構的反感與原則，他開始關注擁有極高空頭部位的股票。在深入研究 RKT 後，他發現其融券放空比例（short interest）高達 60% 以上，情況極為罕見。雖然一般散戶很難去擠壓一家市值超過 300 億美元的大型公司，但他認為在如此驚人的高融券比例支撐下，散戶發動軋空（short squeeze）是絕對有可能的，因此抱持著強烈的看多立場。",
+    "milestones": [
+      {
+        "tweet_id": "1947899608073404845",
+        "title": "發現 RKT 高達 60% 的空頭比例",
+        "significance": "指出 RKT 的融券放空比例超過 60%，認為雖然市值龐大但散戶仍有機會發動軋空，確立了看多 RKT 的核心投資論點。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "1947899608073404845",
+        "point": "RKT 是一家具備 300 億美元以上市值的公司，通常散戶很難對這樣規模的企業成功發動軋空。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "1947899608073404845",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:39:10Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "REMX": {
+    "ticker": "REMX",
+    "ai": true,
+    "thesis_story": "投資人 Serenity 對稀土與關鍵金屬 ETF REMX 的論點主要基於地緣政治風險與政策利多。在 2025 年 9 月，他因中國的地緣政治風險以及川普政府投入 50 億美元加速國內採礦，開始看好稀土板塊，並將 REMX 列為潛在的投資標的之一。隨後在 2026 年 1 月，他進一步確認 REMX 是一檔優秀的關鍵金屬 ETF，並肯定其在該產業中具備良好的投資組合權重與暴險，維持其看好的立場。",
+    "milestones": [
+      {
+        "tweet_id": "1968431919105966479",
+        "title": "看好稀土與政策利多",
+        "significance": "在 2025 年 9 月指出中國地緣政治風險與川普推動 50 億美元採礦資金，點出對 REMX 的初步興趣。"
+      },
+      {
+        "tweet_id": "2015953304803803269",
+        "title": "確認 ETF 產業暴險",
+        "significance": "於 2026 年 1 月明確表示 REMX 是優質的關鍵金屬 ETF，肯定其產業暴險。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2015953304803803269",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:39:13Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "RELL": {
+    "ticker": "RELL",
+    "ai": true,
+    "thesis_story": "根據 Serenity 歷來發布的推文，其對 RELL 的投資論點主要建立在追蹤特定供應鏈與關鍵技術概念上。在 2026 年 1 月的貼文中，作者並未直接將 RELL 列入其個人研究清單中，而是廣泛盤點了國防、核能與關鍵礦物等西方供應鏈瓶頸。隨後在 2026 年 6 月的貼文中，作者進一步整理了市場關注的 800V DC 相關概念股清單，然而在該次清單中同樣未提及 RELL。整體而言，從其歷來貼文的脈絡來看，作者並未對 RELL 形成明確且正面的核心投資論點或加碼記錄，目前對於該標的無特定的多頭或空頭主張。",
+    "milestones": [
+      {
+        "tweet_id": "2012957864026087525",
+        "title": "供應鏈研究清單",
+        "significance": "於 2026 年 1 月發表個人研究清單，盤點西方供應鏈瓶頸與相關標的。"
+      },
+      {
+        "tweet_id": "2063869376542192013",
+        "title": "800V概念股",
+        "significance": "於 2026 年 6 月整理市場關注的 800V DC 相關股票與市值清單。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2063869376542192013",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-11T15:39:17Z",
+    "model": "gemini-3.5-flash-lite"
   }
 }
