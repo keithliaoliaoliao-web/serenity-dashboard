@@ -12528,5 +12528,359 @@
     "analyzed_count": 2,
     "generated_at": "2026-10-12T00:31:51Z",
     "model": "gemini-3.5-flash-lite"
+  },
+  "GNRC": {
+    "ticker": "GNRC",
+    "ai": true,
+    "thesis_story": "Serenity 對 GNRC（Generac Holdings）並未建立獨立或深入的專屬多空論述。在 2026 年 9 月的一篇貼文中，作者在盤點 Amazon 投資與持股生態系（被其戲稱為 Amazon 半導體 ETF 投資組合）時，列出了 Amazon 擁有持股或認股權證（warrants）的公司清單，GNRC 僅作為該生態系清單中的一員被順帶提及。整體而言，作者在 2026 年 9 月對包含 GNRC 在內的該則貼文保持中立（Neutral）態度，主要焦點在於觀察 Amazon 廣泛布局硬體供應鏈的動態，並未對 GNRC 本身營運提出額外的轉折、加碼理由或未來展望。",
+    "milestones": [
+      {
+        "tweet_id": "2105151002760679706",
+        "title": "列入亞馬遜持股清單",
+        "significance": "作者指出 Amazon 擁有 GNRC 的股權或權證，將其歸納為 Amazon 生態系投資組合之一。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2105151002760679706",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:18:58Z",
+    "model": "gemini-3.8-flash"
+  },
+  "GM": {
+    "ticker": "GM",
+    "ai": true,
+    "thesis_story": "Serenity 對 GM 的投資看法經歷了從自動駕駛技術到工廠自動化的關注演變。2025 年 11 月，他指出 GM 旗下的 Cruise 已具備 Level 4 自動駕駛技術，相較於競爭對手展現出技術優勢。到了 2026 年 6 月，他的立場轉為看多，主因是 GM 裁減 1,000 名員工並以 50 台機器人取代，且傳出與 NVIDIA 合作工廠機器人技術。他認為這驗證了機器人技術在製造業的應用，能有效提升營運費用利潤率與員工效率，展現出良好的自動化轉型效益。",
+    "milestones": [
+      {
+        "tweet_id": "1993335570978967802",
+        "title": "Cruise達L4技術",
+        "significance": "指出GM旗下Cruise具備L4自動駕駛能力，技術優於特斯拉的L2。"
+      },
+      {
+        "tweet_id": "2071532870859149617",
+        "title": "導入機器人轉看多",
+        "significance": "GM裁員並引入機器人與輝達合作，驗證自動化技術能提升營運利潤率。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2071532870859149617",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:19:58Z",
+    "model": "gemini-3.5-flash"
+  },
+  "GEV": {
+    "ticker": "GEV",
+    "ai": true,
+    "thesis_story": "在 2026 年 2 月，Serenity 關注到 OpenAI 向美國國會提交的備忘錄，內容強調維持美國在人工智慧領域的領先優勢，關鍵在於能否大規模且可靠地供給電力。在此背景下，GEV（GE Vernova）被其歸類為第一梯隊能源提供商（Tier-1 Energy Providers）之一。Serenity 認為 AI 發展對大規模電力的剛性需求，將成為 GEV 等電力與能源巨頭的長期利多順風。目前 Serenity 對 GEV 持看多立場，將其視為 AI 算力擴張下能源供應鏈的核心受益標的。",
+    "milestones": [
+      {
+        "tweet_id": "2023061769313542601",
+        "title": "AI電力需求利多",
+        "significance": "引用OpenAI備忘錄指出AI規模化需可靠電力，將GEV列為第一梯隊能源提供商。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2023061769313542601",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:20:08Z",
+    "model": "gemini-3.5-flash"
+  },
+  "GAP": {
+    "ticker": "GAP",
+    "ai": true,
+    "thesis_story": "Serenity 在 2025 年 9 月對 GAP 抱持看多立場。2025 年 9 月 22 日，他首次提到看好 GAP 及旗下 Banana Republic 品牌，認為該股能受惠於年末季節性趨勢，但需要觀察總體經濟與關稅帶來的影響。2025 年 9 月 29 日，他再次重申看多，指出 GAP 基本面良好且有年底節慶旺季加持，唯仍需深入評估關稅對未來營收衝擊。整體而言，他目前維持看多立場，核心理由為基本面與季節性優勢。",
+    "milestones": [
+      {
+        "tweet_id": "1970224716322611675",
+        "title": "首提季節性與品牌喜好",
+        "significance": "提出對品牌喜好與年末季節性優勢，建立看多立場，但提及關稅變數。"
+      },
+      {
+        "tweet_id": "1972770809073861075",
+        "title": "確認基本面與節慶旺季",
+        "significance": "強調基本面良好並受惠年底節慶旺季，鞏固看多立場，持續留意關稅衝擊。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "1970224716322611675",
+        "point": "宏觀經濟與關稅政策對公司業務的潛在衝擊。"
+      },
+      {
+        "tweet_id": "1972770809073861075",
+        "point": "關稅對未來營收的具體影響仍待評估。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "1972770809073861075",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:20:27Z",
+    "model": "gemini-3.5-flash"
+  },
+  "FEIM": {
+    "ticker": "FEIM",
+    "ai": true,
+    "thesis_story": "2026 年 1 月，Serenity 在個人研究中將 FEIM 歸類為西方供應鏈的關鍵瓶頸企業之一，核心產品為原子鐘（Atomic Clocks）。他對 FEIM 持看多立場，強調其具備太空產業曝險，並指出市場已開始意識到該瓶頸，帶動股價大幅上漲。FEIM 的產品已被 NASA 及洛克希德馬丁（Lockheed Martin）重度採用，Serenity 也推測 SpaceX 的 Starshield 可能利用其原子鐘，在 GPS 遭干擾或破壞時進行授時與同步。雖然他提及該市場極度小眾，但對其前景仍保持正面看法。",
+    "milestones": [
+      {
+        "tweet_id": "2012957864026087525",
+        "title": "列為供應鏈瓶頸",
+        "significance": "將 FEIM 歸類為西方供應鏈中負責原子鐘的瓶頸企業，確立投資邏輯。"
+      },
+      {
+        "tweet_id": "2012964500702642525",
+        "title": "分析太空與國防應用",
+        "significance": "指出其產品用於 NASA 與國防大廠，並具備反 GPS 干擾的潛力。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2012964500702642525",
+        "point": "市場與產品應用領域極度小眾（very niche）。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2012964500702642525",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:20:41Z",
+    "model": "gemini-3.5-flash"
+  },
+  "FEAM": {
+    "ticker": "FEAM",
+    "ai": true,
+    "thesis_story": "Serenity 對 FEAM 的投資論點始於 2026 年 1 月，當時他注意到 Google TPU v8x 的先進封裝技術中可能存在鋁矽酸鹽玻璃瓶頸，並將精煉硼酸鹽的供應商 FEAM 納入研究範圍，認為其在該領域的相關工作是令人興奮的機會。隨後在 2026 年 8 月，白宮宣佈投資關鍵礦物與材料政策，FEAM 獲得 800 萬美元的資金支持（用於硼）。這項政策利多讓 Serenity 的立場轉為看多（Bullish），他認為雖然這對美國政府來說只是微不足道的小錢，但對推動關鍵礦物自主與產業發展是一項極佳的政策轉折與利多催化劑。",
+    "milestones": [
+      {
+        "tweet_id": "2016129326824227195",
+        "title": "關注精煉硼需求",
+        "significance": "2026 年 1 月研究先進封裝玻璃瓶頸時發現 FEAM 的精煉硼業務，認為是具潛力的機會。"
+      },
+      {
+        "tweet_id": "2085823672569467005",
+        "title": "獲得白宮資金補助",
+        "significance": "2026 年 8 月白宮宣佈投資關鍵礦物，FEAM 獲得 800 萬美元資金，推動作者轉為看多立場。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2085823672569467005",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:20:58Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "FCEL": {
+    "ticker": "FCEL",
+    "ai": true,
+    "thesis_story": "用戶 Serenity 對 $FCEL 的投資論點主要建立在基本面與合約進展上。在 2026 年 6 月時，其發文主要關注 800V DC 相關的產業鏈與各家企業市值。隨後到了 2026 年 7 月，其立場轉為看多（Bullish），指出如同其他機器人與感測器類股受到首次公開募股與媒體敘事的催化一樣，能源類股如 $FCEL 與 $BE 的表現則顯得相當扎實，主要原因在於有新的大型合約（upsized contracts）作為基本面支撐，確立了其價值與發展動能。",
+    "milestones": [
+      {
+        "tweet_id": "2063869376542192013",
+        "title": "關注產業鏈概念股",
+        "significance": "在 2026 年 6 月整理了市場上熱門的 800V DC 相關概念股與市值清單，奠定了對相關科技與能源領域的追蹤基礎。"
+      },
+      {
+        "tweet_id": "2072262479179284686",
+        "title": "看多 FCEL 基本面",
+        "significance": "於 2026 年 7 月轉為看多，指出 $FCEL 等能源股具備扎實基本面，並受惠於新獲得的大型合約支持。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2072262479179284686",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:02Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "EXA": {
+    "ticker": "EXA",
+    "ai": true,
+    "thesis_story": "Serenity 對 EXA 的投資論點主要圍繞在水下防禦與水雷清除的題材上。在 2026 年 3 月的觀察中，起初僅將 EXA 列為其他值得關注的有趣標的之一。隨後在同月發生了重大外部事件，傳出伊朗在荷姆茲海峽布設水下海雷導致川普憤怒，市場對水雷偵測與清除的需求急遽升溫。這項突發地緣政治局勢成為水域防禦承包商十年來最大的催化劑，推動 Serenity 將 EXA 視為可望從中獲利的國防防禦公司之一，目前維持樂觀看好的立場。",
+    "milestones": [
+      {
+        "tweet_id": "2031457195091759114",
+        "title": "初次列入關注名單",
+        "significance": "在 2026 年 3 月首次將 EXA 與其他潛在潛水防禦標的共同列出，為後續的投資論點奠定基礎。"
+      },
+      {
+        "tweet_id": "2031464140028654077",
+        "title": "地緣政治重大催化",
+        "significance": "2026 年 3 月因伊朗荷姆茲海峽布雷事件，帶動水雷清除需求暴增，確立 EXA 作為國防受益者的邏輯。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2031464140028654077",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:06Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "EWJ": {
+    "ticker": "EWJ",
+    "ai": true,
+    "thesis_story": "Serenity 在 2026 年 2 月初至中旬透過多檔半導體及區域 ETF 獲得顯著報酬，累積了豐富的跨國市場實戰經驗。在 2026 年 2 月 26 日的觀察中，他將日本 ETF（$EWJ）與韓國 ETF（$EWY）進行比較，指出 $EWJ 的產業結構較為分散，不像 $EWY 過度集中於三星與 SK 海力士兩家公司。同時，他認為日本與台灣 ETF 的隱含波動率（IV）定價合理，若此時進場，其核心目的應是押注方向性槓桿，而非追求如記憶體超級週期般罕見的波動率（Vega）擴張。目前對於 $EWJ 的整體立場保持中立，視其為方向性操作的工具選擇。",
+    "milestones": [
+      {
+        "tweet_id": "2027106275881079067",
+        "title": "跨國投資獲利豐碩",
+        "significance": "2026年2月展現其在多檔區域ETF與半導體標的上的研究成果，取得數百個百分點的報酬。"
+      },
+      {
+        "tweet_id": "2027112586953756784",
+        "title": "評估EWJ分散特性",
+        "significance": "2026年2月比較日韓ETF，指出EWJ較EWY分散，並認為進場應以方向性槓桿為主。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2027112586953756784",
+        "point": "不宜期待如記憶體超級週期般的罕見Vega擴張。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2027112586953756784",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:10Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "ETORO": {
+    "ticker": "ETORO",
+    "ai": true,
+    "thesis_story": "Serenity 在 2025 年 7 月對 ETORO 持強烈看多立場。在 2025 年 7 月 2 日的初期觀察中，他認為 $ETORO 在 63.1 美元時是很好的加碼點，當時同類型的加密貨幣經紀商如 $HOOD 與 $BULL 皆上漲 8 至 10%，而 ETORO 卻逆勢下跌 1.25%，顯示出明顯的落後補漲機會。隨後在同日的進一步分析中，他指出由於 ETORO 是一檔新股票，市場尚未將其與加密貨幣直接聯想，但實際上其高達 37% 的利潤來自加密貨幣業務。在股價處於低位時，具有類似過去從 61 美元飆升至 76 美元的潛在補漲空間。",
+    "milestones": [
+      {
+        "tweet_id": "1940462531740578167",
+        "title": "發現落後補漲機會",
+        "significance": "2025 年 7 月指出同業大漲而 ETORO 下跌，認為此落後狀態提供了良好加碼點。"
+      },
+      {
+        "tweet_id": "1940464309450199197",
+        "title": "潛在加密貨幣收益",
+        "significance": "2025 年 7 月點出 37% 利潤來自加密貨幣，且市場尚未將其與加密貨幣直接連結，具飆升空間。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "1940464309450199197",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:13Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "EONR": {
+    "ticker": "EONR",
+    "ai": true,
+    "thesis_story": "在 2026 年 4 月初，Serenity 開始將 EONR 納入追隨者最喜愛的股票拋物線成長 ETF 清單中，當時標價為 11.79 美元，展現出看多的立場。隨後在 2026 年 4 月中旬的績效追蹤中，該 ETF 的表現更新並未再特別提及 EONR 的單週漲跌幅表現，立場轉為中立。整個投資論點主要圍繞在跟隨追隨者選擇的組合ETF中，經歷了從最初的看多標的納入到後續週報的中立追蹤。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "納入成長 ETF 清單",
+        "significance": "在 2026 年 4 月將 EONR 以 11.79 美元納入拋物線成長 ETF，確立了最初的看多立場。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "ETF 第一週表現追蹤",
+        "significance": "在 2026 年 4 月中旬更新組合績效時未再強調 EONR，使整體立場轉為中立。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:17Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "ENVX": {
+    "ticker": "ENVX",
+    "ai": true,
+    "thesis_story": "根據 Serenity 在 2026 年 4 月的貼文紀錄，ENVX 作為其追隨者喜愛的潛力標的之一被納入追蹤。在 2026 年 4 月 3 日的貼文中，ENVX 的初始價格記錄為 5.07 美元，顯示出其在成長型 ETF 中的定位。隨後在 2026 年 4 月 11 日的更新中，該追蹤組合展現出強勁的表現，ENVX 在第一週即實現了 21.30% 的漲幅，價格由 5.07 美元上升至 6.15 美元。目前整體立場維持在中立偏多，主要透過追蹤特定 ETF 組合的表現來觀察其波段成長潛力，尚未有進一步的利空或風險警示。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "納入成長 ETF 組合",
+        "significance": "在 2026 年 4 月將 ENVX 以 5.07 美元納入追隨者喜愛的成長型 ETF 標的中，確立了其潛力股的初始定位。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "第一週強勁上漲",
+        "significance": "2026 年 4 月 11 日數據顯示 ENVX 在第一週實現 21.30% 的漲幅，價格自 5.07 美元攀升至 6.15 美元。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:21Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "ENTG": {
+    "ticker": "ENTG",
+    "ai": true,
+    "thesis_story": "Serenity 對 ENTG 的投資論點主要圍繞在先進半導體製程與封裝中的關鍵材料與耗材供應機會。在 2026 年 1 月初的貼文中，他指出 ENTG 在碳化矽（SiC）間中層（Interposer）相關的化學機械研磨（CMP）領域扮演重要角色。隨後在 2026 年 1 月下旬的貼文中，進一步探討 ENTG 在先進封裝技術（如玻璃基板 EMIB-T）中的 CMP 漿料與純化過濾器（CMP Slurries and Purity Filters）應用商機。整體而言，其立場從看好特定技術瓶頸的受惠者，逐步擴展至對其先進封裝材料供應潛力的持續關注。",
+    "milestones": [
+      {
+        "tweet_id": "2015164232795627975",
+        "title": "看好 SiC CMP 應用",
+        "significance": "點出 ENTG 在輝達 Rubin 與超大規模資料中心 ASIC 的 SiC 間中層瓶頸中，負責關鍵的 CMP 製程。"
+      },
+      {
+        "tweet_id": "2016129326824227195",
+        "title": "關注先進封裝材料",
+        "significance": "指出 ENTG 在 Google TPU v8x 等先進玻璃基板封裝技術中，提供 CMP 漿料與純化過濾器，具備發展機會。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2016129326824227195",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:25Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "ENPH": {
+    "ticker": "ENPH",
+    "ai": true,
+    "thesis_story": "根據 Serenity 針對 ENPH 的貼文紀錄，其投資論點與觀察主要在 2026 年初至年中展開。在 2026 年 3 月時，Serenity 注意到 ENPH 具有高達 40% 以上的空頭回補（SI）潛力，並將其與歷史上如 GME 等標的的軋空行情進行討論，顯示出對其短線籌碼動能與爆發力的關注。隨後在 2026 年 6 月，Serenity 進一步將 ENPH 納入市場關注的 800V DC 相關概念股名單中，市值規模排在第 9 位。整體而言，其立場從早期聚焦於高空手比例的籌碼博弈與話題性，轉為中性看待其在直流電技術領域的產業佈局與分類地位。",
+    "milestones": [
+      {
+        "tweet_id": "2030245046742876233",
+        "title": "關注高空頭回補潛力",
+        "significance": "在 2026 年 3 月指出 ENPH 擁有 40% 以上的高空頭回補比例，讓人聯想到歷史上的軋空行情，聚焦於籌碼面的爆發契機。"
+      },
+      {
+        "tweet_id": "2063869376542192013",
+        "title": "納入 800V DC 概念股",
+        "significance": "於 2026 年 6 月將 ENPH 列入市場關注的 800V DC 相關概念股與市值排名清單中，以中性視角檢視其產業定位。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2063869376542192013",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:29Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "ENAFF": {
+    "ticker": "ENAFF",
+    "ai": true,
+    "thesis_story": "在 2026 年 4 月初，用戶 Serenity 關注到追蹤其追隨者喜愛股票的相關 ETF，其中包含了 ENAFF。到了 2026 年 4 月中旬，該檔 ETF 的第一週表現更新顯示出顯著成長，其中 ENAFF 表現亮眼，單週價格由 1.71 美元上升至 2.25 美元，漲幅達 31.58%。整體而言，這段期間 ENAFF 主要是作為其追隨者挑選組合中的一部分被追蹤記錄，展現出強勁的短期價格上漲動能與表現。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "列入追隨者最愛股票清單",
+        "significance": "在 2026 年 4 月初的貼文中，ENAFF 與多檔股票一同被納入追隨者喜愛的股票與 ETF 追蹤清單中。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "首週表現大幅成長",
+        "significance": "在 2026 年 4 月中旬的績效更新中，記錄了 ENAFF 在第一週即繳出 31.58% 的漲幅，價格由 1.71 美元攀升至 2.25 美元。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T07:21:32Z",
+    "model": "gemini-3.5-flash-lite"
   }
 }
