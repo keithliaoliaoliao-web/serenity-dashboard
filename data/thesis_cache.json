@@ -12156,5 +12156,377 @@
     "analyzed_count": 2,
     "generated_at": "2026-10-11T20:14:01Z",
     "model": "gemini-3.5-flash-lite"
+  },
+  "QURE": {
+    "ticker": "QURE",
+    "ai": true,
+    "thesis_story": "2026 年 4 月初，Serenity 在其推文提及粉絲精選的拋物線成長型 ETF 名單，其中將 QURE 列為成分股之一，當時股價為 17.21 美元，立場偏向看多。然而，該名單僅代表社群追蹤者偏好的潛力標的，作者並未提供基本面等深入投資分析。到了 2026 年 4 月中旬，作者追蹤該組合第一週的整體績效時，立場轉為中立，且內容中未特別對 QURE 進行個別績效追蹤或深入闡述。整體而言，Serenity 對 QURE 僅限於社群精選投資組合的追蹤，缺乏獨立的深度營運論點。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "納入精選成長名單",
+        "significance": "將QURE以17.21美元列入粉絲最喜愛的拋物線成長ETF組合。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "首週組合績效追蹤",
+        "significance": "追蹤精選組合第一週表現，整體立場轉為中立，未特別論述QURE。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:29:57Z",
+    "model": "gemini-3.8-flash"
+  },
+  "NEE": {
+    "ticker": "NEE",
+    "ai": true,
+    "thesis_story": "在 2026 年 2 月，Serenity 因應 OpenAI 向國會提交關於 DeepSeek 蒸餾與美國 AI 優勢的備忘錄，指出維持美國 AI 優勢取決於能否大規模可靠地生成與交付電力，因此將 NEE 列為 Tier-1 的頂級能源供應商之一，視此趨勢為強大的產業順風。到了 2026 年 4 月，Serenity 雖然在另一個隨機挑選的美國股票清單中未直接詳細展開 NEE，但整體仍延續其對美國關鍵基建與能源供應商的關注。從最初因應 AI 算力與電力需求的宏觀政策備忘錄將其納入核心受惠名單，顯示其看好 NEE 作為能源巨頭在 AI 時代扮演的關鍵角色，目前立場維持正面。",
+    "milestones": [
+      {
+        "tweet_id": "2023061769313542601",
+        "title": "納入頂級能源供應商",
+        "significance": "2026 年 2 月因應 AI 電力需求備忘錄，首次將 NEE 定位為 Tier-1 能源供應商，確立其 AI 題材受惠地位。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2042187668931616964",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:02Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "NBCLF": {
+    "ticker": "NBCLF",
+    "ai": true,
+    "thesis_story": "投資人 Serenity 在 2026 年 1 月 23 日指出，日本公司 Nitto Boseki ($NBCLF) 擁有百年紡織與玻璃技術，其生產的 T-Glass 成為人工智慧領域的極端瓶頸。從 TSM、Apple、Nvidia 到 Tesla 與 AMD 等科技巨頭皆高度依賴其產能，導致其訂單已全數售罄至 2026 年。隨後在 2026 年 1 月 25 日，Serenity 進一步將其列為外國首選股票之首，強調其在全球 AI 供應鏈中扮演不可或缺的關鍵瓶頸角色，目前立場維持極度看多。",
+    "milestones": [
+      {
+        "tweet_id": "2014505817509355841",
+        "title": "點出 AI 關鍵瓶頸",
+        "significance": "在 2026 年 1 月指出其 T-Glass 成為各大科技巨頭的命脈，且訂單已售罄至 2026 年。"
+      },
+      {
+        "tweet_id": "2015549311732658520",
+        "title": "列為外國首選股",
+        "significance": "在 2026 年 1 月將該公司列為外國首選股票第一名，確立其在 AI 供應鏈的關鍵地位。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2015549311732658520",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:05Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "NB": {
+    "ticker": "NB",
+    "ai": true,
+    "thesis_story": "Serenity 對 NB 的關注主要聚焦於其在次產業供應鏈中的利基應用。在 2026 年 1 月，因相關新聞帶動，NB 與同類股在盤前大漲隨後暴跌 8% 到 15%，他認為這是散戶追高後的利多出盡現象，當時持偏空立場。到了 2026 年 3 月，他的視角轉為偏多，將 NB 定位在機器人與伺服器供應鏈中，指出其提供鈪與伺服器機架的輕量化金屬框架等應用，屬於市值小於 10 億美元、較不受市場矚目的潛力標的，展現出對其特殊材料應用的持續追蹤與看好。",
+    "milestones": [
+      {
+        "tweet_id": "2015813438216548835",
+        "title": "利多出盡回檔",
+        "significance": "2026 年 1 月指出相關新聞使 NB 盤前大漲後暴跌，顯示散戶追高後的利多出盡現象。"
+      },
+      {
+        "tweet_id": "2035984148159164870",
+        "title": "供應鏈利基定位",
+        "significance": "2026 年 3 月將 NB 定位為伺服器機架輕量化金屬框架供應商，屬於市值小於 10 億美元的潛力標的。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2015813438216548835",
+        "point": "消息面帶動股價大漲後可能面臨散戶追高殺盤，導致短線劇烈回檔。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2035984148159164870",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:09Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "MKSI": {
+    "ticker": "MKSI",
+    "ai": true,
+    "thesis_story": "根據 Serenity 對 MKSI 的長期追蹤與研究，其投資論點主要圍繞在半導體供應鏈的關鍵利基。在 2026 年 1 月初的個人研究中，將 MKSI 納入美國本土供應鏈與關鍵零組件的觀察名單內。接著在 2026 年 1 月中旬，進一步將 MKSI 定位為記憶體超級循環（Memory Supercycle）受惠股，點出其作為雷射子系統供應商的市值規模與產業地位，顯示其看好記憶體技術升級帶動相關設備需求，目前維持偏多立場。",
+    "milestones": [
+      {
+        "tweet_id": "2012957864026087525",
+        "title": "納入供應鏈研究",
+        "significance": "在 2026 年 1 月的個人研究中，將 MKSI 視為美國本土供應鏈瓶頸受惠標的之一。"
+      },
+      {
+        "tweet_id": "2014368177682292774",
+        "title": "記憶體超級循環受惠",
+        "significance": "於 2026 年 1 月中旬明確將 MKSI 定位為記憶體超級循環中提供雷射子系統的受惠公司。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2014368177682292774",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:13Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "MITK": {
+    "ticker": "MITK",
+    "ai": true,
+    "thesis_story": "根據 Serenity 於 2026 年 4 月的貼文紀錄，其對 MITK 的投資論點主要建立在追蹤追風者喜愛的成長潛力標的之上。在 2026 年 4 月 3 日，Serenity 將 MITK 列入備受期待的粉絲最愛成長 ETF 追蹤清單中，當時標價為 13.9 美元，展現出看多的立場。然而，在隨後 2026 年 4 月 11 日公佈的 ETF 第一週績效表現中，MITK 並未被列入漲幅前段班的榜單內。整體而言，目前其對 MITK 的立場主要基於社群關注與 ETF 組合配置，隨著時間推移持續追蹤其市場表現。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "納入成長 ETF 清單",
+        "significance": "在 2026 年 4 月初將 MITK 以 13.9 美元納入粉絲最愛的成長 ETF 追蹤清單，確立看多立場。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "公佈首週績效",
+        "significance": "在 2026 年 4 月中旬更新 ETF 績效表現時，MITK 未出現在漲幅領先的標的中，顯示短期表現平淡。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:16Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "MINT": {
+    "ticker": "MINT",
+    "ai": true,
+    "thesis_story": "在 2025 年 11 月，Serenity 提出了一套名為 MINT 的投資組合論點，認為這四檔股票（META、IBIT、NBIS、TSM）在 2025 年 11 月至 12 月期間具備極高且不對稱的回報潛力，代表了低資本風險與高上檔回報的結合，涵蓋了科技巨頭、加密貨幣、AI 資料中心與半導體領域。隨後在同日進一步補充，將 $MINT 的定位明確解釋為具備不對稱的上檔機會，展現出高度看多的強烈立場。",
+    "milestones": [
+      {
+        "tweet_id": "1985175534133993567",
+        "title": "提出 MINT 組合",
+        "significance": "在 2025 年 11 月首次提出 MINT 論點，涵蓋 META、IBIT、NBIS 與 TSM，認為年底具備不對稱的高回報潛力。"
+      },
+      {
+        "tweet_id": "1985216187245248650",
+        "title": "補充 MINT 定位",
+        "significance": "在 2025 年 11 月進一步說明 MINT 具備不對稱的上檔機會，鞏固其看多立場。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "1985216187245248650",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:20Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "MCB": {
+    "ticker": "MCB",
+    "ai": true,
+    "thesis_story": "作者對 MCB 的投資論點始於 2026 年 1 月 31 日對其倒閉事件的觀察。起初，作者注意到美國當年度首家銀行 Metropolitan Capital Bank & Trust 遭到 FDIC 接管，指出該行資產規模雖小但帶有精品投資銀行的風險，涉足科技體育、數位媒體與房地產建設等利基領域。隨後，作者轉為看多立場，認為這是一起獨立事件，與其他板塊無關，並指出如果演算法在週一將其與其他銀行混淆，MCB 將會帶來巨大的超額收益（alpha）機會。",
+    "milestones": [
+      {
+        "tweet_id": "2017439237294211221",
+        "title": "銀行倒閉事件",
+        "significance": "在 2026 年 1 月 31 日指出該地區銀行遭 FDIC 接管，並分析其高風險的業務營運模式。"
+      },
+      {
+        "tweet_id": "2017443897946083738",
+        "title": "看多投資機會",
+        "significance": "於 2026 年 1 月 31 日判定此為獨立事件，認為演算法誤判可能帶來極大的超額收益。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2017439237294211221",
+        "point": "資產規模雖小但具備精品投資銀行的營運風險。"
+      },
+      {
+        "tweet_id": "2017439237294211221",
+        "point": "涉足科技體育、數位媒體與利基房地產建設等高風險領域。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2017443897946083738",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:24Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "LUNR": {
+    "ticker": "LUNR",
+    "ai": true,
+    "thesis_story": "Serenity 對 LUNR 的投資論點主要圍繞在太空產業的整體發展與市場定位。在 2025 年 10 月，Serenity 強調 LUNR 屬於太空探索領域，與專注於可重複使用火箭的 RKLB 有所區別。隨後到了 2026 年 3 月，其立場轉為看多（Bullish），認為市場上出現一家高達 1.75 兆美元的太空巨頭，對包括 LUNR 在內的所有太空類股而言，是極為強勁的利多訊號，推動整體板塊的樂觀情緒。",
+    "milestones": [
+      {
+        "tweet_id": "1975963249427546421",
+        "title": "釐清 LUNR 定位",
+        "significance": "在 2025 年 10 月指出 LUNR 是太空探索公司，與可重複使用火箭公司有所不同，確立了其產業分類。"
+      },
+      {
+        "tweet_id": "2029270954715824141",
+        "title": "巨頭帶動板塊",
+        "significance": "於 2026 年 3 月轉為看多，認為 1.75 兆美元太空公司的出現對 LUNR 等太空類股全面利多。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2029270954715824141",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:28Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "LCID": {
+    "ticker": "LCID",
+    "ai": true,
+    "thesis_story": "在 2026 年 3 月底，Serenity 針對 LCID 的投資論點主要建立在宏觀地緣政治風險與末日避險策略上。2026 年 3 月 28 日，他將 LCID 列入末日空頭 ETF 中，進行 10% 的做空配置，主要反映出對市場流動性及特定總體經濟環境的擔憂。隨後在 2026 年 3 月 29 日，隨著五角大廈準備對伊朗進行數週地面行動的消息傳出，他進一步將此末日 ETF（包含做空 LCID 與 NVDA）視為潛在的避險工具。整體而言，其對 LCID 的立場由最初的直接做空，轉變為在地緣政治衝突升溫下的避險配置的一部分，展現出高度的防禦性質。",
+    "milestones": [
+      {
+        "tweet_id": "2037779565066764425",
+        "title": "建立末日做空配置",
+        "significance": "在 2026 年 3 月 28 日將 LCID 納入末日 ETF 並進行 10% 做空，確立了看空該標的的初始立場。"
+      },
+      {
+        "tweet_id": "2038109389111062832",
+        "title": "地緣政治風險避險",
+        "significance": "2026 年 3 月 29 日因應伊朗地面行動傳聞，將包含 LCID 空頭的組合轉為總體經濟與地緣衝突的避險工具。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2037779565066764425",
+        "point": "中東資金撤離私有市場與總體流動性危機。"
+      },
+      {
+        "tweet_id": "2038109389111062832",
+        "point": "五角大廈準備伊朗地面行動引發的地緣衝突。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2038109389111062832",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:32Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "KOSPI": {
+    "ticker": "KOSPI",
+    "ai": true,
+    "thesis_story": "Serenity 對韓國股市 KOSPI 採取強烈看多立場。在 2026 年 2 月時，他指出 KOSPI 與 EWY 正處於價格發現階段，由三星與 SK 海力士等兩檔重量級股票的強勁營業利益預估所支撐，不應用傳統技術分析或白銀崩盤來類比。隨後在 2026 年 6 月，面對美國銀行聲稱 KOSPI 處於極端泡沫並將其比擬為白銀崩盤導致散戶拋售，他反諷美銀的說法猶如惡意反指標，並強調該指數在此之後隨即接近翻倍並創下歷史新高。整體而言，其論點核心在於韓國核心企業的巨額獲利預期足以支撐指數持續向上，未受市場雜音影響。",
+    "milestones": [
+      {
+        "tweet_id": "2027184821173416261",
+        "title": "看好企業獲利成長",
+        "significance": "2026 年 2 月提出 KOSPI 處於價格發現期，由三星與 SK 海力士的強勁營業利益支撐，不應以傳統技術分析看待。"
+      },
+      {
+        "tweet_id": "2069271973402931511",
+        "title": "反擊泡沫論並創新高",
+        "significance": "2026 年 6 月指出外資機構的泡沫警告反成為散戶誤導，指數隨後大漲並創下歷史新高，印證看多觀點。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2069271973402931511",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:36Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "KLA": {
+    "ticker": "KLA",
+    "ai": true,
+    "thesis_story": "在 2026 年 5 月初的貼文中，Serenity 主要關注半導體設備與先進封裝供應鏈的投資機會。在 2026 年 5 月 4 日的貼文中，作者提到 KLA 長期在 HBM4、HBM4e 及 HBM5 循環的紅外線量測（IR Metrology）領域享有壟斷地位，這突顯了 KLA 在先進封裝與記憶體製程中具備關鍵的技術護城河與市場影響力。整體而言，其論點聚焦於 KLA 在高頻寬記憶體（HBM）次世代技術推進下所扮演的獨佔量測設備角色，展現出高度關注與看好的立場。",
+    "milestones": [
+      {
+        "tweet_id": "2051099481693954525",
+        "title": "指出 KLA 壟斷地位",
+        "significance": "在 2026 年 5 月提及 KLA 在 HBM4 等循環的紅外線量測具備壟斷地位，凸顯其技術優勢。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2051099481693954525",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:39Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "JOBY": {
+    "ticker": "JOBY",
+    "ai": true,
+    "thesis_story": "在 2025 年 10 月，Serenity 對 JOBY 抱持強烈的看跌立場。其論點在於批判部分 X 平台上的熱門帳號為了追求互動率與販售課程，盲目推薦如 JOBY、RGTI、OPEN 等小型股。這些帳號在相關股票已經歷大幅漲幅後，才事後諸葛地將其列為未來趨勢產業的首選，這種缺乏實質基本面支撐的行為會嚴重危害盲目跟隨的散戶投資人資產。Serenity 認為這類名單極度糟糕，若依此投資恐導致投資組合遭到重創。",
+    "milestones": [
+      {
+        "tweet_id": "1974570974361358400",
+        "title": "批判 JOBY 投資名單",
+        "significance": "在 2025 年 10 月指出 JOBY 等小型股不適合列為首選，認為盲目跟隨恐導致投資組合毀滅。"
+      },
+      {
+        "tweet_id": "1974576290125795760",
+        "title": "揭露網紅推介炒作",
+        "significance": "於 2025 年 10 月進一步批評熱門帳號為賺取點閱與訂閱，事後將 JOBY 包裝成未來趨勢，散布有害資訊。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "1974570974361358400",
+        "point": "網紅推薦名單缺乏實質內容，盲目跟隨恐導致投資組合受損。"
+      },
+      {
+        "tweet_id": "1974576290125795760",
+        "point": "熱門帳號為衝高互動率，在股票大漲後才將其列為首選，屬有害資訊。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "1974576290125795760",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:44Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "IBM": {
+    "ticker": "IBM",
+    "ai": true,
+    "thesis_story": "在 2026 年 5 月，Serenity 觀察到量子計算領域的相關時程，注意到 Foxconn 預期量子商業化落在 2030 年，並提及 IBM Starling 預計於 2029 年設立，認為 2028 年下半年至 2029 年上半年或許是量子領域的前瞻佈局時機，當時對 IBM 持中立態度。到了 2026 年 7 月，Serenity 對 IBM 的立場依然維持中立，坦言自己對 IBM 各項營收來源了解不足，因此沒有強烈的投資意見，但對於 IBM 在財報發布後單日暴跌 24.3% 感到相當意外。",
+    "milestones": [
+      {
+        "tweet_id": "2060708982906294613",
+        "title": "關注量子計算時程",
+        "significance": "在 2026 年 5 月注意到 IBM Starling 設立時程與量子商業化進展，認為 2028 至 2029 年可能是前瞻佈局的好時機。"
+      },
+      {
+        "tweet_id": "2077040840837632253",
+        "title": "財報後股價暴跌",
+        "significance": "在 2026 年 7 月指出對 IBM 營收來源了解不深故無強烈意見，但對財報後單日大跌 24.3% 感到驚訝。"
+      }
+    ],
+    "risks": [
+      {
+        "tweet_id": "2077040840837632253",
+        "point": "對 IBM 的各項營收來源了解不足，因此無法形成強烈的投資意見。"
+      }
+    ],
+    "tweet_count": 2,
+    "last_tweet_id": "2077040840837632253",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:48Z",
+    "model": "gemini-3.5-flash-lite"
+  },
+  "HGRAF": {
+    "ticker": "HGRAF",
+    "ai": true,
+    "thesis_story": "根據 Serenity 於 2026 年 4 月發布的貼文，HGRAF 被納入其追蹤者喜愛的股票所組成的成長型 ETF 清單中，初期價格為 4.49 美元，展現出具潛力的 parabolic growth 特性。到了 2026 年 4 月中旬，該檔 ETF 的績效追蹤顯示，HGRAF 在第一週便取得 14.48% 的正向報酬，價格從 4.49 美元上升至 5.14 美元。整體而言，Serenity 對 HGRAF 的立場是將其視為追蹤者關注組合中的一部分，並持續觀察其在 ETF 表現中的價格波動與回報率。",
+    "milestones": [
+      {
+        "tweet_id": "2039906072291611057",
+        "title": "納入成長 ETF 清單",
+        "significance": "在 2026 年 4 月將 HGRAF 納入追蹤者喜愛的成長 ETF，初始價格為 4.49 美元，確立了其成長投資標的地位。"
+      },
+      {
+        "tweet_id": "2043096081060504057",
+        "title": "首週績效表現",
+        "significance": "在 2026 年 4 月中旬公布的第一週表現中，HGRAF 實現 14.48% 的成長，價格由 4.49 美元上升至 5.14 美元。"
+      }
+    ],
+    "risks": [],
+    "tweet_count": 2,
+    "last_tweet_id": "2043096081060504057",
+    "analyzed_count": 2,
+    "generated_at": "2026-10-12T00:31:51Z",
+    "model": "gemini-3.5-flash-lite"
   }
 }
