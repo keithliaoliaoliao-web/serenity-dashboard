@@ -11471,24 +11471,76 @@
     "translation_zh": "@Mellokhai 具細微差別的長線看多，特別是作為投資人看好 $MTSI 及其債務清償。Macom 不是當沖客，所以那 4500 萬美元是被鎖定的。如果發行的另一半是賣給套利可轉換公司債的投資人，則短線看空。"
   },
   "2049038014245175387": {
+    "id": "2049038014245175387",
+    "tweet_id": "2049038014245175387",
     "sentiment": "Bullish",
-    "summary": "Win Semi 產能規模大且風險低",
-    "translation_zh": "所以 $SIVE 不處理產能擴充，Win Semi 負責產能爬坡。Win 的規模非常龐大。$AVGO、$LITE、$QCOM、聯發科、$MTSI、$NXPI 全都使用他們。他們也在 $AAPL 和 SpaceX 的供應鏈中。因此，透過 Win 來確保配額並擴大超大規模資料中心的產能，其風險已被大大降低。"
+    "stances": {
+      "AAPL": "Bullish",
+      "AVGO": "Bullish",
+      "LITE": "Bullish",
+      "MTSI": "Bullish",
+      "NXPI": "Bullish",
+      "QCOM": "Bullish",
+      "SIVE": "Neutral"
+    },
+    "summary": "Win Semi 支援多家大廠及蘋果供應鏈，放量去風險化看多相關個股。",
+    "translation_zh": "所以 SIVE 不處理產能擴充，穩懋（Win Semi）負責量產。穩懋規模龐大。AVGO、LITE、QCOM、聯發科、MTSI、NXPI 都是他們的客戶。他們也進入了 AAPL 與 SpaceX 的供應鏈。因此，如果你確保了產能分配並透過穩懋進行，超大規模資料服務商的產量擴充風險就降低了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:38Z"
   },
   "2049036819078304208": {
-    "sentiment": "Bullish",
-    "summary": "Marvell 直接尋求SIVE雷射供應",
-    "translation_zh": "所以 $POET 負責封裝部分。如果 $MRVL 放棄 Poet，這意味著 Marvell 覺得他們可以將該層垂直整合到 Celestial 中，並直接自己購買雷射（不只是因為 nda 爭議）。Marvell 仍然需要購買雷射。我確信他們正在計劃多重來源合約，但我認為 $NVDA 不會與 $MRVL 共享配額。這就是為什麼 $SIVE 很可能仍然是 Marvell 的直接雷射供應商，因為它們已經符合 Celestial 的規格，這只是省去了中間商。"
+    "id": "2049036819078304208",
+    "tweet_id": "2049036819078304208",
+    "sentiment": "Neutral",
+    "stances": {
+      "MRVL": "Neutral",
+      "NVDA": "Neutral",
+      "POET": "Bearish",
+      "SIVE": "Bullish"
+    },
+    "summary": "MRVL捨棄POET轉向直接採購，SIVE有望受惠成為直接雷射供應商。",
+    "translation_zh": "所以POET負責封裝部分。如果MRVL放棄了POET，這意味著Marvell認為他們可以將該層垂直整合到Celestial中，並直接購買雷射（不僅僅是NDA糾紛）。Marvell仍然需要購買雷撒。我確信他們正計劃多源供應合約，但我不認為NVDA會將分配額度分享給MR這就是為什麼SIVE可能仍然是Marvell的直接雷射供應商，因為它們已經符合Celestial的規格，這只是剔除了中間商。",
+    "risk": "若NVDA不願分享雷射分配額度，或Marvell的垂直整合不如預期，可能影響相關供應鏈表現。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:40Z"
   },
   "2049032343974007088": {
+    "id": "2049032343974007088",
+    "tweet_id": "2049032343974007088",
     "sentiment": "Bullish",
-    "summary": "SIVE具備強大技術優勢，長線看多",
-    "translation_zh": "很高興日本社群在做完研究後開始建立 $SIVE 的部位！更強大的國際股東基礎絕對是正面的。至於一些想法，我對市場的解讀如下：1. $NVDA 買斷了 $LITE / $COHR 的配額。2. $AMD CPO 選擇了 $GFS + $SIVE / Win 來供應剩餘雷射，如果還有配額的話也許是 $LITE。3. 而且……$MRVL CPO 無論如何都需要雷射。$SIVE 看起來像是少數僅存的純雷射供應商之一。所以 Marvell 將直接與 $SIVE（已符合 Celestial 規格）合作，未來並會有多重來源（可能是 $MTSI）。在他們垂直整合掉進入 Celestial 的中介層封裝製程 IP 之後。支援這一點的一些有趣之處：-> Ayar 從他們的網站上移除了 $MTSI 和 $LITE，轉而將 $SIVE 作為首選。Ayar 與 AlChip/GUC 及其他公司有關聯。-> 如果看 $GFS 的幻燈片，在 $AMD 選擇 Globalfoundries 用於其 CPO 專案後，只有 $SIVE 和 $LITE 這兩個公開玩家。-> $SIVE 去年可能就與 Win 達成了雷射產能擴充協議。$NVDA 可能還沒有完全分配好該雷射供應，因此像 $JBL、$AMD 和其他公司等剩餘企業會轉向 Sivers 尋求溢出產能。因為 $LITE 已經表示他們 2028 年的產能已滿。我可能是錯的，但僅根據公開資訊，情況就是這樣。至於為什麼我認為這是一筆好的長線投資：-> Sivers 基本上沒有接觸過 800G 或前幾代產品。-> 歐洲市場反映了前 12 個月的營收……因此之前的估值被壓低。-> 他們獲得了 $NVDA 市場恐慌所產生的所有超大規模資料中心溢出需求。但他們也恰好處於 CPO 的最前沿，甚至為明年 2027 年第二代 1.6T（$JBL LRO）的擴展做準備。然後在 2027 年下半年或 2028 年，他們將在相鄰領域擴展，例如可能用於 $AAPL 消費性裝置的矽光子學。或是像 $AEVA 這樣的 FMCW 4D AI 公司。多年的開發，終於將在明年開花結果。我個人認為市場在這裡遺漏了一些重大訊息，這些訊息是公眾隨著時間透過對應超大規模資料中心關係、挖掘網站或簡報幻燈片而逐漸發現的。超大規模資料中心的供應商不會無緣無故地選擇一家 10 億美元的瑞典雷射公司。與 $JBL 的直接合約就是其中最大的信號。這是我未來高度確信的長線標的。"
+    "stances": {
+      "AAPL": "Neutral",
+      "AEVA": "Neutral",
+      "AMD": "Neutral",
+      "COHR": "Neutral",
+      "GFS": "Neutral",
+      "JBL": "Bullish",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "MTSI": "Neutral",
+      "NVDA": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者強烈看好 SIVE，因其為 CPO 純代工廠並獲得各大廠訂單。",
+    "translation_zh": "我很高興日本社群在做完研究後開始建倉 $SIVE！更強大的國際股東基礎絕對是正面的。就一些想法而言，我的市場解讀如下：1. $NVDA 從 $LITE / $COHR 買斷了配額。2. $AMD CPO 採用了 $GFS + $SIVE，剩餘雷射供應的贏家也許是 $LITE（如果還有配額的話）。3. 而且…… $MRVL 的 CPO 無論如何都需要雷射。 $SIVE 看起來是少數僅存的純晶圓雷射供應商之一。因此 Marvell 將直接與 $SIVE 合作（已符合 Celestial 規格），未來將有多源供應（可能是 $MTSI）。在其去垂直整合掉饋入 Celestial 的中介層封裝製程 IP 之後。一些有趣的佐證：-> Ayar 從網站上移除了 $MTSI 和 $LITE，改以 $SIVE 為首選。Ayar 與 AlChip/GUC 等公司有關聯。-> 如果看 $GFS 的幻燈片，在 $AMD 選擇 Globalfoundries 作為其 CPO 專案後，只有 $SIVE 和 $LITE 這兩個公開玩家。-> $SIVE 自去年以來可能就與 Win 簽署了雷射產能擴充協議。 $NVDA 可能尚未完全分配該雷射供應，因此像 $JBL、$AMD 等剩餘公司會將溢出訂單交給 Sivers。因為 $LITE 已經表示他們的 2028 年產能已全滿。我可能是錯的，但僅根據公開資訊，情況就是這樣。至於為什麼我認為這是一筆很好的長期投資：-> Sivers 基本上沒有接觸過 800G 或前幾代產品。-> 歐洲市場反映了過去 12 個月的營收……因此估值先前遭到壓抑。-> 他們獲得了由 $NVDA 市場恐慌所產生的所有超大型企業溢出需求。但他們也恰好處於 CPO 的最前端，甚至涵蓋了明年 2027 年擴產的第二代 1.6T（$JBL LRO）。然後在 2027 年下半年或 2028 年，他們將在相鄰領域擴展，例如可能用於 $AAPL 消費性裝置的矽光子學。或是像 $AEVA 這樣的 FMCW 4D AI 公司。多年的開發，終於將在明年開花結果。我個人認為市場在這裡漏掉了什麼大事，隨著時間推移，大眾透過繪製超大型企業關係、挖掘網站或簡報幻燈片會發現這些。超大型企業供應商不會無緣無故隨便選擇一家 10 億美元的瑞典雷射公司。與 $JBL 的直接合約就是這點最大的信號。這是我未來的高信念長期投資。",
+    "risk": "作者坦言自己可能判斷錯誤，需承擔市場預期與公開資訊解讀落差之風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:45Z"
   },
   "2049021098176704596": {
+    "id": "2049021098176704596",
+    "tweet_id": "2049021098176704596",
     "sentiment": "Neutral",
-    "summary": "產業供應商定位分析",
-    "translation_zh": "@offermemoneyXYZ $LITE 是一隻龍蝦，也是最終的海陸大餐。$AAOI 是蒸蛤蜊的人，他也銷售最終的海陸大餐。但他們也想回頭去養紅龍蝦。"
+    "stances": {
+      "AAOI": "Neutral",
+      "LITE": "Neutral"
+    },
+    "summary": "推文提及 LITE 與 AAOI，未表達明顯多空立場。",
+    "translation_zh": "@offermemoneyXYZ $LITE 是一隻龍蟹與最後的海陸大餐。$AAOI 是同時販售最後海陸大餐的蒸煮業者。但他們也想回到養殖紅龍蝦的行列。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:47Z"
   },
   "2048960689327456513": {
     "sentiment": "Bullish",
@@ -11501,19 +11553,51 @@
     "translation_zh": "哇，不會吧。$IBKR 現在有韓國股票了。這會很有趣，我有很多以前無法做多的想法。"
   },
   "2048914800533721376": {
+    "id": "2048914800533721376",
+    "tweet_id": "2048914800533721376",
     "sentiment": "Bullish",
-    "summary": "Towa 壟斷 HBM4 封裝市場潛力大",
-    "translation_zh": "只是想讓大家知道：Towa (6315)，市值 13.5 億美元... 它是對 HBM4（壓縮模塑）壟斷的稀有、活生生的定義。今年以來股價表現平平，但每家記憶體公司如 $MU、SK Hynix、三星都是其客戶。而每家記憶體公司的財報都預示了大規模的資本支出增加。正如從 $TSM 的財報中所見，每家主要的半導體公司都在經歷大規模的資本支出週期以滿足 AI 需求。這三家記憶體製造商都從 hbm3e 和 nand 中獲利... 因此下一個資本支出週期可能與上一個不同（意味著支出更多）。就像 $ASML 一樣，這是高度週期性的，但我想在未來幾個月內佈局即將到來的 HBM4 資本支出增長。我想把這家公司與 $LPK（玻璃基板）一起放在大家的雷達上，作為一個功能性的壟斷者。但我確實覺得現在的時機大約正確，因為每家機器供應商都在經歷大規模的重新估值，而這家公司相對持平。這不完全是一個新發現，因為其他一些分析師和隨機追隨者也有這名字，但希望我把握住了時機。（免責聲明：我持有部位，這只是我個人想法的簡短摘要，請勿跟單。）"
+    "stances": {
+      "ASML": "Neutral",
+      "LPK": "Bullish",
+      "MU": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "Towa與LPK具備類壟斷優勢，受惠記憶體大廠HBM4資本支出而看多。",
+    "translation_zh": "所以跟大家分享一下：Towa市值13.5億美元，簡直是HBM4壓模技術的稀有活生生壟斷代表。今年以來表現有點平淡，但像是美光、SK海力士、三星等每家記憶體公司都是他們的客戶。而且各家記憶體財報都暗示了資本支出將大幅增加。正如從台積電財報所見，所有大型半導體廠都在經歷龐大的資本支出週期以迎合AI需求。隨著三大記憶體廠在HBM3e和NAND皆有獲利，下一個資本支出週期可能與以往不同（意味著更多的支出）。就像艾司摩爾一樣，這屬於超週期產業，但我想要參與接下來幾個月即將到來的HBM4資本支出浪潮。我想把這檔股票連同玻璃基板的LPK一起放進大家的雷達中，作為功能性壟斷企業。不過我覺得目前的時機剛剛好，當每家設備供應商都在大幅重新評估時，這檔相對平淡。雖然不算新發現，因為其他分析師和一些追蹤者也知道這檔，但希望我能抓對時機。免責聲明：我確實持有部位，這只是我個人想法的極簡總結，請不要跟單。",
+    "risk": "屬於超週期產業，需注意進場時機是否正確。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:50Z"
   },
   "2048846462164045991": {
+    "id": "2048846462164045991",
+    "tweet_id": "2048846462164045991",
     "sentiment": "Bullish",
-    "summary": "看好 Towa 受惠 HBM4 設備需求",
-    "translation_zh": "從 $MU 到 $EWY（SK Hynix、三星）以及 $SNDK 的記憶體類股最近表現強勁。除了三大巨頭，還有你的 NAND 或像南亞科這樣的台灣廠商。現在或許是關注 Towa (6315) 的好時機，以捕捉 HBM4 上遊壟斷的資本支出週期？"
+    "stances": {
+      "EWY": "Bullish",
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "記憶體相關標的如MU、EWY與SNDK走勢強勁，看好上游設備商。",
+    "translation_zh": "從MU到EWY（SK海力士、三星）以及SNDK等記憶體名稱最近表現非常強勁。除了三大巨頭之外，還有你的NAND或是像南亞科這樣的台灣名稱。現在或許是關注Towa（6315）等名稱以捕捉hbm4上游壟斷資本支出週期好時機？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:52Z"
   },
   "2048833654336729213": {
+    "id": "2048833654336729213",
+    "tweet_id": "2048833654336729213",
     "sentiment": "Bullish",
-    "summary": "POET 與 Marvell 供應鏈關係看好",
-    "translation_zh": "假裝 $SIVE 和 $LITE 製造專門的藍色和紅色緬因龍蝦。非常罕見，沒多少人能做。$POET 蒸熟龍蝦並將其準備在即食容器中。$MRVL 購買那些龍蝦尾，與西蘭花和牛排一起擺盤。然後以最高價格供應給高端客戶。Marvell 以供應藍龍蝦尾聞名。但總是可以供應紅色的，而且繼續供應他們習慣的藍色更容易。紅龍蝦養殖者也有可能透過一些努力轉向藍龍蝦，但養殖這些龍蝦需要時間。但... 恰巧 Marvell 的競爭對手 Nvidia 為其餐廳買斷了所有紅龍蝦。最後，他們仍然需要那些稀有的藍緬因龍蝦。但決定自己動手蒸。這就是 $POET 和 $MRVL 的情況。他們很可能會直接去買龍蝦，因為你不能隨便變出藍龍蝦。"
+    "stances": {
+      "LITE": "Bullish",
+      "MRVL": "Bullish",
+      "POET": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "推文看好SIVE、LITE、POET與MRVL具獨特稀缺性優勢。",
+    "translation_zh": "假裝SIVE和LITE生產稀有的藍色和紅色緬因龍蝦，非常罕見沒幾個人能做到。POET負責蒸龍蝦並準備好隨時出餐的容器。MRVL買下那些龍蝦尾，與花椰菜和牛排一起擺盤，然後以最高價格服務高端客戶。Marvell以供應藍龍蝦尾聞名，但隨時可以供應紅龍蝦，而且繼續供應他們習慣的藍龍蝦比較容易。紅龍蝦養殖場也可能費力轉向藍龍蝦，但養育這些龍蝦需要時間。不過……剛好Marvell的競爭對手Nvidia把所有的紅龍蝦都買去他們的餐廳了。最後，他們仍然需要那些稀有的藍色緬因龍蝦，只是決定自己蒸。這就是POET和MRVL的處境。他們很可能會直接去買龍蝦，因為你不能憑空變出藍龍蝦。",
+    "risk": "競爭對手可能買斷替代資源，且培育稀缺產品需要時間成本。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:55Z"
   },
   "2048826623034802327": {
     "sentiment": "Neutral",
@@ -11521,34 +11605,89 @@
     "translation_zh": "@6m3k4z $MTSI 不是當日沖銷交易者。"
   },
   "2048824585974649005": {
+    "id": "2048824585974649005",
+    "tweet_id": "2048824585974649005",
     "sentiment": "Bullish",
-    "summary": "MTSI 入股 IQE 緩解債務利多",
-    "translation_zh": "@JeremyMaine4 $MTSI 計劃幫助 $IQE 脫離債務並成為戰略投資者？這怎麼可能是利空。"
+    "stances": {
+      "IQE": "Bullish",
+      "MTSI": "Bullish"
+    },
+    "summary": "MTSI擬收購IQE債務並成為戰略投資者，推文者認為這完全不看空。",
+    "translation_zh": "@JeremyMaine4 $MTSI 計畫收購 $IQE 的債務並成為戰略投資者？這怎麼可能是看空的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:57Z"
   },
   "2048824360639836304": {
+    "id": "2048824360639836304",
+    "tweet_id": "2048824360639836304",
     "sentiment": "Neutral",
-    "summary": "不同供應鏈環節難以類比",
-    "translation_zh": "@soscoder 他們處於供應鏈的不同部分。這就像是在問 $CMG 的捲餅是否能成為 $NVDA GPU 的 AI 替代品。"
+    "stances": {
+      "CMG": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "CMG與NVDA處於不同供應鏈，無法相互替代。",
+    "translation_zh": "@soscoder 他們是供應鏈的不同部分。這就像是在問CMG的捲餅能否成為AI的NVDA GPU替代品。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:06:59Z"
   },
   "2048823678339891301": {
+    "id": "2048823678339891301",
+    "tweet_id": "2048823678339891301",
     "sentiment": "Bullish",
-    "summary": "MTSI 投資 IQE 具極正面影響",
-    "translation_zh": "@LNMDad $MTSI 幫助 $IQE 擺脫債務並成為戰略投資者，這是極其正面的。"
+    "stances": {
+      "IQE": "Bullish",
+      "MTSI": "Bullish"
+    },
+    "summary": "MTSI協助IQE償債並成為策略投資人，雙方皆受惠看多。",
+    "translation_zh": "@LNMDad $MTSI 將 $IQE 帶出債務並成為策略投資人，這令人難以置信地正向。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:01Z"
   },
   "2048822871527682152": {
+    "id": "2048822871527682152",
+    "tweet_id": "2048822871527682152",
     "sentiment": "Bullish",
-    "summary": "MTSI 投資 IQE 確保外延片供應",
-    "translation_zh": "就在剛才，$MTSI 尋求向 $IQE 投資 4500 萬美元並進入董事會。我說了什麼，無名氏？？？Landmark 此前產能過剩... 此外，當市值在 1 億美元時，IQE 是光子學供應鏈中的結構性瓶頸。這筆交易也是為了確保長期的外延片（epiwafer）供應。"
+    "stances": {
+      "IQE": "Bullish",
+      "MTSI": "Bullish"
+    },
+    "summary": "MTSI將投資IQE並取得董事會席位，兩檔標的皆看多。",
+    "translation_zh": "剛剛，MTSI計畫向IQE投資4500萬美元並進入董事會。我之前怎麼說的，老兄？Landmark產能過剩...而且IQE在市值1億美元時就是光子學供應鏈的結構性瓶頸。這筆交易也是為了確保長期的磊晶片供應。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:03Z"
   },
   "2048820885336031461": {
+    "id": "2048820885336031461",
+    "tweet_id": "2048820885336031461",
     "sentiment": "Neutral",
-    "summary": "AAOI 有潛力但架構仍待研究",
-    "translation_zh": "謝謝提醒。$AAOI 有可能是其中之一，因為他們在 OFC 宣佈了 ELSFP。他們通常只做自用並銷售成品光收發器。他們有權利選擇這麼做。但我不認為這與 $SIVE 為 Celestial 設計的架構相匹配？我還需要進一步研究。"
+    "stances": {
+      "AAOI": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "作者對 AAOI 與 SIVE 持中立觀點，認為架構可能不同需再深入研究。",
+    "translation_zh": "感謝提醒。$AAOI有可能成為其中之一，因為他們在OFC上宣佈了ELSFP。他們通常只做封閉式並銷售成品的光收發器。他們有這種選擇權。但我不認為這與$SIVE設計到Celestial中的架構相符？需要再深入研究一下。",
+    "risk": "需確認AAOI的ELSFP技術架構是否與SIVE設計相符，存在不確定性。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:05Z"
   },
   "2048819752886489214": {
+    "id": "2048819752886489214",
+    "tweet_id": "2048819752886489214",
     "sentiment": "Bullish",
-    "summary": "Marvell 直接採購對 Sivers 利多",
-    "translation_zh": "@mpunaskar 這很微妙，目前不一定是正面的，但最終可能會變得更正面。我猜測 $MRVL 很可能會直接從 $SIVE 採購。直接對接像 Sivers + $JBL 這樣的超大規模業者，比在中間增加另一家公司要正面得多。"
+    "stances": {
+      "JBL": "Bullish",
+      "MRVL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "MRVL繞過中間商直接向SIVE與JBL採購，對兩者偏向利多。",
+    "translation_zh": "@mpunaskar 這很微妙，不算正面但最終可能更正面。我的猜測是 $MRVL 很可能會直接向 $SIVE 購買。直接找 Sivers 加上 $JBL 這類超大規模業者，比在中間加一家公司要正面得多。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:08Z"
   },
   "2048819178443083852": {
     "sentiment": "Bullish",
@@ -11556,34 +11695,107 @@
     "translation_zh": "它們都處於供應鏈的不同環節。$AXTI 製造光子學相關所需的一切材料。我仍持有 AXT 的部位。考慮到超大規模雲端服務商垂直整合的細節，封裝層廠商可能會受到影響。但拋售任何雷射或上游廠商是毫無道理的，對某些人來說反而是個不錯的買入機會。"
   },
   "2048818575633461542": {
+    "id": "2048818575633461542",
+    "tweet_id": "2048818575633461542",
     "sentiment": "Bullish",
-    "summary": "看好SIVE獲MRVL直接採購",
-    "translation_zh": "顯然不是。雷射和封裝在光學供應鏈中是兩種實質上截然不同的環節。如果投資邏輯破裂，我會公開說明，就像我之前對 $XLU 與降息的看法一樣。但我極度看好 $SIVE，因為我仍然認為 $MRVL 的 Celestial 只會直接向他們採購，並垂直整合 $POET 的封裝流程。"
+    "stances": {
+      "MRVL": "Neutral",
+      "POET": "Neutral",
+      "SIVE": "Bullish",
+      "XLU": "Bearish"
+    },
+    "summary": "分析師看好SIVE將被MRVL收購或垂直整合，立場極度看多。",
+    "translation_zh": "很明顯不是。雷射和封裝是光學供應鏈中兩個截然不同的部分。如果投資論點破裂，我會像當初對待XLU和降息那樣保持透明。但我對SIVE極度看多，因為我認為MRVL仍會直接向他們採購Celestial，並垂直整合POET的封裝流程。",
+    "risk": "若投資論點破裂或如XLU與降息的情況發生，將構成風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:20Z"
   },
   "2048808103832109336": {
-    "sentiment": "Bullish",
-    "summary": "MRVL料將直接採購SIVE",
-    "translation_zh": "$LITE 和 $COHR 在完成交易後，產能可能大部分/完全分配給了 $NVDA。因為 Nvidia 去年對 EML 也是如法炮製。穩懋（Win）作為商業代工廠比較難做到這點，因此 $MRVL 很可能會直接轉向 $SIVE，因為他們已經符合 Celestial 的規格。"
+    "id": "2048808103832109336",
+    "tweet_id": "2048808103832109336",
+    "sentiment": "Neutral",
+    "stances": {
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "NVDA": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "分析 LITE、COHR、MRVL、NVDA 與 SIVE 的供應鏈合作動向。",
+    "translation_zh": "在達成交易後，LITE 和 COHR 可能大部分或全部配置給了 NVDA，就像去年輝達對 EML 做的那樣。由於 Win 是一家商業晶圓廠，要做到這點更困難，因此 MRVL 很可能直接轉向 SIVE，因為它們已經符合 Celestial 的規格。",
+    "risk": "商業晶圓廠的營運模式可能增加直接合作的難度。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:22Z"
   },
   "2048807344017224052": {
+    "id": "2048807344017224052",
+    "tweet_id": "2048807344017224052",
     "sentiment": "Bullish",
-    "summary": "MRVL垂直整合利好雷射商",
-    "translation_zh": "@O_bhaina $MRVL 長期來看將受益於封裝流程的垂直整合。我的猜測是，他們可能會達成協議，直接從 $SIVE、$MTSI 以及可能的 $LITE 採購雷射。"
+    "stances": {
+      "LITE": "Neutral",
+      "MRVL": "Bullish",
+      "MTSI": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "MRVL垂直整合封裝具長期優勢，可能向SIVE等直接採購雷射。",
+    "translation_zh": "@O_bhaina $MRVL 透過垂直整合封裝流程將在長期受益。他們很可能會達成協議，直接向 $SIVE、$MTSI 購買雷射，我猜 $LITE 也許也是候選之一。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:24Z"
   },
   "2048802707360936259": {
+    "id": "2048802707360936259",
+    "tweet_id": "2048802707360936259",
     "sentiment": "Neutral",
-    "summary": "LITE產能滿載需另尋夥伴",
-    "translation_zh": "@adrian_jega $LITE 很可能已將大部分產能分配給 $NVDA，而非 $MRVL。Ayar 從其網站上移除了 $LITE，而之前他們主要在 $SIVE、$MTSI 和 $LITE 之間進行多方採購，這就是一個暗示。因此他們需要尋找其他雷射合作夥伴。"
+    "stances": {
+      "LITE": "Bearish",
+      "MRVL": "Neutral",
+      "MTSI": "Neutral",
+      "NVDA": "Bullish",
+      "SIVE": "Neutral"
+    },
+    "summary": "LITE產能配置疑慮，NVDA受惠，其餘標的中立。",
+    "translation_zh": "@adrian_jega 認為 $LITE 的大部分產能可能分配給了 $NVDA，而非 $MRVL。Ayar 已將 $LITE 從其網站上移除，在此之前他們主要在 $SIVE、$MTSI 和 $LITE 之間進行多元採購，這是一個跡象。所以他們需要尋找其他雷射合作夥伴。",
+    "risk": "LITE失去了Ayar的合作並需尋找新夥伴，MRVL面臨LITE產能分配不足疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:27Z"
   },
   "2048801270337831047": {
+    "id": "2048801270337831047",
+    "tweet_id": "2048801270337831047",
     "sentiment": "Bullish",
-    "summary": "SIVE邏輯未變且長期估值看增",
-    "translation_zh": "不，$SIVE 的投資邏輯依然完全成立，我仍認為它被低估了。這很大程度上是基於 $JBL 1.6T 作為過渡到 CPO 放量的橋樑。但 $AMD CPO 選擇與 $GFS 合作，大幅降低了該公司的風險。此外還有市場尚未知曉的 $AAPL 矽光子（SiPH）機會。老實說，我預期 $MRVL 現在會像 $JBL 那樣直接向 Sivers 採購，但在購買雷射後，採取多方採購並垂直整合封裝 IP 端。長期來看，直接對接像 Jabil、Marvell 這樣的一線客戶，實際上可能比透過封裝合作夥伴跳一階更具估值提升潛力。"
+    "stances": {
+      "AAPL": "Neutral",
+      "AMD": "Bullish",
+      "GFS": "Bullish",
+      "JBL": "Bullish",
+      "MRVL": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE 估值被低估且論點完整，長期看多 SIVE 與相關供應鏈",
+    "translation_zh": "不對，$SIVE 的投資論點完全沒有改變，我依然認為它被低估了。很大一部分是基於 $JBL 的 1.6T 橋接 CPO 量產。但 $AMD 的 CPO 搭配 $GFS 大幅降低了公司的風險。還有市場尚未察覺的 $AAPL SiPH。我老實說現在預期 $MRVL 會像 $JBL 那樣直接向 Sivers 採購。但在買下雷射後，透過多重供應源並垂直整合封裝 IP 方面。長期來看，這實際上可能會比透過包裝合作夥伴轉一手提高更多估值（直接找 T1 如 Jabil、Marvell）。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:29Z"
   },
   "2048799639525351574": {
+    "id": "2048799639525351574",
+    "tweet_id": "2048799639525351574",
     "sentiment": "Neutral",
-    "summary": "MRVL或將直接採購SIVE",
-    "translation_zh": "這算不上好消息，但也沒有那麼糟糕。$LITE 的產能很可能都分配給了 $NVDA，這也是我猜測為何 $AMD CPO（很可能）選擇了 $SIVE + $GFS。$MRVL 可能會直接向 $SIVE 採購並實施多方採購，或許還包括 $MTSI，並在內部自行設計封裝端技術。"
+    "stances": {
+      "AMD": "Neutral",
+      "GFS": "Neutral",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "MTSI": "Neutral",
+      "NVDA": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "分析半導體供應鏈板塊動向，各標的立場中立。",
+    "translation_zh": "這不是好消息，但也沒有那麼糟。我的猜測是，LITE 可能將產能分配給 NVDA，這就是為什麼 AMD CPO（可能）選擇了 SIVE + GFS。MRVL 可能會直接從 SIVE 採購並進行多元供應，或許還有 MTSI，並在內部設計封裝部分。",
+    "risk": "產能分配與供應鏈重組可能帶來不確定性。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-14T06:07:32Z"
   },
   "2048798568543387922": {
     "sentiment": "Neutral",
@@ -47694,5 +47906,18 @@
     "risk": "市場對OpenAI營收的負面解讀及媒體扭曲報導可能引發投資人恐慌與短線拋售。",
     "model": "gemini-3.5-flash-lite",
     "analyzed_at": "2026-10-14T01:07:33Z"
+  },
+  "2110146513766900019": {
+    "id": "2110146513766900019",
+    "tweet_id": "2110146513766900019",
+    "sentiment": "Neutral",
+    "stances": {
+      "SKHY": "Neutral"
+    },
+    "summary": "推測馬斯克砲轟記憶體因SK海力士等過度漲價，看法中立。",
+    "translation_zh": "看來我們找到為什麼伊隆最近發文狂轟記憶體的原因了。難道是 SK 海力士和三星把記憶體價格調漲得太誇張了嗎？",
+    "risk": "記憶體大幅漲價引發大客戶公開抨擊與反彈疑慮。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-10-14T06:04:44Z"
   }
 }
