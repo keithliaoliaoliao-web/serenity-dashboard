@@ -313,39 +313,47 @@
   "MRVL": {
     "ticker": "MRVL",
     "ai": true,
-    "thesis_story": "Serenity對MRVL的投資論點始於2025年8月，當時認為其屬於股價下跌且具防禦價值的標的。2025年9月經歷財報過度反應下跌後，轉為積極買進，並在後續與Google達成高達122億美元的TPU生態系協議以及收購Celestial後，持續看好其在AI、ASIC與光學網路領域的長期潛力。2026年9月，隨著與Globalfoundries簽署SiGe產能協議，論點更加確立，目前整體持偏多與關注態度。",
+    "thesis_story": "2025 年 9 月，Serenity 認為 MRVL 財報後大跌 18% 屬過度反應，視為定期定額佈局的良機，並在降息與半導體反彈行情中將其列為買入標的。進入 2026 年，雖然 MRVL 歷經半導體類股非理性拋售與回檔，但他始終看好其在 ASIC 與光學領域的核心地位。2026 年 8 月，MRVL 與 Google 簽訂涵蓋 TPU 且長期潛在營收達 1,200 億美元的協議，加上收購 Celestial 後具備光子技術優勢，並獲 Nvidia 和 Amazon 策略支持與認股權證。2026 年 10 月傳出 MRVL 擬收購 LITE 以垂直整合雷射瓶頸，Serenity 給予極高評價，整體立場從估值修復轉向極度看好其在 ASIC 及光學供應鏈的戰略龍頭地位。",
     "milestones": [
       {
         "tweet_id": "1962880256576242129",
-        "title": "財報後過度反應",
-        "significance": "2025年9月指出MRVL因財報下跌18%是完全的過度反應，成為定期定額加碼的完美時機。"
+        "title": "財報暴跌視為加碼良機",
+        "significance": "認為財報後大跌 18% 為市場過度反應，定調為分批逢低進場建立部位的好時機。"
       },
       {
         "tweet_id": "2090103899302826302",
-        "title": "Google合作協議",
-        "significance": "2026年8月指出MRVL給予Google價值12.2億美元的選擇權，涵蓋TPU相關技術，帶來龐大營收潛力。"
+        "title": "獲谷歌大單與認股權",
+        "significance": "Google 達成協議且潛在營收達千億美元，加上亞馬遜權證，奠定長期成長核心論點。"
       },
       {
-        "tweet_id": "2100735673561174047",
-        "title": "簽署產能擴充協議",
-        "significance": "2026年9月報導其與Globalfoundries簽署延長SiGe產能協議，支援日益增長的需求。"
+        "tweet_id": "2115624832947917083",
+        "title": "洽購LITE整合雷射",
+        "significance": "指出收購 LITE 垂直整合最吃緊的雷射供應鏈是極具戰略眼光的大招。"
       }
     ],
     "risks": [
       {
-        "tweet_id": "2072575509880512555",
-        "point": "整體半導體板塊與MRVL在2026年7月遭遇顯著的雙位數股價下跌。"
+        "tweet_id": "2074494514061017508",
+        "point": "半導體與AI族群受外部消息面引發無差別拋售與市場性崩跌。"
       },
       {
-        "tweet_id": "2090782670838231129",
-        "point": "競爭對手可能透過供應鏈調整將MRVL的Celestial技術設計排除在外。"
+        "tweet_id": "2094353950040592854",
+        "point": "收購Celestial早期貢獻不明顯，營收與獲利短期尚未顯現。"
+      },
+      {
+        "tweet_id": "2101402656845808007",
+        "point": "若競爭對手博通鎖定外部雷射供應，可能造成ASIC出貨瓶頸。"
+      },
+      {
+        "tweet_id": "2116064400381706600",
+        "point": "大型股仍可能面臨補跌與大幅波動的市場回檔壓力。"
       }
     ],
-    "tweet_count": 261,
-    "last_tweet_id": "2109789664622322081",
-    "analyzed_count": 261,
-    "generated_at": "2026-10-13T21:14:24Z",
-    "model": "gemini-3.5-flash-lite"
+    "tweet_count": 263,
+    "last_tweet_id": "2116064400381706600",
+    "analyzed_count": 263,
+    "generated_at": "2026-10-30T20:45:43Z",
+    "model": "gemini-3.7-flash"
   },
   "META": {
     "ticker": "META",
