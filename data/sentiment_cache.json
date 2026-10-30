@@ -15526,9 +15526,22 @@
     "analyzed_at": "2026-10-29T21:44:45Z"
   },
   "2042819960301588910": {
+    "id": "2042819960301588910",
+    "tweet_id": "2042819960301588910",
     "sentiment": "Bullish",
-    "summary": "認為$SIVE估值顯著被市場低估",
-    "translation_zh": "我有那麼強大的影響力嗎？我很確定這只是資訊整合與發掘的力量。如果我發文討論一家本益比 8 倍的面巾紙公司，根本沒人在乎。當 $SIVE 作為市值約 4 億美元的 $JBL 和 $MRVL 的光源供應商… 且估值僅為 $LWLG 等更具投機性標的約四分之一時，同時其他 CW DFB 公司如 $MTSI 或 $LITE 市值都在數百億美元級別。最終吸引人們注意力的是資訊本身，而不是個人。"
+    "stances": {
+      "JBL": "Neutral",
+      "LITE": "Neutral",
+      "LWLG": "Neutral",
+      "MRVL": "Neutral",
+      "MTSI": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "推主看好SIVE估值偏低且為JBL與MRVL光源供應商。",
+    "translation_zh": "我真的有那麼厲害嗎？我很確定這只是資訊綜合與發現罷了。如果我發文討論一家本益比8倍的餐巾紙公司，根本沒人在乎。當SIVE作為JBL與MRVL約4億美元項目的光源，估值卻只有LWLG這種更具投機性公司的大約四分之一，而MTSI或LITE等其他CW DFB公司市值都已達數百億美元時。最終吸引大家關注的是資訊本身，而不是我個人。",
+    "risk": "推文提到LWLG相較之下較具投機性且估值較高。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-10-30T01:51:21Z"
   },
   "2042797823574634991": {
     "id": "2042797823574634991",
@@ -15888,9 +15901,19 @@
     "analyzed_at": "2026-10-29T21:50:01Z"
   },
   "2042476441196241094": {
+    "id": "2042476441196241094",
+    "tweet_id": "2042476441196241094",
     "sentiment": "Bullish",
-    "summary": "光子超級週期爆發帶動三雄大漲",
-    "translation_zh": "我們現在正處於光子學超級週期。美國的三巨頭 $COHR、$LITE、$AAOI 預計將受益於需求的激增而表現良好。最新報告指出：「Lumentum 正經歷來自人工智慧領域的需求激增，其訂單排期已一路排滿至 2028 年。」"
+    "stances": {
+      "AAOI": "Bullish",
+      "COHR": "Bullish",
+      "LITE": "Bullish"
+    },
+    "summary": "光學元件三雄迎來超級週期，訂單強勁看多。",
+    "translation_zh": "我們現在正處於光學超級週期。美國的 COHR、LITE、AAOI 三雄預期將因需求激增而表現良好。最新報告：「Lumentum 正經歷來自人工智慧產業的需求激增，其訂單管線已完全預訂至 2028 年。」",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:24Z"
   },
   "2042407468685541583": {
     "sentiment": "Bullish",
@@ -15898,19 +15921,52 @@
     "translation_zh": "@justaladd_ 很高興 $AEHR 對你有效！是的，這次上漲相當驚人。看到這麼多散戶因為不懂認證週期而去做空，真的很搞笑 https://t.co/xZZcSF3swF"
   },
   "2042405405339631908": {
+    "id": "2042405405339631908",
+    "tweet_id": "2042405405339631908",
     "sentiment": "Bullish",
-    "summary": "TSEM強勁翻倍與看好台灣穩懋",
-    "translation_zh": "@alexanderlee1 好時光……不敢相信這還不到一個月？當我看多 $TSEM 時，它的市值只有 130 億美元。現在大約 230 億美元，幾乎翻倍了。大海裡總是有更多的魚。不過台灣的穩懋 (Win Semi) 也相當不錯。不過是的，$TSM 和 $TSEM 聽起來太像了。"
+    "stances": {
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "看好TSEM從13億飆至23億市值，對TSM則僅為名稱相似的提及。",
+    "translation_zh": "@alexanderlee1 美好時光... 仍然不敢相信不到一個月？當我做多時，$TSEM 的市值僅有 13 億美元。現在大約是 23 億美元，接近翻倍。海裡總是有更多的魚。不過台灣的穩懋（應指世界先進或台積電，原文Win Semi實為穩懋，但推文混淆）相當不錯。但是，是的，$TSM 和 $TSEM 聽起來太像了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:26Z"
   },
   "2042402839797141620": {
+    "id": "2042402839797141620",
+    "tweet_id": "2042402839797141620",
     "sentiment": "Bullish",
-    "summary": "多檔光通訊概念股帶來倍數回報",
-    "translation_zh": "@0xInitialAce 你還需要多少檔翻倍成長的股票才能擺脫底層？感覺像 $AAOI 翻 4 倍、$AXTI 翻 5 倍、$AEHR 翻 2 倍、$IQE 翻 2 倍、$LITE 翻 2 倍，以及其他股票應該就足夠了吧？"
+    "stances": {
+      "AAOI": "Bullish",
+      "AEHR": "Bullish",
+      "AXTI": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish"
+    },
+    "summary": "作者看好AAOI、AXTI等飆股具備翻倍潛力。",
+    "translation_zh": "你究竟還需要多少檔三位數的飆股才能翻身？感覺 AAOI 翻四倍、AXTI 翻五倍、AEHR 翻兩倍、IQE 翻兩倍、LITE 翻兩倍以及其他股票應該就夠了吧？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:28Z"
   },
   "2042400195607216431": {
+    "id": "2042400195607216431",
+    "tweet_id": "2042400195607216431",
     "sentiment": "Bullish",
-    "summary": "精準選股與擇時帶來超越大盤報酬",
-    "translation_zh": "不，在今天的整體反彈之後，我今年迄今的收益率仍保守維持在 759%。因為避險損失太多了。如果大盤指數和許多個股（如 $RDDT）沒有因總體經濟而下跌，收益可能會更高。但如果你在超大規模客戶供應鏈中精選贏家（如 $AAOI 或 $AEHR）……事實證明超越大盤是有可能的？我確實認為要在每個領域找出關鍵參與者並掌握催化劑時機比看起來難一點。$TSEM 在我買入前整年基本上橫盤，然後在 3 週內大漲了 90%，所以時機也很重要（例如 OFC 宣告）。而且在找到未知的台積電 COUPE 玻璃基板供應商後，我落下了 PTSD……結果只看到他們不久後被阿波羅 (Apollo) 收購。所以並不總是順風順水。但如果我的想法能幫助其他人超越指數或看到前沿產業的走向，我會很高興。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AEHR": "Bullish",
+      "RDDT": "Bearish",
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "作者看好AAOI、AEHR與TSEM等飆股，但因避險與總經受挫。",
+    "translation_zh": "不，在今天整體反彈後，我的年初至今收益率仍保持在保守的759%。避險損失了太多。如果指數和許多像$RDDT這樣的個股沒有因總經而大幅下跌，收益可能會更高。但如果你在超大規模資料中心供應鏈中挑選如$AAOI或$AEHR等精選贏家……事實證明跑贏市場是有可能的？我確實認為，在每個產業中找到重要參與者並掌握催化劑時機，比看起來要難一些。$TSEM基本上整年持平，直到我買入，然後在3週內大漲90%，所以時機也很重要（例如OFC公告）。而且在找到未知的$TSM COUPE玻璃基板供應商後，我得到了創傷後壓力症候群……結果不久後他們就被Apollo收購了。所以並非總是過得很好。但如果我的想法能幫助其他人跑贏指數或了解前沿產業的發展方向，我會很高興。",
+    "risk": "避險操作導致損失，且宏觀經濟與指數下跌會拖累個股表現，尋找潛在贏家與掌握時機具備一定難度。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:31Z"
   },
   "2042375705913328083": {
     "sentiment": "Neutral",
@@ -15918,19 +15974,49 @@
     "translation_zh": "@qdgk123 1. 不，只買現股。除非是像 $MSFT 這樣隱含波動率 (IV) 較低的股票。 2. 這只是許多股票背後我的思考過程。我把它設置為最低金額 1 美元。但我無論如何都會把所有核心想法發送到主要時間線上。"
   },
   "2042360934086398315": {
+    "id": "2042360934086398315",
+    "tweet_id": "2042360934086398315",
     "sentiment": "Bullish",
-    "summary": "看好SIVE價值應逾3.5億",
-    "translation_zh": "@Jornka329996 我仍然認為是 $SIVE。一家作為 $MRVL 和 $JBL 光源供應商的公司，我認為市值應該超過3.5億美元。他們只需要在那斯達克上市即可。"
+    "stances": {
+      "JBL": "Neutral",
+      "MRVL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好SIVE潛力，認為其估值被低估。",
+    "translation_zh": "@Jornka329996 我還是認為是 $SIVE。作為 $MRVL 和 $JBL 的光源供應商，依我之見，這家公司的市值應該高於 3.5 億美元。他們只需要在那斯達克上市即可。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:33Z"
   },
   "2042345236354265271": {
+    "id": "2042345236354265271",
+    "tweet_id": "2042345236354265271",
     "sentiment": "Bullish",
-    "summary": "變壓器缺貨嚴重，具結構性長多潛力",
-    "translation_zh": "可惜的是，並非我選的所有標的都能在一週內上漲三位數。$HPS.A 目前僅上漲約17%。Hammond 是我針對變壓器/配電設備資料中心瓶頸所選的標的，因為它市值較低但乾式變壓器市占率高。$POWL 是我常遇到另一個不錯的配電設備長期看多標的；我最後雖然放棄了，但還是提出來供參考。變壓器/配電設備作為瓶頸可能被低估了，但許多類型在未來2到5年內都已售罄。因此，它們正導致廣泛的資料中心延誤，憑藉訂單能見度與極端需求，應該是良好的結構性長期看多標的。"
+    "stances": {
+      "HPS": "Neutral",
+      "POWL": "Bullish"
+    },
+    "summary": "變壓器與開關設備需求極端強勁，看多 HPS.A 與 POWL。",
+    "translation_zh": "不幸的是，並非我所有的股票都在一周內翻倍。$HPS.A 目前才漲了約 17%。Hammond 是我針對變壓器與開關設備資料中心瓶頸的選股，因為它的市值較低但乾式變壓器市佔率高。$POWL 是我經常遇到的另一個優質開關設備多頭標的；我最後錯過了，但還是提出來供參考。變壓器與開關設備作為瓶頸可能被低估了，但許多類型未來 2 到 5 年都已售罄。正因如此，它們正在導致廣泛的資料中心延遲，憑藉訂單能見度與極端需求，應該會成為優秀的結構性多頭標的。",
+    "risk": "變壓器與開關設備供應短缺，正在導致廣泛的資料中心專案延遲。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:36Z"
   },
   "2042335200110322131": {
+    "id": "2042335200110322131",
+    "tweet_id": "2042335200110322131",
     "sentiment": "Bullish",
-    "summary": "亞馬遜晶片獲採用，利多供應鏈生態",
-    "translation_zh": "如果你想知道為什麼 $AMZN 今天大漲：最新消息顯示 Anthropic Mythos 及其最新模型可能是用 Amazon Trainium 訓練的。因為 Anthropic，這對 Amazon 的生態系統（從 $MRVL 到 $AAOI）來說是個重大利多。就像今年早些時候 Google 的 TPU 生態系統（例如 $LITE）因 Gemini 而大漲一樣。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Bullish",
+      "LITE": "Bullish",
+      "MRVL": "Bullish"
+    },
+    "summary": "Anthropic模型使用亞馬遜Trainium，帶動AMZN及相關供應鏈全面看多。",
+    "translation_zh": "以防你想知道為什麼 $AMZN 今天大漲：有新消息指出，Anthropic Mythos 及其最新模型很可能是使用 Amazon Trainium 進行訓練的。這對從 $MRVL 到 $AAOI 的亞馬遜生態系來說是一件大事，因為有 Anthropic 的加持。就像今年稍早 Google 的 TPU 生態系（例如 $LITE）因為 Gemini 而大漲一樣。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:38Z"
   },
   "2042324781916438621": {
     "sentiment": "Bullish",
@@ -15943,9 +16029,18 @@
     "translation_zh": "@real_jensen_lee 我是 $LASR 和定向能量武器的粉絲。這份清單只是憑印象寫的，所以可能會漏掉一兩個名字。"
   },
   "2042195959187439634": {
+    "id": "2042195959187439634",
+    "tweet_id": "2042195959187439634",
     "sentiment": "Bullish",
-    "summary": "看好AXTI與RKLB的漲勢潛力",
-    "translation_zh": "@Ud197601 @KRock1287 是的，版主不喜歡 $AXTI 價格上漲且人們真的賺到錢。你應該看看我第一次在 $24 以下發布 $RKLB 時的情況，那些貼文一直被刪除，而且在它上漲 200% 之前我還被暫時封禁了。https://t.co/odczv2uDXm"
+    "stances": {
+      "AXTI": "Bullish",
+      "RKLB": "Bullish"
+    },
+    "summary": "作者看好 AXTI 與 RKLB 上漲潛力，並抱怨版主刪文。",
+    "translation_zh": "@Ud197601 @KRock1287 沒錯，版主不喜歡 $AXTI 價格上漲且大家真的賺到錢。應該看看我第一次發文 $RKLB 低於 $24 的時候，那些貼文一直被刪除 + 在它暴漲 200% 之前被暫時封鎖。https://t.co/odczv2uDXm",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:40Z"
   },
   "2042194625990123834": {
     "sentiment": "Bullish",
@@ -15953,29 +16048,113 @@
     "translation_zh": "@lamottown 我喜歡 $VNP 作為 AXT 供應鏈的替代方案，這是一份僅限美國的清單 + 5n 是一間在加拿大上市的公司。"
   },
   "2042193982801973360": {
-    "sentiment": "Bullish",
-    "summary": "看好Reddit作為長期投資標的",
-    "translation_zh": "在發布關於 $AXTI 的貼文後被該子版塊封禁了，所以有點不爽。版主不喜歡股價從 15 美元漲到 70 美元、散戶真的賺到錢的情況。但他們卻鼓勵大家把一生積蓄賠在當天到期的 $PLTR 期權上。Reddit 是審查制度和同溫層最嚴重的社群媒體之一，儘管作為長期投資標的非常賺錢。"
+    "id": "2042193982801973360",
+    "tweet_id": "2042193982801973360",
+    "sentiment": "Neutral",
+    "stances": {
+      "AXTI": "Bullish",
+      "PLTR": "Bearish"
+    },
+    "summary": "作者看好 AXTI 潛力但諷刺 PLTR 0DTE 選擇權高風險。",
+    "translation_zh": "發佈關於 $AXTI 的貼文後被該 subreddit 封鎖，所以有點不爽。版主不喜歡看到股票從 15 美元漲到 70 美元且散戶真的賺到錢。但他們卻鼓勵大家在 $PLTR 的 0DTE 選擇權上賠掉畢生積蓄。Reddit 是最大的社群媒體之一，充滿審查與同溫層，儘管作為做多標的非常賺錢。",
+    "risk": "暗示散戶在 PLTR 0DTE 選擇權上可能損失畢生積蓄，且 Reddit 平台存在審查與同溫層風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:43Z"
   },
   "2042187668931616964": {
+    "id": "2042187668931616964",
+    "tweet_id": "2042187668931616964",
     "sentiment": "Bullish",
-    "summary": "推薦30支看好美股及投資邏輯",
-    "translation_zh": "以下是我今天喜歡的 30 支隨機可交易美股及其原因：\n\n1. $INTC - 美國晶圓代工與國家安全的希望\n2. $MRVL - 從未來的 Maia ASIC 及 CPO 等附加組件擴大營收，他們什麼都做都數不清了\n3. $TSM - 半導體/AI 的基石\n4. $COHR - 垂直整合做全套 + 捕捉光學週期\n5. $RKLB - 太空的最終前沿在約 5 年後及 20 年後都會存在\n6. $DRAM - 三星/SK海力士的記憶體曝險\n7. $AVGO - 超大規模客戶不喜歡英偉達的 GPU 稅\n8. $AMZN - 沒人能與衛生紙隔夜送達競爭。機器人技術隨時間降低營運成本\n9. $ARM - AGI CPU 在未來十年相當程度地擴大營收\n10. $TSEM - 基於光學的產品會需要晶圓廠\n11. $IBIT - 比特幣，大家現在都知道了\n12. $NBIS - 我認為是下一個 AWS。此外他們與 Uber 合作自駕車、擁有可擴展數據庫公司、數據標註。簡直像迷你 Google\n13. $GOOGL - YouTube 不會消失，Gemini 很棒。他們以 TPU 垂直整合並用本業收入資助擴建，所以我喜歡\n14. $AMKR - 超級設施將於 2027-2028 年底上線。受益於美國製造\n15. $HOOD - 我不喜歡短期，但長期我是 Robinhood 的粉絲，因為他們抓住了散戶 + 有更多正在擴展的產品（如銀行業務）。產品創新很狂\n16. $CRCL - 我恰好非常喜歡穩定幣，將其視為支付/持有的未來（取決於清晰法案）\n17. $META - 人們不會在短期內停止使用 Instagram、WhatsApp 或其他平台\n18. $LITE - $GOOGL TPU 曝險在物料清單中占相當高比例。只要 Google 的 AI 計畫持續運作，我認為 $LITE 就會表現出色\n19. $LPTH - 鍺和中國出口管制永遠是問題，因此美國製造的工程替代方案永遠重要\n20. $FN - 總得有人來組裝光學產品\n21. $JBL - 同上，但加上來自 Intel SiPh 收購的 IP，最終可能像中際旭創？\n22. $MP - 美國稀土計畫極為重要，類似 $INTC 的國家安全風險\n23. $HIMS - 好吧聽我說，他們剛收購了一堆公司，且在 19 美元價格具備全球 DTC 渠道。空頭非常討厭這家公司，但我認為作為逆向看多標的實際上很有前途\n24. $SMTC - LRO/LPO 轉型\n25. $POWL - 美國替代 Hammond 的配電設備資料中心瓶頸標的\n26. $VPG - 人形機器人將在未來（也許 2027-2028）成為趨勢，這家公司製造感測器\n27. $MOG.A - 感覺在機器人到 SpaceX 供應鏈中隨處可見他們\n28. $MSFT - 在 375 美元，總有一天我們回頭看會發現這是買入良機\n29. $CVX - 戰後石油可能會暴跌，但這些石油公司將極其重要，特別是委內瑞拉是金礦時\n30. $XLU - 我認為降息可能會回歸，AI 需要電力/電網，因此從 $CEG 到 $NEE 這些標的永遠很重要\n\n除了 $AAOI 和 $AEHR 之外隨便提些其他想法。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AEHR": "Neutral",
+      "AMKR": "Bullish",
+      "AMZN": "Bullish",
+      "ARM": "Bullish",
+      "AVGO": "Bullish",
+      "CEG": "Bullish",
+      "COHR": "Bullish",
+      "CRCL": "Bullish",
+      "CVX": "Bullish",
+      "DRAM": "Bullish",
+      "FN": "Bullish",
+      "GOOGL": "Bullish",
+      "HIMS": "Bullish",
+      "HOOD": "Bullish",
+      "IBIT": "Bullish",
+      "INTC": "Bullish",
+      "JBL": "Bullish",
+      "LITE": "Bullish",
+      "LPTH": "Bullish",
+      "META": "Bullish",
+      "MOG": "Bullish",
+      "MP": "Bullish",
+      "MRVL": "Bullish",
+      "MSFT": "Bullish",
+      "NBIS": "Bullish",
+      "NEE": "Bullish",
+      "POWL": "Bullish",
+      "RKLB": "Bullish",
+      "SMTC": "Bullish",
+      "TSEM": "Bullish",
+      "TSM": "Bullish",
+      "VPG": "Bullish",
+      "XLU": "Bullish"
+    },
+    "summary": "分析師看好多檔美股標的，涵蓋半導體、AI及能源等領域。",
+    "translation_zh": "以下是我今天喜歡的30檔美國隨機股票及其原因：1. INTC：美國晶圓代工希望與國家安全...（其餘略）",
+    "risk": "石油可能在戰爭後崩跌，且短期看空Robinhood。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:46Z"
   },
   "2042177514873946555": {
-    "sentiment": "Neutral",
-    "summary": "分析微軟量子設備供應商價值",
-    "translation_zh": "他們製造量子計算與量子點雷射器設備。這是該利基領域中相當於 $AIXA 或 $AMSL 的存在。@latent_value7 從 LinkedIn 貼文的機器分析中發現 $MSFT 量子部門正在向他們採購，這只是一篇資訊發現貼文。我不確定市場給予微軟作為其客戶多少價值評價。"
+    "id": "2042177514873946555",
+    "tweet_id": "2042177514873946555",
+    "sentiment": "Bullish",
+    "stances": {
+      "AIXA": "Neutral",
+      "AMSL": "Neutral",
+      "MSFT": "Bullish"
+    },
+    "summary": "微軟買入量子設備，潛在供應商備受關注。",
+    "translation_zh": "他們製造用於量子計算和量子點雷達的機器。這個領域相當於 $AIXA 或 $AMSL。@latent_value7 透過領英貼文分析發現 $MSFT Quantum 向他們採購，這只是一篇資訊發掘貼文。我不知道市場對微軟作為客戶有多大價值。",
+    "risk": "目前未知市場對微軟作為客戶的實際定價估值。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:49Z"
   },
   "2042167898723242100": {
-    "sentiment": "Neutral",
-    "summary": "推薦拉回時關注大型半導體股",
-    "translation_zh": "@NabQ321 好問題！$AAOI 和 $AEHR 是兩檔極高 Beta 值且高速成長的股票。也許下次拉回時可以考慮一些較大型的公司，像是 $COHR、$TSEM、$SMTC、$MRVL、$INTC 或 $FN？像 AOI 或 AEHR 這樣的公司相當罕見。"
+    "id": "2042167898723242100",
+    "tweet_id": "2042167898723242100",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "AEHR": "Bullish",
+      "COHR": "Neutral",
+      "FN": "Neutral",
+      "INTC": "Neutral",
+      "MRVL": "Neutral",
+      "SMTC": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "AAOI與AEHR具高貝塔與高成長，大型股可待回檔再關注。",
+    "translation_zh": "好問題！$AAOI 和 $AEHR 是兩檔極高貝塔值的高成長股。或許下次下跌時可以考慮 $COHR、$TSEM、$SMTC、$MRVL、$INTC 或 $FN 等大型公司？像 AOI 或 AEHR 這樣的公司非常少見。",
+    "risk": "推文未提及具體風險、疑慮或警告。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:51Z"
   },
   "2042163792008945727": {
+    "id": "2042163792008945727",
+    "tweet_id": "2042163792008945727",
     "sentiment": "Neutral",
-    "summary": "解析市場對微軟量子概念的定價",
-    "translation_zh": "@MarginCallMick 這只是關於微軟（$MSFT）量子計算與 $ALRIB 的新資訊發現。無法控制市場如何將其與超大型雲端業者建立連結進行定價。如今許多事情都只是由演算法驅動的。"
+    "stances": {
+      "ALRIB": "Neutral",
+      "MSFT": "Neutral"
+    },
+    "summary": "市場正對MSFT與ALRIB的新資訊進行演算法定價，立場中立。",
+    "translation_zh": "這只是圍繞著微軟量子與ALRIB的新資訊發現過程。無法控制市場如何將該連結計入超大規模雲端服務商的價格中。現在很多事情都只是由演算法驅動的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:53Z"
   },
   "2042162239424311761": {
     "sentiment": "Neutral",
@@ -15983,14 +16162,36 @@
     "translation_zh": "@devandraan 不是的，新標的與輝達（$NVDA）CPO 生態系有關。這只是關於量子相關標的的後續追蹤。"
   },
   "2042161215968051652": {
+    "id": "2042161215968051652",
+    "tweet_id": "2042161215968051652",
     "sentiment": "Bullish",
-    "summary": "看好 Riber 受益微軟量子採購",
-    "translation_zh": "微軟（$MSFT）看起來像是 Riber（$ALRIB）為其微軟量子專案進行的秘密買家。廣大市場和演算法可能還不知道這個關聯。分子束磊晶（MBE）對於量子計算、量子點雷射、垂直共振腔面射型雷射（VCSEL）和矽光子學非常重要。但如果微軟量子開始採購這家歐洲設備製造商，長期影響將相當巨大。量子領域仍處於非常早期階段，早期產業風險顯著。但由於該公司看起來像量子領域的 $AIXA，且以預估前瞻本益比約 27 倍獲利交易，與 $VECO 形成 MBE 的雙頭壟斷，因此看起來很有吸引力。根據 LinkedIn 的公開情報，美國超大型雲端業者正使用 Riber 的 MBE 設備來晶圓代工前沿量子晶片。這至少有助於驗證該公司技術的重要性，並使其在不久的將來能夠良好佔據量子計算和量子點資本支出週期的有利位置。"
+    "stances": {
+      "AIXA": "Neutral",
+      "ALRIB": "Bullish",
+      "MSFT": "Neutral",
+      "VECO": "Neutral"
+    },
+    "summary": "微軟可能是 Riber 的潛在買家，看好 ALRIB 在量子計算領域的前景。",
+    "translation_zh": "$MSFT 看起來像是微軟量子計畫中 Riber < $ALRIB > 的秘密買家。整體市場和演算法可能還不知道這個連結。MBE 對量子計算、量子點雷射、VCSEL 和矽光子學很重要。但如果微軟量子開始向這位歐洲設備製造商採購，其長期影響將相當可觀。量子仍處於非常早期階段，早期產業的風險實質存在。但由於這家公司看起來像是量子的 $AIXA，且以獲利約 27 倍預估遠期本益比交易，作為與 $VECO 的 MBE 雙頭壟斷之一，它看起來很有趣。從公開的 LinkedIn 情資來看，美國超大規模雲端運算商使用 Riber MBE 設備來製造前沿量子晶片，至少有助於驗證該公司作為一項技術的重要性，並使其在不久的將來似乎處於有利地位，能夠抓住量子計算和量子點資本支出週期。",
+    "risk": "量子運算仍處於極早期階段，早期產業面臨著重大的實質風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:56Z"
   },
   "2041963517071519963": {
+    "id": "2041963517071519963",
+    "tweet_id": "2041963517071519963",
     "sentiment": "Bullish",
-    "summary": "看好 COHR 與 MRVL 年漲幅",
-    "translation_zh": "我覺得 $COHR 和 $MRVL 是兩檔「什麼都做」的多頭標的。如果你在公開場合問大家，實際上沒有人知道他們在做什麼。$NVDA？GPU。$INTC？晶圓代工。Marvell？毫無頭緒。Coherent？毫無頭緒。他們就像半導體界的新生代 Deloitte。兩者在未來一年都是非常穩健且能獲利的多頭標的。可能不會有 200% 的漲幅，但在這裡預期 50-100% 的報酬看起來是合理的。"
+    "stances": {
+      "COHR": "Bullish",
+      "INTC": "Neutral",
+      "MRVL": "Bullish",
+      "NVDA": "Neutral"
+    },
+    "summary": "COHR與MRVL具備獲利潛力，預期未來一年有50至100%漲幅。",
+    "translation_zh": "我覺得COHR和MRVL是兩檔「包山包海」的長期多頭標的。雖然當你在公眾場合問起時，根本沒人知道它們到底在做什麼。NVDA？GPU。INTC？晶圓代工。Marvell？毫無頭緒。Coherent？毫無頭緒。它們就像半導體界的德勤。兩者都是未來一年非常扎實且具獲利能力的長期多頭。雖然可能不會有200%的漲幅，但在這裡實現50-100%的漲幅看起來是合理的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:51:59Z"
   },
   "2041940759457493433": {
     "sentiment": "Bullish",
@@ -15998,14 +16199,32 @@
     "translation_zh": "@yianisz 謝謝！很高興看到我們去年共同看多的標的（如 $AAOI）表現得相當出色。"
   },
   "2041929392331616431": {
+    "id": "2041929392331616431",
+    "tweet_id": "2041929392331616431",
     "sentiment": "Neutral",
-    "summary": "感謝訂閱者支持並分享投資分析",
-    "translation_zh": "哇，付費訂閱者達到 9,200 人了……我感到非常榮幸，謝謝大家！很高興許多人覺得我對從 $JBL 到 $ALRIB 等各種標的的思考過程，只要 1 美元就能有所幫助！https://t.co/LXGVgFPDJt"
+    "stances": {
+      "ALRIB": "Neutral",
+      "JBL": "Neutral"
+    },
+    "summary": "作者感謝訂閱者，並提及JBL與ALRIB兩檔股票。",
+    "translation_zh": "哇，9200位付費訂閱者...我感到非常榮幸，謝謝大家！很高興很多人覺得我對從JBL到ALRIB等各種股票的思考過程對1美元很有幫助！https://t.co/LXGVgFPDJt",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:52:01Z"
   },
   "2041922561257468329": {
+    "id": "2041922561257468329",
+    "tweet_id": "2041922561257468329",
     "sentiment": "Bullish",
-    "summary": "看好並加碼買進 JBL 與 COHR",
-    "translation_zh": "@SidkMena 也許 $JBL 在這裡也很吸引人。我今天最終買進了 Jabil，並加碼了更多 $COHR。"
+    "stances": {
+      "COHR": "Bullish",
+      "JBL": "Bullish"
+    },
+    "summary": "作者看好並買進 Jabil 與 COHR 兩檔股票。",
+    "translation_zh": "也許 $JBL 在這裡也很有趣。今天最終買入了 Jabil 和更多的 $COHR。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:52:03Z"
   },
   "2041921503877636386": {
     "sentiment": "Bullish",
@@ -16013,14 +16232,33 @@
     "translation_zh": "@misrlcomp 所有那些 $AAOI 的空頭都被屠殺了，哈哈。"
   },
   "2041916656944083188": {
+    "id": "2041916656944083188",
+    "tweet_id": "2041916656944083188",
     "sentiment": "Bullish",
-    "summary": "看多 AAOI 等光通訊股邏輯驗證",
-    "translation_zh": "匿名讀者你聽進去了嗎？？？我高度確信看多的 $AAOI 已經爆漲極多。2025 年關於超大型雲端業者的貼文：「我們可能會在 2026 年看到資金湧入像 $COHR、中際旭創、$LITE 和 $AAOI 這樣的玩家主題中。」投資邏輯，得到驗證，正在發生。https://t.co/A3V6eRaXeH"
+    "stances": {
+      "AAOI": "Bullish",
+      "COHR": "Bullish",
+      "LITE": "Bullish"
+    },
+    "summary": "AAOI大漲且超大規模資料中心題材獲驗證，看好AAOI、COHR與LITE。",
+    "translation_zh": "你有聽我的嗎？？我高度確信做多的AAOI暴漲了。關於超大規模資料中心2025年的貼文：「我們可能會看到投資湧向COHR、Innolight、LITE和AAOI等業者，作為2026年的投資主題。」論點。驗證。實現。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-10-30T01:52:05Z"
   },
   "2041907945500504466": {
+    "id": "2041907945500504466",
+    "tweet_id": "2041907945500504466",
     "sentiment": "Bearish",
-    "summary": "警告 $IREN 過度增資稀釋股權",
-    "translation_zh": "$IREN 的套牢族什麼時候才要承認我對以下這點是對的：60億美元的 ATM 增資是一個結構性壓抑因素？\n\n-> $NBIS 今年累計上漲 48% \n-> $IREN 今年累計下跌 13%。\n\n雖然 IREN 的市值增加了（ATM 增資對公司有利），但股東權益卻下降了。\n\n這就是人們不理解或不想聽到的關於過度稀釋的警告。\n\n可能在每一次為了透過 GPU 變現 GW 容量而籌集資金的拉升中：都會有半數市值憑空印出，然後在公開市場上拋售。"
+    "stances": {
+      "IREN": "Bearish",
+      "NBIS": "Bullish"
+    },
+    "summary": "作者看空IREN過度稀釋，並看好NBIS表現。",
+    "translation_zh": "什麼時候$IREN的套牢族才願意承認我說的是對的？關於60億美元的ATM稀釋是結構性負擔。$NBIS年初至今上漲48%，而$IREN下跌13%。雖然IREN市值上升（ATM對公司有利），但股東權益卻在下降。這是人們不理解或不想聽到的關於過度稀釋的警告。他們很可能會在每次反彈時籌集資金，將GW產能貨幣化為GPU：市值將有一半憑空產生，然後拋售到公開市場。",
+    "risk": "IREN存在嚴重的股權稀釋風險，公司透過不斷發行新股籌資，導致股東權益被大幅稀釋。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-10-30T01:52:23Z"
   },
   "2041889308416839808": {
     "sentiment": "Bullish",
