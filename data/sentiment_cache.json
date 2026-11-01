@@ -20139,39 +20139,106 @@
     "translation_zh": "@bennybigbull 不用了，以六位數的扎實虧損賣出 $AVAV，並轉向光學技術（photonics）。"
   },
   "2036854584174694447": {
+    "id": "2036854584174694447",
+    "tweet_id": "2036854584174694447",
     "sentiment": "Bullish",
-    "summary": "看好 SIVE、ARM 與 AAOI 長期潛力",
-    "translation_zh": "@Jornka329996 謝謝！就我個人而言，$SIVE 的信念很高，即使在市值約 4 億美元的這個水平也是如此。\n\n以目前的價位來看，$ARM 和 $AAOI 長期來看也相當有潛力！\n\n我這週還在看另外兩家大型公司。"
+    "stances": {
+      "AAOI": "Bullish",
+      "ARM": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好 SIVE、ARM 與 AAOI 的長期發展。",
+    "translation_zh": "謝謝！我個人高度看好 $SIVE，即使目前市值約 4 億美元左右。在當前價位，$ARM 和 $AAOI 的長期前景也很有潛力！我本週還有另外兩家正在關注的大型股公司。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-01T16:02:28Z"
   },
   "2036852577720316281": {
+    "id": "2036852577720316281",
+    "tweet_id": "2036852577720316281",
     "sentiment": "Neutral",
-    "summary": "持有 VPG 觀察是否仍為特斯拉供應商",
-    "translation_zh": "@throughthetape 我持有 $VPG 的部位，因為這是我押注 $TSLA Optimus 長期的標的。\n\n但是，我不百分之百確定他們是否在量產爬坡階段被中國合作夥伴替換掉……\n\n然而，這個說法聽起來像是他們仍然是關鍵供應商？真的很難確定。"
+    "stances": {
+      "TSLA": "Neutral",
+      "VPG": "Neutral"
+    },
+    "summary": "作者持有VPG看好特斯拉Optimus，但對供應商地位存疑。",
+    "translation_zh": "@throughthetape 我持有 $VPG 倉位，因為這是我看好 $TSLA Optimus 的標的。但我不確定他們在量產提升階段是否被中國合作夥伴替換掉...不過這項聲明聽起來他們似乎仍是關鍵供應商？真的很難確定。",
+    "risk": "VPG 可能在特斯拉 Optimus 量產推升階段被中國合作夥伴替換。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-01T16:02:38Z"
   },
   "2036851975376298062": {
-    "sentiment": "Neutral",
-    "summary": "VPG 具 Optimus 題材但機器人供應鏈尚待引爆",
-    "translation_zh": "距離我上次追蹤 $VPG 已經有一段時間了。\n\n這曾是針對 $TSLA Optimus 量產的感測器標的。\n\n本週在 Sidoti 會議上發現一個非常重要的線索：\n\n「到 2026 年底潛在規模可擴大到每週數百台機器人。」\n\n聽起來跟 Optimus 不謀而合？不是嗎？\n\n如果根據他們執行長「每台機器人 500-1200 美元」的說法：還算不錯。\n\n但當然，在人形機器人真正大規模量產的引爆點到來之前，許多機器人供應鏈的資金都算是死錢。\n\n也許宇樹科技（Unitree）的 IPO 會很快為機器人供應鏈注入一些生氣？"
+    "id": "2036851975376298062",
+    "tweet_id": "2036851975376298062",
+    "sentiment": "Bullish",
+    "stances": {
+      "TSLA": "Neutral",
+      "VPG": "Bullish"
+    },
+    "summary": "看好VPG受惠特斯拉Optimus量產潛力。",
+    "translation_zh": "好久沒有追蹤 $VPG 了。這曾是特斯拉 Optimus 量產的感測器概念股。本週在 Sidoti 會議上有個非常重要的線索：「到 2026 年底有潛力擴充至每週數百台機器人。」聽起來有點像是對齊 Optimus 對吧？如果以他們 CEO 提到的「每台機器人 500 至 1,200 美元」說法來看：相當不錯。但當然，在人形機器人真正迎來大規模量產的轉折點之前，許多機器人供應鏈基本上像是死水。也許宇樹科技（Unitree）的 IPO 近期能為機器人供應鏈注入一些活力？",
+    "risk": "人形機器人尚未大規模量產前，機器人供應鏈資金可能呈現停滯狀態。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-01T16:02:51Z"
   },
   "2036842706597789779": {
+    "id": "2036842706597789779",
+    "tweet_id": "2036842706597789779",
     "sentiment": "Neutral",
-    "summary": "P4O 作為玻璃供應商具戰略價值但財務 BOM 低",
-    "translation_zh": "@genZinvest0r 我的每篇貼文大概都有 3 則關於 $P4O 的留言，所以我最終還是去看了盡職調查（DD）。\n\n從戰略上來看，作為 Bosch、Samsung 以及可能的下游 $LITE 甚至 $COHR 等公司的玻璃供應商，它相當有價值。但從財務上來看則不然，因為 BOM（物料清單）極低。"
+    "stances": {
+      "COHR": "Neutral",
+      "LITE": "Neutral"
+    },
+    "summary": "提及 $LITE 與 $COHR，對兩者持中立看法。",
+    "translation_zh": "@genZinvest0r 我幾乎每隔幾篇貼文就會收到三個關於 $P4O 的留言，所以最後終於去研究了一下盡職調查。從策略上看，作為博世、三星以及可能作為下游 $LITE 和 $COHR 等廠商的玻璃供應商，它相當有價值。但從財務上看則沒那麼好，因為其物料清單成本極低。",
+    "risk": "提及財務效益不佳，主因其物料清單（BOM）成本極低。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-01T16:02:59Z"
   },
   "2036842201792340206": {
+    "id": "2036842201792340206",
+    "tweet_id": "2036842201792340206",
     "sentiment": "Neutral",
-    "summary": "$LITE 上游供應鏈地圖有趣但非投資推薦",
-    "translation_zh": "@AtlasShrug1 供應鏈地圖非常有趣。\n\n當追隨者在玻璃晶圓層級發現疑似 $LITE OCS 上游供應商，以及像市值千億美元的 $GLW 等公司時。\n\n我並不是在推薦它，也從未說過這是一筆好投資。"
+    "stances": {
+      "GLW": "Neutral",
+      "LITE": "Neutral"
+    },
+    "summary": "提及 $LITE 與 $GLW 供應鏈，但未推薦投資。",
+    "translation_zh": "@AtlasShrug1 供應鏈圖譜非常有趣。有追蹤者發現 $LITE OCS 玻璃晶圓層級的可能上游供應商，與像 $GLW 這樣千億美元規模的公司並列。並非推薦該標的，也從未說過這是個好的投資標的。",
+    "risk": "作者明確提示未推薦此標的，亦未保證其為良好投資。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-01T16:03:05Z"
   },
   "2036840136730935736": {
-    "sentiment": "Bullish",
-    "summary": "P4O 具 LITE 供應鏈戰略價值，已買進",
-    "translation_zh": "剛查看了留言...\n\n$P4O 在市值 3400 萬美元的情況下，看起來像是 $LITE 的潛在上游供應商。\n\n可能的供應鏈對應關係：\n\n-> Plan Optik $P4O（玻璃晶圓）\n-> Teledyne $TDY 或 Silek（微機電代工廠）\n-> $LITE（OCS 交換器）\n-> $GOOGL（TPU）\n\n然而，$LITE 在玻璃晶圓層級很可能採用康寧（$GLW）作為雙供應來源。\n\nP4O 是英飛凌、三星和其他公司的知名供應商，所以並非隨便的公司。\n\n335 萬歐元對比 3552 萬美元市值，資產負債表非常健全。\n\n話雖如此：\n\n-> 這並不完全意味著這會轉化為實質的營收成長，除非他們開始調漲價格（鑑評玻璃晶圓可能只是 $LITE OCS BOM 的一小部分）。\n\n讀完這些後，我個人確實買了股票。\n\n因為 $LITE OCS 潛在的供應鏈瓶頸具有戰略價值，或許在財務上的價值沒那麼高。\n\n但他們的核心論點——Plan Optik 的玻璃流動與 MDF 精加工技術對於 OCS 封裝而言是不可替代的，這點是成立的。\n\n當然，超大規模資料中心的供應鏈受到嚴密保護，所以無法確切得知。\n\n所有功勞都歸功於追蹤者的留言。\n\n但總結來說（TLDR）：\n\n供應鏈對應\n-> $P4O -> 代工廠 -> $LITE -> $GOOGL 根據他們的分析極其可能。\n\n至於是否能成為 $LITE OCS 供應鏈的瓶頸...我不知道這能否轉化為實質影響。\n\n再次強調，我絕對不是在推薦這檔股票。\n\n只是覺得像這樣對 $LITE OCS 供應鏈進行對應非常有趣，如果追蹤者花費心力整理的這些成果石沉大海會很可惜。"
+    "id": "2036840136730935736",
+    "tweet_id": "2036840136730935736",
+    "sentiment": "Neutral",
+    "stances": {
+      "GLW": "Neutral",
+      "GOOGL": "Neutral",
+      "LITE": "Bullish",
+      "TDY": "Neutral"
+    },
+    "summary": "分析LITE供應鏈，認為P4O具戰略價值但營收助益有限，LITE維持中立偏多。",
+    "translation_zh": "剛查看了評論...$P4O市值3400萬美元，看起來像是潛的上游$LITE供應商。可能對應關係為：Plan Optik $P4O(玻璃晶圓)->Teledyne $TDY或Silek(MEMS代工)->$LITE(OCS交換器)->$GOOGL(TPU)。然而，$LITE在玻璃晶圓層級可能會向Corning($GLW)進行雙源採購。P4O是英飛凌、三星等大廠的已知供應商，並非隨便的小公司。335萬歐元對比3552萬美元市值，資產負債表非常健康。話雖如此：這不代表一定會帶來實質營收成長，除非他們調高價格(鑑於玻璃晶圓可能只是$LITE OCS物料清單很小的一部分)。看完這些後我個人確實持有股票。因為$LITE OCS潛在供應鏈瓶頸具有戰略價值，儘管財務價值可能沒那麼高。但他們的核心論點認為Plan Optik的玻璃流道與MDF精加工對OCS封裝來說實際上是不可替代的，這點是正確的。當然，超大規模資料中心供應鏈防護嚴密，無法百分之百確定。所有功勞歸於追蹤者的評論。但總結來說：供應鏈對應$P4O -> 代工廠 -> $LITE -> $GOOGL根據他們的分析是非常可能的。至於是否為$LITE OCS供應鏈的瓶頸...不知道這是否能轉化為實質效益。再次強調，這絕非投資建議。只是覺得$LITE OCS的這種供應鏈對應非常有趣，若追蹤者花費這麼多心血發文卻石沉大海太浪費了。",
+    "risk": "玻璃晶圓佔比較小且供應鏈保密，可能無法轉化為實質營收成長。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:09Z"
   },
   "2036827701785587796": {
+    "id": "2036827701785587796",
+    "tweet_id": "2036827701785587796",
     "sentiment": "Bullish",
-    "summary": "買進大型股 ARM，隔日小型股也跟漲",
-    "translation_zh": "我跟你說...就算我買進像 $ARM 這樣市值 1,700 億美元的小型股（編按：原文如此），隔天它們也會像 $TSEM 或 $SIVE 一樣直接漲 20%？"
+    "stances": {
+      "ARM": "Bullish",
+      "SIVE": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "作者看好ARM、TSEM與SIVE等標的，認為其股價會迅速飆漲。",
+    "translation_zh": "我跟你們說... 就算我買像是1700億美元市值的小型股ARM，它們隔天也一樣會像TSEM或SIVE那樣直接飆漲20%嗎？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:11Z"
   },
   "2036804455568683303": {
     "sentiment": "Bullish",
@@ -20184,9 +20251,18 @@
     "translation_zh": "@O_bhaina 這可能與 $AAOI 的期權資金流向有關。"
   },
   "2036801199073382422": {
+    "id": "2036801199073382422",
+    "tweet_id": "2036801199073382422",
     "sentiment": "Bullish",
-    "summary": "看好 Sivers 潛力，預期成下個十倍股",
-    "translation_zh": "當機構意識到 $SIVE 在 CW/EML 雷射瓶頸中的重要性，卻發現自己毫無持倉時…… Sivers 至今已上漲超過 220%，但我預期它會成為像 $AXTI 一樣的下一個個人十倍股。"
+    "stances": {
+      "AXTI": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者極度看好 SIVE 與 AXTI，認為 SIVE 具備 10 倍潛力。",
+    "translation_zh": "當機構意識到 Sivers 在 CW/EML 雷射瓶頸中的重要性卻沒有持倉時。Sivers 已經大漲超過 220%，但我預期它會像 AXTI 一樣成為我的下一個 10 倍潛力股。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:13Z"
   },
   "2036794525000274273": {
     "sentiment": "Bullish",
@@ -20204,9 +20280,18 @@
     "translation_zh": "@Rationalmind__ 兄弟，$ARM 是一家具備 1400 億美元市值的公司"
   },
   "2036778272101695958": {
+    "id": "2036778272101695958",
+    "tweet_id": "2036778272101695958",
     "sentiment": "Bullish",
-    "summary": "認為 $TTD 和 $RDDT 是良好反彈做多標的",
-    "translation_zh": "@HAkbarnataj $TTD 和 $RDDT 是很好的反彈做多標的。不過感覺市場現在根本不在乎營收年增 20-50% 的軟體公司了？"
+    "stances": {
+      "RDDT": "Bullish",
+      "TTD": "Bullish"
+    },
+    "summary": "作者看好 TTD 與 RDDT 作為反彈作多標的。",
+    "translation_zh": "$TTD 和 $RDDT 是很好的反彈作多標的。然而，感覺市場似乎不再關心那些年成長率達 20-50% 的軟體公司了？",
+    "risk": "市場可能不再關注成長率達 20-50% 的軟體公司。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:16Z"
   },
   "2036761156074045694": {
     "sentiment": "Bullish",
@@ -20239,9 +20324,18 @@
     "translation_zh": "@JOptionEngineer $ARM 是一家市值 1430 億美元的小型股。"
   },
   "2036746039588434165": {
+    "id": "2036746039588434165",
+    "tweet_id": "2036746039588434165",
     "sentiment": "Bullish",
-    "summary": "看好ARM的AI推論晶片與盈收潛力",
-    "translation_zh": "僅供參考：我在 139 美元時買進了 $ARM。\n\n隨著市場從訓練轉向推論，以 1430 億美元市值來看，它真的極具吸引力。\n\n然後 $ARM 的 AI CPU 將蠶食推論市場以及 $NVDA 的市佔率。\n\n特別是隨著大語言模型變得越來越輕量化。\n\n達到 250 億美元營收（5倍營收）的預測已經足以支持其風險報酬比。"
+    "stances": {
+      "ARM": "Bullish",
+      "NVDA": "Bearish"
+    },
+    "summary": "分析師看好 ARM 推論晶片潛力並做多，同時認為將侵蝕 NVDA 市佔。",
+    "translation_zh": "僅供參考：我在 139 美元時買進了 $ARM。隨著市場從訓練轉向推論，以 1430 億美元市值來看確實極具吸引力。隨後 $ARM 的 AI CPU 將蠶食推論市場以及 $NVDA 的市佔率。特別是在大型語言模型變得更加輕量化之際。達到 250 億美元營收（5倍營收）的預測，已經足以支撐其風險報酬比。",
+    "risk": "預測營收需達到 250 億美元（5倍營收）來支撐其風險報酬比。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:19Z"
   },
   "2036740775955075344": {
     "sentiment": "Bullish",
@@ -20259,9 +20353,18 @@
     "translation_zh": "@MildBullyMMA 這是你自己做的決定，不用謝我！\n\n我只是沿途分享我自己的投資論點和對 $SIVE 的信心。"
   },
   "2036734000174334434": {
+    "id": "2036734000174334434",
+    "tweet_id": "2036734000174334434",
     "sentiment": "Bullish",
-    "summary": "SIVE具收購價值但涉國安考量",
-    "translation_zh": "@TGodTrader 哦，百分之百會有公司想要收購 Sivers。他們是世界上少數幾家能做到這一點的公司，就像 $MTSI 一樣。\n\n但收購可能會被阻止，因為 $SIVE 對歐洲和美國的國家安全都至關重要（是晶片法案的受惠者）。"
+    "stances": {
+      "MTSI": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "MTSI與SIVE技術獨特具收購價值，看好兩檔潛力。",
+    "translation_zh": "@TGodTrader 喔，100%的公司都會想要併購 Sivers。他們是世界上少數像 $MTSI 一樣能做到這一點的公司。但併購可能會受阻，因為 $SIVE 對歐洲和美國的國家安全都至關重要（美國晶片法案補助對象）。",
+    "risk": "因SIVE涉及歐美國家安全且為晶片法案補助對象，併購案可能面臨阻礙。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:21Z"
   },
   "2036733379224490307": {
     "sentiment": "Bullish",
@@ -20269,9 +20372,22 @@
     "translation_zh": "@Ayouubb_ 考量到他們在瓶頸環節中的定位，$SIVE 的市值竟然只有約 4.2 億美元，這實在是低得離譜。\n\n在我來看，它有非常大的價值重估空間。"
   },
   "2036732940064080007": {
+    "id": "2036732940064080007",
+    "tweet_id": "2036732940064080007",
     "sentiment": "Bullish",
-    "summary": "SIVE是光學雷射瓶頸的稀缺標的",
-    "translation_zh": "$SIVE 簡然是全球光學雷射瓶頸（CW/EML）中僅有的少數純正公開市場標的之一。\n\n$LITE - 550億美元以上\n$COHR - 530億美元以上\n$MTSI - 178億美元以上\n$AAOI - 88億美元\n$SIVE - 4億美元\n\n你幾乎幾乎看不到這種情況……\n\n真心震驚市場上竟然還有 Sivers 這樣的小型公司……它已經透過 Jabil、Marvel Celestial、O-Net、Ayar 等公司成為超大規模資料中心供應鏈的合格供應商。\n\n這是我有生以來見過市場上最大的結構性落差之一。\n\n隨著越來越多機構開始意識到這一點，我預期市場會像對待 $AXTI 那樣每天重新定價。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AXTI": "Bullish",
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "MTSI": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE具備獨特光學雷射優勢，市場將持續重新訂價，看好SIVE與AXTI。",
+    "translation_zh": "$SIVE 簡直是全球少數幾檔純粹公開參與 (CW/EML) 光學雷射瓶頸的公司之一。$LITE - 550億美元以上，$COHR - 530億美元以上，$MTSI - 178億美元以上，$AAOI - 88億美元，$SIVE - 4億美元。你基本上幾乎沒見過這種情況... 我真心驚訝市場上竟然有 Sivers 這樣的小型股... 它已經透過 Jabil、Marvel Celestial、O-Net、Ayar 和其他公司成為超大規模資料中心供應鏈的合格供應商。這是我見過市場上最大的結構性落差之一。隨著更多機構開始意識到這一點，我預期市場會像 $AXTI 那樣每天不斷重新為其訂價。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:24Z"
   },
   "2036730832854077766": {
     "sentiment": "Neutral",
@@ -20289,14 +20405,38 @@
     "translation_zh": "給西方從事人工智慧、機器人、太空和半導體等前沿科技領域人士的一個教訓：創辦人切勿在中國設立在地企業或嘗試獲取當地的風險投資。特別是：除非你的名字是 $TSLA，或者你是一家千億美元級別的公司，否則絕不要設立合資企業。在矽谷，有太多的親身經歷涉及中國政府的脅迫和強制拘留。太多的創辦人被超過 8,000 萬美元的高額融資所吸引，與當地實體達成許多熱絡的「交易」。然後在那裡開發他們的技術或親自訪問。但當資金被凍結且你的技術被強制轉移給中國國營實體時，那些紙面資本就變得毫無意義了。沒有高管願意公開說出這一點，因為他們都害怕中國或在當地有商業利益，但這就是殘酷的現實。希望發完這篇貼文後不會有一堆機器人前來攻擊我。"
   },
   "2036674779399545279": {
+    "id": "2036674779399545279",
+    "tweet_id": "2036674779399545279",
     "sentiment": "Bullish",
-    "summary": "SIVE具極高潛力與龐大潛在商機",
-    "translation_zh": "$SIVE 絕對是我自 $AXTI 以來在這個市場上見過具備最大上行潛力的股票？市場不可能錯過 Jabil、Marvell（Celestial 透過 $POET）、O-Net、Ayar（由 $NVDA 和聯發科資助）的 CW 激光光源……當時市值僅為 1.4 億美元（現在為 3.5 億美元）。你不僅能獲得對未來 CPO 規模擴展最直接的雷射曝險？而且很快還能迎來與 $JBL（前 Intel 矽光子部門）合作的本週期 1.6T 可插拔模組。加上穩懋（Win Semi）橋接產能擴充以滿足超大型雲端業者供應鏈的需求。我不認為 99.9% 的人已經意識到這件事的龐大規模。"
+    "stances": {
+      "AXTI": "Bullish",
+      "JBL": "Bullish",
+      "NVDA": "Neutral",
+      "POET": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE具備極高上檔潛力，結合POET與JBL等題材看多。",
+    "translation_zh": "$SIVE 可能是這波市場中我見過上檔空間最高的股票，自 $AXTI 以來？市場絕不可能漏掉 Jabil、Marvell（透過 $POET 的 Celestial）、O-Net、Ayar（獲 $NVDA、聯發科支持）的光學雷射光源……在 1.4 億美元估值時。（現在 3.5 億美元）。你不僅能獲得對未來 CPO 規模化最直接的雷射曝光？而且還能迎來本週期與 $JBL（前身為英特爾矽光子部門）即將推出的 1.6T 可插拔產品。隨著超大規模資料中心供應鏈所需的 Win Semi 橋接產能擴充，99.9% 的人根本還沒意識到其龐大的規模。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:27Z"
   },
   "2036669268448960858": {
+    "id": "2036669268448960858",
+    "tweet_id": "2036669268448960858",
     "sentiment": "Bullish",
-    "summary": "雷射直接供應商為生態最大受益者",
-    "translation_zh": "@QuantumDom 這就像 $NVDA，雖然有一個完整的生態系統，但有時最大的受益者是直接的 GPU 或雷射供應商，例如 $SIVE 或 $LITE。而不是像 $POET、$FN 這類的公司。不過也有一些高毛利的特例，像是新易盛（Eoptolink）。"
+    "stances": {
+      "FN": "Neutral",
+      "LITE": "Bullish",
+      "NVDA": "Bullish",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好NVDA、SIVE與LITE為最大受益者。",
+    "translation_zh": "就像 $NVDA 一樣，有一個完整的生態系，但有時候最大的受益者是像 $SIVE 或 $LITE 這樣的直接 GPU 或雷射供應商。而不是像 $POET、$FN 這類型的公司。有一些像是 Eoptolink 的高利潤例外。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:29Z"
   },
   "2036660214259392520": {
     "sentiment": "Bullish",
@@ -20319,14 +20459,36 @@
     "translation_zh": "@AdityaInvests90 人們應該看基本面和市值，而不是只看股價走勢圖漲了多少。否則你會錯過下一個 $NVDA。"
   },
   "2036658383173173394": {
+    "id": "2036658383173173394",
+    "tweet_id": "2036658383173173394",
     "sentiment": "Bullish",
-    "summary": "組合高確信度標的可大幅跑贏大盤",
-    "translation_zh": "@yathatone2 除了 $MTSI 和穩懋之外，這些基本上都是高確信度的選擇……你大概只需要把這些股票放進等權重 ETF 中，就能大幅跑贏大盤。雖然還有像 $GFS 這樣的雷射供應商/代工廠，但我選擇了上面列表中我個人看好的贏家。"
+    "stances": {
+      "GFS": "Bullish",
+      "MTSI": "Bearish"
+    },
+    "summary": "看好多檔高確信標的與GFS，僅對MTSI持保留態度。",
+    "translation_zh": "他們基本上都是高確信的... 除了 $MTSI 和穩懋 (Win Semi) 之外。你大概可以直接把這些組成等權重ETF，就能大幅跑贏大盤。還有更多像 $GFS 的雷射供應商/晶圓廠，但我挑選了上面清單中的個人贏家。",
+    "risk": "暗示部分標的估值偏高。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:31Z"
   },
   "2036657811179155561": {
+    "id": "2036657811179155561",
+    "tweet_id": "2036657811179155561",
     "sentiment": "Bullish",
-    "summary": "雷射為半導體瓶頸看好相關供應鏈",
-    "translation_zh": "每位行業領袖……尤其是 $AVGO（物理層產品部門）在今天的聲明中都指出，雷射是半導體的瓶頸所在。如果你還沒有作多…… -> CW 雷射：$SIVE | $MTSI -> EML 雷射：$COHR | $LITE -> 或其代工廠 $TSEM / 穩懋。也許是時候該醒醒了？博通的 Ramachandran 表示：「儘管當前行業內有多家供應商……但雷射領域絕對存在供應瓶頸。」"
+    "stances": {
+      "AVGO": "Bullish",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "MTSI": "Bullish",
+      "SIVE": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "博通點出雷射瓶頸，看好AVGO及相關雷射供應鏈表現。",
+    "translation_zh": "每個產業龍頭... 特別是今天的$AVGO（實體層產品部門）在聲明中指出，雷射是半導體的瓶頸。如果你還沒做多 -> 連續波雷射：$SIVE | $MTSI -> EML雷射：$COHR | $LITE -> 或其晶圓代工$TSEM/穩懋。也許該醒醒了？博通的拉馬錢德蘭表示：「儘管今天產業中有許多供應商... 但雷射領域確實存在供應限制。」",
+    "risk": "雷射領域存在供應限制，可能成為半導體產業的瓶頸。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:34Z"
   },
   "2036655775079411862": {
     "sentiment": "Bullish",
@@ -20344,14 +20506,33 @@
     "translation_zh": "@beauty_oe 從 110 美元一下子就漲到了 185 美元對吧？隨時歡迎，很高興能幫上忙！\n\n雖然我無法全部預測正確，但很高興 $TSEM 的表現非常不錯。"
   },
   "2036634794701037821": {
+    "id": "2036634794701037821",
+    "tweet_id": "2036634794701037821",
     "sentiment": "Neutral",
-    "summary": "AXTI偏高，建議關注其他標的",
-    "translation_zh": "@beauty_oe 你也是從 10 美元區間就開始追蹤 $AXTI 對吧！能漲到那個地步真的很厲害。\n以目前的水平來看是有點處於高檔，所以我想分享其他估值可能更具吸引力的股票，比如 $SIVE 和 $TSEM。"
+    "stances": {
+      "AXTI": "Bullish",
+      "SIVE": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "看好AXTI大漲但目前價位偏高，轉而分享SIVE與TSEM。",
+    "translation_zh": "@beauty_oe 你之前也從10美元左右開始關注 $AXTI 對吧！它能漲到那裡真的非常精彩。以目前的水平來看處於稍高的價位區間，所以想分享一些在估值上可能更有吸引力的其他標的，例如 $SIVE 或 $TSEM。",
+    "risk": "AXTI目前價位處於高檔，バリュエーション（估值）可能不夠吸引人。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:36Z"
   },
   "2036632240017522962": {
+    "id": "2036632240017522962",
+    "tweet_id": "2036632240017522962",
     "sentiment": "Neutral",
-    "summary": "分享半導體與科技業過往經歷",
-    "translation_zh": "我現在經營一家金融科技公司。\n\n不過我在半導體領域確實有一些零星的經驗？\n\n我的第一份工作是在 $INTC，但很快就離職了。之後在加州大學柏克萊分校花了一兩年時間研究與 RISC-V 相關的事物，例如 RocketChip、安全分區（secure enclaves）等。\n\n也曾在某些 AI 實驗室短暫擔任研究員，所以算是有相關吧？\n\n做過一堆雜七雜八的事情，比如 $AMZN 的機器人強化學習無人機模擬或是半導體新創……對我來說經歷蠻豐富的，但我永遠無法適應朝九晚五的工作。\n\n不過累積的知識確實會發揮作用！"
+    "stances": {
+      "AMZN": "Neutral",
+      "INTC": "Neutral"
+    },
+    "summary": "作者回顧職涯經歷，提及AMZN與INTC僅屬過往工作背景，立場中立。",
+    "translation_zh": "我現在經營一家金融科技公司。但我以前確實有些零星的半導體相關經驗？我的第一份工作是英特爾，但我很快就辭職了。在柏克萊加州大學花了一兩年時間從事 RISC-V 相關的事情，像是 RocketChip、安全飛地等。曾在一些人工智慧實驗室擔任研究員一小陣子，所以算是有點相關？做了一堆雜七雜八的事情，像是亞馬遜機器人強化學習無人機模擬或是半導體新創公司……所以對我來說有點雜亂無章，但就是無法過朝九晚五的生活。累積的知識確實有累積起來！",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:38Z"
   },
   "2036544815010345138": {
     "sentiment": "Bullish",
@@ -20374,9 +20555,19 @@
     "translation_zh": "是的，我一直公開批評《清晰法案》（Clarity Act），因為那是銀行業給加密貨幣產業和 $CRCL 的毒藥。\n\n大家都知道他們會試圖起草禁止收益的法案。但我們會關注最終結果如何。\n\n這對穩定幣的流通來說是一個合理且實質的風險。"
   },
   "2036536675413926123": {
+    "id": "2036536675413926123",
+    "tweet_id": "2036536675413926123",
     "sentiment": "Bearish",
-    "summary": "看空ARM與高通看好聯發科",
-    "translation_zh": "我個人其實相當看空 $ARM 和 $QLCM。\n\n問我有關 $ARM 的事可能不太合適，因為我曾對 RISC-V 有過不少貢獻，所以帶有一些偏見。\n\n至於高通……聯發科長期來看可能更好，特別是他們的高成長 ASIC 部門正在與 $GOOGL 合作。"
+    "stances": {
+      "ARM": "Bearish",
+      "GOOGL": "Bullish",
+      "QCOM": "Bearish"
+    },
+    "summary": "作者看空 ARM 與高通，看好谷歌與聯發科合作。",
+    "translation_zh": "我個人其實對 $ARM 和 $QLCM 都相當看空。找我問 $ARM 可能不是最準的，因為我幫過 RISC-V 不少，所以有點偏見。至於高通... 聯發科長期可能更好，特別是他們的高成長 ASIC 部門正與 $GOOGL 合作。",
+    "risk": "面臨 RISC-V 的競爭威脅以及聯發科在 ASIC 領域的高成長挑戰。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:41Z"
   },
   "2036535069150773452": {
     "sentiment": "Bearish",
@@ -20394,9 +20585,21 @@
     "translation_zh": "@B8trades 我最近才剛看到新聞，需要更多時間將其納入 $ARM 的估算模型中。"
   },
   "2036532579638399109": {
+    "id": "2036532579638399109",
+    "tweet_id": "2036532579638399109",
     "sentiment": "Bullish",
-    "summary": "ARM發布AGI晶片，台積電與ARM受益",
-    "translation_zh": "$ARM 宣布推出名為「AGI CPU」的新 AI 晶片。據 Arm 稱，該公司「預計它將增加數十億美元的年營收」。\n\n- 136 個 Neoverse V3 核心，基於 $TSM 3奈米製程建構\n- 專為「代理型 AI」工作負載客製化，以 OpenAI 和 $META 作為主要客戶。\n\n$AMD 和 $INTC 最近受益於企業 CPU 短缺的東風。\n\n你可能會想：ARM 能解決短缺問題嗎？從架構上來說，是的。從物理上來說，不是。\n\n主要受益者是 $TSM，但隨著他們從授權轉型，這對 $ARM 來說也是一個巨大的推動力。"
+    "stances": {
+      "AMD": "Neutral",
+      "ARM": "Bullish",
+      "INTC": "Neutral",
+      "META": "Neutral",
+      "TSM": "Bullish"
+    },
+    "summary": "ARM推出AI晶片營收看增，台積電同受惠大好。",
+    "translation_zh": "ARM宣布推出名為「AGI CPU」的新AI晶片。據Arm表示，公司「預期這將增加數十億美元的年度營收」。擁有136個Neoverse V3核心，採用台積電3奈米製程製造，為「代理型AI」工作負載量身打造，並以OpenAI和META作為主要客戶。AMD和INTC最近受惠於企業CPU短缺的順風。你可能在想：ARM解決了短缺問題嗎？架構上是的，物理上不是。主要受惠者是台積電，但隨著ARM從授權轉型，這對ARM來說也是一波巨大的順風。",
+    "risk": "實體產能上並未解決CPU短缺問題。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T16:03:43Z"
   },
   "2036521794811883565": {
     "sentiment": "Neutral",
