@@ -20637,19 +20637,53 @@
     "translation_zh": "@StocksAREnuts 巴菲特購買的是能產生巨大自由現金流的獲利公司。$IREN 則是「反向巴菲特」，你買進的公司只會讓你面臨股權稀釋。"
   },
   "2036515409357316247": {
-    "sentiment": "Bearish",
-    "summary": "IREN稀釋風險高，有更好替代標的",
-    "translation_zh": "市面上有比 $IREN 好得多的機會。如果你想要同個板塊，從資本支出融資方式來看（例如 $NVDA 提供 20 億美元資金），$NBIS 客觀上更好……還有像 $AAOI 這樣的公司，以更少的資本支出在營收和利潤上超越 $IREN。但如果你仍想持有 $IREN，最好等大家都被股權稀釋以資助其擴建之後，再重新進場收穫回報。"
+    "id": "2036515409357316247",
+    "tweet_id": "2036515409357316247",
+    "sentiment": "Neutral",
+    "stances": {
+      "AAOI": "Bullish",
+      "IREN": "Bearish",
+      "NBIS": "Bullish",
+      "NVDA": "Neutral"
+    },
+    "summary": "看空IREN警惕股權稀釋，看好NBIS與AAOI具更高優勢。",
+    "translation_zh": "市場上有比 $IREN 好得多的機會。如果你想要同個產業，從資本支出融資方式來看（獲得 $NVDA 20 億美元資助），$NBIS 客觀上更好……還有像 $AAOI 這樣的公司，以更少的資本支出，營收與獲利均超越了 $IREN。但如果你仍想持有 $IREN，最好等大家因籌措建置資金而被稀釋股權後再重新進場，之後再收穫回報。",
+    "risk": "警告 IREN 為籌集擴建資金將面臨股權稀釋風險，建議等稀釋完成後再重新進場。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-01T20:30:09Z"
   },
   "2036512077960061176": {
+    "id": "2036512077960061176",
+    "tweet_id": "2036512077960061176",
     "sentiment": "Bearish",
-    "summary": "持有IREN面臨巨額稀釋如同套牢",
-    "translation_zh": "我真佩服居然還有人持有 $IREN。想像一下，接近市值一半的規模……約 60 億美元最終被稀釋，並在每次股價上漲時向公開市場拋售……然後你居然還看多？如果你為了它而避開今年迄今上漲 100-200%+ 的 $SNDK 或 $AAOI，只因你關心一家公司勝過關心自己的投資組合報酬率，那你已經進入了類似 $AMC 套牢族的特殊領域了。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMC": "Bearish",
+      "IREN": "Bearish",
+      "SNDK": "Bullish"
+    },
+    "summary": "看空IREN與AMC套牢者，看好SNDK與AAOI高報酬。",
+    "translation_zh": "我真的佩服竟然還有人持有 $IREN。想想看接近一半的市值……約 60 億美元最終被稀釋，並在每次股票反彈時被拋售到公開市場……然後竟然還能看多？如果你因為重視一家公司勝過自己的投資組合報酬，而避開今年迄今上漲 100-200%+ 的 $SNDK 或 $AAOI，那你已經進入了特殊的 $AMC 套牢族群了。",
+    "risk": "IREN 面臨高達 60 億美元的股權稀釋，且反彈時遭公開市場持續拋售。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-01T20:30:19Z"
   },
   "2036493814656106744": {
+    "id": "2036493814656106744",
+    "tweet_id": "2036493814656106744",
     "sentiment": "Bullish",
-    "summary": "估值被低估，重估潛力極巨大",
-    "translation_zh": "如果你是第一次接觸 $AAOI：在今年迄今大漲 175% 後，於接近歷史高點 109 美元建立倉位看起來很嚇人。然而，這看起來像是光學領域的 $SNDK，而且正好處於光收發器超級週期的核心……在 82 億美元估值下，我們可以看預測數字：（預計產能 * 預計平均售價）2026 年 Q2：約 3.121 億美元；2026 年 Q4：約 14.1 億美元；2027 年 Q2：約 15.3 億美元；2027 年 Q4：約 19.7 億美元。如果 $AAOI 最終在營收上超越市值 550 億美元的 $LITE……對於具備 30-40% 毛利率的營收成長而言，80 億美元市值顯得有些荒謬……重新估值的潛力極大。最壞情況，即使自家雷射晶圓廠失敗而轉向 $COHR 採購，它最終也會成為美國製造的中際旭創/新易盛（兩家均為 660 億至 900 億+ 美元的中國公司）嗎？將整個供應鏈在美國製造的選擇權價值被低估了。如果能實現預測，$AAOI 是我除了 $SIVE 和 $LITE 之外少數極具信心的長線看多標的。"
+    "stances": {
+      "AAOI": "Bullish",
+      "COHR": "Neutral",
+      "LITE": "Bullish",
+      "SIVE": "Bullish",
+      "SNDK": "Neutral"
+    },
+    "summary": "看好AAOI、LITE及SIVE，認為AAOI重估潛力巨大。",
+    "translation_zh": "如果你是新關注 $AAOI 的人：在今年至今上漲 175% 後，於 109 美元歷史高點附近建倉看起來很嚇人。然而，這看起來像是光學領域的 $SNDK。而且它恰好處於光收發器超級週期的中心... 在 82 億美元估值下，我們可以參考預測數據：（預估產能 * ASP 預測）2026年Q2：約3.121億美元；2026年Q4：約14.1億美元；2027年Q2：約15.3億美元；2027年Q4：約19.7億美元。如果 $AAOI 最終在營收上超越 550 億美元市值的 $LITE... 以 30-40% 利潤率帶來的營收成長來看，80 億美元市值顯得有些荒謬... 估值重估的潛力巨大。最壞的情況是，如果他們自研雷射晶圓廠失敗並向 $COHR 採購。最終會成為美國製造的旭創 / 新易盛（兩家均為 660 億至 900 億+ 美元的中國公司）嗎？在美國本土製造整個供應鏈的選擇權被低估了。如果能夠實現預測，$AAOI 是我除了 $SIVE 和 $LITE 之外極少數的高確信度看多標的之一。",
+    "risk": "若自研雷射晶圓廠失敗需外購，以及能否如期達成營收預測。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-01T20:30:28Z"
   },
   "2036479336572920037": {
     "sentiment": "Bearish",
@@ -20667,9 +20701,18 @@
     "translation_zh": "@MindQuest42 實際上只重新整理了一次就停在 69.69 美元，所以 $AXTI 真是天時地利人和。"
   },
   "2036470700173828342": {
-    "sentiment": "Bullish",
-    "summary": "市價單直接買進SIVE標的",
-    "translation_zh": "@RitwikBobbili 這是 $SIVE SFB。$IBKR 上的數據沒有顯示，所以最後我直接用市價單買進了。"
+    "id": "2036470700173828342",
+    "tweet_id": "2036470700173828342",
+    "sentiment": "Neutral",
+    "stances": {
+      "IBKR": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "提及SIVE與IBKR，無明顯多空立場。",
+    "translation_zh": "@RitwikBobbili 是 $SIVE SFB。$IBKR 上的數據沒有顯示，所以我最後直接用市價買進了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:30Z"
   },
   "2036470434221424647": {
     "sentiment": "Bullish",
@@ -20682,9 +20725,24 @@
     "translation_zh": "@KDREAM111111 看起來 $AAOI 的按市價增發 (ATM) 完成了嗎？無法確定。如果它強勢突破 100 美元以上並能維持一兩天的漲幅，那很有可能已經結束了。"
   },
   "2036467416218108244": {
+    "id": "2036467416218108244",
+    "tweet_id": "2036467416218108244",
     "sentiment": "Bullish",
-    "summary": "看好AXTI後市並點名多檔潛力標的",
-    "translation_zh": "所以我的10倍潛力股 $AXTI 真的登月了。如果你覺得錯過了這發火箭：-> $SIVE 是我個人目前價格下最看好的下一個10倍 AXT 潛力股。-> $AAOI 自我提到以來已經漲了4倍，但我認為從這個水位起它還能再漲4倍。如果你想玩得保守一點：-> $VNP 是西方世界的 $AXTI -> $SOI 是矽光子/CPO領域的 $AXTI，但它還沒真正發力。-> $IQE 根據重組情況來看更具二元性。-> $TSEM、$LITE、$COHR 是更穩健的複合成長股。我還沒怎麼提過 $VNP (5N Plus)，但它作為 $AXTI 的對手，確實是西方供應鏈中最重要的公司之一。基本上它供應：鍺、鎵、碲、鉍。用於低軌衛星的太陽能電池。光子學的基板原料。市場上永遠有更多機會！"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Neutral",
+      "LITE": "Bullish",
+      "SIVE": "Bullish",
+      "SOI": "Neutral",
+      "TSEM": "Bullish"
+    },
+    "summary": "作者看好AXTI等標的，並點名SIVE與AAOI具備十倍潛力。",
+    "translation_zh": "我的十倍潛力股AXTI真的登陸月球了。如果你覺得錯過火箭：SIVE是我目前最愛的下一個十倍潛力股；AAOI在我提過後已漲4倍，但我認為還能再漲4倍。若想保守一點：VNP是西方世界的AXTI；SOI是矽光子/CPO的AXTI但尚未真正放量；IQE的重組結果較為二元；TSEM、LITE、COHR則是更穩健的複合成長股。我先前沒怎麽提過VNP，但它是西方供應鏈中最重要的公司之一，作為AXTI的平衡力量。基本上它供應：銦、鍺、鎵、碲、鉍，還有低軌衛星太陽能電池及光子基板原料。市場上永遠有更多機會！",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:33Z"
   },
   "2036460494568194277": {
     "sentiment": "Neutral",
@@ -20692,29 +20750,81 @@
     "translation_zh": "@fakeboycarti 整個評論區都好負面哈哈。發布關於 $AXTI 的投資論點結果被踩到谷底 https://t.co/TvVjrSeez6"
   },
   "2036458844793217133": {
+    "id": "2036458844793217133",
+    "tweet_id": "2036458844793217133",
     "sentiment": "Bullish",
-    "summary": "AXTI達傳奇價位，瓶頸期無法用傳統估值衡量",
-    "translation_zh": "$AXTI 現在已經達到了 69.69 美元的傳奇地位。本來預期一年半內有近 10 倍的回報，沒想到短短幾個月就達到了...從 $AAOI 到 $SIVE 的所有股票都表現得好得離譜。至於 AXT 40 億美元的估值？它被高估了嗎？是的。超大規模資料中心會付 100 億美元來確保他們的 AI 建設嗎？是的。許多這類瓶頸是無法用傳統指標來估值的。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "AXTI等標的大幅超預期，AI建設需求推動估值。",
+    "translation_zh": "$AXTI 現在達到了 69.69 美元的傳奇地位。本來預期在一年半內獲得近 10 倍的回報，而不是幾個月內……從 $AAOI 到 $SIVE 的一切都表現得好得離譜。至於 AXT 市值達到 40 億美元？它被高估了嗎？是的。超大規模企業會支付 100 億美元來確保他們的 AI 建設嗎？是的。許多這樣的瓶頸無法用傳統指標來估值。",
+    "risk": "估值過高，且傳統指標無法衡量瓶頸。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:35Z"
   },
   "2036451073045700967": {
+    "id": "2036451073045700967",
+    "tweet_id": "2036451073045700967",
     "sentiment": "Bullish",
-    "summary": "看好AEHR長線，點評多檔半導體設備股",
-    "translation_zh": "@GoldenMeth 依我看 $AEHR 這裡是一個很好的長線買點，應該會在未來幾個月像 $AAOI 一樣迎來拐點。$AMKR 最好等到明年，因為他們正處於資本支出階段，如果我沒記錯的話，他們的建設要到 2027 年底或 2028 年才會投產。$FORM 是我今年很喜歡的一檔"
+    "stances": {
+      "AAOI": "Bullish",
+      "AEHR": "Bullish",
+      "AMKR": "Bearish",
+      "FORM": "Neutral"
+    },
+    "summary": "看好 AEHR 與 AAOI，建議等待 AMKR 資本支出週期。",
+    "translation_zh": "依我之見，AEHR 在這裡是一個很好的長期投資標的，應該會在未來幾個月內像 AAOI 一樣達到轉折點。AMKR 最好等到明年，因為他們正處於資本支出階段，如果我沒記錯的話，他們的擴建工程要到 2027 年底或 2028 年才會投產。我今年曾是 FORM 的粉絲。",
+    "risk": "AMKR 正處於資本支出階段，擴建產能要到 2027 年底或 2028 年才會上線。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:38Z"
   },
   "2036449457064255618": {
+    "id": "2036449457064255618",
+    "tweet_id": "2036449457064255618",
     "sentiment": "Bullish",
-    "summary": "認為微軟與Meta在現階段極具吸引力",
-    "translation_zh": "@TheVantaBlack 還沒，但 $MSFT 的 LEAPS 選擇權，特別是搭配 OpenAI 的流動性解鎖，在這裡感覺更有吸引力？$META 也是如此，其財報表現亮眼，推遲 Avocado 發布雖然短期內靠廣告營收對整體財報影響不大，但確實會影響市場觀感。"
+    "stances": {
+      "META": "Bullish",
+      "MSFT": "Bullish"
+    },
+    "summary": "作者看好微軟與Meta，認為微軟具吸引力且Meta財報亮眼。",
+    "translation_zh": "還沒，但微軟的長期選擇權，特別是搭配OpenAI流動性解鎖，在這裡似乎更有吸引力？Meta也是如此，擁有亮眼的財報，延遲Avocado發布短期內並不會實質改變以廣告為主體的營收，但確實影響了市場觀感。",
+    "risk": "延遲Avocado產品發布可能會對市場觀感造成負面影響。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:40Z"
   },
   "2036448156280561850": {
+    "id": "2036448156280561850",
+    "tweet_id": "2036448156280561850",
     "sentiment": "Bullish",
-    "summary": "美股七雄跌幅過頭，資金有望回流美股科技板塊",
-    "translation_zh": "感覺 Mag7 科技巨頭從 $META 的 593 美元跌到 $MSFT 的 373 美元……跌得有點過頭了嗎？在這個時間點，風險與報酬在超大規模支出、ROI 與宏觀氣候的對比下，顯得很有吸引力。我們應該很快就會看到資金輪動回美股科技板塊。 https://t.co/KBCi7gMfGT"
+    "stances": {
+      "META": "Bullish",
+      "MSFT": "Bullish"
+    },
+    "summary": "META與MSFT跌幅過大，風險報酬具吸引力，看好資金回流美股科技股。",
+    "translation_zh": "感覺美股七雄的拋售潮，從META的593美元到MSFT的373美元……是不是有點過頭了？就目前而言，超大規模雲端運算商的支出與投資報酬率以及宏觀經濟環境相比，風險與報酬比變得相當具吸引力。我們應該很快就會看到資金重新輪動回到美國科技板塊。",
+    "risk": "需留意超大規模雲端運算商的支出效益（ROI）以及總體經濟環境的變化。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:44Z"
   },
   "2036424304703758840": {
+    "id": "2036424304703758840",
+    "tweet_id": "2036424304703758840",
     "sentiment": "Bullish",
-    "summary": "強調短期宏觀波動不改長線投資邏輯",
-    "translation_zh": "我不太喜歡發這種貼文，但今天破例再發一次：當像 $SOI 這樣的股票下跌 6%，回吐了本週大部分漲幅時：矽光子/CPO 領域的 SOI 基板核心邏輯一點也沒有改變。不幸的是，更廣泛的指數（巴黎證商指數）這個月暴跌了 9% 且持續下跌。來自伊朗戰爭的宏觀局勢壓低了許多股票。並不是我提到的每一個名字（例如 $AXTI）都能一直直線上升，但它們往往是強勢的跑贏大盤者。如果我的投資邏輯有實質改變，我會發文。但如果股價下跌是因為宏觀因素，或者像 $AAOI 在大漲 400% 後只是小幅修正。又或者 $SIVE 在週五下跌 16% 之後又在週一上漲 35%……短期的股價不會改變投資邏輯。這也不應該動搖你的信念。特別是對於一些股票，如果我暫時沒提到它們，例如 $IQE，那只是在等待重組或資產出售的時期。或者 $NBIS 處於極端第四季營收暴增前的靜默建設期。這樣的表現有時是宏觀環境的副產品。但如果它們可以在一週內下跌 10%，它們就能在下一週上漲 10%。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "IQE": "Bullish",
+      "NBIS": "Bullish",
+      "SIVE": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "短線拉回不改基本面，作者對相關個股維持強烈看多。",
+    "translation_zh": "我不喜歡這類貼文，但今天破例發一篇：當像 $SOI 這樣股票下跌 6% 並回吐本週大部分漲幅時：關於矽光子 / CPO 級壟斷的 SOI 基板論點完全沒變。不幸的是，整體指數（巴黎股市）本月暴跌 9% 且持續下跌。伊朗戰爭帶動的宏觀局勢也讓許多個股下跌。並非我提及的每個名字如 $AXTI 都能一直直線上升，但它們往往是強勢的優於大盤者。如果我的論點有實質改變，我會發文。但如果股價下跌是因為宏觀因素，或像 $AAOI 在大漲 400% 後只是輕微修正。或者像 $SIVE 在週五下跌 16% 後週一又大漲 35%……短期股價不會改變投資論點。你的信念也不該因此動搖。特別是有些名字如果我一陣子沒提到，例如 $IQE 那只是在等待重組或資產出售的期間。或者 $NBIS 正在為第四季極端營收爆發進行沈默的建構期。這樣的表現有時是宏觀的副產物。但如果它們可以在一週內下跌 10%，它們也可以在下一週上漲 10%。",
+    "risk": "宏觀環境動盪、巴黎股市崩跌及伊朗戰爭引發的市場風險導致個股短線劇烈波動。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:47Z"
   },
   "2036381656886755614": {
     "sentiment": "Neutral",
@@ -20722,9 +20832,18 @@
     "translation_zh": "@Onedayyourise $IQE 正處於等待任何收購或重組消息完成的時期。"
   },
   "2036381524191486227": {
+    "id": "2036381524191486227",
+    "tweet_id": "2036381524191486227",
     "sentiment": "Bullish",
-    "summary": "SIVE應用獲OFC確認，並非純粹投機",
-    "translation_zh": "@siv_s7 這不是投機？$SIVE 支援 Jabil 1.6T 的消息已從 OFC 獲得證實。這甚至還不包括 Ayar、$POET Celestial 和其他 CPO 玩家。"
+    "stances": {
+      "POET": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "推文確認 SIVE 與 POET 具備強勁業務利多，整體立場看多。",
+    "translation_zh": "@siv_s7 這不是投機？$SIVE 供電 Jabil 1.6T 已獲 OFC 確認。這還不包括 Ayar、$POET Celestial 以及其他 CPO 玩家。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:49Z"
   },
   "2036377148035047473": {
     "sentiment": "Bullish",
@@ -20737,9 +20856,20 @@
     "translation_zh": "我坦白說覺得這很有趣...像《Privata Affärer》這樣缺乏先進半導體背景的瑞典在地記者：竟把佔該公司多數的瑞典散戶嚇得拋售 $SIVE 持股。這可能是他們國家市值約 3.2 億美元中，具最高上行潛力的科技股。並把籌碼轉移給更懂超大規模客戶 CPO/光子學供應鏈的美國投資人。在地媒體竟在幫美國投資人做足功課？真是謝謝囉？"
   },
   "2036342519727006000": {
+    "id": "2036342519727006000",
+    "tweet_id": "2036342519727006000",
     "sentiment": "Neutral",
-    "summary": "幽默點出社群對券商獲利的影響",
-    "translation_zh": "我們生活在這樣的世界真的很有趣：大型銀行的股票分析師...可能需要調整他們對 $IBKR 或 $HOOD 的獲利預期。因為 X 上某個陌生人喜歡了像 $SIVE、$IQE、旺宏、SK 海力士、欣興等在 Robinhood 或美國券商買不到的國際股票。多麼瘋狂的時間線。"
+    "stances": {
+      "HOOD": "Neutral",
+      "IBKR": "Neutral",
+      "IQE": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "散戶轉向國際股票，推文提及IBKR與HOOD盈餘受影響，看多SIVE與IQE。",
+    "translation_zh": "真滑稽我們活在這樣一個世界：大型銀行的股票分析師可能需要調整 $IBKR 或 $HOOD 的盈餘預估。因為 X 上的某個隨機路人喜歡 $SIVE、$IQE、宏旺、SK海力士、欣興等無法在 Robinhood 或美國券商買到的國際股票。這真是個瘋狂的時間線。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:52Z"
   },
   "2036340314915610944": {
     "sentiment": "Neutral",
@@ -20747,14 +20877,42 @@
     "translation_zh": "@soulbiri1 關於 $HOOD 的說法非常有道理。但你有考慮過克萊爾·卡蓋諾（Claire Kagenou）拉下他的兜帽（Hood）、從而失去力量的看空情況嗎？"
   },
   "2036329557444403424": {
+    "id": "2036329557444403424",
+    "tweet_id": "2036329557444403424",
     "sentiment": "Bullish",
-    "summary": "看好AI帶動的光子學超級週期",
-    "translation_zh": "這邊有太空衛星大週期：-> 由 $PL 觸發。接著是 $BKSY / $SATL / $SPIR 等跟進。然後是光子學超級週期：-> 由 $LITE 和 $COHR 觸發。接著是 $AAOI / $TSEM / $MTSI / $SIVE / $IQE / $SOI 等跟進。一個是對太空應用的炒作，另一個是對 AI 帶來極致營收與獲利成長的炒作。後者通常更有防禦性（更具基本面支撐）。"
+    "stances": {
+      "AAOI": "Bullish",
+      "BKSY": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish",
+      "MTSI": "Bullish",
+      "PL": "Bullish",
+      "SATL": "Bullish",
+      "SIVE": "Bullish",
+      "SOI": "Bullish",
+      "SPIR": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "太空與光子學雙超週期崛起，PL與LITE領軍，AI營收成長更具防禦性。",
+    "translation_zh": "這裡有太空衛星超級週期：由 PL 觸發，BKSY、SATL、SPIR 等隨後跟進。接著是光子學超級週期：由 LITE 和 COHR 觸發，AAOI、TSEM、MTSI、SIVE、IQE、SOI 等隨後跟進。一個是對太空應用的炒作，另一個是對來自人工智慧極端營收和盈餘成長的炒作。後者往往更具防禦性。",
+    "risk": "太空應用偏向炒作，相對AI晶片營收成長較缺乏防禦性。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:55Z"
   },
   "2036300779221557364": {
+    "id": "2036300779221557364",
+    "tweet_id": "2036300779221557364",
     "sentiment": "Bullish",
-    "summary": "希望SIVE複製AXTI大漲暴賺",
-    "translation_zh": "@ResonantCapital 我希望 $SIVE 也能做到。我的 $AXTI 持股現在已經大漲超過 800% 了 https://t.co/hZH404W4Ry"
+    "stances": {
+      "AXTI": "Bullish",
+      "SIVE": "Neutral"
+    },
+    "summary": "AXTI持股大漲逾800%表現強勢，對SIVE抱持期待。",
+    "translation_zh": "@ResonantCapital 我希望 $SIVE 也能這樣。我的 $AXTI 持股現在已經大漲超過 800% 了 https://t.co/hZH404W4Ry",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:57Z"
   },
   "2036293844489347486": {
     "sentiment": "Bullish",
@@ -20762,24 +20920,80 @@
     "translation_zh": "@miraclemaster07 關於 $SOI 的基本面沒有任何改變，我只是繼續持有，目前小漲了 20%。我認為它在未來一年內有 2 到 3 倍的成長空間。"
   },
   "2036292963354235381": {
+    "id": "2036292963354235381",
+    "tweet_id": "2036292963354235381",
     "sentiment": "Bullish",
-    "summary": "點出該公司具備材料半壟斷優勢",
-    "translation_zh": "@zephyr_z9 嚴格來說這跟資產負債表沒什麼關係。他們很可能是 $HIMX -> 台積電 $TSM COUPE 的供應商，且在 WLO 所需的混合樹脂領域擁有半壟斷地位。"
+    "stances": {
+      "HIMX": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "供應鏈優勢具備半壟斷地位，看好 HIMX 與 TSM。",
+    "translation_zh": "這其實不太是關於資產負債表本身。他們可能是 HIMX 到 TSM COUPE 的潛在供應商，並且對 WLO 所需的混合樹脂擁有半壟斷地位。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:30:59Z"
   },
   "2036289688227684729": {
+    "id": "2036289688227684729",
+    "tweet_id": "2036289688227684729",
     "sentiment": "Bullish",
-    "summary": "認定SIVE價值低估市值上看20億",
-    "translation_zh": "如果你到現在還不知道，$SIVE 透過晶片法案對美國國家安全至關重要。但特別是作為超大規模 AI 供應鏈的光源。他們至今獲得了約 1,160 萬美元的兩筆晶片法案補助：1. 與愛立信 $ERIC 和雷神 $RTX 合作的 FR3 波束成形 IC。2. 與 BAE 系統 $BA (LSE) 合作的電磁戰技術。CEO 更暗示 2026 年晶片法案將有更多資金挹注。小型股幾乎從未獲得美國政府這種程度的支持。你擁有一家市值僅 3.3 億美元的公司：其半導體部門對美國國家安全至關重要，且透過 $MRVL Celestial、Ayar、Jabil、ONet 等，對超大規模客戶（$MSFT、$META、$AMZN、$ORCL 等）的光子學供應鏈至關重要...關於規模與資本支出的主要疑問，現在已由穩懋（Win Semi）的合作關係解答。而關於「等待 CPO」的時間成本疑問，現在也由 OFC 的 Jabil 1.6T 可插拔擴產計畫解答。$SIVE 是光子學領域中最鮮為人知的寶藏之一，我個人認為這家公司目前的市值應該要達到 20 億美元以上。"
+    "stances": {
+      "AMZN": "Neutral",
+      "BA": "Neutral",
+      "ERIC": "Neutral",
+      "META": "Neutral",
+      "MRVL": "Neutral",
+      "MSFT": "Neutral",
+      "ORCL": "Neutral",
+      "RTX": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE具美國國安與AI供應鏈關鍵地位，極度看好。",
+    "translation_zh": "如果你到現在還不知道，$SIVE 透過晶片法案對美國國家安全至關重要。特別是作為超大規模資料中心 AI 供應鏈的光源。他們迄今已獲得兩筆約 1160 萬美元的晶片法案補助：1. 與 $ERIC 和雷神 $RTX 合作的 FR3 波束成形 IC。2. 與 $BA (LSE) BAE Systems 合作的 EW 技術。執行長暗示 2026 年將有更多晶片法案資金挹注。小型股幾乎從未獲得美國政府這種支持。你擁有一家市值 330 百萬美元的公司：其半導體部門對美國國家安全至關重要，且其光子學透過 $MRVL Celestial、Ayar、Jabil、ONet 等對超大規模供應鏈（$MSFT、$META、$AMZN、$ORCL 等）至關重要。關於規模與資本支出的主要問題現在已由 Win Semi 合作夥伴關係解答。關於「CPO 等待」機會成本的問題現在已由 OFC 的 Jabil 1.6T 可插拔產品量產解答。$SIVE 是光子學領域最不為人知的瑰寶之一，我個人認為這家公司今天的市值應該達到 20 億美元以上。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:31:02Z"
   },
   "2036280113298546865": {
-    "sentiment": "Neutral",
-    "summary": "炫耀個人獨家分析預測收購案",
-    "translation_zh": "老實說，如果我在訂閱者聊天室發表了關於台積電 $TSM 潛在上游供應商的內容，一小時後阿波羅 $APO 就收購了該公司。我大概是真的做對了什麼吧？https://t.co/27DuGXbwQN"
+    "id": "2036280113298546865",
+    "tweet_id": "2036280113298546865",
+    "sentiment": "Bullish",
+    "stances": {
+      "APO": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "作者精準預測APO併購TSM上游供應商，顯示其分析能力出色，對兩檔皆看多。",
+    "translation_zh": "老實說，如果我在訂閱者聊天室發布關於潛在 $TSM 上游供應商的內容，然後 Apollo < $APO > 在一小時後就收購了這家公司，我大概是做對了什麼吧？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:31:04Z"
   },
   "2036264013370368378": {
+    "id": "2036264013370368378",
+    "tweet_id": "2036264013370368378",
     "sentiment": "Neutral",
-    "summary": "分析晶片法案補助名單並給予警示",
-    "translation_zh": "美國晶片法案資金是國家安全重要性的最大信號之一。較少人知的清單：1. $SIVE ($330M) 2. $AKTS ($920M) 3. $BLG ($34M) 4. $QUBT ($1.65B) 5. $RGTI ($5.27B) 6. $MRAM ($210M) 7. $SKYT (被收購) 8. $PDFS ($1.35B) 9. $ATOM ($177M) 10. $SLVC ($227M) 11. $NVTS ($2.12B) 12. $WOLF ($750M) 13. $ALMU ($234M) 14. $ACLS ($2.6B)。提醒一下：對美國技術重要（例如 Wolfspeed）並不等於是一個好的投資。剛好在研究 $SIVE 的晶片法案補助，決定順便看看還有哪些較少人知的公司也獲得了補助或受益。"
+    "stances": {
+      "ACLS": "Neutral",
+      "AKTS": "Neutral",
+      "ALMU": "Neutral",
+      "ATOM": "Neutral",
+      "BLG": "Neutral",
+      "INFN": "Neutral",
+      "MRAM": "Neutral",
+      "NVTS": "Neutral",
+      "PDFS": "Neutral",
+      "QUBT": "Neutral",
+      "RGTI": "Neutral",
+      "SIVE": "Neutral",
+      "SKYT": "Neutral",
+      "SLVC": "Neutral",
+      "WOLF": "Neutral"
+    },
+    "summary": "盤點美國晶片法案與國防資助受惠股，對多檔個股持中立客觀研究態度。",
+    "translation_zh": "美國晶片法案資金是一大重要信號，對美國國家安全至關重要。較少人知的名單包含 SIVE、AKTS、BLG、QUBT、RGTI、MRAM、SKYT、PDFS、ATOM、SLVC、NVTS、WOLF、ALMU、ACLS。直接資金與商務部晶片補助涵蓋 WOLF、INFN、SKYT。聯邦研發合約涵蓋 RGTI、QUBT。國防部微電子次承攬商涵蓋 SIVE、MRAM、ACLS、BLG、AKTS。鄰近領域包含 ATOM、NVTS、PDFS、ALMU。電磁戰分配 5100 萬美元、AI 硬體 4200 萬美元、5G/6G 4200 萬美元、商業跨代技術 3800 萬美元、量子技術 3200 萬美元、安全邊緣運算與物聯網 2500 萬美元。警告：對美國技術重要（如 Wolfspeed）不代表就是好投資。這只是研究 SIVE 的晶片法案資金時，順便看看其他獲得補助或受益的較少人知公司。",
+    "risk": "對美國技術重要不代表就是好投資，須防範基本面與投資價值脫節的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:31:07Z"
   },
   "2036247612001804424": {
     "sentiment": "Neutral",
@@ -20787,14 +21001,33 @@
     "translation_zh": "不確定。我個人沒有持有 $TSLA，但我能理解為什麼其他人會持有，因為埃隆非常有遠見。如果他真的能量產 Optimus 軀體加上 XAi 的大腦並成功取代人類勞動力，1.3 兆美元看起來就像小錢一樣。但就目前而言，正如我所說的，從傳統指標來看它似乎被高估了。"
   },
   "2036245604393951613": {
+    "id": "2036245604393951613",
+    "tweet_id": "2036245604393951613",
     "sentiment": "Neutral",
-    "summary": "新瓶頸股難精準預測營收",
-    "translation_zh": "想要為 $AXTI 或 $SIVE 這類新型瓶頸/卡脖子公司建立未來的營收模型是不可能的。只能對比產業龍頭與客戶的估值，再根據市場定位（例如 Jabil 的 1.6T 光收發器、Ayar 到 AI 晶片、$MRVL celestial 以及更多未公開的客戶）來做出主觀估算。任何試圖精準預測營收成長曲線的分析師根本都在胡扯 哈哈哈。"
+    "stances": {
+      "AXTI": "Neutral",
+      "MRVL": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "分析師認為AXTI、MRVL與SIVE等新瓶頸的前瞻營收無法準確預測。",
+    "translation_zh": "要對像AXTI或SIVE這類新的瓶頸／關鍵點建立前瞻營收模型是不可能的。其估值是透過與領導廠商及其客戶進行比較，然後根據市場定位（例如Jabil的1.6T光收發模組、Ayar轉向AI晶片、$MRVL的celestial，以及可能更多未公開的客戶）來對其未來走勢做出自由裁量的估計。任何試圖對營收成長建立準確預測模型的分析師，都只是在胡扯哈哈。",
+    "risk": "無法準確建立前瞻營收模型，分析師的預測可能不準確。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:31:10Z"
   },
   "2036244547957825769": {
+    "id": "2036244547957825769",
+    "tweet_id": "2036244547957825769",
     "sentiment": "Bullish",
-    "summary": "SIVE作為光源填補CPO空窗期",
-    "translation_zh": "@lxjourney_ Jabil 用於可插拔模組的 1.6T 光收發器使用 $SIVE 作為光源。以前你必須等待 CPO（共同封裝光學），但現在有了這家承接了 $INTC 光子部門且擁有超大規模終端客戶的最大光子學業者之一，剛好填補了這段等待期。"
+    "stances": {
+      "INTC": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE作為光源填補CPO空缺，看好其技術與超大規模客戶。",
+    "translation_zh": "@lxjourney_ Jabil 的 1.6T 可插拔收發器使用 $SIVE 作為光源。在此之前，你必須等待 CPO，但現在你擁有了繼承 $INTC 光學部門並擁有超大規模終端用戶的頂級光子學玩家之一，從而填補了等待的鴻溝。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-01T20:31:12Z"
   },
   "2036243653048639552": {
     "sentiment": "Bearish",
