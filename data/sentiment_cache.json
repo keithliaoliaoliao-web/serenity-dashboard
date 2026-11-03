@@ -23124,34 +23124,100 @@
     "analyzed_at": "2026-11-03T09:29:07Z"
   },
   "2033720895731339435": {
-    "sentiment": "Neutral",
-    "summary": "免費公開優質研究顛覆傳統模式",
-    "translation_zh": "平常我不太回應酸民，但這個平台上的雙標現象確實令人印象深刻。\n\nX 上的隨機散戶：\n「為什麼在 $LITE 已經漲了 1000% 之前不告訴我？」\n\n我：\n「一開始就毫無保留、完全免費公開發布關於下一個潛在 $LITE 的研究論點。」\n\nX 散戶：\n😡「我寧可花 400 美元訂閱付費牆去做多 $ADBE 和做空 $PLTR。」\n\n特別是在我的 $AXTI 論點在 3 個月內已經從 12 美元漲到 50 美元之後…\n\n我免費分享所有的思考過程。市場可以立即反映任何超額收益（Alpha），或隨心所欲地定價。（我也會犯錯，特別是像 $ETOR 這樣從 65 美元崩跌至 33 美元的標的）。\n\n然而，不同於分析師以 2000 美元以上的價格將論點賣給避險基金以便其慢慢建倉、接著散戶在如 $LITE 達到 400 億美元以上估值時才接盤的傳統模式，我的帳號之所以持續成長，是因為我是少數打破該模式的分析師之一，且我免費向所有人提供新穎的資訊整合。如果一個投資論點在方向上是正確的，那麼股票就是一場所有人都能受益的正和博弈。"
+    "id": "2033720895731339435",
+    "tweet_id": "2033720895731339435",
+    "sentiment": "Bullish",
+    "stances": {
+      "ADBE": "Bearish",
+      "AXTI": "Bullish",
+      "ETOR": "Bearish",
+      "LITE": "Bullish",
+      "PLTR": "Bearish"
+    },
+    "summary": "作者看多LITE與AXTI，看空ADBE、PLTR及ETOR。",
+    "translation_zh": "通常不會回應酸民，但這個平台的虛偽令人印象深刻。隨機的X散戶：「為什麼在$LITE漲了1000%之前沒告訴我？」我：「免費且毫無付費牆地發表了我對下一個可能$LITE的看法。」X散戶：😡，「我要花400美元買付費牆去做多$ADBE並放空$PLTR」。特別是在我的$AXTI論點在3個月內從12美元漲到50美元之後...我免費分發我所有的思考過程。市場可以立即或以任何他們想要的方式為任何阿爾法定價。（我也有看走眼的時候，尤其是像$ETOR從65美元暴跌到33美元的名字）。然而，有別於分析師以2000美元以上的價格向其他避險基金出售論點以緩慢累積的原始模式。然後散戶在400億美元以上買進，正如$LITE所見。我的帳號一直在成長，因為我是少數打破該模式的分析師之一。我向所有人免費分發新穎的資訊綜合。股票是一場正和遊戲，如果論點方向正確，每個人都會受益。",
+    "risk": "作者提到投資會犯錯，並舉出ETOR從65美元暴跌至33美元的例子。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:46:29Z"
   },
   "2033695716938551350": {
+    "id": "2033695716938551350",
+    "tweet_id": "2033695716938551350",
     "sentiment": "Bullish",
-    "summary": "看好SIVE在矽光子CPO光源地位",
-    "translation_zh": "$SIVE 今天上漲了 +73.78%（市值 2.31 億美元）。隨著市場開始消化其作為光子學領域下一個潛在 $LITE 的資訊整合。\n\n如果我必須解釋兩者的差異：\nLumentum 中的一種雷射光源主要受益於當前光學瓶頸。\n而 $SIVE 的雷射光源則是針對即將到來的 CPO／矽光子瓶頸。\n\nLumentum 目前主要受益於 $NVDA 和超大規模業者為當前可插拔光收發器週期鎖定 EML 雷射產能。正如當前 EML 瓶頸所見，超大規模業者正在買斷來自以下公司的任何 800G/1.6T 收發器及上游產能：\n- $AAOI（自研自產）\n- $COHR, $LITE（EML 雷射 + 設計）-> $FN（組裝）\n- $COHR, $LITE（EML 雷射）-> 中際旭創 / 新易盛\n\n下一步是什麼？\n矽光子（Silicon Photonics）與共同封裝光學（Co-Packaged Optics, CPO）。\n轉向 CPO 的架構轉變需要大量高功率 CW DFB 雷射陣列。這可能會引發需求量徹底且突如其來的典範轉移。\n\n$SIVE 受益於用於矽光子和 CPO 的磷化銦（InP）CW DFB 雷射：\n新興公司如：\n$AYAR、$POET 採購 $SIVE 的雷射，但主要進行先進封裝。\n然後它們供應給像 $MRVL Celestial 這樣的大型公司（購買 $POET 的中介層）。\n然而，如果你往上游走，光源就是 $SIVE。\nCW DFB 雷射是光引擎（$SIVE）；而矽光子封裝（$POET 等公司）則是傳輸方式。\n\nCPO 的規模化尚未到來，但我們知道它即將發生。\n正如當前光收發器週期所示：\n- 來自 $LITE 和 $COHR 的光源估值遠高於像 $FN 這樣專注於先進封裝的公司。\n\n市場一直聚焦於 $POET，但忽略了他們從哪裡取得類似 $LITE 的 Starlight 光源。\n風險確實存在，包括面臨來自 $LITE、$COHR、$AVGO 等公司的多方採購競爭。所以再次提醒，請務必自行研究。\n但我反對這一點的論據是：Sivers 足夠早地客製化雷射以符合 $POET、Ayar 和其他公司的規格（類似於 $POET 與 $MRVL Celestial 的類比）。\n同時也存在產量風險，但潛在的穩懋（Win Semi）認證抵消了這一點。每個早期階段公司也始終存在為擴充產能而帶來的股權稀釋風險。\n\n我去年發表了關於 $LITE 的論點，並且因 Google TPU 的放量／OCS 依然喜愛這檔股票。但今年，我聚焦於：$SIVE，作為我個人在全新光子學架構轉移中佈局 CW DFB 雷射的標的。我正在分享關於捕捉從當前 EML 週期輪動到即將到來的 CW DFB／矽光子週期的個人想法。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AVGO": "Neutral",
+      "AYAR": "Neutral",
+      "COHR": "Neutral",
+      "FN": "Neutral",
+      "LITE": "Bullish",
+      "MRVL": "Neutral",
+      "NVDA": "Neutral",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好SIVE與LITE，聚焦矽光子與CPO架構的轉換潛力。",
+    "translation_zh": "$SIVE今天大漲73.78%（市值2.31億美元）。隨著市場將資訊定價，它可能是下一個光學領域的$LITE。若要解釋差異：Lumentum的一個雷射源主要受益於當前的光學瓶頸，$SIVE的另一個則是用於即將到來的CPO/矽光子瓶頸。Lumentum目前主要受益於$NVDA和超大規模資料中心為當前可插拔光收發器週期確保EML雷射產能。如當前EML瓶頸所示，超大規模資料中心正在買斷任何800G/1.6T收發器與上游產能，來自：$AAOI（內部）、$COHR與$LITE（EML雷射加設計）至$FN（組裝）、$COHR與$LITE（EML雷射）至Innolight/Eoptolink。接下來是什麼？矽光子與共同封裝光學（CPO）。CPO的架構轉變需要大量的高功率CW DFB雷射陣列。這可能會引發需求量的完全、突然典範轉移。$SIVE受益於適用於SiPh與CPO的InP CW DFB雷射：像$AYAR、$POET這樣的新興公司向$SIVE採購雷射，但主要負責先進封裝。然後它們向上供應給更大的公司，例如$MRVL Celestial（購買$POET的中介層）。然而，如果你往上游看，光源就是$SIVE。CW DFB雷射是光引擎（$SIVE）；矽光子封裝（$POET及其他）是它的傳輸方式。CPO規模尚未完全成熟，但我們知道它正在到來。正如當前的光收發器週期所見：來自$LITE和$COHR的光源需求估值遠高於專注於先進封裝的公司如$FN。市場一直聚焦於$POET，但錯過了他們從哪裡獲得Starlight實際的$LITE型光源。風險確實存在，包括面臨來自$LITE、$COHR、$AVGO及其他公司的多光源競爭。所以再次強調，務必做好自己的研究。但我對此的反駁是：Sivers夠早量身訂製雷射以符合$POET、Ayar和其他規格，在它們走紅之前（有點像$POET對$MRVL Celestial的類比）。也有產量風險：但潛在的Win Semi認證抵消了這一點。對於每家早期公司來說，擴大產能的稀釋風險也始終存在。我去年對$LITE做過研究報告，並且仍然因為Google TPU的增產與OCS而喜愛這檔股票。但今年，我聚焦於：$SIVE，作為我個人針對新光子架構轉變的CW DFB雷射曝險。我正在分享我對於捕捉從當前EML週期輪動到即將到來的CW DFB/矽光子週期的個人想法。",
+    "risk": "面臨多光源競爭、產量與稀釋風險，早期公司擴大產能時常伴隨股權稀釋。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:46:59Z"
   },
   "2033665621356122611": {
+    "id": "2033665621356122611",
+    "tweet_id": "2033665621356122611",
     "sentiment": "Bearish",
-    "summary": "憂慮美企機器人進度落後中國",
-    "translation_zh": "美國機器人 vs. 中國機器人。\n各位，我們是不是完蛋了？\n今天黃仁勳在 $NVDA GTC 大會上現場展示的機器人基本上就像個「雪人波斯提（Frosty the Snowman）」。\n此前 $QLCM 在展示時機器人直接跌倒。\n與此同時在中國，隨便看到的機器人都能在城市裡跑馬拉松。"
+    "stances": {
+      "NVDA": "Bearish",
+      "QCOM": "Bearish"
+    },
+    "summary": "作者認為美中機器人技術有落差，對NVDA與QCOM持悲觀看法。",
+    "translation_zh": "美國機器人對決中國機器人。我們完蛋了嗎各位？今天輝達（NVDA）在GTC大會上現場展示了一個基本上像是雪寶的機器人。這是在高通（QCOM）的機器人在展示中跌倒之後發生的。與此同時在中國，隨處可見機器人在城市裡跑馬拉松。",
+    "risk": "美國機器人技術展示表現不佳，面臨來自中國快速發展的機器人技術之強烈競爭威脅。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:47:21Z"
   },
   "2033651209371013588": {
+    "id": "2033651209371013588",
+    "tweet_id": "2033651209371013588",
     "sentiment": "Bullish",
-    "summary": "記憶體為AI基石長期看好",
-    "translation_zh": "提醒大家一下：\n當整個社群在最初的伊朗衝突期間對記憶體類股發布末日言論時——\n從 $EWY（SK 海力士、三星）、$MU 到 $SNDK。\n聲稱「因為氦氣或液化天然氣（LNG）問題，韓國綜合指數和記憶體類股將下跌 30-40%。」\n我是少數自始至終保持看多的分析師之一。\n因為我確實進行了深入研究，以支持我關於 LNG、原油和氦氣不會造成實質性中斷的論點。\n伊朗衝突仍在持續，關於潛在油價暴漲仍有許多未知數：\n但恐慌和聳動的頭條新聞驅動短期價格，營業利益才驅動長期價格。\n只要明白從大方向來看，記憶體對 AI 建設至關重要。\n美國絕不會因為一場中東衝突，就讓自己在歷史上最具變革性的技術——AI 領域的建設停滯，進而輸給中國。"
+    "stances": {
+      "EWY": "Bullish",
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "作者看好EWY、MU與SNDK，認為記憶體對AI至關重要。",
+    "translation_zh": "溫馨提醒：當整個社群都在恐慌唱空記憶體概念股（如EWY、MU和SNDK），並因伊朗衝突初期擔憂氦氣或液化天然氣導致Kospi與記憶體暴跌30-40%時，我是少數全程保持看多的分析師。因為我確實做了研究，證明液化天然氣、原油與氦氣的實質供應中斷有限。伊朗衝突仍在持續，潛在油價飆升仍有許多未知數，但恐懼與聳動標題驅動短期價格，營業利益才驅動長期價格。請明白在方向上，記憶體對AI基礎建設至關重要。美國不會為了一場中東衝突，而讓其AI基礎建設停滯並在AI這項歷史上最具革命性的技術上輸給中國。",
+    "risk": "伊朗衝突持續，潛在的油價飆升仍存在許多未知數與風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:47:42Z"
   },
   "2033643128390095328": {
+    "id": "2033643128390095328",
+    "tweet_id": "2033643128390095328",
     "sentiment": "Bullish",
-    "summary": "看好SOI與TSEM等矽光子個股表現",
-    "translation_zh": "我在 CPO（共同封裝光學）與矽光子領域的首選兩檔股票：1. $SOI 上漲 7.05% 2. $TSEM 上漲 11.03%。僅在一天下。像 Tower 這類公司是市值超過 150 億美元的光子學大型晶圓代工廠。而像 Soitec 這類則是數十億美元的基板公司。市場似乎真的很喜歡我高確信度的光子學個股。"
+    "stances": {
+      "SOI": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "分析師看好SOI與TSEM兩檔CPO與矽光子概念股，單日大漲展現強勁動能。",
+    "translation_zh": "我對CPO與矽光子領域的首選兩檔標的：1. SOI上漲7.05%。2. TSEM上漲11.03%。僅僅一天之內。像Tower這樣的公司是市值超過150億美元的光子晶圓廠。而像Soitec這樣的公司則是市值數十億美元的基板公司。市場真的很喜歡我高信念的個別光子學標的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:47:55Z"
   },
   "2033557709270954184": {
-    "sentiment": "Bullish",
-    "summary": "慶幸投資人自TSEM與AXTI獲利",
-    "translation_zh": "@TacticzH 笑死。很高興看到大家在 $TSEM 或 $AXTI 等標的上賺到錢。"
+    "id": "2033557709270954184",
+    "tweet_id": "2033557709270954184",
+    "sentiment": "Neutral",
+    "stances": {
+      "AXTI": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "作者提到TSEM與AXTI，持中立提及態度。",
+    "translation_zh": "笑死。很高興大家在 $TSEM 或 $AXTI 等股票上賺到錢。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:48:08Z"
   },
   "2033548444586160430": {
     "sentiment": "Bullish",
@@ -23159,19 +23225,54 @@
     "translation_zh": "@pepemoonboy 很喜歡你投資組合中的 $TSEM 標的！很高興它表現很好。考慮到它通常的 Beta 值比這還低，今天能上漲超過 10% 真讓我驚訝。"
   },
   "2033538523081666708": {
+    "id": "2033538523081666708",
+    "tweet_id": "2033538523081666708",
     "sentiment": "Bullish",
-    "summary": "認爲SIVE估值被低估具上漲空間",
-    "translation_zh": "感覺 $SIVE 應該獲得比主要從事先進封裝的 $POET 更高許多的估值。$LITE 和 $COHR 因供應 EML 激光器而獲得巨大的溢價。而 $SIVE（Sivers）生產用於矽光子/CPO 的激光器……但估值只有 $POET 的 1/6……且只有 Ayar 的 1/20（儘管 Ayar 做多方供應）。至於 $ACMR 了解不多，還需要跟進。"
+    "stances": {
+      "ACMR": "Neutral",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "POET": "Neutral",
+      "SIV": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好SIV/SIVE低估值與LITE、COHR的雷射優勢。",
+    "translation_zh": "感覺$SIVE應該值得比$POET高得多的估值，$POET主要在先進封裝方面。$LITE和$COHR因供應EML雷射而獲得巨大的溢價。然後$SIV做矽光子/CPO的雷射……但估值只有$POET的1/6……以及ayar的1/20（雖然它們確實有多源）。至於$ACMR不太最新，需要趕上進度。",
+    "risk": "估值差異過大與競爭風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:48:20Z"
   },
   "2033535833085718996": {
+    "id": "2033535833085718996",
+    "tweet_id": "2033535833085718996",
     "sentiment": "Bullish",
-    "summary": "看好SIVE成為下一個LITE潛力巨",
-    "translation_zh": "$SIVE 目前已上漲超過 50%，市值達到 1.9 億美元（約 18 億瑞典克朗換算美元）。然而，我真心相信它可能成為矽光子/CPO 領域的下一個 $LITE。我持有其股份，因為我個人最佳預期的市值目標是 100 億美元以上。因為 Sivers 處於由 $NVDA 主導的下一代光子架構中矽光子 CW DFB 激光器的瓶頸位置。這類似於 $COHR / $LITE EML 激光器是目前光收發器的瓶頸一樣。他們已經是 Ayar、$POET（購買 $SIVE 激光器並封裝成光學中介層）以及其他矽光子/CPO 業者的激光供應商。Win semi（穩懋）持續進行的認證是最大的利多之一，因為這能讓他們擴充產能。時間會證明這個論點是否正確，但我個人認為這檔股票尚未被廣泛發現。這是我的個人觀點，並非建議任何人跟進。但如果你做足功課，也許你會得出跟我一樣的結論，即 $SIVE 看起來像下一個 $LITE。"
+    "stances": {
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "NVDA": "Neutral",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "分析師看好SIVE具備龐大成長潛力，認為其有望成為下一個LITE。",
+    "translation_zh": "SIVE漲幅已超50%，市值達1.9億美元。然而，我真心相信這可能是矽光子/CPO領域的下一個LITE。我持有股票，因為我的個人樂觀情境預期市值可達100億美元以上。由於Sivers處於NVDA主導的次世代光子架構之矽光子CW DFB雷射瓶頸位置，相較於COHR/LITE的EML雷射是當前光收發器瓶頸。他們已是Ayar、POET（採購SIVE雷射並先進封裝成光學中介層）以及其他矽光子/CPO玩家的雷射供應商。Win semi正在進行的認證是最大利多之一，這讓他們能夠擴大產能。時間會證明這個論點是否正確，但我個人認為這檔標的尚未被廣泛發掘。這是我個人的論點，我不建議任何人跟隨。但如果你做自己的研究，也許你會得出和我一樣的結論，即SIVE看起來像下一個LITE。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:48:35Z"
   },
   "2033519828473159919": {
+    "id": "2033519828473159919",
+    "tweet_id": "2033519828473159919",
     "sentiment": "Bullish",
-    "summary": "首選做多NBIS，看好TSEM與SIVE",
-    "translation_zh": "@Ricky_Macchiato $TSEM 和 $SIVE 是我的兩個新選擇。$NBIS 是我在 Neocloud（新型雲端）領域的首選做多標的。"
+    "stances": {
+      "NBIS": "Bullish",
+      "SIVE": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "作者看多 TSEM、SIVE 與 NBIS 三檔股票。",
+    "translation_zh": "@Ricky_Macchiato $TSEM 和 $SIVE 是我的兩個新選擇。$NBIS 是我首選的新雲端板塊做多標的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:48:56Z"
   },
   "2033519207087018253": {
     "sentiment": "Neutral",
@@ -23189,9 +23290,21 @@
     "translation_zh": "才過了 5 天。我挑選用於矽光子與 CPO 的 Soitec < $SOI > 基板標的，現已上漲超過 +44.3%。這是市場現場對下一個光子學關鍵業者進行重新估值。Soitec 今天又上漲了 7.03%。 https://t.co/kHSRZpCmiF"
   },
   "2033504948768690385": {
+    "id": "2033504948768690385",
+    "tweet_id": "2033504948768690385",
     "sentiment": "Bullish",
-    "summary": "看好SOI、SIVE與TSEM新標的",
-    "translation_zh": "@MattReno264555 我個人過去這一週的新標的是用於矽光子基板的 Soitec ( $SOI )，以及作為 CPO/矽光子領域下一個 $LITE 的 $SIVE。還有作為光子學領域 $TSM（台積電）的 $TSEM。"
+    "stances": {
+      "LITE": "Neutral",
+      "SIVE": "Bullish",
+      "SOI": "Bullish",
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "看好SOI、SIVE與TSEM在矽光子與CPO領域的發展潛力。",
+    "translation_zh": "我上週的新個人持股是Soitec（$SOI），用於矽光子基板，以及被視為CPO/矽光子下一個$LITE的$SIVE。還有作為光子學界的$TSM的$TSEM。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:49:22Z"
   },
   "2033501241758949863": {
     "sentiment": "Bullish",
@@ -23204,14 +23317,32 @@
     "translation_zh": "@daniel_koss 是的，但市場是向前看的。\n\n原本他們與 $META 的交易額是 30 億美元，但現在已經暴增 9 倍達到 270 億美元的累積金額……\n\n這對 Nebius 作為 AI 首選基礎設施是一個巨大的信心信號。"
   },
   "2033491494775267787": {
+    "id": "2033491494775267787",
+    "tweet_id": "2033491494775267787",
     "sentiment": "Bullish",
-    "summary": "META鉅額合約助攻強烈看好NBIS",
-    "translation_zh": "@yasutaketin 從 $META 那裡來了一筆驚人的鉅額合約！原本是 30 億美元，竟然增加到了 270 億美元。\n\n對未來的 $NBIS 充滿強烈的確信。"
+    "stances": {
+      "META": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "META合約暴增至270億美元，看好NBIS未來發展。",
+    "translation_zh": "來自META的巨額合約太驚人了！原本是30億美元，竟然暴增到270億美元。我對未來的NBIS充滿強烈信心。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:49:44Z"
   },
   "2033488130712682972": {
+    "id": "2033488130712682972",
+    "tweet_id": "2033488130712682972",
     "sentiment": "Bullish",
-    "summary": "熬過低潮期Nebius新合約與資金終獲回報",
-    "translation_zh": "@soulbiri1 是的，$NBIS 和數據中心股票經歷了幾個月殘酷的回撤。\n\n但很高興去年底對 Nebius 的信念開始得到回報。特別是有了新的超大規模企業交易和 $NVDA 的資金支援。"
+    "stances": {
+      "NBIS": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "歷經回檔後，NBIS與NVDA因新協議與資金支持展現看多訊號。",
+    "translation_zh": "@soulbiri1 是的，NBIS和資料中心股經歷了幾個月的慘烈回檔。但很高興去年底對 Nebius 的信念開始獲得回報。特別是有了新的超大規模資料中心協議和 NVDA 的資金支援。",
+    "risk": "先前經歷了數個月的慘烈回檔，顯示股價波動劇烈。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:02Z"
   },
   "2033487693318127792": {
     "sentiment": "Bullish",
@@ -23219,14 +23350,32 @@
     "translation_zh": "@inversorBetico 不。我認為 $NBIS 是下一個超大規模雲端服務商 (hyperscaler)"
   },
   "2033486637553127865": {
+    "id": "2033486637553127865",
+    "tweet_id": "2033486637553127865",
     "sentiment": "Bullish",
-    "summary": "META簽署270億合約推升NBIS盤前大漲",
-    "translation_zh": "剛剛消息：$META 與 $NBIS 簽署了一份高達 270 億美元的龐大累積 AI 支出合約。\n\nNebius 是我首選的新雲端 AI 基礎設施數據中心標的。\n\n很高興管理層正在朝著 70-90 億美元的 ARR 目標執行。\n\nNebius 盤前大漲 14.79% 至 129.66 美元。 https://t.co/RaaDWm1if0"
+    "stances": {
+      "META": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "META與NBIS簽署巨大AI合約，雙方均看多。",
+    "translation_zh": "最新消息：META與NBIS簽署高達270億美元的巨額累積AI支出合約。Nebius是我首選的新雲端AI基礎設施資料中心標的。很高興管理層正朝著70億至90億美元的ARR目標執行。Nebius盤前大漲14.79%至129.66美元。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:24Z"
   },
   "2033479322372354228": {
+    "id": "2033479322372354228",
+    "tweet_id": "2033479322372354228",
     "sentiment": "Neutral",
-    "summary": "探討AI供應鏈中隱藏的瑞典雷射供應商",
-    "translation_zh": "AI 供應鏈中的瓶頸和公司遍布全球。\n\n正如你所看到的，從 HBM 到 Toto 馬桶，其中許多都非常隨機。\n\n剛好 $LITE 類型的 cw dfb 雷射供應商（供應給 Ayar、$POET 以及矽光子/CPO 公司）是瑞典的一家神祕公司。"
+    "stances": {
+      "LITE": "Neutral",
+      "POET": "Neutral"
+    },
+    "summary": "推文提及LITE與POET在AI供應鏈的角色，立場中立。",
+    "translation_zh": "AI供應鏈的瓶頸遍布全球。正如你所見，HBM與Toto馬桶的關聯非常隨機。恰巧的是，供應Ayar、POET以及矽光子/CPO公司的LITE型CW DFB雷射供應商，竟是一家瑞典的隨機公司。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:39Z"
   },
   "2033477393818743035": {
     "sentiment": "Neutral",
@@ -23234,19 +23383,57 @@
     "translation_zh": "@BonyBallf2 我率先與我的訂閱者分享了我的 $SIVE 投資論點。不過，我不喜歡將我的資訊綜合整理永久放在付費牆後面，所以我總是會在事後公開我的想法 https://t.co/MYHYzPOaWD"
   },
   "2033476573471359403": {
+    "id": "2033476573471359403",
+    "tweet_id": "2033476573471359403",
     "sentiment": "Bullish",
-    "summary": "看好矽光子CPO板塊長期持有SIVE不作推薦",
-    "translation_zh": "我無法控制市場如何對公開發布的免費資訊綜合體進行定價。\n\nWSB 族群關注 $POET（並討論過 $SIVE）有一小陣子了，但沒有人以易讀的方式整合 Sivers Photonics 的資訊。我也認為他們錯失了時機。\n\n隨著資金輪動到矽光子/CPO，我個人覺得這是合適的時機。\n\n我持有長倉，但我不建議其他人進行這筆交易。我只是想分享我的研究和想法"
+    "stances": {
+      "POET": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "作者看好矽光子與CPO產業，並持有POET與SIVE多頭部位。",
+    "translation_zh": "我無法控制市場如何消化公開資訊。WSB社群關注POET與SIVE已久，但缺乏易讀的分析，且錯失時機。隨著資金輪動至矽光子與CPO領域，我認為現在是合適的切入點。我持有長倉，但並非推薦他人跟進，僅分享研究觀點。",
+    "risk": "作者強調僅分享研究，明確表示不建議他人跟進此交易，暗示投資存在風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:42Z"
   },
   "2033469494769995993": {
-    "sentiment": "Neutral",
-    "summary": "SIVE潛力巨大但因流動性與稀釋風險不建議買進",
-    "translation_zh": "不幸的是它在瑞典斯德哥爾摩市場上市。\n\n這就是為什麼我認為 $SIVE 可能還沒被許多機構發現，儘管它是 Ayar、$POET 和其他 CPO/矽光子公司的 cw dfb 雷射供應商。\n\n話雖如此，由於規模和潛在的稀釋風險，不建議其他人購買。\n\n我只是覺得這家公司很吸引人，因為它看起來像是下一個可能的 $LITE。\n\n我想分享我的投資論點！"
+    "id": "2033469494769995993",
+    "tweet_id": "2033469494769995993",
+    "sentiment": "Bullish",
+    "stances": {
+      "LITE": "Neutral",
+      "POET": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好SIVE具備潛力，有望成為下一個LITE，但提醒投資人注意風險。",
+    "translation_zh": "遺憾的是它在瑞典斯德哥爾摩市場交易。這就是為什麼我認為 $SIVE 可能尚未被許多機構發現，儘管他們是 Ayar、$POET 和其他 CPO/矽光子公司的連續波分佈反饋雷射（cw dfb laser）供應商。話雖如此，由於公司規模和潛在的稀釋風險，我不建議其他人購買。我只是覺得這家公司很引人注目，因為我認為它看起來像是下一個可能的 $LITE。想分享我的論點！",
+    "risk": "公司規模較小，且存在潛在的股權稀釋風險，投資人需謹慎評估。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:44Z"
   },
   "2033466880661606646": {
+    "id": "2033466880661606646",
+    "tweet_id": "2033466880661606646",
     "sentiment": "Bullish",
-    "summary": "看好SIVE為下一個LITE，具備CPO龐大上漲潛力",
-    "translation_zh": "我以1.4億美元市值做多$SIVE。\n\n我認為這是下一個被市場和機構錯過的$LITE。\n\n$SIVE生產InP CW DFB雷射。\n\n最接近的對比是當前EML雷射瓶頸中的$LITE。\n\n但他們不是在當前的光收發器週期供應給Innolight/Eoptolink。\n\n而是將雷射供應給$POET Starlight、Ayar SuperNova。\n\n以及其他由$NVDA帶頭的未來CPO/矽光子架構合作夥伴。\n\n就我個人而言，目前的估值完全不合理。\n\n$POET是針對$SIVE這類雷射的高階封裝……\n\n但$POET的市值卻比製造雷射本身的公司高出11倍以上？\n\n這感覺就像把價值400億美元、更先進的$FN（約200億美元）封裝估值，而$LITE的估值為40億美元。\n\n因此，在市值1.3億美元時：\n\n- 透過$POET，您擁有了一個類似Marvell Celestial + 超大規模資料中心（hyperscalers）的微型$LITE雷射供應商。\n\n- 雖然他們與$LITE、Sumitomo、$MTSI有多源供應，但他們也是Ayar（$NVDA、$INTC）的雷射供應商。\n\n以及其他可能的新興供應商，例如他們在2023年第二季財報中點名過的Lightmatter。這尚未獲得證實，因為供應鏈BOM是機密的。\n\n最重要的是，在營收方面，他們預期「未來幾年有4.53億美元的專案儲備（pipeline）」。\n\n此外，他們透過WIN進行產能擴張：「Win Semi晶圓廠認證正在進行中，以便從Sivers的雷射設計進行量產。」\n\nSivers感覺就像是矽光子/CPO版的$LITE，擁有透過$POET、Ayar等快速成長的實際客戶，未來還會有更多。\n\n如果是在去年，我可能不會喜歡它，但就在3週前，他們成功將所有債務進行了融資重組，轉為1200萬美元的可轉換貸款（10.85%）和500萬美元的定期貸款（12%），這清理了債務總額。\n\n總共才1700萬美元，這對美國市場來說簡直微不足道，相比之下$AAOI每隔幾週就在進行5億美元的ATM（增發股票）。\n\n最棒的是，這是他們專門針對矽光子/光子學+CPO的純InP雷射業務。\n\n他們的光達（Lidar）業務正在加速發展，預計將有5300萬至1.38億美元的營收進帳。\n\n下行風險：\n- 執行力（一如既往）\n- 為了擴大產能以與$LITE等人競爭而產生的股權稀釋。\n- 在$NVDA剛給了$LITE等人40億美元後，來自$LITE、$COHR在規模上的競爭\n- CPO發展進度延遲。\n\n我完全不明白，像$LWLG這樣一個與$TSEM合作、尚無營收的科學專案，市值怎麼能達到10億美元以上。\n\n或者$POET的市值怎麼會比其雷射供應商高出9-10倍。\n\n而CPO/矽光子學的微型$LITE對標企業$SIVE，市值卻只有1.4億美元。\n\n我深信這在很大程度上尚未被機構發現，因為這只是OMX北歐交易所的一家不知名公司（就像我開始發文探討InP基板瓶頸之前的微型股$AXTI一樣）。\n\n但我認為隨著Celestial和Ayar的規模擴大，它將獲得大量機構關注。\n\n特別是如果$POET和$SIVE獲得其他客戶的認證。\n\n如果CPO在下一代超大規模資料中心架構中完全取代可插拔收發器。\n\nSivers若能獲得WIN Semi的認證，並成為輝達、邁威爾、英特爾和博通架構的多源雷射供應商，其估值可能會大幅重新評級。\n\n正如$LITE今天從16美元飆升至622美元那樣。\n\n這只是我分享的個人論點，請自行研究（DYOR），不構成財務建議（NFI）。\n\n總結（TLDR）：\n\n正如$LITE的估值所示，InP雷射是當前光學領域的瓶頸。\n\n$SIVE看起來像是即將到來的CPO/矽光子學浪潮中的微型$LITE。\n\n我個人對$SIVE採取了做多倉位，因為我相信他們將是$NVDA即將進行的矽光子/CPO架構變革（配合GTC催化劑）的巨大受益者。\n\n對我個人而言，這裡的上行空間實在太吸引人了，它可能是下一個$LITE。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AXTI": "Neutral",
+      "COHR": "Bearish",
+      "FN": "Neutral",
+      "INTC": "Neutral",
+      "LITE": "Bearish",
+      "LWLG": "Bearish",
+      "MTSI": "Neutral",
+      "NVDA": "Neutral",
+      "POET": "Bearish",
+      "SIVE": "Bullish",
+      "TSEM": "Neutral"
+    },
+    "summary": "看好SIVE為下一個LITE，具備矽光子與CPO成長潛力。",
+    "translation_zh": "我以1.4億美元的市值做多SIVE。我相信這是市場和機構錯過的下一個LITE。SIVE生產InP CW DFB雷射，是當前EML雷射瓶頸下的最佳對標。與其供應給現有的光收發器週期，他們選擇供應給POET Starlight和Ayar SuperNova，以及NVDA主導的未來CPO/矽光子架構。目前的估值對我來說完全不合理，POET的市值竟然是其雷射供應商的11倍以上。SIVE就像是CPO版本的LITE，隨著Celestial和Ayar的擴張，機構關注度將會提升，若能成為NVDA、Marvell、Intel和Broadcom的多重供應商，將迎來強勁的重估。",
+    "risk": "執行風險、為擴產帶來的股權稀釋、LITE與COHR的規模競爭，以及CPO技術導入延遲。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:48Z"
   },
   "2033449575038738810": {
     "sentiment": "Neutral",
@@ -23254,14 +23441,32 @@
     "translation_zh": "@NicholasBardy 我對$EWY的匯率波動的擔憂，大過於對個別公司的擔憂。\n\n但無論如何，我預期SK海力士和三星將大幅拉動報酬率。"
   },
   "2033447091679416393": {
+    "id": "2033447091679416393",
+    "tweet_id": "2033447091679416393",
     "sentiment": "Bullish",
-    "summary": "記憶體漲幅超預期，恐慌賣壓造就短期低價",
-    "translation_zh": "想像一下那些因為「氦氣」而賣出記憶體持倉的人們。\n\n包括SK海力士、Sandisk和Micron：\n\nSK海力士：+7.03% (1日)\n$SNDK：+31.75% (1週)\n$MU：+19.66% (1週)\n三星：+2.83% (1日)\n\n看看NAND和DRAM的漲幅，遠遠超出了預期。\n\n以及公司聲明這沒有造成實質影響。\n\n媒體末日論者和恐慌性賣壓推動了短期的價格。\n\n而營業利潤才決定了長期的股價。"
+    "stances": {
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "記憶體產業基本面強勁，MU與SNDK遭市場誤判恐慌拋售，看好後市。",
+    "translation_zh": "想像一下那些因為「氦氣」問題而賣出SK海力士、SanDisk和美光持倉的人。SK海力士單日漲7.03%，SNDK一週漲31.75%，美光一週漲19.66%，三星單日漲2.83%。看看NAND和DRAM的漲幅，遠超預期，且公司聲明並無實質影響。媒體的末日論和恐慌性拋售只會影響短期價格，營業利潤才是推動長期股價的關鍵。",
+    "risk": "推文認為媒體散布末日論導致恐慌性拋售，影響短期股價波動。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:51Z"
   },
   "2033320724291813503": {
+    "id": "2033320724291813503",
+    "tweet_id": "2033320724291813503",
     "sentiment": "Bullish",
-    "summary": "AI帶動結構性記憶體需求，供應鏈獲利將維持高檔",
-    "translation_zh": "記憶體週期。\n\n可能看起來會像這張圖表嗎？\n\n伴隨SK海力士、$SNDK、三星、$MU和其他公司：\n\n-> 價格調漲直到2028年\n-> 需求永久增加\n-> 2028年後價格下降\n\n-> 產能增加 * 需求增加 * 利潤率下降 = 獲利依然高漲。\n\n例如：\n\n2026年第1季：DRAM、NAND價格調漲\n- NAND價格季增100%+，DRAM上漲70%+。\n\n2026年第2季：DRAM、NAND價格調漲\n- 三星第2季再次將NAND價格調漲100%+，DRAM跟進上漲。\n\n第3季 -> 2028年 持續漲價。\n\n1. 反對意見：「在超大規模資料中心採購意願未減的情況下，記憶體價格在[2027年]下半年修正的機率微乎其微」\n2. 英特爾執行長：「記憶體短缺問題直到2028年都無法緩解」。\n\n然而，人們誤解的是：\n\n-> 記憶體需求與AI具有結構性連結。\n-> 價格則不然。\n\n我們很可能在2026年極端記憶體短缺的情況下，看到價格持續上漲。\n\n但價格將在2028年開始下跌。人們混淆的概念是：\n\n-> AI的極端需求不會導致價格跌至0。\n-> 產能增加不會導致需求突然跌至0。\n\n更多供應 * 價格 * 更多需求 * 更低的營業利潤率 = 總之獲利更多。\n\n營業利益不會像現在這樣出現10000%+的季增爆發。\n\n但如果SK海力士透過產能增加但利潤率下降，在400億美元市值下穩定產生約100億美元以上的年營業利益：\n\n相較於 100億 -> 220億 -> 90億 -> 120億。\n\n那麼它本身就顯得被低估了。\n\n我不認為末日論者預測的那種情況會發生：即業績從100億 -> 180億（2027年）-> 跌至10億美元，因需求下滑（例如智慧型手機）和利潤下滑而陷入虧損。\n\n需要留意的兩大關鍵是：軟體/記憶體使用是否變得極其高效，或者超大規模資料中心的資本支出突然消失（AI不再是主流）。\n\n訓練/推論用的GPU也是如此。\n\n不過，我主要會將超大規模資料中心的資本支出預測作為頭號指標，而不是隨便拿三星高層斷章取義的言論來預測兩年後的營業利益。\n\nAI已經從根本上改變了「商品化」記憶體的定義，就像2023年的GPU一樣。"
+    "stances": {
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "AI需求結構性支撐記憶體週期，看好MU與SNDK長期獲利潛力。",
+    "translation_zh": "記憶體週期可能延續至2028年。隨著AI需求結構性增長，即便未來產能擴張導致利潤率下降，總體獲利仍將維持高檔。市場過度擔憂需求崩盤，但只要超大規模雲端資本支出持續，記憶體產業將維持強勁，MU與SNDK等公司估值仍具吸引力。",
+    "risk": "需留意軟體記憶體使用效率大幅提升，或超大規模雲端資本支出突然中斷的風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:54Z"
   },
   "2033161645862916232": {
     "sentiment": "Bearish",
@@ -23279,9 +23484,18 @@
     "translation_zh": "@Sermario 不。試著告訴X平台以外的散戶投資人：\n\n「$CIFR剛剛啟動了他們300MW的Barber Lake資料中心！」\n\n對比：\n\n「$CIFR剛剛在Barber Lake啟動了他們300MW的Leviathan Megacluster」。\n\n看看哪一個能獲得更多關注和估值溢價。"
   },
   "2033036332159873172": {
+    "id": "2033036332159873172",
+    "tweet_id": "2033036332159873172",
     "sentiment": "Bullish",
-    "summary": "借鏡馬斯克的酷炫命名，有望推升資料中心估值",
-    "translation_zh": "沒錯，$NBIS只需要效仿伊隆在$TSLA上的命名慣例，像是「Colossus（巨像）」資料中心，這名字酷斃了。\n\n他才不叫它「曼菲斯1號資料中心」\n\n只要比這更厲害就行。\n\n把位於維蘭德的$NBIS下一個資料中心命名為：「The Singularity Megaplex（奇點超級綜合體）」，它就能獲得高得多的估值。"
+    "stances": {
+      "NBIS": "Bullish",
+      "TSLA": "Neutral"
+    },
+    "summary": "建議NBIS效仿TSLA命名策略，透過品牌行銷提升市場估值。",
+    "translation_zh": "沒錯，NBIS只需要效仿伊隆對TSLA的命名慣例，例如「Colossus」資料中心，這名字太帥了。他沒有把它叫作「曼菲斯一號資料中心」。只要超越這一點，把NBIS在Vineland的下一個資料中心命名為「奇點巨型綜合體」，就能獲得更高的估值。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-03T17:50:58Z"
   },
   "2033033107557986332": {
     "sentiment": "Bullish",
@@ -55538,5 +55752,50 @@
     "risk": "",
     "model": "gemini-3.5-flash-lite",
     "analyzed_at": "2026-11-03T09:26:38Z"
+  },
+  "2117639781572366705": {
+    "id": "2117639781572366705",
+    "tweet_id": "2117639781572366705",
+    "sentiment": "Bullish",
+    "stances": {
+      "AEHR": "Bullish",
+      "FN": "Bullish"
+    },
+    "summary": "AI半導體AEHR與FN財報後反彈，作者持看多立場。",
+    "translation_zh": "很高興看到像 $AEHR 或 $FN 這樣的高貝塔 AI 半導體在財報後反彈。我很好奇之前開槓桿的人是否還有活著看到潛在復甦的？",
+    "risk": "暗示先前使用槓桿的投資人可能面臨生存危機與爆倉風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:45:29Z"
+  },
+  "2117634458778247210": {
+    "id": "2117634458778247210",
+    "tweet_id": "2117634458778247210",
+    "sentiment": "Bullish",
+    "stances": {
+      "AGLT": "Bullish",
+      "AMZN": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "AGLT 合併案獲批將上市，市場看好其人形機器人前景。",
+    "translation_zh": "Agility Robotics 合併案現已獲批！$AGLT 預計在 11 月 4 日收盤後、於 11 月 5 日開始交易……作為美國首家純人形機器人公司！該公司背後有 $NVDA、$AMZN、富士康、軟銀等大廠支持……旨在實現倉庫人類工作的自動化。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:45:45Z"
+  },
+  "2117550199895896490": {
+    "id": "2117550199895896490",
+    "tweet_id": "2117550199895896490",
+    "sentiment": "Neutral",
+    "stances": {
+      "CRDO": "Neutral",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "分析MRVL收購LITE觀點，看好SIVE具備新產能潛力。",
+    "translation_zh": "針對MRVL/LITE收購案的反向觀點：「每個與Marvell競爭的買家都會想要第二個獨立的雷射來源。」他們將SIVE/Scintil Photonics識別為新的CW/ELS產能，並點名像CRDO可能是Sivers的潛在合作夥伴。「隨著Lumentum售罄...",
+    "risk": "競爭對手尋求獨立雷射來源，市場產能與供應鏈可能重組。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-03T17:46:07Z"
   }
 }
