@@ -24323,9 +24323,19 @@
     "analyzed_at": "2026-11-04T06:02:27Z"
   },
   "2032194165690548623": {
+    "id": "2032194165690548623",
+    "tweet_id": "2032194165690548623",
     "sentiment": "Bullish",
-    "summary": "Reddit成長驚人且利潤高，極度低估",
-    "translation_zh": "$RDDT 變得太離譜了。\n\n看起來完全被嚴重低估。過去幾個月現在下跌了 40%。\n\n如果你剔除結轉虧損，他們的淨利約佔營收的 28%，這是絕對巨大的數字。\n\n在經歷了 70%+ 年增長之後，他們的前瞻營收仍在以 50%+ 的年增長率增長。\n\n如果你曾研究過 $META，你就會知道每個用戶的營收可以被優化到什麼程度。Reddit 的變現天花板高得令人難以置信。\n\n自 IPO 以來它已經去除了風險，因為 Reddit 現在是市場上增長最快、利潤最高的公司之一。\n\n如果有一天它像 $CRCL 財報後那樣爆發，\n我們回頭看時，會納悶當初怎麼會給它 240 億美元的市值。"
+    "stances": {
+      "CRCL": "Neutral",
+      "META": "Neutral",
+      "RDDT": "Bullish"
+    },
+    "summary": "作者極看多RDDT，認為股價嚴重低估且高成長高利潤。",
+    "translation_zh": "$RDDT 越來越誇張了。看起來完全被低估，過去幾個月已經下跌 40%。如果扣除虧損結轉，他們的淨利潤約占營收的 28%，這絕對非常驚人。而且在經歷 70%+ 的年增長後，未來營收年增率仍達 50%+。如果你看過 $META，就知道每位用戶的營收優化空間有多大。Reddit 的變現天花板非常高。自 IPO 以來風險已經降低，因為 Reddit 現在是市場上成長最快、利潤率最高的公司之一。如果有一天它在財報後像 $CRCL 一樣暴漲，我們回頭看會納悶當初市值怎麼會只有 240 億美元。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:22:21Z"
   },
   "2032186873553272966": {
     "sentiment": "Neutral",
@@ -24333,44 +24343,131 @@
     "translation_zh": "@ps_georg 這純屬胡扯，不太確定為什麼大家一直在傳播假消息。\n\nSK 海力士已經表示氦氣中斷沒有影響。\n\n$TSM 表示沒有顯著影響，但他們正在監控局勢。"
   },
   "2032181937784389759": {
+    "id": "2032181937784389759",
+    "tweet_id": "2032181937784389759",
     "sentiment": "Bullish",
-    "summary": "看好AAOI買點與長期營收潛力",
-    "translation_zh": "$AAOI 基本面沒有改變，這看起來是個買入機會。我同意羅森布拉特（Rosenblatt）分析師的觀點，即「考慮到該公司 2027 年營收潛力達 40 億美元，目前低於 80 億美元的市值太低了」。分析師可能對執行力持悲觀態度，而擴充產能一直是焦點問題。我不認為有什麼新變化，在他們真正實現目標之前，這一直會是被爭論的點。超大規模客戶的需求毫無疑問。$GOOGL 和 $AVGO 也釋放了可插拔光收發器壽命延長的信號，但由於 $AAOI 涵蓋了從雷射、設計到組裝的供應鏈，他們擁有大多數人忽視的選擇權。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AVGO": "Neutral",
+      "GOOGL": "Neutral"
+    },
+    "summary": "看好AAOI具買點；對GOOGL與AVGO保持中立觀望。",
+    "translation_zh": "$AAOI 的情況沒有改變，看起來是個買入機會。我同意 Rosenblatt 分析師的看法，『公司 2027 年營收潛力達 40 億美元，目前低於 80 億美元的市值太低』。分析師可能看空其執行力，而產能擴充一直是焦點問題。我不認為有任何新狀況，在他們實際交付前這仍會被爭論。超大規模客戶的需求毋庸置疑。$GOOGL 與 $AVGO 也釋出可插拔收發器延壽的訊號，但由於 $AAOI 涵蓋從雷射、設計到組裝的完整供應鏈，具備多數人忽視的選擇權。",
+    "risk": "分析師對其執行力與產能擴充能力存疑，需待實際交付驗證。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:22:32Z"
   },
   "2032178441064534389": {
+    "id": "2032178441064534389",
+    "tweet_id": "2032178441064534389",
     "sentiment": "Bullish",
-    "summary": "Soitec具壟斷優勢，看好後市",
-    "translation_zh": "Soitec（$SOI / $SLOIF）現在上漲了 45.58%。鑑於他們在矽光子和 CPO 架構上擁有襯底級的壟斷地位，未來還有很大的上漲空間。"
+    "stances": {
+      "SLOIF": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "看好Soitec具矽光子壟斷優勢，SOI與SLOIF看多。",
+    "translation_zh": "Soitec ( $SOI / $SLOIF ) 現已上漲 45.58%。鑑於其在矽光子與 CPO 架構上的基板級壟斷地位，未來仍大有可為。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:22:40Z"
   },
   "2032052366338609402": {
+    "id": "2032052366338609402",
+    "tweet_id": "2032052366338609402",
     "sentiment": "Bullish",
-    "summary": "AAOI有望進入多間科技巨頭供應鏈",
-    "translation_zh": "@Sher_Lockknows 不需要。但 $AAOI 並不需要它，因為他們很可能已經進入 $AMZN、$MSFT 以及 $ORCL / $META 的發展路線圖中。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Neutral",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "ORCL": "Neutral"
+    },
+    "summary": "看好AAOI將納入大型科技巨頭發展路線圖。",
+    "translation_zh": "@Sher_Lockknows 不需要。但 $AAOI 並不需要，因為他們很有可能已在 $AMZN、$MSFT 和 $ORCL / $META 的發展路線圖中。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:23:09Z"
   },
   "2032051645161619846": {
+    "id": "2032051645161619846",
+    "tweet_id": "2032051645161619846",
     "sentiment": "Neutral",
-    "summary": "梳理輝達供應鏈廠商之間的關聯",
-    "translation_zh": "@BrokeDadCapital 基本上，$NVDA 留下了許多線索，而這些線索之間有著幾層關聯。例如：$SLOIF -> $TSEM -> $NVDA，或者可能是 $AXTI -> $IQE -> $LITE。"
+    "stances": {
+      "AXTI": "Neutral",
+      "IQE": "Neutral",
+      "LITE": "Neutral",
+      "NVDA": "Neutral",
+      "SLOIF": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "推文分析 NVDA 等多股供應鏈關聯，總體立場中立。",
+    "translation_zh": "@BrokeDadCapital 基本上，NVDA 留下許多線索，而這些線索之間存在著幾層關聯。例如 SLOIF -> TSEM -> NVDA，或是 AXTI -> IQE -> LITE。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:23:36Z"
   },
   "2032049059104772347": {
+    "id": "2032049059104772347",
+    "tweet_id": "2032049059104772347",
     "sentiment": "Bullish",
-    "summary": "光子學上游供應商利多尚未反映",
-    "translation_zh": "「已經反映在股價中（Priced in）」。與此同時，$TSEM 今年迄今還停留在 -1.89%。許多散戶比機構更早佈局。$AXTI 在過去三個月大漲 4 倍之前就是個完美的例子。我不認為 $SOI 和 $TSEM 這類小眾上游供應商已經反映利多，而 $LITE 和 $COHR 也是如此。"
+    "stances": {
+      "AXTI": "Bullish",
+      "COHR": "Bearish",
+      "LITE": "Bearish",
+      "SOI": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "看好TSEM與SOI潛力，指COHR與LITE已反映利多。",
+    "translation_zh": "「已反映在股價中」。然而 $TSEM 今年以來仍下跌 1.89%。許多散戶比機構更早布局，$AXTI 在過去三個月大漲 4 倍前就是完美例子。我不認為像 $SOI 和 $TSEM 這種利基型上游供應商已經反映，但 $LITE 和 $COHR 很可能已經反映了。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:24:01Z"
   },
   "2032045719167934775": {
+    "id": "2032045719167934775",
+    "tweet_id": "2032045719167934775",
     "sentiment": "Bullish",
-    "summary": "GTC大會前夕看好矽光子概念股",
-    "translation_zh": "$NVDA GTC 大會將於下週舉行。市場正在想知道輝達新的矽光子架構會公布哪些公司名稱。> $TSEM 與 $NVDA 在矽光子領域合作 > $NVDA 投資了 $COHR 和 $LITE 以確保供應鏈穩定 > $AXTI 是磷化銦（InP）襯底的瓶頸 > Soitec（$SOI）在矽光子 SOI 襯底方面形成壟斷。嗯，完全沒有線索暗示哪些公司會進入 $NVDA 的供應鏈呢！最好還是等大會開始再看吧？"
+    "stances": {
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "NVDA": "Bullish",
+      "SOI": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "看好NVDA大會帶動TSEM與COHR等矽光子供應鏈。",
+    "translation_zh": "輝達（$NVDA）GTC大會將於下週登場，市場好奇哪些公司會隨輝達全新的矽光子架構一同公布。> $TSEM 在矽光子領域與 $NVDA 合作 > $NVDA 投資了 $COHR 與 $LITE 以鞏固供應鏈 > $AXTI 是 InP 襯底的關鍵瓶頸 > Soitec（$SOI）壟斷了矽光子所需的 SOI 襯底。嗯，完全沒有線索可以看出哪些公司會進入 $NVDA 的供應鏈呢！最好還是等大會開幕來揭曉吧？",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:24:22Z"
   },
   "2032029248240959632": {
+    "id": "2032029248240959632",
+    "tweet_id": "2032029248240959632",
     "sentiment": "Bullish",
-    "summary": "HIMS迎和解利多，空頭措手不及",
-    "translation_zh": "@alc2022 這很有道理，考慮到 $NVO 放棄訴訟並與 $HIMS 合作對大多數人來說是個意外。這絕對讓很多人措手不及，尤其是那些沒有補回空頭頭寸、以為 $HIMS 會倒閉的空頭。"
+    "stances": {
+      "HIMS": "Bullish",
+      "NVO": "Neutral"
+    },
+    "summary": "NVO撤訴並合作看多HIMS，空頭措手不及。",
+    "translation_zh": "@alc2022 這很合理，畢竟 NVO 放棄訴訟並與 HIMS 合作讓大多數人感到意外。這絕對讓很多人措手不及，特別是那些尚未回補空單、以為 HIMS 會倒閉的空頭。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:24:31Z"
   },
   "2032028848712532384": {
+    "id": "2032028848712532384",
+    "tweet_id": "2032028848712532384",
     "sentiment": "Bullish",
-    "summary": "TSEM估值低且純，具重估潛力",
-    "translation_zh": "@zephyr_z9 確實，但相比台積電（$TSM），$TSEM 是更純粹的光子學成長標的，且估值僅為其百分之一。可謂具有更快重估價值的潛力。"
+    "stances": {
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "看好TSEM受惠矽光子且估值低於TSM，具重估潛力。",
+    "translation_zh": "確實，但相比TSM，$TSEM是更純粹的光電放量概念股，且估值僅為其百分之一，可望帶來更快的估值重估潛力。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-04T14:25:14Z"
   },
   "2031973770844626988": {
     "sentiment": "Bullish",
@@ -24388,19 +24485,49 @@
     "translation_zh": "@zzzpw4a 分散投資對降低風險總是好事。集中投資則有利於追求更高回報。在我看來，鑑於 $SOI 的起點，它有更大的估值重估空間。"
   },
   "2031896692283621696": {
+    "id": "2031896692283621696",
+    "tweet_id": "2031896692283621696",
     "sentiment": "Bullish",
-    "summary": "$SOI 壟斷襯底，將極大受益於輝達",
-    "translation_zh": "感謝 MarketScreener 這一次對 $SOI 進行了實質報導。\n\n文章寫道：\n\n「在專門討論 Soitec 的文章中，作者提出幾個觀點。\n\n他認為該集團能受益於共封裝光學（CPO）的發展，這是一種旨在配合人工智慧和資料中心興起的光子架構。\n\n據他所述，Soitec 在此技術使用的某些 SOI 襯底上擁有準壟斷地位，若光子技術被大規模採用，這將成為戰略優勢。\n\n該投資人還提到他認為目前的估值偏低，並認為市場可能會在 2027 年光子技術迎來光明週期前開始提前佈局。」\n\n這完全就是我之前的投資論點，沒有任何花哨誇大。\n\n上一次英國《金融時報》和彭博社報導我關於 $RPI 的論點時，莫名其妙地將其貼上「迷因股」標籤，許多媒體甚至直接加油添醋，引發了負面情緒。\n\n話雖如此：\n\n$SOI 在 CPO 的襯底層幾乎處於壟斷地位。\n\n我計劃在未來一到兩年內繼續持有頭寸，因為我預期它將成為由 $NVDA 領頭的新架構推廣的最大受益者。"
+    "stances": {
+      "NVDA": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "作者看好SOI因CPO技術具壟斷優勢且將受惠於NVDA架構。",
+    "translation_zh": "感謝MarketScreener這次對$SOI的真實報導。文章寫道：「在專門介紹Soitec的文章中，作者提出了幾個論點。他認為該集團可以受益於CPO（共封裝光學）的發展，這是一種旨在配合人工智慧和資料中心崛起的光子架構。根據他的說法，Soitec在該技術中使用的某些SOI基板上擁有準壟斷地位，如果大規模採用光學技術，這種優勢可能會成為戰略優勢。該投資者還提到他認為很低的估值水平，並相信市場可能會在2027年光學技術充滿希望的週期之前開始佈局。」這正是論點所在，沒有多餘的廢話。上次來自FT和Bloomberg的媒體報導我對$RPI的論點時，莫名其妙地將其標記為「迷因股」。許多媒體直接添加了從未說過的話，這引發了負面情緒。話雖如此：$SOI對CPO的基板層擁有幾乎壟斷的地位。我計畫在未來一兩年內持有我的部位，因為我預期它將成為由$NVDA帶頭即將到來的架構升級的最大受益者。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:26:42Z"
   },
   "2031861089823228353": {
+    "id": "2031861089823228353",
+    "tweet_id": "2031861089823228353",
     "sentiment": "Neutral",
-    "summary": "$LWLG 零營收太投機，但整合重大",
-    "translation_zh": "我已經研究過 $LWLG 了。\n\n對我個人而言，這項整合合作夥伴關係並未披露任何財務條款。\n\n因此在零營收的情況下過於投機，像 Soitec 這樣已經向 $NVDA 供貨的公司市值也沒有高出多少。但人們可以自由承擔這個風險。\n\n話雖如此，與 $TSEM 的整合對他們公司來說確實非常重大。"
+    "stances": {
+      "LWLG": "Bearish",
+      "NVDA": "Neutral",
+      "TSEM": "Bullish"
+    },
+    "summary": "作者看空LWLG認為過於投機，看好TSEM整合具重大實質效益。",
+    "translation_zh": "已經研究過LWLG。對我個人而言，沒有揭露財務條款且這是一項整合夥伴關係。因此零營收下過於投機，像Soitec這樣的公司已經將供應傳遞給NVDA且價值沒有高出那麼多。但人們可以自由承擔該風險。話雖如此，TSEM的整合對其公司而言極其重要。",
+    "risk": "LWLG零營收且缺乏財務條款揭露，屬於過於投機的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:26:57Z"
   },
   "2031859498546299159": {
+    "id": "2031859498546299159",
+    "tweet_id": "2031859498546299159",
     "sentiment": "Bullish",
-    "summary": "$HIMS 基本面改善且具軋空機會",
-    "translation_zh": "我試著從基本面角度來談 $HIMS。\n\n但這一點絕不能低估：\n\n$HIMS 的方向性空頭似乎被套牢了。\n\n股價現已上漲 64.15% 至 26.5 美元（仍低於 70 多美元的高點）。\n\n而空頭頭寸比率卻升至 41.6% 的歷史新高。\n\n隨著空頭頭寸虧損加深，可能會引發劇烈的軋空反饋循環。\n\n然而，這取決於基礎股票因買盤推升及基本面改善而持續上漲，這樣他們的頭寸才會被迫清算。\n\n否則，如果價格停滯，他們可以長期維持空頭頭寸（借券利率低）並緩慢買入平倉。\n\n話雖如此，我個人很期待參與其中，並期待看到 $HIMS 能帶來什麼：\n\n無論是從他們近期類似 $META 的全球收購狂潮，還是類似 $HOOD 的交叉銷售潛在營收機會。\n\n隨著 $HIMS 基本面因與 $NVO 出人意料的合作而迅速改善：\n\n我個人看到了 $HIMS 創造歷史的真正機會。"
+    "stances": {
+      "HIMS": "Bullish",
+      "HOOD": "Neutral",
+      "META": "Neutral",
+      "NVO": "Neutral"
+    },
+    "summary": "分析師看好HIMS基本面改善與短倉軋空機會，給予多頭立場。",
+    "translation_zh": "我嘗試從基本面的角度來談論HIMS。但這點不容低估：HIMS的方向性空頭看起來被困住了。股價現在上漲了64.15%達到26.5美元（雖然仍低於70美元的高點）。同時融券空頭利率增加到41.6%的歷史新高。隨著空頭倉位陷入更深的虧損，可能會出現劇烈的反饋循環。然而；這取決於在買盤壓力和不斷增長的基本面推動下，標的股票是否會上漲。為了讓他們的倉位被強制平倉。否則，如果價格停滯不前，他們可以讓空頭銷售保持很長一段時間（借貸利率低）並慢慢買入回補。話雖如此，我個人也在參與這場旅程，並期待看到HIMS能交付什麼成果：無論是來自他們最近類似META的全球收購狂潮，還是類似HOOD的交叉銷售潛在營收機會。隨著HIMS基本面的快速改善，加上令人驚喜的NVO合作夥伴關係：我個人看到HIMS創造歷史的真實機會。",
+    "risk": "若股價停滯不前，空頭可長期持有並緩慢回補，軋空行情須視買盤與基本面而定。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:27:11Z"
   },
   "2031840738695406034": {
     "sentiment": "Bullish",
@@ -24408,24 +24535,67 @@
     "translation_zh": "@PhotonCap 噢對，我很喜歡 $TSEM。我覺得它的市值可能會重估至 350 億美元，也就是從現在起上漲約 2.5 倍。\n\n感覺這只是時間問題，也許再過一年半？"
   },
   "2031833591328751923": {
+    "id": "2031833591328751923",
+    "tweet_id": "2031833591328751923",
     "sentiment": "Bullish",
-    "summary": "看好 $TSEM，將其類比台積電",
-    "translation_zh": "@PhotonCap 是的，我非常喜歡 $TSEM。\n\n我試著透過與讀者熟悉的事物（如 $TSM）進行比較，讓內容更容易理解。\n\n畢竟外面有太多專業術語了。"
+    "stances": {
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "作者非常喜歡 TSEM，並將其與 TSM 進行比較。",
+    "translation_zh": "@PhotonCap 沒錯，我真的很喜歡 $TSEM。我試著透過與大家熟知的 $TSM 進行比較，讓讀者更容易理解。外面有太多專業術語了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:27:36Z"
   },
   "2031825744016638199": {
+    "id": "2031825744016638199",
+    "tweet_id": "2031825744016638199",
     "sentiment": "Bullish",
-    "summary": "看好 AI 光子技術典範與整體供應鏈",
-    "translation_zh": "@demarscrypto 如果你認為光子技術是 AI 的新典範，買下整個光子供應鏈並沒有錯。\n\n襯底：$AXTI、$SOI\n組裝/雷射/收發器/供應鏈：$AAOI、$LITE、$COHR\n晶圓代工：$TSEM\n\n這些是我之前看好的標的。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "SOI": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "看好光子學供應鏈為AI新典範，全面看多相關個股。",
+    "translation_zh": "如果你把光子學視為AI的新典範，買進整個光子學供應鏈並沒有錯。基板類股：AXTI、SOI；組裝、雷射、收發器與供應鏈類股：AAOI、LITE、COHR；晶圓代工：TSEM。這些都是我一直很喜歡的標的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:27:47Z"
   },
   "2031823112745234543": {
+    "id": "2031823112745234543",
+    "tweet_id": "2031823112745234543",
     "sentiment": "Bullish",
-    "summary": "$TSEM 低風險具強勁增長，做多持有",
-    "translation_zh": "@AtlasShrug1 我也更喜歡 $SOI，上行空間大得多。\n\n然而，$TSEM 是規模大得多的參與者，但我認為它因訂單積壓的產能以及與 $NVDA 的合作而大幅降低了風險。\n\n而且我確實看到這在未來兩年內會強勁複合增長，所以我在這個位置做多。"
+    "stances": {
+      "NVDA": "Neutral",
+      "SOI": "Bullish",
+      "TSEM": "Bullish"
+    },
+    "summary": "分析師看好SOI潛在升幅，並因訂單與輝達加持而做多TSEM。",
+    "translation_zh": "@AtlasShrug1 我也比較喜歡 $SOI，有更高上檔潛力。然而，$TSEM 是規模大得多的參與者，但我看好它從滿手訂單和 $NVDA 獲得高度去風險化。而且我確實看到這在未來兩年會強勁複合成長，所以我現在附近做多。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:27:59Z"
   },
   "2031820871170736570": {
+    "id": "2031820871170736570",
+    "tweet_id": "2031820871170736570",
     "sentiment": "Bullish",
-    "summary": "看多 $TSEM 光子代工，具不對稱上行",
-    "translation_zh": "我看多 $TSEM，它是光子學領域的台積電。\n\n我對 CPO 的前兩大首選是 $SOI 和 Tower Semi。\n\n鑑於下週 $NVDA GTC 會議上關於新光子相關架構的催化劑：\n\n我預期 Tower Semi 將迎來巨大的催化劑。\n\n輝達上個月已經直接與 Tower 合作擴展 1.6T 矽光子技術（這是給 GTC 的暗示），這可能會推動下游廠商採用它。\n\n現在，Tower 是 1.6T SiPh PIC 的主要供應商，也是擴展 CPO 架構的主要晶圓代工廠（另一家是格羅方德）。\n\n根據我的遠期預測：\n2028 年遠期市盈率：約 16.8 倍至 18.1 倍\n\n（Tower 設定了到 2028 年實現 28.4 億美元營收的目標，營業利潤率約為 31.7%，淨利潤約為 7.5 億美元）\n\n需要注意的是，他們計劃中的光子產能中有超過 70% 在 2028 年前已被預訂。而光子技術甚至都還沒大規模推廣。\n\n因此，由於極端的光子規模擴展以及未計入預測的配額提價，我預計他們的業績將大幅超出盈利預期。\n\n此外，$TSEM 70% 的產能已被預訂，風險已大幅降低。市值偏低可能是因為 $TSEM 是光子供應鏈中非常隱蔽的上游參與者。\n\n但我預計 $NVDA GTC 大會將成為將其推向溢價估值的催化劑。\n\n我看多 $TSEM，將其視為上游光子晶圓代工層的不對稱上行機會。"
+    "stances": {
+      "NVDA": "Neutral",
+      "SOI": "Bullish",
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "看好TSEM與SOI，期待輝達GTC催化光學晶片股價。",
+    "translation_zh": "我做多 $TSEM，他是光學晶片領域的 $TSM。我對 CPO 的前兩大首選是 $SOI 和 Tower Semi。鑑於下週 $NVDA GTC 催化劑將帶來新的光學相關架構，我預期 Tower Semi 將獲得巨大的催化。輝達上個月已經與 Tower 直接合作以擴展 1.6T 矽光子（GTC 的暗示），這可能會推動下游玩家使用它。現在，Tower 是 1.6T 矽光子 PIC 的領先供應商，也是擴展 CPO 架構的主要代工廠（另一家是格羅方德）。從我的前瞻估計：2028年前瞻市盈率約為 16.8倍至 18.1倍（Tower 設定了到 2028 年營收達到 28.4 億美元的目標，營運利潤率約為 31.7%，淨利潤約 7.5 億美元）。需要注意的是，他們超過 70% 的計劃矽光子產能已經預訂到 2028 年。而且光學晶片甚至還沒開始放量。因此，我預期由於極端的光學晶片擴展加上未計入預測的分配價格調漲，他們的財報將強勁超預期。此外，$TSEM 因為 70% 的產能已被預訂而大幅降低了風險。市值低可能是因為 $TSEM 是光學晶片供應鏈中非常冷門的上游玩家。但我預期 $NVDA GTC 會議將成為帶動其達到溢價估值的催化劑。我做多 $TSEM 作為上游光學晶片代工層的非對稱上漲機會。",
+    "risk": "市值可能因屬於冷門上游玩家而被低估，但高達七成產能已預訂大幅降低了營運風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:28:37Z"
   },
   "2031813164145521111": {
     "sentiment": "Neutral",
@@ -24433,24 +24603,64 @@
     "translation_zh": "@Meatusmax @jaegerjaque7 他們說是今天。$AXTI 創下了歷史新高，如果他們週一問我，我就會把它包含進去了。"
   },
   "2031812811555496434": {
+    "id": "2031812811555496434",
+    "tweet_id": "2031812811555496434",
     "sentiment": "Neutral",
-    "summary": "提及多檔潛在關注股票清單",
-    "translation_zh": "@jaegerjaque7 $SOI, $AAOI, SK Hynix, $RDDT, $HIMS"
+    "stances": {
+      "AAOI": "Neutral",
+      "HIMS": "Neutral",
+      "RDDT": "Neutral",
+      "SOI": "Neutral"
+    },
+    "summary": "推文僅提及 SOI、AAOI、RDDT 與 HIMS，立場中立。",
+    "translation_zh": "@jaegerjaque7 $SOI, $AAOI, SK Hynix, $RDDT, $HIMS",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:29:15Z"
   },
   "2031810360882446636": {
+    "id": "2031810360882446636",
+    "tweet_id": "2031810360882446636",
     "sentiment": "Bearish",
-    "summary": "IREN短期因增發稀釋看跌",
-    "translation_zh": "這並不是說 $IREN 會崩盤。更準確地說是 $IREN 在中短期的上漲空間受限，因為有 60 億美元的 ATM（增發股票計畫）。如果你投資 $IREN，最好等到現有股東因高達 60 億美元的賣壓而被嚴重稀釋後再做多。如果你在追求股價資本增值，$NBIS 擁有優越得多的資本支出融資結構。"
+    "stances": {
+      "IREN": "Bearish",
+      "NBIS": "Bullish"
+    },
+    "summary": "IREN因60億美元增發面臨稀釋壓力看空，NBIS則因資本結構較優看多。",
+    "translation_zh": "並不是說IREN會崩盤。更準確地說，由於60億美元的ATM（增發），IREN中短期內的上漲空間受限。如果你投資IREN，最好等到現有持股人被多達60億美元的賣壓稀釋到徹底泡沫化之後，再做多。如果你在追求股權增值，NBIS擁有優越得多的資本支出融資結構。",
+    "risk": "IREN因高達60億美元的ATM增發計畫，將面臨巨大的現有股東權益稀釋與賣壓。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:29:38Z"
   },
   "2031806703562596470": {
+    "id": "2031806703562596470",
+    "tweet_id": "2031806703562596470",
     "sentiment": "Bullish",
-    "summary": "分享投資組合創下高額回報",
-    "translation_zh": "@workoutwithp @tech_signals 很高興看到我提過的標的組成了一個迷你 ETF！很高興看到其中 60% 是我討論過的股票，從 $NBIS 到 $AEHR，還有一些隨機的生技股。很高興這對你有效，61% 的回報率太驚人了。"
+    "stances": {
+      "AEHR": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "推文者提及NBIS與AEHR等標的組成之迷你ETF創下61%驚人報酬率，態度樂觀看好。",
+    "translation_zh": "@workoutwithp @tech_signals 看到我提過的股票組成迷你 ETF 真有趣！很高興看到 60% 是我談論過的股票，從 $NBIS 到 $AEHR，撇開隨機的生技股不談。很高興它對你有幫助，61% 的回報率太驚人了。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:29:51Z"
   },
   "2031805039069839745": {
+    "id": "2031805039069839745",
+    "tweet_id": "2031805039069839745",
     "sentiment": "Bullish",
-    "summary": "看好SOI加入強勢股行列",
-    "translation_zh": "@iiiiiiiivanth 哈哈，恭喜。$AAOI 和 $AXTI 是我早期的兩個最愛。$LITE 則是年初時的目標。現在 $SOI 也加入了這場派對"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "LITE": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "作者看好AAOI、AXTI、LITE與新加入的SOI。",
+    "translation_zh": "哈哈恭喜。$AAOI 和 $AXTI 之前是我最愛的兩檔，$LITE 是在年初。現在 $SOI 也加入行列了",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T14:30:03Z"
   },
   "2031803861481222385": {
     "sentiment": "Bullish",
@@ -56334,5 +56544,29 @@
     "risk": "NAND相關記憶體領域遭到延遲，且宏觀環境可能導致估值壓縮。",
     "model": "gemini-3.5-flash-lite",
     "analyzed_at": "2026-11-04T06:01:12Z"
+  },
+  "2117884722076643829": {
+    "id": "2117884722076643829",
+    "tweet_id": "2117884722076643829",
+    "sentiment": "Bullish",
+    "stances": {},
+    "summary": "吉伊卡哇人氣極高，推主幽默看多詢問如何購買看漲期權。",
+    "translation_zh": "吉伊卡哇在日本實在太受歡迎了，連進去店家都辦不到。難道沒有地方可以買到吉伊卡哇股票的買權（Call）嗎？笑 https://t.co/oOx03YAtC0",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-04T14:20:46Z"
+  },
+  "2117835682702110999": {
+    "id": "2117835682702110999",
+    "tweet_id": "2117835682702110999",
+    "sentiment": "Bullish",
+    "stances": {
+      "NVDA": "Bullish"
+    },
+    "summary": "AI獲兩黨國安支持，看好輝達不受大選政局影響。",
+    "translation_zh": "X 平台上與馬斯克的言論極度看空民主黨勝選後的局勢。雖然這有點像同溫層泡沫，但大家似乎忘了 AI 是獲得兩黨共識的國家安全優先事項，且 $NVDA 創紀錄的飆漲與 AI 建設加速正是發生在拜登政府任內。",
+    "risk": "市場過度擔心民主黨勝選可能對經濟與產業帶來衝擊。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-04T14:21:09Z"
   }
 }
