@@ -24673,9 +24673,18 @@
     "translation_zh": "@AtlasShrug1 我會說那個分析師當時根本不知道自己在談論 $SOI 什麼，因為它目前的交易價只有 1 倍股價淨值比、2 倍市銷率，並且是 CPO（共同封裝光學）的壟斷者。並不是每個人在光學供應鏈上都有領域專業知識"
   },
   "2031802972917940427": {
+    "id": "2031802972917940427",
+    "tweet_id": "2031802972917940427",
     "sentiment": "Bullish",
-    "summary": "強烈看好SOI的光學長期發展",
-    "translation_zh": "@Noobverest 那些只是交易點子，我沒有持有像 $KRKNF 這類的部位。不過我確實喜歡 Octopus。$SOI 則是具有高確信度的光學長期多頭部位！"
+    "stances": {
+      "KRKNF": "Neutral",
+      "SOI": "Bullish"
+    },
+    "summary": "作者對 $KRKNF 僅持提及態度，但高度看多 $SOI。",
+    "translation_zh": "那些只是交易構想，我沒有像 $KRKNF 這類的持倉。不過我確實喜歡 Octopus。$SOI 則是強烈看多的光學股！",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:21Z"
   },
   "2031802127421751329": {
     "sentiment": "Bullish",
@@ -24683,9 +24692,19 @@
     "translation_zh": "隨便一個人對一家市值數十億美元的公司 $SOI 發表看法……怎麼就能讓它漲了 20%？難道我現在這麼有影響力了嗎？https://t.co/fltXyAOyxC"
   },
   "2031785810052465078": {
+    "id": "2031785810052465078",
+    "tweet_id": "2031785810052465078",
     "sentiment": "Bullish",
-    "summary": "對比NBIS與IREN融資優劣",
-    "translation_zh": "$NBIS 對決 $IREN。兩者的差異有如天壤之別。Nebius：來自 $NVDA 的 20 億美元稀釋，對公眾流通盤沒有立即的賣壓。Iren：透過 ATM 進行 60 億美元的稀釋，直接對公開市場造成賣壓。這直接從大眾身上抽取流動性並壓抑動能。非常清楚，哪家公司透過資本支出融資能帶來更高的股價增值。一個與輝達有戰略合作，另一個則是毒性融資。"
+    "stances": {
+      "IREN": "Bearish",
+      "NBIS": "Bullish",
+      "NVDA": "Neutral"
+    },
+    "summary": "NBIS與IREN融資策略天差地遠，NBIS看多、IREN看空",
+    "translation_zh": "NBIS對比IREN。兩者有天壤之別。Nebius：來自NVDA的20億美元稀釋，對公眾流通股沒有直接賣壓；Iren：透過ATM進行60億美元稀釋並形成公開市場賣壓，這直接從大眾抽取流動性並壓抑動能。非常明確，哪家公司透過資本支出融資更能帶來股價價值增長。一家與Nvidia採取戰略合作，另一家則是毒性融資。",
+    "risk": "公開市場賣壓抽取流動性並壓抑股價動能，且存在大規模股權稀釋風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:23Z"
   },
   "2031774404972327172": {
     "sentiment": "Bullish",
@@ -24693,19 +24712,48 @@
     "translation_zh": "放空者對 $HIMS 進行方向性的雙倍加碼簡直極其愚蠢。他們最近的收購案剛好讓 $HIMS 獲得了 DTC 醫療保健的全球零售市場。其交叉銷售的機會極具潛力且難以建模。考慮到這不是你典型的對沖套利交易，這真的是非常糟糕的風險管理。"
   },
   "2031771668004344072": {
+    "id": "2031771668004344072",
+    "tweet_id": "2031771668004344072",
     "sentiment": "Bullish",
-    "summary": "MRVL長期看好，營收增長主要來自微軟與ASIC",
-    "translation_zh": "@siflower 你從 $MRVL 獲得的曝險非常少。Celestial 的營收在 2028 年約為 5 億美元，2029 年為 10 億美元。\n\nMarvell 的大部分營收成長來自 2028 年左右的 $MSFT Maia 和 ASIC，但無論如何這仍是一檔極佳的長期投資標的。\n\n至於 CPO，Soitec 和 $TSEM 可能才是這兩檔。"
+    "stances": {
+      "MRVL": "Bullish",
+      "MSFT": "Neutral",
+      "TSEM": "Neutral"
+    },
+    "summary": "作者看好MRVL長期潛力，並提及MSFT與TSEM。",
+    "translation_zh": "你從$MRVL獲得的曝險非常有限。Celestial的營收在2028年約為5億美元，2029年為10億美元。Marvell的大部分營收成長來自2028年左右的$MSFT Maia和ASIC，但它仍然是一檔極佳的長期投資。至於CPO，Soitec和$TSEM可能是唯二的選擇。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:26Z"
   },
   "2031770301298802834": {
+    "id": "2031770301298802834",
+    "tweet_id": "2031770301298802834",
     "sentiment": "Neutral",
-    "summary": "探討CODA與KRKNF及原油價格反應",
-    "translation_zh": "@CoffeeStocksGuy 不錯，你搶先我一步了。真有趣，你對 $CODA 和 $KRKNF 得出了相同的結論。\n\n這比較像是對 12 個月前新地雷報告的反應。看起來原油價格自消息傳出後稍微飆升。"
+    "stances": {
+      "CODA": "Neutral",
+      "KRKNF": "Neutral"
+    },
+    "summary": "提及 CODA 與 KRKNF 礦場報告反應及油價微幅波動。",
+    "translation_zh": "@CoffeeStocksGuy 不錯，你搶先了我一步。真有趣，你對 $CODA 和 $KRKNF 得出了相同的結論。這主要是對 12 個月前新礦場報告的反應。看起來自從該消息公佈後，原油價格稍微飆升了一些。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:28Z"
   },
   "2031768855287394699": {
+    "id": "2031768855287394699",
+    "tweet_id": "2031768855287394699",
     "sentiment": "Bullish",
-    "summary": "CODA基本面健全，水雷危機成強力順風",
-    "translation_zh": "不完全是， $CODA 看起來基本面非常健全。\n\n高現金餘額、淨利為正，且在該行業加感測器領域擁有極高的利潤率。\n\n如果說有什麼影響的話，伊朗在海峽布雷反而給了像這些聲納/探測股以及 $KRKNF 十年來最大的順風。\n\n委內瑞拉的戰事更多聚焦於像 $AVAV 這類的無人機，從未真正轉入水下。\n\n所以這可能是大家首次看到實際應用，並導致更多資金流入該板塊，即便整體潛在市場規模（TAM）並沒有增加太多。"
+    "stances": {
+      "AVAV": "Neutral",
+      "CODA": "Bullish",
+      "KRKNF": "Bullish"
+    },
+    "summary": "CODA與KRKNF基本面佳且受惠地緣政治，看好後市。",
+    "translation_zh": "不完全是，CODA看起來基本面非常穩健。現金部位高、淨利為正，且在該產業與感測器領域中擁有極高的利潤率。如果說有什麼影響的話，伊朗在海峽布雷剛好給了像這類聲納/探測股票以及KRKNF十年來最大的順風。委內瑞拉的戰事更聚焦於像AVAV這樣的無人機，實際上並未轉往水面下。因此這可能是大家第一次看到實際應用，並帶動更多產業資金流入，即便總潛在市場（TAM）並沒有實質大幅增加。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:31Z"
   },
   "2031768015625392570": {
     "sentiment": "Bullish",
@@ -24713,9 +24761,20 @@
     "translation_zh": "任何干擾絕非好事。然而，對韓國或台灣 $TSM 供應鏈的影響在很大程度上被誇大了。\n\n美國政策的中心是壓低油價。而伊朗唯一的生存機會是能源/油價極端飆升，迫使美國退縮。\n\n我總是把賭注壓在美國政策上。"
   },
   "2031765468982473011": {
+    "id": "2031765468982473011",
+    "tweet_id": "2031765468982473011",
     "sentiment": "Bullish",
-    "summary": "KRKNF與CODA基本面佳，受惠水下防衛需求",
-    "translation_zh": "路透社 10 個月前剛發布的消息：\n\n新消息確認伊朗已在荷姆茲海峽部署了約十枚水雷。\n\n我發現兩檔非常有趣的水下作戰概念股。\n\n$KRKNF 烏賊🦑 和 $CODA 章魚。\n\n$KRKNF：Kraken Robotics 作為 Anduril 的供應商，是水下作戰領域最純粹的標的之一：\n\n他們製造合成孔徑聲納 (SAS) 和 SeaPower 電池，許多像 Anduril 這樣的國防巨頭都依賴這些產品。\n\nAnduril 最近在羅德島開設了一家工廠，以量產無人水下載具 (UUV)（例如 Dive-LD 和 Ghost Shark）。\n\n根據零售 BOM 估算：\n- Dive-LD 搭載 100 萬至 200 萬加幣的 Kraken 硬體\n- Ghost Shark XL-AUV 搭載 800 萬至 1000 萬加幣。\n\n如果 Anduril 的產量增加：營收成長就會隨之而來。\n\n我不會試圖根據營收預測來對 Kraken 進行建模，而是看 Anduril 的規模擴張有多大（類似於根據 $GOOGL TPU 來對 $LITE 進行建模）\n\n但財務與資產：資產 3.015 億美元，負債 6570 萬美元，總債務約 2410 萬美元，看起來相當健康。年營收成長率 60%，毛利率 59%。\n\n至於清除海峽水雷，他們擁有 KATFISH 掃雷無人機，以及用於獲取海底 3D 圖像以識別埋藏水雷的 SAS 聲納。\n\n$CODA：Coda Octopus，基本上是純粹押注伊朗佈雷的標的。\n\n他們的主要產品是 Echoscope 即時 3D/4D/5D 體積聲納，可在混濁、漆黑的水中繪製靜態和移動物體的圖本地圖。\n\n這可以延伸到其他產品，例如作為 UUV 感知的 Echoscope 版本「NANO Gen Series」。\n\n然後是潛水員擴增顯示器（特種作戰部隊訂購的），基本上是將 Echoscope 聲納數據傳輸給人員。\n\nCODA 擁有驚人的資產負債表。根據最近的 2025 財年報告（截至 2025 年 10 月），他們持有 2870 萬美元的純現金，且無長期債務。\n\n毛利率也非常高，綜合毛利率為 66.5%，而大多數國防承包商大約在 10-20%。\n\n2025 年營收 2660 萬美元，年增 30.7%，淨利 410 萬美元，能實現盈利實屬難得。\n\n但基本上他們的聲納/探測產品組合看起來非常完美地契合了這種確切情境，而且他們在沒有催化劑的情況下基本面也非常穩健。\n\n無論如何，伊朗在海峽布雷並不是一個重大的 TAM 成長。\n\n然而，它確實提醒了投資者和政府，戰爭可能會轉向水下：\n\n這將導致更多的板塊資金流入以及國防合約機會。\n\n這些是我個人最喜歡的兩檔股票，在此發表我的想法，以防對其他人有幫助。"
+    "stances": {
+      "CODA": "Bullish",
+      "GOOGL": "Neutral",
+      "KRKNF": "Bullish",
+      "LITE": "Neutral"
+    },
+    "summary": "伊朗部署水雷促使水下戰爭概念股備受關注，作者看多 KRKNF 與 CODA。",
+    "translation_zh": "路透社剛在十分鐘前報導：消息確認伊朗已在荷姆茲海峽部署了約十幾枚水雷。我發現兩檔非常有意思的水下戰爭概念股可供曝險：$KRKNF（魷魚）與 $CODA（章魚）。$KRKNF：Kraken Robotics 作為安杜里爾（Anduril）的供應商，是水下戰爭領域中較為純粹的標的之一。他們製造合成孔徑聲納（SAS）與 SeaPower 電池，許多國防主承包商如 Anduril 都依賴這些產品。Anduril 最近在羅德島開設了一家工廠，用於大規模生產無人水下載具（UUV，例如 Dive-LD 與 Ghost Shark）。根據散戶的物料清單（BOM）估算：Dive-LD 搭載 100 萬至 200 萬加幣的 Kraken 硬體；Ghost Shark XL-AUV 則搭載 800 萬至 1000 萬加幣。如果 Anduril 的產能擴增發生：營收成長就會隨之而來。我不會試圖根據營收預測來為 Kraken 建模，而是看 Anduril 的規模擴展有多大（類似於根據 $GOOGL TPU 來為 $LITE 建模）。不過就財務與資產而言：資產 3.015 億美元、負債 6570 萬美元、總債務約 2410 萬美元，看起來相當健全。年營收成長率達 60%，毛利率為 59%。至於清除海峽水雷，他們擁有 KATFISH 掃雷無人機，以及用於獲取海底 3D 影像以識別埋地水雷的 SAS 聲納。$CODA：Coda Octopus，基本上是針對伊朗佈雷的純粹曝險標的。他們的主要產品是 Echoscope 即時 3D/4D/5D 體積聲納，能夠在混濁且漆黑的水中繪製靜態與移動物體的圖本地圖。這也延伸應用到其他產品，例如「NANO Gen 系列」，即作為 UUV 感測器的 Echoscope 版本。還有潛水員擴增顯示器（特戰司令部已下訂單），這基本上是將 Echoscope 聲納資料餵給人員的設備。CODA 擁有驚人的資產負債表。根據最近的 2025 會計年度報告（截至 2025 年 10 月），他們持有 2870 萬美元的純現金且沒有長期負債。毛利率也非常高，合併毛利率達 66.5%，而大多數國防承包商大約落在 10-20%。2025 年營收為 2660 萬美元，年增 30.7%，淨利為 410 萬美元，這在能獲利的公司中相當罕見。但基本上他們的一套聲納與偵測產品看起來非常適應這類確切情境，且在沒有催化劑的情況下，其基本面本身就非常健全。無論如何，伊朗在海峽佈雷並不完全算是整體潛在市場（TAM）的大幅增加。然而，這確實提醒了投資人與政府，戰爭可能會轉向水下：從而帶動更多產業資金流入以及國防合約機會。這些是我個人最喜歡的兩檔，在此發布我的想法，以防對其他人有幫助。",
+    "risk": "伊朗佈雷並未大幅增加整體潛在市場，且作者提醒不應單純依據營收預測來替 Kraken 建模。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:35Z"
   },
   "2031754906970050592": {
     "sentiment": "Bullish",
@@ -24723,29 +24782,79 @@
     "translation_zh": "@offermemoneyXYZ Clickhouse 實際上是 Nebius 內部的一個項目，但後來分拆成為一家獨立公司。\n\n$NBIS 以 150 億美元的估值持有 Clickhouse 約 25% 的股份，在他們可能進行 IPO 之前，其市值很可能會大幅上升。"
   },
   "2031753721152156011": {
-    "sentiment": "Neutral",
-    "summary": "IQE暴漲後需歇息，選股非天天大漲",
-    "translation_zh": "@ryansfinance $IQE 自上個月以來實際上已經上漲了 136% 哈哈，有時候事物需要休息一下。\n\n並不是我所有的選股（例如 $AAOI 或 $AXTI）都能每天垂直上漲 8%。"
+    "id": "2031753721152156011",
+    "tweet_id": "2031753721152156011",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "IQE": "Bullish"
+    },
+    "summary": "IQE飆漲後需休息，AAOI與AXTI亦看好持續上漲。",
+    "translation_zh": "@ryansfinance $IQE 自上個月以來實際上已經飆漲了 136% 哈哈，有時候股票需要休息一下。並非我所有的選股（像是 $AAOI 或 $AXTI）都能每天以垂直線飆升 8%。",
+    "risk": "短期急漲後可能面臨漲多回檔或需要休息整理的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:37Z"
   },
   "2031751619117744443": {
+    "id": "2031751619117744443",
+    "tweet_id": "2031751619117744443",
     "sentiment": "Bullish",
-    "summary": "Soitec受惠NVDA CPO架構，長線看好",
-    "translation_zh": "原來市場喜歡隱藏的光學壟斷企業？\n\nSoitec 盤中大漲 16%。\n\n如果你看一下由 $NVDA 主導的 CPO 光學架構擴展：\n\n它是拋物線式的。\n\n$SOI 很可能成為人們作為 CPO 基板壟斷者可以持有多年的標的。\n\n最棒的是，下週即將迎來 $NVDA GTC 發布會。\n\n這可能會向機構發出信號，開始關注他們錯過的玩家，例如 $AXTI，以及現在的 $SOI。"
+    "stances": {
+      "AXTI": "Bullish",
+      "NVDA": "Bullish",
+      "SOI": "Bullish"
+    },
+    "summary": "市場熱捧光子學壟斷企業，看好SOI與AXTI等標的。",
+    "translation_zh": "原來市場喜歡隱藏的光子學壟斷企業？Soitec盤中大漲16%。如果你看看由$NVDA主導的CPO光子學架構 ramp：它是拋物線式的。$SOI很可能是人們可以長期持有的CPO基板壟斷者。更棒的是，下週還有即將到來的$NVDA GTC發布會。這可能會向機構發出信號，開始關注他們錯過的參與者，如$AXTI，以及現在的$SOI。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:40Z"
   },
   "2031748911174725855": {
+    "id": "2031748911174725855",
+    "tweet_id": "2031748911174725855",
     "sentiment": "Bullish",
-    "summary": "HIMS通路護城河強大，短空被套建議做多",
-    "translation_zh": "$HIMS 現在回升 14.22%。\n\n其全球 DTC 零售分銷護城河帶來的未開發潛在營收非常巨大。\n\n這與 $META 早期的收購有相似之處。\n\n以及 $HOOD 的交叉銷售能力。\n\n在沒有監管阻力地收購了三家主要的全球競爭對手後， $HIMS 仍然從 70 美元以上的高點回落。\n\n最棒的是：\n\n方向性放空公司 40% 以上股份的空頭，因令人驚喜的 $NVO 合作 + 訴訟終止而完全被困住。\n\n我個人會在這裡持有並做多 HIMS。\n\n管理層有效利用龐大的全球醫療零售分銷網路帶來的風險報酬比似乎非常值得。"
+    "stances": {
+      "HIMS": "Bullish",
+      "HOOD": "Neutral",
+      "META": "Neutral",
+      "NVO": "Neutral"
+    },
+    "summary": "分析師看好HIMS的全球通路與合作夥伴，建議持股做多。",
+    "translation_zh": "$HIMS 目前反彈了 14.22%。其全球 DTC 零售分銷護城河中尚未開發的潛在營收極為龐大，這與 $META 早期的併購以及 $HOOD 的交叉銷售能力有相似之處。在未受監管阻力影響下收購三大全球競爭對手後，其股價仍低於 70 美元以上的高點。最棒的是：因方向性作空而賣空該公司 40% 以上股份的空頭，因令人驚訝的 $NVO 合作夥伴關係與訴訟終止而完全被困住。我個人會在這裡持有並做多 HIMS。管理層有效將龐大的全球醫療零售分銷網路變現的風險報酬比似乎很值得。",
+    "risk": "管理層能否有效將龐大的全球醫療零售分銷網路變現仍需觀察。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:42Z"
   },
   "2031745824171126896": {
+    "id": "2031745824171126896",
+    "tweet_id": "2031745824171126896",
     "sentiment": "Bullish",
-    "summary": "輝達投資NBIS是強大信號，看好長期AI發展",
-    "translation_zh": "@beauty_oe 考量到 $NBIS 的市值，$NVDA 投資 20 億美元是極為巨大的金額，這是支持其未來成長的超級強大信號！Nebius 是我最喜歡的長期標的，用以參與 AI 的未來。"
+    "stances": {
+      "NBIS": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "輝達大舉投資Nebius，推文看好其為極佳長期AI標的。",
+    "translation_zh": "@beauty_oe 考量到 $NBIS 的市值，$NVDA 砸下 20 億美元投資規模龐大，這是支撐其未來成長的超強信號！Nebius 是我最喜歡、能參與 AI 未來的長期投資標的。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:45Z"
   },
   "2031744017201848397": {
+    "id": "2031744017201848397",
+    "tweet_id": "2031744017201848397",
     "sentiment": "Bullish",
-    "summary": "輝達投資NBIS，看好其成為下一個亞馬遜",
-    "translation_zh": "剛剛消息：輝達向 $NBIS 投資了 20 億美元。\n\n我深信 Nebius 隨著時間推移會成為下一個亞馬遜級別的超大規模雲端服務商。\n\n因為他們有 5 家公司，各自的各部分加總（sum-of-parts）營收均呈三位數年增長：\n- Nebius：AI 雲端業務擁有 7-9 億美元 ARR，正成為下一個 AWS。\n- Clickhouse：支撐多數財富 500 強企業的資料庫，最新估值達 150 億美元。\n- Avride：無人計程車與 FSD-4 級技術，現正與 Uber 合作進行實際規模化營運。\n- Toloka：資料標註平台，由傑夫·貝佐斯資助並被 $AMZN 使用。\n- TripleTen：教育平台，雖然沒有其他幾家性感，但也正快速成長。\n\n並帶有諸如 SWE-rebench 等廣泛使用的基準測試等支線業務。\n\n黃仁勳對 Nebius 的 $NVDA 投資表達了相同的看法：\nNebius 處於 AI 的最前沿，引領浪潮以滿足對運算能力日益增長的需求。"
+    "stances": {
+      "AMZN": "Neutral",
+      "NBIS": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "Nvidia投資Nebius，看好其具備成為下一個Amazon級別雲端巨頭的潛力。",
+    "translation_zh": "最新消息：輝達已向Nebius投資20億美元。我確信隨著時間推移，Nebius將成為下一個亞馬遜級別的超大規模資料中心。因為它們是由五家業務各部分皆實現年增三位數成長的公司組成：Nebius（AI雲端的7-9億美元ARR，作為下一個AWS）、Clickhouse（支撐多數財星500大企業的資料庫，最新估值150億美元）、Avride（機器計程車與FSD-4級技術，現正與優步合作擴大即時規模）、Toloka（由傑夫·貝佐斯資助並被AMZN使用的資料標註平台）、TripleTen（教育平台，雖不如其他吸引人但仍快速成長）。加上如SWE-rebench等廣泛使用的基準測試側翼專案。黃仁勳對Nebius的NVDA投資呼應了相同的觀點：Nebius處於人工智慧的最前沿，並引領浪潮以滿足對運算不斷增長的需求。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:48Z"
   },
   "2031735350985662695": {
     "sentiment": "Bullish",
@@ -24758,19 +24867,50 @@
     "translation_zh": "@brener_moshe 差得遠了。與 Soitec 最接近的比較標的是 $AXTI"
   },
   "2031684775275356259": {
+    "id": "2031684775275356259",
+    "tweet_id": "2031684775275356259",
     "sentiment": "Neutral",
-    "summary": "在AXTI與SLOIF間難以抉擇",
-    "translation_zh": "@afgmantu 叫我在 $AXTI 和 $SLOIF 之間二選一，就像問你如果有兩個小孩，你最喜歡哪一個一樣。"
+    "stances": {
+      "AXTI": "Neutral",
+      "SLOIF": "Neutral"
+    },
+    "summary": "作者認為在 AXTI 與 SLOIF 之間難以抉擇。",
+    "translation_zh": "叫我在 $AXTI 和 $SLOIF 之間做選擇，就跟問你如果有兩個小孩，哪一個是你的最愛一樣。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:50Z"
   },
   "2031648475310616604": {
+    "id": "2031648475310616604",
+    "tweet_id": "2031648475310616604",
     "sentiment": "Bullish",
-    "summary": "看好SLOIF的CPO潛力，已建立重倉",
-    "translation_zh": "我改變了對 Soitec ( $SLOIF ) 的看法，在約 43 的價位建立了相當規模的持倉，以押注 CPO（共同封裝光學）題材。\n\n下週的 $NVDA GTC 大會將是推動光子學和該架構的最大催化劑。\n\n市值約 15 億歐元。本淨比僅 1 倍，P/S 約 2 倍（估值非常低迷）。\n\n在 CPO 的基板方面擁有真正的壟斷地位（光子學通常享有極高溢價 + 壟斷地位的額外溢價）。\n\n演算法和分析師可能會對市佔率感到混淆，但它確實對 SOI 基板擁有壟斷權，因為他們出於多元化考量將許可證授予了信越等其他玩家，就像 $TSM 不喜歡只有一家供應商一樣。\n\n我認為機構不會等到明年才來搶先佈局 Soitec 或 $TSEM 這樣的名字（而且大多數人可能還沒聽過 $AXTI 等名字）。\n\n這個時機點剛好是在買進低迷手機週期的可能底部，同時又能完整吃到 2027 年中後期的 CPO 紅利，以及下週 $NVDA GTC 的催化劑。\n\n我個人認為這裡有 3 倍的潛力，所以我做多了。"
+    "stances": {
+      "AXTI": "Bullish",
+      "NVDA": "Bullish",
+      "SLOIF": "Bullish",
+      "TSEM": "Bullish",
+      "TSM": "Neutral"
+    },
+    "summary": "看好SLOIF具CPO壟斷優勢，並同步看多NVDA、TSEM與AXTI。",
+    "translation_zh": "我改變了對Soitec（$SLOIF）的看法，並在43元左右建立了可觀部位以佈局CPO。下週的NVDA GTC大會是推動光子學與此架構的最大催化劑。該公司市值約15億歐元，股價淨值比僅1倍，市銷率約2倍，估值極度低迷。它在CPO基板領域擁有真正的壟斷地位。演算法與分析師可能對市佔率感到困惑，但它確實壟斷了SOI基板，甚至授權給Shin Etsu等其他廠商以利多元化，例如$TSM不喜歡單一供應源。我不認為機構會等到明年才搶先佈局Soitec或$TSEM（而且大多數人可能還沒聽過$AXTI）。現在進場可能買在智慧型手機週期的底部，同時能享受到2027年中後期的CPO成長紅利以及下週NVDA GTC的催化效應。我個人認為它有3倍的上漲空間，所以我做多了。",
+    "risk": "市場對市佔率的認知可能存在誤解，且需考量智慧型手機週期復甦的不確定性。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:20:16Z"
   },
   "2031632009618161879": {
+    "id": "2031632009618161879",
+    "tweet_id": "2031632009618161879",
     "sentiment": "Bullish",
-    "summary": "美國防部採購海鮮，點名SYY等供應商受益",
-    "translation_zh": "五角大廈用納稅人的錢購買了價值 200 萬美元的阿拉斯加帝王蟹。\n\n以及 9 月份價值 69 十萬美元的龍蝦尾。\n\n如果你的第一反應和我一樣是：\n我該如何從政府在帝王蟹和龍蝦上的過度消費中獲利？\n\n方法如下：\n\n$SYY - 他們持有美國政府規模龐大、價值數百萬美元的 DLA 合約，因此當政府需要訂購數百萬美元交付的帝王蟹或龍蝦時，他們就是最大的受益者。\n\n$USFD - 美國第二大綜合食品經銷商。USFD 也競標機構和政府合約，消化政府龐大食品預算中用於昂貴螃蟹和龍蝦的溢出訂單。\n\n$PFGC - 另一家大型經銷商，競標螃蟹和龍蝦的機構政府與供應合約。\n\n要從五角大廈對海鮮和牛排的品味中獲利，你必須投資運輸食物的咽喉要道。\n\n上面三家是最大的受益者，第四季龍蝦和螃蟹的支出應該會反映在他們的財報中。"
+    "stances": {
+      "PFGC": "Bullish",
+      "SYY": "Bullish",
+      "USFD": "Bullish"
+    },
+    "summary": "看好SYY、USFD與PFGC受惠於五角大廈龐大的海鮮採購合約。",
+    "translation_zh": "五角大廈在九月花費了200萬美元購買阿拉斯加帝王蟹，以及690萬美元購買龍蝦尾。如果你跟我一樣想知道如何從政府的過度支出中獲利，答案就是投資SYY、USFD與PFGC。這些大型食品經銷商持有政府合約，是政府採購高價海鮮的主要受益者，其第四季財報應能反映這些支出。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:20:51Z"
   },
   "2031616917765763084": {
     "sentiment": "Bearish",
@@ -24783,14 +24923,39 @@
     "translation_zh": "@melikesmoney 是的，我本該買進這份清單的……\n\n我最終沒有在投資組合中買入 $ALM，但如果你有買的話恭喜你。https://t.co/e2VwSVVPk1"
   },
   "2031567544751108436": {
+    "id": "2031567544751108436",
+    "tweet_id": "2031567544751108436",
     "sentiment": "Bullish",
-    "summary": "反向指標克萊姆失靈，多檔科技半導體股大漲",
-    "translation_zh": "吉姆·克萊姆 (Jim Cramer)：「今天根本不可能賺到錢」。\n\n今天：\n$AXTI：+15.08%\n$AAOI：+11.5%\n$HIMS：+6.05%\n$LITE：+7.06%\n$SNDK：+6.12%\n$IQE：+19.08%\nSK海力士：4.38%\n$MU：+4.65%\n$COHR：+4.86%\n\n這是繼週日發布關於「油價 150-200 美元」的貼文之後的情況。\n\n克萊姆指標再次發威。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "HIMS": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish",
+      "MU": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "反向指標Cramer看空反成買點，多檔科技股強勢大漲。",
+    "translation_zh": "Jim Cramer說：今天根本不可能賺錢。結果今天AXTI漲15%、AAOI漲11.5%、HIMS漲6.05%、LITE漲7.06%、SNDK漲6.12%、IQE漲19.08%、SK海力士漲4.38%、MU漲4.65%、COHR漲4.86%。這發生在週日關於油價將達150-200美元的貼文之後。Cramer反向指標再次應驗。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:21:14Z"
   },
   "2031497121468383529": {
-    "sentiment": "Neutral",
-    "summary": "比較CODA與國防股的毛利率差異",
-    "translation_zh": "@barbell_ideas 對的，剛剛再次確認 $CODA 的毛利率高達 66.5% 到 67.6%，這在該行業中極其高。\n\n像 $GD 或 $RTX 這樣的國防承包商通常在 10-20% 左右。"
+    "id": "2031497121468383529",
+    "tweet_id": "2031497121468383529",
+    "sentiment": "Bullish",
+    "stances": {
+      "CODA": "Bullish",
+      "GD": "Neutral",
+      "RTX": "Neutral"
+    },
+    "summary": "CODA毛利率高達67%，遠優於GD與RTX等國防承包商。",
+    "translation_zh": "我剛再次確認了，$CODA的毛利率在66.5%到67.6%之間，這在該產業中極高。像$GD或$RTX這樣的國防承包商通常僅在10%到20%之間。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:21:26Z"
   },
   "2091264273007960320": {
     "id": "2091264273007960320",
@@ -24827,9 +24992,22 @@
     "translation_zh": "@retail_mourinho 是的，$KRKNF 在這件事上是極大的受益者。過去我不太喜歡水下防務公司，因為戰爭尚未延伸到水下……看來他們現在終於有了實際應用場景。"
   },
   "2031464140028654077": {
+    "id": "2031464140028654077",
+    "tweet_id": "2031464140028654077",
     "sentiment": "Bullish",
-    "summary": "地緣緊張帶來水下防務十年利多",
-    "translation_zh": "最新消息：伊朗在霍爾木茲海峽佈設水雷後引發川普憤怒。> 伊朗佈設水下水雷 > 川普因石油問題憤怒 > 急需清除水雷 > 水雷探測與清除公司 = 獲利？如果你想從這種局勢中獲利：像 $CODA、$KRKNF、$OPTT、$MIND、$EXA、$ESLT 等許多防務公司都將受益。鑑於最新新聞，這是水下防務承包商十年來最大的催化劑。現在只需要找出誰受益最多。"
+    "stances": {
+      "CODA": "Bullish",
+      "ESLT": "Bullish",
+      "EXA": "Bullish",
+      "KRKNF": "Bullish",
+      "MIND": "Bullish",
+      "OPTT": "Bullish"
+    },
+    "summary": "伊朗封鎖荷姆茲海峽，水下防禦與掃雷概念股受惠看漲。",
+    "translation_zh": "突發消息：伊朗在荷姆茲海峽佈置水雷引發川普不滿。由於急需清除水雷，水下偵測與掃雷公司將迎來獲利契機。若想從中獲利，CODA、KRKNF、OPTT、MIND、EXA、ESLT 等國防公司將受惠，這是水下國防承包商十年來最大的催化劑。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:22:03Z"
   },
   "2031460338164748391": {
     "sentiment": "Neutral",
@@ -24842,19 +25020,57 @@
     "translation_zh": "@ShukiCar 我會去研究看看 $ESLT，感謝提及。"
   },
   "2031458181969486070": {
+    "id": "2031458181969486070",
+    "tweet_id": "2031458181969486070",
     "sentiment": "Neutral",
-    "summary": "指出巨頭公司水下防務純度較低",
-    "translation_zh": "@FairValueHunter 很遺憾，我的專業領域不在聲納和水下水雷探測。因為這是最新新聞，我只是把我找到的所有標的發出來。但總體而言，像倫敦證交所的 $BA（BAE系統，非波音）或 $GD（通用動力）這類大型公司，概念純度相對較低。"
+    "stances": {
+      "BA": "Neutral",
+      "GD": "Neutral"
+    },
+    "summary": "作者僅分享新聞，對BA與GD兩檔軍工股持中立態度。",
+    "translation_zh": "@FairValueHunter 很遺憾，我的專業領域不在聲納與水下地雷偵測。我只是因為這是新消息，所以發布我找到的相關名稱。但總體而言，像 $BA (BAE Systems，非波音) 或 $GD 這種大型股，其純度通常較低。",
+    "risk": "作者指出大型軍工股業務廣泛，純度較低，可能影響投資聚焦。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:22:10Z"
   },
   "2031457195091759114": {
+    "id": "2031457195091759114",
+    "tweet_id": "2031457195091759114",
     "sentiment": "Bullish",
-    "summary": "盤點多檔水下掃雷與聲納概念股",
-    "translation_zh": "除了 $KRKNF、$CODA、$EXA 之外，其他值得關注的標的：$OPTT - 用於水下水雷巡檢與處置的 WAM-Vs（可能是 Anduril 合作夥伴，粉絲提及）。$MIND - 用於水雷的側掃聲納。$NORBT - 寬頻多束聲納。$HII - 用於掃雷作業的 REMUS 100、300 及 600。$GD - 用於複雜水下埋藏水雷的 Bluefin Robotics Knifefish UUV。$BA - Archerfish，一種自主式一次性水雷銷毀器。$SAABF - Sea Wasp，用於導航至水雷和簡易爆炸裝置旁並放置炸藥。$TDY - 用於獵雷的 Gavia AUV、SeaBotix ROV 以及高階 RESON 聲納。$NSANY - 合成孔徑聲納。$NOC - 用於獵雷的 AN/AQS-24B/C。"
+    "stances": {
+      "BA": "Bullish",
+      "CODA": "Bullish",
+      "EXA": "Bullish",
+      "GD": "Bullish",
+      "HII": "Bullish",
+      "KRKNF": "Bullish",
+      "MIND": "Bullish",
+      "NOC": "Bullish",
+      "NORBT": "Bullish",
+      "NSANY": "Bullish",
+      "OPTT": "Bullish",
+      "SAABF": "Bullish",
+      "TDY": "Bullish"
+    },
+    "summary": "看好水下掃雷與無人載具技術相關的國防軍工概念股。",
+    "translation_zh": "除了 KRKNF、CODA、EXA 之外，還有其他值得關注的標的：OPTT（水下掃雷）、MIND（側掃聲納）、NORBT（多波束聲納）、HII（REMUS 載具）、GD（Bluefin 機器人）、BA（Archerfish 中和器）、SAABF（Sea Wasp）、TDY（Gavia AUV）、NSANY（合成孔徑聲納）、NOC（AN/AQS-24）。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-04T21:22:19Z"
   },
   "2031451419182772459": {
-    "sentiment": "Bullish",
-    "summary": "兩者皆與 Anduril 合作",
-    "translation_zh": "@Forcenito_ 據我所知，$OPTT 和 $KRKNF 都與 Anduril 有合作"
+    "id": "2031451419182772459",
+    "tweet_id": "2031451419182772459",
+    "sentiment": "Neutral",
+    "stances": {
+      "KRKNF": "Neutral",
+      "OPTT": "Neutral"
+    },
+    "summary": "提及 OPTT 與 KRKNF 皆與 Anduril 有合作關係。",
+    "translation_zh": "據我所知，OPTT 和 KRKNF 兩家公司都與 Anduril 有合作。",
+    "risk": "",
+    "model": "gemini-3-flash-preview",
+    "analyzed_at": "2026-11-04T21:23:29Z"
   },
   "2031449992981000333": {
     "sentiment": "Bullish",
@@ -56568,5 +56784,76 @@
     "risk": "市場過度擔心民主黨勝選可能對經濟與產業帶來衝擊。",
     "model": "gemini-3.6-flash",
     "analyzed_at": "2026-11-04T14:21:09Z"
+  },
+  "2118049698733064433": {
+    "id": "2118049698733064433",
+    "tweet_id": "2118049698733064433",
+    "sentiment": "Bullish",
+    "stances": {
+      "INTC": "Bullish",
+      "MU": "Neutral",
+      "TSM": "Neutral"
+    },
+    "summary": "英特爾執行長逢低大舉買進，展現強烈看多信心。",
+    "translation_zh": "最新的 SEC 申報文件顯示，英特爾（$INTC）執行長透過其家族信託，以 64.7 美元的價格買入價值 971 萬美元的英特爾股票。在該股本月重挫 49.9% 之後，這是一次相當大的信心投票。這讓我想起前台積電（$TSM）董事長在 300 多美元時買入 780 萬美元美光（$MU）的那次經歷。",
+    "risk": "本月股價已出現 49.9% 的劇烈回檔跌幅。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-04T21:15:10Z"
+  },
+  "2118035778253283768": {
+    "id": "2118035778253283768",
+    "tweet_id": "2118035778253283768",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "NVDA": "Bullish",
+      "SIVE": "Bullish"
+    },
+    "summary": "SIVE、AAOI與NVDA需求極強，供不應求看多。",
+    "translation_zh": "像 $SIVE / $AAOI 這樣的公司，雷射的需求失衡是如此嚴重，以至於假設資料中心（DC）放緩導致整體需求減少 20-30%，也可能無法消除短缺。我們在下一次架構轉變之前就已經看到了這一點，其中包括 $NVDA 的黃仁勳。",
+    "risk": "假設性的資料中心（DC）放緩可能導致整體需求減少 20-30%。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:12Z"
+  },
+  "2118015527440515458": {
+    "id": "2118015527440515458",
+    "tweet_id": "2118015527440515458",
+    "sentiment": "Bearish",
+    "stances": {
+      "AAOI": "Bearish",
+      "AMZN": "Neutral",
+      "CIFR": "Bearish",
+      "GOOGL": "Neutral"
+    },
+    "summary": "市場去槓桿嚴重，CIFR與AAOI股價大跌看空。",
+    "translation_zh": "小抱怨一下，但這能讓你看清去槓桿化有多猖獗：- $CIFR 的市值比宣佈與 $GOOGL / $AMZN 進行コロ（託管）交易時少了 44%。- $AAOI 的價格現在大約回到了他們獲得主要超大規模資料中心訂單、籌集 16 億美元擴充產能之前的水準。",
+    "risk": "市場去槓桿化猖獗，導致標的股價大跌並抹去先前利多漲幅。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:15Z"
+  },
+  "2118004727053218010": {
+    "id": "2118004727053218010",
+    "tweet_id": "2118004727053218010",
+    "sentiment": "Neutral",
+    "stances": {
+      "DUOL": "Bullish",
+      "MU": "Bearish"
+    },
+    "summary": "資金轉向優質安全資產，DUOL大漲34.86%看多，MU下跌4.41%看空。",
+    "translation_zh": "我們看到資金正大幅輪動至安全且具品質的資產。$DUOL +34.86% $MU -4.41%",
+    "risk": "資金輪動至安全資產可能對部分科技股或景氣循環股造成壓力與回檔風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:17Z"
+  },
+  "2117996413879828556": {
+    "id": "2117996413879828556",
+    "tweet_id": "2117996413879828556",
+    "sentiment": "Bullish",
+    "stances": {},
+    "summary": "民主黨勝選利好人形機器人板塊。",
+    "translation_zh": "我知道清潔能源和醫療保健...但顯然民主黨獲勝對人形機器人也是利好？",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-04T21:18:19Z"
   }
 }
