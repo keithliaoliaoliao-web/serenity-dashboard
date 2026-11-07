@@ -27795,9 +27795,23 @@
     "analyzed_at": "2026-11-06T20:55:18Z"
   },
   "2028470130628514077": {
+    "id": "2028470130628514077",
+    "tweet_id": "2028470130628514077",
     "sentiment": "Bullish",
-    "summary": "矽光子概念暴漲看好上游供應鏈",
-    "translation_zh": "我去年真的分享了一個光學金礦。匿名讀者你有聽進去嗎？過去兩個月裡，從 AXTI 到 AAOI 的所有股票都翻了 2 到 3 倍。LITE 最終上漲了 100%+。甚至 COHR 和 IQE 也快要翻倍了。AAOI 目前正在強勁飆升，考慮到他們 45 億美元的預測，很可能會繼續走高。而現在 NVDA 今天正在投資這些相同的光學公司，從 LITE（IQE 供應商，以及 AXTI 是 LITE 的供應商）到 COHR。矽光子就是下一個記憶體，像 AAOI 這樣的公司看起來就像下一個 SNDK。最棒的是，對許多上游供應商來說，一切才剛開始。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish",
+      "NVDA": "Bullish",
+      "SNDK": "Neutral"
+    },
+    "summary": "光子學產業爆發，看好AAOI、LITE等供應鏈後市表現。",
+    "translation_zh": "我去年分享了一個光子學的金礦，你聽進去了嗎？從AXTI到AAOI，過去兩個月所有股票都翻了2-3倍，LITE漲幅超過100%，COHR和IQE也接近翻倍。AAOI目前正處於超級漲勢，鑑於其45億美元的預測，漲勢有望持續。現在NVDA也開始投資這些光子學公司，從LITE（IQE和AXTI的供應商）到COHR。光子學是下一個記憶體產業，AAOI看起來就像下一個SNDK。最棒的是，許多上游供應商的成長才剛開始。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:26Z"
   },
   "2028467833915711710": {
     "sentiment": "Neutral",
@@ -27805,34 +27819,102 @@
     "translation_zh": "@galaxymaker1989 @ryansfinance 是的，我對 $IQE 也有同樣的想法。但真的很奇怪，台灣的光學股票全線飆升了 10%+，比如全新 (Landmark)？我的猜測是某些機構可能提前獲得了消息洩漏。"
   },
   "2028466744642469898": {
+    "id": "2028466744642469898",
+    "tweet_id": "2028466744642469898",
     "sentiment": "Bullish",
-    "summary": "輝達投資推動IQE成為主要受益者",
-    "translation_zh": "@ryansfinance 所以 NVDA 向 LITE 投資 20 億美元，對 IQE 來說可能是最大的受益者，因為作為磊晶代工廠，他們是 LITE 的大型供應商。我之前還好奇為什麼 IQE 今天大漲 28%... 這大概就是原因。"
+    "stances": {
+      "IQE": "Bullish",
+      "LITE": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "NVDA投資LITE帶動供應鏈，IQE作為晶圓代工廠受惠大漲。",
+    "translation_zh": "NVDA投資20億美元給LITE，這對IQE來說可能是最大的利多，因為IQE是LITE主要的磊晶圓代工供應商。我還在想為什麼IQE今天會大漲28%，這應該就是原因了。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:28Z"
   },
   "2028466487707754904": {
+    "id": "2028466487707754904",
+    "tweet_id": "2028466487707754904",
     "sentiment": "Bullish",
-    "summary": "光學概念股強勁飆升且遠超大盤",
-    "translation_zh": "@Investmnt_Eagle 哈哈是的，我挑選的所有股票像 $AAOI 和 $IQE 最近每天都上漲 20-40%。$AXTI 和 $LITE 在本月翻倍後進行了微幅休整。老實說，市場上的其他股票可沒有這麼好過。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish"
+    },
+    "summary": "作者看好AAOI、IQE強勢上漲，AXTI與LITE則在翻倍後進行盤整。",
+    "translation_zh": "哈哈，沒錯，我選的股票像 AAOI 和 IQE 最近每天都漲了 20-40%。AXTI 和 LITE 在本月翻倍後正在稍微休息一下。老實說，市場其他部分就沒這麼好玩了。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:36Z"
   },
   "2028465895627186585": {
+    "id": "2028465895627186585",
+    "tweet_id": "2028465895627186585",
     "sentiment": "Bullish",
-    "summary": "矽光子供應鏈全線股價直線走高",
-    "translation_zh": "@anhecdote 不客氣！是的，我提到的整個光學供應鏈，從 $AXTI、$LITE、$COHR、$IQE 到 $AAOI，都在一路飆漲。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish"
+    },
+    "summary": "光電供應鏈表現強勢，AAOI、AXTI、COHR、IQE與LITE股價持續攀升。",
+    "translation_zh": "不客氣！沒錯，我提到的整個光電供應鏈，包括 AXTI、LITE、COHR、IQE 和 AAOI，股價都呈現直線上升的走勢。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:42Z"
   },
   "2028465538444427584": {
+    "id": "2028465538444427584",
+    "tweet_id": "2028465538444427584",
     "sentiment": "Bullish",
-    "summary": "輝達巨額投資激勵光學供應鏈",
-    "translation_zh": "$NVDA 剛剛向 $COHR 投資了 20 億美元，用於先進雷射和光網路產品。這對 $AXTI（基板供應商）、其他像 $AAOI 這樣的光網路公司，以及整個光學供應鏈來說，都是極大的利多順風。而最直接的受益者莫過於 $COHR。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "輝達投資COHR，帶動光通訊供應鏈如AAOI、AXTI看漲。",
+    "translation_zh": "輝達剛向COHR投資20億美元，用於先進雷射與光纖網路產品。這對基板供應商AXTI、其他光通訊公司如AAOI以及整個光子供應鏈來說，是極為強勁的看漲順風。最重要的是，COHR將是直接受益者。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:44Z"
   },
   "2028464631195574674": {
+    "id": "2028464631195574674",
+    "tweet_id": "2028464631195574674",
     "sentiment": "Bullish",
-    "summary": "輝達投資拉抬整個矽光子產業鏈",
-    "translation_zh": "$NVDA 剛剛投資了 20 億美元來支援 Lumentum ($LITE) 的研發和美國新晶圓廠。這對光學概念股來說是巨大的利多，包括：$LITE、$COHR、$AAOI、$AXTI、$IQE 等。$IQE 今天上漲 28% 就更有道理了，因為他們是著名的 $LITE 供應商。而 $AXTI 則是著名的 $IQE 供應商。這項合作針對矽光子、光學互連和封裝整合，將惠及整個光學供應鏈。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Bullish",
+      "LITE": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "NVDA投資Lumentum，帶動光子學供應鏈全面看漲。",
+    "translation_zh": "NVDA剛投入20億美元支持Lumentum的研發與美國新晶圓廠。這對LITE、COHR、AAOI、AXTI、IQE等光子學股票是巨大的利多。IQE今日大漲28%更顯合理，因其為LITE供應商，而AXTI又是IQE的供應商。此合作鎖定矽光子、光互連與封裝整合，將惠及整個光子學供應鏈。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:47Z"
   },
   "2028461742783893827": {
-    "sentiment": "Bullish",
-    "summary": "看好LASR為純度最高概念股",
-    "translation_zh": "@geokoutalidis 沒錯，提得好！市面上還有其他大型參與者，比如 $DRS、$RTX 和 $ESLT。但據我所知，除了 $LASR 之外，沒有其他上市公司能如此純粹地專注於定向能量武器領域。"
+    "id": "2028461742783893827",
+    "tweet_id": "2028461742783893827",
+    "sentiment": "Neutral",
+    "stances": {
+      "DRS": "Neutral",
+      "ESLT": "Neutral",
+      "LASR": "Bullish",
+      "RTX": "Neutral"
+    },
+    "summary": "提及DRS、RTX與ESLT，並看好LASR在定向能武器的純度。",
+    "translation_zh": "沒錯，說得好！市場上還有其他大型參與者，像是DRS、RTX和ESLT。但據我所知，除了LASR之外，沒有其他公開上市的公司能提供定向能武器的純粹曝險。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:59Z"
   },
   "2028459615214879032": {
     "sentiment": "Neutral",
@@ -27860,34 +27942,97 @@
     "translation_zh": "@Vcondry84 第一次看到 $LASR 的實際行動真的太震撼了。我關注它有一段時間了，但直到現在才真正看到戰場實證。https://t.co/KMnDV9dlD5"
   },
   "2028455727996752242": {
+    "id": "2028455727996752242",
+    "tweet_id": "2028455727996752242",
     "sentiment": "Bullish",
-    "summary": "實戰驗證加持，建倉純雷射武器股",
-    "translation_zh": "來自鐵穹雷射（Iron Beam）的 $LASR 定向能量武器。這可能是美/以與伊朗衝突中最大的單一受益者與實證。真主黨向以色列發射火箭。-> Rafael 鐵穹雷射內部的 $LASR (Nlight) 雷射引擎將其擊落。看到它實際發揮作用真的太震撼了。鑑於剛獲得的驗證，許多國防基金近期可能會大量湧入定向能量武器領域。特別是在 HELSI 計畫中用來擊落極音速飛彈。雖然有像 $DRS 或 $RTX 這樣的大型參與者，但市值 31 億美元的純定向能量武器概念股只有這一家。它恰好也是鐵穹雷射的知名關鍵供應商。最終我在 30 億美元市值時建倉了 $LASR。"
+    "stances": {
+      "DRS": "Neutral",
+      "LASR": "Bullish",
+      "RTX": "Neutral"
+    },
+    "summary": "雷射武器需求大增，LASR作為Iron Beam關鍵供應商，極具成長潛力。",
+    "translation_zh": "雷射武器（Energy Directed Weapons）在Iron Beam系統中展現威力。LASR可能是美以與伊朗衝突中最大的受益者與驗證者。真主黨向以色列發射火箭，LASR的雷射引擎成功將其擊落。看到實戰效果令人震驚。鑑於此次驗證，未來將有大量國防資金湧入雷射武器領域，特別是用於攔截高超音速飛彈的HELSI計畫。雖然DRS或RTX等大型企業也有相關曝險，但只有一家市值31億美元的純雷射武器股，且剛好是Iron Beam的關鍵供應商。我已在30億美元市值時買入LASR。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:02Z"
   },
   "2028431595779358963": {
+    "id": "2028431595779358963",
+    "tweet_id": "2028431595779358963",
     "sentiment": "Bullish",
-    "summary": "光學需求供不應求，看好產能滿載",
-    "translation_zh": "三到四家超大型雲端業者把未來一年的產能全部訂滿，這難道意味著訂單取消的風險嗎？不知道你從哪裡得出這個結論的。什麼 20% 的利潤率上限？他們提到的是 40%。此外，他們擁有罕見的美國製造供應鏈，而 $LITE 和 $COHR 的組裝都在亞洲進行。不過人們對多年前 $AMZN 取消訂單患有 PTSD 是可以理解的。但這次應該有所不同，因為光子學是已知的瓶頸，且需求供不應求。"
+    "stances": {
+      "AMZN": "Neutral",
+      "COHR": "Bearish",
+      "LITE": "Bearish"
+    },
+    "summary": "看好光子技術需求強勁，相較LITE與COHR，該美製供應鏈更具優勢。",
+    "translation_zh": "超大規模雲端運算商的訂單已排滿一年，這難道沒有取消風險嗎？我不確定你從哪得來的消息。什麼20%的利潤上限？他們明明提到的是40%。此外，他們擁有罕見的美國製造供應鏈，而LITE和COHR則在亞洲進行組裝。雖然人們對AMZN多年前的訂單取消仍有心理陰影，但這次情況不同，因為光子技術是已知的瓶頸，且需求大於供給。",
+    "risk": "需留意光子技術供應鏈的產能瓶頸，以及過去大型客戶取消訂單的歷史心理陰影。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:04Z"
   },
   "2028429689946357937": {
+    "id": "2028429689946357937",
+    "tweet_id": "2028429689946357937",
     "sentiment": "Neutral",
-    "summary": "建議分散佈局 $AEHR 與 $AAOI",
-    "translation_zh": "@B38B37 如果你在 $AEHR 和 $AAOI 之間做選擇，我是分散投資的支持者。越多越好。"
+    "stances": {
+      "AAOI": "Neutral",
+      "AEHR": "Neutral"
+    },
+    "summary": "作者建議在AEHR與AAOI之間採取分散投資策略，並未明確表態看多或看空。",
+    "translation_zh": "如果你在 AEHR 和 AAOI 之間做選擇，我建議採取分散投資。標的越多越好。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:06Z"
   },
   "2028425020146672018": {
+    "id": "2028425020146672018",
+    "tweet_id": "2028425020146672018",
     "sentiment": "Bullish",
-    "summary": "評估光電股佈局時機與風險",
-    "translation_zh": "$AXTI 和 $AAOI 大概還非常早期。$LITE 的價格稍微反應比較多了。$COHR 還有一些上行空間。$IQE 處於極早期，但由於重組固有風險，我不推薦給別人。我只是分享我進場的原因並一路慶祝。至於 2028 年的 CPO，明年會有另一組標的可以提早佈局。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Neutral",
+      "LITE": "Neutral"
+    },
+    "summary": "看好AXTI、AAOI與COHR潛力，LITE估值已反映，IQE風險高。",
+    "translation_zh": "AXTI 和 AAOI 可能還太早。LITE 的價格已部分反映。COHR 還有上漲空間。IQE 雖然處於早期，但因重組風險極高，我不建議投資，我只是分享我的交易動機。至於 2028 年的 CPO，明年會有另一批標的可以提前佈局。",
+    "risk": "IQE 正進行重組，具有內在風險，不建議一般投資人參與。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:09Z"
   },
   "2028423645098610839": {
+    "id": "2028423645098610839",
+    "tweet_id": "2028423645098610839",
     "sentiment": "Bullish",
-    "summary": "核心光子學標的無視大盤逆勢狂飆",
-    "translation_zh": "顯然 $IQE 也不關心伊朗的戰爭？無論總體經濟如何，我選的核心光子學領域標的 $AXTI、$LITE、$COHR 和 $AAOI 最近每天都呈現垂直綠線噴射上漲。https://t.co/I4O1zxyY8W"
+    "stances": {
+      "AAOI": "Bullish",
+      "AXTI": "Bullish",
+      "COHR": "Bullish",
+      "IQE": "Neutral",
+      "LITE": "Bullish"
+    },
+    "summary": "光子學板塊表現強勢，AXTI、LITE、COHR、AAOI近期漲勢凌厲。",
+    "translation_zh": "顯然 IQE 也不擔心伊朗戰爭？我核心的光子學選股 AXTI、LITE、COHR 和 AAOI，儘管宏觀環境如何，最近每天都呈現垂直向上的綠色走勢。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:15Z"
   },
   "2028417664247578749": {
+    "id": "2028417664247578749",
+    "tweet_id": "2028417664247578749",
     "sentiment": "Bullish",
-    "summary": "預估營收暴漲，$AAOI 為一年交易",
-    "translation_zh": "@Blazedsin 是也不是。我的猜測是它最終可能會像 $SMCI 或 $SNDK 一樣暴漲，主要營收成長會持續到 2027 年底。然後 CPO 登場。對我來說 $AAOI 是一年的短中線交易。"
+    "stances": {
+      "AAOI": "Bullish",
+      "SMCI": "Bullish",
+      "SNDK": "Bullish"
+    },
+    "summary": "看好AAOI將複製SMCI與SNDK的垂直飆漲走勢。",
+    "translation_zh": "沒錯也不完全是。我猜它最終會像 SMCI 或 SNDK 一樣垂直拉升，大部分營收成長將持續到 2027 年底。接著 CPO 技術問世，對我來說 AAOI 是一筆一年的交易。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:17Z"
   },
   "2028405114076328344": {
     "sentiment": "Neutral",
@@ -27895,9 +28040,19 @@
     "translation_zh": "@thexanguy 我依然認為這是對的。自從伊朗襲擊了他們的基礎設施後，阿聯 / 科威特股市就全面停牌了。接著還有特拉維夫證券交易所 ($TSE) 的下行螺旋。也許以色列是罕見的例外？"
   },
   "2028404466937159754": {
+    "id": "2028404466937159754",
+    "tweet_id": "2028404466937159754",
     "sentiment": "Neutral",
-    "summary": "評估中東局勢對相關個股影響",
-    "translation_zh": "我也沒料到會這樣。也許伊朗戰爭的影響消除了對像 $NBIS 這類相關股票，以及像 $ETOR 到 $VLN 等以色列股票的「生存風險折價因素」？或者這是多方面的，因為國防股在以色列證券交易所佔有很大的權重。這對我來說是新領域，仍在進行更多研究。"
+    "stances": {
+      "ETOR": "Neutral",
+      "NBIS": "Neutral",
+      "VLN": "Neutral"
+    },
+    "summary": "分析伊朗戰爭對以色列相關股ETOR、NBIS與VLN的潛在影響，目前尚在研究中。",
+    "translation_zh": "我也沒料到會這樣。也許伊朗戰爭的影響消除了像NBIS這類相關股票，以及像ETOR到VLN這類以色列股票的生存折扣因素？或者情況更複雜，因為國防工業在以色列證券交易所佔有很大權重。我還在深入研究，因為這對我來說是新議題。",
+    "risk": "地緣政治衝突帶來的市場不確定性，以及以色列國防產業權重過高可能引發的波動風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:19Z"
   },
   "2028392329460253121": {
     "sentiment": "Bullish",
@@ -27910,9 +28065,19 @@
     "translation_zh": "$AAOI 完全不受伊朗戰爭影響。這檔光電股爆出驚人的約900%營收成長預測：到2027年中ARR將達45.3億美元，利潤率約40%。再加上雙位數的軋空潛力（做空受困）。可能根本不用擔心。"
   },
   "2028203665430057068": {
-    "sentiment": "Neutral",
-    "summary": "矽光子長遠潛力大但短期仍有阻力",
-    "translation_zh": "Soitec（$SLOIF）是矽光子領域與 $AXTI 對應的壟斷企業。基本上它直接與 CPO 以及 2027 下半年至 2028 年的拐點掛鉤。對於 800g/1.6T 和 CPO 來說，沒有 $AXTI 和 Soitec 很難達成：AXT 負責 InP，Soitec 負責光子-SOI 襯底。屬於功能性壟斷（信越化學在其授權下營運）->（英特爾、格芯、塔爾）。但預計在 2028 年初 CPO 迎來拐點時，它們將迎來極大的重新定價。然而與 $IQE 類似，有大量傳統業務拖累其股價。對於 $AXTI 來說，供應緊缺正在發生。對於 Soitec 來說，可能太早了 6 個月或一年，但不知道市場何時開始提前炒作。但只是把它作為未來的瓶頸提出來。"
+    "id": "2028203665430057068",
+    "tweet_id": "2028203665430057068",
+    "sentiment": "Bullish",
+    "stances": {
+      "AXTI": "Bullish",
+      "IQE": "Neutral",
+      "SLOIF": "Bullish"
+    },
+    "summary": "AXTI與SLOIF為CPO關鍵瓶頸，長期看好，但短期受舊業務拖累。",
+    "translation_zh": "Soitec (SLOIF) 是 AXTI 在矽光子領域的壟斷性鏡像對手。基本上它與 CPO 及其 2027-2028 年的轉折點直接掛鉤。對於 800g/1.6T 和 CPO 而言，沒有 AXTI 和 Soitec 很難實現：AXT 提供磷化銦 (InP)，Soitec 提供光子 SOI 基板，具備功能性壟斷地位（信越化學在其授權下運作，客戶包括 Intel、Global Foundries、Tower）。預計到 2028 年初 CPO 達到轉折點時，它們將迎來強勁的重估。然而，與 IQE 類似，它們受到大量舊業務的拖累。對於 AXTI 來說，供應緊縮正在發生。對於 Soitec，現在進場可能早了 6 個月或一年，但市場何時開始提前佈局尚不可知。我只是將其視為未來的瓶頸提出來。",
+    "risk": "受舊有業務拖累，且目前進場時機可能過早，需等待市場啟動。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:22Z"
   },
   "2028147215206859218": {
     "sentiment": "Neutral",
@@ -27935,19 +28100,47 @@
     "translation_zh": "@btc_overflow 我會等待 $XLU 出現回檔（如果有的話），且履約價的隱含波動率（IV）降到 14-16% 左右再進場。如果它繼續上漲你也不會虧損，只是錯過許多機會中的一個而已。"
   },
   "2028112194949513586": {
+    "id": "2028112194949513586",
+    "tweet_id": "2028112194949513586",
     "sentiment": "Bullish",
-    "summary": "最看好NBIS，期待後續估值重估",
-    "translation_zh": "在所有新興雲端（Neocloud）公司中，$NBIS 實際上是我的最愛。雖然細節複雜，但它們基本上是由 5 家不同的公司組成，年成長率皆達三位數。最看好它們與 $UBER 合作的自動駕駛計程車部門，以及 Clickhouse，未來估值可能高於 150 億美元（它們持有約 1/4 股權）。此外，預計到 2027 年 2 月的報告中，其資料中心業務上線將帶來約 70-90 億美元的 ARR。我認為 SOTP（分類加總估值法）尚未反映其真正價值，但預期 Nebius 在結束靜默建置期並開始將資本支出轉化為自由現金流後，將迎來重新定價。"
+    "stances": {
+      "NBIS": "Bullish",
+      "UBER": "Neutral"
+    },
+    "summary": "看好NBIS業務成長潛力，認為市場低估其價值，未來有望重估。",
+    "translation_zh": "NBIS 是我最喜歡的 Neocloud 公司。它非常細膩，實際上是由五家各自以三位數年增率擴張的公司組成。我非常看好他們與 UBER 合作的機器人計程車部門，以及 Clickhouse 業務，未來估值可能超過 150 億美元（他們持有約四分之一）。此外，其數據中心業務預計於 2027 年 2 月帶來約 70-90 億美元的年度經常性收入（ARR）。我認為市場尚未正確定價其各項業務的總和，預期在靜默建設期結束、資本支出轉為自由現金流後，Nebius 將迎來價值重估。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:24Z"
   },
   "2028111150613959097": {
+    "id": "2028111150613959097",
+    "tweet_id": "2028111150613959097",
     "sentiment": "Bearish",
-    "summary": "不看好IREN長線，存在稀釋風險",
-    "translation_zh": "我不看好做多 $IREN，除非他們停止提供 GPU 服務並轉向純託管（colo）。現在的投資人將面臨無休止的股權稀釋，以實現其 3GW 產能的變現。話雖如此，它確實具有較高的潛在回報，但我個人更信任 $NBIS 的管理層。過去我對 $NBIS 與 $IREN 進行過很多爭論，但時間會證明誰是對的。"
+    "stances": {
+      "IREN": "Bearish",
+      "NBIS": "Bullish"
+    },
+    "summary": "看空IREN的稀釋風險，較看好NBIS的管理層表現。",
+    "translation_zh": "除非IREN停止GPU發行並轉向純託管業務，否則我不看好其長線。投資人將面臨無止盡的稀釋以變現其3GW產能。話雖如此，它確實有較高的潛在回報，但我個人更信任NBIS的管理層。過去我曾多次爭論NBIS與IREN的優劣，時間會證明誰是對的。",
+    "risk": "IREN面臨無止盡的股權稀釋風險，以支撐其3GW產能的變現。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:26Z"
   },
   "2028109409948508531": {
+    "id": "2028109409948508531",
+    "tweet_id": "2028109409948508531",
     "sentiment": "Bearish",
-    "summary": "警惕新興雲端警訊與債務風險",
-    "translation_zh": "這預言實現得很好，$CRWV 在過去一個月下跌了約 28%。我覺得最好的空頭實際上會是長期投資者或波段交易者。如果你看到 Coreweave 或 $CRCL 在 200 美元時出現紅燈警訊，總是可以選擇反向操作，而不是避開它。話雖如此，$NBIS 和其他公司一直跟著該類股被演算法拖累。我一次又一次地注意到，並非所有的新型雲端公司（Neoclouds）結構都相同。– 一家新型雲端公司可能每年有數十億美元的債務利息損害自由現金流 – 另一家新型雲端公司則可能沒有……"
+    "stances": {
+      "CRCL": "Bearish",
+      "CRWV": "Bearish",
+      "NBIS": "Neutral"
+    },
+    "summary": "看空CRWV與CRCL估值，NBIS則受板塊拖累。",
+    "translation_zh": "這則推文經得起時間考驗，$CRWV 在過去一個月下跌了約 28%。我覺得最厲害的空頭其實是長線投資者或波段交易者。如果你看到警訊，面對 200 美元的 Coreweave 或 $CRCL，總是可以反向操作，而不是選擇避開。話雖如此，$NBIS 和其他股票正隨著整個板塊被演算法拖累。我一再注意到，並非所有 Neocloud 公司的體質都相同。有些 Neocloud 公司可能背負數十億美元的年度債務利息，嚴重侵蝕自由現金流，而有些則不然。",
+    "risk": "需留意部分Neocloud公司背負高額債務利息，嚴重侵蝕自由現金流，且板塊正受演算法拋售影響。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:31Z"
   },
   "2028099937947541831": {
     "sentiment": "Bullish",
@@ -27970,9 +28163,31 @@
     "translation_zh": "伊隆完全正確，當他警告電力/電網對於美國在 AI 領域保持主導地位至關重要時。我對 $XLU（電網/電力公用事業 ETF）一生難得一遇的大行情預測正在即時實現。光是這週，新的買權就已經上漲了約 100%+。發電與電網是工業產能的指標，美國有充分的動機對其進行現代化與擴張。"
   },
   "2028008655493427252": {
+    "id": "2028008655493427252",
+    "tweet_id": "2028008655493427252",
     "sentiment": "Neutral",
-    "summary": "整理AI供應鏈各領域代表性標的",
-    "translation_zh": "@jahintanvir_ 大概是像這些：記憶體 – $MU、三星、SK 海力士、Sandisk；晶圓代工/先進封裝 – $INTC、$TSM、$AMKR；光子學 – $LITE、$COHR、$AAOI；特定應用積體電路（ASIC）– $AVGO、$MRVL；互連技術 – $ALAB、$CRDO；電力/電網 – $XLU；資料中心 – $NBIS、$CIFR、$WULF"
+    "stances": {
+      "AAOI": "Neutral",
+      "ALAB": "Neutral",
+      "AMKR": "Neutral",
+      "AVGO": "Neutral",
+      "CIFR": "Neutral",
+      "COHR": "Neutral",
+      "CRDO": "Neutral",
+      "INTC": "Neutral",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "MU": "Neutral",
+      "NBIS": "Neutral",
+      "TSM": "Neutral",
+      "WULF": "Neutral",
+      "XLU": "Neutral"
+    },
+    "summary": "推文僅列出記憶體、晶圓代工及資料中心等相關產業標的，未表達明確多空立場。",
+    "translation_zh": "這類股票可能包括：記憶體（MU、三星、SK海力士、SanDisk）、晶圓代工與封裝（INTC、TSM、AMKR）、光電（LITE、COHR、AAOI）、ASIC（AVGO、MRVL）、連接技術（ALAB、CRDO）、電力與電網（XLU）、資料中心（NBIS、CIFR、WULF）。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:33Z"
   },
   "2028007393582621071": {
     "sentiment": "Bullish",
@@ -27980,9 +28195,20 @@
     "translation_zh": "不知道怎麼會有人認為 AI 是泡沫？美國政府單靠 $PLTR 和 Anthropic Claude 黑盒 AI 大語言模型，就在一天內消滅了委內瑞拉和伊朗的領導層。更棒的是，美國政府看起來完全依賴 Anthropic。這似乎是一個一生一次的機會，可以透過從 AI 建設和地緣政治軍備競賽中獲利，來擺脫永久的底層階級。"
   },
   "2027854978199785918": {
+    "id": "2027854978199785918",
+    "tweet_id": "2027854978199785918",
     "sentiment": "Bullish",
-    "summary": "需求遠超供給看好AAOI美國製造",
-    "translation_zh": "– 即使每個人都生產 800g/1.6T，數量依然不足。需求遠超過供給。雖然不像三星/SK 海力士/美光這三巨頭，但 $AAOI 可能是唯一來自美國製造供應鏈的公司，因為 $COHR 在馬來西亞進行組裝，而 $LITE -> $FN 則在泰國和亞洲其他地區。– 在法說會中，他們詳細說明了超大型資料中心業者想購買他們能生產的任何東西。這更關乎產能提升，並印證了第一點：全面供不應求。我不認為會看到供過於求，因為在可預見的未來，需求將消化廠商所能生產的一切。而且有不小的機率會對中國廠商實施像記憶體領域的長江存儲/中芯國際那樣的出口管制。"
+    "stances": {
+      "AAOI": "Bullish",
+      "COHR": "Neutral",
+      "FN": "Neutral",
+      "LITE": "Neutral"
+    },
+    "summary": "光通訊需求遠大於供給，看好美國本土供應鏈AAOI。",
+    "translation_zh": "即便各家都生產800G/1.6T產品，供給仍遠不及需求。這不像三星、SK海力士與美光的三強鼎立，AAOI可能是美國本土供應鏈中唯一的選擇，因為COHR在馬來西亞組裝，而LITE與FN則在泰國及其他亞洲地區生產。財報會議中提到超大規模資料中心需求強勁，產能擴張速度將決定一切，且未來需求將消化所有產能，甚至可能面臨針對中國廠商的出口管制風險。",
+    "risk": "需留意未來可能出現針對中國廠商的出口管制政策。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:57:36Z"
   },
   "2027849069125898457": {
     "sentiment": "Bullish",
@@ -58456,5 +58682,135 @@
     "risk": "提及 ASTS 研發 Blacklift 火箭，可能構成 RKLB 和 SPCX 的競爭風險。",
     "model": "gemini-3.6-flash",
     "analyzed_at": "2026-11-06T20:53:06Z"
+  },
+  "2118586028944687282": {
+    "id": "2118586028944687282",
+    "tweet_id": "2118586028944687282",
+    "sentiment": "Neutral",
+    "stances": {
+      "SPCX": "Neutral"
+    },
+    "summary": "以SPCX為例分析IPO對市場流動性影響，持中立看法。",
+    "translation_zh": "我的意思是考量到目前市場的清算潮，這段時間再出現另一個大型 IPO 並不是個好主意……6 月的 $SPCX 就是個好例子，從成長股中吸走了大量的市場流動性。OpenAI 將其 IPO 推遲到 2027 年，市場反應還算不錯。",
+    "risk": "大型IPO可能從成長股吸走大量市場流動性，且當前市場面臨清算壓力。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-07T00:55:18Z"
+  },
+  "2118570510783246410": {
+    "id": "2118570510783246410",
+    "tweet_id": "2118570510783246410",
+    "sentiment": "Bullish",
+    "stances": {
+      "IREN": "Bullish"
+    },
+    "summary": "IREN獲得5年期九成預付款，立場極度看多。",
+    "translation_zh": "$IREN 在 5 年期合約上獲得 90% 的 GPU 資本支出預付款，至少可以說是極度看多且令人驚喜的... 特別是考量到市場對 Neocloud 融資的疑慮。",
+    "risk": "提及市場對 Neocloud 融資狀況存有疑慮。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-07T00:55:25Z"
+  },
+  "2118397193354899865": {
+    "id": "2118397193354899865",
+    "tweet_id": "2118397193354899865",
+    "sentiment": "Bullish",
+    "stances": {},
+    "summary": "大盤大幅回檔，認為是使用槓桿的好時機。",
+    "translation_zh": "@InvEnProceso_ 我之前沒用太多槓桿，但今天下跌時我確實加入了。這種大跌20%的投降時期感覺才是使用槓桿的時候，而不是去追高。這絕對不是對其他人部位或交易的建議。我們拭目以待結果如何。",
+    "risk": "使用槓桿投資大盤面臨高波動風險，作者也強調這並非投資建議。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:28Z"
+  },
+  "2118387249087918591": {
+    "id": "2118387249087918591",
+    "tweet_id": "2118387249087918591",
+    "sentiment": "Neutral",
+    "stances": {
+      "CBRS": "Neutral"
+    },
+    "summary": "CBRS針對放空報告做出直接回應，立場中立。",
+    "translation_zh": "@andrewdfeldman @CulperResearch @cerebras很高興看到$CBRS對放空報告做出直接回應",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:35Z"
+  },
+  "2118262426101547280": {
+    "id": "2118262426101547280",
+    "tweet_id": "2118262426101547280",
+    "sentiment": "Bearish",
+    "stances": {},
+    "summary": "市場對AI敘事缺乏信心，企業估值崩跌引發融資與交易對手風險。",
+    "translation_zh": "為什麼需要一個X上的動漫角色來反駁AI敘事？當這些價值數十億甚至數兆美元的公司在估值崩跌時卻保持沈默。低迷的估值確實會對融資和交易對手信心產生反身性壓力。",
+    "risk": "企業估值崩跌可能引發融資困難，並削弱交易對手對公司的信心。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:47Z"
+  },
+  "2118258090328162483": {
+    "id": "2118258090328162483",
+    "tweet_id": "2118258090328162483",
+    "sentiment": "Bullish",
+    "stances": {
+      "SPCX": "Bullish",
+      "TSLA": "Bullish"
+    },
+    "summary": "作者讚賞馬斯克即時反駁市場對TSLA與SPCX的負面報導。",
+    "translation_zh": "馬斯克是反擊市場胡言亂語的絕佳典範。若華爾街日報或X平台對TSLA或SPCX發布虛假報導，即便只是關於太空數據中心不可行的微小質疑，他也會即時反駁。我並非要求所有產業高管都效仿，但至少應聘請專人來防禦誤導性的敘事。",
+    "risk": "市場存在針對公司業務的誤導性敘事與負面報導風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:49Z"
+  },
+  "2118253723244007677": {
+    "id": "2118253723244007677",
+    "tweet_id": "2118253723244007677",
+    "sentiment": "Bearish",
+    "stances": {
+      "CBRS": "Bearish"
+    },
+    "summary": "作者批評CBRS管理層應對做空報告不力，導致市值大幅蒸發。",
+    "translation_zh": "我只是指出企業溝通失敗的問題，特別是在利害攸關之時。我不明白為何代表韓國經濟的SK海力士與三星，任由客戶在X平台上主導記憶體供給過剩的敘事。也不明白為何在做空報告後損失數十億市值的CBRS，竟要等到財報會議被分析師提問才試圖修復損害。我也不懂為何那些在Neocloud市場面臨生存危機的小型公司，不積極反擊相關指控。許多敘事與主張都是在X上發酵與傳播的。即便你不喜歡馬斯克或X，連民主黨都會在平台上反擊敘事。我不明白為何AI公司不能針對B300晶片價格過剩的說法進行反擊。",
+    "risk": "公司面臨做空報告指控，且管理層缺乏主動溝通與反擊，導致市值大幅縮水。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:52Z"
+  },
+  "2118240089025413421": {
+    "id": "2118240089025413421",
+    "tweet_id": "2118240089025413421",
+    "sentiment": "Bullish",
+    "stances": {
+      "COHR": "Bullish"
+    },
+    "summary": "推文看好Coherent雷射需求強勁，簽署多項長期合約。",
+    "translation_zh": "這完全是錯誤的，業界對於MicroLED是否能商業化應用於CPO存在嚴重質疑。另外關於COHR的光學需求：我們持續看到需求沒有減弱的跡象。雷射需求與記憶體一樣強勁，否則Coherent與Lumentum不會不斷簽署200億或50億美元的長期合約。",
+    "risk": "市場對MicroLED技術應用於CPO的可行性存有疑慮。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:55Z"
+  },
+  "2118209743709933703": {
+    "id": "2118209743709933703",
+    "tweet_id": "2118209743709933703",
+    "sentiment": "Bullish",
+    "stances": {},
+    "summary": "AI資料中心發展不受政治影響，看好產業長期成長。",
+    "translation_zh": "如果你看看民主黨人的實際言論，其實相當合理。在共和黨州長任內就已實施過「全州暫停令」以爭取更多保護措施。近期針對DC（資料中心）的限制措施僅影響極小比例的建設計畫，卻被過度解讀。認為民主黨會阻礙AI發展的想法很愚蠢，這類虛假敘事是由共和黨人推動並被賣空者放大，目的是為了選票。事實上，超大規模AI資料中心在拜登政府下蓬勃發展，AI發展是兩黨共識。",
+    "risk": "市場對政策干預AI資料中心建設存在過度恐慌與錯誤敘事。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:55:57Z"
+  },
+  "2118206374689853853": {
+    "id": "2118206374689853853",
+    "tweet_id": "2118206374689853853",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish",
+      "COHR": "Neutral",
+      "CRDO": "Neutral",
+      "LITE": "Neutral",
+      "MRVL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "看好AAOI與SIVE具備高成長潛力，未來營收有望超越目前市值。",
+    "translation_zh": "沒錯，AAOI之前有筆龐大的InP基板訂單，我不認為全是用在Rosenblatt所預測的收發器雷射上。我相信他們擁有與COHR（200億美元LTA）及LITE（50億美元LTA）類似的60%以上毛利率UHP雷射技術。考慮到其市值不到50億美元，稍後應會有相關公告。至於SIVE，重點在於認證，因為他們現在已有晶圓代工產能加上1億顆雷射擴產計畫。MRVL與LITE的合作為其創造了極佳的機會窗口，同時解決了CRDO、Innolight、Cambridge及超大規模資料中心等廠商目前的雷射瓶頸。我們將觀察本月財報是否宣布新合作夥伴。鑑於兩者市值分別僅約6億與49億美元，若其2028年營收超過當前市值，我一點也不會感到驚訝。",
+    "risk": "雷射產能瓶頸與客戶認證進度是影響公司營運的關鍵風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-07T00:56:00Z"
   }
 }
