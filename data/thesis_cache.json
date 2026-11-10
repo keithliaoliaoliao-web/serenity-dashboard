@@ -2,39 +2,43 @@
   "NBIS": {
     "ticker": "NBIS",
     "ai": true,
-    "thesis_story": "Serenity對NBIS的投資論點始於2025年7月，當時將其視為與CRDO、CRWV同屬的高成長潛力公司。在2025至2026年間，隨著Nvidia的投資、與Palantir的合作及GPU租金調漲，論點逐步加深。經歷2026年下半年的總經與類股回檔修正後，作者在2026年11月抱持強烈看多立場，認為其融資模式相對健康且具備成為下一個超大規模雲端商（hyperscaler）的潛力。",
+    "thesis_story": "Serenity對NBIS的投資論點始於2025年7月至9月，當時他將NBIS歸類為跟隨CRWV成長的高高速新雲端（Neocloud）標的。隨著時間推移，他在2026年8月指明Nvidia的35億美元結盟與Groq3採用，展現出強烈的算力需求。2026年9月，隨著Palantir選定Nebius為首選主權AI夥伴、GPU租金逆勢上漲17-21%，以及擁有花旗35億美元低利融資與Clickhouse等資產價值，他決定將原本分散於其他新雲端公司的持股集中整合至Nebius。儘管2026年10月經歷高Beta AI股的估值回調，他在2026年11月仍維持極度看好立場，認為NBIS具備成為下一個超大規模雲端巨頭（Hyperscaler）的潛力。",
     "milestones": [
       {
-        "tweet_id": "1947298901108957475",
-        "title": "初期看多與類比",
-        "significance": "在2025年7月將NBIS視為穩健的高成長公司，並與CRWV等新雲端業者一同觀察。"
+        "tweet_id": "2097327653116363127",
+        "title": "結盟Palantir",
+        "significance": "Palantir指定Nebius為首選主權AI基礎設施夥伴，開啟與美政府及企業合作潛力。"
       },
       {
-        "tweet_id": "2091909391238979970",
-        "title": "Nvidia合作落地",
-        "significance": "2026年8月指出NBIS成為首批透過Nebius權杖工廠採用Groq3 LPX的企業，展現技術落地能力。"
+        "tweet_id": "2102070202779492802",
+        "title": "融資優勢與漲價",
+        "significance": "指出NBIS融資比同業永續，且GPU租約上漲17-21%，同時具備SOTP分拆價值。"
       },
       {
-        "tweet_id": "2118605467459199016",
-        "title": "潛在超大規模雲端商",
-        "significance": "在2026年11月的市場震盪中，明確點出NBIS具備成為下一個超大規模雲端商的潛力。"
+        "tweet_id": "2103139052363133062",
+        "title": "集中持股至Nebius",
+        "significance": "決定將2025年提出的新雲端投資論點，完全集中整合至 Nebius。"
       }
     ],
     "risks": [
       {
         "tweet_id": "2114495814538285526",
-        "point": "新雲端與共筆中心（Neocloud/Colo）的融資與債務利息問題存在隱憂。"
+        "point": "新雲端產業面臨融資與債務利息壓力，僅少數具壁壘者能存活。"
       },
       {
-        "tweet_id": "2114495814538285526",
-        "point": "認為只有少數新雲端業者能在幾年內建立足夠護城河並生存下來。"
+        "tweet_id": "2094492628758999451",
+        "point": "總體經濟因素在數月內大幅削減高Beta AI類股的估值。"
+      },
+      {
+        "tweet_id": "2119077473107472729",
+        "point": "新雲端主題經歷過嚴密的市場拋售與大幅度的估值修正。"
       }
     ],
-    "tweet_count": 712,
-    "last_tweet_id": "2119077473107472729",
-    "analyzed_count": 712,
-    "generated_at": "2026-11-07T18:47:28Z",
-    "model": "gemini-3.5-flash-lite"
+    "tweet_count": 713,
+    "last_tweet_id": "2119807048204595582",
+    "analyzed_count": 713,
+    "generated_at": "2026-11-10T09:48:27Z",
+    "model": "gemini-3.6-flash"
   },
   "LITE": {
     "ticker": "LITE",
