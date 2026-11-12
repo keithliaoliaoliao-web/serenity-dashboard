@@ -1339,43 +1339,47 @@
   "TSLA": {
     "ticker": "TSLA",
     "ai": true,
-    "thesis_story": "Serenity 對 TSLA 的觀點經歷了從基本面質疑到長期願景認同的轉變。2025 年 9 月，他多次批評 TSLA 基本面不佳，認為其 FSD 技術僅為 Level 2 且行銷手法如「蛇油」，甚至將其列為賣出標的。然而，隨著時間推移，他對 Elon Musk 的願景展現出高度敬意，特別是在 Optimus 人形機器人領域。2026 年 3 月至 7 月，他承認 TSLA 在機器人量產路徑上具備領先優勢，並將其視為美國機器人產業的重要支柱。儘管他仍對 TSLA 供應鏈過度依賴中國及公司治理（如 Musk 利用 X 平台影響輿論）持保留態度，但已轉向認同其作為長期願景公司的價值，並將其與 Agility Robotics 等公司並列為機器人領域的核心參與者。目前立場轉為中性偏多，既看好其改變世界的潛力，也對其執行細節與地緣政治風險保持警惕。",
+    "thesis_story": "Serenity 對 Tesla (TSLA) 的觀點經歷了從基本面懷疑到聚焦機器人與人形機器人潛力的轉折。在 2025 年 9 月時，Serenity 認為 TSLA 基本面不佳且 FSD 僅屬於 Level 2 像行銷噱頭，甚至警告散戶盲目信仰。然而，隨著 2026 年市場對人形機器人 (Optimus) 關注度提升，以及 Elon Musk 在 2026 年 7 月 Q2 財報中強調 Optimus 將成為史上最大產品，Serenity 的立場轉趨樂觀，將 TSLA 視為美國人形機器人商業化的領頭羊之一，並高度肯定其長期願景與執行力。",
     "milestones": [
       {
         "tweet_id": "1968018552822370394",
         "title": "基本面差但具炒作潛力",
-        "significance": "這是作者早期對 TSLA 的典型看法，認為公司基本面糟糕，但因 Musk 的個人影響力與炒作能力，使其具備短線交易價值。"
+        "significance": "2025 年 9 月指出 TSLA 基本面不佳，但可能因為 Elon Musk 想要拉抬股價而成為買點。"
       },
       {
         "tweet_id": "1993335570978967802",
-        "title": "批評 FSD 為行銷蛇油",
-        "significance": "明確指出 TSLA 的 FSD 技術僅達 Level 2，與 Waymo 等 Level 4 競爭對手存在技術差距，質疑其自動駕駛的商業化進度。"
+        "title": "FSD 遭到質疑",
+        "significance": "2025 年 11 月批評 Tesla FSD 僅屬 Level 2 且仍需人類監控，直言其行銷手法像是行銷蛇油。"
       },
       {
         "tweet_id": "2080149813065396454",
-        "title": "認同 Optimus 願景",
-        "significance": "作者引用財報會議內容，展現對 Musk 在人形機器人領域願景的高度認同，將其視為 TSLA 未來最重要的產品與成長驅動力。"
+        "title": "看好 Optimus 前景",
+        "significance": "2026 年 7 月引用 Q2 財報中 Elon Musk 對 Optimus 的極高評價，確認其對人形機器人長線 TAM 的強烈信心。"
       }
     ],
     "risks": [
       {
+        "tweet_id": "1967518403138318801",
+        "point": "缺乏具備偉大基本面與潛力的特質，不屬於高信念核心持股。"
+      },
+      {
         "tweet_id": "1993335570978967802",
-        "point": "技術層面僅為 Level 2，且過度依賴行銷包裝，被質疑為蛇油。"
+        "point": "FSD 技術僅達 Level 2，行銷手法被質疑像蛇油。"
       },
       {
         "tweet_id": "2038454646902272155",
-        "point": "供應鏈過度依賴中國，在地緣政治緊張下存在潛在斷鏈風險。"
+        "point": "人形機器人零組件與供應鏈（如致動器材料）高度依賴中國。"
       },
       {
-        "tweet_id": "2114477224208535600",
-        "point": "Musk 利用 X 平台放大對競爭對手的負面敘事，引發公司治理與公平競爭疑慮。"
+        "tweet_id": "2059280575203328398",
+        "point": "供應鏈存在被設計替換的風險（Design out risk）。"
       }
     ],
-    "tweet_count": 107,
-    "last_tweet_id": "2118258090328162483",
-    "analyzed_count": 107,
-    "generated_at": "2026-11-07T01:00:58Z",
-    "model": "gemini-3.1-flash-lite"
+    "tweet_count": 109,
+    "last_tweet_id": "2120798356205093139",
+    "analyzed_count": 109,
+    "generated_at": "2026-11-12T10:59:58Z",
+    "model": "gemini-3.5-flash-lite"
   },
   "CRCL": {
     "ticker": "CRCL",
