@@ -892,39 +892,39 @@
   "AMD": {
     "ticker": "AMD",
     "ai": true,
-    "thesis_story": "Serenity 對 AMD 的投資論點始於 2025 年 9 月，初期強調其作為台積電客戶的受惠地位。2025 年 10 月，隨著市場將 AMD 重新定價為下一個 NVIDIA，Serenity 開始看好其在 AI 領域的潛力，並在 2026 年 7 月透過實地調研確認其在 CPO（共封裝光學）技術的佈局與供應鏈進展，進一步加強信心。2026 年 8 月至 9 月，Serenity 觀察到 CPU 與記憶體需求強勁，並指出 AMD 在 AI 推論與加速運算中的關鍵角色，特別是與 Anthropic 等公司的合作與長約簽訂。儘管期間曾因光學供應鏈延遲傳聞出現中立觀點，但 Serenity 始終認為 AMD 是 AI 基礎設施不可或缺的參與者。截至 2026 年 11 月，Serenity 維持看好態度，認為市場應給予這些具備強勁需求與技術護城河的公司更多時間發酵，並肯定 AMD 在 AI 運算架構轉型中的長期價值。",
+    "thesis_story": "Serenity 對 AMD 的投資論點始於 2025 年 9 月，當時認為 AMD 雖然依賴台積電，但隨著與 OpenAI 等基礎模型合作展開，市場逐漸將其重新定價為下一個輝達。2025 年 10 月，AMD 傳出獲得龐大前瞻營收與 GPU 需求，促使作者將其納入投資組合並看好其市值上看兆美元。至 2026 年 7 月至 11 月期間，論點進一步擴展至光學與 AI 基礎設施，指出 AMD 正積極透過共同封裝光學（CPO）與雷射供應鏈（如與 Globalfoundries、Ayar 及 Sivers 合作）推進次世代資料中心架構，同時受惠於強勁的 CPU 與加速器需求，展現長期具備挑戰輝達長期領導地位的潛力。",
     "milestones": [
       {
+        "tweet_id": "1966185091467718795",
+        "title": "強調台積電樞紐地位",
+        "significance": "指出包括 AMD 在內的所有晶片都依賴台積電，確立了對上游產能與整體 AI 生態的基礎認知。"
+      },
+      {
         "tweet_id": "1976034517845692546",
-        "title": "AMD 潛在重估",
-        "significance": "指出若 OpenAI 轉向使用 AMD GPU，AMD 有望重估為兆美元公司，確立了其作為 AI 領導者的潛力。"
+        "title": "OpenAI 與重新定價",
+        "significance": "提到 OpenAI 可能使用大量 AMD GPU，認為 AMD 有機會重新定價為兆美元企業。"
       },
       {
         "tweet_id": "2080394259535221222",
-        "title": "CPO 供應鏈驗證",
-        "significance": "透過實地調研確認 AMD 在 CPO 技術的佈局，並反駁了市場關於供應鏈延遲的負面報導，強化了看多立場。"
-      },
-      {
-        "tweet_id": "2103232350348001701",
-        "title": "AI 需求強勁印證",
-        "significance": "透過 Akamai 與 Anthropic 的大額運算合約，證明 AI 基礎設施需求未減，持續推動 AMD 的 CPU 需求。"
+        "title": "CPO 與架構轉向",
+        "significance": "透過通路調查確認 AMD 在次世代 Helios 規模擴展中推進 CPO 網路技術，深化對其基礎設施技術升級的信心。"
       }
     ],
     "risks": [
       {
-        "tweet_id": "2085606635834388515",
-        "point": "光學元件供應鏈產能不足，可能影響第一代 CPO 部署進度。"
+        "tweet_id": "2080411863448522994",
+        "point": "供應鏈及 CPO 相關路線的商業機密與直接供應商確認不易。"
       },
       {
-        "tweet_id": "2118035778253283768",
-        "point": "若發生資料中心需求減緩，可能對供應鏈造成結構性衝擊。"
+        "tweet_id": "2085606635834388515",
+        "point": "獨立 CW 激光與合格 CPO 激光玩家產能有限，可能影響交付時程。"
       }
     ],
-    "tweet_count": 156,
-    "last_tweet_id": "2118605467459199016",
-    "analyzed_count": 156,
-    "generated_at": "2026-11-07T01:00:33Z",
-    "model": "gemini-3.1-flash-lite"
+    "tweet_count": 157,
+    "last_tweet_id": "2120943109505008055",
+    "analyzed_count": 157,
+    "generated_at": "2026-11-13T00:12:46Z",
+    "model": "gemini-3.5-flash-lite"
   },
   "JBL": {
     "ticker": "JBL",
