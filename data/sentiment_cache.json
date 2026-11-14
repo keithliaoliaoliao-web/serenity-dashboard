@@ -38872,19 +38872,52 @@
     "translation_zh": "@JonathanRoss321 恭喜獲得 $20B 的 $NVDA 收購。我原本有點希望你能成為破局者，繼續獨立擴展 LPU，但我想當任何公司成為領導者的威脅時，免不了被收購的命運。"
   },
   "2003604861414408240": {
+    "id": "2003604861414408240",
+    "tweet_id": "2003604861414408240",
     "sentiment": "Neutral",
-    "summary": "對Sivers了解有限，將再深入研究",
-    "translation_zh": "@Plaskpojken 我對 $SIVE 還不太了解。$POET 目前也算不上大廠，因此推測 Sivers 可能不會是主要玩家。但我會研究看看。"
+    "stances": {
+      "POET": "Neutral",
+      "SIVE": "Neutral"
+    },
+    "summary": "作者認為POET規模尚小，對SIVE暫持中立觀望。",
+    "translation_zh": "我目前對 $SIVE 還一無所知。$POET 現在也還不算什麼知名大廠，因此推論 Sivers 可能也不是主要市場參與者。但我會去研究看看。",
+    "risk": "指出POET知名度尚低，推測Sivers可能非主要市場玩家。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-14T02:14:41Z"
   },
   "2003476197028852074": {
+    "id": "2003476197028852074",
+    "tweet_id": "2003476197028852074",
     "sentiment": "Bullish",
-    "summary": "微軟Maia供應鏈龐大，看好MRVL與AAOI",
-    "translation_zh": "個人研究：$MSFT Maia 300 供應鏈。根據 $MRVL 報告，UBS估計到2027年Maia產量將突破100萬顆。預估將有 180 億美元以上的資金從 Maia ASIC 產能爬坡流向供應商。資金流向如下：1. $MRVL - 作為主要受益者，營收達 80-120 億美元（毛利率約 30-40%）。他們設計數位管道、向SK海力士購買HBM4記憶體、向台積電支付2奈米晶圓與CoWoS封裝費用，並將成品模組售予微軟。隨著 2026 年底至 2027 年初 Maia 展開量產，Marvell 的估值有望大幅重估。2. 光學織網：約 30 億至 40 億美元。主要受益者：Applied Optoelectronics ($AAOI)、Coherent ($COHR)、Innolight。Maia 叢集要求收發器對 GPU 的比例達到 1:1 或更高。對於 1.6T 速度（Maia 300 所需），每個節點的光學內容估計為 3,000 美元以上。此處 $AAOI 大獲全勝：與市值 700 億美元的 $MRVL 相比，$AAOI 是一家 25 億美元的公司。即使拿下這 30 億美元大餅的 20-30%（6億至9億美元），也能讓其現有 ARR（年度經常性收入）翻三倍以上。整體而言，在 1.6T 升級週期中，$AAOI 與 Marvell 的光學 DSP 業務是默默無聞的最大贏家。風險：主要風險在於認證失敗。若雷達未能通過微軟嚴格的可靠性測試，可能在一夜之間被 $LITE 取代。不過，Maia 300 的量產標誌著超大規模 ASIC 交易的開始，關鍵供應商已就位。受惠最多的公司將是 $AAOI、$MRVL、$TSM 與 SK 海力士。警告：這是基於公開資料與深度研究的投機性研究與建模，非官方事實。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Neutral",
+      "COHR": "Bullish",
+      "LITE": "Neutral",
+      "MRVL": "Bullish",
+      "MSFT": "Neutral",
+      "NVDA": "Neutral",
+      "TSM": "Neutral"
+    },
+    "summary": "微軟Maia放量，強烈看好MRVL與AAOI供應鏈商機。",
+    "translation_zh": "個人研究：微軟 Maia 300 供應鏈。根據瑞銀對 Marvell 的報告，預估到 2027 年 Maia 出貨量將突破 100 萬顆，Maia ASIC 的放量預計將為供應商帶來超過 180 億美元的商機。主要流向如下：1. MRVL：身為最大受益者，預計可獲得 80-120 億美元營收（毛利率約 30-40%）。他們設計數位架構、向 SK 海力士購買 HBM4、支付台積電 2 奈米晶圓與 CoWoS 封裝費用，並將完成的模組售予微軟。預計 2026 年底至 2027 年初放量時，MRVL 估值將大幅重估。2. 光學架構：約 30-40 億美元規模，主要受惠者為 AAOI、COHR、中際旭創。Maia 叢集要求光收發器與 GPU 比例達 1:1 以上，1.6T 規格每節點光學元件成本估計超過 3,000 美元。AAOI 將是大贏家：不同於 700 億美元市值的 MRVL，AAOI 僅 25 億美元市值，即使只拿下這 30 億美元市場的 20-30%（約 6-9 億美元），其當前年經常性收入（ARR）也將暴增三倍以上。台積電雖增加 30-40 億美元營收，但對其千億美元體量而言僅算中等規模。主要風險：若 AAOI 雷射未能通過微軟嚴格認證測試，可能會迅速被 LITE 取代。這項預估純屬個人基於公開資訊的推論與模型分析，非官方確切數據。",
+    "risk": "AAOI面臨驗證失敗風險，若未通過微軟可靠度測試，可能立即被LITE取代。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-14T02:15:41Z"
   },
   "2003454286651666658": {
+    "id": "2003454286651666658",
+    "tweet_id": "2003454286651666658",
     "sentiment": "Bullish",
-    "summary": "MRVL是長期良機，與LITE屬不同股票",
-    "translation_zh": "@bricked_trades $MRVL 是一檔極佳的長期投資，我會另外撰寫一篇關於他們在 Maia 300 中所扮演角色的論文。不過這篇論文是針對 $LITE 的……所以這是兩檔不同的股票。"
+    "stances": {
+      "LITE": "Neutral",
+      "MRVL": "Bullish"
+    },
+    "summary": "看好MRVL做多潛力，澄清原論點是討論LITE。",
+    "translation_zh": "@bricked_trades $MRVL 是個極佳的做多標的，我會另外寫一篇關於他們在 maia 300 角色定位的投資論述。不過這篇論述原本是在講 $LITE……所以是兩檔不同的股票。",
+    "risk": "",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-14T02:15:46Z"
   },
   "2003446353784111605": {
     "sentiment": "Bullish",
@@ -38892,9 +38925,18 @@
     "translation_zh": "嗯，不完全是這樣，他們過去有執行失敗的歷史，多年前曾被 $AMZN 放棄。但如果他們這次能夠憑藉從銅轉向光子學的黃金機會，以及記憶體等供應常數來執行，他們目前的仙股定價可能並未反映出他們在所參與的每一個 Trainium 和 Maia 叢集中的 BOM 佔比，以及在美國本土的 InP 晶圓廠選擇權。"
   },
   "2003440559772540989": {
+    "id": "2003440559772540989",
+    "tweet_id": "2003440559772540989",
     "sentiment": "Bullish",
-    "summary": "AAOI高度槓桿Trainium與Maia",
-    "translation_zh": "額，$AAOI 只是 Trainium 和 Maia 的槓桿多頭，根據公開資訊，他們不像 $LITE 那樣參與 TPU/Blackwell。Maia 已延後至 2026 年，預計在年底至 2027 年開始放量。特別是傳聞 $AAOI 正與微軟共同開發新架構，雙方很可能共同成長。無論如何，只要這兩者啟動，我們將看到更多資產被重新定價。隨著每個超大規模企業都想要自己的 ASIC，這似乎是不可避免的。但主要關鍵在於 $AAOI 這邊的產能爬坡與執行力。"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Neutral"
+    },
+    "summary": "看好AAOI受惠微軟與AWS晶片，具重估潛力。",
+    "translation_zh": "AAOI本質上就是做多Trainium和Maia的槓桿標的，因為從公開資訊來看，他們不像LITE那樣有切入TPU或Blackwell。Maia已被推遲到2026年，可能要到年底至2027年才會放量。特別是有傳言指出AAOI正與微軟共同開發新架構，雙方很可能會同步擴大產能。總之，一旦這兩者啟動，我們很可能會看到更多估值重估的機會。鑑於各大超大規模雲端業者都想發展自研ASIC，這似乎是必然趨勢，但對AAOI而言，關鍵仍在於產能爬坡與執行力。",
+    "risk": "Maia晶片量產推遲至2026年底，且AAOI面臨產能爬坡與執行力的考驗。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-14T02:16:23Z"
   },
   "2003267396967309473": {
     "sentiment": "Bullish",
@@ -38902,24 +38944,67 @@
     "translation_zh": "非常中肯的批評。我最初在 86 美元時發文介紹 $NBIS，現在 125 美元我依然會買進。我沒想到一家未來 ARR 達 70-90 億美元、年增率超過 700%、旗下 4 家子公司年增率皆超 100% 的公司，會暴跌 40% 至 190 億美元市值。有些東西在 1-3 個短線內被錯誤定價（特別是受到套利交易平倉與暫時性信貸收緊等宏觀因素影響導致高貝塔資產拋售），但我預期我所有高確信度的標的在 6-12 個月後表現會超越大盤。"
   },
   "2003259964526330053": {
+    "id": "2003259964526330053",
+    "tweet_id": "2003259964526330053",
     "sentiment": "Bullish",
-    "summary": "InP將成瓶頸，看好AAOI與LITE等光子學標的",
-    "translation_zh": "自我發表論文今天以來，$AAOI 上漲了 24%，$LITE 上漲了 5%。從 BOM 分析來看，$LITE（270億美元）由於 OCS 架構而槓桿了 TPU Ironwood，但也受惠於 NVDA 及所有 ASIC。$AAOI（25億美元）則槓桿了微軟 MAIA 產能爬坡與亞馬遜 Trainium。如同 HBM 一樣，InP 將成為 2026 年的瓶頸，因為它們是這些部署中雷射的基礎材料。類似美光與 SK 海力士的記憶體瓶頸，我們可能會看到市場將注意力轉向 InP 晶圓廠，例如 $AAOI（剛好是美國少數幾家之一，還有 COHR、Macom）。但與 $LITE 因 Google TPU 的成功（來自 Meta 與 Anthropic 的訂單）年初至今大漲 362% 相比，$AAOI 年初至今僅上漲 7%。這主要是因為散戶或媒體對 $AMZN Trainium 或 $MSFT Maia 的部署缺乏關注，這些部署預計在 2026-2027 年顯著放量。然而，由於每個超大規模企業都想降低其雲端平台的推論成本，它們很可能會成功。如果其他超大規模企業也採用 OCS 以追求 TPU 所達到的最佳化效能，預期 $LITE 鑑於其在該特定區段的壟斷地位，其估值重估幅度會更大。然而，如果看到 $MSFT Maia 量放量（鑑於 $AAOI 可能正為其開發新架構）以及 $AMZN Trainium 放量（40億美元認股權證加採購訂單），預期 $AAOI 將迎來價值重估。光子學與 InP 將成為如記憶體般的新瓶頸。在 2026 年的主題中，資金很可能向下流向 $COHR、Innolight、$LITE 等玩家，以及押注特定超大規模 ASIC 的隱藏槓桿標的如 $AAOI。市場目前在獎勵 Google TPU 供應鏈，但可能忽略了其他超大規模 ASIC 的產能爬坡。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Neutral",
+      "COHR": "Bullish",
+      "LITE": "Bullish",
+      "MSFT": "Neutral"
+    },
+    "summary": "看好AAOI與LITE受惠ASIC光通訊與InP瓶頸題材。",
+    "translation_zh": "自從我今天提出論點以來，$AAOI 上漲了 24%，$LITE 上漲了 5%。從物料清單（BOM）分析來看，LITE（市值 270 億美元）因 OCS 技術而深度綁定 TPU Ironwood，但也受惠於 NVDA 及所有 ASIC。AAOI（市值 25 億美元）則高度連動微軟 MAIA 的放量以及亞馬遜 Trainium。磷化銦（InP）就像 HBM 一樣，將成為 2026 年的瓶頸，因為它們是這些佈署中雷射所使用的基礎材料。類似於美光和 SK 海力士的記憶體瓶頸，市場焦點很可能會轉向 InP 晶圓廠，例如 $AAOI，它剛好是美國少數的業者之一（其他如 COHR、Macom）。但相較於 $LITE 因 Google TPU 的成功（來自 Meta 和 Anthropic 的採購訂單）今年迄今上漲 362%，$AAOI 今年迄今僅上漲 7%。我們之所以看到這種情況，主要是因為散戶或媒體缺乏對 $AMZN Trainium 或 $MSFT Maia 佈署的關注，而這些預計主要會在 2026-2027 年放量。然而，由於每家超大規模雲端業者都希望降低自身雲端平台的推論成本，這些計畫很可能都會成功。如果我們看到其他雲端業者為了獲得 TPU 那樣的最佳化效能而採用 OCS，鑑於 $LITE 在該特定領域的壟斷地位，預期它的估值會比現在獲得更多重新評估（re-rate）。然而，如果我們看到 $MSFT Maia 放量（鑑於 $AAOI 可能正為其開發新架構），以及 $AMZN Trainium 放量（40 億美元認股權證加採購訂單），預期 $AAOI 也將迎來估值重估。光子學和 InP 將成為類似記憶體的新瓶頸。2026 年的主題很可能會看到投資資金湧向下游廠商如 $COHR、中際旭創、以及特定超大規模雲端 ASIC 的隱藏高槓桿標的如 $AAOI。市場目前正在獎勵 Google TPU 供應鏈，但可能忽略了其他雲端業者的 ASIC 放量商機。",
+    "risk": "零售或媒體對亞馬遜及微軟ASIC佈署關注度不足，放量主要落在2026-2027年。",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-14T02:16:36Z"
   },
   "2003244238155481144": {
+    "id": "2003244238155481144",
+    "tweet_id": "2003244238155481144",
     "sentiment": "Bullish",
-    "summary": "看好 LITE 與 AAOI 光子學前景與超級大廠 ASIC 潛力",
-    "translation_zh": "不見得！市場開始意識到 $LITE 在每一個超大規模資料中心 ASIC 部署加黑威爾（Blackwell）晶片中所扮演的角色，當你檢視物料清單（BOM）時，佔比相當驚人，特別是在 TPU v7 中。\n\nLite 是光子學的領導者，但還有其他像是 $AAOI 等公司，它們槓桿連結了微軟 Maia 和亞馬遜 Trainium（目前股價完全還沒動過）。\n\n因此，明年光子學領域充滿機會。"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Bullish"
+    },
+    "summary": "看好$LITE與$AAOI，矽光子領域明年迎巨大商機。",
+    "translation_zh": "並非如此！市場開始意識到 $LITE 在所有超大規模業者 ASIC 部署與 Blackwell 中的重要角色，檢視物料清單（BOM）會發現金額相當驚人，特別是在 TPU v7 中。LITE 是矽光子領頭羊，但還有像 $AAOI 這樣連動微軟 Maia 和亞馬遜 Trainium 的標的（股價還完全沒動）。因此明年矽光子領域充滿機會。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-14T02:16:52Z"
   },
   "2003132436230844831": {
+    "id": "2003132436230844831",
+    "tweet_id": "2003132436230844831",
     "sentiment": "Bullish",
-    "summary": "LITE 與 AAOI 受惠 AI 晶片部署，極具投資價值",
-    "translation_zh": "沒錯，$LITE 在看到它出現在每一款 ASIC 與 $NVDA 的 Blackwell 部署中後，表現簡直不可思議。\n\n接著，當你做了 BOM 分析並對 TPU/GPU 部署進行建模後，你會發現即使在歷史高點（ATH）它依然被低估。\n\n然後是 $AAOI，它類似 LITE，但槓桿連結了亞馬遜和微軟的 ASIC。它是美國僅有的磷化銦（InP）晶圓廠之一，並將根據 Trainium 和 Maia 的表現擴大生產規模。其市值也才 25 億美元。\n\n光子學與記憶體領域在 2026 年將會瘋狂至極。"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Bullish",
+      "NVDA": "Neutral"
+    },
+    "summary": "看好 LITE 與 AAOI 受益於光子學及 ASIC 趨勢。",
+    "translation_zh": "是的，$LITE 在確定被納入每一款 ASIC 和 $NVDA Blackwell 部署後表現令人驚豔。一旦進行物料清單（BOM）分析並建立 TPU/GPU 部署模型後，即使處於歷史新高，它看起來仍被低估。此外還有 $AAOI，它與 LITE 類似但更偏向 AMZN 與 MSFT 的 ASIC。它是美國少數的磷化銦（InP）晶圓廠之一，擴展規模將取決於 Trainium 和 Maia 的表現。它的市值也才 25 億美元。光子學與記憶體領域在 2026 年將會非常狂熱。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-14T02:17:00Z"
   },
   "2003129898660192292": {
+    "id": "2003129898660192292",
+    "tweet_id": "2003129898660192292",
     "sentiment": "Bullish",
-    "summary": "LITE 結構 asymmetric，AAOI 為潛力黑馬",
-    "translation_zh": "在 $LITE、$COHR、旭創科技（Innolight）等公司中，我發現 $LITE 具有最不对称的配置，因為它是鐵木（Ironwood，搭配 OCS）、Blackwell 以及其他超大規模資料中心 ASIC 的核心。\n\n然而，$AAOI 具有極端的 alpha 超額報酬。特別是作為 $AMZN Trainium、$MSFT Maia ASIC 規模擴大的槓桿標的，且它是美國少數幾家 InP 晶圓廠之一。\n\n雖然他們擁有 4 十億美元的 $AMZN 認股權證與採購協議，但 12 月份的訂單似乎確實是基於 Maia 的集群。也有傳言指出 $AAOI 似乎也在為 $MSFT 的晶片專門開發一種新的光學互連架構。\n\n儘管有超大規模 ASIC 的炒作與光子學反彈，$AAOI 的股價完全沒動過，以 20 億美元市值來看絕對是一顆隱藏的寶石。不過，它高度槓桿連結微軟與亞馬遜（鑑於自身的雲端部門，這兩家公司很可能成功並大規模部署自己的 ASIC）。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Neutral",
+      "COHR": "Neutral",
+      "LITE": "Bullish",
+      "MSFT": "Neutral"
+    },
+    "summary": "看好AAOI與LITE具備極佳上行潛力與被低估優勢。",
+    "translation_zh": "在 $LITE、$COHR、中際旭創等公司中，我發現 $LITE 是最具非對稱優勢的配置，因為它是 Ironwood（含 OCS）、Blackwell 以及其他超大型雲端業者 ASIC 的核心。然而，$AAOI 則是極致的 Alpha 標的。特別是作為 $AMZN Trainium 和 $MSFT Maia ASIC 擴展的槓桿標的，加上它擁有美國少數的 InP 晶圓廠之一。雖然他們擁有 40 億美元的 $AMZN 認股權證與採購協議，但 12 月的訂單看起來很有可能是基於 Maia 的集群。有傳聞指出 $AAOI 似乎也在專門為 $MSFT 的晶片開發新的光學互連架構。儘管有超大型雲端業者 ASIC 熱潮與光子學上漲行情，$AAOI 卻完全沒動，因此在 20 億美元市值下絕對是顆隱藏寶石。不過，它的營運高度槓桿集中在 $MSFT 和 $AMZN（鑑於他們擁有自己的雲端部門，這兩家公司很可能會成功並大規模部署自己的 ASIC）。",
+    "risk": "AAOI的營運高度槓桿集中於微軟與亞馬遜兩大客戶。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-14T02:17:10Z"
   },
   "2003107631180001334": {
     "sentiment": "Neutral",
@@ -38927,44 +39012,133 @@
     "translation_zh": "可能不會，沒有理由這麼做。鍳於 $JPM 所提供的龐大造市流動性，他們幾乎肯定享有 0% 的交易手續費權限。\n\n他們沒有理由去收購一家商品化的交易所，然後承擔額外的監管頭痛問題和資產負債表波動。\n\n他們透過與 Coinbase 合作獲得免費執行來享受交易所的同等好處，然後僅透過額外的垂直領域從客戶價差中獲利。"
   },
   "2003088229147533645": {
+    "id": "2003088229147533645",
+    "tweet_id": "2003088229147533645",
     "sentiment": "Bullish",
-    "summary": "看好 LITE 與 AAOI 的光子學雙頭壟斷與成長潛力",
-    "translation_zh": "我只有 $LITE 和 $AAOI 哈哈。但我個人的看法是，$LITE 和 $COHR 基本上是光子學領域的雙頭壟斷。\n\n其中 $LITE 更額外槓桿受惠於谷歌 TPU 的成長。\n\n接著是 $AAOI，具備極端 alpha 報酬與對微軟、亞馬遜超大規模 ASIC 的槓桿看漲期權特性。\n\n目前還沒有動作，沒有重大漲勢（今年甚至下跌了 12%，儘管身為光子學玩家），因為市場對亞馬遜 Trainium 或微軟 Maia 還沒有投資熱情（目前還沒有）。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Neutral",
+      "COHR": "Neutral",
+      "LITE": "Bullish",
+      "MSFT": "Neutral"
+    },
+    "summary": "看好LITE與AAOI，具光子學寡占與ASIC爆發潛力。",
+    "translation_zh": "我只持有 $LITE 和 $AAOI 哈哈。但我會這樣解讀：$LITE 和 $COHR 基本上是光子學領域的雙頭寡占，其中 $LITE 更具備 Google TPU 成長的槓桿效應。至於 $AAOI，則是對 $MSFT 與 $AMZN 超大型雲端業者自研 ASIC 的極致 Alpha 與槓桿投資標的。目前尚未爆發也無大幅上漲（儘管身為光子學廠商，今年股價仍下跌 12%），因為市場對亞馬遜 Trainium 或微軟 Maia 尚未出現炒作熱潮（至少目前還沒）。",
+    "risk": "AAOI今年下跌12%，且市場目前對Trainium與Maia仍缺乏炒作熱情。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-14T02:17:20Z"
   },
   "2003083807273152736": {
+    "id": "2003083807273152736",
+    "tweet_id": "2003083807273152736",
     "sentiment": "Bullish",
-    "summary": "LITE 處於完美甜蜜點，受惠各大晶片與 OCS 壟斷",
-    "translation_zh": "$LITE 正處於黃金甜蜜點，每一個 GOOGL TPU + 超大規模 ASIC + NVDA Blackwell 都依賴它。\n\n目前他們因需求而面臨供應緊缺（類似美光）。\n\n據我所知，光子學目前是一個雙頭壟斷市場（$COHR 和 Lite）。\n\n然而，對於 Google TPU 架構為追求更高效能而使用的 OCS（光電路交換），$LITE 憑藉其專利組合與技術形成了壟斷。如果微軟和亞馬遜最終採用 OCS，對 LITE 來說將是歷史性的高光時刻。\n\n超大規模企業垂直整合 InP 晶圓廠在近期實在太困難了。至少在未來幾年內（也許 2027-2028 年來自 $AVGO 的競爭會增加），可能沒有人能取代他們，但就目前而言，他們正面臨供應短缺。"
+    "stances": {
+      "AMZN": "Neutral",
+      "AVGO": "Neutral",
+      "COHR": "Neutral",
+      "LITE": "Bullish",
+      "MSFT": "Neutral"
+    },
+    "summary": "看好LITE受惠晶片需求強勁且具OCS獨佔優勢。",
+    "translation_zh": "LITE正處於黃金時期，每顆Google TPU、超大規模業者ASIC與NVIDIA Blackwell都依賴它。目前需求強勁導致供不應求（類似美光）。就我了解，光子學領域目前由COHR與LITE雙頭壟斷。然而在Google TPU架構用於提升效能的OCS方面，LITE憑藉專利與技術形成壟斷。若微軟、亞馬遜最終採用OCS，對LITE將是絕佳時刻。超大規模業者短期內自建InP晶圓廠垂直整合難度太高，至少未來幾年無人能取代（2027-2028年可能面臨博通日益增加的競爭），但目前他們正面臨產能吃緊。",
+    "risk": "2027至2028年可能面臨來自博通（AVGO）日益增加的競爭。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-14T02:17:28Z"
   },
   "2003040048930074770": {
+    "id": "2003040048930074770",
+    "tweet_id": "2003040048930074770",
     "sentiment": "Bullish",
-    "summary": "AXTI 作為 LITE 上游材料商同樣值得關注",
-    "translation_zh": "@manukafirth 另一檔不錯的標的是 $AXTI，它是 $LITE / 光子學領域的材料供應商。市值 5 億美元。"
+    "stances": {
+      "AXTI": "Bullish",
+      "LITE": "Neutral"
+    },
+    "summary": "看多$AXTI為光通訊材料商，中立提及$LITE",
+    "translation_zh": "@manukafirth 另一個不錯的標的是 $AXTI，它是 $LITE 及光通訊產業的材料供應商，目前市值約 5 億美元。",
+    "risk": "",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-14T02:17:50Z"
   },
   "2003024646367740327": {
+    "id": "2003024646367740327",
+    "tweet_id": "2003024646367740327",
     "sentiment": "Bullish",
-    "summary": "LITE 佔 TPU BOM 核心，AAOI 具備強大補漲潛力",
-    "translation_zh": "「太晚了？」（才不）\n\n$LITE 是一家市值 26 億美元的公司，處於每一個未來 $GOOGL TPU 部署、$NVDA / $AMZN / 其他 GPU/ASIC 的核心。\n\n佔每個 Google TPU v7 的 BOM 份額的 8-12%。這就像當年輝達市值 1 兆美元時說它「太晚了」一樣。\n\n但如果你想要另一個玩家，那就是 $AAOI。\n\n$MSFT 正在將其用於 Maia ASIC，並且很可能正與 $AAOI 共同建立新架構。\n\n他們還擁有與 $AMZN 的 40 億美元認股權證與採購協議。\n\n因此這更像是一場做多微軟 Maia 與亞馬遜 Trainium ASIC 的押注，只是市場還不在乎這兩家超大規模業者的 ASIC。\n\n如果這兩者有任何正面消息，$AAOI 將會極快地重新估值。\n\n不過在傳出 $META 將大量採購後，大家都蜂擁加入了 $GOOGL TPU 的行列。"
+    "stances": {
+      "AAOI": "Bullish",
+      "AMZN": "Neutral",
+      "GOOGL": "Neutral",
+      "LITE": "Bullish",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "看多LITE與AAOI，受惠AI客製晶片需求。",
+    "translation_zh": "「已經太晚了」？$LITE 目前市值僅 260 億美元，卻處於未來所有 $GOOGL TPU 部署以及 $NVDA、$AMZN 與其他 GPU/ASIC 供應鏈的核心位置，佔據每一顆 Google TPU v7 物料清單（BOM）成本的 8-12%。現在嫌晚，就像當初 $NVDA 市值 1 兆美元時說已經太晚一樣。但如果你想找另一檔標的，可以看看 $AAOI。$MSFT 正將其產品用於 Maia ASIC，且很可能正與 $AAOI 共同打造新架構；同時他們與 $AMZN 也簽有 40 億美元的認股權證暨採購協議。因此這更像是佈局 $MSFT Maia 與 $AMZN Trainium ASIC 的受惠標的，只是市場目前還沒真正關注這兩家雲端巨頭的 ASIC 進展。一旦這兩項業務傳出任何利多，$AAOI 將會非常快速地迎來估值重估。不過大家也是在傳出 $META 將大量採購後，才一窩蜂追捧 $GOOGL TPU 概念的。",
+    "risk": "",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-14T02:18:00Z"
   },
   "2003019490871869644": {
+    "id": "2003019490871869644",
+    "tweet_id": "2003019490871869644",
     "sentiment": "Bullish",
-    "summary": "Lumentum（LITE）為 AI 光學核心壟斷者，潛力龐大",
-    "translation_zh": "$LITE 的論點：AI 領域中的隱形壟斷者。\n\nLumentum 年初至今已漲了 316%，但在 2027 年之前可能會漲 1000% 以上。\n\n美光（3000億美元）或台積電（1.5兆美元）處於每一個部署的 TPU/GPU 的核心。\n\n$LITE 也是如此，但它的市值僅有 26 億美元。\n\n在 Google 的每一個 TPU 中，$LITE 憑藉其市值賺取了難以置信的利潤。\n\n這是因為它是光電路交換（OCS）加光纖網路的標準。\n\n它也同時出現在：\n- $NVDA Blackwell\n- $AMZN Trainium\n- 以及其他超大規模 ASIC 中。\n\nLumentum 坐擁光子學每一個晶片部署的神聖三位一體。\n\n而且對於每一塊花費的 TPU 資本支出，$LITE 拿走 8-12%。對於每一張輝達 GPU，$LITE 拿走約 2-3%（在旭創等公司之間分配，所以數學計算有點複雜）。\n\n但針對輝達 GPU 部署的 BOM 做一些簡單計算：\n\nNVIDIA Blackwell (GB200)：\n- HBM 記憶體：~50–55%（SK海力士（領頭）、美光、三星）\n- 邏輯晶片（GPU Die）：~25-30%（$TSM 4NP）\n- CoWoS 封裝：~13-18% $TSM\n- 光學/網路：~3–5%（旭創、Lumentum、Coherent）\n- PCB/電源：5%\n\n對於 Google TPU「Ironwood」TPU v7：\n- HBM 記憶體：38-42% 三星 / SK 海力士\n- 邏輯晶片：TSM ~28-33%\n- 設計/I.O：8-10% 聯發科\n- 光學網路：10-14%（$LITE（主力）、$COHR 次要）\n- 光學開關：2-4% $LITE\n\n$LITE 預估總集群佔比：~8–12%\n\n順便一提，Google 的「光學」BOM 佔比（8–12%）是由於其獨特的光電路開關（OCS）壟斷而產生的異常現象。\n\n簡單計算一下：\n\n到 2027 年 Google TPU 支出將達 400 億美元。$LITE 捕獲 10%（30-40% 毛利率），僅從 Google 一家就能獲得超過 15 億美元的自由現金流（FCF），僅憑其主要客戶計算，本益比為 17 倍（分析師在預測 TPU 支出的規模時可能嚴重失準）。\n\n這甚至還不包括他們從 $AMZN Trainium、$NVDA Blackwell、$MSFT Maia 以及其他晶片部署中分得的份額。\n\n$LITE 目前處於每一個未來 TPU/GPU 晶片部署的核心並從中分一杯羹。\n\n唯一的缺點是他們現在是明顯的市場領導者，但 $AVGO 和 $COHR 很可能在 2027-2028 年準備好進行競爭。然而……\n\n人們說「26億美元，歷史新高，為什麼你現在還要買」。\n\n這就是原因。他們參與了每一個未來將部署的 TPU/GPU/ASIC。\n\n如果 Google TPU 以及其他晶片支出增加，且 LITE 從每一塊花費的美元中抽成 2-3%（來自 NVDA、AMZN、MSFT）或 8-12%（來自 GOOGL），$LITE 的市值很容易就能超過 600 億美元以上。"
+    "stances": {
+      "AMZN": "Neutral",
+      "AVGO": "Neutral",
+      "COHR": "Neutral",
+      "GOOGL": "Neutral",
+      "LITE": "Bullish",
+      "MSFT": "Neutral",
+      "NVDA": "Neutral",
+      "TSM": "Neutral"
+    },
+    "summary": "看多$LITE，稱其壟斷AI光學且具倍數成長空間。",
+    "translation_zh": "$LITE 投資論點：AI 領域的隱形壟斷者。Lumentum 今年以來已上漲 316%，但到 2027 年漲幅可能超過 1000%。Micron（市值 3,000 億美元）或台積電 $TSM（市值 1.5 兆美元）位於每一顆部署的 TPU/GPU 核心位置，$LITE 同樣如此，但市值卻僅 260 億美元。在 Google 的每一顆 TPU 中，$LITE 相對於其市值都賺取了驚人的利潤，因為它是光路交換器（OCS）與光學網路的標準配置。此外，它也應用於 $NVDA Blackwell、$AMZN Trainium 及其他超大規模雲端業者的 ASIC。Lumentum 在每一次晶片部署的光子學領域中都處於核心三位一體地位。Google 每投入一筆 TPU 資本支出，$LITE 就能拿下 8-12%；每顆輝達 GPU，$LITE 則佔約 2-3%（與中際旭創等廠商分食，計算上較為複雜）。單就輝達 GPU 部署的物料清單（BOM）粗略估算：NVIDIA Blackwell（GB200）中，HBM 記憶體約 50-55%（SK 海力士主導、Micron、三星）、邏輯晶片（GPU Die）約 25-30%（$TSM 4NP）、CoWoS 封裝約 13-18%（$TSM）、光學/網路約 3-5%（Innolight、Lumentum、Coherent）、PCB/電源 5%。Google「Ironwood」TPU v7 方面：HBM 記憶體 38-42%（三星/SK 海力士）、邏輯晶片約 28-33%（台積電）、設計/I.O 8-10%（聯發科）、光學網路 10-14%（$LITE 為主力、$COHR 為次要）、光學交換器 2-4%（$LITE），預估 $LITE 佔總叢集份額約 8-12%。補充說明，Google 的「光學」BOM 佔比（8-12%）之所以異常高，是因為其獨特的光路交換器（OCS）壟斷地位。簡單試算一下：若 2027 年 Google TPU 支出達 400 億美元，$LITE 拿下 10%（利潤率 30-40%），光靠 Google 一家就能貢獻 15 億美元以上的自由現金流，僅靠單一主要客戶的本益比就只有 17 倍（分析師對 TPU 支出擴張的預測可能嚴重低估），這還不包含 $AMZN Trainium、$NVDA Blackwell、$MSFT Maia 與其他晶片部署的分潤。$LITE 目前處於未來每一代 TPU/GPU 晶片部署的核心並從中抽成。唯一的缺點是雖然目前是明確的市場領先者，但 $AVGO 與 $COHR 預計將在 2027 至 2028 年準備好加入競爭。不過，人們常問「市值 260 億美元又在歷史高點，為什麼現在要買？」原因就在這裡：他們參與了未來每一個 TPU/GPU/ASIC 的部署。若 Google TPU 與其他晶片支出持續放量，且 LITE 能從每筆支出中拿走 2-3%（來自 $NVDA、$AMZN、$MSFT）或 8-12%（來自 $GOOGL），$LITE 市值將輕易突破 600 億美元以上。",
+    "risk": "2027至2028年可能面臨$AVGO與$COHR競爭，且股價處於歷史高點。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-14T02:18:15Z"
   },
   "2002985501293428827": {
-    "sentiment": "Bearish",
-    "summary": "出於地緣政治原則，避開投資中國企業如小鵬",
-    "translation_zh": "@investingluc @xiaopenghexpeng 出於不資助地緣政治對手的原則，我遠離像 $XPEV 這樣的中國公司。特別是當涉及到人工智慧和機器人等軍事賦能技術時。\n\n除此之外，$XPEV 和 $BYD 都是非常有趣的公司。"
+    "id": "2002985501293428827",
+    "tweet_id": "2002985501293428827",
+    "sentiment": "Neutral",
+    "stances": {
+      "BYD": "Neutral",
+      "XPEV": "Neutral"
+    },
+    "summary": "因地緣政治避開$XPEV與$BYD，立場中立。",
+    "translation_zh": "基於不資助地緣政治對手的原則，我會避開像 $XPEV 這類中國企業，特別是涉及 AI 與機器人等具軍事賦能潛力的技術領域。除此之外，$XPEV 和 $BYD 都是相當有意思的公司。",
+    "risk": "地緣政治對立及AI與機器人等軍事應用技術疑慮。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-14T02:18:31Z"
   },
   "2002968528643854846": {
+    "id": "2002968528643854846",
+    "tweet_id": "2002968528643854846",
     "sentiment": "Bullish",
-    "summary": "Circle嚴重低估，86美元買進",
-    "translation_zh": "如果 ChatGPT 能在寫出 OF 和卡類網路比較的同時，附上關於私營部門穩定幣投資的個人經驗，那我就佩服了。\n\n機構並沒有對 31 美元退縮，$CRCL 被大幅超額認購，且在 IPO 後通過了針對穩定幣的 GENIUS 法案。\n\n如果你讀了這篇文章，護城河就是網路效應，因為它是結算和數位美元的標準。\n\n雖然可能會出現來自 Paxos USD、PayPal USD、SOFI USD 等數百種其他穩定幣，但這並不意味著它們會獲得廣泛採用。\n\nUSDC 和 USDT 已經是雙頭壟斷和數位標準。\n\n我也寫過這是定性論點。對於像 $RKLB 這種非標準公司（如 Circle），我認為不應使用傳統估值方法。\n\n話雖如此，作為數位美元貨幣發行商，190 億美元的估值被嚴重低估，我自己正在 86 美元大舉加碼。\n\n我只是分享我的論點，你完全可以選擇另一方交易。我也鼓勵你用行動支持你的言論！"
+    "stances": {
+      "CRCL": "Bullish",
+      "RKLB": "Neutral"
+    },
+    "summary": "看多$CRCL具護城河且低估，中性提及$RKLB",
+    "translation_zh": "如果 ChatGPT 能寫出 OF 與信用卡網路的比較，並結合私募市場穩定幣投資的個人經驗，我會相當佩服。機構投資人在 31 美元時並未退縮，$CRCL 獲得極大幅度的超額認購，且穩定幣《GENIUS 法案》在 IPO 後也順利通過。如果你看過貼文，就會知道其護城河在於作為結算與數位美元標準的網路效應。市面上可能會有數百種其他穩定幣，像是 Paxos USD、PayPal USD、SOFI USD 等，但這不代表它們能獲得廣泛採用。USDC 與 USDT 已經形成雙寡頭壟斷與數位標準。我也提過這是質化投資論點。對於像 $RKLB 這類非標準型公司（如同 Circle），我認為不該使用傳統的估值方法。話雖如此，對於一家數位美元的印鈔機與發行商而言，190 億美元的估值仍被嚴重低估，我自己也在 86 美元大舉加碼。我只是分享我的看法，你大可選擇站在交易的另一方，我也鼓勵你用論據來支持自己的觀點！",
+    "risk": "提及市場可能出現數百種其他穩定幣的潛在競爭。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-14T02:18:40Z"
   },
   "2002907012049645877": {
+    "id": "2002907012049645877",
+    "tweet_id": "2002907012049645877",
     "sentiment": "Bullish",
-    "summary": "看好NBIS與IREN未來潛力",
-    "translation_zh": "確實。僅 $NBIS 持有的 Clickhouse 和 Avride 股權，在一兩年內價值就可能超過 $IREN 的市值。\n\n話雖如此，我依然看好這兩者。不過，Nebius 擁有 4 家從 Yandex 時代延續下來、年增率達三位數的子公司，這確實有點不公平。\n\n這甚至還沒算入他們的主營業務。"
+    "stances": {
+      "IREN": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "分析師看好 NBIS 與 IREN 兩檔股票前景。",
+    "translation_zh": "沒錯。一年或兩年內，單單 Nebius 的 Clickhouse 和 Avride 股權價值就可能超過 IREN 的市值。話雖如此，我對這兩檔依然看多。只是 Nebius 擁有從 Yandex 時期保留、營收年增率達三位數的四家子公司，這樣對 IREN 有點不公平。這甚至還沒把他們的主營業務算進去。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-14T02:18:42Z"
   },
   "2002904797985542154": {
     "sentiment": "Bullish",
@@ -38972,19 +39146,48 @@
     "translation_zh": "低利率確實會影響 $CRCL，這也是主要的看空論點。\n\n然而，與來自國債的高利息相比，低利率環境將釋放更多 USDC 供應量，並帶來更多基於交易量的收入。Circle 需要將交易量變現，而非僅靠利息（利息佔其利潤 90% 以上）。\n\n我上面的論點是，人們不應該像對待金融科技公司那樣對其進行估值。如果它成為數位聯準會，且 USDC 成為線上美元的預設結算貨幣，那麼其網路和發行方的價值將遠超傳統估值。"
   },
   "2002886827422978197": {
+    "id": "2002886827422978197",
+    "tweet_id": "2002886827422978197",
     "sentiment": "Bullish",
-    "summary": "看好AAOI受益微軟Maia推動",
-    "translation_zh": "@itsthesquonky 我今天會對此做些研究，感謝提點。\n\n我已經投入了不少微型股，例如 $AAOI，我認為它就像是槓桿版的 $LITE，純粹是為了看好 $MSFT Maia 的推進。\n\n我想 1 月 6 日至 8 日有個會議，如果微軟透露更多相關消息，應該會成為催化劑。"
+    "stances": {
+      "AAOI": "Bullish",
+      "LITE": "Bullish",
+      "MSFT": "Bullish"
+    },
+    "summary": "看好AAOI與LITE因微軟Maia晶片放量而具備投資潛力。",
+    "translation_zh": "@itsthesquonky 我今天會對此做些研究，謝謝你的提醒。我已經投資了不少微毛股，像是 $AAOI，我認為它就像是針對微軟 Maia 晶片產量爬升而附加了槓桿的 $LITE。我想 1 月 6 日至 8 日有一個會議，如果微軟能透露更多相關消息，應該會成為催化劑。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-14T02:18:45Z"
   },
   "2002774159869550634": {
+    "id": "2002774159869550634",
+    "tweet_id": "2002774159869550634",
     "sentiment": "Bearish",
-    "summary": "謹慎看待COIN，偏好投資CRCL",
-    "translation_zh": "對於 $COIN，我稍微不太同意。它的通用性比你想像的要低得多，因為 2026 年與 $CRCL 的合約重新談判即將到來。\n\n目前 Coinbase 受益於 50% 的 USDC 收入分成加上交易所業務。還有來自託管（例如黑石 ETF）的價值。但從長遠來看，交易所業務可能會被 $HOOD 和 Bitfinex 等零手續費交易所侵蝕。\n\n至於這顆金蛋的 50% 收入分成：Circle 存在脫離 Coinbase 的法律漏洞。我非常確定 Circle 長期來看會找到方法。\n\n例如，Genius 法案明確禁止穩定幣發行商向持有者支付利息——從而以此為由依法停止支付分成。\n\n或者到 2027 年透過合約談判將 50/50 的分成降至 75/25 等。\n\n但你可以選擇以 180 億美元直接投資純發行商（$CRCL），或者以 660 億美元投資交易所附加業務（$COIN）。"
+    "stances": {
+      "COIN": "Bearish",
+      "CRCL": "Bullish",
+      "HOOD": "Bullish"
+    },
+    "summary": "作者看空COIN，因合約 renegotiation 與競爭風險，看好CRCL與HOOD。",
+    "translation_zh": "以$COIN來說，我稍微不認同。它比你想像的還要不具多元性，因為2026年與$CRCL的合約重新談判即將到來。目前Coinbase受益於50%的USDC營收分潤加上交易所業務。接著是託管所帶來的價值（例如貝萊德ETF）。但長期來看，該交易所業務可能會被$HOOD和像Bitfinex這樣的零手續費交易所侵蝕。至於那顆金雞蛋的50%營收分潤：Circle有法律漏洞可以與Coinbase脫鉤。而且我很確定Circle長期會找到方法。例如，「Genius法案」明確禁止穩定幣發行方向持有人支付利息 -> 利用這點在法律上停止支付他們分潤。或者在2027年合約談判時，將50/50的分潤降至大約75/25。但你可以用180億美元買入純粹不對稱性的直接發行商，或者用660億美元買入交易所附加業務。",
+    "risk": "COIN面臨與CRCL分潤合約重談、法規漏洞導致分潤取消，以及交易所業務長期遭HOOD等競爭者蠶食的風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-14T02:18:48Z"
   },
   "2002767209949745302": {
+    "id": "2002767209949745302",
+    "tweet_id": "2002767209949745302",
     "sentiment": "Bullish",
-    "summary": "Circle具極高毛利與無限擴展性",
-    "translation_zh": "別客氣！我喜歡免費分享想法，主要是為了幫助他人帶來的成就感。\n\n我透過市場賺錢，所以個人看不出有什麼理由需要將粉絲變現。\n\n至於這個問題：\n\n$CRCL 的商業模式本質上是金融界的「聖杯」：100% 的毛利率、零資金成本和無限的擴充性。\n\n它簡直就是一台不間斷的印鈔機，這就是為什麼它享有高估值/溢價。\n\n銀行：2-4% 利息的「儲蓄帳戶」，以 6% 貸出，利差約 2-4%。\n\nCircle：付你 0%（當你持有 USDC 時），他們（透過國債）借給美國政府約 5%，利差就是完整的約 5%。\n\n我是故意簡化概念來解釋（未計入與 $COIN 的收入分成等因素），但是：\n\n如果 Circle 有 600 億美元的流通量 (USDC)：600 億美元 × 5% 殖利率 = 每年 30 億美元的無風險收入。\n\n如果看看 Tether，在 2024 年，Tether 報告了約 130 億美元的利潤，且員工數少於 100 人。他們拿走「免費資金」（用戶存款），購買國債（安全的 5%）以及比特幣。\n\nCircle + Tether 的商業模式可以說是全球最好的：\n\n印免費的錢（來自用戶），以 X% 借給政府，口袋收下利差。如果聯準會降息至 0%，印鈔機不會停止，只是像銀行一樣轉向服務/交易相關收入（但顯然會受點傷）。\n\n如果 USDC 擴展到 1 兆美元以上的市值，或作為數位化美元的預設標準達到 2 兆美元以上，若能從中賺取 5%，每年利潤將達到 500-1000 億美元。\n\n而現在 Circle 的市值為 180-200 億美元，流通供應量為 770 億美元。\n\n它也是純軟體，因此可以像 Tether 一樣以低員工數擴展，不像銀行有極高的高額開支。\n\n所以基本上無限擴充的商業模式（印鈔機）結合極高的利潤率 = 高估值。"
+    "stances": {
+      "COIN": "Neutral",
+      "CRCL": "Bullish"
+    },
+    "summary": "作者高度看好CRCL的商業模式，認為其具備極高利潤與擴展性。",
+    "translation_zh": "不用擔心！我喜歡免費分享想法，主要是為了幫助他人獲得成就感。我透過市場賺錢，所以我個人看不出有任何需要將追蹤者營利化的理由。至於問題：CRCL的商業模式本質上是金融的「聖杯」：100%毛利率、零資金成本且無限擴展性。它簡直是個印鈔機，這也是為什麼它享有高估值和溢價。銀行：2-4%利息的「儲蓄帳戶」。他們以6%放貸。利差約2-4%。Circle：付給你0%（當你持有USDC）。他們以約5%借給美國政府（透過美債）。他們的利差就是整整約5%。我故意簡化概念來解釋（未將與COIN的營收分潤等因素計入），但：如果Circle有600億美元流通量（USDC）：600億美元 × 5%收益率 = 30億美元/年無風險收益。如果我們看Tether，在2024年，Tether報告了約130億美元利潤。他們用不到100名員工就做到了。他們拿走「免費資金」（用戶存款），買入美債（安全的5%）以及BTC。Circle與Tether的商業模式可說是世界上最好的：印出免費資金（來自用戶），以X%借給政府，口袋麥克麥克賺取利差。如果聯準會降息至0%，印鈔機不會停止，它只是像銀行一樣轉向服務/交易相關營收（但顯然會受一點傷）。如果USDC擴大到1兆美元以上市值或2兆美元以上，作為數位化美元的事實標準，如果他們從中賺取5%，利潤將是每年500億至1000億美元。而現在Circle市值為180-200億美元，流通供應量為770億美元。這也是純軟體，因此它可以像Tether一樣以低員工數擴展，不像銀行那樣擁有極高的管銷費用。所以基本上無限可擴展的商業模式（印鈔機）結合極高利潤率 = 高估值。",
+    "risk": "若聯準會降息至0%，將會對收益造成一些打擊。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-14T02:18:51Z"
   },
   "2002718408652079206": {
     "sentiment": "Bullish",
@@ -38992,9 +39195,18 @@
     "translation_zh": "謝謝，我等了很久才建立 $CRCL 的多頭頭寸。\n\n我們經歷了加密貨幣領域清算、浮動股解禁、降息以及高 Beta 股票拋售，最終導致從高點下跌了 70%。\n\n現在 Circle 終於回到了一個值得尊敬的價格，因此我在回檔至 70 美元時建立了頭寸。\n\n我最初確實在 IPO 期間下了買單，但後來它直接飆到了 250 美元以上。自那時以來有了更多積極的進展，所以從投資者角度來看，這對我來說是非常高興能持有並長期看多的標的。賣出認售期權 (CSP) 也是個好策略，但我有點貪心，試圖抓住上行空間。"
   },
   "2002697083359563951": {
+    "id": "2002697083359563951",
+    "tweet_id": "2002697083359563951",
     "sentiment": "Bullish",
-    "summary": "USDC具合規優勢，加速機構採用",
-    "translation_zh": "問得好，這是我對 USDT 與 $CRCL USDC 的細緻看法。\n\n我能給出的最佳例子是 OnlyFans 和信用卡網絡。\n\n這本來是不被允許的，但信用卡網絡仍然與 OF 合作，因為他們處理的交易量龐大。同樣地，Tether 與美國政府處於一種愛恨交織的關係。\n\n至於 Tether，他們是全球第 17 大美國政府債務持有者，實際上持有超過 1300 億美元的國債。如果美國政府試圖禁止 USDT，可能會引發國債市場的混亂拋售。\n\n然而，它在推廣「美元化」方面仍具有戰略重要性，特別是在阿根廷或土耳其等國家，確實有助於美元成為主導貨幣。\n\n它在國際上仍占主導地位，特別是在「灰市」合規與加密貨幣交易方面。\n\n然而，$USDC 基本上已成為美國財政部在私營部門的合規延伸，主要在美國市場。\n\nUSDC 打破了高度監管的機構壁壘，深入美國金融機構（Visa、Mastercard、Stripe、BNY 等）。\n\nTether 依然是合規頭痛的問題，在美國要獲得 Bitfinex 等平台的鑄造功能/交易依然極其困難且不合規。\n\nUSDC 基本上已經成為乾淨的美元，並將在金融機構/銀行業中加速擴充；而 USDT 將主要用於國際、較少受監管的場景（例如委內瑞拉人將當地貨幣轉換為 USDT，而不需要通過繁瑣的 KYC/AML）。\n\n但鑑於 Tether 規模巨大，它將永遠存在。"
+    "stances": {
+      "CRCL": "Bullish",
+      "USDC": "Bullish"
+    },
+    "summary": "USDC與USDT各有優勢，USDC因受監管更看好其機構發展。",
+    "translation_zh": "好問題，這是我對USDT與USDC的細膩看法。最好的例子就是Onlyfans與信用卡網路。雖然不太被允許，但信用卡網路因為處理龐大交易量仍與OF合作。同樣地，Tether與美國政府處於愛恨交織的關係。就Tether而言，它是全球約第17大美國公債持有者，實際持有超過1300億美元的公債。如果美國政府試圖禁止USDT，可能會在公債市場引發混亂的拋售潮。然而，它對於推動「美元化」仍具戰略重要性，特別是在阿根廷或土耳其等國，且確實幫助美元成為主導貨幣。它在國際上仍然占主導地位，特別是在「灰市」合規與加密貨幣交易中。然而，USDC基本上已成為美國財政部的受監管私營部門延伸，主要在美國市場。USDC憑藉美國金融機構（Visa、Mastercard、Stripe、BNY等）成功打入高度受監管的機構高牆。Tether仍然是個合規頭痛問題，在美國獲得鑄造功能或在Bitfinex等平台上交易仍然極其困難且不合法。USDC基本上已成為乾淨的美元，未來將隨著金融機構和銀行快速規模化，而USDT則將存在於許多國際、較少受監管的使用情境中（例如委內瑞拉人將當地貨幣轉換為USDT，而不是RuneScape金幣，且無需經過大量的KYC/AML程序）。但鑑於Tether規模龐大，它將一直存在。",
+    "risk": "Tether存在合規隱患，若遭美政府禁止恐引發公債市場混亂拋售。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-14T02:18:54Z"
   },
   "2002688753710887007": {
     "sentiment": "Bullish",
@@ -65080,5 +65292,18 @@
     "risk": "",
     "model": "gemini-3.5-flash",
     "analyzed_at": "2026-11-13T21:58:27Z"
+  },
+  "2121396827484524803": {
+    "id": "2121396827484524803",
+    "tweet_id": "2121396827484524803",
+    "sentiment": "Neutral",
+    "stances": {
+      "NVDA": "Neutral"
+    },
+    "summary": "推文分享股東致輝達董事會的信函，立場中立。",
+    "translation_zh": "Altimeter 與 Atreides 致輝達（$NVDA）董事會的信函。",
+    "risk": "",
+    "model": "gemini-3.8-flash",
+    "analyzed_at": "2026-11-14T02:13:56Z"
   }
 }
