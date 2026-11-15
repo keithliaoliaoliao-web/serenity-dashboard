@@ -40407,59 +40407,187 @@
     "translation_zh": "@RKLBMan @Hedgeye 是的，我對 $RKLB 的論點是它會在適當的時間內（例如 5 到 7 年）追上 SpaceX，而 SpaceX 上次的估值為 3,500 億美元，因此這有 10 倍以上的報酬率。對 Avride 也是相同的論點，它可能在兩三年內追上 Waymo 在 2024 年時 450 億美元的估值。"
   },
   "1997051147207823830": {
+    "id": "1997051147207823830",
+    "tweet_id": "1997051147207823830",
     "sentiment": "Bullish",
-    "summary": "看好Nebius旗下Avride估值爆發",
-    "translation_zh": "根據 Seeking Alpha 參照 Nuro 的報告，目前估計約為 60 億美元。但我會說 Avride 是 $NBIS 的皇冠明珠，而不是 ClickHouse，特別是當像 Waymo 這樣的 Robotaxi 公司在短時間內將估值擴展至 1,000 億美元以上時。$TSLA 僅憑 Robotaxi 發布就增加了數千億美元價值（例如 Cathie Wood 表示 Robotaxi 可能占特斯拉價值的 90%），而且由於缺少競爭對手，這是一個具有極大上行空間的市場。基本上只有 $TSLA、$GOOGL 的 Waymo、$AMZN 的 Zoox、現代汽車……然後是試圖自衛抵禦 Robotaxi 競爭的 $UBER。$UBER 至關重要的是利用 Avride 擴展其防禦力，而不是與 Waymo 合作（避免將客戶引流到其他 App，這也是他們共同投資 3.75 億美元的原因）。考慮到 $NBIS 擁有 Avride 83% 的股權，如果其市值成長到約 450 億美元（這是 Waymo 在 2024 年 10 月的估值）……這簡直比 Nebius 今天的市值還高（笑），而且它才剛在德州推出。像 Hedgeye 這樣的基金可能沒有考慮到 SOP 的成長，大大低估了 Nebius。"
+    "stances": {
+      "AMZN": "Neutral",
+      "GOOGL": "Neutral",
+      "NBIS": "Bullish",
+      "TSLA": "Neutral",
+      "UBER": "Neutral"
+    },
+    "summary": "看多$NBIS，指機構嚴重低估Avride潛力。",
+    "translation_zh": "根據Seeking Alpha報告與Nuro對標，目前估值大概在60億美元左右。但我認為Avride才是$NBIS真正的王牌資產，而非ClickHouse，特別是考量到像Waymo這樣的無人計程車公司在短時間內就擴展到超過1,000億美元的估值。$TSLA僅因推出無人計程車就增加了數千億美元的市值（例如Cathie Wood曾說無人計程車可能佔特斯拉價值的90%），而且由於市場參與者極少，這是一個具備極大上漲空間的市場。市場上基本上就只有$TSLA、$GOOGL的Waymo、$AMZN的Zoox和現代汽車……還有試圖抵禦無人計程車競爭的$UBER。對$UBER而言，透過與Avride合作來擴大防禦能力至關重要，而不是與Waymo合作導致將客戶導流至對方的應用程式（這也是為何他們聯合投資了3.75億美元）。考量到$NBIS持有Avride 83%的股權，如果Avride的市值擴展到約450億美元（這不過是Waymo早在2024年10月的估值）……這簡直比Nebius目前的總市值還要高，哈哈，而且它才剛在德州上線營運。像Hedgeye這樣的基金可能沒有將SOP成長納入考量，嚴重低估了Nebius。",
+    "risk": "$UBER面臨無人計程車競爭壓力，與Waymo合作恐將客戶導流至對方。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:49:22Z"
   },
   "1997034977524121633": {
+    "id": "1997034977524121633",
+    "tweet_id": "1997034977524121633",
     "sentiment": "Bullish",
-    "summary": "駁斥做空，Nebius基本面遠優於CRWV",
-    "translation_zh": "做空機構 @Hedgeye 現在正在做空 Nebius $NBIS。目前股價為 97.8 美元。他們的說法？Nebius 是 Coreweave 2.0。Coreweave [ $CRWV ]：客戶多樣性低，主要為超大規模業者，其積壓訂單中約四分之一來自 OpenAI；剩餘現金 18 億美元；來自利率 8-10% 的高風險融資，每年產生 13 億美元以上的債務利息。這跟 Nebius 是一樣的嗎？Nebius [ $NBIS ]：在新興雲端市場中擁有最高多樣性的客戶，包含 $META、$MSFT、政府機關、$SHOP、Mistral、$NOW 等；剩餘現金超過 48 億美元；可轉債結構履約價溢價 40% 以上，利率約 2%，每年利息僅約 7,660 萬美元；擁有 Level 4 級別 Robotaxi 自動駕駛汽車部門，對 $UBER（上一輪與 UBER 合作 3.75 億美元）抵禦 Waymo 競爭至關重要；AI 訓練部門獲得貝佐斯資助，並由 $AMZN、Anthropic 等使用；擁有某子公司 28% 股權，絕大多數上市公司如 $TSLA、$NET、Tiktok、$META 等都在使用；4 家子公司與其核心運營業務一同保持 100% 的年成長，其中 Tripleten/Toloka 每年都貢獻淨利潤。相同的公司？（諷刺）"
+    "stances": {
+      "AMZN": "Neutral",
+      "CRWV": "Bearish",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "NBIS": "Bullish",
+      "NET": "Neutral",
+      "NOW": "Neutral",
+      "SHOP": "Neutral",
+      "TSLA": "Neutral",
+      "UBER": "Neutral"
+    },
+    "summary": "反駁做空觀點，看多NBIS基本面並看空CRWV",
+    "translation_zh": "做空機構 @Hedgeye 目前正在放空 Nebius ($NBIS)，目前股價為 97.8 美元。他們的論點是什麼？Nebius 就是 Coreweave 2.0。Coreweave ($CRWV)：客戶分散度低，主要為超大規模雲端業者，約四分之一的積壓訂單來自 OpenAI。帳上現金僅剩 18 億美元。每年因 8-10% 利率的惡性融資產生超過 13 億美元的債務利息。這跟 Nebius 一樣嗎？Nebius ($NBIS)：在 Neocloud 市場擁有最高的客戶分散度，涵蓋 $META、$MSFT、政府機構、$SHOP、Mistral、$NOW 等眾多客戶。帳上現金超過 48 億美元。透過價外 40% 以上的票據結構，每年僅需約 7,660 萬美元利息（利率約 2%）。擁有對 $UBER 至關重要的 Level 4 自動駕駛計程車部門（$UBER 上輪投資 3.75 億美元），用以對抗 Waymo。擁有貝佐斯投資、並獲 $AMZN 及 Anthropic 等採用的 AI 訓練部門。持有某子公司 28% 股權，該公司獲 $TSLA、$NET、TikTok、$META 等多數上市公司使用。另有 4 家年增率達 100% 的子公司與核心業務並進，其中 Tripleten/Toloka 每年皆貢獻淨利。同一家公司。",
+    "risk": "NBIS面臨做空機構狙擊，CRWV則有客戶集中與高利債務融資風險。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:49:32Z"
   },
   "1997029704969367661": {
+    "id": "1997029704969367661",
+    "tweet_id": "1997029704969367661",
     "sentiment": "Bullish",
-    "summary": "諷刺做空邏輯，Nebius財務遠勝CRWV",
-    "translation_zh": "因為你覺得 $NBIS 和 $CRWV 一樣就去做空它，真是太明智了，好棒的論點！（諷刺）$CRWV -> 每年 13 億美元以上的債務利息、來自 OpenAI 的大量積壓訂單、剩餘 18 億美元現金。$NBIS -> 可轉換公司債結構不會嚴重侵蝕盈利能力、客戶群多元化帶來高利用率（Shopify、Cursor、政府機關、Meta/MSFT 等超大規模業者）、超過 48 億美元現金可用於建設、Robotaxi 自駕車部門獲 $UBER 採用並擴大規模以競逐 Waymo、AI 訓練部門由 $AMZN、Anthropic 等資助並使用、持有大多數上市公司使用的子公司 28% 股權、全部 4 家子公司年成長率達 100% —— 市值 240 億美元。肯定跟 Coreweave 是同一家公司呢。（諷刺）"
+    "stances": {
+      "AMZN": "Neutral",
+      "CRWV": "Bearish",
+      "NBIS": "Bullish",
+      "UBER": "Neutral"
+    },
+    "summary": "看多$NBIS成長與現金優勢，對比看空$CRWV。",
+    "translation_zh": "因為覺得$NBIS跟$CRWV一樣就去做空$NBIS真是個好主意，好棒的論點啊！ $CRWV -> 每年超過13億美元的債務利息、來自OpenAI的龐大積壓訂單、帳上僅剩18億美元現金。 $NBIS -> 採用可轉債結構，利息不會大幅侵蝕獲利；擁有多元化的客戶群以維持高利用率（包含Shopify、Cursor、各國政府、Meta與微軟等超大規模雲端業者）；帳上擁有超過48億美元現金可用於擴建；自動駕駛計程車業務獲$UBER採用，並正擴大營運與Waymo競爭；AI訓練業務由$AMZN、Anthropic等公司出資並使用；持有大多數上市公司都有使用的子公司28%股權，旗下4家子公司年增率皆達100%，市值為240億美元。 還真是跟CoreWeave一模一樣的公司呢。",
+    "risk": "$CRWV每年債息逾13億美元且現金僅18億；$NBIS面臨Waymo競爭。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:49:45Z"
   },
   "1997001372198490531": {
+    "id": "1997001372198490531",
+    "tweet_id": "1997001372198490531",
     "sentiment": "Neutral",
-    "summary": "諷刺NBIS與IREN股價跌幅的比較",
-    "translation_zh": "@DannyQuark 你說得對，$NBIS > $IREN，因為 Nebius 只下跌了 -17.5%，而不是 -41.5%。但你有沒有想過反向論點，即 $IREN > $NBIS，因為 $IREN 的投資組合今天只承受了 -4% 的損失，而不是 -6%？"
+    "stances": {
+      "IREN": "Neutral",
+      "NBIS": "Neutral"
+    },
+    "summary": "調侃$IREN與$NBIS跌幅，對兩檔皆中立。",
+    "translation_zh": "@DannyQuark 你說得對，$NBIS 確實優於 $IREN，因為 Nebius 只跌了 17.5% 而不是 41.5%。但你有沒有想過反過來的說法：$IREN 優於 $NBIS，因為 $IREN 的投資組合今天只虧損 4% 而不是 6%？",
+    "risk": "",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:49:58Z"
   },
   "1996999459788804485": {
-    "sentiment": "Neutral",
-    "summary": "客觀分析NBIS與IREN回檔原因與風險",
-    "translation_zh": "財報公布前，$NBIS 股價約在 115 至 135 美元之間。自那時以來，我們已下跌了約 ~21%-40%，期間發生的事包括：與 $UBER 合作推出 Robotaxi FSD、ARR 預期翻倍、吉瓦 (GW) 產能指引提升 150%、意外獲得 $META 合約、納入 MSCI 帶來資金流入。唯一的負面因素是：2,500 萬股的股權稀釋。作為投資者我極度不喜歡這一點（更希望是用自由現金流來推進）。不幸的是，TI 針對 $ORCL 的報告、$CRWV 的重大債務警訊、$CRWV 影響到供應商（如 $APLD 發行垃圾債）以及信用緊縮，再加上 GPU 折舊的論點，幾乎同時襲擊了新興雲端市場。只有信用緊縮是實質影響，不應導致 $NBIS 出現這麼大的跌幅（純粹是市場情緒）。話雖如此，他們確實需要改進行銷（例如，完全沒有人把 Robotaxi 與 $NBIS 聯繫起來，甚至主流新聞都不知道）。至於 $IREN，他們採取了購買 GPU 而非代管服務的出人意料舉動，考慮到 3GW 的產能，投資者可能會看到巨大的潛在股權稀釋風險，因此也下跌了 40%。我相信 $IREN 在行銷方面沒問題，它擁有像 $ASTS 那樣狂熱的追隨者（這對他們來說是好事）。"
+    "id": "1996999459788804485",
+    "tweet_id": "1996999459788804485",
+    "sentiment": "Bearish",
+    "stances": {
+      "APLD": "Bearish",
+      "ASTS": "Bullish",
+      "CRWV": "Bearish",
+      "IREN": "Bearish",
+      "META": "Neutral",
+      "NBIS": "Neutral",
+      "ORCL": "Neutral",
+      "UBER": "Neutral"
+    },
+    "summary": "NBIS與IREN遭遇大跌，市場受稀釋與債務疑慮拖累。",
+    "translation_zh": "財報前NBIS股價約在115至135美元。自那之後我們下跌了約21%至40%，原因包括：與UBER合作推出Robotaxi FSD、ARR預估翻倍、GW產能指引上調150%、意外獲得META合約以及MSCI納入引發的資金流入。唯一的缺點是2500萬股的稀釋。作為投資人我極度討厭這點（我更偏好自由現金流來擴產）。不幸的是，TI針對ORCL的報導、CRWV的重大債務警訊、CRWV透過APLD發行垃圾債與信用收緊影響供應商，以及GPU折舊爭議，這些因素幾乎同時襲擊了新雲端（Neocloud）市場。唯有信用收緊是實質因素，且不至於讓NBIS跌幅這麼大（純粹是情緒面）。話雖如此，他們絕對需要改善行銷（例如沒人把Robotaxi與NBIS聯想在一起，甚至主流新聞也不知道）。至於IREN，他們採取了令人意外的舉動，買入GPU而非採用機櫃代管（colo），考量到3GW的產能，投資人可能看到極巨幅的潛在稀釋，這也是下跌40%的原因。我確信IREN在行銷方面沒問題，它擁有像ASTS那樣的狂熱追隨者（這對他們是好事）。",
+    "risk": "面臨2500萬股股權稀釋、CRWV重大債務警訊、供應商受信用收緊與垃圾債影響，以及潛在稀釋風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:01Z"
   },
   "1996994803503075542": {
+    "id": "1996994803503075542",
+    "tweet_id": "1996994803503075542",
     "sentiment": "Neutral",
-    "summary": "諷刺NBIS與IREN爭論時兩股皆跌",
-    "translation_zh": "$NBIS 與 $IREN 爭論簡而言之：『 $IREN 更好因為——』兩檔股票：分別 -6.16% 和 -4.00%。大盤市場：🟩 🚀"
+    "stances": {
+      "IREN": "Neutral",
+      "NBIS": "Neutral"
+    },
+    "summary": "NBIS與IREN在市場大漲時皆下跌，對兩者均持中立。",
+    "translation_zh": "NBIS對決IREN的辯論簡而言之：「IREN比較好因為——」兩檔股票皆為：-6.16%與-4.00%。市場：🟩 🚀",
+    "risk": "推文未明確提及特定風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:03Z"
   },
   "1996976122551206150": {
+    "id": "1996976122551206150",
+    "tweet_id": "1996976122551206150",
     "sentiment": "Neutral",
-    "summary": "解釋GPU折舊起算點之會計定義",
-    "translation_zh": "另外 ——「折舊僅在底層資產（GPU）投入使用後才開始」—— 這個說法較微妙且偏向錯誤。我不確定 $IREN 是否有特別之處，但通常來說，折舊是在資產「可用於使用」時開始，而非「投入使用」時，後者隱含了 100% 利用率（門檻），不論是否已經用於客戶的工作負載，或資產是否真的在運作中。（例如，如果我們看 $ORCL 的報告，它就考慮到了利用率滯後的因素）。"
+    "stances": {
+      "IREN": "Neutral",
+      "ORCL": "Neutral"
+    },
+    "summary": "探討IREN與ORCL的GPU資產折舊計算方式，立場中立。",
+    "translation_zh": "另外—「折舊只有在基礎資產（GPU）投入使用時才會開始。」—這很微妙且傾向於錯誤。我不確定這對$IREN來說是否具體不同，但一般而言，折舊是從資產可供使用時開始，而不是實際投入使用時，這暗示了百分之百的利用率（門檻），而不是針對客戶工作負載或資產實際被使用。（例如，如果我們看$ORCL的報告，它考慮了利用率滯後）。",
+    "risk": "資產折舊認列時間點與利用率滯後可能影響財務報表表現。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:05Z"
   },
   "1996974297118920957": {
+    "id": "1996974297118920957",
+    "tweet_id": "1996974297118920957",
     "sentiment": "Bullish",
-    "summary": "利用率提升帶動營收突破固定折舊",
-    "translation_zh": "「營收無法超越折舊成長」是錯誤的，你沒有正確陳述單價（隨時間下降）與營運槓桿（隨規模擴大）的關係。在「前期準備」階段，你擁有了資產（折舊已開始計算），但尚未帶來全部營收。當你為 $MSFT / $META 等合約啟動集群時，利用率提高且利潤率擴張（可變）。因此「營收無法超越折舊成長」是不對的，因為營收絕對會因為利用率的提升而超越折舊成長（折舊是固定的，而營收是可變的）。看看 $CRWV 約 74% 的現金利潤率就能涵蓋折舊。（忽略 $CRWV 龐大的債務利息，這是 $IREN 和 $NBIS 所沒有的）。"
+    "stances": {
+      "CRWV": "Bullish",
+      "IREN": "Bullish",
+      "META": "Bullish",
+      "MSFT": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "營收隨產能利用率擴張，CRWV等標的看多。",
+    "translation_zh": "「營收無法超越折舊成長」的說法是錯的，因為你沒有正確表達單價（會下降）與營運槓桿（會規模化）的差別。在「前期投入」階段，你擁有資產（折舊正在進行）但營收尚未全開。當你為微軟、Meta等合約啟用叢集時，利用率會提高且利潤率會擴大（具變動性）。所以「營收無法超越折舊成長」是錯的，因為營收絕對會透過利用率超越折舊成長（折舊是固定的，而營收是變動的）。看看CRWV約74%左右的現金利潤率就能覆蓋折舊（忽略CRWV龐大的利息債務，IREN和NBIS都沒有這項債務）。",
+    "risk": "CRWV擁有龐大的利息債務，需留意財務負擔。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:08Z"
   },
   "1996967974046232748": {
-    "sentiment": "Neutral",
-    "summary": "分析新興雲端概念股之風險與潛力",
-    "translation_zh": "好，從我的角度來看：$NBIS —— 具備最高的不對稱上行空間，因為除了核心營運的資料中心業務外，他們還有 4 家像 Robotaxi 一樣年成長 100%+ 的子公司。這只是一場等待市場將這些部分計入價格的遊戲（例如 $UBER 因 Avride 的自駕車大漲，但持有 Avride 的 $NBIS 卻沒動靜）。我非常非常看好 Robotaxi 和 Avride。我不知道市場為什麼沒看到這個機會（可能我們只是太早了，上次我查看時，機構持股率已從 38% 累積到 52% 以上，所以有些機構大概已經察覺到了）。$IREN —— 潛在上行空間最大，但風險也最大。僅為了與 $MSFT 的交易，他們就必須稀釋股權並支付價值超過 58 億美元的硬體費用，最終僅為了加速建設就花費高達 200萬美元/兆瓦 的成本。然而，那只是為了將一小部分產能變現，而且他們選擇走 AI 雲端路線而非像 $CIFR 那樣進行代管並購買 GPU。作為投資者，如果他們繼續進行 GPU 方案，我會非常擔心，因為執行存在不確定性，且為了將那「3 GW 產能管道」變現會面臨極為極端的股權稀釋。也許再等幾個月會更好，因為近期投資者受創最重。$CIFR —— 可能是新興雲端領域中最安全的，因為有 $AMZN 和 $GOOGL 作後盾，資產負債表上有大量比特幣應對下一次減半事件，且正透過與超大規模業者簽訂具有營收可見度的高利潤代管合約進行較慢但利潤更高的成長。$TE —— 能源是個不錯的標的。你的投資組合波動性極高（可能出現 -50% 的波動），但如果你是經歷過 WSB Reddit、加密貨幣和選擇權考驗的資深玩家，那就沒問題。"
+    "id": "1996967974046232748",
+    "tweet_id": "1996967974046232748",
+    "sentiment": "Bullish",
+    "stances": {
+      "AMZN": "Neutral",
+      "CIFR": "Bullish",
+      "GOOGL": "Neutral",
+      "IREN": "Neutral",
+      "MSFT": "Neutral",
+      "NBIS": "Bullish",
+      "TE": "Bullish",
+      "UBER": "Neutral"
+    },
+    "summary": "看好NBIS、CIFR與TE，潛在回報高但波動極大。",
+    "translation_zh": "從我的角度來看，$NBIS 具備最高的不對稱上漲潛力，因其擁有機器人計程車等以年增率逾100%成長的子公司。市場尚未定價 Avride，而 $UBER 則因自駕車而大漲。我非常喜歡機器人計程車和 Avride。我不知道為什麼市場沒看到這機會，可能是我們太早進場，但機構已將流通股持股從38%累積到52%以上。$IREN 具備最高上漲潛力，但也是風險最大的。光是為了微軟的交易，他們就必須稀釋股權並支付價值超過58億美元的硬體費用，甚至花費每兆瓦200萬美元的成本來加速建置。然而，這僅是為了變現一小部分容量，他們走的是AI雲端路線而非如 $CIFR 般買GPU做散列託管。如果他們繼續進行GPU發行，身為投資人我會極度擔心，因為執行存在不確定性，且為了變現「3GW儲備」將產生極端大量的股權稀釋。或許再等幾個月會更好，因為短期投資人受傷最重。$CIFR 可能是新雲端產業中最安全的，因為有亞馬遜和谷歌作後盾，資產負債表上有大量比特幣以因應下次減半事件，且其營收成長較慢但具備更高利潤率的託管業務，並有大型雲端廠商交易帶來的營收能見度。$TE：能源是個好標的。你的投資組合波動性極高哈哈（會大幅波動達50%），但如果你出身自WSB論壇、加密貨幣和選擇權的深淵，那就沒問題。",
+    "risk": "IREN面臨極端股權稀釋、執行不確定性與高昂成本風險；整體投資組合波動極大可能腰斬。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:11Z"
   },
   "1996965116282393027": {
+    "id": "1996965116282393027",
+    "tweet_id": "1996965116282393027",
     "sentiment": "Bullish",
-    "summary": "看好NBIS爆發力與台積電博通穩健",
-    "translation_zh": "100% 同意，$NBIS 可能是上行潛力最高的投資組合哈哈。話雖如此，擁有像 $AVGO 或 $TSM 這類更穩健的複利成長股來追蹤整個產業的成長也是件好事，這樣你就不會對最近這種劇烈波動（30-40% 的漲跌）感到太害怕。"
+    "stances": {
+      "AVGO": "Bullish",
+      "NBIS": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "看好NBIS具高上漲潛力，並以AVGO與TSM作為穩健配置。",
+    "translation_zh": "@MMerrino569447 100% 認為 $NBIS 很可能是潛在漲幅最高投資組合。話雖如此，擁有一些像 $AVGO 或 $TSM 這樣更穩健的複利成長股來追蹤更廣泛的產業成長也不錯，這樣才不會被近期（30-40%的跌幅與漲幅）的波動嚇到。",
+    "risk": "需承受近期達30至40%的高震盪風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:13Z"
   },
   "1996964360087031854": {
+    "id": "1996964360087031854",
+    "tweet_id": "1996964360087031854",
     "sentiment": "Bullish",
-    "summary": "認同ASML獨家EUV優勢可長期持有",
-    "translation_zh": "我沒有把 $ASML 放進去，因為他們追蹤的是晶圓廠週期，而不是像 $TSM 或三星電子（代工 + 記憶體 + 其他）那樣追蹤整個 AI 資本支出交易。但作為唯一的 EUV 供應商，相較於追逐下一波 TPU/Blackwell 週期/大語言模型代理建設的最直接受益者，它是一個很好的長期複利成長股。我敢肯定你可以用 ASML 替換上述任何一家公司。"
+    "stances": {
+      "ASML": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "ASML與TSM皆具長期成長潛力，ASML為優秀的長期複利股。",
+    "translation_zh": "我沒有把ASML納入，因為它們追蹤的是晶圓廠週期，而不是像TSM或三星電子那樣涵蓋整體的AI資本支出交易（晶圓代工+記憶體+其他）。但作為唯一的EUV供應商，相較於追逐下一個TPU/Blackwell週期/LLM代理建置的最直接受惠者，它是一檔很好的長期複利股。我相信你可以用ASML置換上述任何一檔股票。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:15Z"
   },
   "1996949412279734426": {
     "sentiment": "Bullish",
@@ -40477,14 +40605,41 @@
     "translation_zh": "@mhayavkay 關於 $SMCI https://t.co/i9EduOkMGY"
   },
   "1996822473212629140": {
+    "id": "1996822473212629140",
+    "tweet_id": "1996822473212629140",
     "sentiment": "Neutral",
-    "summary": "彙整歷史個股深度分析與供應鏈研究",
-    "translation_zh": "如果你平時有關注我發的內容，其實我以前就發過分析並討論過上面的每一檔股票。這只是歷史記錄的彙整清單。例如，我不久前才對 TPU v7 ironwood 供應鏈（$COHR、$AMKR、$LITE、$MPWR）進行了更深入的研究。我也經常發布關於新型雲端公司（如 $NBIS、$CIFR）的盡職調查（DD）。"
+    "stances": {
+      "AMKR": "Neutral",
+      "CIFR": "Neutral",
+      "COHR": "Neutral",
+      "LITE": "Neutral",
+      "MPWR": "Neutral",
+      "NBIS": "Neutral"
+    },
+    "summary": "作者分享歷史追蹤清單，涵蓋多檔供應鏈與雲端概念股。",
+    "translation_zh": "我其實已經發文分析過並談論過上面提到的每一檔股票，如果你平常有在關注我的貼文的話。這只是一份歷史統整清單。舉例來說，我不久前才發文深入探討 TPU v7 ironwood 供應鏈（$COHR、$AMKR、$LITE、$MPWR）。而且我經常發布關於 neoclouds（如 $NBIS、$CIFR）的研究報告。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:18Z"
   },
   "1996641921561948448": {
+    "id": "1996641921561948448",
+    "tweet_id": "1996641921561948448",
     "sentiment": "Neutral",
-    "summary": "根據當前估值偏好的大型科技股清單",
-    "translation_zh": "@Scepticus16 就目前的估值而言，對我來說大概是 $meta、$amzn、$googl、$nvda、$appl、$msft、$tsla。"
+    "stances": {
+      "AAPL": "Neutral",
+      "AMZN": "Neutral",
+      "GOOGL": "Neutral",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "NVDA": "Neutral",
+      "TSLA": "Neutral"
+    },
+    "summary": "作者針對美股七大巨頭的當前估值進行討論，立場中立。",
+    "translation_zh": "就目前的估值而言，對我來說大概是 META、AMZN、GOOGL、NVDA、AAPL、MSFT、TSLA。",
+    "risk": "暗示這些大型科技股的當前估值可能存在疑慮或值得審視。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:20Z"
   },
   "1996626010092327115": {
     "sentiment": "Bullish",
@@ -40492,19 +40647,46 @@
     "translation_zh": "目前 $NBIS 正投入大量資本支出，為其超大型雲端客戶建設 AI 資料中心，並推動子公司（如 Avride）與 Waymo 競爭。關於遠期盈餘，管理層提及 20-30% 的 EBIT 利潤率，即折舊後（但稅前）轉為營運利潤的營收比例。如果我沒記錯的話，目前的 EBITDA 大約是 19%。我們將在一年左右看到淨利大幅增長，現在只是早期階段（建設/擴展年）。否則，如果它今天以這些利潤率達到 100 億美元的 ARR，我們的市值就會達到 1000 億美元。我的論點是這只是一場等待遊戲，最高的報酬來自於從一開始就迎浪而上。"
   },
   "1996620223248748972": {
+    "id": "1996620223248748972",
+    "tweet_id": "1996620223248748972",
     "sentiment": "Bullish",
-    "summary": "市場未完全反映NBIS子公司成長價值",
-    "translation_zh": "是的，$NBIS 實際上是同類中的第一個。我想不出有任何其他可參考的對象。市場開始將其所有成長達三位數的子公司以及核心營運業務一起納入定價，只是時間問題。昨天的 $UBER 就是一個完美的例子，這是其無人駕駛計程車（robotaxi）部門有史以來最大的交易之一，但股價幾乎沒有動靜，因為演算法/市場尚未將 Avride 與 Nebius 聯繫起來。"
+    "stances": {
+      "NBIS": "Bullish",
+      "UBER": "Bullish"
+    },
+    "summary": "看好NBIS與UBER具備強勁成長潛力",
+    "translation_zh": "沒錯，$NBIS 確實是同類型的首創。我想不出任何其他參考。市場開始將其所有子公司的三位數成長以及核心營運業務計入價格，只是時間問題，$UBER 昨天就是個完美的例子，其自動駕駛計程車部門迎來史上最大交易之一，卻幾乎沒有價格波動，因為演算法和市場還沒把 avride 與 Nebius 聯想在一起。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:22Z"
   },
   "1996611097311486244": {
+    "id": "1996611097311486244",
+    "tweet_id": "1996611097311486244",
     "sentiment": "Bearish",
-    "summary": "IREN面臨高額費用與合約終止風險",
-    "translation_zh": "單就加速費用這一元素而言，考慮到它佔 $IREN 的利潤率比例有多高，這顯然是一個相當明確的負面因素。如果他們不支付並面臨與 $MSFT 的合約延誤甚至終止，情況會更糟。這只是以客觀、不美化的方式來描述它。如果說每個人都需要支付那麼高比例的加速費用，那是錯誤的。有時候 $IREN 也存在負面因素，並非所有事情都無比看多。"
+    "stances": {
+      "IREN": "Bearish",
+      "MSFT": "Neutral"
+    },
+    "summary": "推文指出IREN面臨加急成本與合約終止風險，整體看法偏空。",
+    "translation_zh": "光是就加急這部分來看，對於 IREN 的利潤率百分比而言顯然是個負面因素。如果他們不支付這筆費用並面臨微軟（MSFT）的延遲加上合約終止，情況會更糟。這就是客觀且毫不掩飾的說法。如果你說每個人都需要支付那麼高百分比的加急費，那是錯的。有時候 IREN 就是會有負面消息，並不是每件事都一面倒地看多。",
+    "risk": "IREN面臨高額加急成本、微軟專案延遲以及合約終止的重大風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:24Z"
   },
   "1996606601919348926": {
-    "sentiment": "Neutral",
-    "summary": "分析 IREN 設施升級與成本增加",
-    "translation_zh": "若我有錯請指正，但就我對 $IREN 所見，在他們與微軟 ($MSFT) 簽約後，產品算力規格從標準設施轉變為超大規模業者等級。超大型集群的液冷/匯流排/高密度機架約 300 萬。雜項規格約 200 萬（例如加倍備用發電機、冷卻迴路等的設備）。如前所述，加快進度的 200 萬（任何試圖合理化為何這是好事的人，都是在硬撐）。除此之外，前兩項新增似乎很標準。其他 9/10 的回覆看了只會降低智商。"
+    "id": "1996606601919348926",
+    "tweet_id": "1996606601919348926",
+    "sentiment": "Bearish",
+    "stances": {
+      "IREN": "Bearish",
+      "MSFT": "Neutral"
+    },
+    "summary": "作者認為IREN轉型超大規模設施成本大增且加急費用不合理，對其持看空立場。",
+    "translation_zh": "如果我沒弄錯的話，據我所見，對於 $IREN 來說，是在簽署 $MSFT 的交易後，產品計算方式從標準設施變更為超大規模級設施。大約 300 萬用於超級叢集的液冷/母線槽/高密度機架。大約 200 萬來自各種規格（例如設備雙倍備份發電機、冷卻迴路等）。外加如前所述的 200 萬加急費（任何試圖證明這是一件好事的人，都只是在死鴨子嘴硬）。否則前兩項新增似乎是標準的。其他九成的回覆讀了讓人智商受損。",
+    "risk": "IREN因升級設施產生額外的高額成本與加急費用，引發市場疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:27Z"
   },
   "1996586822189613538": {
     "sentiment": "Bullish",
@@ -40517,19 +40699,47 @@
     "translation_zh": "在 38.6 美元（年初至今 -67.5%）將 $TTD 評級調升為買進。The Trade Desk 目前價格合理且略被低估。毛利率 78.1%，2025 財年營收約 29 億美元，年增 18%，自由現金流利潤率 25%。擁有 18 億美元現金、零債務、95% 客戶留存率，以及 10 億美元的股票回購來抵銷高額的股權激勵費用。市值為 186.7 億美元。絕對不像之前提到的超高成長股，但具有良好的價值。基本面放緩，但尚未死亡。考慮到 7.35 億美元的自由現金流、12% 的年成長率和折現率，我將合理價值定在 48-55 美元區間。我認為隨著 12 月中旬年底稅務拋售結束，它會在約 4 個月內回升至 50 美元，約有 31.6% 的上漲空間。"
   },
   "1996560529679327449": {
+    "id": "1996560529679327449",
+    "tweet_id": "1996560529679327449",
     "sentiment": "Bullish",
-    "summary": "看好擁有多家超高成長子公司的股票",
-    "translation_zh": "我是超高成長型公司的早期投資者。航太領域有 $RKLB。金融科技領域有 $HOOD。互連技術領域有 $CRDO。但我從未、從未、從未見過有一家公司的遠期營收年增率超過 700%+。而且同時擁有 4 家超高成長子公司，各自以每年超過 100% 的速度擴張。 https://t.co/iqU2jWf41O"
+    "stances": {
+      "CRDO": "Bullish",
+      "HOOD": "Bullish",
+      "RKLB": "Bullish"
+    },
+    "summary": "推主極度看好RKLB、HOOD與CRDO，讚嘆其高速成長與驚人營收。",
+    "translation_zh": "我是超高成長公司的早期投資人。$RKLB 代表太空。$HOOD 代表金融科技。$CRDO 代表連接技術。但我從未、從未、從未見過一家公司的未來營收年增率達700%以上，同時還擁有4家各自以超過100%年增率同步擴張的超高成長子公司。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:28Z"
   },
   "1996371542369034395": {
-    "sentiment": "Neutral",
-    "summary": "分析 Uber 與 NBIS 自駕合作可能",
-    "translation_zh": "@Jason 我 100% 確定 $UBER 不會與 Waymo 在所有城市合作。如果你是 Uber，為什麼有一天要把所有用戶引流到 Waymo 應用程式中？而不是與他們部分持有股份且沒有獨立競爭對手的另一家全自動駕駛 L4 業者 $NBIS avride 合作？ https://t.co/BE9J3sl72O"
+    "id": "1996371542369034395",
+    "tweet_id": "1996371542369034395",
+    "sentiment": "Bearish",
+    "stances": {
+      "NBIS": "Bullish",
+      "UBER": "Bearish"
+    },
+    "summary": "看空UBER與Waymo合作，看好NBIS avride。",
+    "translation_zh": "@Jason 我百分之百確定 UBER 不會在所有城市都與 Waymo 合作。如果你是 Uber，為什麼有一天要把所有用戶都引導到 Waymo 的 App 呢？為什麼不與他們部分持股且沒有獨立競爭對手的另一個 FSD-4 玩家 $NBIS avride 合作呢？",
+    "risk": "UBER將用戶引導至Waymo恐削弱自身競爭優勢。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:30Z"
   },
   "1996364923233017963": {
+    "id": "1996364923233017963",
+    "tweet_id": "1996364923233017963",
     "sentiment": "Bullish",
-    "summary": "看好 NBIS 在全棧技術與護城河優勢",
-    "translation_zh": "我的意思是並非所有人都能開發 L4 級別的全自動駕駛汽車。美國大概只有 5 家主要業者：Amazon、Waymo、Tesla、$NBIS Avride 和 Motional。除非你的問題是關於母公司。那麼在上市的 Neocloud 公司中，只有 $NBIS 和 $CRWV。接著只有一家具有極大的客戶多元化（Shopify、Cursor、政府、微軟/Meta 等），這有助於提升利用率（對毛利至關重要）。此外，它結合了全棧 + 軟體全棧協調層。例如 GPU 利用率 -> 更快的訓練速度 + 降低營運成本，從軟硬體結合中建立經濟護城河。創建這個並不容易，$CRWV 花費了數十億美元和多年時間，這就是為什麼礦業者/代管業者無法完全轉型為全棧產品的原因。如果只有個位數的供應商能做到，那在技術上可能非常複雜。"
+    "stances": {
+      "CRWV": "Bullish",
+      "NBIS": "Neutral"
+    },
+    "summary": "分析師看好CRWV具備全端優勢與客戶多樣化，持看多立場。",
+    "translation_zh": "我的意思是，不是每個人都能開發出FSD Level 4等級的自動駕駛汽車。美國大概只有5個主要玩家：亞馬遜、Waymo、特斯拉、$NBIS Avride和Motional。除非你的問題是關於母公司。那麼在上市公司Neoclouds中，只有$NBIS和$CRWV。然後其中只有一家擁有極大量的客戶多元化（Shopify、Cursor、政府、微軟/Meta等等），這有助於提高利用率（對利潤率至關重要）。此外，它結合了全端+軟體全端協調層。例如，GPU利用率->更快的訓練時間+降低營運支出，從而透過軟體+硬體的結合建立經濟護城河。要做到這一點並不容易，$CRWV花費了數十億美元和數年時間，這就是為什麼礦商/資料中心業者無法確切轉型為全端供應商的原因。如果有個位數的供應商能做到這些事情，那它可能在技術上非常複雜。",
+    "risk": "技術複雜度極高且需耗費數十億美元資金，使其他同業難以輕易轉型競爭。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-15T01:50:33Z"
   },
   "1996323202839241207": {
     "sentiment": "Bullish",
@@ -40552,9 +40762,20 @@
     "translation_zh": "@Avrideai 🔥 很高興看到 $NBIS Avride 的實機運作影片，超級酷，迫不及待想看到它擴展到其他州。"
   },
   "1996266253665919074": {
+    "id": "1996266253665919074",
+    "tweet_id": "1996266253665919074",
     "sentiment": "Bullish",
-    "summary": "質疑NBIS跟漲Uber邏輯矛盾",
-    "translation_zh": "@babyfolio $GOOGL 使用 Planet Labs 的服務，$PL 暴漲 80%。\n\n$UBER 使用 $NBIS 的 Avride，$NBIS 卻下跌 3%，而 $UBER 上漲 4%。\n\n????????????$@$@$?????"
+    "stances": {
+      "GOOGL": "Neutral",
+      "NBIS": "Bearish",
+      "PL": "Bullish",
+      "UBER": "Bullish"
+    },
+    "summary": "推文指出PL因與GOOGL合作大漲，UBER與NBIS合作後UBER上漲而NBIS下跌。",
+    "translation_zh": "GOOGL 使用 Planet Labs 的服務，PL 股價大漲 80%。UBER 採用 NBIS 的 Avride 技術，NBIS 下跌 3%，UBER 上漲 4%。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-15T01:51:07Z"
   },
   "1996265487919931602": {
     "sentiment": "Bullish",
@@ -66088,5 +66309,130 @@
     "risk": "",
     "model": "gemini-3.8-flash",
     "analyzed_at": "2026-11-14T02:13:56Z"
+  },
+  "2121347464431354104": {
+    "id": "2121347464431354104",
+    "tweet_id": "2121347464431354104",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "提及黃仁勳迷因梗，無特定投資立場，整體中立。",
+    "translation_zh": "為了致敬黃仁勳，是時候讓我在2027年展開我的動漫救贖篇章了。看我大顯身手吧。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-15T01:47:10Z"
+  },
+  "2121341959671566633": {
+    "id": "2121341959671566633",
+    "tweet_id": "2121341959671566633",
+    "sentiment": "Bullish",
+    "stances": {},
+    "summary": "看好機器人迎ChatGPT時刻，帶動AI與人形機器人發展。",
+    "translation_zh": "同意，黃仁勳與宇樹科技創辦人皆表示，我們已接近機器人領域的 ChatGPT 時刻。正如你所提，AI資料中心與人形機器人在電力/驅動器 MLCC、關節控制器 PCB、光達雷射及運算 DRAM 方面存在供應瓶頸重疊。",
+    "risk": "提及MLCC、PCB、雷射與DRAM等零組件存在供應瓶頸與限制。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-15T01:47:26Z"
+  },
+  "2121288886509039677": {
+    "id": "2121288886509039677",
+    "tweet_id": "2121288886509039677",
+    "sentiment": "Neutral",
+    "stances": {
+      "TSM": "Neutral"
+    },
+    "summary": "推主澄清台積電減產傳聞僅為假設且尚未發生。",
+    "translation_zh": "我也看到了。台積電減產的傳聞似乎是新任執行長若專注於成本效益前提下的假設，而且目前尚未發生。",
+    "risk": "若新執行長專注於成本效益，未來可能存在削減產能的風險。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-15T01:47:40Z"
+  },
+  "2121232045947134093": {
+    "id": "2121232045947134093",
+    "tweet_id": "2121232045947134093",
+    "sentiment": "Bullish",
+    "stances": {
+      "AXTI": "Bullish"
+    },
+    "summary": "作者看好AXTI，因積壓訂單增長且本益比具吸引力。",
+    "translation_zh": "我個人非常看好目前的 $AXTI，即使我親眼看著自己的部位經歷了 13 美元 -> 140 美元 -> 45 美元的劇烈波動。受一般短期訂單推動，近期積壓訂單從 1 億美元增至 5 億美元，在 2027 年產能擴充與提價之前，第四季年化本益比已壓縮至 18.8 倍。現在加上已確認的",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-15T01:47:57Z"
+  },
+  "2121228215939453264": {
+    "id": "2121228215939453264",
+    "tweet_id": "2121228215939453264",
+    "sentiment": "Bullish",
+    "stances": {
+      "JBL": "Neutral",
+      "SIVE": "Bullish"
+    },
+    "summary": "Sivers轉向量產看多SIVE，提及JBL合作看好發展。",
+    "translation_zh": "好問題！$SIVE 在 2026 年之前的客製化 CPO 部署（例如 Ayar）在架構上許多都被延後到 2028 年。直到 2025 年第三季，Sivers 才轉向大型商業化產品，包含 2026 年上半年的 $JBL 在內共有 7 家新的可插拔廠商。Sivers 目前也正在進行 NPO 送樣。",
+    "risk": "部分客製化CPO部署在架構上被推遲延後至2028年。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-15T01:48:13Z"
+  },
+  "2121212026081222852": {
+    "id": "2121212026081222852",
+    "tweet_id": "2121212026081222852",
+    "sentiment": "Bearish",
+    "stances": {},
+    "summary": "對黃仁勳領導後的長期路線圖與高層變動表示擔憂。",
+    "translation_zh": "除了財務長常與黃仁勳意見相左可能導致新融資放緩外，我預期近期影響非常有限。我更擔心的是在黃仁勳領導下規劃的2029年後現有路線圖會如何發展。在其他人接手後...",
+    "risk": "擔心2029年後管理層更迭對長期產品路線圖與經營帶來的風險。",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-15T01:48:26Z"
+  },
+  "2121195741599473827": {
+    "id": "2121195741599473827",
+    "tweet_id": "2121195741599473827",
+    "sentiment": "Neutral",
+    "stances": {
+      "NVDA": "Neutral"
+    },
+    "summary": "對NVDA中立：短期營運動能穩健，長期憂缺黃仁勳",
+    "translation_zh": "@sameworld001 未來會有庫藏股回購來支撐股價。$NVDA 短期內的營收與產品藍圖依然穩健。我認為市場喊 Nvidia 股價歸零實在過於誇張，由財務長領軍仍能維持其獲利結構。但未來十年若沒有黃仁勳的領導，我不認為 Nvidia",
+    "risk": "未來十年若缺乏黃仁勳的領導，公司長期發展前景存在疑慮。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:48:34Z"
+  },
+  "2121193045718872467": {
+    "id": "2121193045718872467",
+    "tweet_id": "2121193045718872467",
+    "sentiment": "Bullish",
+    "stances": {
+      "NVDA": "Neutral"
+    },
+    "summary": "強烈看多AI，對NVDA則中立看待換帥隱憂。",
+    "translation_zh": "@madmoott 這屬於個別公司層面的問題。我對 AI 依然高度看多，因為我認為它是人類史上最具變革性的技術。但這其中存在許多細節差異，例如 $NVDA 若由不同的執行長掌舵，可能就不會像過去那樣在架構或融資上做出如此激進的押注。",
+    "risk": "若NVDA更換執行長，可能在架構或融資上不再像過去般積極押注。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:48:44Z"
+  },
+  "2120981782531395609": {
+    "id": "2120981782531395609",
+    "tweet_id": "2120981782531395609",
+    "sentiment": "Neutral",
+    "stances": {
+      "NVDA": "Neutral"
+    },
+    "summary": "僅提及輝達第二位員工圖片，對NVDA立場中立。",
+    "translation_zh": "@rulerofbronze5 據稱這是第二位 $NVDA 員工的照片 https://t.co/x8bIVVN5bW",
+    "risk": "",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:48:50Z"
+  },
+  "2120875484905091274": {
+    "id": "2120875484905091274",
+    "tweet_id": "2120875484905091274",
+    "sentiment": "Neutral",
+    "stances": {
+      "MSFT": "Bearish"
+    },
+    "summary": "整體中立，$MSFT因專案延遲影響營收表現偏空。",
+    "translation_zh": "@CryptoVandelay 所以這就是我解讀出的長期基本面正向展望。另一方面，也有我上面提到的短期逆風，而市場正在將其計價反映。我看到的短期負面因素是 $MSFT Vineland 專案推遲到 2027 年第二季，這會導致營收延後。",
+    "risk": "面臨短期逆風，且$MSFT Vineland延後至2027年Q2將使營收遞延。",
+    "model": "gemini-4-hydrogen",
+    "analyzed_at": "2026-11-15T01:49:03Z"
   }
 }
