@@ -47624,14 +47624,47 @@
     "analyzed_at": "2026-11-20T11:35:13Z"
   },
   "1976033094932234314": {
+    "id": "1976033094932234314",
+    "tweet_id": "1976033094932234314",
     "sentiment": "Bullish",
-    "summary": "重倉看好AMD與新創標的，積極調倉配置",
-    "translation_zh": "哇，我這次押注 ETF 賺翻了，每檔標的都暴漲。\n\n總之，我會做一些公司配置調整與解釋：\n\n$AMD - +10%（重新評估定價）\n$FLY - +3%（新增）\n$WLAC - +1%（新增）\n$MU - +1%（新增）\n$FLNC - 0.5%（新增）\n$SEI - 0.5%（新增）\n$DFLI - -0.25%（新增）\n\n_\n\n減倉（為了節稅規劃）\n\n$ORCL\n$LULU\n$META\n$UPWK\n$ETOR\n$SNAP\n其他小型股\n\n_\n\n以下是解釋：\n\n$AMD - 剛獲得超過 1000 億美元的前瞻營收，笑死，他們的季度營收幾乎在一夜之間翻倍，而且這甚至還沒被完全定價。極度強烈的買進訊號。\n\n$FLY - 44 億美元估值，從事中小型運載火箭發射，類似 $RKLB。讓我想起剛起步時的 RocketLab，風險報酬比很不錯。\n\n$WLAC - Neocloud（雲端新創）以 6.0 億美元（偏低）的估值進行 IPO，具備 75% 以上的 EBITDA 毛利率 + 去年營收成長 250% + 可能獲得美股七巨頭（Mag7）背書。\n\n$MU - 考慮到 Stargate + OpenAI 所需的大量基礎設施，記憶體需求強勁。\n\n$FLNC + $SEI - 能源概念股（高風險高報酬）\n\n$DFLI - 電池概念股（高風險高報酬）\n\n減倉標的：\n\n$ORCL - GPU 建置遇到困難，這剛好顯示出超大規模雲端商與像 $NBIS 這類 Neocloud 之間的護城河。直接買 Neocloud 潛在漲幅更高。\n\n$LULU, $META, $UPWK, $ETOR, $SNAP - 漲幅不大，我們正以最積極的方式押注贏家，等節稅操作結束後會買回來，例如換成 $AMD，以及享受降息帶來的高報酬。\n\n年底節稅完成後會買回。"
+    "stances": {
+      "AMD": "Bullish",
+      "DFLI": "Bullish",
+      "DLFI": "Bullish",
+      "ETOR": "Bearish",
+      "FLNC": "Bullish",
+      "FLY": "Bullish",
+      "KLAC": "Neutral",
+      "LULU": "Bearish",
+      "META": "Bearish",
+      "MU": "Bullish",
+      "NBIS": "Bullish",
+      "ORCL": "Bearish",
+      "RKLB": "Bullish",
+      "SEI": "Bullish",
+      "SNAP": "Bearish",
+      "UPWK": "Bearish"
+    },
+    "summary": "作者看好AMD、MU與能源電池股，並因節稅調節ORCL與META。",
+    "translation_zh": "哇，我用這檔 ETF 賺翻了，每支股票都漲得亂七八糟。總之，我會對一些公司做出調整與解釋：$AMD 加碼 10%、$FLY 加碼 3%、$WLAC 加碼 1%、$MU 加碼 1%、$FLNC 加碼 0.5%、$SEI 加碼 0.5%、$DFLI 加碼 0.25%。減碼（為了稅損收割）：$ORCL、$LULU、$META、$UPWK、$ETOR、$SNAP 以及其他小型股。解釋如下：$AMD 獲得超過千億美元的遠期營收，極度看多；$FLY 類似早期 RocketLab；$WLAC 為新雲端 IPO；$MU 記憶體需求大；$FLNC、$SEI、$DLFI 為高風險高報酬的能源與電池股。減碼部分：$ORCL 遭遇 GPU 建置困難；$LULU、$META、$UPWK、$ETOR、$SNAP 漲幅不大，將進行稅損收割並換股，預計年底買回。",
+    "risk": "能源與電池類股為高風險高報酬；Oracle 遭遇 GPU 建置困難，顯示超級大廠與新雲端之間存在護城河。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:53Z"
   },
   "1976006587765395592": {
+    "id": "1976006587765395592",
+    "tweet_id": "1976006587765395592",
     "sentiment": "Bullish",
-    "summary": "參與多檔熱門IPO獲利，看好Boost持股",
-    "translation_zh": "@cuantitative 我搶先佈局了 $DJT、$OKLO 的 IPO，但錯過了 $BULL。\n\n那些都帶來了 3-6 倍的瘋狂利潤，但我總是太早賣出。\n\n不過，相比前兩檔，我真心覺得一直持有 Boost 的股票也沒問題。"
+    "stances": {
+      "BULL": "Bullish",
+      "DJT": "Bullish",
+      "OKLO": "Bullish"
+    },
+    "summary": "推主認為DJT、OKLO與BULL皆具備極高獲利潛力。",
+    "translation_zh": "我搶先投資了DJT、OKLO的IPO，錯過了BULL。這些都獲得了3到6倍的瘋狂利潤，但我總是太早賣出。不過，相較於前兩者，我真心覺得持有Boost的股票很不錯。",
+    "risk": "太早賣出潛力股，未能完整獲取倍數報酬。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:55Z"
   },
   "1976006034310455666": {
     "sentiment": "Neutral",
@@ -47639,19 +47672,48 @@
     "translation_zh": "@Khagani_gahrh0 @dubiousnoob $WLAC 基本上就是買進 IPO 前股票，然後在上市當天轉換成 Boost 的股票。\n\n這是一檔 SPAC IPO。"
   },
   "1976001305866080372": {
+    "id": "1976001305866080372",
+    "tweet_id": "1976001305866080372",
     "sentiment": "Bullish",
-    "summary": "透過$WLAC搶先佈局Boost SPAC",
-    "translation_zh": "依我之見，如果有 3 個月的耐心，透過 $WLAC 搶先佈局 Boost SPAC Neocloud IPO 是個好機會（像 OKLO、DJT 等）。\n\nBoost 與 Fluidstack 合作，未來很可能獲得 $GOOGL 背書。\n\n75%+ EBITDA 毛利率 + 去年營收成長 250%。\n\n預估市值約 6 億美元，可能是下一個 $CIFR。"
+    "stances": {
+      "CIFR": "Bullish",
+      "GOOGL": "Bullish",
+      "KLAC": "Neutral"
+    },
+    "summary": "看好透過WLAC卡位Boost SPAC IPO，具備高利潤潛力。",
+    "translation_zh": "依我之見，若你有三個月的耐心，透過WLAC（OKLO、DJT等）在Boost SPAC Neocloud IPO之前卡位將是個好機會。Boost與Fluidstack合作，未來可能獲得GOOGL的背書。EBITDA毛利率超過75%，營收較去年成長250%。預估市值約6億美元，或許會成為下一個CIFR。",
+    "risk": "需有三個月的耐心等待，且相關預估市值與未來背書存在不確定性。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:58Z"
   },
   "1975994220235444451": {
-    "sentiment": "Bullish",
-    "summary": "看好Neocloud前景，尋找高確信標的",
-    "translation_zh": "@NoahIAvest 我現在持有大約 5 家 neocloud 公司。我確信它們會一起上漲，只需要挑選最有信心的即可。\n\n我對 $HUT 或 $SLNH 還沒有做足夠的研究來給出意見，但根據這些數據，它們看起來都很有潛力。"
+    "id": "1975994220235444451",
+    "tweet_id": "1975994220235444451",
+    "sentiment": "Neutral",
+    "stances": {
+      "HUT": "Neutral",
+      "SLNH": "Neutral"
+    },
+    "summary": "作者認為HUT與SLNH數據 promising，但因研究不足持中立態度。",
+    "translation_zh": "我現在參與了約5個新雲端項目。我確信它們會一起上漲，只需要挑選你最有信心的即可。我對$HUT或$SLNH的研究還不够深入，無法發表意見，但根據這些數據，它們看起來都很有潜力。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:59Z"
   },
   "1975991330120872132": {
-    "sentiment": "Bullish",
-    "summary": "認為$CIFR非迷因股，看好Neocloud成長",
-    "translation_zh": "@sam_badawi 真的，$CIFR 怎麼會被當成迷因股 lol。由 $GOOGL 背書的 neocloud 實現了數百個百分比的規模成長。\n\n像 $RGTI 這樣的公司也很有道理。"
+    "id": "1975991330120872132",
+    "tweet_id": "1975991330120872132",
+    "sentiment": "Neutral",
+    "stances": {
+      "CIFR": "Neutral",
+      "GOOGL": "Bullish",
+      "RGTI": "Neutral"
+    },
+    "summary": "GOOGL支援雲端擴展表現強勁，CIFR與RGTI立場不一。",
+    "translation_zh": "@sam_badawi 沒錯，$CIFR 怎麼會是迷因股哈哈。$GOOGL 支持新雲端實現數百個百分點的規模擴展。像 $RGTI 這樣的事物才合理",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:02Z"
   },
   "1975988773277270355": {
     "sentiment": "Bullish",
@@ -47659,9 +47721,18 @@
     "translation_zh": "@rocket5010 瘋狂的漲勢，人們把這視為一家 4,000 億美元市值的公司，正追趕高達 4.5 兆美元的 $NVDA。\n\n我當初應該多買一點的，笑死，我只有 1,100 股。"
   },
   "1975987940473045058": {
+    "id": "1975987940473045058",
+    "tweet_id": "1975987940473045058",
     "sentiment": "Bullish",
-    "summary": "AMD表現瘋狂，市場正將其重估為下一個NVDA",
-    "translation_zh": "$AMD 真的瘋了，太扯。我猜市場正在把它重新定價為下一個 $NVDA。"
+    "stances": {
+      "AMD": "Bullish",
+      "NVDA": "Bullish"
+    },
+    "summary": "市場將AMD視為下一個輝達，對其極度看多。",
+    "translation_zh": "AMD真的太瘋狂了。我猜市場正在把它重新定價為下一個NVDA。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:04Z"
   },
   "1975987193937289426": {
     "sentiment": "Bearish",
@@ -47674,9 +47745,18 @@
     "translation_zh": "@__visionxry__ 對啊，自我發布逢低買進貼文以來，我還一直抱著我的 $CIFR 買權（Call）。已經大漲 169% 了笑死"
   },
   "1975974445782348070": {
+    "id": "1975974445782348070",
+    "tweet_id": "1975974445782348070",
     "sentiment": "Bullish",
-    "summary": "IREN的GW發電容量遠大於同業NBIS",
-    "translation_zh": "@cmachdop $IREN 擁有的吉瓦(GW)容量比 $NBIS 等其他業者大得多，即便他們目前沒有任何交易。"
+    "stances": {
+      "IREN": "Bullish",
+      "NBIS": "Neutral"
+    },
+    "summary": "IREN擁有龐大GW電力容量，規模超越NBIS。",
+    "translation_zh": "@cmachdop IREN擁有的GW容量比NBIS等其他同業大得多，即使他們目前沒有任何協議。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:06Z"
   },
   "1975972170439569701": {
     "sentiment": "Bearish",
@@ -47684,34 +47764,91 @@
     "translation_zh": "抱歉，我最終刪除了關於 $BULL 逢低買進的貼文。\n\n我原本相信關於機構拋售的新聞與貼文。但深入研究後發現，這是一起佔流通股 30% 的 4.45 億股解鎖事件。\n\n有一位內部人士可能在預期解鎖會帶來進一步股價壓力前，拋售了 300 萬股。\n\n雖然可能會反彈買進，但考量到解鎖的股份數量以及 $BULL 的基本面，這是一個非常重大的實質事件。各位可以根據這些資訊自行承擔風險。"
   },
   "1975966364142862548": {
-    "sentiment": "Neutral",
-    "summary": "分享BULL的期權策略與未來觀察",
-    "translation_zh": "@resilliencep 我通常在 14 美元左右進行區間操作。\n\n透過這個，你可以賣出 11.9 美元賣權、履約價 13 美元的掩護性買權，成本均價 11.5 美元，若達到該履約價 $BULL 大約可賺取 15%。\n\n或者再等等，它有一天可能會變得像迷你版的 $HOOD。"
+    "id": "1975966364142862548",
+    "tweet_id": "1975966364142862548",
+    "sentiment": "Bullish",
+    "stances": {
+      "BULL": "Bullish",
+      "HOOD": "Bullish"
+    },
+    "summary": "作者對 $BULL 持看多立場可賺15%，也看好 $HOOD。",
+    "translation_zh": "@resilliencep 我通常在 14 美元左右做波段。利用這個你可以用 11.9 美元賣出掩護性買權 (covered call) 執行價 13 美元，成本均價 11.5 美元，如果達到 $BULL 的那個履約價就能賺大約 15%。或者就等等，說不定哪天會變得像小型的 $HOOD 一樣。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:08Z"
   },
   "1975963249427546421": {
+    "id": "1975963249427546421",
+    "tweet_id": "1975963249427546421",
     "sentiment": "Neutral",
-    "summary": "釐清LUNR與RKLB的業務差異",
-    "translation_zh": "@Khagani_gahrh0 @SebastianS79509 不，$LUNR 是太空探索，$RKLB 是可重複使用火箭。"
+    "stances": {
+      "LUNR": "Neutral",
+      "RKLB": "Neutral"
+    },
+    "summary": "釐清 LUNR 屬太空探索，RKLB 屬可重複使用火箭。",
+    "translation_zh": "不，$LUNR$ 是太空探索，$RKLB$ 是可重複使用火箭",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:10Z"
   },
   "1975956913402921067": {
+    "id": "1975956913402921067",
+    "tweet_id": "1975956913402921067",
     "sentiment": "Neutral",
-    "summary": "對鋰電池了解不足無法比較DFLI與QS",
-    "translation_zh": "@EccShibaInuInv 我對鋰電池了解不夠，無法拿 $DFLI 和 $QS 做比較。"
+    "stances": {
+      "DFLI": "Neutral",
+      "QS": "Neutral"
+    },
+    "summary": "作者對 DFLI 與 QS 持中立態度，表示對鋰電池了解不足無法比較。",
+    "translation_zh": "我對鋰電池的了解還不足以拿 DFLI 和 QS 做比較。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:12Z"
   },
   "1975956589225111844": {
+    "id": "1975956589225111844",
+    "tweet_id": "1975956589225111844",
     "sentiment": "Bullish",
-    "summary": "看好RKLB承接國家安全火箭發射",
-    "translation_zh": "@SebastianS79509 我的意思是，當大家認為 $RKLB 不賺錢時，我在 14 美元左右買進了它。\n\n如果他們正在從事對國家安全至關重要的火箭發射工作，我願意冒險買進 $FLY。"
+    "stances": {
+      "FLY": "Bullish",
+      "RKLB": "Bullish"
+    },
+    "summary": "作者看好RKLB與FLY，認為其具備國家安全價值。",
+    "translation_zh": "@SebastianS79509 我的意思是，當大家都認為他們不賺錢時，我在 14 美元左右買入了 $RKLB。如果他們正在進行對國家安全至關重要的火箭發射，我願意承擔 $FLY 的風險。",
+    "risk": "承擔火箭發射與國家安全相關的投資風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:14Z"
   },
   "1975691406149910690": {
+    "id": "1975691406149910690",
+    "tweet_id": "1975691406149910690",
     "sentiment": "Bullish",
-    "summary": "看好NBIS、CIFR與IREN等雲端潛力股",
-    "translation_zh": "@DeepValueBagger @__visionxry__ 這說得通，我最喜歡的前三名是 $NBIS，就 Mag7 + 資金而言堪稱小 Nebius 的 $CIFR，以及單純看 GW 容量與未來 mag7 合作的 $IREN。\n\n我只是想在 Neocloud 領域再加碼一些像 $WYFI 這樣的標的。"
+    "stances": {
+      "CIFR": "Bullish",
+      "IREN": "Bullish",
+      "NBIS": "Bullish",
+      "WYFI": "Bullish"
+    },
+    "summary": "作者看好NBIS、CIFR、IREN與WYFI等雲端概念股。",
+    "translation_zh": "這很合理，我前三大最愛是NBIS、CIFR（就Mag7與資金而言堪稱Nebius縮小版），然後是IREN（單純因為GW產能加上未來的Mag7交易）。我只是想沿著新雲端路線再加碼一些像WYFI的股票。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:16Z"
   },
   "1975690333410468151": {
+    "id": "1975690333410468151",
+    "tweet_id": "1975690333410468151",
     "sentiment": "Bullish",
-    "summary": "WYFI具備低成本改造優勢與升值空間",
-    "translation_zh": "沒錯。開玩笑歸開玩笑（抱歉嚇到 @DeepValueBagger），$WYFI 的優勢在於將設施轉換的成本比其他人需要建造的綠地（從頭建造）資料中心低 40%，且租賃負擔不重。\n\n與礦企相比，它也是純粹的高效能運算（HPC）。\n\n缺點是他們不像 $NBIS 那樣建立自己的編排堆疊，規模也沒有 $IREN 擴張得快。但他們擁有基礎設施而不是租賃。專為硬體和實體打造的垂直整合 HPC 基礎設施。\n\n我的假設是所有 Neocloud 都有成長空間，且考量到 13 億美元的小市值，還有更多重新評價（re-rating）的空間。\n\nClear Street 給出 51 美元目標價的分析師在數據分析方面可能做得更好，所以我建議參考他們的意見。"
+    "stances": {
+      "IREN": "Neutral",
+      "NBIS": "Neutral",
+      "WYFI": "Bullish"
+    },
+    "summary": "看好WYFI具備成本優勢與基礎設施所有權，具備成長潛力。",
+    "translation_zh": "說真的，撇開玩笑不談（抱歉嚇到@DeepValueBagger），$WYFI 的優勢在於其設施轉換成本比新建資料中心低 40%，且不依賴租賃。與礦企相比，它是純粹的高效能運算（HPC）標的。缺點是他們不像 $NBIS 那樣自建編排堆疊，擴張速度也不如 $IREN。但他們擁有基礎設施而非租賃，是硬體與實體層面的垂直整合 HPC 基礎設施。我假設所有新雲端（Neoclouds）都有成長空間，且考慮到 13 億美元的小市值，還有重估價值空間。Clear Street 分析師給出的 51 美元目標價應該更具參考價值。",
+    "risk": "WYFI缺乏自建編排堆疊技術，且擴張速度較同業緩慢。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:35Z"
   },
   "1975681147654054254": {
     "sentiment": "Neutral",
@@ -47719,19 +47856,46 @@
     "translation_zh": "@mattia030339 謝謝，我決定在深入研究 $WYFI 時，將我部分的 WallStreetBets 智商運用到 X 上。https://t.co/oGudn2nZDJ"
   },
   "1975669807749161147": {
+    "id": "1975669807749161147",
+    "tweet_id": "1975669807749161147",
     "sentiment": "Neutral",
-    "summary": "趣談NVDA透過特定結構間接持股AMD",
-    "translation_zh": "@pepemoonboy 我只是覺得有趣，透過這種結構，$NVDA 竟然會間接持有 $AMD 的股份。"
+    "stances": {
+      "AMD": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "推文僅討論NVDA與AMD間的間接持股結構，未表達多空立場。",
+    "translation_zh": "我覺得很有趣的是，透過這種結構，NVDA竟然會間接持有AMD的股份。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:37Z"
   },
   "1975647344197837015": {
+    "id": "1975647344197837015",
+    "tweet_id": "1975647344197837015",
     "sentiment": "Bullish",
-    "summary": "逢低加碼NBIS並建倉WYFI",
-    "translation_zh": "對，遇到這種雜訊我只會逢低買進 Neoclouds（新型雲端服務商）。$NBIS 在下跌 5% 時是個絕佳的買點。我也終於趁著下跌 4% 時開始建倉 $WYFI。"
+    "stances": {
+      "NBIS": "Bullish",
+      "WYFI": "Bullish"
+    },
+    "summary": "作者看好NBIS與WYFI，建議趁股價回調時分批買進。",
+    "translation_zh": "沒錯，我會趁這種雜音導致的股價回調時買進Neoclouds。NBIS在下跌5%時是絕佳買點，我也剛開始建立WYFI的部位，當時它下跌了4%。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:40Z"
   },
   "1975646406804492485": {
-    "sentiment": "Bullish",
-    "summary": "WYFI是佳標的應持底層資產",
-    "translation_zh": "沒錯，$WYFI 是個極佳的買入標的。大家應該忽略 $BTBT，直接持有底層資產。公司資產淨值折價（低於 NAV）的原因有很多，看看灰度（Grayscale）及其加密貨幣持倉多年來的狀況就知道了。"
+    "id": "1975646406804492485",
+    "tweet_id": "1975646406804492485",
+    "sentiment": "Neutral",
+    "stances": {
+      "BTBT": "Bearish",
+      "WYFI": "Bullish"
+    },
+    "summary": "看好WYFI買入機會，建議忽略BTBT並持有底層資產。",
+    "translation_zh": "沒錯，$WYFI 是個很棒的買入標的。大家應該忽略 $BTBT，直接持有底層資產就好。公司股價低於淨值（NAV）的原因有很多，看看灰度（Grayscale）及其加密貨幣持倉多年來的情況就知道了。",
+    "risk": "公司股價可能因各種因素長期低於淨值，存在折價風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:43Z"
   },
   "1975620920514650366": {
     "sentiment": "Bullish",
@@ -47739,24 +47903,61 @@
     "translation_zh": "從這類新聞來看，$NBIS 顯然是最大贏家，因為他們擁有多元化的客戶群，可以抵消任何建設/營收延遲。而且他們可能擁有最佳的軟體編排技術堆疊，能最大化 GPU 利用率。"
   },
   "1975619679554314322": {
+    "id": "1975619679554314322",
+    "tweet_id": "1975619679554314322",
     "sentiment": "Bullish",
-    "summary": "利用拉回買進NBIS並建倉WYFI",
-    "translation_zh": "對，我正利用這個機會買進 $NBIS（-5.37%）並建倉 $WYFI（-3%）。機構對科技七巨頭 AI 計算基礎設施的持股比例偏低，因此他們可能會利用這些機會從散戶手中收集籌碼。"
+    "stances": {
+      "NBIS": "Bullish",
+      "WYFI": "Bullish"
+    },
+    "summary": "作者趁股價回調，看好並買入NBIS與WYFI進行佈局。",
+    "translation_zh": "沒錯，我正利用這次機會買進NBIS（-5.37%）並開始建立WYFI（-3%）的部位。AI運算基礎設施的機構持股比例仍低，他們很可能正趁此機會從散戶手中吸籌。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:46Z"
   },
   "1975616147321200788": {
-    "sentiment": "Bullish",
-    "summary": "NBIS客戶多元表現優於同行",
-    "translation_zh": "這是多種因素綜合的結果，文章並未提供詳細拆解。主要原因之一是建設/利用率與營收增長之間的時差。$NBIS 在這方面比 $IREN 和 $ORCL 表現更好，因為他們擁有高度多元化的客戶群，加上更好的軟體編排，能在整個過程中實現更高的利用率。我不同意主要歸咎於代管（colocation）的說法，因為是 4-5 個不同的因素同時導致甲骨文（Oracle）利潤率受損。"
+    "id": "1975616147321200788",
+    "tweet_id": "1975616147321200788",
+    "sentiment": "Neutral",
+    "stances": {
+      "IREN": "Bearish",
+      "NBIS": "Bullish",
+      "ORCL": "Bearish"
+    },
+    "summary": "NBIS憑藉多元客戶與軟體優勢勝過IREN與ORCL。",
+    "translation_zh": "情況很複雜，文章沒有提供細節。很大一部分原因是建設、利用率與營收增長之間存在滯後。NBIS在這一點上表現優於IREN與ORCL，因為他們擁有高度多元化的客戶群，且具備更好的軟體編排能力以實現更高的利用率。我不同意這主要是由主機託管造成的，因為對Oracle而言，同時有四到五個因素導致了利潤率下降。",
+    "risk": "建設與營收增長存在滯後，且ORCL面臨多重因素導致的利潤率下滑風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:48Z"
   },
   "1975615080479006738": {
+    "id": "1975615080479006738",
+    "tweet_id": "1975615080479006738",
     "sentiment": "Bullish",
-    "summary": "NBIS客戶多元具更高經濟效益",
-    "translation_zh": "是的，確實如此，這提醒了集中度風險，也解釋了為何擁有高度多元化客戶群的新型雲端服務商（如 $NBIS）可能比那些沒有多元客戶的公司具備更好的經濟效益。$ORCL 部分虧損源於建設與利用之間的時間差，因為其幾乎所有交易都來自像 OpenAI 等 4-5 家客戶。需求確實存在，但有營收延後現象。例如 $NBIS 客戶非常多元，在建設期間可能達成高利用率。"
+    "stances": {
+      "NBIS": "Bullish",
+      "ORCL": "Bearish"
+    },
+    "summary": "看好客戶多元的NBIS，認為ORCL因客戶過度集中面臨營收遞延風險。",
+    "translation_zh": "沒錯，這凸顯了集中度風險。像NBIS這類擁有高度多元化客戶群的雲端公司，其經濟效益應優於其他同業。ORCL的部分虧損源於基礎設施建設與實際使用間的時間差，因為其幾乎所有交易都來自OpenAI等4-5家客戶，導致營收出現滯後。NBIS因客戶多元，預計能在建設期間維持高利用率。",
+    "risk": "ORCL面臨客戶過度集中導致的營收遞延風險，以及基礎設施建設與利用率之間的時程落差。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:51Z"
   },
   "1975613499045974163": {
+    "id": "1975613499045974163",
+    "tweet_id": "1975613499045974163",
     "sentiment": "Bullish",
-    "summary": "利多NBIS並驗證其護城河",
-    "translation_zh": "@foogleman1234 忽略雜音並獨立思考是好事。例如，我喜歡 $HIMS，但如果我認為某些事（如 TrumpRX）確實是淨負面影響，我會指這是逆風。但在這裡，我只將其視為對 $NBIS 及其他公司的利多，且是對護城河的驗證。"
+    "stances": {
+      "HIMS": "Neutral",
+      "NBIS": "Bullish"
+    },
+    "summary": "作者看好NBIS的護城河優勢，並認為TrumpRX對其是正面利多。",
+    "translation_zh": "忽略市場雜訊並獨立思考很重要。例如我喜歡HIMS，但若認為TrumpRX是負面因素我會提出；但我認為這對NBIS及其他同業是利多，且驗證了其護城河。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-20T20:00:54Z"
   },
   "1975612208286736451": {
     "sentiment": "Bullish",
@@ -71037,5 +71238,69 @@
     "risk": "推文提及中國企業級SSD需求放緩、NAND供過於求疑慮與機構下修預測。",
     "model": "gemini-3.6-flash",
     "analyzed_at": "2026-11-20T11:20:19Z"
+  },
+  "2123851594811011470": {
+    "id": "2123851594811011470",
+    "tweet_id": "2123851594811011470",
+    "sentiment": "Bearish",
+    "stances": {
+      "AMZN": "Bearish",
+      "SPCX": "Bearish"
+    },
+    "summary": "PCB瓶頸影響供應鏈，看空AMZN與SPCX。",
+    "translation_zh": "我在一月初曾提過光電以及 Amazon Kuiper 和 SPCX Starlink 供應鏈的 PCB 瓶頸問題。但最新近況顯示，AI 以外的其他產業現在也真的開始感受到痛苦了。全球電子協會表示：「正在發布此消息：https://t.co/VXg999AfTb」",
+    "risk": "PCB瓶頸導致供應鏈受阻，非AI產業亦受波及與衝擊。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-20T19:59:31Z"
+  },
+  "2123820597465776460": {
+    "id": "2123820597465776460",
+    "tweet_id": "2123820597465776460",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "推文僅含連結，未提及具體標的與立場。",
+    "translation_zh": "https://t.co/WnjrVcXuMv",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:44Z"
+  },
+  "2123805601411277149": {
+    "id": "2123805601411277149",
+    "tweet_id": "2123805601411277149",
+    "sentiment": "Bearish",
+    "stances": {
+      "HOOD": "Bearish",
+      "NBIS": "Bearish"
+    },
+    "summary": "分析師指出HOOD與NBIS等成長股重挫，市場估值泡沫化。",
+    "translation_zh": "感覺就像每檔成長股，甚至在AI領域之外，從$HOOD到$NBIS都跌落谷底。同時，必需消費品正形成泡沫，估值創下1999年以來未見的水準。大家認為市場是對的嗎...給予火箭或AI公司的溢價應該...",
+    "risk": "成長股估值大跌，且必需消費品出現1999年以來未見的高估值泡沫風險。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:46Z"
+  },
+  "2123762482280055255": {
+    "id": "2123762482280055255",
+    "tweet_id": "2123762482280055255",
+    "sentiment": "Neutral",
+    "stances": {
+      "NVDA": "Neutral",
+      "P": "Neutral"
+    },
+    "summary": "P與NVDA財報顯示AI資本支出擴大，整體持中立看法。",
+    "translation_zh": "P的財報其實很有趣，雖然不具備實質的可執行投資價值，但更多體現在AI資本支出的擴大、部署的進展，以及黃仁勳在NVDA對於開源模型與GPU需求的願景。Everpure執行長表示企業正處於...",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:49Z"
+  },
+  "2123749426019868932": {
+    "id": "2123749426019868932",
+    "tweet_id": "2123749426019868932",
+    "sentiment": "Neutral",
+    "stances": {},
+    "summary": "推文內容未提及特定標的與立場。",
+    "translation_zh": "當世界最需要他時，他消失了",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-20T19:59:50Z"
   }
 }
