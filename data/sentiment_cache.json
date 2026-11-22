@@ -50232,9 +50232,18 @@
     "translation_zh": "買入了價值 50 萬美元的 $NBIS。\n\n這是我在未來 1 年時間內信心最高的股票。\n\n目標價 225 美元 https://t.co/buW9CV4WWH"
   },
   "1969092270365307350": {
+    "id": "1969092270365307350",
+    "tweet_id": "1969092270365307350",
     "sentiment": "Bullish",
-    "summary": "TSM買權大漲68%，NBIS回報亮眼",
-    "translation_zh": "@DavidJang0620 是 $TSM 的買權*。\n\n自從我發文以來，我的買權現在已經上漲了 68%。$NBIS 大約上漲了 10%，這依然是非常優秀的回報。"
+    "stances": {
+      "NBIS": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "看好台積電與NBIS，買權與個股報酬率表現出色。",
+    "translation_zh": "@DavidJang0620 是台積電買權*。自從我發文以來，我的買權現在已經上漲 68%。NBIS 大約上漲了 10%，這依然是非常棒的報酬率。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-22T18:28:01Z"
   },
   "1969091035859931221": {
     "id": "1969091035859931221",
@@ -50251,14 +50260,34 @@
     "analyzed_at": "2026-11-22T11:08:50Z"
   },
   "1968813225186893857": {
+    "id": "1968813225186893857",
+    "tweet_id": "1968813225186893857",
     "sentiment": "Bullish",
-    "summary": "做多IBIT與LTC，看好降息及ETF",
-    "translation_zh": "是的，我做多 $IBIT 和 $LTC。$BKKT 是我唯一會考慮重新進場的加密貨幣小型股。但因為股權稀釋問題，我絕不會長期持有它。\n\n萊特幣（LTC）擁有降息順風、LTC 儲備以及下個月的 LTC ETF 作為催化劑。它只需要像 $BMNR 那樣的敘事就能再次衝上 250 美元以上。"
+    "stances": {
+      "BKKT": "Neutral",
+      "BMNR": "Neutral",
+      "IBIT": "Bullish",
+      "LTC": "Bullish"
+    },
+    "summary": "看多 IBIT 與 LTC；BKKT 具股權稀釋風險。",
+    "translation_zh": "是的，我做多 $IBIT 和 $LTC。$BKKT 是我唯一會考慮重新進場的加密貨幣小型股，但因為股權稀釋我絕不做多。萊特幣享有降息順風、LTC 儲備以及下個月的 LTC ETF 等催化劑，只需要像 $BMNR 那樣的敘事就能再次衝上 250 美元以上。",
+    "risk": "BKKT 存在股權稀釋疑慮。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-22T18:29:31Z"
   },
   "1968808809322742219": {
+    "id": "1968808809322742219",
+    "tweet_id": "1968808809322742219",
     "sentiment": "Neutral",
-    "summary": "降息不利PLMR投資收益受惠有限",
-    "translation_zh": "@MMerrino569447 我平時不投資小型股，但我們得到了三次降息的預期。所以這純粹是一筆宏觀交易……\n\n$PLMR 看起來像 $UPWK 一樣穩健。但三次降息會因為投資收益減少而傷害他們，因此它無法像其他高負債的小型股那樣享受降息紅利。"
+    "stances": {
+      "PLMR": "Bearish",
+      "UPWK": "Neutral"
+    },
+    "summary": "降息減少投資收益不利PLMR，對UPWK持中立。",
+    "translation_zh": "我平時很少投資小型股，但目前有降息三次的預估，所以這完全是總體經濟導向的交易。$PLMR 和 $UPWK 一樣看起來很穩健，但三次降息會因為投資收益減少而損害其表現，無法像其他高負債小型股那樣受益。",
+    "risk": "降息會導致投資收益減少，且無法享有高負債小型股的降息紅利。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-22T18:30:17Z"
   },
   "1968805096503836814": {
     "sentiment": "Bearish",
@@ -50266,9 +50295,18 @@
     "translation_zh": "@Rrrdv4 額，他們的債務非常多。降息雖然有一點幫助，但作用有限。$HAIN 市值只有 1.34 億是有原因的，但誰知道他們能不能實現逆轉呢。"
   },
   "1968799491332399136": {
+    "id": "1968799491332399136",
+    "tweet_id": "1968799491332399136",
     "sentiment": "Bullish",
-    "summary": "先佈局NBIS數月，之後轉向RKLB",
-    "translation_zh": "@YodaStockInvest 未來幾個月先佈局 $NBIS -&gt; 之後轉向 $RKLB"
+    "stances": {
+      "NBIS": "Bullish",
+      "RKLB": "Bullish"
+    },
+    "summary": "看好 NBIS 未來數月表現，之後轉向 RKLB。",
+    "translation_zh": "@YodaStockInvest 未來幾個月看好 $NBIS，之後轉向 $RKLB。",
+    "risk": "",
+    "model": "gemini-3.5-flash",
+    "analyzed_at": "2026-11-22T18:30:57Z"
   },
   "1968793503032316220": {
     "sentiment": "Bullish",
@@ -50306,24 +50344,71 @@
     "translation_zh": "謝謝，剛買了 2 萬美元的 $NFE。主要問題是債務，但預計降息 3 次將有助於減少其浮動利息。AI 能源消耗對像 $VST 或 $CEG 這類能源公司來說也是個極佳的催化劑，值得一賭。"
   },
   "1968431919105966479": {
+    "id": "1968431919105966479",
+    "tweet_id": "1968431919105966479",
     "sentiment": "Bullish",
-    "summary": "看好稀土板塊與轉型AI的礦業股",
-    "translation_zh": "鑑於與中國的地緣政治風險，我確實看好稀土。川普也將撥款 50 億美元來加速採礦。我原本在考慮 $REMX 或 $MP 的看漲期權，但 $UURAF 看起來也很有一套，我會進一步研究。我看到的主要缺點是它是以加幣計價。我不怎麼喜歡 $NAKA 或股價低於資產淨值 (NAV) 的控股公司，Grayscale 曾很長時間低於 NAV。是的，我之前就知道 $BITF，我只是更喜歡 $NBIS，但外面還有成堆轉型做 AI 的礦商。感謝推薦。"
+    "stances": {
+      "BITF": "Neutral",
+      "MP": "Bullish",
+      "NAKA": "Bearish",
+      "NBIS": "Bullish",
+      "REMX": "Bullish",
+      "UURAF": "Bullish"
+    },
+    "summary": "看好稀土類股REMX、MP與UURAF，偏好NBIS。",
+    "translation_zh": "考慮到中國的地緣政治風險，我確實喜歡稀土。川普也正在投入50億美元來加速採訪。我原本在考慮REMX或MP的買權，但UURAF看起來也很有潛力，我會再深入研究。我看到的唯一缺點是它是加幣。我不太喜歡NAKA或淨資產價值(NAV)之下的控股公司。灰度基金在NAV之下維持了很長時間。是的，我之前就知道BITF。我只是更喜歡NBIS，不過外面還有很多其他礦商正在轉向人工智慧。謝謝推薦。",
+    "risk": "主要風險包含中國地緣政治風險、標的以加幣計價，以及控股公司低於淨資產價值(NAV)的折價疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:11Z"
   },
   "1968427635890913694": {
+    "id": "1968427635890913694",
+    "tweet_id": "1968427635890913694",
     "sentiment": "Bullish",
-    "summary": "長期看好RKLB市值達千億美元",
-    "translation_zh": "@vicecarloans $UPWK、$HOOD、$IREN 將會是第 16、17、18 名，哈哈。至於 $RKLB，只需持有 5 到 8 年，總有一天會像 SpaceX 一樣達到 3,500 億美元的市值。"
+    "stances": {
+      "HOOD": "Neutral",
+      "IREN": "Neutral",
+      "RKLB": "Bullish",
+      "UPWK": "Neutral"
+    },
+    "summary": "看好RKLB長期持有至3500億市值，其餘標的中立提及。",
+    "translation_zh": "@vicecarloans $UPWK、$HOOD、$IREN，大概是 16、17、18 吧哈哈。至於 $RKLB，只要抱個 5 到 8 年就好，有一天市值應該會達到 3500 億美元，就像 SpaceX 一樣。",
+    "risk": "",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:13Z"
   },
   "1968426222578442740": {
+    "id": "1968426222578442740",
+    "tweet_id": "1968426222578442740",
     "sentiment": "Neutral",
-    "summary": "尋找具十倍上漲潛力的優質小型股",
-    "translation_zh": "正在探索具備 10 倍以上潛力且逐漸獲得關注的小盤股。如果大家有充分理由且信念強烈，我會投入 10 萬美元以上：在 $IREN 上漲後的 $APLD (50億)、$CIFR (48億)；或者 $ONDS (19.9億)、$NVTS (13億)、$MVST (10億)，或其他推薦。真誠詢問，非投資建議——只是在尋找盡職調查標的。"
+    "stances": {
+      "APLD": "Neutral",
+      "CIFR": "Neutral",
+      "IREN": "Neutral",
+      "MVST": "Neutral",
+      "NVTS": "Neutral",
+      "ONDS": "Neutral"
+    },
+    "summary": "尋找具10倍潛力的小型股，對APLD等標的持中立觀察態度。",
+    "translation_zh": "正在探索具備十倍以上潛力且逐漸受到關注的小型股。如果大家有高度確信的理由，我願意投入十萬美元以上資金：APLD (5B)、在IREN大漲後的CIFR。還有ONDS (1.99B)、NVTS (1.3B)、MVST (1B)，或其他推薦。真心請益，非投資建議——單純尋找盡職調查標的。",
+    "risk": "非投資建議，潛在風險包含小型股波動劇烈與盲目跟風。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:17Z"
   },
   "1968079550912532886": {
+    "id": "1968079550912532886",
+    "tweet_id": "1968079550912532886",
     "sentiment": "Bearish",
-    "summary": "警告籌碼解鎖風險並看空CRCL",
-    "translation_zh": "我們都同意市場是不理性的——但你的閱讀理解能力大概跟你的技術分析一樣爛。你忽略的重點是：當技術分析忽略流通量與基本面時是毫無用處的。如果像 $BULL 那樣由 1% 的流通量驅動市值，而 99% 隨後解鎖，線圖根本不重要。我唯一的估值觀點是，如果 $CRCL 的交易價格超過 $COIN 的一半，它就是個絕佳的做空標的，因為利息收入是五五分成。我看好 USDC，但 Circle 今天如果是 200 美元，價值就會超過 Coinbase 的一半。總之，繪製技術圖表卻忽略超過 100 億的解鎖與收入分潤，並用「市場不理性」來辯解，正是讓你的追蹤者虧錢的原因。"
+    "stances": {
+      "BULL": "Bearish",
+      "COIN": "Neutral",
+      "CRCL": "Bearish"
+    },
+    "summary": "作者認為BULL面臨解鎖壓力，CRCL估值過高適合放空。",
+    "translation_zh": "我們同意市場是不理性的，但你的閱讀理解能力跟你的技術分析一樣差。你沒看懂的重點是：當技術分析忽略了流通籌碼與基本面時就毫無用處。如果只有1%的流通籌碼推動市值，而99%會在日後解鎖（像是$BULL），那圖表根本不重要。我唯一的估值觀點是，如果$CRCL的交易價格超過$COIN的一半，它就是一個極佳的放空標的，因為利息收入是五五分帳。我雖然看好USDC，但如果Circle現在值200美元，其價值將超過Coinbase的一半。總之，一邊忽略高達百億美元的解鎖與營收分配、一邊畫著技術分析，然後用「市場不理性」來合理化，這正是讓你的粉絲虧錢的方法。",
+    "risk": "潛在風險包含百億美元規模的股票解鎖潮、籌碼稀釋，以及CRCL相對於Coinbase的估值過高疑慮。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:19Z"
   },
   "1968069803261956165": {
     "sentiment": "Neutral",
@@ -50331,34 +50416,118 @@
     "translation_zh": "@gurgavin $SMCI 正在做筆記。"
   },
   "1968068563471897087": {
+    "id": "1968068563471897087",
+    "tweet_id": "1968068563471897087",
     "sentiment": "Bearish",
-    "summary": "警惕CRCL解禁拋壓，看空高估值",
-    "translation_zh": "吐槽：這張 $CRCL 圖表是說明技術分析作用不大、基本面更為重要的好教材。\n\n當人們在 $BULL IPO 時貼出技術分析圖時，我在做認購權證的套利並冷眼旁觀。\n\nBULL 從 10 美元漲到 70 美元以上，但人們交易的只是 1% 的流通股。當股票解禁時，BULL 又回到了 10 美元的 IPO 價格。\n\n對於 CRCL，我們看到股價從 31 美元的 IPO 價格反彈至 200 美元以上，因為人們在有限的流通量中交易，且市值幾乎與 $COIN 相同。（COIN 除了加密貨幣交易所業務外，還與 Circle 分享 50% 的利息收入）\n\n當超過 140 萬股 Circle 股票早期解禁時，價格暴跌回 130 美元。如果你看到 $CRCL 達到 200 美元，那是一個簡單的做空 Circle / 做多 Coinbase 的操作。\n\n完整的 180 天禁售期將於 12 月 2 日結束，兩個月內你將面臨超過 100 億美元的潛在拋售壓力。\n\n我看好 USDC 和 Circle/Coin，但以現有的商業模式來看，考慮到像 Tether 這樣的穩定幣業務如何賺取利息收入，在今天 200 美元的情況下 $CRCL 的價值不應該超過 $COIN 的一半。\n\n技術分析在即將到來的股票解禁面前毫無意義。\n\n教訓：流通量與基本面 > 圖表上的線條。"
+    "stances": {
+      "BULL": "Bearish",
+      "COIN": "Bullish",
+      "CRCL": "Bearish"
+    },
+    "summary": "CRCL估值過高且面臨解禁賣壓，建議做空CRCL並做多COIN。",
+    "translation_zh": "抱怨：CRCL的走勢圖是技術分析意義不大的絕佳教材，基本面才重要。當初BULL IPO時，大家在發技術分析，我卻在做權證套利。BULL從10美元漲到70美元以上，但當時流通股僅1%，解禁後股價跌回10美元。CRCL從31美元漲到200美元以上，是因為流通股有限且市值一度與COIN相當（COIN除交易所業務外，還與Circle有50%的穩定幣利息收入分成）。當140萬股Circle股票提前解禁時，股價跌回130美元。若再見到CRCL漲到200美元，做空CRCL並做多COIN是簡單的交易。12月2日有完整的180天鎖定期解禁，未來兩個月有超過100億美元的潛在賣壓。我看好USDC與Circle/Coin，但以現有商業模式，考慮到Tether等穩定幣公司的利息收入模式，CRCL市值不應高於COIN的一半。技術分析在即將到來的股票解禁面前毫無意義。結論：流通股與基本面優於技術線圖。",
+    "risk": "CRCL面臨12月大規模股票解禁，潛在賣壓超過100億美元，且目前估值相較COIN過高。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:31Z"
   },
   "1968055497933922327": {
-    "sentiment": "Bullish",
-    "summary": "看好NBIS一兩年內衝上200美元",
-    "translation_zh": "對於像 $NBIS 這樣的標的，我會假設在一兩年內因營收成長和未來潛力，會有強大的催化劑將股價推升至 200 美元以上。\n\n然後兩三年後，當一切平靜下來，營收高但毛利較低，且在大科技公司透過台積電（$TSM）與博通（$AVGO）部署自研晶片後面臨庫存風險和利潤成長時，它可能會變得像 $SMCI 一樣。"
+    "id": "1968055497933922327",
+    "tweet_id": "1968055497933922327",
+    "sentiment": "Neutral",
+    "stances": {
+      "AVGO": "Neutral",
+      "NBIS": "Bullish",
+      "SMCI": "Neutral",
+      "TSM": "Neutral"
+    },
+    "summary": "看好NBIS長期成長潛力，並分析SMCI未來面臨的產業競爭與利潤風險。",
+    "translation_zh": "像NBIS這類股票，我認為未來一兩年內會有巨大的催化劑推動股價至200美元以上，這源於營收成長與未來潛力。兩三年後，當市場趨於穩定，它可能會像SMCI一樣，擁有高營收但利潤率下降，且當大型科技公司開始與TSM和AVGO合作部署自家晶片時，將面臨庫存風險與獲利成長挑戰。",
+    "risk": "大型科技公司部署自家晶片可能導致庫存風險增加，且未來恐面臨利潤率下滑的挑戰。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:34Z"
   },
   "1968054549245296871": {
+    "id": "1968054549245296871",
+    "tweet_id": "1968054549245296871",
     "sentiment": "Bullish",
-    "summary": "長期最看好RKLB、BTC與TSM",
-    "translation_zh": "@junyongisusing1 如果以 5 年的期限來看，就信心程度而言，我的排序會是 $RKLB，其次是 $BTC，然後是 $TSM。\n\n這個清單只是我對未來幾個月報酬潛力從高到低的最佳推測。"
+    "stances": {
+      "RKLB": "Bullish",
+      "TSM": "Bullish"
+    },
+    "summary": "作者看好RKLB與TSM的長期潛力，並列為高信心標的。",
+    "translation_zh": "如果我有五年的投資期限，就最高信心程度而言，依序會是 RKLB、BTC，然後是 TSM。這份清單僅是我對未來幾個月報酬潛力由高至低的預測。",
+    "risk": "",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:37Z"
   },
   "1968051910663118861": {
+    "id": "1968051910663118861",
+    "tweet_id": "1968051910663118861",
     "sentiment": "Bullish",
-    "summary": "整理9月15支高潛力催化劑股票",
-    "translation_zh": "我在 9 月份精選的 15 支由催化劑驅動的股票，按到 2025 財年的潛力、解釋和理想買點排序：\n\n1. $NBIS - 170億以上的微軟合約，股權稀釋基本完成 < $100（現在）。比起 $IREN、$WULF 或 $BTBT 我更喜歡這個\n2. $HIMS - 42% 的空頭頭寸。來自歐洲的 120 萬+ 客戶進場。突發利多可能衝至 $100 < $45\n3. $LTC - ETF 即將推出 + LTC 儲備 < $120（現在）\n4. $RKLB - Neutron 2026 年初發射 < $42\n5. $TSM (買權)- 繼續成長至 1.8 兆+ 市值，資本支出狂暴 < $265（現在）\n6. $ETOR - 被低估，伴隨像 $HOOD $IBKR 這類金融科技起飛。在當前價格下我更偏好這個而非 $DLO 或 $DAVE < $48（現在）\n7. $LULU - 假期消費支出帶動年末短期反彈，已超賣 < $165（現在）\n8. $MRVL - 健康的 45-55% 年增率，財報後被不公平對待 < $70（現在）\n9. $SG - 值得投資等待反彈。去年 $45 < $9（現在）\n10. $TSSI - 像 $SMCI、$DELL 這樣的伺服器機架，正在趕上其餘 AI 熱潮 < $13.5\n11. $ASTS - 類似 $OPEN 的信仰型股票 < $38.5\n12. $CRDO - 追趕市值 380 億的 $ALAB < $125\n13. $RUM - Charlie Kirk 和保守派可能在年底前推高平台參與度 < $7.25\n14. $AMZN (買權)- AWS... 關注 $ORCL 和其他資料中心財報 < $215\n15. $SMCI - 2026 遠期營收 330 億。市值 240 億呵呵。一次好財報就會爆發。$45（現在）\n15. $IBIT (1年期 Leaps)- 鑑於美元印鈔，純粹的 BTC。不買 $MSTR 或 $BMNR，只買純資產 ETF < $112.5k\n\n還有遺漏什麼嗎？"
+    "stances": {
+      "ALAB": "Neutral",
+      "AMZN": "Bullish",
+      "ASTS": "Bullish",
+      "BMNR": "Bearish",
+      "BTBT": "Bearish",
+      "CRDO": "Bullish",
+      "DAVE": "Bearish",
+      "DELL": "Neutral",
+      "DLO": "Bearish",
+      "ETOR": "Bullish",
+      "HIMS": "Bullish",
+      "HOOD": "Neutral",
+      "IBIT": "Bullish",
+      "IBKR": "Neutral",
+      "IREN": "Bearish",
+      "LTC": "Bullish",
+      "LULU": "Bullish",
+      "MRVL": "Bullish",
+      "MSTR": "Bearish",
+      "NBIS": "Bullish",
+      "OPEN": "Neutral",
+      "ORCL": "Neutral",
+      "RKLB": "Bullish",
+      "RUM": "Bullish",
+      "SG": "Bullish",
+      "SMCI": "Bullish",
+      "TSM": "Bullish",
+      "TSSI": "Bullish",
+      "WULF": "Bearish"
+    },
+    "summary": "作者看好NBIS、HIMS等15檔個股，認為具備催化劑與成長潛力。",
+    "translation_zh": "我整理了9月至2025財年的15檔催化劑驅動股票，包含理由與理想進場點：1. NBIS（微軟合約）、2. HIMS（高空單）、3. LTC（ETF）、4. RKLB、5. TSM（資本支出）、6. ETOR、7. LULU、8. MRVL、9. SG、10. TSSI、11. ASTS、12. CRDO、13. RUM、14. AMZN、15. SMCI、16. IBIT（比特幣ETF）。",
+    "risk": "部分個股提及股權稀釋風險，且市場競爭激烈，需留意各標的進場價格。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:40Z"
   },
   "1968046957588631746": {
-    "sentiment": "Bullish",
-    "summary": "看好RKLB潛力，警告勿空信仰股",
-    "translation_zh": "他並不笨，只是在生技領域極其專業，那是你該關注他的地方，而不是其他領域。\n\n只是在聽了一些影片後，他似乎不理解像 $RKLB 這樣的前沿股票，並對做空信仰型股票給出了糟糕的建議。\n\n例如對於 $RKLB，他不太理解中型載荷+來自 Starlink/扁平衛星的潛在服務收益，這些並沒有反映在他唯一關心的典型遠期營收中。\n\n像 $QBTS 這種是垃圾，我只是說做空收益有限但面臨無限虧損的信仰型股票是非常愚蠢的想法。"
+    "id": "1968046957588631746",
+    "tweet_id": "1968046957588631746",
+    "sentiment": "Neutral",
+    "stances": {
+      "QBTS": "Bearish",
+      "RKLB": "Bullish"
+    },
+    "summary": "作者看好RKLB潛力，認為QBTS表現不佳，並警告放空熱門股風險極高。",
+    "translation_zh": "他並不笨，只是過於專注生物科技領域，這才是你該關注他的地方，而非其他領域。聽過一些影片後，他似乎不理解像RKLB這類前沿科技股，對放空熱門股的建議也很糟糕。例如，他沒看出RKLB在中型載荷與Starlink服務潛力帶來的回報，這些並未反映在他只看重的傳統預期營收中。像QBTS這種股票很爛，我只是說，放空這種具有狂熱追隨者且虧損無上限的股票是非常愚蠢的行為。",
+    "risk": "警告放空具有狂熱追隨者且虧損無上限的熱門股是非常危險的行為。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:44Z"
   },
   "1968037963083960547": {
-    "sentiment": "Bullish",
-    "summary": "強烈看好台積電，偏好勝過Lyft",
-    "translation_zh": "我不喜歡追高，除非像 $TSM 那樣很明顯在未來幾年會因為強勁需求而上漲。\n\n$Lyft 主要在美國市場，我認為 Waymo 隨著時間推移會侵蝕其市場份額。\n\n即使在 20 美元它仍然是不錯的標的，但我更喜歡其他公司。如果我有額外 100 萬美元，我會把它投進 TSM 而不是 Lyft，因為我會在信念更高的股票上加倍下注。"
+    "id": "1968037963083960547",
+    "tweet_id": "1968037963083960547",
+    "sentiment": "Neutral",
+    "stances": {
+      "LYFT": "Bearish",
+      "TSM": "Bullish"
+    },
+    "summary": "作者看好TSM長期需求，認為LYFT面臨Waymo競爭威脅，投資首選TSM。",
+    "translation_zh": "我不喜歡追高，除非像TSM這樣未來幾年有明確的強勁需求。Lyft主要市場在美國，我認為Waymo會隨時間侵蝕其市佔率。即使在20美元，它還算不錯，但我有更好的選擇。如果我還有100萬美元，我會加碼TSM而不是Lyft，因為我傾向重押高信念的股票。",
+    "risk": "LYFT面臨Waymo帶來的市場競爭與市佔率流失風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:47Z"
   },
   "1968033164024295829": {
     "sentiment": "Bullish",
@@ -50366,19 +50535,50 @@
     "translation_zh": "@himshouse 空頭敘事是因為有超過 42% 的空頭比例，隨著 HIMS 成長並完成擁有 120 萬+ 客戶的歐洲併購，有超過 45 億美元面臨無限虧損風險。\n\n關於廣告強烈措辭信函的新聞對 $HIMS 沒有實質影響。"
   },
   "1968027977113104505": {
+    "id": "1968027977113104505",
+    "tweet_id": "1968027977113104505",
     "sentiment": "Bearish",
-    "summary": "警告RKLB增資拋售將壓制股價",
-    "translation_zh": "@beavinvests 抱歉，但我自從 $GME 或 $AMC 股東慶祝公司向他們拋售股票以來，就沒見過這麼失幻的人了。\n\n讓 $RKLB 在公開市場上針對任何買盤拋售 7.5 億美元股票，絕不是件值得高興的事。"
+    "stances": {
+      "AMC": "Bearish",
+      "GME": "Bearish",
+      "RKLB": "Bearish"
+    },
+    "summary": "作者看空AMC、GME與RKLB，認為RKLB拋售股票將稀釋股東權益。",
+    "translation_zh": "抱歉，自從看到GME或AMC持有者為公司向他們拋售股票而歡呼以來，我還沒見過這麼自欺欺人的情況。RKLB在市場買壓下拋售7.5億美元股票，這沒什麼好興奮的。",
+    "risk": "RKLB在市場拋售價值7.5億美元的股票，將對股價造成沉重的稀釋壓力。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:49Z"
   },
   "1968026564081459688": {
+    "id": "1968026564081459688",
+    "tweet_id": "1968026564081459688",
     "sentiment": "Bullish",
-    "summary": "認為ETOR價值被市場嚴重低估",
-    "translation_zh": "如果你看我的歷史紀錄，我通常會在極度底部買入，比如 $GOOGL，或者像大家都認為公司要失敗時買入 $UPWK。\n\n$ETOR 與 $UPWK 類似，擁有大量現金且已獲利。但它以 20%+ 的年增率成長，增速堪比 $IBKR，市值卻極低。\n\n有時很難逆著情緒交易，但我確實認為市場對其定價錯誤。"
+    "stances": {
+      "ETOR": "Bullish",
+      "GOOGL": "Bullish",
+      "IBKR": "Neutral",
+      "UPWK": "Bullish"
+    },
+    "summary": "作者看好ETOR、GOOGL與UPWK，認為市場定價錯誤，具備成長潛力。",
+    "translation_zh": "若查看我的歷史，我通常會在市場極度悲觀時買入像GOOGL或UPWK這類被認為即將失敗的公司。ETOR與UPWK相似，擁有大量現金且獲利，其成長率與IBKR相當（年增20%以上），但市值極低。有時很難逆勢操作，但我認為市場對此定價錯誤。",
+    "risk": "市場情緒可能與基本面背離，逆勢交易存在難度。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:54Z"
   },
   "1968024941112275406": {
+    "id": "1968024941112275406",
+    "tweet_id": "1968024941112275406",
     "sentiment": "Bullish",
-    "summary": "ETOR基本面良好，看好未來反彈",
-    "translation_zh": "我想 $ETOR 可能是今年迄今我唯一逢低加碼卻虧損的標的 😅。公佈未實現虧損也很重要。\n\n我沒有把我計算中 Cathie Wood 的 @ARKInvest 買入股票考慮進去，因為股票通常會在她進出時做相反的操作。\n\n但它擁有 7.567 億以上的淨現金、36 億市值且已獲利。\n\nIBKR 成長率相似很受歡迎，但 ETOR 常被拿來與成長率 40%+ 的 $HOOD 或 $BULL 比較。\n\n不過以約 22% 的成長率和 18 倍本益比來看，它真的被低估了，市場對此定價錯誤。也許等 IPO 買家放棄後會有隨機的 40% 反彈。"
+    "stances": {
+      "BULL": "Neutral",
+      "ETOR": "Bullish",
+      "HOOD": "Neutral"
+    },
+    "summary": "作者看好ETOR基本面強勁且遭市場低估，認為未來有反彈潛力。",
+    "translation_zh": "我覺得$ETOR可能是我今年唯一帳面虧損的部位，公開未實現虧損很重要。我沒算到Cathie Wood的ARK會買進，畢竟她進出通常反向。但公司有7.56億淨現金、36億市值且獲利。IBKR成長率相似，常被拿來跟成長率40%以上的$HOOD或$BULL比較。但以22%成長率與18倍本益比來看，它確實被低估，市場定價錯誤。或許等IPO買家放棄後，會出現40%的隨機反彈。",
+    "risk": "需留意Cathie Wood進場帶來的反向指標效應，以及IPO賣壓可能持續。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:32:57Z"
   },
   "1968018552822370394": {
     "sentiment": "Bullish",
@@ -50386,9 +50586,18 @@
     "translation_zh": "@unusual_whales 老實說，$TSLA 的基本面很爛，但可能值得買進，只因為 @elonmusk 看起來想要拉抬股價 哈哈。"
   },
   "1968015339666682082": {
+    "id": "1968015339666682082",
+    "tweet_id": "1968015339666682082",
     "sentiment": "Bearish",
-    "summary": "警告勿跟風非生技股如OPEN的分析",
-    "translation_zh": "@unusual_whales 抱歉，但跟隨 @MartinShkreli 操作任何非生技股都是最蠢的主意，特別是 $OPEN。市場上的事並非都有道理，看看他們做空像 $QBTS 這類量子股的下場就知道了。"
+    "stances": {
+      "OPEN": "Bearish",
+      "QBTS": "Bearish"
+    },
+    "summary": "推文看空OPEN與QBTS，認為跟隨特定人士投資並不理智。",
+    "translation_zh": "抱歉，對於任何非生技股來說，跟隨 Martin Shkreli 都是最愚蠢的主意，特別是針對 OPEN。市場並非事事都有邏輯，看看他們的量子空頭標的 QBTS 表現就知道了。",
+    "risk": "暗示跟隨特定人士投資風險極高，且市場走勢往往缺乏邏輯支撐。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:33:00Z"
   },
   "1967577080788590935": {
     "sentiment": "Bullish",
@@ -50406,9 +50615,19 @@
     "translation_zh": "@robswainept 不行，這是一家 $ETH 控股公司，你只是在歷史高點因為 FOMO 追高。最佳買入時機是我當時買在 1600 美元的時候，而不是在 4800 美元時去買控股公司。"
   },
   "1967448919467864526": {
+    "id": "1967448919467864526",
+    "tweet_id": "1967448919467864526",
     "sentiment": "Bullish",
-    "summary": "看好 NBIS 逢低買進與 HIMS 潛力",
-    "translation_zh": "我高確信度的股票不多，但 $NBIS 在 90 美元時算一檔。任何拉回都是強烈買進訊號。對於一家擁有如此高未來營收的公司來說，210 億市值簡直瘋狂。$IREN 也很棒，但目前投機性較強且有增資稀釋需求。不過 $HIMS 在未來 3 個月內因 42% 的空單餘額而最具潛力。https://t.co/Mg9ZN12rRV"
+    "stances": {
+      "HIMS": "Bullish",
+      "IREN": "Bullish",
+      "NBIS": "Bullish"
+    },
+    "summary": "看好NBIS強勁買入，IREN具潛力但需注意稀釋，HIMS短期爆發力強。",
+    "translation_zh": "我沒有太多高信念的股票，但NBIS在90美元時是其中之一，任何回調都是強烈買入點。對於一家擁有如此多遠期營收的公司來說，210億美元的市值簡直瘋狂。IREN也很棒，但目前投機性較強，且需要稀釋股權。不過，HIMS憑藉42%的空單回補潛力，在未來三個月內最具爆發力。",
+    "risk": "IREN目前投機性較高，且未來可能面臨股權稀釋風險。",
+    "model": "gemini-3.1-flash-lite",
+    "analyzed_at": "2026-11-22T18:33:03Z"
   },
   "1967414161597755466": {
     "sentiment": "Bullish",
