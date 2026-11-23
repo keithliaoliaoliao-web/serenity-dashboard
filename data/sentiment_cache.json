@@ -51065,34 +51065,99 @@
     "translation_zh": "哈哈 $UNH"
   },
   "1965290061714600032": {
-    "sentiment": "Neutral",
-    "summary": "看好TSM等股，對SG僅看短線反彈",
-    "translation_zh": "@moonman6577 我對 $SG 不是太看多。如果非要挑選我看多的股票，會是 $TSM、$HOOD、$RKLB、$CREDO、$NBIS 等等。但我認為 $SG 會反彈，因為它因短期期權資金流而被超賣，而且我只是單純喜歡他們的沙拉。"
+    "id": "1965290061714600032",
+    "tweet_id": "1965290061714600032",
+    "sentiment": "Bullish",
+    "stances": {
+      "CREDO": "Bullish",
+      "HOOD": "Bullish",
+      "NBIS": "Bullish",
+      "RKLB": "Bullish",
+      "SG": "Neutral",
+      "TSM": "Bullish"
+    },
+    "summary": "看好TSM與HOOD等五股，對SG看超跌反彈。",
+    "translation_zh": "@moonman6577 我不太看好 $SG。但如果要選看好的股票，會是 $TSM、$HOOD、$RKLB、$CREDO、$NBIS 等。不過我認為 $SG 受到短期選擇權資金流影響已超賣並將反彈，而且我單純喜歡他們的沙拉。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:57:38Z"
   },
   "1965282462743101843": {
+    "id": "1965282462743101843",
+    "tweet_id": "1965282462743101843",
     "sentiment": "Bullish",
-    "summary": "SG下跌非基本面惡化為逢低買進良機",
-    "translation_zh": "@lionsfan5116 老實說，除非是 $SMCI，否則 CFO 退休沒什麼大不了的。$SG 下跌 8.2% 看起來是由期權資金流驅動的（9/19 的 1萬張+ $8 看跌期權導致做市商做空），而非基本面變化。避險行為可能使賣壓過度擴大，因此我認為這是短期避險造成的逢低買進良機。"
+    "stances": {
+      "SG": "Bullish",
+      "SMCI": "Neutral"
+    },
+    "summary": "SG因期權避險致跌非基本面問題，看好逢低買進。",
+    "translation_zh": "老實說，除非是 $SMCI，否則財務長退休根本不算什麼。$SG 下跌 8.2% 看起來是期權資金流向驅動的（1萬多張 9/19 到期的 $8 賣權引發做市商賣空），並非基本面改變。避險操作可能過度放大賣壓，既然下跌是短期避險所致，我認為這是值得逢低買進的低點。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:57:48Z"
   },
   "1965104785255985546": {
-    "sentiment": "Neutral",
-    "summary": "觀望比特幣挖礦股考慮MARA與RIOT",
-    "translation_zh": "@__visionxry__ 我從未入場 $IREN。我只是在觀察未來幾個月比特幣挖礦股的潛力。但如果我必須對其中兩家進行投機性豪賭，我可能會買入 $MARA / $RIOT 或 $WYFI。"
+    "id": "1965104785255985546",
+    "tweet_id": "1965104785255985546",
+    "sentiment": "Bullish",
+    "stances": {
+      "IREN": "Neutral",
+      "MARA": "Bullish",
+      "RIOT": "Bullish",
+      "WYFI": "Bullish"
+    },
+    "summary": "看好MARA、RIOT及WYFI，對IREN持中立。",
+    "translation_zh": "@__visionxry__ 我從未買進 $IREN。我只是在觀察未來幾個月比特幣礦業股的潛力。但如果我要進行投機性賭注，我可能會買進 $MARA / $RIOT 或 $WYFI。",
+    "risk": "提及投資此類比特幣礦業股屬於投機性賭注。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:58:04Z"
   },
   "1965093748901380182": {
-    "sentiment": "Bearish",
-    "summary": "停利短空ALAB並買進CREDO避險",
-    "translation_zh": "改變了對 $ALAB 的看法，在 217 美元獲利了結並平倉多單，同時開了空單並以 $CREDO 作為對沖。$ALAB 在上漲 14% 後感覺有點超買。不過 $CREDO 應該很快就會補漲。"
+    "id": "1965093748901380182",
+    "tweet_id": "1965093748901380182",
+    "sentiment": "Neutral",
+    "stances": {
+      "ALAB": "Bearish",
+      "CREDO": "Bullish"
+    },
+    "summary": "看空已超買的ALAB改建空單，看好CREDO將補漲。",
+    "translation_zh": "我改變了對 $ALAB 的看法，在 217 美元獲利了結平倉多單並轉為做空，同時以 $CREDO 作為對沖。$ALAB 在上漲 14% 後感覺有點超買。不過 $CREDO 應該很快就會補漲。",
+    "risk": "ALAB在短線大漲14%後出現超買疑慮。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:58:21Z"
   },
   "1965084810982064626": {
+    "id": "1965084810982064626",
+    "tweet_id": "1965084810982064626",
     "sentiment": "Bullish",
-    "summary": "逢恐慌加碼SG，看好反彈買點",
-    "translation_zh": "在大家感到恐慌時，我在跌至 8.22 美元時買入了 10 萬美元的 $SG。\n\n沒有任何壞消息，卻下跌了 8.2% 以上。與此同時，市場和像 $HOOD、$RKLB、$ALAB、$CREDO、$HIMS、$APP 這類高 Beta 股票都在上漲。\n\n買入的最佳時機就是在散戶拋售他們在 40 美元買入的股票、極度恐慌的時候。"
+    "stances": {
+      "ALAB": "Neutral",
+      "APP": "Neutral",
+      "CREDO": "Neutral",
+      "HIMS": "Neutral",
+      "HOOD": "Neutral",
+      "RKLB": "Neutral",
+      "SG": "Bullish"
+    },
+    "summary": "作者趁極度恐慌大跌時買入 SG，堅定看多。",
+    "translation_zh": "當大家感到恐慌時，我在 $SG 跌至 8.22 美元時買進了 10 萬美元。在沒有任何新聞的情況下大跌了 8.2% 以上。與此同時，大盤以及像 $HOOD、$RKLB、$ALAB、$CREDO、$HIMS、$APP 這類高 Beta 股都在上漲。最佳買進時機就是在散戶拋售他們在 40 美元買進的股票、市場極度恐慌之際。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:58:41Z"
   },
   "1964093020581875862": {
-    "sentiment": "Neutral",
-    "summary": "建議低IV股票買進看漲期權",
-    "translation_zh": "@triforcerytp 持有正股最棒。我主要建議對像 $GOOGL 或 $UNH 這種隱含波動率（IV）極低（10-35%）的股票購買看漲期權（Call）。"
+    "id": "1964093020581875862",
+    "tweet_id": "1964093020581875862",
+    "sentiment": "Bullish",
+    "stances": {
+      "GOOGL": "Bullish",
+      "UNH": "Bullish"
+    },
+    "summary": "看多GOOGL與UNH，建議買進超低隱波看漲期權。",
+    "translation_zh": "持有股票是最棒的。我主要建議針對像 $GOOGL 或 $UNH 這類超低隱波（10-35%）的股票買進看漲期權。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:59:01Z"
   },
   "1964086425445691848": {
     "sentiment": "Bullish",
@@ -51100,9 +51165,18 @@
     "translation_zh": "@triforcerytp 人們轉向自由職業，所以除非出現嚴重衰退，否則這是積極的。\n\n即使營收下降，$UPWK 也只需要提高利潤率。\n\n他們的股票被嚴重低估，管理層只需要精簡冗員就能達到 25 美元。1 億美元的回購也有所幫助。"
   },
   "1964085082194579609": {
+    "id": "1964085082194579609",
+    "tweet_id": "1964085082194579609",
     "sentiment": "Bullish",
-    "summary": "買入BULL，看好高成長與散戶動能",
-    "translation_zh": "現在跟隨領頭羊操作。\n\n跟隨 $HOOD 納入標普 500 的消息，買入了 10 萬美元的 $BULL。\n\n奇怪的是，在給予 18 美元跑贏大盤目標價的情況下它還下跌了 2.4%，我猜是週期權太多的緣故。\n\n營收年增 45%，與 Hood 類似，擁有來自 WSB 的龐大散戶群體。\n\n短期風險是 9 月份隨機的宏觀環境。"
+    "stances": {
+      "BULL": "Bullish",
+      "HOOD": "Neutral"
+    },
+    "summary": "看好BULL並買入十萬美元，營收暴增且具散戶基礎。",
+    "translation_zh": "現在跟隨領頭羊走。在$HOOD入選標普後買入了10萬美元的$BULL。奇怪的是在給出18美元優於大盤目標價後竟下跌2.4%，猜是週買權過多。營收年增45%與Hood相似，且擁有來自WSB龐大的散戶基礎。短期風險為9月隨機的總體經濟因素。",
+    "risk": "短期風險為九月份隨機的總體經濟因素。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:59:13Z"
   },
   "1964079336685744438": {
     "sentiment": "Bullish",
@@ -51120,14 +51194,42 @@
     "translation_zh": "@DanielTan64198 $UPWK 低於 20 美元絕對是極佳買點。在約 14 倍本益比下，25 美元看起來是合理的估值。\n\n誰知道呢，有一天可能會達到 75 美元。Upwork 盈利能力極強，手握大量現金，所以如果你是投資者，就靜觀其收購進展。否則我會等到 20 美元以上再說。"
   },
   "1963340844188275072": {
+    "id": "1963340844188275072",
+    "tweet_id": "1963340844188275072",
     "sentiment": "Bullish",
-    "summary": "UPWK低估利潤高，極具持股價值",
-    "translation_zh": "$UPWK 剛剛宣布將通過 1 億美元的回購計劃買回約 5% 的流通股。\n\n讓我們再次重申這一點：\n\n1. 約 20 億市值，年營收 7.73 億，毛利率 77.8%。\n\n2. 龐大現金儲備，盈利，約 9 倍本益比。利潤率擴大 + 新業務收購尚未計入預期營收。\n\n如果你擔心 9 月份的 $RKLB、$CRWV、$IREN、$HIMS、$WULF 和其他高 Beta 股票，如果你的市值這麼低且正在賺大錢，季節性因素根本無所謂。\n\nUpwork 可能是這個市場中最被低估且獲利能力極強的股票。"
+    "stances": {
+      "CRWV": "Neutral",
+      "HIMS": "Neutral",
+      "IREN": "Neutral",
+      "RKLB": "Neutral",
+      "UPWK": "Bullish",
+      "WULF": "Neutral"
+    },
+    "summary": "UPWK宣布億元庫藏股且估值極低，看多UPWK。",
+    "translation_zh": "UPWK剛宣布透過1億美元庫藏股計畫買回約5%流通股。再次重申：1. 市值約20億，年營收7.73億且毛利率達77.8%。2. 現金充沛、已獲利且本益比約9倍。利潤率擴大與新併購尚未反映在未來營收中。如果你擔心RKLB、CRWV、IREN、HIMS、WULF與其他高Beta股票在9月的波動，當市值這麼低又極具獲利能力時，季節性因素並不重要。Upwork可能是當前市場中最被低估且獲利能力極佳的股票。",
+    "risk": "提及高Beta股票在九月份可能面臨季節性波動與市場疑慮。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:59:43Z"
   },
   "1963203275005858261": {
+    "id": "1963203275005858261",
+    "tweet_id": "1963203275005858261",
     "sentiment": "Bullish",
-    "summary": "比特幣礦企轉型AI具極佳投資機會",
-    "translation_zh": "在 $IREN 上升到 30 美元以上後，我仍在關注它。這讓我想起了 $NBIS 在 $CRWV 大漲後的表現。\n\n沒有什麼能阻止 $MARA、$RIOT、$CIFR、$CLSK、$HUT 等公司從比特幣轉向 AI，對吧？\n\n這可能是一個絕佳的投資機會。"
+    "stances": {
+      "CIFR": "Bullish",
+      "CLSK": "Bullish",
+      "CRWV": "Neutral",
+      "HUT": "Bullish",
+      "IREN": "Bullish",
+      "MARA": "Bullish",
+      "NBIS": "Neutral",
+      "RIOT": "Bullish"
+    },
+    "summary": "看好IREN及MARA等礦企轉型AI的投資機會。",
+    "translation_zh": "在 IREN 漲破 30 美元後我仍在關注它。這讓我想起 CRWV 大漲後跟著噴發的 NBIS。沒有什麼能阻止 MARA、RIOT、CIFR、CLSK、HUT 等公司從比特幣轉型至 AI 領域，對吧？這或許是個極佳的投資機會。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:00:04Z"
   },
   "1962880256576242129": {
     "sentiment": "Bullish",
@@ -51140,9 +51242,25 @@
     "translation_zh": "@SCurveCapital 我很快會對 $IREN 做更深入的盡職調查（DD），我之前聽過這個名字，初步看來相當穩健。"
   },
   "1961992261816004834": {
+    "id": "1961992261816004834",
+    "tweet_id": "1961992261816004834",
     "sentiment": "Bullish",
-    "summary": "看好長線潛力股五年十倍報酬",
-    "translation_zh": "以目前估值來看，我預計5年內能實現1000%回報的高潛力投資組合：太空 - $RKLB (220B) AI - $CRWV (470B) 半導體 - $CREDO (200B), $TSSI (3.8B) 加密貨幣 - $BKKT (1.8B) 金融科技 - $DJT (49B) 社交 - $BMBL (6.2B) 醫療健康 - $HIMS (95B) 軟體 - $UPWK (19B)。你們的選擇是什麼？"
+    "stances": {
+      "BKKT": "Bullish",
+      "BMBL": "Bullish",
+      "CREDO": "Bullish",
+      "CRWV": "Bullish",
+      "DJT": "Bullish",
+      "HIMS": "Bullish",
+      "RKLB": "Bullish",
+      "TSSI": "Bullish",
+      "UPWK": "Bullish"
+    },
+    "summary": "看好RKLB與CRWV等九檔股票，預期五年報酬十倍。",
+    "translation_zh": "考量當前估值，這是我預計五年內獲得1000%回報的潛力股組合。太空 - $RKLB (220B) AI - $CRWV (470B) 半導體 - $CREDO (200B)、$TSSI (3.8B) 加密貨幣 - $BKKT (1.8B) 金融科技 - $DJT (49B) 社群 - $BMBL (6.2B) 醫療 - $HIMS (95B) 軟體 - $UPWK (19B)。你的選擇是什麼？",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:00:30Z"
   },
   "1960217004843110858": {
     "sentiment": "Bullish",
@@ -51150,24 +51268,85 @@
     "translation_zh": "如果大家都在底部勸你恐慌拋售而非在頂部拋售，這大概是買入比特幣 / $IBIT（在11萬美元時）的好指標。"
   },
   "1960080191876702263": {
-    "sentiment": "Bearish",
-    "summary": "九月避險，遠離高Beta炒作股",
-    "translation_zh": "溫馨提示：九月前後請降低風險偏好。具獲利能力的股票如 $UNH、$NVO、$GOOGL、$UPWK、$KSPI... 或今年以來下跌的股票 $MRVL、$SG、$SNAP 可能表現不錯。如果你全倉高 Beta 股票的看漲期權，例如 $PLTR、$DUOL、$HOOD、$COIN、$CRCL、$NVDA、$MSTR、$TSLA... 祝你好運。"
+    "id": "1960080191876702263",
+    "tweet_id": "1960080191876702263",
+    "sentiment": "Neutral",
+    "stances": {
+      "COIN": "Bearish",
+      "CRCL": "Bearish",
+      "DUOL": "Bearish",
+      "GOOGL": "Bullish",
+      "HOOD": "Bearish",
+      "KSPI": "Bullish",
+      "MRVL": "Bullish",
+      "MSTR": "Bearish",
+      "NVDA": "Bearish",
+      "NVO": "Bullish",
+      "PLTR": "Bearish",
+      "SG": "Bullish",
+      "SNAP": "Bullish",
+      "TSLA": "Bearish",
+      "UNH": "Bullish",
+      "UPWK": "Bullish"
+    },
+    "summary": "九月看好UNH等獲利股，看空NVDA等高Beta股。",
+    "translation_zh": "小建議：九月前後市場風險偏好降低。獲利良好的股票如 $UNH、$NVO、$GOOGL、$UPWK、$KSPI...或今年以來下跌的股票如 $MRVL、$SG、$SNAP 可能表現不錯。如果你全倉重押 $PLTR、$DUOL、$HOOD、$COIN、$CRCL、$NVDA、$MSTR、$TSLA 等高 Beta 股買權...祝你好運。",
+    "risk": "警告九月份市場風險偏好下降，全倉重押高 Beta 個股買權將面臨高風險。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:01:06Z"
   },
   "1960075780383498312": {
+    "id": "1960075780383498312",
+    "tweet_id": "1960075780383498312",
     "sentiment": "Bullish",
-    "summary": "HIMS基本面強勁高空單宜買進",
-    "translation_zh": "$HIMS 在 42 美元是個輕鬆買入並持有的標的。做空比例（Short Interest）升至流通盤的 34.59%，且公司年營收約 30 億美元以上 / 市值 97 億美元。對沖基金做空像 $HIMS 這樣盈利且成長的公司，同時 $IONQ 和 $OKLO 兩者零營收卻有 100 億以上市值，這簡直是愚蠢做空的典範。HIMS 通過收購 Zava 在歐洲獲得超過 130 萬名客戶，這預測尚未反映在價格中。目前他們做到：- 2024年營收約14.8億美元（成長69%） - 近十二個月（2025年中）營收約20.1億美元（成長約88.7%） - 2025年第二季度營收5.448億美元（年增73%）。成長最終將軋平空頭頭寸。簡而言之：HIMS 是個輕鬆買進並持有的股票，直到空頭回補。"
+    "stances": {
+      "HIMS": "Bullish",
+      "IONQ": "Bearish",
+      "OKLO": "Bearish"
+    },
+    "summary": "看好 HIMS 高成長與收購效益，空頭將面臨軋空。",
+    "translation_zh": "HIMS 在 42 美元是個輕鬆買進並持有的標的。做空比率上升至流通股的 34.59%，市值達 97 億美元且規模超 30 億美元。避險基金做空像 HIMS 這種有獲利且成長的公司，卻無視 IONQ 和 OKLO 這兩家零營收卻有百億市值的公司，簡直是最蠢的做空行為。HIMS 透過收購 Zava 在歐洲獲得超過 130 萬名客戶，市場預測尚未反映此因素。目前表現：2024 年營收約 14.8 億美元（成長 69%）、TTM 營收約 20.1 億美元（成長約 88.7%）、2025 年 Q2 營收 5.448 億美元（年增 73%）。成長最終將重挫空頭部位。結論：在空頭平倉回補前，HIMS 是個輕鬆買進並持有的標的。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:01:26Z"
   },
   "1959211074357723498": {
-    "sentiment": "Neutral",
-    "summary": "點名反彈波段股並遠離特定跌勢",
-    "translation_zh": "目前有一些不錯的反彈/波段交易機會：1. $SG - $9.39 2. $SNAP - $7.21 3. $UNH - $306.8 4. $ETOR - $46.8 5. $NVO - $57.00 6. $HIMS - $44.73 7. $CRWV - $94.7。請遠離這些逢低買入標的：1. $CRCL - $136.2 2. $PLTR - $159.6 3. $DUOL - $334.5"
+    "id": "1959211074357723498",
+    "tweet_id": "1959211074357723498",
+    "sentiment": "Bullish",
+    "stances": {
+      "CRCL": "Bearish",
+      "CRWV": "Bullish",
+      "DUOL": "Bearish",
+      "ETOR": "Bullish",
+      "HIMS": "Bullish",
+      "NVO": "Bullish",
+      "PLTR": "Bearish",
+      "SG": "Bullish",
+      "SNAP": "Bullish",
+      "UNH": "Bullish"
+    },
+    "summary": "看好SG與UNH等波段反彈，建議遠離CRCL與PLTR。",
+    "translation_zh": "目前有一些不錯的反彈/波段交易標的：1. $SG - $9.39 2. $SNAP - $7.21 3. $UNH - $306.8 4. $ETOR - $46.8 5. $NVO - $57.00 6. $HIMS - $44.73 7. $CRWV - $94.7。遠離以下這些下跌拉回的標的：1. $CRCL - $136.2 2. $PLTR - $159.6 3. $DUOL - $334.5",
+    "risk": "推文警告投資人應遠離 CRCL、PLTR 及 DUOL 的回檔下跌風險。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:01:35Z"
   },
   "1959207473812050156": {
+    "id": "1959207473812050156",
+    "tweet_id": "1959207473812050156",
     "sentiment": "Bullish",
-    "summary": "UPWK高毛利成長，極安全價值股",
-    "translation_zh": "$UPWK 是最安全的價值投資標的，甚至優於 $UNH、$NVO、$GOOGL 等公司。做市商清除了 Upwork 8 月 15 日的看漲期權未平倉合約，現在它正在回升至應有的 17.5 美元以上。一家 18 億美元的軟體公司，毛利率約 80%，年營收 7.7 億美元，這幾乎就是送錢。"
+    "stances": {
+      "GOOGL": "Neutral",
+      "NVO": "Neutral",
+      "UNH": "Neutral",
+      "UPWK": "Bullish"
+    },
+    "summary": "作者看好 UPWK 為最安全價值股，具高毛利與反彈潛力。",
+    "translation_zh": "UPWK 是最安全的價值投資標的，甚至超越 UNH、NVO、GOOGL 等股票。做市商洗掉了 Upwork 8 月 15 日的買權未平倉量，現在股價正強勢反彈至應有的 17.5 美元以上。一家市值 18 億美元、毛利率約 80%、年營收 7.7 億美元的軟體公司，幾乎等於送錢。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:01:54Z"
   },
   "1953214112500203897": {
     "sentiment": "Bullish",
@@ -51180,14 +51359,38 @@
     "translation_zh": "$UPWK 今日財報公布後將迎來價值重估，加上空頭回補與分析師調升評級。他們只需要在其 78% 的高毛利率基礎上擴大營業利潤率，而他們做到了。15 億美元的公司，全年營收 7.7 億美元，營業利潤率持續成長，且現金狀況強勁。"
   },
   "1950838489257480592": {
+    "id": "1950838489257480592",
+    "tweet_id": "1950838489257480592",
     "sentiment": "Bullish",
-    "summary": "KSPI逢低買進高成長低本益比",
-    "translation_zh": "$KSPI 在本週下跌 7.2% 後，於 82 美元是極佳的買入時機。所以我買入了 10 萬美元以上，計劃將持股均價擴大至 25 萬美元。拋開 $HOOD、$SOFI、$BULL 不談，$KSPI 作為一家金融科技公司，營收年增 47%，淨利潤率 31%，本益比僅 7.9。我也許會在 WSB 發一篇關於這檔股票的帖子。https://t.co/JdyYm2rBuV"
+    "stances": {
+      "BULL": "Neutral",
+      "HOOD": "Neutral",
+      "KSPI": "Bullish",
+      "SOFI": "Neutral"
+    },
+    "summary": "看好 KSPI 低估值與高成長，已大舉加碼買進。",
+    "translation_zh": "在經歷本週下跌 7.2% 後，$KSPI 在 82 美元是非常划算的買點。所以我買入了超過 10 萬美元的股票，並計劃將成本均價擴大至 25 萬美元。拋開 $HOOD、$SOFI 和 $BULL 不談，$KSPI 作為一家金融科技公司，年成長率達 47%，淨利利率為 31%，本益比僅 7.9。我也許會為此發一篇 WSB 風格的文章。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:02:04Z"
   },
   "1949825690960023810": {
+    "id": "1949825690960023810",
+    "tweet_id": "1949825690960023810",
     "sentiment": "Bullish",
-    "summary": "看好 ALAB 成為下個千倍 AI 飆股",
-    "translation_zh": "$ALAB 暴漲的原因在於，Astera 是目前唯一一家對七大科技巨頭（Mag7）中的 5 家有系統性曝險的小型股公司。\n\n1. ALAB 的客戶群基本上就是 Mag 7：$GOOGL、$MSFT、$NVDA、$META 和 $AMZN。\n\n2. 他們以令人驚嘆的速度成長（年增約 150%+），毛利率達 76%（毛利率比 NVDA 還高，是半導體市場中最高的之一）。\n\n3. AI 資本支出持續增加，這從 $GOOGL 的財報中可以看出。\n\nNVDA 從 1500 億市值起步 -> 到 4 兆+，是因為巨型雲端業者需要 GPU。我們正處於 ALAB 在 AI 供應鏈中這種效應的起點，而它目前的市值僅 200 億。\n\n如果他們執行得當且 AI 基礎設施建設持續，我們可能會看到它成為下一個暴漲 1000% 的股票。"
+    "stances": {
+      "ALAB": "Bullish",
+      "AMZN": "Neutral",
+      "GOOGL": "Neutral",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "NVDA": "Neutral"
+    },
+    "summary": "強烈看好ALAB受惠AI供應鏈，具10倍上漲潛力。",
+    "translation_zh": "ALAB股價起飛的原因，在於Astera是唯一一家與七大巨頭中的5家有系統性關聯的小型股公司。1. ALAB的客戶群正是七大巨頭：GOOGL、MSFT、NVDA、META與AMZN。2. 他們以年增率150%+的驚人速度成長，毛利率高達76%（比NVDA還高，是半導體市場最高之一）。3. 從GOOGL財報可以看出AI資本支出仍在增加。NVDA過去因為超大規模雲端業者需要GPU，市值從1500億成長到4兆以上。ALAB在AI供應鏈才剛開始發揮這種效應，而且起步市值僅200億。如果他們執行得當且AI基礎建設持續擴建，我們可能會看到它成為下一個上漲1000%的股票。",
+    "risk": "若公司執行不當或 AI 基礎建設擴建未能持續，可能影響預期的成長前景。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:02:21Z"
   },
   "1949769736562319514": {
     "sentiment": "Bearish",
@@ -51195,9 +51398,18 @@
     "translation_zh": "做空 $PLTR，謝謝吉姆。 https://t.co/2xKvNnPqvE"
   },
   "1949765584989925742": {
+    "id": "1949765584989925742",
+    "tweet_id": "1949765584989925742",
     "sentiment": "Bullish",
-    "summary": "預期美國政策將推升比特幣價格",
-    "translation_zh": "浴室沉思：如果美國在 2 天後的聲明中改變政策，透過增持來推升比特幣 $IBIT 價格，我不會感到意外。\n\n川普今天剛為他的 $DJT 公司購買了 3 億美元的比特幣看漲期權以及 20 億美元的比特幣。\n\nDJT 就是新的南西·裴洛西（Nancy Pelosi），跟著做就對了。"
+    "stances": {
+      "DJT": "Bullish",
+      "IBIT": "Bullish"
+    },
+    "summary": "看好DJT與IBIT，建議跟隨川普加碼比特幣。",
+    "translation_zh": "一點想法：如果美國在兩天後的聲明中宣布改變政策，透過購買更多比特幣來推升比特幣 ($IBIT) 價格，我一點也不意外。川普今天剛為他的 $DJT 公司買進了 3 億美元的比特幣買權以及 20 億美元的比特幣。DJT 就是新的南西·佩洛西，跟著大老走就對了。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:02:33Z"
   },
   "1949746562495840726": {
     "sentiment": "Neutral",
@@ -51205,9 +51417,18 @@
     "translation_zh": "關於 $HIMS，賣早了只實現了 7 萬美元的利潤，但大部分依然是未實現利潤。\n\n這些只是我在兩到三個月的時間跨度內，發表在 WSB 上的短線交易範例。\n\n我最成功的交易以前從未在 WSB 上發表過。 https://t.co/Tlhc9IxdY8"
   },
   "1949746559912132787": {
+    "id": "1949746559912132787",
+    "tweet_id": "1949746559912132787",
     "sentiment": "Bullish",
-    "summary": "看好 IBIT 具低風險與不對稱潛力",
-    "translation_zh": "關於 $IBIT 的 WSB 交易，在週五下跌 3% 後，目前仍有約 4.4 萬美元以上的未實現利潤。\n\n僅靠在 2 個月內出售備兌看漲期權（covered calls）就實現了 6,557 美元以上的利潤。\n\n按相同速率計算，2 年內將超過 15.7 萬美元。低風險、不對稱的上行空間，特別是在 $DJT 購買了價值 20 億美元以上的情況下。 https://t.co/BPa8uSvV1s"
+    "stances": {
+      "DJT": "Bullish",
+      "IBIT": "Bullish"
+    },
+    "summary": "看好IBIT與DJT，具低風險與不對稱上漲潛力。",
+    "translation_zh": "在 $IBIT 的 WSB 交易中，經歷週五 3% 下跌後仍有約 4.4 萬美元以上的未實現利潤。光是這 2 個月賣出掩護看漲期權就已實現 6557 美元以上利潤。按相同速率計算，2 年內可達約 15.7 萬美元以上。風險低且具不對稱上漲空間，特別是在 $DJT 購買價值 20 億美元以上的情況下。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T09:02:47Z"
   },
   "1949746557253030018": {
     "sentiment": "Bullish",
@@ -51215,9 +51436,19 @@
     "translation_zh": "關於我發布的 WSB 圖表：\n\n在 $GOOGL 上，已實現利潤為 101,428 美元以上，並且還有大量未實現利潤，因為如果科技股反彈持續（$META $APPL $AMZN $MSFT $NVDA $SPOT），我預計 GOOGL 年底將達到 220 美元以上。\n\n財報表現非常亮眼，而且他們還有 700 億以上的庫藏股回購計畫。 https://t.co/G6jrKAyumE"
   },
   "1947901801203961876": {
+    "id": "1947901801203961876",
+    "tweet_id": "1947901801203961876",
     "sentiment": "Neutral",
-    "summary": "分享波段與長期投資的出場策略",
-    "translation_zh": "@EliCoen1 我為波段交易制定了退場策略。對於投資，我會像 $ALAB 一樣持有多年。\n\n對於像 $DNUT 這樣的軋空行情，這取決於每天的情況。\n\n如果有標的發生軋空，一定要記得賣出。$OPEN 曾發生軋空但人們沒有賣出，這就是為什麼有人可能會「虧損 40%」。"
+    "stances": {
+      "ALAB": "Bullish",
+      "DNUT": "Neutral",
+      "OPEN": "Bearish"
+    },
+    "summary": "長期看好ALAB，DNUT視情況操作，OPEN未停利恐虧損。",
+    "translation_zh": "@EliCoen1 我為波段交易規劃了出場策略。至於投資，我會像買 $ALAB 那樣抱上好幾年。對於像 $DNUT 這種短線軋空股，則要逐日觀察。如果標的出現軋空，務必記得賣出。$OPEN 之前出現軋空但大家沒賣，這就是為什麼有人可能會「虧損40%」。",
+    "risk": "軋空時若未即時出場賣出，可能導致高達40%的重大虧損。",
+    "model": "gemini-3.5-flash-lite",
+    "analyzed_at": "2026-11-23T09:03:09Z"
   },
   "1947899608073404845": {
     "sentiment": "Bullish",
@@ -73129,5 +73360,31 @@
     "risk": "文中提到 AI 市場崩盤、循環融資疑慮以及政黨立場引發的市場恐慌。",
     "model": "gemini-3.6-flash",
     "analyzed_at": "2026-11-23T00:11:54Z"
+  },
+  "2124715837533859857": {
+    "id": "2124715837533859857",
+    "tweet_id": "2124715837533859857",
+    "sentiment": "Bullish",
+    "stances": {
+      "NVDA": "Bullish"
+    },
+    "summary": "川普支持黃仁勳回任輝達，看多 NVDA 前景。",
+    "translation_zh": "川普總統表示：「我希望輝達董事會重新聘用黃仁勳。」在美國總統的支持下，黃仁勳重返 $NVDA 的可能性似乎大幅提升。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:57:03Z"
+  },
+  "2124318494879780986": {
+    "id": "2124318494879780986",
+    "tweet_id": "2124318494879780986",
+    "sentiment": "Bullish",
+    "stances": {
+      "CRWV": "Bullish"
+    },
+    "summary": "CRWV財報顯示需求遠大於算力，看好其未來表現。",
+    "translation_zh": "@corbinians_bear 也許這是自我實現，我們拭目以待。從財報來看，$CRWV 表示直到 2027 年量化需求將達到可用算力的 10 倍以上。然而同週卻有一群人根據受影響的亞洲小型資料中心，推論算力過剩。這是最具意思的市場動態之一。",
+    "risk": "部分市場人士根據亞洲小型資料中心狀況，擔憂算力過剩的風險。",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T08:57:20Z"
   }
 }
