@@ -51431,9 +51431,23 @@
     "analyzed_at": "2026-11-23T09:02:47Z"
   },
   "1949746557253030018": {
+    "id": "1949746557253030018",
+    "tweet_id": "1949746557253030018",
     "sentiment": "Bullish",
-    "summary": "看好 GOOGL 年底達 220 美元",
-    "translation_zh": "關於我發布的 WSB 圖表：\n\n在 $GOOGL 上，已實現利潤為 101,428 美元以上，並且還有大量未實現利潤，因為如果科技股反彈持續（$META $APPL $AMZN $MSFT $NVDA $SPOT），我預計 GOOGL 年底將達到 220 美元以上。\n\n財報表現非常亮眼，而且他們還有 700 億以上的庫藏股回購計畫。 https://t.co/G6jrKAyumE"
+    "stances": {
+      "AAPL": "Neutral",
+      "AMZN": "Neutral",
+      "GOOGL": "Bullish",
+      "META": "Neutral",
+      "MSFT": "Neutral",
+      "NVDA": "Neutral",
+      "SPOT": "Neutral"
+    },
+    "summary": "看好GOOGL年底達220美元，財報出色且持續執行庫藏股。",
+    "translation_zh": "關於我貼出的WSB圖表：$GOOGL已實現獲利超過101,428美元，若科技股漲勢持續（$META $AAPL $AMZN $MSFT $NVDA $SPOT），預計年底將達220美元以上，還有大量未實現獲利。財報非常亮眼且仍有超過700億美元的庫藏股。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T21:12:24Z"
   },
   "1947901801203961876": {
     "id": "1947901801203961876",
@@ -51456,14 +51470,35 @@
     "translation_zh": "對於正在關注 $RKT 的人來說，空頭做空比例超過 60%+，這簡直瘋狂。\n\n通常散戶無法對一家市值超過 300 億美元的公司進行軋空，但憑藉如此高的空頭比例，這絕對是有可能的。"
   },
   "1947897807115063386": {
+    "id": "1947897807115063386",
+    "tweet_id": "1947897807115063386",
     "sentiment": "Bullish",
-    "summary": "出於原則買入 DNUT 對抗空頭",
-    "translation_zh": "通常我不參與像 $RKT、$KSS 這樣的迷因股狂歡，但我真的很不喜歡空頭透過拋售 32% 的流通股把我最喜歡的甜甜圈店逼到破產。\n\n這一次完全是出於原則。\n\n買了價值 3 萬美元的 $DNUT，純粹是為了對空頭說去你的。 https://t.co/jTNnxFNJlq"
+    "stances": {
+      "DNUT": "Bullish",
+      "KSS": "Neutral",
+      "RKT": "Neutral"
+    },
+    "summary": "買入3萬美元DNUT看多，對KSS與RKT持中立。",
+    "translation_zh": "通常我不會參與像 $RKT、$KSS 這類迷因股狂歡，但我真的很看不慣放空者藉由賣空 32% 的流通股把我最愛的甜甜圈店逼到破產。這次純粹是出於原則。我買進了價值 3 萬美元的 $DNUT，只為了向空頭表達不滿。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T21:12:31Z"
   },
   "1947298901108957475": {
+    "id": "1947298901108957475",
+    "tweet_id": "1947298901108957475",
     "sentiment": "Bullish",
-    "summary": "看好 CRDO 展現高成長性並買入",
-    "translation_zh": "剛買了價值 10 萬美元的 $CRDO，因為它是一家類似 $ALAB 的公司，而且也以狂暴的速度成長。\n\n市場領域相似，上週下跌了 8%。通常同類標的會一起上漲（例如 $CRWV + $NBIS）。\n\n無論如何我都會持有，因為它是一家非常穩健的超高成長公司。 https://t.co/v4kI2fb1Ef"
+    "stances": {
+      "ALAB": "Neutral",
+      "CRDO": "Bullish",
+      "CRWV": "Neutral",
+      "NBIS": "Neutral"
+    },
+    "summary": "看好高成長的CRDO並買入10萬美元，認為具持有價值。",
+    "translation_zh": "剛買入了價值10萬美元的$CRDO，因為它是一間與$ALAB類似的公司，且同樣以驚人的速度成長。兩者市場領域相似，且它上週下跌了8%。通常同類標的會同步上漲（例如$CRWV + $NBIS）。無論如何我都會持有，因為它是一間穩健的超高成長公司。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T21:12:39Z"
   },
   "1947292748563796124": {
     "sentiment": "Bullish",
@@ -51501,14 +51536,35 @@
     "translation_zh": "目前的微中/長期波段交易目標為：1. 暴跌 30% 後的 $GME；2. 暴跌 49% 後的 $SG；3. 暴跌 45% 後的 $UNH；4. 再次跌至 164 美元後的 $GOOGL。之前為 WSB 分析買了約 150 美元的買權，在 175 美元賣出，於 164 美元重新買入，現持有看至 185 美元。正在對 $SRPT 進行更多研究。"
   },
   "1940698335398318450": {
-    "sentiment": "Neutral",
-    "summary": "分析 BKSY 補漲邏輯與公司劣勢",
-    "translation_zh": "至於對 Blacksky（$BKSY）的投資邏輯，老實說這是一家相當糟糕的公司。然而，Planet Labs（$PL）以及像 $RKLB、$RDW 這類衛星/太空概念股不久前出現大幅上漲，而 Blacksky（同產業）當時完全沒動。它最終補漲了，所以這筆交易奏效了。"
+    "id": "1940698335398318450",
+    "tweet_id": "1940698335398318450",
+    "sentiment": "Bearish",
+    "stances": {
+      "BKSY": "Bearish",
+      "PL": "Neutral",
+      "RDW": "Neutral",
+      "RKLB": "Neutral"
+    },
+    "summary": "作者認為BKSY是糟糕的公司，僅因補漲而短暫獲利。",
+    "translation_zh": "就Blacksky（$BKSY）的投資論點而言，老實說，這是一家相當糟糕的公司。不過，Planet Labs（$PL）以及$RKLB、$RDW等衛星與太空公司之前大漲了一波，而身處相鄰產業的Blacksky當時完全沒動。它最後價格總算跟上了，所以策略奏效了。",
+    "risk": "作者直言該公司本質相當糟糕，僅靠產業補漲行情支撐，存在基本面不佳的風險。",
+    "model": "gemini-flash-lite-latest",
+    "analyzed_at": "2026-11-23T21:16:19Z"
   },
   "1940696557151781335": {
-    "sentiment": "Neutral",
-    "summary": "中立看待微型股，建議謹慎佈局",
-    "translation_zh": "無法在 WSB 上討論微型股，但如果你好奇的話：我持有的只有三家：$BKKT（12 美元）、$TSSI（8 美元）、$BKSY（11 美元）。關於 BKKT，該公司有超過 21% 被放空，且加密貨幣公司表現良好。我不建議追高，但建立小部位並不算太差。"
+    "id": "1940696557151781335",
+    "tweet_id": "1940696557151781335",
+    "sentiment": "Bullish",
+    "stances": {
+      "BKKT": "Bullish",
+      "BKSY": "Neutral",
+      "TSSI": "Neutral"
+    },
+    "summary": "BKKT因高融券與加密貨幣利多看多，其餘標的僅提及。",
+    "translation_zh": "雖然無法在WSB上討論微型股，但如果你好奇的話：我曾擁有的只有三個$BKKT（12美元）、$TSSI（8美元）、$BKSY（11美元）。對於BKKT，公司有超過21%遭到放空，且加密貨幣公司表現良好。我不建議追高，但持有小部位並不算最糟的選擇。",
+    "risk": "不建議追高，且有超過21%的股份遭到放空。",
+    "model": "gemini-flash-lite-latest",
+    "analyzed_at": "2026-11-23T21:16:35Z"
   },
   "1940695151216939458": {
     "sentiment": "Bearish",
@@ -73386,5 +73442,18 @@
     "risk": "部分市場人士根據亞洲小型資料中心狀況，擔憂算力過剩的風險。",
     "model": "gemini-3.6-flash",
     "analyzed_at": "2026-11-23T08:57:20Z"
+  },
+  "2124865722342085117": {
+    "id": "2124865722342085117",
+    "tweet_id": "2124865722342085117",
+    "sentiment": "Bullish",
+    "stances": {
+      "NVDA": "Bullish"
+    },
+    "summary": "AI交易回歸，看好輝達董事會重任黃仁勳為CEO。",
+    "translation_zh": "AI 交易強勢回歸！輝達董事會重任黃仁勳為執行長。",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-23T21:12:16Z"
   }
 }
