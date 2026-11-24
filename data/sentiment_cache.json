@@ -73544,5 +73544,31 @@
     "risk": "SMTC 的 UHP 400mW 雷射研發與驗證進度落後 AAOI。",
     "model": "gemini-3.6-flash",
     "analyzed_at": "2026-11-24T05:55:06Z"
+  },
+  "2125276382909566982": {
+    "id": "2125276382909566982",
+    "tweet_id": "2125276382909566982",
+    "sentiment": "Neutral",
+    "stances": {
+      "GOOGL": "Neutral"
+    },
+    "summary": "提及GOOGL於AI量子算法的研究，持中立觀點。",
+    "translation_zh": "我想知道繼生技探索之後，未來是否會出現 AI 量子發現的主題。$GOOGL Deepmind：「利用 Agent 尋找更快的量子演算法」：1. 量子電腦能解決科學突破性問題的時間線，很大程度上取決於...",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-24T17:30:27Z"
+  },
+  "2125215193139663292": {
+    "id": "2125215193139663292",
+    "tweet_id": "2125215193139663292",
+    "sentiment": "Bullish",
+    "stances": {
+      "AAOI": "Bullish"
+    },
+    "summary": "AAOI簽署巨額長期合約，看多未來營運成長。",
+    "translation_zh": "AAOI與超大型雲端客戶簽署22億美元的長期協議（LTA）。包含2027年15億美元的800G光收發器，以及2028至2029年間7億美元的雷射產品。「客戶預測顯示四年期內的需求可能超過100億美元。」",
+    "risk": "",
+    "model": "gemini-3.6-flash",
+    "analyzed_at": "2026-11-24T17:30:47Z"
   }
 }
